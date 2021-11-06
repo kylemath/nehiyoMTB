@@ -5,7 +5,6 @@ Set of 3d printable trail signs made for mountain bike trails around Edmonton, C
 
 After printing in PLA, I spray praint with white primer, then use Acrylic paints for colour.
 
-![Screenshot](oyoyow_wild.png)
 ![Screenshot](whiteprimer.png)
 ![Screenshot](kakwa.png)
 ![Screenshot](raven_wild.png)
