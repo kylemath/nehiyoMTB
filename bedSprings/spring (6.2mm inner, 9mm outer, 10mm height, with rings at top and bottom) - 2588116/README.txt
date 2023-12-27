@@ -1,0 +1,1 @@
+spring (6.2mm inner, 9mm outer, 10mm height, with rings at top and bottom) by Supernova_6969 on Thingiverse: https://www.thingiverse.com/thing:2588116
