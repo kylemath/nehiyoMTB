@@ -6,7 +6,7 @@ Set of 3d printable trail signs made for mountain bike trails around Edmonton, C
 After printing in PLA, I spray praint with white primer, then use Acrylic paints for colour.
 
 ![Screenshot](whiteprimer.png)
-![Screenshot](kakwa.png)
-![Screenshot](raven_wild.png)
-![Screenshot](purple_haze.png)
 
+
+![Signs](https://github.com/kylemath/nehiyoMTB/assets/3662613/7e0babbf-c782-4f03-8448-ca30d08f8686)
+![Signs2](https://github.com/kylemath/nehiyoMTB/assets/3662613/0c3e7731-dcd3-4afa-a2ee-467f3b79b288)
