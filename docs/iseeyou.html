@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I See You • kiwâpamitin • Interactive Poster</title>
+    <style>
+      :root{
+        --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#dc3545;--accent2:#c82333;--line:#dee2e6;--chip:#e9ecef;--ok:#dc3545;--primary-bg:#d1e7f0;--primary-text:#000000;--formula-bg:#fff5f5;--formula-border:#dc3545;--secondary-bg:#e8f4f8;--secondary-border:#a8d5e2
+      }
+      *{box-sizing:border-box}
+      body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+      a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+      a:hover{border-bottom-color:var(--accent)}
+      .container{max-width:1100px;margin:0 auto;padding:16px}
+      header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, #d1e7f0 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+      .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+      .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+      h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+      .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+      .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+      .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+      .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+      .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+      .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+      .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid #a8d5e2;white-space:nowrap}
+      .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid #a8d5e2}
+      .muted{color:var(--muted);font-size:15px}
+      .chips{display:flex;flex-wrap:wrap;gap:8px}
+      .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+      .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+      .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+      .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(251,191,36,0.1);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+      .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+      .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+      .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+      .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+      .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+      .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+      .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+      .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+      .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid #a8d5e2;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+      .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+      .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+      .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(168,213,226,0.1)}
+      .kv strong{color:#000000}
+      .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+      .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+      .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+      .table tr:hover{background:#f8fafc}
+      .table tr:last-child td{border-bottom:none}
+      .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+      footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+      @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+      @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+      .tooltip{position:relative}
+      .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+      .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(220,53,69,0.1)}
+      .icu-box{background:linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>I See You • kiwâpamitin • ᑭᐚᐸᒥᑎᐣ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)  </span>
+        </div>
+      </header>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Core Phrase</h2>
+          <div class="primary-content">
+            <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">ki‑ wâpam ‑itin</div>
+            <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="ki" data-tip="marks 'you' (the person you're talking to)" data-syll-id="ki-syll">ki‑</span>
+              <span class="part tooltip" data-key="wapam" data-tip="'see (a person)'" data-syll-id="wapam-syll">wâpam</span>
+              <span class="part tooltip" data-key="itin" data-tip="means 'you (one person)'" data-syll-id="itin-syll">‑itin</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">kiwâpamitin</strong>
+            </div>
+            <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="ki" data-tip="ki‑" id="ki-syll">ᑭ</span>
+              <span class="syll-part tooltip" data-key="wapam" data-tip="wâpam" id="wapam-syll">ᐚᐸᒥ</span>
+              <span class="syll-part tooltip" data-key="itin" data-tip="‑itin" id="itin-syll">ᑎᐣ</span>
+            </div>
+            <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">"I See You"</p>
+          </div>
+
+          <div class="icu-box">
+            <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The ICU Connection</h3>
+            <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The trail builder, an ICU (Intensive Care Unit) physician, chose a name rich with meaning. In English, "ICU" and "I See You" are pronounced identically — a pun made appropo given the deep care and individual attention central to intensive care medicine.</p>
+            <p style="margin:0;font-size:15px;line-height:1.6">In Plains Cree the ICU would be expressed through words like <strong>sohkī-kanawēyimikamik</strong> (place of strong/intensive caring) or <strong>sohkī-nākatawihamākwān</strong> (place of intensive attention). </p>
+            <p style="margin:0,font-size:18px;line-height:1.6"> The act of truly <em>seeing</em> each patient—<strong>kiwâpamitin</strong>—embodies the essence of intensive care: acknowledging and attending to each person as a complete individual.</p>
+          </div>
+
+          <h2 style="margin-top:16px">Building Other Forms</h2>
+          
+          <div class="kv">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: "I See Them"</div>
+            <div class="formula">
+              <span class="part tooltip" data-key="ni2" data-tip="marks 'I' (the speaker)" data-syll-id="ni-syll2">ni‑</span>
+              <span class="part tooltip" data-key="wapam2" data-tip="'see (a person)'" data-syll-id="wapam-syll2">wâpam</span>
+              <span class="part tooltip" data-key="awak" data-tip="means 'them'" data-syll-id="awak-syll">‑âwak</span>
+              <span style="margin-left:8px">→</span>
+              <strong>niwâpamâwak</strong>
+            </div>
+            <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="ni2" data-tip="ni‑" id="ni-syll2">ᓂ</span>
+              <span class="syll-part tooltip" data-key="wapam2" data-tip="wâpam" id="wapam-syll2">ᐚᐸᒫ</span>
+              <span class="syll-part tooltip" data-key="awak" data-tip="‑âwak" id="awak-syll">ᐘᐠ</span>
+            </div>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: "He/She Sees You"</div>
+            <div class="formula">
+              <span class="part tooltip" data-key="ki3" data-tip="marks 'you' (being seen)" data-syll-id="ki-syll3">ki‑</span>
+              <span class="part tooltip" data-key="wapam3" data-tip="'see (a person)'" data-syll-id="wapam-syll3">wâpam</span>
+              <span class="part tooltip" data-key="ik" data-tip="means 'he/she sees you'" data-syll-id="ik-syll">‑ik</span>
+              <span style="margin-left:8px">→</span>
+              <strong>kiwâpamik</strong>
+            </div>
+            <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="ki3" data-tip="ki‑" id="ki-syll3">ᑭ</span>
+              <span class="syll-part tooltip" data-key="wapam3" data-tip="wâpam" id="wapam-syll3">ᐚᐸᒥ</span>
+              <span class="syll-part tooltip" data-key="ik" data-tip="‑ik" id="ik-syll">ᐠ</span>
+            </div>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: "I See You (All)"</div>
+            <div class="formula" id="f-pl">
+              <span class="part tooltip" data-key="ki4" data-tip="marks 'you' (the people you're talking to)" data-syll-id="ki-syll4">ki‑</span>
+              <span class="part tooltip" data-key="wapam4" data-tip="'see (a person)'" data-syll-id="wapam-syll4">wâpam</span>
+              <span class="part tooltip" data-key="itinawaw" data-tip="means 'you (all)'" data-syll-id="itinawaw-syll">‑itinâwâw</span>
+              <span style="margin-left:8px">→</span>
+              <strong>kiwâpamitinâwâw</strong>
+            </div>
+            <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="ki4" data-tip="ki‑" id="ki-syll4">ᑭ</span>
+              <span class="syll-part tooltip" data-key="wapam4" data-tip="wâpam" id="wapam-syll4">ᐚᐸᒥ</span>
+              <span class="syll-part tooltip" data-key="itinawaw" data-tip="‑itinâwâw" id="itinawaw-syll">ᑎᓈᐚᐤ</span>
+            </div>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: "I See You, Each One Individually"</div>
+            <div class="formula">
+              <span class="part tooltip" data-key="peyak" data-tip="'one by one; each one'" data-syll-id="peyak-syll">pêyak‑pêyak</span>
+              <span>+</span>
+              <span>kiwâpamitinâwâw</span>
+              <span style="margin-left:8px">→</span>
+              <strong>pêyak‑pêyak kiwâpamitinâwâw</strong>
+            </div>
+            <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="peyak" data-tip="pêyak‑pêyak" id="peyak-syll">ᐯᔭᐠ‑ᐯᔭᐠ</span>
+              <span> </span>
+              <span class="syll-part">ᑭᐚᐸᒥᑎᓈᐚᐤ</span>
+            </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">This is what makes the meaning explicit: seeing each person, one by one.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: "I See You (Repeatedly)"</div>
+            <div class="formula">
+              <span class="part tooltip" data-key="mina" data-tip="'again and again; repeatedly'" data-syll-id="mina-syll">mîna‑mîna</span>
+              <span>+</span>
+              <span>kiwâpamitinâwâw</span>
+              <span style="margin-left:8px">→</span>
+              <strong>mîna‑mîna kiwâpamitinâwâw</strong>
+            </div>
+            <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="mina" data-tip="mîna‑mîna" id="mina-syll">ᒦᓇ‑ᒦᓇ</span>
+              <span> </span>
+              <span class="syll-part">ᑭᐚᐸᒥᑎᓈᐚᐤ</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Trail Information</h2>
+          <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
+          <div style="text-align:center">
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=805899&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1"></iframe>
+            <div style="margin-top:8px">
+                <a href="https://www.trailforks.com/trails/i-see-you/" style="font-size: 0.7em;">I See You</a>            </div>
+          </div>
+
+          <h2 style="margin-top:24px">Examples & Sources</h2>
+          <h3 style="margin:0 0 12px 0">Quick comparison</h3>
+          <table class="table">
+            <thead>
+              <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>I See You (sg)</td><td class="tooltip" data-tip="ends with -itin">kiwâpamitin</td><td>ᑭᐚᐸᒥᑎᐣ</td></tr>
+              <tr><td>I See You (pl)</td><td class="tooltip" data-tip="ends with -itinâwâw">kiwâpamitinâwâw</td><td>ᑭᐚᐸᒥᑎᓈᐚᐤ</td></tr>
+              <tr><td>One‑By‑One I See You (pl)</td><td>pêyak‑pêyak kiwâpamitinâwâw</td><td>ᐯᔭᐠ‑ᐯᔭᐠ ᑭᐚᐸᒥᑎᓈᐚᐤ</td></tr>
+              <tr><td>I See Him/Her</td><td>niwâpamâw</td><td>ᓂᐚᐸᒫᐤ</td></tr>
+              <tr><td>I See Them</td><td>niwâpamâwak</td><td>ᓂᐚᐸᒫᐘᐠ</td></tr>
+              <tr><td>He/She Sees</td><td>wâpiw</td><td>ᐚᐱᐤ</td></tr>
+              <tr><td>He/She Sees Him/Her</td><td>wâpamêw</td><td>ᐚᐸᒣᐤ</td></tr>
+              <tr><td>He/She Sees You</td><td>kiwâpamik</td><td>ᑭᐚᐸᒥᐠ</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin:18px 0 12px 0">Base words</h3>
+          <div class="row"><span class="chip">wâpiw</span><span class="muted">= "He/She Sees"</span><span class="chip">ᐚᐱᐤ</span><button class="copy" data-copy-text="wâpiw">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">wâpamêw</span><span class="muted">= "See Someone"</span><span class="chip">ᐚᐸᒣᐤ</span><button class="copy" data-copy-text="wâpamêw">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">niwâpamâw</span><span class="muted">= "I See Him/Her"</span><span class="chip">ᓂᐚᐸᒫᐤ</span><button class="copy" data-copy-text="niwâpamâw">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">kiwâpamâw</span><span class="muted">= "You See Him/Her"</span><span class="chip">ᑭᐚᐸᒫᐤ</span><button class="copy" data-copy-text="kiwâpamâw">Copy</button></div>
+
+          <h3 style="margin:18px 0 12px 0">Sources</h3>
+          <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+          <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+          <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary (ADP)</a></p>
+        </div>
+      </section>
+
+      <footer>
+        I See You • kiwâpamitin • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      // Cross-highlight between SRO and syllabics
+      const pairs = [
+        {sro: '[data-key="ki"]', syll: '#ki-syll'},
+        {sro: '[data-key="wapam"]', syll: '#wapam-syll'},
+        {sro: '[data-key="itin"]', syll: '#itin-syll'},
+        {sro: '[data-key="ni2"]', syll: '#ni-syll2'},
+        {sro: '[data-key="wapam2"]', syll: '#wapam-syll2'},
+        {sro: '[data-key="awak"]', syll: '#awak-syll'},
+        {sro: '[data-key="ki3"]', syll: '#ki-syll3'},
+        {sro: '[data-key="wapam3"]', syll: '#wapam-syll3'},
+        {sro: '[data-key="ik"]', syll: '#ik-syll'},
+        {sro: '[data-key="ki4"]', syll: '#ki-syll4'},
+        {sro: '[data-key="wapam4"]', syll: '#wapam-syll4'},
+        {sro: '[data-key="itinawaw"]', syll: '#itinawaw-syll'},
+        {sro: '[data-key="peyak"]', syll: '#peyak-syll'},
+        {sro: '[data-key="mina"]', syll: '#mina-syll'}
+      ];
+
+      // Add hover events for SRO parts
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      // Add hover events for syllabics parts
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      // Copy buttons
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      // Tiny toast
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+  </body>
+</html>
