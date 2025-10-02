@@ -8,36 +8,36 @@ transliteration = "kiwâpamitin";        // Cree transliteration at top
 cree_syllabics = "ᑭᐚᐸᒥᑎᐣ";            // Cree syllabics (paste from text editor)
 
 // Text sizing and positioning
-english_size = 18;                    // Size of English text at bottom
-transliteration_size = 15;            // Size of transliteration at top
-syllabics_size = 21;                  // Size of Cree syllabics
+english_size = 15;                    // Size of English text at bottom
+transliteration_size = 12;            // Size of transliteration at top
+syllabics_size = 17.5;                  // Size of Cree syllabics
 syllabics_boldness = 0.6;             // How much to thicken syllabics (0 = normal, 0.5-1.0 = bolder)
-text_depth = 3;                     // How deep to emboss/deboss text
-syllabics_depth = 5;                  // How deep to emboss/deboss syllabics
+text_depth = 1.5;                     // How deep to emboss/deboss text
+syllabics_depth = 2.5;                  // How deep to emboss/deboss syllabics
 
 // Sign dimensions (adjust based on your blank_plaque_thinner.stl)
-sign_width = 111;                     // Width of sign
-sign_height = 210;                    // Height of sign  
-sign_thickness = 3;                   // Thickness of sign
-corner_radius = 8;                    // Rounded corner radius
+sign_width = 90;                     // Width of sign
+sign_height = 165;                    // Height of sign  
+sign_thickness = 1.75;                   // Thickness of sign
+corner_radius = 5;                    // Rounded corner radius
 
 // Text positioning (from bottom of sign)
-english_y_offset = 12;                // Distance from bottom edge
-syllabics_y_offset = 160;              // Distance from bottom edge
-transliteration_y_offset = 193;       // Distance from bottom edge
+english_y_offset = 10;                // Distance from bottom edge
+syllabics_y_offset = 130;              // Distance from bottom edge
+transliteration_y_offset = 153;       // Distance from bottom edge
 
-top_hole_offset = 32;
-bottom_hole_offset = 30;
+top_hole_offset = 23;
+bottom_hole_offset = 20;
 
 // HueForge insert settings
 hueforge_clearance = 0.05;            // Clearance around insert edge (mm)
-
+hueforge_size = 90; 
 // ===== MODULES =====
 module hueforge_cutout() {
     // cutout a 100 x 100 square from the center between the two holes a few layers think to fit the hueforge logo
-    translate([0, -13, 2]) {
+    translate([0, -13, 1]) {
         linear_extrude(height = 10) {
-            square([100 + 2*hueforge_clearance, 100 + 2*hueforge_clearance], center = true);
+            square([hueforge_size + 2*hueforge_clearance, hueforge_size + 2*hueforge_clearance], center = true);
         }
     }
 }
