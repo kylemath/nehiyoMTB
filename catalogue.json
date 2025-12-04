@@ -3,7 +3,7 @@
   "title": "NehiyoMTB",
   "oneLiner": "Nehiyo plains cree trail signs for Edmonton area single track trails, 3D printed",
   "demoUrl": "https://kylemath.github.io/nehiyoMTB",
-  "screenshot": "./screenshot.png",
+  "screenshot": "https://raw.githubusercontent.com/kylemath/nehiyoMTB/main/screenshot.png",
   "kind": "page",
   "categories": ["3dPrinting", "wayfinding", "cree"],
   "tags": ["cree", "3dprinting", "trails"],
