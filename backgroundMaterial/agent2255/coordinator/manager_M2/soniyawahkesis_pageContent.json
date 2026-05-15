@@ -1,0 +1,155 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#9aa0a6",
+  "themeName": "silver",
+  "headerTitle": "Silverfox • sôniyâwâhkêsis • ᓲᓂᔮᐚᐦᑫᓯᐢ",
+  "photo": {
+    "src": "../assets/sôniyâwâhkêsîs/silverfox_render.png",
+    "alt": "Stylized black-and-white kitsune-like fox silhouette used as the source render for the sôniyâwâhkêsis trail sign",
+    "caption": "Source design render for the Silverfox plaque — flowing kitsune-style fox silhouette"
+  },
+  "trailforks": {
+    "notes": "No dedicated Trailforks page found for the Edmonton 'Silver Fox' trail. It is referenced in the Shredders Kinsmen Loop #1 route description ('Rip down Silver Fox (not shown on map — trail start is by the Emily Murphy Park sign at the entry to the park)') but the trail is explicitly noted as 'not shown on map' — i.e. unmapped in Trailforks as of May 2026. Left empty pending local upload."
+  },
+  "linguistics": {
+    "meaning": "Silver Fox — literally 'money/silver little-fox'",
+    "type": "noun (animate, NA, compound + diminutive)",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "sôniyâw‑âhkêsis",
+      "syllabics": "ᓲᓂᔮᐚᐦᑫᓯᐢ",
+      "morphemes": [
+        {
+          "key": "soniyaw-init",
+          "sro": "sôniyâw‑",
+          "syllabics": "ᓲᓂᔮᐤ",
+          "gloss": "NA noun (used here as a noun-incorporated initial): 'money; metal currency; silver' — the same word names both money and the metal colour 'silver'"
+        },
+        {
+          "key": "ahkesis-fin",
+          "sro": "‑âhkêsis",
+          "syllabics": "ᐚᐦᑫᓯᐢ",
+          "gloss": "NA bound diminutive final: 'small/young fox' — the incorporated, diminutive form of the free NA noun <strong>mahkêsîs</strong> 'fox' (long î in the free form, short i in the bound form)"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Fox (the everyday word)",
+        "sro": "mahkêsîs",
+        "syllabics": "ᒪᐦᑫᓰᐢ",
+        "morphemes": [
+          {
+            "key": "mahkesis-noun",
+            "sro": "mahkêsîs",
+            "syllabics": "ᒪᐦᑫᓰᐢ",
+            "gloss": "NA noun: 'fox' (Plains Cree). The bound form ‑âhkêsis inside the headword is the incorporated, vowel-reduced version of this same word."
+          }
+        ],
+        "note": "Useful for showing how the headword is built — the 'fox' word loses its initial <strong>ma‑</strong> and its long <strong>î</strong> when it incorporates."
+      },
+      {
+        "english": "Money; silver (the metal/colour)",
+        "sro": "sôniyâw",
+        "syllabics": "ᓲᓂᔮᐤ",
+        "morphemes": [
+          {
+            "key": "soniyaw-noun",
+            "sro": "sôniyâw",
+            "syllabics": "ᓲᓂᔮᐤ",
+            "gloss": "NA noun: 'money, silver currency' — by extension also the colour 'silver'. Stands alone inside the headword as the first element."
+          }
+        ],
+        "note": "In Plains Cree the same word covers 'money' and 'silver-coloured'."
+      },
+      {
+        "english": "Foxes (plural)",
+        "sro": "mahkêsîsak",
+        "syllabics": "ᒪᐦᑫᓰᓴᐠ",
+        "morphemes": [
+          {
+            "key": "mahkesis-stem2",
+            "sro": "mahkêsîs‑",
+            "syllabics": "ᒪᐦᑫᓰᐢ",
+            "gloss": "stem of NA 'fox'"
+          },
+          {
+            "key": "ak-plur2",
+            "sro": "‑ak",
+            "syllabics": "ᐊᐠ",
+            "gloss": "NA animate plural"
+          }
+        ],
+        "note": "Plural of the free-form 'fox'."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Silverfox (the plaque)",
+        "sro": "sôniyâwâhkêsis",
+        "syllabics": "ᓲᓂᔮᐚᐦᑫᓯᐢ",
+        "note": "Animate noun, compound: money/silver + diminutive fox."
+      },
+      {
+        "english": "Fox",
+        "sro": "mahkêsîs",
+        "syllabics": "ᒪᐦᑫᓰᐢ",
+        "note": "NA. Long î in the free form."
+      },
+      {
+        "english": "Foxes",
+        "sro": "mahkêsîsak",
+        "syllabics": "ᒪᐦᑫᓰᓴᐠ",
+        "note": "Animate plural."
+      },
+      {
+        "english": "Money, silver",
+        "sro": "sôniyâw",
+        "syllabics": "ᓲᓂᔮᐤ",
+        "note": "NA. Source of the 'silver' half of the headword."
+      },
+      {
+        "english": "Silverfoxes (plural)",
+        "sro": "sôniyâwâhkêsisak",
+        "syllabics": "ᓲᓂᔮᐚᐦᑫᓯᓴᐠ",
+        "note": "Headword + animate plural ‑ak."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "mahkêsîs",
+        "english": "fox (NA)",
+        "syllabics": "ᒪᐦᑫᓰᐢ"
+      },
+      {
+        "sro": "sôniyâw",
+        "english": "money, silver (NA)",
+        "syllabics": "ᓲᓂᔮᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About the Silver Fox",
+    "body": [
+      "The carved plaque reads <strong>sôniyâwâhkêsis</strong> — 'silver little-fox', the everyday Plains Cree way to name the rare silver-coated colour-phase of the red fox. <strong>sôniyâw</strong> is the same word for 'money', so the compound carries a soft double-reading: a 'money-fox', the kind of fox whose pelt was once worth a small fortune in the fur trade. The diminutive <strong>‑âhkêsis</strong> is the bound, vowel-reduced version of the free NA noun <strong>mahkêsîs</strong> 'fox'.",
+      "The plaque art picks up the same poise — a stylized white-and-black silhouette of a fox in a flowing, kitsune-like pose, head turned and tail curling forward. The carving is mostly black on white with red syllabics. The English label is rendered as <strong>SILVEREFOX</strong> on this particular plaque (extra E between SILVER and FOX) — likely a layout/carving quirk; the catalogue and most signage use the more standard <strong>Silverfox</strong>.",
+      "Silver Fox the trail is a short descent in the Kinsmen / Emily Murphy network in Northwest Edmonton, ridden as part of the popular 'Shredders Kinsmen Loop' alongside <strong>nikocwâsaskanôs / Six Shooter</strong> and <strong>sâpwâpahcikan pâskisikan / Ray Gun</strong>. It sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory)."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The current catalogue creeSyllabics for soniyawahkesis is <strong>ᓲᓂᔮᐁᐦᑫᓯᐢ</strong> — the fourth glyph <strong>ᐁ</strong> ('e') appears to be a transcription error. The SRO <strong>sôniyâwâhkêsis</strong> breaks into syllables sô‑ni‑yâ‑wâ‑h‑kê‑sis, which yields <strong>ᓲᓂᔮᐚᐦᑫᓯᐢ</strong> with <strong>ᐚ</strong> ('wâ') as the fourth glyph. Coordinator should update catalogue.json creeSyllabics 'ᓲᓂᔮᐁᐦᑫᓯᐢ' → 'ᓲᓂᔮᐚᐦᑫᓯᐢ' (ᐁ → ᐚ).",
+    "The plaque's English text appears to read 'SILVEREFOX' (one word, extra E inserted between SILVER and FOX) rather than 'SILVERFOX'. This may be a carving / layout artefact (the letters were arranged to fill the plaque) or an intentional stylization. Flagged for user review — the catalogue.json englishName 'Silverfox' is the conventional form and is left unchanged.",
+    "Folder path on disk includes diacritics: 'sôniyâwâhkêsîs' (with all three circumflexes plus a long î at the very end). The folder name uses 'sîs' (long î) at the end, but the SRO carved on the plaque uses 'sis' (short i) — this short-i form is the standard Plains Cree spelling (matches Wolvengrey). Coordinator should leave the folder path unchanged (legacy), and the on-page SRO uses the standard short-i form.",
+    "Photo wired to the existing screenshot source render in the repo root folder (sôniyâwâhkêsîs/Screenshot 2023-11-17 at 6.00.15 PM.png) — copied as docs/assets/sôniyâwâhkêsîs/silverfox_render.png.",
+    "No dedicated Trailforks entry for Edmonton 'Silver Fox' trail — only a route-description reference noting the trail is 'not shown on map'. Trailforks widget block left empty with notes."
+  ]
+}

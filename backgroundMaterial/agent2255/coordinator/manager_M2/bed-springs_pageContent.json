@@ -1,0 +1,193 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#1f7fb6",
+  "themeName": "blue",
+  "headerTitle": "Bed Springs • nipêwin ka kwâskwekotek kîkwayak • ᓂᐯᐃᐣ ᑲ ᑳᐢᑵᑯᑌᐠ ᑮᑿᔭᐠ",
+  "photo": {
+    "src": "../assets/bedSprings/sign_render.png",
+    "alt": "Bed Springs trail sign cropped from the studio wall photo, showing the carved Cree phrase nipêwin ka kwâskwekotek kîkwayak in blue with red syllabics and a row of black metal bedsprings protruding from the plaque face",
+    "caption": "The Bed Springs plaque (cropped from the full-wall photo)"
+  },
+  "trailforks": {
+    "trailId": "15537",
+    "trailUrl": "https://www.trailforks.com/trails/bed-springs/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=15537&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Bed Springs",
+    "mapCoords": {
+      "lat": 53.5013,
+      "lng": -113.5907,
+      "source": "trailforks trailhead 15537"
+    }
+  },
+  "linguistics": {
+    "meaning": "Bed Springs — descriptive Cree phrase: 'a bed (sleeping-place), the thing(s) that bounce'",
+    "type": "descriptive noun phrase (NI + ka- relative clause + NI plural)",
+    "primarySection": {
+      "heading": "The Phrase",
+      "sro": "nipêwin   ka   kwâskwekotek   kîkwayak",
+      "syllabics": "ᓂᐯᐃᐣ ᑲ ᑳᐢᑵᑯᑌᐠ ᑮᑿᔭᐠ",
+      "morphemes": [
+        {
+          "key": "nipewin-bed",
+          "sro": "nipêwin",
+          "syllabics": "ᓂᐯᐃᐣ",
+          "gloss": "NI noun: 'bed, sleeping place' — from VAI <strong>nipâ‑</strong> 'to sleep' + the place/state nominalizer <strong>‑win</strong> ('the place/act of sleeping')"
+        },
+        {
+          "key": "ka-rel",
+          "sro": "ka‑",
+          "syllabics": "ᑲ",
+          "gloss": "relative-clause prefix (shortened conjunct <strong>kâ‑</strong> 'the one that…') — introduces the descriptive clause 'that bounces'"
+        },
+        {
+          "key": "kwaskwekotek-vii",
+          "sro": "kwâskwekotek",
+          "syllabics": "ᑳᐢᑵᑯᑌᐠ",
+          "gloss": "II verb (changed conjunct of <strong>kwâskwêkotêw</strong>): '(the thing) that bounces, that springs, that recoils' — root <strong>kwâskw‑</strong> 'jump, bounce' is the same productive initial in <strong>kwâskohtin</strong> 'it bounces off (involuntarily)' and <strong>kwâskwepayiw</strong> 'it springs into motion'"
+        },
+        {
+          "key": "kikwayak-things",
+          "sro": "kîkwayak",
+          "syllabics": "ᑮᑿᔭᐠ",
+          "gloss": "INDEF noun, plural: 'things' (animate plural / pejorative-flavoured) — base <strong>kîkway</strong> 'something, what', with plural marker <strong>‑ak</strong>"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Bed (NI singular)",
+        "sro": "nipêwin",
+        "syllabics": "ᓂᐯᐃᐣ",
+        "morphemes": [
+          {
+            "key": "nipa-sleep",
+            "sro": "nipâ‑",
+            "syllabics": "ᓂᐹ",
+            "gloss": "VAI: 'to sleep'"
+          },
+          {
+            "key": "win-nomz",
+            "sro": "‑win",
+            "syllabics": "ᐃᐣ",
+            "gloss": "abstract / place nominalizer"
+          }
+        ],
+        "note": "The standalone NI noun appears unchanged inside the headword."
+      },
+      {
+        "english": "It bounces, it springs back, it recoils",
+        "sro": "kwâskwêkotêw",
+        "syllabics": "ᑵᐢᑵᑯᑌᐤ",
+        "morphemes": [
+          {
+            "key": "kwaskw-init",
+            "sro": "kwâskw‑",
+            "syllabics": "ᑵ",
+            "gloss": "initial: 'jump, bounce, spring'"
+          },
+          {
+            "key": "ekotew-fin",
+            "sro": "‑êkotêw",
+            "syllabics": "ᑯᑌᐤ",
+            "gloss": "II final: '(it) does so by itself; (it) hangs/dangles in that manner'"
+          }
+        ],
+        "note": "The 'plain' independent form. Changed-conjunct <strong>kâ kwâskwêkotêk</strong> 'the one that bounces' is what the plaque uses, written as <strong>ka kwâskwekotek</strong>."
+      },
+      {
+        "english": "Something / things",
+        "sro": "kîkway / kîkwayak",
+        "syllabics": "ᑮᑿᕀ / ᑮᑿᔭᐠ",
+        "morphemes": [
+          {
+            "key": "kikway-base",
+            "sro": "kîkway",
+            "syllabics": "ᑮᑿᕀ",
+            "gloss": "indefinite pronoun: 'something, anything, what?'"
+          },
+          {
+            "key": "ak-plur1",
+            "sro": "‑ak",
+            "syllabics": "ᐊᐠ",
+            "gloss": "animate plural marker"
+          }
+        ],
+        "note": "Plural <strong>kîkwayak</strong> 'things' carries an animate plural — a small grammatical wink, since bedsprings 'jump' and so can be cast as animate."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Bed Springs (the plaque)",
+        "sro": "nipêwin ka kwâskwekotek kîkwayak",
+        "syllabics": "ᓂᐯᐃᐣ ᑲ ᑳᐢᑵᑯᑌᐠ ᑮᑿᔭᐠ",
+        "note": "Descriptive Cree phrase, not a single lexeme."
+      },
+      {
+        "english": "Bed",
+        "sro": "nipêwin",
+        "syllabics": "ᓂᐯᐃᐣ",
+        "note": "NI noun. 'Sleeping place.'"
+      },
+      {
+        "english": "S/he sleeps",
+        "sro": "nipâw",
+        "syllabics": "ᓂᐹᐤ",
+        "note": "VAI 3rd person — anchors the root."
+      },
+      {
+        "english": "It bounces / springs",
+        "sro": "kwâskwêkotêw",
+        "syllabics": "ᑵᐢᑵᑯᑌᐤ",
+        "note": "II verb. Changed-conjunct = 'kâ kwâskwêkotêk' 'the one that bounces'."
+      },
+      {
+        "english": "Something / things",
+        "sro": "kîkway / kîkwayak",
+        "syllabics": "ᑮᑿᕀ / ᑮᑿᔭᐠ",
+        "note": "Indefinite noun; plural with animate -ak."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "nipêwin",
+        "english": "bed, sleeping place (NI)",
+        "syllabics": "ᓂᐯᐃᐣ"
+      },
+      {
+        "sro": "kwâskwêkotêw",
+        "english": "it bounces, it springs (II)",
+        "syllabics": "ᑵᐢᑵᑯᑌᐤ"
+      },
+      {
+        "sro": "kîkway",
+        "english": "something, thing (indef.)",
+        "syllabics": "ᑮᑿᕀ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "Springs Underfoot",
+    "body": [
+      "The plaque does not name a single Cree word for 'bed-spring' — there isn't one in everyday speech. Instead the carving spells out a small descriptive sentence: <strong>nipêwin ka kwâskwekotek kîkwayak</strong>, literally 'a bed (a sleeping-place), the thing(s) that bounce.' It is the kind of phrase a Cree speaker might construct on the fly to describe a piece of unfamiliar furniture, and it preserves that exploratory, fitted-to-the-object register on a permanent sign.",
+      "The plaque itself is the most three-dimensional in the whole wall: a row of small black metal springs is mounted directly into the white plaque face, with a blue inset panel holding the red Cree syllabics. <strong>nipêwin ka kwâskwekotek kîkwayak</strong> is carved in black above, with <strong>kîkwayak</strong> floated in blue to match the panel. <strong>Bed Springs</strong> sits at the bottom in matching blue. The combination reads as a 'physical pun' — the literal springs sit between the words for 'bed' and 'things that bounce'.",
+      "Bed Springs the mountain-bike trail runs through Patricia Ravine on Edmonton's southwest side, black-diamond rated, a short rooty ribbon that earns its name by the way the rooty fall-line section makes a rider's saddle 'sproing' off the pedals. The trail sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory). The neighbouring trail in the same network is, fittingly, called <strong>Sproing!</strong> — same gag, same family of names."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The carved plaque reads SRO <strong>nipêwin ka kwâskwekotek kîkwayak</strong> (with circumflexes on <strong>ê</strong> of nipêwin, <strong>â</strong> of kwâskwekotek, and <strong>î</strong> of kîkwayak). The current catalogue.json creeName is <strong>kekokel sôniyâwâhkêsis</strong> — that is in fact the Cree word for SILVERFOX and was accidentally placed on the Bed Springs entry. Coordinator should set bed-springs creeName to <strong>nipêwin ka kwâskwekotek kîkwayak</strong> and creeSyllabics to <strong>ᓂᐯᐃᐣ ᑲ ᑳᐢᑵᑯᑌᐠ ᑮᑿᔭᐠ</strong>.",
+    "The form <strong>ka kwâskwekotek</strong> is the relative / changed-conjunct of the II verb <strong>kwâskwêkotêw</strong> 'it bounces'. The plaque writes <strong>ka</strong> (short a) rather than <strong>kâ</strong> (long â) — both are attested in carved signage; <strong>kâ‑</strong> is the standard descriptive-relative prefix. The internal vowels of <strong>kwâskwekotek</strong> on the plaque are short in places where standard published Cree would write <strong>kwâskwêkotêk</strong>. The fragment preserves the plaque spelling exactly; an alternate normalized spelling for educational use would be <strong>nipêwin kâ kwâskwêkotêk kîkway</strong> or <strong>...kîkwayak</strong>.",
+    "Syllabic transcription <strong>ᓂᐯᐃᐣ</strong> for 'nipêwin' uses the bare ᐃ for the medial 'wi' rather than the more standard <strong>ᐏ</strong>; the carved plaque appears to use the simpler vowel glyph. Flagged for elder review.",
+    "Trailforks pick: 'Bed Springs' (trailId 15537), Patricia Ravine, Edmonton. High confidence — exact slug match, single result, located in Edmonton. There is also a 'Lower Bed Springs' adjacent trail (slug lower-bed-springs) which is a separate continuation segment.",
+    "Photo cropped from allSigns.jpg at box (4150, 4200, 5350, 5800) — this is the plaque-and-label pair, not the upper-row 'Bed Springs' variant. The upper variant in the wall is the same plaque art."
+  ]
+}

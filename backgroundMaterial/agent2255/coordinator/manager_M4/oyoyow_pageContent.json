@@ -1,0 +1,181 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Howl • oyôyow • ᐅᔫᔪᐤ",
+  "photo": {
+    "src": "../assets/oyoyow/oyoyow_render.png",
+    "alt": "Oyôyow / HOWL trail sign showing a black silhouette of a howling wolf overlaid with red Plains Cree syllabics",
+    "caption": "3D printed plaque: black howling-wolf silhouette with the syllabics ᐅᔫᔪᐤ in red across the muzzle and chest."
+  },
+  "trailforks": {},
+  "linguistics": {
+    "meaning": "Howl — the long, drawn-out cry of a wolf",
+    "type": "verb (AI, animate intransitive) — onomatopoeic / imitative",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "o‑yô‑yow",
+      "syllabics": "ᐅᔫᔪᐤ",
+      "morphemes": [
+        {
+          "key": "o-onomat",
+          "sro": "o‑",
+          "syllabics": "ᐅ",
+          "gloss": "imitative initial: the open ‘oh‑’ that starts the howl. In Plains Cree, onomatopoeic animal-cry verbs often begin with an open vowel that mimics the very first sound the animal makes."
+        },
+        {
+          "key": "yoo-howl-vowel",
+          "sro": "‑yô‑",
+          "syllabics": "ᔫ",
+          "gloss": "imitative core: the long, lifted ‘‑yô‑’ that carries the pitch of the howl. The long ô is what stretches the cry across the night."
+        },
+        {
+          "key": "yo-howl-fall",
+          "sro": "‑yo‑",
+          "syllabics": "ᔪ",
+          "gloss": "imitative tail: the falling-off ‘‑yo‑’ where the howl drops back down before it ends. The reduplicated yô–yo shape is what makes the word audibly a howl rather than just a name for one."
+        },
+        {
+          "key": "w-AI-3sg",
+          "sro": "‑w",
+          "syllabics": "ᐤ",
+          "gloss": "AI 3rd-person singular animate-intransitive ending: ‘he/she does it.’ The same ‑w that closes <strong>nipâw</strong> ‘s/he sleeps,’ <strong>pimohtêw</strong> ‘s/he walks,’ <strong>matwêhkâsow</strong> ‘s/he is heard.’ Here it turns the imitative cry into a verb: ‘s/he howls.’"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Wolf (the animal itself)",
+        "sro": "mahihkan",
+        "syllabics": "ᒪᐦᐃᐦᑲᐣ",
+        "morphemes": [
+          {
+            "key": "mahihkan-noun",
+            "sro": "mahihkan",
+            "syllabics": "ᒪᐦᐃᐦᑲᐣ",
+            "gloss": "NA noun (animate): wolf. The everyday noun for the animal whose voice the headword imitates."
+          }
+        ],
+        "note": "The bare noun. Where <strong>oyôyow</strong> names the cry, <strong>mahihkan</strong> names the animal making it."
+      },
+      {
+        "english": "Wolves (plural, animate)",
+        "sro": "mahihkanak",
+        "syllabics": "ᒪᐦᐃᐦᑲᓇᐠ",
+        "morphemes": [
+          {
+            "key": "mahihkan-stem",
+            "sro": "mahihkan‑",
+            "syllabics": "ᒪᐦᐃᐦᑲᐣ",
+            "gloss": "stem: wolf"
+          },
+          {
+            "key": "ak-anim-pl",
+            "sro": "‑ak",
+            "syllabics": "ᐊᐠ",
+            "gloss": "NA animate plural ending — the same ‑ak in <strong>iskwêwak</strong> ‘women,’ <strong>nâpêwak</strong> ‘men,’ <strong>kahkakiwak</strong> ‘ravens.’"
+          }
+        ],
+        "note": "Regular animate plural. A pack of wolves howling together is <strong>mahihkanak ê‑oyôyocik</strong>."
+      },
+      {
+        "english": "S/he calls out, s/he shouts",
+        "sro": "têpwêw",
+        "syllabics": "ᑌᐯᐧᐤ",
+        "morphemes": [
+          {
+            "key": "tepwe-stem",
+            "sro": "têpwê‑",
+            "syllabics": "ᑌᐯ",
+            "gloss": "AI stem: ‘call out, shout, cry out (with the voice).’"
+          },
+          {
+            "key": "w-AI-3sg-2",
+            "sro": "‑w",
+            "syllabics": "ᐧᐤ",
+            "gloss": "AI 3rd-person singular ending — the same ‑w as on the headword."
+          }
+        ],
+        "note": "Generic ‘calling-out’ verb. Where <strong>oyôyow</strong> is specifically a long, sustained, animal-style howl, <strong>têpwêw</strong> covers any loud human or animal call. Same AI ‑w family."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Howl — s/he howls (the long wolf-cry)",
+        "sro": "oyôyow",
+        "syllabics": "ᐅᔫᔪᐤ",
+        "note": "Headword on the plaque. AI verb, onomatopoeic / imitative."
+      },
+      {
+        "english": "Wolf (the animal)",
+        "sro": "mahihkan",
+        "syllabics": "ᒪᐦᐃᐦᑲᐣ",
+        "note": "NA noun. The animal whose cry is imitated by oyôyow."
+      },
+      {
+        "english": "Wolves (plural)",
+        "sro": "mahihkanak",
+        "syllabics": "ᒪᐦᐃᐦᑲᓇᐠ",
+        "note": "Regular animate ‑ak plural."
+      },
+      {
+        "english": "Wolf cub",
+        "sro": "mahihkanis",
+        "syllabics": "ᒪᐦᐃᐦᑲᓂᐢ",
+        "note": "Diminutive in ‑is: ‘little wolf.’ Some speakers also use <strong>mâcakawisîs</strong> for a wild young canid."
+      },
+      {
+        "english": "S/he calls out, s/he shouts",
+        "sro": "têpwêw",
+        "syllabics": "ᑌᐯᐧᐤ",
+        "note": "Generic AI verb of calling. Same ‑w 3sg ending."
+      },
+      {
+        "english": "S/he is heard (from afar)",
+        "sro": "matwêhkâsow",
+        "syllabics": "ᒪᑘᐦᑳᓱᐤ",
+        "note": "AI verb anchoring the audible-from-a-distance semantic field that a wolf-howl belongs to."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "mahihkan",
+        "english": "wolf (NA noun, animate)",
+        "syllabics": "ᒪᐦᐃᐦᑲᐣ"
+      },
+      {
+        "sro": "‑w (AI 3sg)",
+        "english": "‘he/she does it’ — the animate-intransitive 3rd-person singular ending",
+        "syllabics": "ᐤ"
+      },
+      {
+        "sro": "têpwêw",
+        "english": "s/he calls out, shouts (AI)",
+        "syllabics": "ᑌᐯᐧᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About oyôyow — the Howl",
+    "body": [
+      "Of all the trail signs in this set, <strong>oyôyow</strong> is the most audible. The word does not merely <em>mean</em> ‘howl’ — it <em>is</em> a howl, fixed into Cree morphology. The open ‘o‑’ opens the throat, the long ‘‑yô‑’ lifts and sustains the cry the way a wolf actually carries its voice across a river valley at dusk, and the falling ‘‑yo‑’ drops it back down before the final AI ending ‑w turns the whole imitation into a verb: ‘s/he howls.’ Plains Cree has a deep tradition of these imitative animal-cry verbs, and <strong>oyôyow</strong> is one of the cleanest examples.",
+      "On the wall the plaque hangs in two near-identical copies — the doubling is itself a kind of echo, the way a wolf-howl in the hills bounces back at you as a second voice. Each plaque shows the silhouette of a howling wolf in solid black, head tilted up, with the red syllabics <strong>ᐅᔫᔪᐤ</strong> set across the muzzle and chest so the language sits inside the animal it names. Underneath, the English ‘HOWL’ is laid out in a heavy block face: short, blunt, and onomatopoeic in its own sparse English way.",
+      "The trail itself sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory) in the Edmonton river-valley network — singletrack ridden by people who have known the line for decades by its English nickname and are now beginning to know it by the Cree word that names what the trail itself sounds like when you let off the brakes."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with SRO 'oyôyow' (circumflex on the second 'ô') and the corresponding red syllabics 'ᐅᔫᔪᐤ' (long-ô glyph ᔫ on the second position). The current catalogue.json creeName is 'oyoyow' (no diacritic) and creeSyllabics is 'ᐅᔪᔪᐤ' (short-o glyph ᔪ on the second position). Coordinator should update catalogue creeName → 'oyôyow' and creeSyllabics → 'ᐅᔫᔪᐤ' to match the carved plaque.",
+    "Morpheme analysis is teaching-grade rather than dictionary-headword grade: 'oyôyow' is treated by most reference works as a single onomatopoeic/imitative AI verb stem oyôyo- + AI ending -w. The four-morpheme split (o- / -yô- / -yo- / -w) used here is a deliberate pedagogical decomposition that surfaces the imitative reduplication pattern (open vowel → long-vowel pitch core → short-vowel fall → AI ending) and lets the renderer hover-link each piece. Either reading is defensible.",
+    "Two near-identical 'oyôyow / HOWL' plaques are mounted on the wall (one far-left as a tall plaque, one in the upper-row cluster). The asset wired here is the canonical design render at oyoyow/oyoyo.png; both wall plaques match this design.",
+    "Trailforks pick: NO confident match. Direct trail name 'Howl' returned no hits in the Edmonton-area Trailforks network on three queries. There is a 'Wolfman' / 'Wolf Bait' family of trail names but nothing carrying 'Howl' itself. Leaving trailforks: {} and surfacing here for human follow-up — a single Trailforks click by a local rider would settle whether this is an unmapped community trail or a named line in another region."
+  ]
+}

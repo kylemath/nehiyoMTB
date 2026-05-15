@@ -1,0 +1,178 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Wonder Woman • mamahtâw iskwew • ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ",
+  "photo": {
+    "src": "../assets/mamahtaw_askwew/mamahtaw_iskwew.png",
+    "alt": "Wonder Woman trail sign showing a black female-warrior silhouette with hair, star tiara, and lariat, with red Plains Cree syllabics across the torso",
+    "caption": "3D printed plaque: black Wonder-Woman silhouette with star tiara and lariat, the syllabics ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ in red across the body."
+  },
+  "trailforks": {
+    "trailId": "31377",
+    "trailUrl": "https://www.trailforks.com/trails/wonder-woman/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=31377&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Wonder Woman",
+    "mapCoords": { "lat": 53.54092, "lng": -113.54308, "source": "trailforks trailhead 31377" }
+  },
+  "linguistics": {
+    "meaning": "Wonder Woman — literally ‘wondrous / miraculous woman’",
+    "type": "noun phrase (VII-derived adjective + NA noun)",
+    "primarySection": {
+      "heading": "The Phrase",
+      "sro": "mamahtâw  iskwew",
+      "syllabics": "ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ",
+      "morphemes": [
+        {
+          "key": "mamahtaaw-stem",
+          "sro": "mamahtâw",
+          "syllabics": "ᒪᒪᐦᑖᐤ",
+          "gloss": "VII / pre-noun: ‘s/he or it is wondrous, miraculous, supernatural, possessing extraordinary power.’ Functions adjectivally before the noun (cf. <strong>mamahtâwisiw</strong> ‘s/he is wondrous, has spirit-power’)."
+        },
+        {
+          "key": "iskwew-noun",
+          "sro": "iskwew",
+          "syllabics": "ᐃᐢᑲᐧᐤ",
+          "gloss": "NA noun (animate): ‘woman, female adult human.’ The everyday word for woman, distinct from <strong>nâpêw</strong> ‘man.’"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "S/he is wondrous / has spirit-power (the AI verb)",
+        "sro": "mamahtâwisiw",
+        "syllabics": "ᒪᒪᐦᑖᐏᓯᐤ",
+        "morphemes": [
+          {
+            "key": "mamahtaa-init",
+            "sro": "mamahtâ‑",
+            "syllabics": "ᒪᒪᐦᑖ",
+            "gloss": "initial: ‘wondrous, miraculous, possessing spiritual power’"
+          },
+          {
+            "key": "wisiw-ai",
+            "sro": "‑wisiw",
+            "syllabics": "ᐏᓯᐤ",
+            "gloss": "AI verb final, 3sg independent: ‘s/he is in such-and-such a state’"
+          }
+        ],
+        "note": "The most common AI verb form. Used to describe people who possess remarkable abilities, especially spiritual/healing power."
+      },
+      {
+        "english": "It is wondrous / miraculous (VII)",
+        "sro": "mamahtâwan",
+        "syllabics": "ᒪᒪᐦᑖᐗᐣ",
+        "morphemes": [
+          {
+            "key": "mamahtaa-init2",
+            "sro": "mamahtâ‑",
+            "syllabics": "ᒪᒪᐦᑖ",
+            "gloss": "initial: ‘wondrous, miraculous’"
+          },
+          {
+            "key": "wan-vii",
+            "sro": "‑wan",
+            "syllabics": "ᐗᐣ",
+            "gloss": "VII final: ‘it is X’"
+          }
+        ],
+        "note": "VII parallel form: ‘it is wondrous.’ The plaque uses the bare prefixal mamahtâw before iskwew."
+      },
+      {
+        "english": "Women (plural — ‘wondrous women’)",
+        "sro": "mamahtâw iskwêwak",
+        "syllabics": "ᒪᒪᐦᑖᐤ ᐃᐢᑵᐘᐠ",
+        "morphemes": [
+          {
+            "key": "iskwew-stem",
+            "sro": "iskwêw",
+            "syllabics": "ᐃᐢᑵᐤ",
+            "gloss": "NA noun stem: ‘woman’"
+          },
+          {
+            "key": "ak-anim-pl2",
+            "sro": "‑ak",
+            "syllabics": "ᐊᐠ",
+            "gloss": "NA animate plural: ‘‑s’"
+          }
+        ],
+        "note": "Plural form (‘wonder-women / wondrous women’). The pre-noun mamahtâw does not inflect."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Wonder Woman — ‘wondrous woman’",
+        "sro": "mamahtâw iskwew",
+        "syllabics": "ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ",
+        "note": "Headword on the plaque. Pre-noun mamahtâw + NA iskwew."
+      },
+      {
+        "english": "S/he is wondrous, has spirit-power",
+        "sro": "mamahtâwisiw",
+        "syllabics": "ᒪᒪᐦᑖᐏᓯᐤ",
+        "note": "AI verb form. Often used of people with remarkable healing or spiritual powers."
+      },
+      {
+        "english": "Woman (the bare noun)",
+        "sro": "iskwew",
+        "syllabics": "ᐃᐢᑲᐧᐤ",
+        "note": "NA noun. Plural: iskwêwak."
+      },
+      {
+        "english": "It is wondrous (VII)",
+        "sro": "mamahtâwan",
+        "syllabics": "ᒪᒪᐦᑖᐗᐣ",
+        "note": "Inanimate-subject parallel."
+      },
+      {
+        "english": "Spirit power, the wondrous (the noun-of-quality)",
+        "sro": "mamahtâwisiwin",
+        "syllabics": "ᒪᒪᐦᑖᐏᓯᐏᐣ",
+        "note": "Nominalised: ‘miraculousness, spirit-power, ability to do wondrous things.’"
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "mamahtâw",
+        "english": "(pre-noun / VII) wondrous, miraculous, having spirit-power",
+        "syllabics": "ᒪᒪᐦᑖᐤ"
+      },
+      {
+        "sro": "iskwew",
+        "english": "woman (NA)",
+        "syllabics": "ᐃᐢᑲᐧᐤ"
+      },
+      {
+        "sro": "mamahtâwisiw",
+        "english": "s/he is wondrous, has spirit-power (AI)",
+        "syllabics": "ᒪᒪᐦᑖᐏᓯᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About mamahtâw iskwew — the Wondrous Woman",
+    "body": [
+      "The <strong>mamahtâw iskwew</strong> plaque turns the comic-book Wonder Woman into a nehiyaw (Plains Cree) figure. The black silhouette is unmistakable — the star tiara, the wave of hair, the lariat looped around both arms — but the syllabics across the torso, <strong>ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ</strong>, render the name in a register the Amazonian original never had: <strong>mamahtâw</strong> is the same word the language uses for spirit-power, for healers, for people who do remarkable things. ‘Wondrous woman’ is the literal gloss; ‘miracle woman’ is closer to the cultural feel.",
+      "The phrase is a pre-noun + noun construction. <strong>mamahtâw</strong> is a VII (it-is-wondrous) used adjectivally before the noun: it does not inflect. <strong>iskwew</strong> is the everyday NA noun for ‘woman.’ The same root surfaces in the AI verb <strong>mamahtâwisiw</strong> ‘s/he has spirit-power, s/he does wondrous things,’ and in the abstract noun <strong>mamahtâwisiwin</strong> ‘miraculousness, spirit-power.’ The naming choice is deliberate: it lifts a pop-culture superhero into a category — the wondrous one, the one with spirit-power — that already exists in nehiyawêwin and that names actual people in Cree communities.",
+      "The trail itself is a 327 m stretch in the <strong>Hawrelak</strong> network on the south side of the river, in the same cluster as <strong>Lovers Lane</strong>, <strong>Victoria’s Secret</strong>, <strong>Purple Haze</strong>, and <strong>Back Breaker</strong> — short, blue-difficulty, tucked behind Government House and the Korean Pavilion. Trailforks itself lists the AKA <strong>mamahtâw iskwew</strong> for the trail. The land is <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory). The plaque’s red syllabics on a black silhouette pop against the bare white background — language and image carrying the same idea in two scripts."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with SRO 'mamahtâw iskwew' (with circumflex on the â). The current catalogue creeName 'mamahtaw iskwew' is missing the â circumflex. Trailforks's AKA listing for trail #31377 also writes 'mamahtâw iskwew' (with â). Coordinator should update catalogue creeName to 'mamahtâw iskwew'.",
+    "PHYSICAL SIGN OVERRIDES CATALOGUE (syllabics): The carved syllabics shows the long-â glyph ᑖ (with dot above) in the fourth position of mamahtâw — i.e. 'ᒪᒪᐦᑖᐤ.' The current catalogue creeSyllabics 'ᒪᒪᐦᑕᐤ ᐃᐢᑲᐧᐤ' has plain ᑕ (short a) in that position. Coordinator should update creeSyllabics to ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ.",
+    "Note the legacy folder name 'mamahtaw_askwew' contains a typo ('askwew' for 'iskwew'). The folder is not renamed (per coordinator instructions); the catalogue 'folder' field correctly points to the existing path. The PAGE displays the corrected 'iskwew' / ᐃᐢᑲᐧᐤ in all carved-text positions.",
+    "iskwew syllabics: the carved plaque uses the decomposed form 'ᐃᐢᑲᐧᐤ' (i + s + ka + w-medial + w-final). The unified-syllabic form 'ᐃᐢᑵᐤ' (i + s + kwê + w) is also valid and is what itwêwina uses. The page uses the carved decomposed form for fidelity to the plaque, but the related-forms section uses the unified form for the plural ᐃᐢᑵᐘᐠ where it reads more naturally.",
+    "Morpheme analysis treats mamahtâw as an indeclinable pre-noun (the VII bare stem used adjectivally) plus the NA noun iskwew. An alternative analysis writes it as a single compound 'mamahtâwiskwew' meaning ‘wondrous-woman’ (single word). Both readings are linguistically defensible; the two-word reading is preferred here because the plaque visually separates the words and Trailforks’s AKA also separates them.",
+    "Trailforks pick: 'Wonder Woman' (trail id 31377), Hawrelak / NW Edmonton — 327m blue singletrack with a black-diamond climb, behind Government House. Trailhead 53.54092, -113.54308. High confidence (Trailforks lists AKA ‘mamahtâw iskwew’)."
+  ]
+}

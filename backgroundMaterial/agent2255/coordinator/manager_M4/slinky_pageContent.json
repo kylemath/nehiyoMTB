@@ -1,0 +1,135 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Slinky",
+  "photo": {
+    "src": "../assets/slinky/sign_render.png",
+    "alt": "Slinky trail-sign installation: a small printed plaque reading 'slinky' in black with a red syllabic transliteration, mounted above a giant red wire-spring sculpture that spans multiple wall rows",
+    "caption": "The slinky 'sign' is two pieces working together: a small printed plaque reading 'slinky' in black with a red syllabic transliteration, and the giant red wire-coil spring sculpture itself, which spans multiple rows of the wall."
+  },
+  "trailforks": {
+    "trailId": "150113",
+    "trailUrl": "https://www.trailforks.com/trails/slinky-mid/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=150113&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Slinky - Mid",
+    "mapCoords": { "lat": 53.51818, "lng": -113.5403, "source": "trailforks trailhead 150113 (Slinky - Mid, Keillor)" }
+  },
+  "linguistics": {
+    "meaning": "Slinky — a borrowed English brand-name (the coiled-spring toy), used here as the trail's English name and rendered into the wall installation as the giant red wire-spring sculpture itself",
+    "type": "loanword / sculpture (no Plains Cree calque)",
+    "primarySection": {
+      "heading": "The Sign Is the Sculpture",
+      "sro": "slinky",
+      "syllabics": "(no Cree calque — see notes)",
+      "morphemes": [
+        {
+          "key": "slinky-loan-sculpture",
+          "sro": "slinky",
+          "syllabics": "—",
+          "gloss": "Borrowed English brand-name (Richard James, 1945, Hollidaysburg PA): the coiled-spring toy that ‘walks’ down stairs. On the wall this sign is unique — there is no carved Plains Cree plaque for it. Instead, the <strong>physical artefact itself is the sign</strong>: a roughly 4-foot tall continuous red wire-spring sculpture spanning multiple rows of the wall (rows 1 → 3), with a small printed companion plaque at the top-left of row 1 carrying the English word ‘slinky’ in black + a red syllabic transliteration of the loanword. The sculpture <em>is</em> the word, the way the spring-toy <em>is</em> its own name."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Spring (the coiled metal kind, generic)",
+        "sro": "(no single Plains Cree word; descriptive phrase used)",
+        "syllabics": "—",
+        "morphemes": [
+          {
+            "key": "spring-descriptive",
+            "sro": "kâ‑kwêskwêkotêk piwâpisk",
+            "syllabics": "ᑳᑴᐢᑴᑯᑌᐠ ᐱᐚᐱᐢᐠ",
+            "gloss": "Descriptive Cree paraphrase: ‘the metal that bounces / coils back.’ Same <strong>kâ‑kwêskwêkotêk</strong> stem the wall uses for the <em>nipêwin ka kwêskwêkotêk kikwayak</em> ‘Bed Springs’ plaque, paired with <strong>piwâpisk</strong> ‘metal, iron’ — gives a transparent ‘bouncy metal’ reading without committing to a single calqued noun."
+          }
+        ],
+        "note": "Plains Cree typically describes mechanical springs by what they do (bounce, recoil) rather than by a single noun. The wall already uses <strong>kâ‑kwêskwêkotêk</strong> on the Bed Springs plaque; pairing it with <strong>piwâpisk</strong> ‘metal’ gives a ‘bouncy-metal-thing’ paraphrase that fits the slinky."
+      },
+      {
+        "english": "It bounces, it coils-and-springs-back",
+        "sro": "kwêskwêkotêw",
+        "syllabics": "ᑴᐢᑴᑯᑌᐤ",
+        "morphemes": [
+          {
+            "key": "kweskwekote-stem",
+            "sro": "kwêskwêkotê‑",
+            "syllabics": "ᑴᐢᑴᑯᑌ",
+            "gloss": "II stem: ‘it coils-and-springs-back, it bounces, it has springiness.’ The reduplicated kwê‑kwê‑ shape is itself imitative of the back-and-forth motion."
+          },
+          {
+            "key": "w-II-3sg",
+            "sro": "‑w",
+            "syllabics": "ᐤ",
+            "gloss": "II 3rd-person singular ending"
+          }
+        ],
+        "note": "The verb behind the kâ‑kwêskwêkotêk relativised form on the wall’s Bed Springs plaque. Anchors the slinky’s defining motion in Plains Cree morphology even though the loanword ‘slinky’ is left untranslated."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Slinky — the coiled-spring toy / the sculpture on this wall",
+        "sro": "slinky",
+        "syllabics": "(loanword — no Cree calque on this sign)",
+        "note": "On the wall this is realised as a giant red continuous wire-spring sculpture spanning multiple rows, plus a small printed companion plaque carrying the English word and a syllabic transliteration."
+      },
+      {
+        "english": "It bounces, it springs back (the defining motion)",
+        "sro": "kwêskwêkotêw",
+        "syllabics": "ᑴᐢᑴᑯᑌᐤ",
+        "note": "II verb — the same root the wall’s Bed Springs plaque builds on (kâ‑kwêskwêkotêk). The Plains Cree way of describing what a slinky does."
+      },
+      {
+        "english": "Metal, iron (the material a slinky is made of)",
+        "sro": "piwâpisk",
+        "syllabics": "ᐱᐚᐱᐢᐠ",
+        "note": "NI noun: ‘piece of metal/iron.’ Combine with the bounce-verb above for a full descriptive Cree reading of ‘slinky.’"
+      },
+      {
+        "english": "Trail (footpath, riding line)",
+        "sro": "mêskanaw",
+        "syllabics": "ᒣᐢᑲᓇᐤ",
+        "note": "NI noun: ‘road, trail, way.’ Same ‑mêskanâs root that closes <strong>nicimos mêskanâs</strong> ‘Lovers Lane’ on the heart-plaques nearby."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "kwêskwêkotêw",
+        "english": "it bounces, it springs back (II verb)",
+        "syllabics": "ᑴᐢᑴᑯᑌᐤ"
+      },
+      {
+        "sro": "piwâpisk",
+        "english": "metal, iron (NI)",
+        "syllabics": "ᐱᐚᐱᐢᐠ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About slinky — the Sculpture That Is the Sign",
+    "body": [
+      "Of the twenty-plus pieces on this wall, <strong>slinky</strong> is the only one where the trail-sign installation IS the artefact rather than a plaque <em>about</em> the artefact. A roughly four-foot-tall continuous red wire spring — recognisably a giant scaled-up version of Richard James's 1945 coil-toy — drops from row 1 down through row 3, threading between the other plaques, with a small white companion plaque tucked in at the top-left carrying the English word ‘slinky’ in raised black letters and a red syllabic transliteration of the loanword underneath. There is no carved Plains Cree calque, because the spring-toy is itself a borrowed English name with no Cree equivalent: the sculpture is the word.",
+      "The trail it commemorates sits in the Central Edmonton (South) / Keillor river-valley network on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory) and is actually a small family of three — <strong>Slinky - North</strong> (Trailforks #51286, ~2,221 ft of typical river's-edge singletrack), <strong>Slinky - Mid</strong> (#150113, the short ‘best section of the three Slinkys’), and a <strong>Slinky - South</strong> sister line. Strung end-to-end the three sections do, in fact, read on the map as a coil that recoils back on itself — flat, off-camber, jumbly — which is why the riders who built and named the line gave it the toy's name.",
+      "Plains Cree handles spring-like motion descriptively rather than with a single noun. The verb <strong>kwêskwêkotêw</strong> ‘it bounces, it coils and springs back’ — the same root the wall uses on the Bed Springs plaque (<strong>nipêwin ka kwêskwêkotêk kikwayak</strong> ‘the thing that bounces on a bed’) — paired with <strong>piwâpisk</strong> ‘metal’ gives a transparent Cree paraphrase ‘bouncy metal thing,’ but the builders of this wall chose instead to leave the slinky as itself: the loanword stays, the sculpture does the talking."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "Trailforks",
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "NO CATALOGUE-LEVEL CORRECTION REQUIRED. The catalogue creeName is the placeholder 'slinky' and creeSyllabics is empty; this is correct because the sign carries no carved Plains Cree calque. Leaving both as-is is intentional and matches the plaque.",
+    "The pre-staged photo at docs/assets/slinky/sign_render.png shows a small printed plaque reading 'slinky' (black) with a red syllabic transliteration of the loanword underneath — this contradicts the brief's read that 'no plaque exists' for slinky. The plaque is small but real; the giant red wire-coil sculpture is the dominant element. Both are part of the slinky installation; the photo wired here captures the printed-plaque side. A future revision could add a wider crop showing the full multi-row coil from allSigns.jpg (approx box (900, 200) → (2400, 5000) in the original 8160×6144 coordinates) as a second photo if a multi-photo gallery field is added to pageContent.",
+    "The exact syllabics on the small printed plaque appear to be a phonetic transliteration of the English loanword ‘slinky’ (s-li-n-ki ≈ ᔅᓕᐣᑭ) but resolution at the wall-photo crop is not high enough to confirm letter-by-letter; a higher-res single-panel photo would settle it. Treated here as a loanword transliteration without carving it into the headerTitle, to avoid fabricating a Cree calque the carvers did not intend.",
+    "Trailforks pick: HIGH confidence — Trailforks lists three 'Slinky' trails in the Edmonton river-valley network (Slinky - North #51286 in Central Edmonton (South); Slinky - Mid #150113 in Keillor; Slinky - South, no ID confirmed in this run). Slinky - Mid (#150113) is wired here as the primary because Trailforks describes it as 'the best section of the three Slinkys.' All three are part of the same continuous riding line and any of them is a defensible primary; the user may wish to flip to Slinky - North (#51286) if the catalogue prefers the longer / more popular section.",
+    "linguistics.relatedForms uses descriptive Cree paraphrases (kwêskwêkotêw, piwâpisk) rather than calqued nouns. This is a deliberate choice: there is no widely-attested Plains Cree word for a coiled mechanical spring, and inventing one would conflict with the spec rule 'do not silently replace a checked local spelling with a dictionary spelling unless the change is intentional.' Surfaced as a related-forms section so the page still teaches Plains Cree morphology adjacent to the loanword.",
+    "headerTitle is just 'Slinky' (no Cree segment) per brief: 'for slinky just `Slinky` if no Cree.' This deviates from the kiwapamitin three-part 'English • SRO • Syllabics' pattern but matches the loanword-only nature of the installation."
+  ]
+}

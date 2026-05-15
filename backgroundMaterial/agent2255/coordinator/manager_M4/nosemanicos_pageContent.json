@@ -1,0 +1,159 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Ladybug • nôsemanicôs • ᓅᓭᒪᓂᒎᐢ",
+  "photo": {
+    "src": "../assets/nosemanicos/nosemanicos_render.png",
+    "alt": "Nôsemanicôs / LADYBUG trail sign showing a red ladybug with black head and black spots, with white Plains Cree syllabics carved across the wing case",
+    "caption": "3D printed plaque: red ladybug with black head, black spots, and the syllabics ᓅᓭᒪᓂᒎᐢ in white across its wing case."
+  },
+  "trailforks": {},
+  "linguistics": {
+    "meaning": "Ladybug — literally ‘the female little bug’ (the female-of-the-bug, with maternal/feminine reading)",
+    "type": "noun (NA, animate)",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "nôse‑manicôs",
+      "syllabics": "ᓅᓭᒪᓂᒎᐢ",
+      "morphemes": [
+        {
+          "key": "noose-female",
+          "sro": "nôse‑",
+          "syllabics": "ᓅᓭ",
+          "gloss": "female-marker prefix: ‘female, mother, dam.’ The same productive prefix that builds <strong>nôsemostos</strong> ‘cow (female buffalo / cow-bovine),’ <strong>nôsepiscâcâs</strong> ‘mother bird, hen,’ <strong>nôsemâcêsis</strong> ‘doe, female deer.’ Marks the specifically-female of any animate species."
+        },
+        {
+          "key": "manicoos-bug",
+          "sro": "manicôs",
+          "syllabics": "ᒪᓂᒎᐢ",
+          "gloss": "NA noun (animate): ‘small bug, little insect, creepy-crawly.’ Itself a diminutive in form (older long-vowel ‑ôs final), grouping with a wide family of animate-small-creature words. The free-standing word for an unspecified small bug."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Bug, small insect (the bare noun, either sex)",
+        "sro": "manicôs",
+        "syllabics": "ᒪᓂᒎᐢ",
+        "morphemes": [
+          {
+            "key": "manicoos-noun",
+            "sro": "manicôs",
+            "syllabics": "ᒪᓂᒎᐢ",
+            "gloss": "NA noun: ‘bug, small insect.’ The base from which <strong>nôsemanicôs</strong> ‘ladybug = female-bug’ is built."
+          }
+        ],
+        "note": "The unmarked species-word. Inside <strong>nôsemanicôs</strong>, the <strong>nôse‑</strong> prefix narrows it to the female form."
+      },
+      {
+        "english": "Bugs, small insects (animate plural)",
+        "sro": "manicôsak",
+        "syllabics": "ᒪᓂᒎᓴᐠ",
+        "morphemes": [
+          {
+            "key": "manicoos-stem",
+            "sro": "manicôs‑",
+            "syllabics": "ᒪᓂᒎᐢ",
+            "gloss": "stem: small bug"
+          },
+          {
+            "key": "ak-anim-pl-2",
+            "sro": "‑ak",
+            "syllabics": "ᐊᐠ",
+            "gloss": "NA animate plural ending — same ‑ak as in <strong>iskwêwak</strong> ‘women,’ <strong>kahkakiwak</strong> ‘ravens,’ <strong>mahihkanak</strong> ‘wolves.’"
+          }
+        ],
+        "note": "Animate plural. A swarm of ladybugs would be <strong>nôsemanicôsak</strong> — same ‑ak ending stacked onto the female-bug headword."
+      },
+      {
+        "english": "Female bovine, cow (literally ‘female-buffalo’)",
+        "sro": "nôsemostos",
+        "syllabics": "ᓅᓭᒧᐢᑐᐢ",
+        "morphemes": [
+          {
+            "key": "noose-female-2",
+            "sro": "nôse‑",
+            "syllabics": "ᓅᓭ",
+            "gloss": "female-marker prefix"
+          },
+          {
+            "key": "mostos-cow",
+            "sro": "mostos",
+            "syllabics": "ᒧᐢᑐᐢ",
+            "gloss": "NA noun: ‘bovine, buffalo / domestic cow.’"
+          }
+        ],
+        "note": "Structural minimal pair: same <strong>nôse‑</strong> prefix slotting onto a different animal noun. Shows that the female-marker is fully productive, not specific to bugs."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Ladybug — ‘female little bug’",
+        "sro": "nôsemanicôs",
+        "syllabics": "ᓅᓭᒪᓂᒎᐢ",
+        "note": "Headword on the plaque. NA noun (animate). Some communities also use <strong>mîniskos</strong> regionally."
+      },
+      {
+        "english": "Bug, small insect (generic)",
+        "sro": "manicôs",
+        "syllabics": "ᒪᓂᒎᐢ",
+        "note": "Bare noun. Source of the second half of the headword."
+      },
+      {
+        "english": "Ladybugs (plural)",
+        "sro": "nôsemanicôsak",
+        "syllabics": "ᓅᓭᒪᓂᒎᓴᐠ",
+        "note": "Regular animate ‑ak plural."
+      },
+      {
+        "english": "Female-marker prefix (used to derive any female-of-species noun)",
+        "sro": "nôse‑",
+        "syllabics": "ᓅᓭ",
+        "note": "Productive prefix: nôsemostos ‘cow,’ nôsemâcêsis ‘doe,’ nôsepiscâcâs ‘hen.’"
+      },
+      {
+        "english": "Cow, female buffalo",
+        "sro": "nôsemostos",
+        "syllabics": "ᓅᓭᒧᐢᑐᐢ",
+        "note": "Same <strong>nôse‑</strong> prefix on a different animal stem."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "manicôs",
+        "english": "small bug, little insect (NA, animate)",
+        "syllabics": "ᒪᓂᒎᐢ"
+      },
+      {
+        "sro": "nôse‑",
+        "english": "(prefix) female-marker, ‘female / mother / dam’",
+        "syllabics": "ᓅᓭ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About nôsemanicôs — the Female Little Bug",
+    "body": [
+      "Across the prairies the ladybug carries an old reading as a small, marked, distinctly-female creature: brilliant red wing case, black head, polka-dot pattern that reads at any distance, and a habit of clustering on grass-stems where children can pick them up. The Cree name <strong>nôsemanicôs</strong> takes that reading literally — ‘female (<strong>nôse‑</strong>) little bug (<strong>manicôs</strong>).’ The same <strong>nôse‑</strong> prefix that builds <strong>nôsemostos</strong> ‘cow’ (female buffalo) and <strong>nôsemâcêsis</strong> ‘doe’ shows up here on a tiny scale, marking the ladybug as the female-of-the-bug-family the way the cow is the female-of-the-bovine-family.",
+      "The plaque leans into that reading visually: a single red ladybug fills almost the whole white plaque, head turned, six legs splayed for balance, with the syllabics <strong>ᓅᓭᒪᓂᒎᐢ</strong> picked out in white across the polished red wing case so the language sits inside the body of the animal it names. White on red in 3D-printed PLA is the closest thing to red enamel paint with a dot of white pigment — exactly the colour scheme of the bug itself.",
+      "The trail of this name sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory) in the Edmonton river-valley network. Putting the diminutive feminine bug-word back onto an MTB sign places a Plains Cree linguistic micro-pattern (the productive <strong>nôse‑</strong> prefix) onto a piece of the everyday landscape — small, polka-dotted, and easy to remember once you see how it is built."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE (syllabics): The plaque is carved with SRO 'nôsemanicôs' (catalogue creeName 'nôsemanicôs' already matches — keep) but the catalogue creeSyllabics is 'ᓄᓭᒪᓂᒑᐢ' which decodes as 'nosemanicâs' (short-o on the first glyph; long-â vowel on the c-glyph ᒑ where the SRO calls for long-ô on c). The plaque-correct syllabics for 'nôsemanicôs' are 'ᓅᓭᒪᓂᒎᐢ' — long-ô glyph ᓅ on the first position (nô) and long-ô glyph ᒎ on the c-position (cô), with the final ᐢ marking the bare ‑s. Coordinator should update catalogue creeSyllabics from 'ᓄᓭᒪᓂᒑᐢ' to 'ᓅᓭᒪᓂᒎᐢ' to match the SRO and the carved plaque.",
+    "Morpheme split: 'nôse-manicôs' is a transparent noun-noun compound (female-prefix + bug). Some references treat <strong>nôse‑</strong> as a free particle/adjectival rather than a bound prefix; either reading is defensible. The 2-morpheme split surfaces both pieces cleanly for the renderer's hover-pairing.",
+    "The third related form (<strong>nôsemostos</strong> ‘cow / female buffalo’) is provided as a structural minimal pair to expose the productive <strong>nôse‑</strong> prefix; readers can then recognise the same prefix on <strong>nôsemâcêsis</strong> ‘doe’ and other female-of-species words.",
+    "Trailforks pick: NO confident match. A direct search for 'Ladybug' in the Edmonton-area Trailforks network returned no hits across three queries. The trail may be unmapped on Trailforks, or be a community/builder name not yet listed. Leaving trailforks: {} and flagging here for a single human-rider Trailforks lookup.",
+    "Mapping syllabic ᒎ (CANS U+128E COO) for the 'cô' position assumes the Plains Cree convention where long ô after c is written ᒎ. Some materials use ᒍ (CO, short) with an external long-vowel mark; either is readable but the long-vowel glyph matches the SRO circumflex more transparently."
+  ]
+}

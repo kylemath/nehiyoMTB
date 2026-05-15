@@ -1,0 +1,177 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Ray Gun • sâpwâpahcikan pâskisikan • ᓵᐚᐸᐦᒋᑲᐣ ᐹᐢᑭᓯᑲᐣ",
+  "photo": {
+    "src": "../assets/sapwapahcikan-paskisikan/ray_gun_render.png",
+    "alt": "Retro sci-fi ray gun icon used as the source render for the sâpwâpahcikan pâskisikan trail sign",
+    "caption": "Source render for the Ray Gun plaque — retro-futuristic silhouette in red on white"
+  },
+  "trailforks": {
+    "notes": "No dedicated Trailforks page found for the Edmonton 'Ray Gun' trail in the Kinsmen / Emily Murphy network. The trail is mentioned in the 'Shredders Kinsmen Loop #1' route description ('Ride Six Shooter, then RayGun and back over the road') but does not have its own /trails/raygun/ entry as of May 2026. A 'Ray Gun' page exists at trailforks.com/trails/ray-gun/ (trailId 20683) but it is the Forebay, Payson, Utah trail — a different trail. Left empty pending Edmonton trail-association upload."
+  },
+  "linguistics": {
+    "meaning": "Ray Gun — literally 'through-shooting firearm' (a coined Cree compound)",
+    "type": "noun phrase (NI + NI compound)",
+    "primarySection": {
+      "heading": "The Phrase",
+      "sro": "sâpw‑âp‑ahcikan  pâskisikan",
+      "syllabics": "ᓵᐚᐸᐦᒋᑲᐣ ᐹᐢᑭᓯᑲᐣ",
+      "morphemes": [
+        {
+          "key": "sapw-init",
+          "sro": "sâpw‑",
+          "syllabics": "ᓵᐚ",
+          "gloss": "verb initial: 'through, all the way through, penetrating' — same productive initial that appears in <strong>sâpwâpiskwâham</strong> 'he sees through it'"
+        },
+        {
+          "key": "ap-medial",
+          "sro": "‑âp‑",
+          "syllabics": "ᐸ",
+          "gloss": "medial: 'see, sight, beam of light' (cognate with <strong>wâpi-</strong> 'see, be light')"
+        },
+        {
+          "key": "ahcikan-fin",
+          "sro": "‑ahcikan",
+          "syllabics": "ᐦᒋᑲᐣ",
+          "gloss": "instrumental nominalizer: '(a) thing used for ____' — the 'tool/device' ending also seen in <strong>masinahikan</strong> 'book, writing tool'"
+        },
+        {
+          "key": "paskisikan-noun",
+          "sro": "pâskisikan",
+          "syllabics": "ᐹᐢᑭᓯᑲᐣ",
+          "gloss": "NI noun: 'firearm, gun' — from VAI <strong>pâskisikê‑</strong> 'to discharge a firearm, to shoot' + the same instrumental ‑(i)kan ending"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Firearm, gun",
+        "sro": "pâskisikan",
+        "syllabics": "ᐹᐢᑭᓯᑲᐣ",
+        "morphemes": [
+          {
+            "key": "paskisike-stem",
+            "sro": "pâskisikê‑",
+            "syllabics": "ᐹᐢᑭᓯᑫ",
+            "gloss": "VAI stem: 'to shoot, to discharge a firearm'"
+          },
+          {
+            "key": "kan-nomz1",
+            "sro": "‑(i)kan",
+            "syllabics": "ᑲᐣ",
+            "gloss": "instrumental nominalizer: 'the tool/device for that action'"
+          }
+        ],
+        "note": "The second word of the plaque, standing alone, is the everyday Cree word for 'gun'."
+      },
+      {
+        "english": "S/he shoots through (it) — VAI",
+        "sro": "sâpwâpaham",
+        "syllabics": "ᓵᐚᐸᐦᐊᒼ",
+        "morphemes": [
+          {
+            "key": "sapw-init2",
+            "sro": "sâpw‑",
+            "syllabics": "ᓵᐚ",
+            "gloss": "initial: 'through'"
+          },
+          {
+            "key": "apaham-stem",
+            "sro": "âpaham",
+            "syllabics": "ᐸᐦᐊᒼ",
+            "gloss": "VTI/VAI form: 's/he does it by sight/by piercing'"
+          }
+        ],
+        "note": "Same <strong>sâpw‑</strong> initial as the headword, showing the 'through-' family of derivations."
+      },
+      {
+        "english": "Beam of light, sunbeam, ray",
+        "sro": "sâpwâstê",
+        "syllabics": "ᓵᐚᐢᑌ",
+        "morphemes": [
+          {
+            "key": "sapwaste",
+            "sro": "sâpwâstê",
+            "syllabics": "ᓵᐚᐢᑌ",
+            "gloss": "VII: 'a beam of light shines through' — captures the 'ray' half of the English name"
+          }
+        ],
+        "note": "Anchors the 'ray' (beam-of-light) reading in everyday Plains Cree."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Ray Gun (the plaque)",
+        "sro": "sâpwâpahcikan pâskisikan",
+        "syllabics": "ᓵᐚᐸᐦᒋᑲᐣ ᐹᐢᑭᓯᑲᐣ",
+        "note": "A coined compound: 'through-shooter firearm'."
+      },
+      {
+        "english": "Gun, firearm",
+        "sro": "pâskisikan",
+        "syllabics": "ᐹᐢᑭᓯᑲᐣ",
+        "note": "NI noun."
+      },
+      {
+        "english": "S/he shoots (with a firearm)",
+        "sro": "pâskisikêw",
+        "syllabics": "ᐹᐢᑭᓯᑫᐤ",
+        "note": "VAI 3rd person."
+      },
+      {
+        "english": "Through, penetrating (initial)",
+        "sro": "sâpw‑",
+        "syllabics": "ᓵᐚ",
+        "note": "Productive Cree verb initial."
+      },
+      {
+        "english": "Six Shooter (the neighbour plaque on the wall)",
+        "sro": "nikocwâsaskanôs",
+        "syllabics": "ᓂᑯᐚᓴᐢᑲᓄᐢ",
+        "note": "Companion firearm sign — same Kinsmen-Loop run."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "pâskisikan",
+        "english": "gun, firearm (NI)",
+        "syllabics": "ᐹᐢᑭᓯᑲᐣ"
+      },
+      {
+        "sro": "sâpw‑",
+        "english": "through, penetrating (verb initial)",
+        "syllabics": "ᓵᐚ"
+      },
+      {
+        "sro": "sâpwâstê",
+        "english": "a beam of light shines through (VII)",
+        "syllabics": "ᓵᐚᐢᑌ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About the Ray Gun",
+    "body": [
+      "The carved plaque reads <strong>sâpwâpahcikan pâskisikan</strong> — literally 'a through-shooting firearm', a tidy Cree neologism for the English mountain-bike trail nickname <strong>Ray Gun</strong>. The retro silver-on-white silhouette borrows from 1950s pulp sci-fi: thick grip, bell-mouth barrel, a red sound-wave radiating out into a single sharp dot at the end of the beam.",
+      "Cree readers will recognise <strong>pâskisikan</strong> as the everyday word for 'gun' — from <strong>pâskisikê‑</strong> 'to discharge a firearm' plus the same instrumental ‑<strong>kan</strong> ending that builds <strong>masinahikan</strong> 'book' from 'writing'. The first word, <strong>sâpwâpahcikan</strong>, picks up the productive verb initial <strong>sâpw‑</strong> 'through, all the way through' — the same initial behind <strong>sâpwâstê</strong> 'a beam of light shines through' — and pairs it with an instrument ending. Together the two words name the trail as 'a firearm that shoots beams through everything.'",
+      "<strong>sâpwâpahcikan pâskisikan</strong> sits in the third row of the wall, just left of <strong>capanaskos / Bobsled</strong>, and is part of the same Kinsmen / Emily Murphy Park run that includes <strong>nikocwâsaskanôs / Six Shooter</strong> and <strong>sôniyâwâhkêsis / Silverfox</strong>. The signs are part of an Edmonton-area effort to put Plains Cree (nēhiyawēwin) names back on the everyday landscape of trails that riders here have known by their English nicknames for a long time. Plaque text colours: black SRO on white, red Cree syllabics, red ray-gun silhouette with the single beam-dot at the tip."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with circumflex on the second word — <strong>pâskisikan</strong> (â over the first 'a'). The current catalogue has <strong>paskisikan</strong> (no diacritic). Coordinator should update catalogue.json creeName 'sâpwâpahcikan paskisikan' → 'sâpwâpahcikan pâskisikan', and creeSyllabics 'ᓵᐚᐸᐦᒋᑲᐣ ᐸᐢᑭᓯᑲᐣ' → 'ᓵᐚᐸᐦᒋᑲᐣ ᐹᐢᑭᓯᑲᐣ' (ᐸ → ᐹ in the second word).",
+    "<strong>sâpwâpahcikan</strong> appears to be an author-coined Cree neologism rather than a stock dictionary entry. The morpheme split sâpw‑ ‘through’ + ‑âp‑ ‘see/beam’ + ‑ahcikan ‘instrumental nominalizer’ is the most defensible reading, but a stricter parse may collapse ‑âp‑ahcikan as a single ‑(âp)ahcike‑ derivation. Either reading is linguistically defensible — flagged for elder/curator review.",
+    "No dedicated Trailforks entry for the Edmonton 'Ray Gun' trail was found; only references inside the Shredders Kinsmen Loop #1 route description. Photo widget left empty rather than embedding the Utah 'Ray Gun' (trailId 20683) which is a different trail.",
+    "Photo wired to the DALL·E source render that was already in the repo root folder — copied unchanged into docs/assets/sapwapahcikan-paskisikan/ray_gun_render.png. A clean wall-photo crop would be a better future replacement."
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Purgatory • kâsenamâkêw iskotêw • ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ",
+  "photo": {
+    "src": "../assets/purgatory/purgatory_wall.jpg",
+    "alt": "Purgatory trail sign — kâsenamâkêw iskotêw plaque against a backdrop of red and black flames around a meandering white river",
+    "caption": "The mounted Purgatory plaque on the wall: SRO 'kâsenamâkêw iskotew' / syllabics ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ with red flames flanking a winding river of fire."
+  },
+  "trailforks": {
+    "notes": "No standalone Trailforks entry was found for a trail named 'Purgatory' in the Edmonton-area regions (the directory contains Patricia Ravine Upper = 'Deliverance' and Patricia Ravine Lower = 'Bed Springs', but no 'Purgatory'). The plaque appears to commemorate a local section or a builder's nickname rather than an officially mapped trail; pairs visually with the adjacent 'Deliverance' plaque on the wall."
+  },
+  "linguistics": {
+    "meaning": "Purgatory — literally 'the fire that refuses (people)', a cleansing-fire compound built from the verb kâsenamâkêw 's/he refuses (people)' and the noun iskotêw 'fire'.",
+    "type": "compound: VTA (3→3′) headword + NI noun",
+    "primarySection": {
+      "heading": "The Compound on the Plaque",
+      "sro": "kâsenamâkêw iskotêw",
+      "syllabics": "ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ",
+      "morphemes": [
+        {
+          "key": "kaaseni-initial",
+          "sro": "kâseni‑",
+          "syllabics": "ᑳᓭᓂ",
+          "gloss": "VTI initial: <strong>refuse, reject, hold back</strong>. The kâ‑ here is the long‑â initial that anchors many Plains Cree verbs of 'shutting off / blocking'; itwêwina lists the related VTI <strong>kâsenam</strong> 's/he refuses, rejects it'."
+        },
+        {
+          "key": "am-vti",
+          "sro": "‑am‑",
+          "syllabics": "ᐊᒼ",
+          "gloss": "VTI thematic: signals an inanimate object is being acted on (the 'it' being refused). Hidden inside the surface form <strong>kâsenamâkêw</strong>."
+        },
+        {
+          "key": "aw-benef",
+          "sro": "‑âk(ê)‑",
+          "syllabics": "ᐋᑫ",
+          "gloss": "VTA benefactive / indefinite‑object suffix: <strong>'for / to people'</strong>. Same applicative tail that turns 'wipe it' into 'wipe (it) for s.o.', here turning 'refuse it' into 'refuse (it) to people'."
+        },
+        {
+          "key": "ew-3to3p",
+          "sro": "‑êw",
+          "syllabics": "ᐁᐤ",
+          "gloss": "VTA 3→3′ indicative suffix: <strong>'s/he does it to him/her (an animate other)'</strong>. Standard verb tail you also see on <em>kaskâwikanênêw</em> 'Back Breaker'."
+        },
+        {
+          "key": "iskotew-fire",
+          "sro": "iskotêw",
+          "syllabics": "ᐃᐢᑯᑌᐤ",
+          "gloss": "NI noun: <strong>fire</strong>. From Proto‑Algonquian *eškwete·wi; the same root sits inside <em>iskotêwâpoy</em> 'firewater / liquor' and <em>iskotêwân</em> 'matchstick'."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "S/he refuses, s/he rejects it (the underlying VTI)",
+        "sro": "kâsenam",
+        "syllabics": "ᑳᓭᓇᒼ",
+        "morphemes": [
+          {
+            "key": "kaaseni-rel1",
+            "sro": "kâseni‑",
+            "syllabics": "ᑳᓭᓂ",
+            "gloss": "Initial: refuse, reject, hold back."
+          },
+          {
+            "key": "am-vti-rel1",
+            "sro": "‑am",
+            "syllabics": "ᐊᒼ",
+            "gloss": "VTI 3→inan. indicative suffix: 's/he does it to (something inanimate)'."
+          }
+        ],
+        "note": "itwêwina headword (Wolvengrey/CW). The plaque's <em>kâsenamâkêw</em> is the people‑object (VTA) sibling of this VTI 'refuse it'."
+      },
+      {
+        "english": "Fire (the inanimate noun)",
+        "sro": "iskotêw",
+        "syllabics": "ᐃᐢᑯᑌᐤ",
+        "morphemes": [
+          {
+            "key": "iskotew-rel2",
+            "sro": "iskotêw",
+            "syllabics": "ᐃᐢᑯᑌᐤ",
+            "gloss": "NI noun: fire. The second word of the plaque, standing on its own."
+          }
+        ],
+        "note": "Standalone form. Same noun used in <em>iskotêwâpoy</em> 'liquor' (lit. 'fire‑water') and <em>iskotêwân</em> 'a matchstick'."
+      },
+      {
+        "english": "S/he wipes / cleans it (acoustic near‑neighbour — different stem)",
+        "sro": "kâsîham",
+        "syllabics": "ᑳᓰᐦᐊᒼ",
+        "morphemes": [
+          {
+            "key": "kaasii-rel3",
+            "sro": "kâsî‑",
+            "syllabics": "ᑳᓰ",
+            "gloss": "VTI initial: <strong>wipe clean, wash, erase</strong> (long‑î, different stem)."
+          },
+          {
+            "key": "h-rel3",
+            "sro": "‑h‑",
+            "syllabics": "ᐦ",
+            "gloss": "Connective consonant before the VTI tail."
+          },
+          {
+            "key": "am-rel3",
+            "sro": "‑am",
+            "syllabics": "ᐊᒼ",
+            "gloss": "VTI 3→inan. indicative suffix."
+          }
+        ],
+        "note": "<em>kâsî‑</em> 'wipe / cleanse' is a structural near‑neighbour of <em>kâseni‑</em> 'refuse', and the two are easy to confuse by ear. The Purgatory plaque sits at exactly that semantic pun: 'fire that refuses' vs. 'cleansing‑fire' both read."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Purgatory — 'the fire that refuses (people)'",
+        "sro": "kâsenamâkêw iskotêw",
+        "syllabics": "ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ",
+        "note": "Headline as carved on the plaque."
+      },
+      {
+        "english": "S/he refuses, s/he rejects it (VTI base)",
+        "sro": "kâsenam",
+        "syllabics": "ᑳᓭᓇᒼ",
+        "note": "Underlying verb stem. itwêwina (CW)."
+      },
+      {
+        "english": "Fire (NI)",
+        "sro": "iskotêw",
+        "syllabics": "ᐃᐢᑯᑌᐤ",
+        "note": "Second word of the plaque; from Proto‑Algonquian *eškwete·wi."
+      },
+      {
+        "english": "S/he refuses people, s/he rejects people (VTA)",
+        "sro": "kâsenamâkêw",
+        "syllabics": "ᑳᓭᓇᒫᑫᐤ",
+        "note": "Same verb tail as <em>kaskâwikanênêw</em> 'Back Breaker' (‑âkêw / ‑êw VTA 3→3′)."
+      },
+      {
+        "english": "Hellfire / a fire that burns severely",
+        "sro": "kâkikê iskotêw",
+        "syllabics": "ᑳᑭᑫ ᐃᐢᑯᑌᐤ",
+        "note": "Literally 'forever fire' — the missionary‑era calque for 'hell' in Plains Cree liturgy. Contrasts with the trail's <em>kâsenamâkêw iskotêw</em>, which is the in‑between 'refusing' fire, not the eternal one."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "kâsenam",
+        "english": "s/he refuses / rejects it (VTI)",
+        "syllabics": "ᑳᓭᓇᒼ"
+      },
+      {
+        "sro": "iskotêw",
+        "english": "fire (NI)",
+        "syllabics": "ᐃᐢᑯᑌᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "The In‑Between Fire",
+    "body": [
+      "In Catholic theology, <strong>purgatory</strong> is the in‑between place — neither heaven nor hell — where souls are held until they are purified by fire. The Plains Cree carved onto this plaque, <strong>kâsenamâkêw iskotêw</strong>, is a compact and quite precise calque of that idea: a fire (<em>iskotêw</em>) that <em>refuses</em> people (<em>kâsenamâkêw</em> 's/he refuses, rejects people' — itwêwina/Wolvengrey). It is the fire that holds you back at the threshold; the fire that says <em>not yet</em>.",
+      "Visually the plaque leans hard into that reading. Red and black flames frame the panel on both sides while a single white river meanders down the middle — souls funnelled between walls of fire, the cool white path threading between the heat. The Cree syllabics float above the flames in clean white block letters, the English 'Purgatory' anchors the bottom in red script. The four points/sparks above the syllabics read as embers, or possibly as stars — small fixed lights set against the moving fire below.",
+      "The trail itself is part of an Edmonton mountain‑bike sequence — sitting on the wall right beside <em>paspîhiwêwin</em> / 'Deliverance', which is the formally‑mapped Patricia Ravine Upper. Where Deliverance is the rescue out, Purgatory is the holding‑fire before it: same flame‑and‑river palette, opposite sides of the same theological hinge. The whole sequence is hung on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), and is part of an ongoing effort to put Plains Cree names back on the everyday landscape of Edmonton trails."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "PLAQUE SRO vs SYLLABICS INTERNAL MISMATCH: The plaque's carved Roman text reads 'kâsenamâkew iskotew' (no ê‑circumflex), while the carved syllabics ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ encode 'kâsênamâkêw iskotêw' (the syllabics ᓭ, ᑫ, ᑌ are by definition long‑ê). The page uses the linguistically‑correct SRO 'kâsenamâkêw iskotêw' (with circumflexes on ê) which matches the syllabics and the itwêwina headword <em>kâsenamâkêw</em> 's/he refuses, rejects people'. Catalogue currently reads 'kâsenamâkew iskotew' (no ê marks) — propose updating to 'kâsenamâkêw iskotêw' to keep SRO and syllabics in agreement, with the caveat that the physical plaque should be re‑carved at some future point to match.",
+    "Trailforks: no standalone match found for 'Purgatory'. The directory contains Patricia Ravine Upper = 'Deliverance' (id 13244) and Patricia Ravine Lower = 'Bed Springs', but no 'Purgatory'. The block intentionally renders the 'trail information coming soon' stub. If the trail builder confirms which sub‑section of Patricia Ravine they meant, we can link to that one.",
+    "kâsenamâkêw morpheme split: presented as kâseni‑ + ‑am‑ + ‑âkê‑ + ‑êw for teaching clarity. An alternative bracketing keeps ‑am‑âkê‑ as a single benefactive/indefinite‑object compound (the standard Plains Cree applicative). Either reading is defensible; the 4‑morpheme split is used here so each piece can be hover‑highlighted against the syllabics.",
+    "kâsenam vs. kâsîham: the page deliberately surfaces the near‑homophone 'kâsî‑ wipe / cleanse' because the design of the plaque (flames + a clean white river through the middle) reads strongly as a cleansing‑fire image even though the strict verb on the plaque is 'refuse'. Flag whichever reading the community prefers.",
+    "Image asset: docs/assets/purgatory/purgatory_wall.jpg is a tight crop from allSigns.jpg (box ≈ (4500, 2900, 5450, 4250) in 8160×6144 original) showing the actual mounted plaque. A second asset docs/assets/purgatory/purgatory_render.jpg (the original DALL·E 'banjo + bridge' design source from the purgatory/ folder) is kept available — but note that art was apparently the source for the <em>Deliverance</em> plaque graphic (banjo / bridge / circular framing), not Purgatory's flames‑and‑river graphic. The wall crop is the more accurate primary photo."
+  ]
+}

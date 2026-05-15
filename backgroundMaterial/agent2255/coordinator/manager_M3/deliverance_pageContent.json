@@ -1,0 +1,200 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#0d6efd",
+  "themeName": "blue",
+  "headerTitle": "Deliverance • paspîhiwêwin • ᐸᐢᐲᐦᐃᐍᐏᐣ",
+  "photo": {
+    "src": "../assets/deliverance/sign_render.png",
+    "alt": "Deliverance trail sign — paspîhiwêwin plaque showing a banjo merged with a wooden bridge over water inside a circular black field",
+    "caption": "Wall crop of the Deliverance plaque: SRO 'paspîhiwewin' / syllabics ᐸᐢᐲᐦᐃᐍᐏᐣ above a banjo+bridge motif with blue water flowing beneath."
+  },
+  "trailforks": {
+    "trailId": "13244",
+    "trailUrl": "https://www.trailforks.com/trails/deliverance-13244/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=13244&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Deliverance (Patricia Ravine Upper)",
+    "mapCoords": {
+      "lat": 53.50799,
+      "lng": -113.59977,
+      "source": "trailforks trailhead 13244"
+    }
+  },
+  "linguistics": {
+    "meaning": "Deliverance — 'the saving / rescuing of people', the abstract noun of paspîhiwêw 's/he saves people'.",
+    "type": "NI noun (deverbal abstract / nominalization of a VAI verb)",
+    "primarySection": {
+      "heading": "The Word on the Plaque",
+      "sro": "paspî‑hiwê‑win",
+      "syllabics": "ᐸᐢᐲᐦᐃᐍᐏᐣ",
+      "morphemes": [
+        {
+          "key": "paspii-initial",
+          "sro": "paspî‑",
+          "syllabics": "ᐸᐢᐲ",
+          "gloss": "Verbal initial: <strong>escape, get free of, slip out of</strong>. The same initial sits inside <em>paspiw</em> 's/he escapes (gets through alive)' and <em>paspâpiw</em> 's/he peeks out (through a hole)'."
+        },
+        {
+          "key": "h-caus",
+          "sro": "‑h‑",
+          "syllabics": "ᐦ",
+          "gloss": "Causative connector: <strong>'cause / make'</strong>. Turns an intransitive escape‑event into an action done <em>to</em> someone."
+        },
+        {
+          "key": "iwe-vai",
+          "sro": "‑iwê‑",
+          "syllabics": "ᐃᐍ",
+          "gloss": "VAI indefinite‑object final: <strong>'(to) people'</strong>. Used when the object of the action is generic / human (rescue <em>people</em>, save <em>folks</em>, teach <em>people</em>)."
+        },
+        {
+          "key": "win-nmlz",
+          "sro": "‑win",
+          "syllabics": "ᐏᐣ",
+          "gloss": "Abstract noun deriver: turns the verb <em>paspîhiwêw</em> 's/he saves people' into the noun <em>paspîhiwêwin</em> 'a saving / rescue / deliverance'. The same ‑win is in <em>pimâtisiwin</em> 'life' (from <em>pimâtisiw</em> 's/he lives')."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "S/he saves people, s/he rescues people (the underlying VAI verb)",
+        "sro": "paspîhiwêw",
+        "syllabics": "ᐸᐢᐲᐦᐃᐍᐤ",
+        "morphemes": [
+          {
+            "key": "paspii-rel1",
+            "sro": "paspî‑",
+            "syllabics": "ᐸᐢᐲ",
+            "gloss": "Initial: escape, get free of."
+          },
+          {
+            "key": "h-rel1",
+            "sro": "‑h‑",
+            "syllabics": "ᐦ",
+            "gloss": "Causative connector."
+          },
+          {
+            "key": "iwew-rel1",
+            "sro": "‑iwêw",
+            "syllabics": "ᐃᐍᐤ",
+            "gloss": "VAI indefinite‑object 3sg suffix: 's/he (does it to) people'."
+          }
+        ],
+        "note": "Strip <em>‑win</em> off the plaque headword and you are back to the verb 's/he saves people'. The plaque chose the abstract noun for the trail name; the verb itself is what a rider <em>does</em> on the rescue ride out."
+      },
+      {
+        "english": "S/he escapes, s/he gets through (alive) — the bare VAI base",
+        "sro": "paspiw",
+        "syllabics": "ᐸᐢᐱᐤ",
+        "morphemes": [
+          {
+            "key": "paspi-rel2",
+            "sro": "paspi‑",
+            "syllabics": "ᐸᐢᐱ",
+            "gloss": "VAI base: get through, escape (the short‑i variant of the initial)."
+          },
+          {
+            "key": "w-rel2",
+            "sro": "‑w",
+            "syllabics": "ᐤ",
+            "gloss": "VAI 3sg indicative suffix: 's/he ___s'."
+          }
+        ],
+        "note": "Bare‑intransitive escape verb — the first‑person rider's reading. Where <em>paspîhiwêwin</em> is the abstract act of <em>rescuing others</em>, <em>paspiw</em> is what the survivor does themselves."
+      },
+      {
+        "english": "S/he saves him/her (animate object, VTA sibling)",
+        "sro": "paspîhêw",
+        "syllabics": "ᐸᐢᐲᐦᐁᐤ",
+        "morphemes": [
+          {
+            "key": "paspii-rel3",
+            "sro": "paspî‑",
+            "syllabics": "ᐸᐢᐲ",
+            "gloss": "Initial: escape, save."
+          },
+          {
+            "key": "h-rel3",
+            "sro": "‑h‑",
+            "syllabics": "ᐦ",
+            "gloss": "Causative connector."
+          },
+          {
+            "key": "ew-rel3",
+            "sro": "‑êw",
+            "syllabics": "ᐁᐤ",
+            "gloss": "VTA 3→3′ indicative suffix: 's/he does it to him/her (animate)'."
+          }
+        ],
+        "note": "VTA sister of the plaque verb: switches the indefinite ‑iwê‑ 'people' for a definite animate object. Use this when you want to say 's/he saved <em>her</em>', not 's/he saves people'."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Deliverance, rescue, saving people, vindication",
+        "sro": "paspîhiwêwin",
+        "syllabics": "ᐸᐢᐲᐦᐃᐍᐏᐣ",
+        "note": "Plaque headword. itwêwina/CW gloss: 'rescue, saving people, deliverance / vindication'."
+      },
+      {
+        "english": "S/he saves people, s/he rescues people",
+        "sro": "paspîhiwêw",
+        "syllabics": "ᐸᐢᐲᐦᐃᐍᐤ",
+        "note": "VAI 3sg — the verb whose nominalization is on the plaque."
+      },
+      {
+        "english": "S/he escapes / gets through (alive)",
+        "sro": "paspiw",
+        "syllabics": "ᐸᐢᐱᐤ",
+        "note": "Bare VAI — the self‑rescue reading."
+      },
+      {
+        "english": "S/he peeks out (through a hole)",
+        "sro": "paspâpiw",
+        "syllabics": "ᐸᐢᐹᐱᐤ",
+        "note": "Same paspî‑ initial + ‑âpi‑ 'look / peek' final. Shows the productivity of the <em>paspî‑</em> 'slip through' initial."
+      },
+      {
+        "english": "Life (the canonical Cree ‑win nominalization)",
+        "sro": "pimâtisiwin",
+        "syllabics": "ᐱᒫᑎᓯᐏᐣ",
+        "note": "Built from <em>pimâtisiw</em> 's/he lives' + <em>‑win</em> 'abstract noun'. Same machinery as the plaque headword."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "paspî‑",
+        "english": "(initial) escape, get through, slip out of",
+        "syllabics": "ᐸᐢᐲ"
+      },
+      {
+        "sro": "paspîhiwêw",
+        "english": "s/he saves / rescues people (VAI)",
+        "syllabics": "ᐸᐢᐲᐦᐃᐍᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "Through Patricia Ravine",
+    "body": [
+      "In MTB vernacular a trail earns the name <strong>Deliverance</strong> by where it puts you and by what it asks of you to get out. On the wall, Deliverance sits paired with Purgatory — the same flame‑palette pivots into a wider banjo‑and‑bridge medallion, a winding pool of blue water threading underneath the bridge's pilings. The banjo is the John Boorman <em>Deliverance</em> reference (the 1972 film, the duelling‑banjos river); the bridge under it is the engineering of getting out alive. Black field, silver bridge, blue water, red Cree syllabics floating across the bridge deck — the design reads as a single rescue tableau.",
+      "The Cree carved onto the plaque, <strong>paspîhiwêwin</strong>, is the abstract noun of <em>paspîhiwêw</em> 's/he saves people' (itwêwina/Wolvengrey). The Plains Cree dictionary glosses it simply: <em>rescue, saving people, deliverance, vindication</em>. The same root <em>paspî‑</em> 'slip through, escape, get out alive' is what makes <em>paspiw</em> 's/he survives' and <em>paspâpiw</em> 's/he peeks out through a hole' — the morpheme that runs through the whole family is the idea of <em>getting through a narrow opening</em>. That is also the literal shape of the trail: Patricia Ravine Upper, the black‑diamond singletrack threading through the steep, narrow ravine on Edmonton's west side.",
+      "Geographically the trail is the official 'Deliverance' on Trailforks (id 13244, Patricia Ravine Upper, 902 m, black diamond) — paired on the ground with 'Bed Springs' (Patricia Ravine Lower) and on the wall with 'Purgatory'. The whole sequence sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory) on the south rim of the North Saskatchewan, and is part of an Edmonton‑area effort to put Plains Cree names back onto the trails this network's riders have known by their English nicknames for a long time."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "CATALOGUE CORRECTION PROPOSED: catalogue.json currently has creeName = 'deliverance' (placeholder) and creeSyllabics = '' for this sign. The plaque is carved with SRO 'paspîhiwewin' (long‑î on pî) and syllabics ᐸᐢᐲᐦᐃᐍᐏᐣ. Propose catalogue update to creeName = 'paspîhiwêwin' (adding the ê circumflex to match syllabics and itwêwina), creeSyllabics = 'ᐸᐢᐲᐦᐃᐍᐏᐣ'. The plaque carved‑SRO drops the ê circumflex on 'we' (same pattern as the Purgatory plaque); the syllabics ᐍ (we, long‑ê by definition) implies the circumflex. itwêwina/Wolvengrey headword is 'paspîhiwêwin' with both diacritics.",
+    "Trailforks: high‑confidence match — 'Deliverance' / 'Patricia Ravine (Upper)' trail id 13244 in the Edmonton region. Trailhead 53.50799, ‑113.59977 (FAQ, Whitemud Park parking 1.8 mi, Terwillegar Park parking 2.0 mi). Pairs with 'Bed Springs' = Patricia Ravine Lower. ~95% confidence.",
+    "Image asset: docs/assets/deliverance/sign_render.png is a tight wall crop from allSigns.jpg (box ≈ (5380, 2950, 6300, 4300) in 8160×6144 original), re‑encoded as a real PNG. The folder had no root design image — the banjo‑and‑bridge DALL·E source in the sibling purgatory/ folder appears to be the original Deliverance graphic that got filed under the wrong folder. The wall crop is the authoritative photo.",
+    "Morpheme bracketing: paspî‑ + ‑h‑ + ‑iwê‑ + ‑win is one defensible split (the one used in this page). An alternative collapses ‑hiwê‑ into a single 'cause‑people' VAI final and treats ‑h‑ as part of that final rather than a separate causative connector. Either is teachably correct.",
+    "The <em>paspî‑</em> initial is the same one that gives <em>paspiw</em> 's/he escapes (alive)' and <em>paspâpiw</em> 's/he peeks out'. The reduction paspî‑ → paspi‑ in <em>paspiw</em> is the standard initial‑vowel shortening before a bare VAI ‑w; flagged for completeness."
+  ]
+}

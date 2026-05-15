@@ -1,0 +1,132 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Porcupine • kâkwa • ᑳᑿ",
+  "photo": {},
+  "trailforks": {},
+  "linguistics": {
+    "meaning": "Porcupine",
+    "type": "noun",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "kâkwa",
+      "syllabics": "ᑳᑿ",
+      "morphemes": [
+        {
+          "key": "kakwa-root",
+          "sro": "kâkwa",
+          "syllabics": "ᑳᑿ",
+          "gloss": "porcupine (animate noun, NA)"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Porcupines (plural)",
+        "sro": "kâkwak",
+        "syllabics": "ᑳᑿᐠ",
+        "morphemes": [
+          {
+            "key": "kakwak-plural",
+            "sro": "kâkwak",
+            "syllabics": "ᑳᑿᐠ",
+            "gloss": "porcupines (animate plural, -ak)"
+          }
+        ],
+        "note": "Regular animate plural in -ak."
+      },
+      {
+        "english": "Little porcupine (diminutive)",
+        "sro": "kâkwasis",
+        "syllabics": "ᑳᑿᓯᐢ",
+        "morphemes": [
+          {
+            "key": "kakwasis-diminutive",
+            "sro": "kâkwasis",
+            "syllabics": "ᑳᑿᓯᐢ",
+            "gloss": "little porcupine (diminutive, -sis)"
+          }
+        ],
+        "note": "Morphologically regular diminutive; not separately verified as a dictionary headword."
+      },
+      {
+        "english": "Porcupine quill",
+        "sro": "kâway",
+        "syllabics": "ᑳᐘᕀ",
+        "morphemes": [
+          {
+            "key": "kaway-quill",
+            "sro": "kâway",
+            "syllabics": "ᑳᐘᕀ",
+            "gloss": "porcupine quill (uncertain — see notes)"
+          }
+        ],
+        "note": "Attested forms vary across teaching materials (kâway / kâwiy / okâway); treat as tentative."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Porcupine",
+        "sro": "kâkwa",
+        "syllabics": "ᑳᑿ"
+      },
+      {
+        "english": "Porcupines",
+        "sro": "kâkwak",
+        "syllabics": "ᑳᑿᐠ"
+      },
+      {
+        "english": "Little porcupine",
+        "sro": "kâkwasis",
+        "syllabics": "ᑳᑿᓯᐢ"
+      },
+      {
+        "english": "Porcupine quill",
+        "sro": "kâway",
+        "syllabics": "ᑳᐘᕀ"
+      },
+      {
+        "english": "I see a porcupine",
+        "sro": "niwâpamâw kâkwa",
+        "syllabics": "ᓂᐚᐸᒫᐤ ᑳᑿ"
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "kâkwa",
+        "english": "Porcupine",
+        "syllabics": "ᑳᑿ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About kâkwa — the Porcupine",
+    "body": [
+      "<strong>kâkwa</strong> (ᑳᑿ) is the Cree word for porcupine — a slow-moving, deeply self-possessed forest dweller of the boreal woods that stretch across nêhiyaw (Cree) territory. Unhurried and largely solitary, the porcupine is famously well-defended: rather than fight or flee, it lowers its head, raises its quills, and lets any aggressor make the mistake of pressing in. Cree teachings often hold up <strong>kâkwa</strong> as a quiet model of patience and gentle strength — protection through stillness rather than aggression, and the wisdom of knowing when not to move.",
+      "Long before glass beads arrived through the fur trade, porcupine quillwork was one of the most refined craft traditions of the Plains and Woodlands peoples, including the Cree. Quills were plucked, soaked, dyed with pigments drawn from roots, berries, lichens and ochres, then softened in the mouth, flattened with the teeth, and woven, wrapped, or sewn onto tanned hide, birchbark, moccasins, pipe stems, and lidded boxes. The geometric and floral patterns that later flourished in beadwork were first carried by quills — making <strong>kâkwa</strong> not only a forest neighbour but a literal source of artistic material, generously offered by an animal that asked only to be approached with care.",
+      "The red, black, and white of this trail sign carry an echo of those older quill-dye palettes — earth reds, charcoal blacks, and undyed natural whites that recur across many Indigenous quillwork traditions. (We note this resonance gently, as a visual rhyme rather than a claim about any specific tribal recipe.) Riding past <strong>kâkwa</strong> here in the river valley, it is worth pausing to remember an animal that taught generations of artists how to make beauty out of patience, and how to defend a small life with quiet, deliberate care."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina (Online Plains Cree Dictionary, University of Alberta — creedictionary.com)",
+    "Online Cree Dictionary (creedictionary.com)",
+    "Plains Cree Dictionary",
+    "Trailforks — Edmonton region (https://www.trailforks.com/region/edmonton/) — searched 2026-05-14; no Edmonton MTB trail named Kakwa / Kâkwa / Porcupine found",
+    "Royal Alberta Museum and general Plains/Woodlands quillwork references (background only; no single citation lifted into prose)"
+  ],
+  "notes": [
+    "Spelling discrepancy: catalogue currently records creeName \"kakwa\" and creeSyllabics \"ᑲᑲᐧ\", but the carved sign reads SRO \"kâkwa\" (circumflex on first a, high confidence) and syllabics best-read as \"ᑳᑿ\" (left glyph ᑳ confirmed by long-vowel dot; right glyph ᑿ chosen to match carved Roman \"kwa\", with bare ᑲ as secondary possibility at the photo resolution available). pageContent uses the carved form per the manager brief (trust the sign first).",
+    "Recommend the coordinator update catalogue.json creeName → \"kâkwa\" and creeSyllabics → \"ᑳᑿ\" when merging, so the catalogue summary matches the carved plaque. Flagging for curator review rather than editing catalogue here.",
+    "Second syllabic glyph (ka vs kwa) could not be resolved to certainty from the composite allSigns.jpg crop. A high-resolution single-panel photo would confirm whether the carved form is ᑳᑿ (kâ-kwa) or ᑳᑲ (kâ-ka). Best read used here: ᑳᑿ.",
+    "Trailforks: no Edmonton-area MTB trail named Kakwa, Kâkwa, or Porcupine was found across six search queries and direct grepping of trailforks.com Edmonton region pages on 2026-05-14. Only namesake is Kakwa Wildland Provincial Park near Grande Prairie (~160 km SW), an OHV/hike area geographically unrelated to Edmonton. trailforks left as {}; the sign likely commemorates the Cree word as cultural/linguistic content rather than naming an existing trail segment. Search was web-based, not Trailforks API-direct, so confidence is ~90% not 100%.",
+    "Photo placeholder pending — no asset exists in docs/assets/kakwa/. User to provide or crop sign #17 from /Users/kylemathewson/Coding/HARDWARE/nehiyoMTB/allSigns.jpg. photo field left as {} until then.",
+    "Linguistics uncertainties: kâkwasis \"little porcupine\" is a morphologically regular -sis diminutive but was not independently verified as a dictionary headword. kâway \"porcupine quill\" is attested in some teaching materials but competing forms (kâwiy, okâway) appear elsewhere; treat as tentative. Both are flagged inline in their relatedForms.note fields. Coordinator/curator may drop these two rows if a more conservative page is preferred.",
+    "Dialect assumption: Plains Cree (y-dialect / nêhiyawêwin), matching the rest of the catalogue.",
+    "Accent color set to #dc3545 (red) per brief, since the sign's syllabics layer is red. themeName \"red\". Curator may adjust."
+  ]
+}

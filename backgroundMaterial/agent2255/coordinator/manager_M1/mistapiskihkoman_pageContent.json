@@ -1,0 +1,170 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#000000",
+  "themeName": "black",
+  "headerTitle": "Machete • mistâpiskihkomân • ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ",
+  "photo": {
+    "src": "../assets/mistapiskihkoman/mistapiskihkoman.png",
+    "alt": "Machete trail sign showing a black machete silhouette with red Plains Cree syllabics carved into the blade",
+    "caption": "3D printed plaque: black machete graphic with the syllabics ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ in red on the blade."
+  },
+  "trailforks": {
+    "trailId": "30260",
+    "trailUrl": "https://www.trailforks.com/trails/machete/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=30260&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Machete",
+    "mapCoords": { "lat": 53.52164, "lng": -113.5399, "source": "trailforks trailhead 30260" }
+  },
+  "linguistics": {
+    "meaning": "Machete — literally ‘great iron knife’",
+    "type": "noun (NI, inanimate)",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "mist‑âpisk‑ihkomân",
+      "syllabics": "ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ",
+      "morphemes": [
+        {
+          "key": "mist-init",
+          "sro": "mist‑",
+          "syllabics": "ᒥᐢ",
+          "gloss": "initial: ‘big, great, large’ — the same productive prefix in <strong>mistik</strong> ‘big tree’, <strong>mistahi</strong> ‘a lot’, <strong>mistatim</strong> ‘horse (lit. great-dog)’"
+        },
+        {
+          "key": "apisk-medial",
+          "sro": "‑âpisk‑",
+          "syllabics": "ᑖᐱᐢ",
+          "gloss": "medial: ‘of metal, of iron, of stone’ — the body-part-like medial that marks tool/material made of metal (cf. <strong>âpisk</strong> ‘piece of metal/iron’)"
+        },
+        {
+          "key": "ihkoman-final",
+          "sro": "‑(i)hkomân",
+          "syllabics": "ᑭᐦᑯᒫᐣ",
+          "gloss": "noun final: ‘knife’ — the same root in <strong>môhkomân</strong> ‘knife’ (the everyday word for a knife / often also ‘White man, American’ via the trade-knife association)"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Knife (the everyday word)",
+        "sro": "môhkomân",
+        "syllabics": "ᒨᐦᑯᒫᐣ",
+        "morphemes": [
+          {
+            "key": "moohkoman-noun",
+            "sro": "môhkomân",
+            "syllabics": "ᒨᐦᑯᒫᐣ",
+            "gloss": "NI noun: ‘knife’. The shared ‑(h)komân tail inside <strong>mistâpiskihkomân</strong> is this same root, with the metal-medial ‑âpisk‑ inserted to specify ‘big iron knife’."
+          }
+        ],
+        "note": "Common everyday word for a knife. Across the prairie this same form has historically also been the word for ‘White person’ (originally ‘the people of the long knives / trade knives’)."
+      },
+      {
+        "english": "Iron, metal (the bare noun)",
+        "sro": "âpisk",
+        "syllabics": "ᐋᐱᐢᐠ",
+        "morphemes": [
+          {
+            "key": "apisk-noun",
+            "sro": "âpisk",
+            "syllabics": "ᐋᐱᐢᐠ",
+            "gloss": "NI noun: ‘piece of iron, piece of metal, piece of stone’ — the source of the ‑âpisk‑ medial in the headword."
+          }
+        ],
+        "note": "The free-standing form of the metal medial. In word-formation it shortens slightly and slots between the size-initial mist‑ and the knife-final ‑hkomân."
+      },
+      {
+        "english": "Big tree / log (showing the same mist‑ initial)",
+        "sro": "mistik",
+        "syllabics": "ᒥᐢᑎᐠ",
+        "morphemes": [
+          {
+            "key": "mist-init2",
+            "sro": "mist‑",
+            "syllabics": "ᒥᐢ",
+            "gloss": "initial: ‘big, great’"
+          },
+          {
+            "key": "ik-tree",
+            "sro": "‑ik",
+            "syllabics": "ᑎᐠ",
+            "gloss": "noun final: ‘tree, wood, stick’ (cf. <strong>mistikwân</strong> ‘head, lit. wooden one’)"
+          }
+        ],
+        "note": "A common minimal pair illustrating that the mist‑ initial is fully productive: it stacks onto many other roots to mean ‘big X’."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Machete — ‘big iron knife’",
+        "sro": "mistâpiskihkomân",
+        "syllabics": "ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ",
+        "note": "Headword on the plaque. NI noun (inanimate)."
+      },
+      {
+        "english": "Knife (everyday)",
+        "sro": "môhkomân",
+        "syllabics": "ᒨᐦᑯᒫᐣ",
+        "note": "Stripped-down form. The plural is môhkomâna."
+      },
+      {
+        "english": "Iron, metal",
+        "sro": "âpisk",
+        "syllabics": "ᐋᐱᐢᐠ",
+        "note": "The metal-medial in its free-standing form."
+      },
+      {
+        "english": "Knives (plural, inanimate)",
+        "sro": "mistâpiskihkomâna",
+        "syllabics": "ᒥᐢᑖᐱᐢᑭᐦᑯᒫᓇ",
+        "note": "Regular NI plural in ‑a."
+      },
+      {
+        "english": "Big, large (verb stem ‘it is big’)",
+        "sro": "misikitiw / mistihkâw",
+        "syllabics": "ᒥᓯᑭᑎᐤ ᐤ ᒥᐢᑎᐦᑳᐤ",
+        "note": "Free-standing verb forms of the same mist‑ initial idea."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "môhkomân",
+        "english": "knife (NI)",
+        "syllabics": "ᒨᐦᑯᒫᐣ"
+      },
+      {
+        "sro": "âpisk",
+        "english": "iron, metal (NI)",
+        "syllabics": "ᐋᐱᐢᐠ"
+      },
+      {
+        "sro": "mist‑",
+        "english": "(initial) big, great, large",
+        "syllabics": "ᒥᐢ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About mistâpiskihkomân — the Big Iron Knife",
+    "body": [
+      "On the wall the <strong>mistâpiskihkomân</strong> plaque is one of the most graphic in the set: a single black machete blade laid across the white plaque, its metal painted matte and its handle riveted, with the syllabics <strong>ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ</strong> carved in red right down the spine of the blade. The English word ‘MACHETE’ underneath the knife is large and unambiguous — there is no joke here, just a sharp tool named in two languages.",
+      "The Cree word is a stack of three productive parts. <strong>mist‑</strong> means ‘big, great’ (the same initial in <strong>mistik</strong> ‘big tree’, <strong>mistatim</strong> ‘horse / great-dog’, and <strong>mistahi</strong> ‘a lot’). <strong>‑âpisk‑</strong> is the body-part-style medial for ‘of metal, of iron, of stone’ (the same medial in many tool words). And <strong>‑(i)hkomân</strong> is the knife-final, the same root that surfaces independently as <strong>môhkomân</strong> ‘knife.’ Read together the word is literally ‘the great iron knife’ — exactly what a machete is, in three Cree morphemes.",
+      "The trail itself drops through Keillor in NW Edmonton on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory): rough, loose, and quick, with steep drops and tight corners — Trailforks lists it as black diamond. The plaque’s naming choice mirrors the trail’s feel: where a small knife (môhkomân) is for fine work, the big iron knife is for clearing line through the brush. The red syllabics on the black blade let the language stay legible at distance, the way a warning sign should."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE (syllabics): The plaque is carved with SRO 'mistâpiskihkomân' (matches catalogue) but with syllabics 'ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ' — note the long-â glyph ᑖ on the second position. The current catalogue.json creeSyllabics is 'ᒥᐢᑕᐱᐢᑭᐦᑯᒫᐣ' (with short-a ᑕ instead of ᑖ). Trailforks's AKA listing for trail #30260 also writes ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ. Coordinator should update catalogue creeSyllabics to ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ.",
+    "Morpheme bracketing of mist‑âpisk‑ihkomân is the standard teaching analysis (size-initial + metal-medial + knife-final). An alternative analysis treats the word as mist‑ + âpiskihkomân (a single nominalized stem 'iron-knife') for fluency-level speakers; the three-morpheme split is preferred here for teaching clarity and to surface the ‑âpisk‑ metal medial which appears in many other tool words.",
+    "The ‑(i)hkomân final is the bound form of free môhkomân 'knife'. The vowel quality difference (ô- vs. -i-) is a regular Cree phonological alternation in compound stems.",
+    "Trailforks pick: 'Machete' (trail id 30260), Keillor / NW Edmonton — black-diamond singletrack. Trailhead 53.52164, -113.5399. High confidence (Trailforks AKA explicitly lists ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ mistâpiskihkomân)."
+  ]
+}

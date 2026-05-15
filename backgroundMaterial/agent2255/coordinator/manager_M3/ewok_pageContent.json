@@ -1,0 +1,106 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#7c4a1a",
+  "themeName": "brown",
+  "headerTitle": "Ewok",
+  "photo": {
+    "src": "../assets/ewok/ewok_render.png",
+    "alt": "Ewok trail sign design — small hooded forest creature silhouette in brown and white, the design source PNG for the printed Ewok plaque",
+    "caption": "Design source for the Ewok plaque (from the ewok/ folder). The wall does not appear to carry a mounted Ewok plaque; this trail name lives on the page as an English‑vernacular borrowing only."
+  },
+  "trailforks": {
+    "notes": "No Edmonton‑area Trailforks entry was found for a trail named 'Ewok'. The catalogue lists this as an MTB English‑vernacular sign (no Cree translation on the plaque); it is most likely a builder‑nickname for a short, technical 'small‑creatures‑in‑the‑forest' section that is not separately mapped. Block intentionally renders the 'trail information coming soon' stub."
+  },
+  "linguistics": {
+    "meaning": "Ewok — borrowed English (Star Wars) name for a forest‑dweller, used as a trail nickname. No Plains Cree equivalent has been assigned to this sign.",
+    "type": "English loanword / vernacular trail name",
+    "primarySection": {
+      "heading": "An English‑Vernacular Trail Name",
+      "sro": "",
+      "syllabics": "",
+      "morphemes": [
+        {
+          "key": "ewok-borrow",
+          "sro": "Ewok",
+          "syllabics": "—",
+          "gloss": "<strong>English‑only borrowing.</strong> Coined by George Lucas for the 1983 film <em>Return of the Jedi</em>; the small hooded forest‑dwelling species of Endor. Used on this trail as a builder's nickname for a tight, low, twisty forest section — the kind of trail where you ride hunched over like an Ewok through the trees. No Plains Cree translation has been carved onto the plaque, and no <em>nêhiyawêwin</em> calque is proposed here: the sign exists in English only, mirroring how <em>slinky</em> is treated elsewhere in this catalogue."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Tight, twisty singletrack section (in MTB vernacular)",
+        "sro": "",
+        "syllabics": "",
+        "morphemes": [
+          {
+            "key": "tight-twisty-en",
+            "sro": "tight singletrack",
+            "syllabics": "—",
+            "gloss": "English MTB term — what 'Ewok' is doing semantically on the trail: it describes a forest section so dense and low‑clearance you feel like a small forest creature picking your way through."
+          }
+        ],
+        "note": "Other Star‑Wars‑adjacent trail nicknames in MTB networks include 'Wookiee', 'Endor', 'Tatooine' (rough, sandy section), 'Jedi'. None are loanwords into Cree; they live as English‑vernacular only."
+      },
+      {
+        "english": "A small forest‑being / 'little person' (general Cree concept, not the trail name)",
+        "sro": "memekwêsiwak",
+        "syllabics": "ᒣᒣᒁᓯᐘᐠ",
+        "morphemes": [
+          {
+            "key": "memekwesiwak-noun",
+            "sro": "memekwêsiwak",
+            "syllabics": "ᒣᒣᒁᓯᐘᐠ",
+            "gloss": "Plains Cree NA noun (plural): <strong>memekwêsiwak</strong> — 'little people / small forest beings' in Plains Cree oral tradition (after Wolvengrey's <em>memekwêsiw</em>). Singular: <em>memekwêsiw</em>. Included here only to point at the nearest <em>cultural</em> analogue to the Ewok concept; the plaque itself carries no Cree."
+          }
+        ],
+        "note": "Cultural reference, NOT a translation of 'Ewok'. The carved plaque is English‑only — if the community ever wanted a Cree name, <em>memekwêsiw</em> 'little forest being' would be one starting point, but this would need elder review before any plaque carving."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Ewok",
+        "sro": "Ewok",
+        "syllabics": "—",
+        "note": "English borrowing only; no Cree on the plaque."
+      },
+      {
+        "english": "Small forest being (Plains Cree, cultural analogue)",
+        "sro": "memekwêsiw",
+        "syllabics": "ᒣᒣᒁᓯᐤ",
+        "note": "Wolvengrey / Plains Cree oral tradition. NOT a translation of 'Ewok' — listed here only to show the nearest cultural concept."
+      },
+      {
+        "english": "I have nothing in Cree to say here, this trail's name is English",
+        "sro": "—",
+        "syllabics": "—",
+        "note": "Mirrors the <em>slinky</em> page pattern: pageStatus = agent-drafted, no Cree on the plaque, no Cree invented for the page."
+      }
+    ],
+    "baseWords": []
+  },
+  "culturalStory": {
+    "heading": "Why no Cree?",
+    "body": [
+      "Most of the plaques on this wall pair an English MTB trail name with a carved Plains Cree calque — sometimes a careful translation, sometimes a riff. The <strong>Ewok</strong> plaque is one of two on the wall (along with <em>slinky</em>) that does <em>not</em> carry a Cree headline. The design source in the <code>ewok/</code> folder is a hooded forest‑creature silhouette inspired by the Endor‑dwelling Ewoks of <em>Return of the Jedi</em>, and the trail itself appears to be a short, tight, low‑clearance forest section — the kind of trail where the rider hunches small to fit through, the way an Ewok moves through the trees of Endor.",
+      "The catalogue mirrors the plaque: <code>creeName</code> is the placeholder string <code>ewok</code> and <code>creeSyllabics</code> is empty. We are not inventing a Cree name here — that would put words in the carvers' hands they did not choose to carve. If a Cree name is added later (the natural cultural analogue would be something built from <em>memekwêsiw</em> 'little forest being'), the page can be re‑drafted and the plaque eventually re‑carved. Until then, this page stays English‑only and points at the missing piece honestly.",
+      "Like every other sign on the wall, the trail still sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory). The land underneath an English name is the same land — naming the missing translation is itself part of the work."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "NO CREE ON THE WALL: The plaque does not appear on the visible wall photo (allSigns.jpg). The two screenshots in the ewok/ folder are design sources, not photos of a mounted plaque — the sign was likely never installed, or is on a section of the wall not in this image. Treat like <em>slinky</em>: English‑only, light single‑row primary section, no invented Cree.",
+    "Catalogue currently has creeName='ewok' (placeholder) and creeSyllabics='' — leave those alone for this batch. The coordinator should NOT auto‑populate a Cree name here without elder review. The brief explicitly says (see sign_inventory.md) 'leave empty or keep ewok' for this row.",
+    "Image asset: docs/assets/ewok/ewok_render.png is the original 'Screenshot 2023-12-11 at 7.14.23 PM.png' from the ewok/ folder, copied verbatim under a clean name. It is the design source for the printed plaque even though the plaque is not visible on the wall.",
+    "Trailforks: searched the Edmonton region directory and a generic 'ewok mountain bike trail Edmonton' query; no match found. Set trailforks = { notes: ... } per the brief's option‑B pattern for no‑match signs.",
+    "If/when a Cree calque is later added by the community, the obvious morphological scaffolding is <em>memekwêsiw</em> 'little forest being' (NA, Plains Cree oral tradition; cf. Wolvengrey). NOT carving that on the page now, only flagging it for future consideration.",
+    "Primary section has a single morpheme row (acceptance criterion: morphemes.length >= 1), mirroring the brief's instruction for English‑vernacular signs. relatedForms has 2 rows (>=1). quickReference has 3 rows (>=3). All keys are unique within the page."
+  ]
+}

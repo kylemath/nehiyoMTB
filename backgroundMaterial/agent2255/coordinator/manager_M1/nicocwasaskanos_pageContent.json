@@ -1,0 +1,177 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#000000",
+  "themeName": "black",
+  "headerTitle": "Six Shooter • nikocwâsaskanôs • ᓂᑯᒑᐧᓴᐢᑲᓅᐢ",
+  "photo": {
+    "src": "../assets/nicocwasaskanos/nikocwasaskanos.png",
+    "alt": "Six Shooter trail sign showing a black single-action revolver silhouette with red Plains Cree syllabics across the cylinder",
+    "caption": "3D printed plaque: black revolver graphic with the syllabics ᓂᑯᒑᐧᓴᐢᑲᓅᐢ in red across the cylinder."
+  },
+  "trailforks": {
+    "trailId": "18858",
+    "trailUrl": "https://www.trailforks.com/trails/six-shooter/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=18858&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Six Shooter",
+    "mapCoords": { "lat": 53.52434, "lng": -113.54104, "source": "trailforks trailhead 18858" }
+  },
+  "linguistics": {
+    "meaning": "Six Shooter — the ‘little six-er’, a six-cartridge revolver",
+    "type": "noun (NI, inanimate; diminutive)",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "nikocwâs‑askan‑ôs",
+      "syllabics": "ᓂᑯᒑᐧᓴᐢᑲᓅᐢ",
+      "morphemes": [
+        {
+          "key": "nikocwas-six",
+          "sro": "nikocwâs‑",
+          "syllabics": "ᓂᑯᒑᐧ",
+          "gloss": "numeral root: ‘six’ — the same root in <strong>nikotwâsik</strong> / <strong>nikocwâsik</strong> ‘six (count)’ and in <strong>nikotwâs‑mitanaw</strong> ‘sixty.’ The cw cluster here reflects the Plains-Cree palatalised dialectal variant of tw."
+        },
+        {
+          "key": "askan-medial",
+          "sro": "‑askan‑",
+          "syllabics": "ᓴᐢᑲᐣ",
+          "gloss": "noun medial: ‘bone, hard projecting thing’ (as in <strong>oskan</strong> ‘bone’) — used here for the cylindrical chamber-and-barrel of the revolver, the ‘hard six-piece’ of the gun."
+        },
+        {
+          "key": "oos-dim",
+          "sro": "‑ôs",
+          "syllabics": "ᓅᐢ",
+          "gloss": "diminutive final: ‘small, little’ — the productive ‑ôs / ‑sis ending that marks something small or familiar (cf. <strong>kâkwasis</strong> ‘little porcupine’, <strong>atimosis</strong> ‘puppy’)."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Six (the bare numeral, ‘there are six of them’)",
+        "sro": "nikotwâsik",
+        "syllabics": "ᓂᑯᑤᓯᐠ",
+        "morphemes": [
+          {
+            "key": "nikot-init",
+            "sro": "nikot‑",
+            "syllabics": "ᓂᑯᐟ",
+            "gloss": "initial: ‘one, single’ — the underlying ‘one’ root that combines with ‑wâsik to form ‘six’"
+          },
+          {
+            "key": "waasik-six",
+            "sro": "‑wâsik",
+            "syllabics": "ᐚᓯᐠ",
+            "gloss": "VII final: ‘there are X of them’ used in numeral words"
+          }
+        ],
+        "note": "The free-standing word for ‘six’. In Plains Cree the tw cluster is widely realised as cw (palatalised), so nikotwâsik and nikocwâsik are both heard."
+      },
+      {
+        "english": "Gun, firearm (the everyday word)",
+        "sro": "pâskisikan",
+        "syllabics": "ᐹᐢᑭᓯᑲᐣ",
+        "morphemes": [
+          {
+            "key": "paaskisi-shoot",
+            "sro": "pâskisi‑",
+            "syllabics": "ᐹᐢᑭᓯ",
+            "gloss": "verb stem: ‘to shoot, to make a sharp/burst sound’"
+          },
+          {
+            "key": "kan-instr",
+            "sro": "‑kan",
+            "syllabics": "ᑲᐣ",
+            "gloss": "instrumental nominaliser: ‘the thing for X-ing’ (cf. <strong>cîmân</strong> ‘canoe’, <strong>mistikowat</strong> ‘box’)"
+          }
+        ],
+        "note": "Literally ‘the shooting-thing.’ This is the generic word for gun; <strong>nikocwâsaskanôs</strong> is the specifically-six-shot diminutive for a revolver."
+      },
+      {
+        "english": "Bone (the bare noun, source of the ‑askan‑ medial)",
+        "sro": "oskan",
+        "syllabics": "ᐅᐢᑲᐣ",
+        "morphemes": [
+          {
+            "key": "oskan-noun",
+            "sro": "oskan",
+            "syllabics": "ᐅᐢᑲᐣ",
+            "gloss": "NI noun: ‘bone, hard projecting/protruding thing’ — surfaces inside the headword as the medial ‑askan‑, naming the cylinder/barrel as the gun’s ‘hard six-piece’."
+          }
+        ],
+        "note": "The metaphor is body-part: a revolver is named for its hard, six-chambered bone-like cylinder."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Six Shooter — the little six-shot (revolver)",
+        "sro": "nikocwâsaskanôs",
+        "syllabics": "ᓂᑯᒑᐧᓴᐢᑲᓅᐢ",
+        "note": "Headword on the plaque. NI noun, diminutive."
+      },
+      {
+        "english": "Six (count)",
+        "sro": "nikotwâsik / nikocwâsik",
+        "syllabics": "ᓂᑯᑤᓯᐠ",
+        "note": "Free numeral. The cw form is the palatalised Plains Cree variant heard locally."
+      },
+      {
+        "english": "Gun, firearm (generic)",
+        "sro": "pâskisikan",
+        "syllabics": "ᐹᐢᑭᓯᑲᐣ",
+        "note": "Same root as in <strong>sâpwâpahcikan paskisikan</strong> ‘Ray Gun’ on the wall."
+      },
+      {
+        "english": "Bone, hard projecting thing",
+        "sro": "oskan",
+        "syllabics": "ᐅᐢᑲᐣ",
+        "note": "Source of the ‑askan‑ medial in the headword."
+      },
+      {
+        "english": "S/he shoots",
+        "sro": "pâskisikêw",
+        "syllabics": "ᐹᐢᑭᓯᑫᐤ",
+        "note": "AI verb: ‘s/he shoots (a gun)’."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "pâskisikan",
+        "english": "gun, firearm (NI; lit. ‘the shooting-thing’)",
+        "syllabics": "ᐹᐢᑭᓯᑲᐣ"
+      },
+      {
+        "sro": "nikotwâsik / nikocwâsik",
+        "english": "six (numeral)",
+        "syllabics": "ᓂᑯᑤᓯᐠ"
+      },
+      {
+        "sro": "oskan",
+        "english": "bone (NI)",
+        "syllabics": "ᐅᐢᑲᐣ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About nikocwâsaskanôs — the Little Six-Shot",
+    "body": [
+      "On the wall the <strong>nikocwâsaskanôs</strong> plaque sits directly under the <strong>mistâpiskihkomân</strong> (Machete) plaque, sharing the same white-and-black palette: a long single-action revolver in black silhouette with a bone-handle grip, the syllabics <strong>ᓂᑯᒑᐧᓴᐢᑲᓅᐢ</strong> carved in red across the chamber, and ‘SIX SHOOTER’ in big letters underneath.",
+      "The Cree word reads three pieces deep. <strong>nikocwâs‑</strong> is the numeral ‘six’ (the standard <strong>nikotwâsik</strong>, with the local Plains Cree palatalisation tw → cw that you hear across Edmonton). <strong>‑askan‑</strong> is the body-part medial ‘bone, hard projecting thing,’ the same medial in <strong>oskan</strong> ‘bone’; here it names the cylinder-and-barrel as the gun’s hard six-piece. The diminutive <strong>‑ôs</strong> at the end means ‘small, little.’ Read together: ‘the little six-shot.’",
+      "The trail of the same name flows along the south side of the river toward Emily Murphy Park in NW Edmonton. Trailforks rates it blue with a 1.1 km roll-and-pump style, named — like its neighbours <strong>Rich Kid</strong>, <strong>Plan B</strong>, and <strong>Machete</strong> — in the cowboy/outlaw register that the local builders favour for this stretch. The land is <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), and Trailforks itself lists the AKA <strong>ᓂᑯᒑᐧᓴᐢᑲᓅᐢ nikocwâsaskanôs</strong> for this trail — the same form carved on the plaque."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE (syllabics): The plaque carving and Trailforks both write the syllabics as 'ᓂᑯᒑᐧᓴᐢᑲᓅᐢ' (with ᒑᐧ for cwâ and ᓅ for nô). The current catalogue creeSyllabics 'ᓂᑯᐚᓴᐢᑲᓄᐢ' is missing the c-glyph and the long-ô on the diminutive. Coordinator should update catalogue creeSyllabics to ᓂᑯᒑᐧᓴᐢᑲᓅᐢ. The catalogue creeName 'nikocwâsaskanôs' is already correct.",
+    "Morpheme bracketing nikocwâs‑askan‑ôs is the structural reading: numeral six + bone-medial + diminutive. An alternative reading parses the word as nikocwâs‑askanôs where ‑askanôs is a frozen ‘small bone-thing’ noun; both readings yield the same surface form, but the three-morpheme split is preferred here because the ‑askan‑ medial is independently productive in Cree word-formation (as in <strong>oskan</strong>).",
+    "The cw cluster in nikocwâsaskanôs reflects the local Plains Cree palatalisation of tw → cw (so nikotwâsik ‘six’ → nikocwâsik). Both forms are widely heard across nehiyaw-askiy.",
+    "The diminutive ‑ôs is a regular Plains Cree diminutive ending; for animate nouns ‑sis is more common. Here the gun is grammatically inanimate (NI), so ‑ôs is the expected ending.",
+    "Trailforks pick: 'Six Shooter' (trail id 18858), Central Edmonton (South) / NW Edmonton — blue singletrack. Trailhead 53.52434, -113.54104. High confidence (Trailforks lists AKA ᓂᑯᒑᐧᓴᐢᑲᓅᐢ nikocwâsaskanôs explicitly)."
+  ]
+}

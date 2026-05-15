@@ -1,0 +1,172 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#7c4dff",
+  "themeName": "purple",
+  "headerTitle": "Purple Haze • nîpâmâyâtân pekiseyâhk • ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ",
+  "photo": {
+    "src": "../assets/nipamayatan_pekiseyahk/purple_haze.png",
+    "alt": "Purple Haze trail sign showing a hazy purple-and-pink mountain silhouette with the Cree name in white syllabics",
+    "caption": "3D printed plaque: pink-to-purple gradient sky over a purple mountain silhouette, with white syllabics ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ above ‘PURPLE HAZE.’"
+  },
+  "trailforks": {
+    "trailId": "15797",
+    "trailUrl": "https://www.trailforks.com/trails/purple-haze-15797/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=15797&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Purple Haze"
+  },
+  "linguistics": {
+    "meaning": "Purple Haze — ‘our way is hazy / we ride through the haze’ (community translation of the Hendrix-titled trail)",
+    "type": "verb phrase (VII subordinative + AI conjunct)",
+    "primarySection": {
+      "heading": "The Phrase",
+      "sro": "nîpâ‑mâyâtân  pekiseyâhk",
+      "syllabics": "ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ",
+      "morphemes": [
+        {
+          "key": "nipa-init",
+          "sro": "nîpâ‑",
+          "syllabics": "ᓂᐹ",
+          "gloss": "initial: ‘at night, in the dark, dimly’ — the same root in <strong>nîpâ‑pimohtêw</strong> ‘s/he walks at night’ and <strong>nîpâyâstêw</strong> ‘the northern lights’"
+        },
+        {
+          "key": "maayatan-vii",
+          "sro": "‑mâyâtan",
+          "syllabics": "ᒫᔮᑖᐣ",
+          "gloss": "VII conjunct stem: ‘it is bad/ugly/unclear’ — combined with nîpâ‑ to give the sense ‘it is dark/hazy/obscured (like at night)’"
+        },
+        {
+          "key": "pekiseyahk-conj",
+          "sro": "pekiseyâhk",
+          "syllabics": "ᐯᑭᓭᔮᕽ",
+          "gloss": "AI conjunct, 1pl-incl: ‘when/while we (all of us) pass through, when we go through it’ — verb stem <strong>pekise‑</strong> ‘pass through, ride through’ + ‑yâhk first-person plural inclusive conjunct ending"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Night, at night (the bare temporal form)",
+        "sro": "tipiskâw",
+        "syllabics": "ᑎᐱᐢᑳᐤ",
+        "morphemes": [
+          {
+            "key": "tipiskaw-vii",
+            "sro": "tipiskâw",
+            "syllabics": "ᑎᐱᐢᑳᐤ",
+            "gloss": "VII verb: ‘it is night, it is dark.’ The nîpâ‑ initial in the headword carries the same dim/dark idea but as a productive verb-initial."
+          }
+        ],
+        "note": "Free-standing verb for ‘it is night.’ The nîpâ‑ initial in the headword is the bound version of this dim/dark concept."
+      },
+      {
+        "english": "It is bad / it is ugly (VII)",
+        "sro": "mâyâtan",
+        "syllabics": "ᒫᔮᑖᐣ",
+        "morphemes": [
+          {
+            "key": "maayatan-noun",
+            "sro": "mâyâtan",
+            "syllabics": "ᒫᔮᑖᐣ",
+            "gloss": "VII verb: ‘it is bad, ugly, unpleasant, hard to see clearly.’ Inside the headword this stem is what nîpâ‑ modifies."
+          }
+        ],
+        "note": "‘It is bad/unclear.’ With the night-initial nîpâ‑ it produces ‘it is hazy / it is bad-as-at-night’ — the visibility-blurring sense the trail name plays on."
+      },
+      {
+        "english": "S/he passes through, rides through",
+        "sro": "pekisew / pekisin",
+        "syllabics": "ᐯᑭᓭᐤ",
+        "morphemes": [
+          {
+            "key": "pekise-stem",
+            "sro": "pekise‑",
+            "syllabics": "ᐯᑭᓭ",
+            "gloss": "AI verb stem: ‘to pass through, to make one’s way through, to ride/walk through’"
+          },
+          {
+            "key": "ew-3sg",
+            "sro": "‑ew",
+            "syllabics": "ᐤ",
+            "gloss": "AI 3sg independent suffix: ‘he/she does it’"
+          }
+        ],
+        "note": "The independent (3sg) form. The plaque uses the conjunct 1pl-incl <strong>pekiseyâhk</strong> ‘when we (all) ride through.’"
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Purple Haze (community translation of the Hendrix title)",
+        "sro": "nîpâmâyâtân pekiseyâhk",
+        "syllabics": "ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ",
+        "note": "Headword on the plaque. Two-word phrase: VII (impersonal ‘it is dim/hazy’) + AI conjunct (‘when we ride through it’)."
+      },
+      {
+        "english": "It is night / it is dark",
+        "sro": "tipiskâw",
+        "syllabics": "ᑎᐱᐢᑳᐤ",
+        "note": "The free-standing ‘night’ verb that the nîpâ‑ initial echoes."
+      },
+      {
+        "english": "It is hazy / unclear / hard to see",
+        "sro": "nîpâmâyâtan",
+        "syllabics": "ᓂᐹᒫᔮᑖᐣ",
+        "note": "The first word of the plaque, treated as a stand-alone VII."
+      },
+      {
+        "english": "When we (all of us) pass through it",
+        "sro": "pekiseyâhk",
+        "syllabics": "ᐯᑭᓭᔮᕽ",
+        "note": "AI conjunct, 1pl-incl. ‑yâhk is the inclusive ‘we including you’ ending."
+      },
+      {
+        "english": "Purple (the colour adjective)",
+        "sro": "wâpiskwêyâw / sîpihkonâkwan",
+        "syllabics": "ᐚᐱᐢᑵᔮᐤ",
+        "note": "There is no single ‘purple’ root in Plains Cree; common formations use sîpihko‑ ‘blue’ + a colour-shading final, or borrow from the wider colour vocabulary. The plaque deliberately does NOT translate the colour word but renders the IDEA — ‘the haze we ride through.’"
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "nîpâ‑",
+        "english": "(initial) at night, in the dark, dimly",
+        "syllabics": "ᓂᐹ"
+      },
+      {
+        "sro": "mâyâtan",
+        "english": "it is bad, ugly, unclear (VII)",
+        "syllabics": "ᒫᔮᑖᐣ"
+      },
+      {
+        "sro": "pekise‑",
+        "english": "(verb stem) to pass / ride through",
+        "syllabics": "ᐯᑭᓭ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About nîpâmâyâtân pekiseyâhk — the Haze We Ride Through",
+    "body": [
+      "<strong>Purple Haze</strong> is a Hendrix song before it is a trail, and the trail name is itself a borrow — when the local builders carved the Cree, they did not try to translate the colour ‘purple’ literally (which Plains Cree does not have a single root for) but instead rendered the FEELING of the song and the trail: the dim, hazy way of moving through. The plaque on the wall is unusually pictorial for the set: a two-tone purple mountain silhouette under a pink-fading-to-violet sky, the syllabics <strong>ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ</strong> in clean white above the mountain, ‘PURPLE HAZE’ in white block letters across the violet base.",
+      "The Cree breaks into two parts. <strong>nîpâmâyâtân</strong> is a VII (it-verb): nîpâ‑ ‘in the dark, at night, dimly’ + ‑mâyâtan ‘it is bad / ugly / unclear,’ together meaning roughly ‘it is hazy / dim / hard to see’ (the sense Hendrix gets at with ‘purple haze all in my eyes’). <strong>pekiseyâhk</strong> is an AI conjunct in the first-person-plural inclusive: ‘when we (all of us) pass through it.’ Read together: ‘when it is hazy and we (all) pass through it’ — the rider’s phrase, not a colour name.",
+      "The trail itself is in the Hawrelak/Central Edmonton (North) network, neighbour to Wonder Woman, Lovers Lane, and Victoria’s Secret in the river-valley clusters under <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory). On the wall there are two Purple Haze plaques — a small portrait-format one in row 1 (the one wired here) and a fuller one further right — both reading the same Cree."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with SRO 'nîpâmâyâtân pekiseyâhk' (with circumflex on the first î; final ‑hk on pekiseyâhk). The current catalogue creeName 'nipâmâyâtan pekisehyânik' is materially different — it is missing the î circumflex on the first vowel, missing the n-final on ‑mâyâtân, has a spurious ‑hy‑ in pekise(h)yâhk, and ends in ‑ânik instead of ‑yâhk. Coordinator should update catalogue creeName to 'nîpâmâyâtân pekiseyâhk'.",
+    "PHYSICAL SIGN OVERRIDES CATALOGUE (syllabics): Catalogue creeSyllabics 'ᓂᐹᒫᔭᑕᐣ ᐯᑭᓭᐦᔮᓂᐠ' encodes the broken catalogue SRO. The plaque-correct syllabics for nîpâmâyâtân pekiseyâhk is 'ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ'. Coordinator should update creeSyllabics accordingly.",
+    "The first-vowel diacritic on nîpâ‑ is read with MEDIUM confidence from the small upper plaque crop (a clear circumflex is visible on the first 'i'). Some local materials write 'nipâ‑' without the î; both are attested. The carving here uses î.",
+    "Morpheme analysis nîpâ‑ + ‑mâyâtan + pekise‑ + ‑yâhk is the structural reading. nîpâ‑ + ‑mâyâtan as a single VII is established (in itwêwina the headword nîpâmâyâtan ‘it is dim/hazy/dusk’ exists). The conjunct pekiseyâhk is a 1pl-inclusive form of the AI verb pekise‑ ‘pass through’. This morpheme breakdown carries ~75% confidence; an alternative reading parses pekiseyâhk as a different stem (pîkise‑ ‘break/disperse’). Suggest user review by an elder or itwêwina cross-check.",
+    "The trail name is a community translation of the Hendrix song title; it is NOT a literal colour translation. Plains Cree does not have a single ‘purple’ root (formations use sîpihko‑ ‘blue’ + colour-shading finals).",
+    "Trailforks pick: 'Purple Haze' (trail id 15797), neighbour to Wonder Woman in the Hawrelak / Central Edmonton (North) network. High confidence (the trail page is referenced from the Wonder Woman 'Nearby Trails' list). Trailhead coords not extracted; the trail sits in the same river-valley cluster as the other M1 Edmonton trails.",
+    "On the wall there are TWO Purple Haze plaques (a small portrait-format upper plaque and a fuller plaque further right). Both carry the same Cree wording. The rendered photo here uses the dedicated design source 'purple_haze.png' which represents the same composition."
+  ]
+}

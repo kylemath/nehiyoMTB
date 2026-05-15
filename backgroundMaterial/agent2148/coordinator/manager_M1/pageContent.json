@@ -1,0 +1,123 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#000000",
+  "themeName": "black",
+  "headerTitle": "Raven • kahkakiw • ᑲᐦᑲᑭᐤ",
+  "photo": {
+    "src": "../assets/kahkakiw/raven_wild.png",
+    "alt": "Raven trail sign with SRO 'kahkakiw' on top, red syllabics ᑲᐦᑲᑭᐤ across the black raven graphic, and 'RAVEN' below, mounted on a birch trunk.",
+    "caption": "3D printed trail sign: black raven silhouette with red syllabics, white plaque."
+  },
+  "trailforks": {
+    "trailId": "146421",
+    "trailUrl": "https://www.trailforks.com/trails/raven-146421/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=146421&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Raven"
+  },
+  "linguistics": {
+    "meaning": "Raven",
+    "type": "noun (animate)",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "kahkakiw",
+      "syllabics": "ᑲᐦᑲᑭᐤ",
+      "morphemes": [
+        {
+          "key": "kahkakiw",
+          "sro": "kahkakiw",
+          "syllabics": "ᑲᐦᑲᑭᐤ",
+          "gloss": "raven (animate noun)"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Ravens (plural)",
+        "sro": "kahkakiwak",
+        "syllabics": "ᑲᐦᑲᑭᐘᐠ",
+        "morphemes": [
+          {
+            "key": "kahkakiw-stem",
+            "sro": "kahkakiw",
+            "syllabics": "ᑲᐦᑲᑭ",
+            "gloss": "raven (stem)"
+          },
+          {
+            "key": "ak-plural",
+            "sro": "-ak",
+            "syllabics": "ᐘᐠ",
+            "gloss": "animate plural suffix"
+          }
+        ],
+        "note": "Animate plural — Cree treats animals, spirits, and certain culturally significant beings as animate."
+      },
+      {
+        "english": "Little Raven (diminutive)",
+        "sro": "kahkakiwisis",
+        "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ",
+        "morphemes": [
+          {
+            "key": "kahkakiw-dim",
+            "sro": "kahkakiw",
+            "syllabics": "ᑲᐦᑲᑭᐤ",
+            "gloss": "raven (stem)"
+          },
+          {
+            "key": "isis-dim",
+            "sro": "-isis",
+            "syllabics": "ᐏᓯᐢ",
+            "gloss": "diminutive suffix ('little')"
+          }
+        ],
+        "note": "Diminutive form. Syllabics carried over verbatim from the prior curator-reviewed draft; see notes for a syllabification flag."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Raven",
+        "sro": "kahkakiw",
+        "syllabics": "ᑲᐦᑲᑭᐤ"
+      },
+      {
+        "english": "Ravens",
+        "sro": "kahkakiwak",
+        "syllabics": "ᑲᐦᑲᑭᐘᐠ"
+      },
+      {
+        "english": "Little Raven",
+        "sro": "kahkakiwisis",
+        "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ"
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "kahkakiw",
+        "english": "Raven",
+        "syllabics": "ᑲᐦᑲᑭᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About the Raven",
+    "body": [
+      "The raven (<strong>kahkakiw</strong>) holds significant cultural importance in many Indigenous traditions, including Plains Cree (nēhiyawēwin). Known for its intelligence, adaptability, problem-solving ability, and distinctive black plumage and rasping call, the raven appears in numerous oral stories and teachings.",
+      "In Cree storytelling the raven is often a trickster and messenger figure — a bird that watches, remembers, and carries news between worlds. This trail sign honours that presence with a stylized black raven silhouette and the syllabics <strong>ᑲᐦᑲᑭᐤ</strong> set across its body in red, so that the Cree name is literally carried on the raven itself."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "Sign text verified visually from docs/assets/kahkakiw/raven_wild.png: SRO 'kahkakiw' (black, top), syllabics 'ᑲᐦᑲᑭᐤ' (red, on raven body), 'RAVEN' (black, bottom). Sign primary colours are white plaque, black silhouette+lettering, red syllabics.",
+    "accentColor '#000000' kept as-is: the raven and lettering are black; red is used only for the syllabics accent and would over-dominate the page UI if used as the accent colour.",
+    "Diminutive 'kahkakiwisis' syllabics preserved from the prior curator-reviewed draft as 'ᑲᐦᑲᑭᐏᓯᓯᐢ'. A strict letter-by-letter syllabification of SRO 'kahkakiwisis' yields 'ᑲᐦᑲᑭᐏᓯᐢ' (7 syllabic characters, one fewer ᓯ). Flagging for human review: either the SRO form is actually 'kahkakiwisisis' (extra -is iteration) or the syllabics has one extra ᓯ. Recommend an elder/itwêwina cross-check before publishing.",
+    "Trailforks: confident match found by sub-subagent S2 — Trail ID 146421, slug 'raven-146421', region Buena Vista (Edmonton river valley park, verified via Trailforks Edmonton region directory and Edmonton conditions feed). S2 could not directly fetch the trail-detail page (Trailforks rate-limited the request), but the trail ID was read verbatim from two Trailforks-hosted Edmonton listings. Recommend a 5-second human eyeball on https://www.trailforks.com/trails/raven-146421/ before flipping pageStatus to 'user-reviewed'.",
+    "STL files in docs/kahkakiw/: kahkakiw_plaque.stl, kahkakiw_plaque_bk.stl, kahkakiw_plaque_hybrid_fixed.stl — filename matches sign id."
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#6f42c1",
+  "themeName": "purple",
+  "headerTitle": "Farmer's Daughter • okistikêw otânisa • ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ",
+  "photo": {
+    "src": "../assets/FarmersDaughter/farmer_daughter_wall.jpg",
+    "alt": "Farmer's Daughter trail sign — okistikêw otânisa plaque showing a sepia/purple portrait of a young woman on a bicycle in front of a wheat field",
+    "caption": "Wall crop of the Farmer's Daughter plaque: purple syllabics ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ above a tinted portrait of the rider; black 'Farmer's Daughter' caption below."
+  },
+  "trailforks": {
+    "notes": "No standalone Trailforks entry was found for an Edmonton‑area trail named 'Farmer's Daughter' (searched the Edmonton region directory, Central Edmonton North subregion, and a generic web query). The plaque appears to commemorate either a local section name, a builder's nickname, or a sequence within an existing trail. If the rider/builder identifies which official trail this corresponds to, the widgetUrl can be filled in then."
+  },
+  "linguistics": {
+    "meaning": "Farmer's Daughter — a possessive noun phrase 'his/her (the farmer's) daughter', built from the agent noun okistikêw 'farmer' and the obviated possessed noun otânisa 'his/her daughter (obv.)'.",
+    "type": "noun phrase (animate possessor + obviative animate possessed)",
+    "primarySection": {
+      "heading": "The Phrase on the Plaque",
+      "sro": "okistikêw otânisa",
+      "syllabics": "ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ",
+      "morphemes": [
+        {
+          "key": "o-actor",
+          "sro": "o‑",
+          "syllabics": "ᐅ",
+          "gloss": "<strong>Actor / agent nominalization prefix.</strong> Turns a VAI verb into the noun for the person who does that verb. Same prefix as in <em>okimâw</em> 'leader / one who leads' and <em>opîkahtahkêw</em> 'fiddler / one who fiddles'."
+        },
+        {
+          "key": "kistike-stem",
+          "sro": "kistikê‑",
+          "syllabics": "ᑭᐢᑎᑫ",
+          "gloss": "VAI stem: <strong>'farm, plant, garden, seed, harvest'</strong>. Underlies the verb <em>kistikêw</em> 's/he farms / s/he plants'. itwêwina lists the agent noun <em>okistikêw</em> 'farmer' as a regular derivation."
+        },
+        {
+          "key": "w-3sg-actor",
+          "sro": "‑w",
+          "syllabics": "ᐤ",
+          "gloss": "VAI 3sg suffix carried into the actor noun: 's/he ___s' → 'the one who ___s'. The whole agent noun <em>okistikêw</em> = 'farmer / one who farms'."
+        },
+        {
+          "key": "o-poss",
+          "sro": "o‑",
+          "syllabics": "ᐅ",
+          "gloss": "<strong>3rd‑person possessive prefix</strong> on the second word: 'his/her ___'. Same <em>o‑</em> shape as the actor prefix, but here it is acting on a kinship‑dependent stem instead of a verb."
+        },
+        {
+          "key": "taanis-stem",
+          "sro": "‑tânis",
+          "syllabics": "ᑖᓂᐢ",
+          "gloss": "Dependent kinship stem: <strong>'daughter'</strong>. Cannot stand alone; always carries a possessor prefix. Compare <em>nitânis</em> 'my daughter', <em>kitânis</em> 'your daughter'."
+        },
+        {
+          "key": "a-obv",
+          "sro": "‑a",
+          "syllabics": "ᐊ",
+          "gloss": "<strong>Obviative suffix</strong> on the possessed animate noun. Required because the daughter (3rd person) is being talked about from the point of view of the farmer (also 3rd person). 'Two 3rd‑persons in the same clause' → one becomes obviative."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "S/he farms, s/he plants things, s/he harvests (the underlying VAI)",
+        "sro": "kistikêw",
+        "syllabics": "ᑭᐢᑎᑫᐤ",
+        "morphemes": [
+          {
+            "key": "kistike-rel1",
+            "sro": "kistikê‑",
+            "syllabics": "ᑭᐢᑎᑫ",
+            "gloss": "VAI stem: farm, plant, garden, harvest."
+          },
+          {
+            "key": "w-vai-rel1",
+            "sro": "‑w",
+            "syllabics": "ᐤ",
+            "gloss": "VAI 3sg indicative suffix: 's/he ___s'."
+          }
+        ],
+        "note": "itwêwina headword (CW). Strip the <em>o‑</em> off the plaque's first word and this is what you have left: the verb of farming itself."
+      },
+      {
+        "english": "Farming, agriculture (abstract noun)",
+        "sro": "kistikêwin",
+        "syllabics": "ᑭᐢᑎᑫᐏᐣ",
+        "morphemes": [
+          {
+            "key": "kistike-rel2",
+            "sro": "kistikê‑",
+            "syllabics": "ᑭᐢᑎᑫ",
+            "gloss": "VAI stem: farm, plant, garden."
+          },
+          {
+            "key": "win-rel2",
+            "sro": "‑win",
+            "syllabics": "ᐏᐣ",
+            "gloss": "Abstract noun deriver. Same machinery that turns <em>pimâtisiw</em> 's/he lives' into <em>pimâtisiwin</em> 'life'."
+          }
+        ],
+        "note": "Companion abstract noun in the same family: <em>okistikêw</em> 'the farmer (person)' vs <em>kistikêwin</em> 'the farming (activity)'."
+      },
+      {
+        "english": "My daughter (1sg.poss form of the same kinship stem)",
+        "sro": "nitânis",
+        "syllabics": "ᓂᑖᓂᐢ",
+        "morphemes": [
+          {
+            "key": "ni-poss-rel3",
+            "sro": "ni‑",
+            "syllabics": "ᓂ",
+            "gloss": "1sg possessive prefix: 'my ___'."
+          },
+          {
+            "key": "taanis-rel3",
+            "sro": "‑tânis",
+            "syllabics": "ᑖᓂᐢ",
+            "gloss": "Dependent kinship stem: 'daughter'."
+          }
+        ],
+        "note": "Same <em>‑tânis</em> dependent stem as the plaque's <em>otânisa</em>, but with the 1st‑person possessor <em>ni‑</em>. No obviative <em>‑a</em> because the speaker (1sg) is the possessor — no clash of 3rd persons."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Farmer's daughter (the farmer's specific daughter, obv.)",
+        "sro": "okistikêw otânisa",
+        "syllabics": "ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ",
+        "note": "Headword on the plaque. Possessor (the farmer, 3sg) + obviated possessed (the daughter, 3sg.obv)."
+      },
+      {
+        "english": "Farmer (the agent noun, animate)",
+        "sro": "okistikêw",
+        "syllabics": "ᐅᑭᐢᑎᑫᐤ",
+        "note": "itwêwina headword (CW). NA. Plural <em>okistikêwak</em>, obviative <em>okistikêwa</em>."
+      },
+      {
+        "english": "S/he farms, s/he plants",
+        "sro": "kistikêw",
+        "syllabics": "ᑭᐢᑎᑫᐤ",
+        "note": "VAI. The underlying verb from which <em>okistikêw</em> is derived."
+      },
+      {
+        "english": "My daughter",
+        "sro": "nitânis",
+        "syllabics": "ᓂᑖᓂᐢ",
+        "note": "1sg.poss of the dependent kinship stem <em>‑tânis</em>."
+      },
+      {
+        "english": "Your daughter",
+        "sro": "kitânis",
+        "syllabics": "ᑭᑖᓂᐢ",
+        "note": "2sg.poss of the same dependent stem."
+      },
+      {
+        "english": "His/her daughter (proximate, when no other 3rd person is in the clause)",
+        "sro": "otânisa",
+        "syllabics": "ᐅᑖᓂᓴ",
+        "note": "Note the <em>‑a</em> obviative on the plaque even in isolation: Plains Cree kinship animates are habitually carried obviative when their possessor is a 3rd person."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "kistikêw",
+        "english": "s/he farms / plants (VAI)",
+        "syllabics": "ᑭᐢᑎᑫᐤ"
+      },
+      {
+        "sro": "okistikêw",
+        "english": "farmer (NA, agent noun)",
+        "syllabics": "ᐅᑭᐢᑎᑫᐤ"
+      },
+      {
+        "sro": "‑tânis",
+        "english": "daughter (dependent kinship stem)",
+        "syllabics": "ᑖᓂᐢ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "The Field, the Daughter, the Trail",
+    "body": [
+      "<strong>Farmer's Daughter</strong> is one of those MTB trail names that lives in the tradition of <em>just calling it like you see it</em>: a long, open, gently‑rolling line that feels like riding across the back forty of an old prairie farm, the kind a farmer's daughter would have grown up biking out to the field on. The plaque art leans straight into the trope — a sepia‑into‑purple portrait of a young woman on a battered single‑speed, white shirt and dark overalls, wheat in the background, the painted‑over‑a‑photograph aesthetic of an old farm‑family album. It is the most figurative plaque on the wall; almost every other one is a silhouette or an abstract motif.",
+      "The carved Cree above the portrait is precise: <strong>okistikêw otânisa</strong>, 'the farmer's daughter (obv.)'. <em>okistikêw</em> is the agent noun built from <em>kistikêw</em> 's/he farms, s/he plants' — strictly 'one who plants', so the kind of farm being named here is the planting / market‑garden / harvest kind, not the ranching kind (which would more naturally use <em>otêhtêwâpêkinikêwa</em> or similar). <em>otânisa</em> is the obviative form of <em>otânis</em> 'his/her daughter' — required because both the farmer and the daughter are 3rd‑person, and Plains Cree grammar marks one of them out as 'the other one' so listeners can keep track of who's who. The English possessive 's' has no machinery in Cree; the relationship rides entirely on the kinship stem <em>‑tânis</em> 'daughter' carrying the same <em>o‑</em> possessor as the farmer carries his actor <em>o‑</em>. Two <em>o‑</em>'s, two roles, one phrase.",
+      "Like every other plaque on this wall, the trail sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory). The Plains Cree had their own long history of <em>kistikêwin</em> (farming / cultivation) on this land — corn, squash, beans where the river bends, gathering and seasonal moves elsewhere — long before the homesteader idiom that 'Farmer's Daughter' borrows from. Naming the trail in <em>nêhiyawêwin</em> sets the English MTB nickname in conversation with that older history of working the land here."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary"
+  ],
+  "notes": [
+    "CATALOGUE CORRECTION PROPOSED: catalogue.json currently has creeName = 'farmers-daughter' (placeholder) and creeSyllabics = '' for this sign. The plaque is carved with SRO 'okistikêw otânisa' and syllabics that visually read as ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ (purple text above the portrait). Propose catalogue update: creeName = 'okistikêw otânisa', creeSyllabics = 'ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ'. Both forms are itwêwina/CW‑attested (okistikêw 'farmer' NA; ‑tânis 'daughter' dep. kinship stem; obviative ‑a standard).",
+    "Note the second character of the first syllabics word: read as ᑭ (ki). At wall‑crop resolution the carving could conceivably be ᐱ (pi) but the linguistically correct Plains Cree word for 'farmer' is <em>okistikêw</em>, the agent noun from <em>kistikêw</em>. A higher‑res photo of just that plaque would settle the carving question, but the page uses the dictionary‑confirmed reading.",
+    "Folder name is camelCase 'FarmersDaughter' (kebab‑case sign id is 'farmers-daughter'). Image assets live at docs/assets/FarmersDaughter/ to match the folder convention.",
+    "Image assets in docs/assets/FarmersDaughter/: farmer_daughter_wall.jpg (tight wall crop from allSigns.jpg, box ≈ (5380, 4380, 6300, 5570)), farmer_daughter_render.png (the farmerDaughterPrint.png design source), farmer_daughter_portrait.png (the fd.png clean‑portrait variant). The wall crop is wired as the primary photo because it shows the actual carved Cree.",
+    "Trailforks: NO match found in Edmonton-region directory or via web search for 'Farmer's Daughter' or 'Farmers Daughter' MTB trail. trailforks block is intentionally minimal with a notes line.",
+    "Morpheme bracketing is presented at 6 morphemes (o‑ + kistikê‑ + ‑w + o‑ + ‑tânis + ‑a) for maximum teaching clarity across the two words of the noun phrase. The two <em>o‑</em>'s are deliberately distinguished by key (o-actor vs o-poss) — they are homophonous but functionally different. Hover‑highlight pairing should still work because keys are unique.",
+    "Obviative ‑a explanation in the cultural story is simplified for non‑linguists; the formal account is that obviation is obligatory on any 3rd‑person animate whose possessor is also a 3rd‑person animate, regardless of whether the contrasting 3rd person is overt in the clause."
+  ]
+}

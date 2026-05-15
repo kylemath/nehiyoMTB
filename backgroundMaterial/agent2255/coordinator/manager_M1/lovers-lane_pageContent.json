@@ -1,0 +1,190 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Lovers Lane • nicimos mêskanâs • ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ",
+  "photo": {
+    "src": "../assets/loversLane/sign_render.png",
+    "alt": "Lovers Lane trail sign: a red heart filled with three interlocking gear-discs carrying white Cree syllabics, with the SRO ‘nicimos mêskanâs’ above and ‘Lovers Lane’ below",
+    "caption": "3D printed plaque: red heart with three gear-discs, each carrying a piece of the syllabics ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ in white. Cropped from the wall photo (allSigns.jpg)."
+  },
+  "trailforks": {
+    "trailId": "15796",
+    "trailUrl": "https://www.trailforks.com/trails/lovers-lane-15796/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=15796&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Lovers Lane",
+    "mapCoords": { "lat": 53.54309, "lng": -113.54137, "source": "trailforks trailhead 15796" }
+  },
+  "linguistics": {
+    "meaning": "Lovers Lane — literally ‘my sweetheart’s little path’",
+    "type": "noun phrase (possessed NA + diminutive NI path)",
+    "primarySection": {
+      "heading": "The Phrase",
+      "sro": "ni‑cimos  mêskan‑âs",
+      "syllabics": "ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ",
+      "morphemes": [
+        {
+          "key": "ni-1sg",
+          "sro": "ni‑",
+          "syllabics": "ᓂ",
+          "gloss": "1sg possessive prefix: ‘my’ — the same prefix in <strong>nikosis</strong> ‘my son’ and <strong>nimâmâ</strong> ‘my mother’"
+        },
+        {
+          "key": "cimos-noun",
+          "sro": "cimos",
+          "syllabics": "ᒋᒧᐢ",
+          "gloss": "NA noun (animate, dependent stem): ‘sweetheart, dear, lover.’ Always appears with a possessive prefix; the bare stem does not surface alone."
+        },
+        {
+          "key": "meskanaw-stem",
+          "sro": "mêskan‑",
+          "syllabics": "ᒣᐢᑲᐣ",
+          "gloss": "NI noun stem: ‘road, path, trail’ — the same stem in <strong>mêskanaw</strong> ‘road, trail’"
+        },
+        {
+          "key": "aas-dim",
+          "sro": "‑âs",
+          "syllabics": "ᐋᐢ",
+          "gloss": "NI diminutive ending: ‘little, small’ — the inanimate-noun cousin of the animate ‑sis (cf. <strong>sîpîs</strong> ‘little river / creek’ from <strong>sîpiy</strong> ‘river’)"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Road, trail, path (the bare noun)",
+        "sro": "mêskanaw",
+        "syllabics": "ᒣᐢᑲᓇᐤ",
+        "morphemes": [
+          {
+            "key": "meskanaw-noun",
+            "sro": "mêskanaw",
+            "syllabics": "ᒣᐢᑲᓇᐤ",
+            "gloss": "NI noun: ‘road, trail, path.’ The diminutive form mêskanâs ‘little path’ on the plaque comes from this stem."
+          }
+        ],
+        "note": "Free-standing word for ‘road/trail.’ With the diminutive ‑âs it becomes mêskanâs ‘little path / trail.’"
+      },
+      {
+        "english": "My sweetheart (animate plural — ‘my sweethearts’)",
+        "sro": "nicimosak",
+        "syllabics": "ᓂᒋᒧᓴᐠ",
+        "morphemes": [
+          {
+            "key": "ni-1sg2",
+            "sro": "ni‑",
+            "syllabics": "ᓂ",
+            "gloss": "1sg possessive prefix: ‘my’"
+          },
+          {
+            "key": "cimos-noun2",
+            "sro": "cimos",
+            "syllabics": "ᒋᒧᐢ",
+            "gloss": "NA stem: ‘sweetheart, lover’"
+          },
+          {
+            "key": "ak-anim-pl",
+            "sro": "‑ak",
+            "syllabics": "ᐊᐠ",
+            "gloss": "NA animate plural ending: ‘‑s’"
+          }
+        ],
+        "note": "The plural form. The catalogue text ‘nicimosak méskanâs’ used this plural; the plaque uses singular ‘nicimos’ (one beloved, not many)."
+      },
+      {
+        "english": "Path, trail, road (the diminutive used here)",
+        "sro": "mêskanâs",
+        "syllabics": "ᒣᐢᑲᓈᐢ",
+        "morphemes": [
+          {
+            "key": "meskan-stem2",
+            "sro": "mêskan‑",
+            "syllabics": "ᒣᐢᑲᐣ",
+            "gloss": "NI noun stem: ‘road, path’"
+          },
+          {
+            "key": "aas-dim2",
+            "sro": "‑âs",
+            "syllabics": "ᐋᐢ",
+            "gloss": "NI diminutive: ‘little’"
+          }
+        ],
+        "note": "‘Little path’ — the affectionate scale of a single-track trail through the bush, perfect for a singletrack lover’s lane."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Lovers Lane — ‘my sweetheart’s little path’",
+        "sro": "nicimos mêskanâs",
+        "syllabics": "ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ",
+        "note": "Headword on the plaque. Singular nicimos (one beloved), with circumflex ê on mêskanâs."
+      },
+      {
+        "english": "My sweetheart, my dear",
+        "sro": "nicimos",
+        "syllabics": "ᓂᒋᒧᐢ",
+        "note": "1sg possessed form. The bare stem cimos is dependent; it does not appear alone."
+      },
+      {
+        "english": "Road, trail, path",
+        "sro": "mêskanaw",
+        "syllabics": "ᒣᐢᑲᓇᐤ",
+        "note": "Free NI noun. Diminutive: mêskanâs ‘little path / trail.’"
+      },
+      {
+        "english": "Little river / creek (showing the same ‑âs diminutive)",
+        "sro": "sîpîs",
+        "syllabics": "ᓰᐲᐢ",
+        "note": "From sîpiy ‘river’ + diminutive ‑(î)s. Same NI-diminutive pattern as mêskanâs."
+      },
+      {
+        "english": "Your sweetheart (2sg form)",
+        "sro": "kicimos",
+        "syllabics": "ᑭᒋᒧᐢ",
+        "note": "Same dependent stem cimos with the 2sg possessive ki‑."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "cimos",
+        "english": "sweetheart, lover (NA dependent stem)",
+        "syllabics": "ᒋᒧᐢ"
+      },
+      {
+        "sro": "mêskanaw",
+        "english": "road, trail, path (NI)",
+        "syllabics": "ᒣᐢᑲᓇᐤ"
+      },
+      {
+        "sro": "‑âs",
+        "english": "(NI diminutive ending) little, small",
+        "syllabics": "ᐋᐢ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About nicimos mêskanâs — My Sweetheart’s Little Path",
+    "body": [
+      "<strong>Lovers Lane</strong> is the rare trail name where the English and the Cree mean almost exactly the same thing. The plaque is a red-on-white heart filled with three interlocking gear-discs, each carrying a piece of the syllabics <strong>ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ</strong> in white — when you read the gears in heart-shape order they spell the phrase. ‘nicimos mêskanâs’ runs across the top in plain SRO; ‘Lovers Lane’ runs across the bottom. Two of these heart plaques are mounted on the wall.",
+      "The Cree breaks into two short pieces. <strong>nicimos</strong> is the 1sg possessed form of <strong>‑cimos</strong> ‘sweetheart, dear, lover’ — the dependent stem that always appears with a possessor prefix (<strong>nicimos</strong> ‘my sweetheart’, <strong>kicimos</strong> ‘your sweetheart’, <strong>ocimosa</strong> ‘his/her sweetheart (obviative)’). <strong>mêskanâs</strong> is the diminutive of <strong>mêskanaw</strong> ‘road, trail, path’: literally ‘little path.’ Together: ‘my sweetheart’s little path’ — the affectionate scale of a singletrack through the river-valley bush.",
+      "The trail itself is in the Central Edmonton (North) network, on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), near Government House just up the bank from the river. Trailforks describes it well: ‘single track that winds through tight overhanging bush creating a cool tunnel effect — rolls and flows well in both directions.’ It is a blue trail (also locally called ‘Groat Road Roller Coaster’ or ‘Monkey Trail’ in MTB vernacular) — the kind of soft, looping line that the Cree name dignifies as a path you’d take a sweetheart down."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with SRO 'nicimos mêskanâs' (singular nicimos, NOT plural nicimosak; circumflex ê on mêskanâs, NOT acute é). The current catalogue creeName 'nicimosak méskanâs' has both errors — it pluralises the sweetheart and uses a French acute é instead of the Cree circumflex ê. Coordinator should update catalogue creeName to 'nicimos mêskanâs'.",
+    "PHYSICAL SIGN OVERRIDES CATALOGUE (syllabics): Catalogue creeSyllabics 'ᓂᒋᒧᓴᐠ ᒣᐢᑲᓈᐢ' encodes the broken plural form (note ‑ᓴᐠ ‘‑sak’ at the end of nicimos). The plaque-correct syllabics is 'ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ'. Coordinator should update creeSyllabics accordingly.",
+    "There is a possible carving variant nîcimos (with circumflex on the first î; itwêwina headword form). The carved plaque appears to use plain 'nicimos' (no î diacritic) — this is the form chosen here. Some Plains Cree dictionaries write nîcimos with long î; both are widely attested and the plaque’s short-i spelling is acceptable.",
+    "Morpheme bracketing ni‑ + cimos | mêskan‑ + ‑âs is the structural reading. cimos is a dependent NA stem that never surfaces without a possessive prefix (so ni‑cimos ‘my sweetheart,’ ki‑cimos ‘your sweetheart,’ etc.). mêskanâs is the regular NI diminutive of mêskanaw with the ‑âs ending and final-vowel reduction (mêskanaw → mêskan‑ + ‑âs).",
+    "Photo: cropped from allSigns.jpg (preview coords 310,605 → 460,885 → original coords ~1581,3084 → 2346,4512). Saved to docs/assets/loversLane/sign_render.png. The crop captures the upper of two near-identical heart plaques on the wall.",
+    "Trailforks pick: 'Lovers Lane' (trail id 15796), Central Edmonton (North) / NW Edmonton — blue singletrack tunnel-of-bush trail. Trailhead 53.54309, -113.54137. High confidence (the trail page is a direct match for the carved Cree name, and the wall is clearly the Edmonton Plains Cree mountain-bike-naming project)."
+  ]
+}

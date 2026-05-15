@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deliverance • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#0d6efd;--accent2:#0b5acf;--line:#dee2e6;--chip:#e9ecef;--ok:#0d6efd;--primary-bg:#dbe9ff;--primary-text:#000000;--formula-bg:#f5f9ff;--formula-border:#0d6efd;--secondary-bg:#ecf3ff;--secondary-border:#b6d4fe
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Deliverance • paspîhiwêwin • ᐸᐢᐲᐦᐃᐍᐏᐣ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Word on the Plaque</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">paspî‑hiwê‑win</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="paspii-initial" data-tip="Verbal initial: &lt;strong&gt;escape, get free of, slip out of&lt;/strong&gt;. The same initial sits inside &lt;em&gt;paspiw&lt;/em&gt; &#x27;s/he escapes (gets through alive)&#x27; and &lt;em&gt;paspâpiw&lt;/em&gt; &#x27;s/he peeks out (through a hole)&#x27;." data-syll-id="paspii-initial-syll">paspî‑</span>
+              <span class="part tooltip" data-key="h-caus" data-tip="Causative connector: &lt;strong&gt;&#x27;cause / make&#x27;&lt;/strong&gt;. Turns an intransitive escape‑event into an action done &lt;em&gt;to&lt;/em&gt; someone." data-syll-id="h-caus-syll">‑h‑</span>
+              <span class="part tooltip" data-key="iwe-vai" data-tip="VAI indefinite‑object final: &lt;strong&gt;&#x27;(to) people&#x27;&lt;/strong&gt;. Used when the object of the action is generic / human (rescue &lt;em&gt;people&lt;/em&gt;, save &lt;em&gt;folks&lt;/em&gt;, teach &lt;em&gt;people&lt;/em&gt;)." data-syll-id="iwe-vai-syll">‑iwê‑</span>
+              <span class="part tooltip" data-key="win-nmlz" data-tip="Abstract noun deriver: turns the verb &lt;em&gt;paspîhiwêw&lt;/em&gt; &#x27;s/he saves people&#x27; into the noun &lt;em&gt;paspîhiwêwin&lt;/em&gt; &#x27;a saving / rescue / deliverance&#x27;. The same ‑win is in &lt;em&gt;pimâtisiwin&lt;/em&gt; &#x27;life&#x27; (from &lt;em&gt;pimâtisiw&lt;/em&gt; &#x27;s/he lives&#x27;)." data-syll-id="win-nmlz-syll">‑win</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">paspî‑hiwê‑win</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="paspii-initial" data-tip="paspî‑" id="paspii-initial-syll">ᐸᐢᐲ</span>
+              <span class="syll-part tooltip" data-key="h-caus" data-tip="‑h‑" id="h-caus-syll">ᐦ</span>
+              <span class="syll-part tooltip" data-key="iwe-vai" data-tip="‑iwê‑" id="iwe-vai-syll">ᐃᐍ</span>
+              <span class="syll-part tooltip" data-key="win-nmlz" data-tip="‑win" id="win-nmlz-syll">ᐏᐣ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;Deliverance — &#x27;the saving / rescuing of people&#x27;, the abstract noun of paspîhiwêw &#x27;s/he saves people&#x27;.&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/deliverance/sign_render.png" alt="Deliverance trail sign — paspîhiwêwin plaque showing a banjo merged with a wooden bridge over water inside a circular black field" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">Wall crop of the Deliverance plaque: SRO &#x27;paspîhiwewin&#x27; / syllabics ᐸᐢᐲᐦᐃᐍᐏᐣ above a banjo+bridge motif with blue water flowing beneath.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">Through Patricia Ravine</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">In MTB vernacular a trail earns the name <strong>Deliverance</strong> by where it puts you and by what it asks of you to get out. On the wall, Deliverance sits paired with Purgatory — the same flame‑palette pivots into a wider banjo‑and‑bridge medallion, a winding pool of blue water threading underneath the bridge's pilings. The banjo is the John Boorman <em>Deliverance</em> reference (the 1972 film, the duelling‑banjos river); the bridge under it is the engineering of getting out alive. Black field, silver bridge, blue water, red Cree syllabics floating across the bridge deck — the design reads as a single rescue tableau.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The Cree carved onto the plaque, <strong>paspîhiwêwin</strong>, is the abstract noun of <em>paspîhiwêw</em> 's/he saves people' (itwêwina/Wolvengrey). The Plains Cree dictionary glosses it simply: <em>rescue, saving people, deliverance, vindication</em>. The same root <em>paspî‑</em> 'slip through, escape, get out alive' is what makes <em>paspiw</em> 's/he survives' and <em>paspâpiw</em> 's/he peeks out through a hole' — the morpheme that runs through the whole family is the idea of <em>getting through a narrow opening</em>. That is also the literal shape of the trail: Patricia Ravine Upper, the black‑diamond singletrack threading through the steep, narrow ravine on Edmonton's west side.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Geographically the trail is the official 'Deliverance' on Trailforks (id 13244, Patricia Ravine Upper, 902 m, black diamond) — paired on the ground with 'Bed Springs' (Patricia Ravine Lower) and on the wall with 'Purgatory'. The whole sequence sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory) on the south rim of the North Saskatchewan, and is part of an Edmonton‑area effort to put Plains Cree names back onto the trails this network's riders have known by their English nicknames for a long time.</p>
+        </div>
+
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=13244&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/deliverance-13244/" style="font-size: 0.7em;">Deliverance (Patricia Ravine Upper)</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;S/he saves people, s/he rescues people (the underlying VAI verb)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="paspii-rel1" data-tip="Initial: escape, get free of." data-syll-id="paspii-rel1-syll">paspî‑</span>
+              <span class="part tooltip" data-key="h-rel1" data-tip="Causative connector." data-syll-id="h-rel1-syll">‑h‑</span>
+              <span class="part tooltip" data-key="iwew-rel1" data-tip="VAI indefinite‑object 3sg suffix: &#x27;s/he (does it to) people&#x27;." data-syll-id="iwew-rel1-syll">‑iwêw</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">paspîhiwêw</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="paspii-rel1" data-tip="paspî‑" id="paspii-rel1-syll">ᐸᐢᐲ</span>
+              <span class="syll-part tooltip" data-key="h-rel1" data-tip="‑h‑" id="h-rel1-syll">ᐦ</span>
+              <span class="syll-part tooltip" data-key="iwew-rel1" data-tip="‑iwêw" id="iwew-rel1-syll">ᐃᐍᐤ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Strip &lt;em&gt;‑win&lt;/em&gt; off the plaque headword and you are back to the verb &#x27;s/he saves people&#x27;. The plaque chose the abstract noun for the trail name; the verb itself is what a rider &lt;em&gt;does&lt;/em&gt; on the rescue ride out.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;S/he escapes, s/he gets through (alive) — the bare VAI base&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="paspi-rel2" data-tip="VAI base: get through, escape (the short‑i variant of the initial)." data-syll-id="paspi-rel2-syll">paspi‑</span>
+              <span class="part tooltip" data-key="w-rel2" data-tip="VAI 3sg indicative suffix: &#x27;s/he ___s&#x27;." data-syll-id="w-rel2-syll">‑w</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">paspiw</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="paspi-rel2" data-tip="paspi‑" id="paspi-rel2-syll">ᐸᐢᐱ</span>
+              <span class="syll-part tooltip" data-key="w-rel2" data-tip="‑w" id="w-rel2-syll">ᐤ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Bare‑intransitive escape verb — the first‑person rider&#x27;s reading. Where &lt;em&gt;paspîhiwêwin&lt;/em&gt; is the abstract act of &lt;em&gt;rescuing others&lt;/em&gt;, &lt;em&gt;paspiw&lt;/em&gt; is what the survivor does themselves.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;S/he saves him/her (animate object, VTA sibling)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="paspii-rel3" data-tip="Initial: escape, save." data-syll-id="paspii-rel3-syll">paspî‑</span>
+              <span class="part tooltip" data-key="h-rel3" data-tip="Causative connector." data-syll-id="h-rel3-syll">‑h‑</span>
+              <span class="part tooltip" data-key="ew-rel3" data-tip="VTA 3→3′ indicative suffix: &#x27;s/he does it to him/her (animate)&#x27;." data-syll-id="ew-rel3-syll">‑êw</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">paspîhêw</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="paspii-rel3" data-tip="paspî‑" id="paspii-rel3-syll">ᐸᐢᐲ</span>
+              <span class="syll-part tooltip" data-key="h-rel3" data-tip="‑h‑" id="h-rel3-syll">ᐦ</span>
+              <span class="syll-part tooltip" data-key="ew-rel3" data-tip="‑êw" id="ew-rel3-syll">ᐁᐤ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">VTA sister of the plaque verb: switches the indefinite ‑iwê‑ &#x27;people&#x27; for a definite animate object. Use this when you want to say &#x27;s/he saved &lt;em&gt;her&lt;/em&gt;&#x27;, not &#x27;s/he saves people&#x27;.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>Deliverance, rescue, saving people, vindication</td><td class="tooltip" data-tip="Plaque headword. itwêwina/CW gloss: &#x27;rescue, saving people, deliverance / vindication&#x27;.">paspîhiwêwin</td><td>ᐸᐢᐲᐦᐃᐍᐏᐣ</td></tr>
+              <tr><td>S/he saves people, s/he rescues people</td><td class="tooltip" data-tip="VAI 3sg — the verb whose nominalization is on the plaque.">paspîhiwêw</td><td>ᐸᐢᐲᐦᐃᐍᐤ</td></tr>
+              <tr><td>S/he escapes / gets through (alive)</td><td class="tooltip" data-tip="Bare VAI — the self‑rescue reading.">paspiw</td><td>ᐸᐢᐱᐤ</td></tr>
+              <tr><td>S/he peeks out (through a hole)</td><td class="tooltip" data-tip="Same paspî‑ initial + ‑âpi‑ &#x27;look / peek&#x27; final. Shows the productivity of the &lt;em&gt;paspî‑&lt;/em&gt; &#x27;slip through&#x27; initial.">paspâpiw</td><td>ᐸᐢᐹᐱᐤ</td></tr>
+              <tr><td>Life (the canonical Cree ‑win nominalization)</td><td class="tooltip" data-tip="Built from &lt;em&gt;pimâtisiw&lt;/em&gt; &#x27;s/he lives&#x27; + &lt;em&gt;‑win&lt;/em&gt; &#x27;abstract noun&#x27;. Same machinery as the plaque headword.">pimâtisiwin</td><td>ᐱᒫᑎᓯᐏᐣ</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">paspî‑</span><span class="muted">= &quot;(initial) escape, get through, slip out of&quot;</span><span class="chip">ᐸᐢᐲ</span><button class="copy" data-copy-text="paspî‑">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">paspîhiwêw</span><span class="muted">= &quot;s/he saves / rescues people (VAI)&quot;</span><span class="chip">ᐸᐢᐲᐦᐃᐍᐤ</span><button class="copy" data-copy-text="paspîhiwêw">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a>, Trailforks</p>
+        </div>
+      </section>
+
+      <footer>
+        Deliverance • paspîhiwêwin • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="ew-rel3"]', syll: '#ew-rel3-syll'},
+        {sro: '[data-key="h-caus"]', syll: '#h-caus-syll'},
+        {sro: '[data-key="h-rel1"]', syll: '#h-rel1-syll'},
+        {sro: '[data-key="h-rel3"]', syll: '#h-rel3-syll'},
+        {sro: '[data-key="iwe-vai"]', syll: '#iwe-vai-syll'},
+        {sro: '[data-key="iwew-rel1"]', syll: '#iwew-rel1-syll'},
+        {sro: '[data-key="paspi-rel2"]', syll: '#paspi-rel2-syll'},
+        {sro: '[data-key="paspii-initial"]', syll: '#paspii-initial-syll'},
+        {sro: '[data-key="paspii-rel1"]', syll: '#paspii-rel1-syll'},
+        {sro: '[data-key="paspii-rel3"]', syll: '#paspii-rel3-syll'},
+        {sro: '[data-key="w-rel2"]', syll: '#w-rel2-syll'},
+        {sro: '[data-key="win-nmlz"]', syll: '#win-nmlz-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+  </body>
+</html>

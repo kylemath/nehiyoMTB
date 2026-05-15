@@ -1,0 +1,163 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#1f7fb6",
+  "themeName": "blue",
+  "headerTitle": "Medicine Man • maskihkîwiyiniw • ᒪᐢᑭᐦᑮᐏᔨᓂᐤ",
+  "photo": {
+    "src": "../assets/maskihkiwiyiniw/medicine_man_render.png",
+    "alt": "Black-line portrait of a masked, scrub-cap-wearing medical figure — source render for the maskihkîwiyiniw / Medicine Man trail sign",
+    "caption": "Source design render for the Medicine Man plaque — masked clinician in scrub blue"
+  },
+  "trailforks": {
+    "trailId": "377579",
+    "trailUrl": "https://www.trailforks.com/trails/maskihkiwiyiniw-medicine-man/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=377579&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "ᒪᐢᑭᐦᑮᐃᐧᔨᓂᐤ - maskihkîwiyiniw - Medicine Man",
+    "mapCoords": {
+      "lat": 53.53526,
+      "lng": -113.56008,
+      "source": "trailforks trailhead 377579"
+    }
+  },
+  "linguistics": {
+    "meaning": "Medicine Man — literally 'medicine-person'",
+    "type": "noun (animate, NA, compound)",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "maskihkîw‑iyiniw",
+      "syllabics": "ᒪᐢᑭᐦᑮᐏᔨᓂᐤ",
+      "morphemes": [
+        {
+          "key": "maskihkiw-init",
+          "sro": "maskihkîw‑",
+          "syllabics": "ᒪᐢᑭᐦᑮᐤ",
+          "gloss": "noun-incorporated initial built from the NI noun <strong>maskihkiy</strong> 'medicine, herb, plant medicine'. The free-form short <strong>i</strong> of <strong>maskihkiy</strong> lengthens to <strong>î</strong> when the word incorporates: <strong>maskihkîw‑</strong> 'of/with medicine'."
+        },
+        {
+          "key": "iyiniw-fin",
+          "sro": "‑iyiniw",
+          "syllabics": "ᐏᔨᓂᐤ",
+          "gloss": "NA noun final: 'person, man, human being'. Same final appears in <strong>nêhiyawiyiniw</strong> 'Cree person' and many other compound nouns."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Medicine, herb, plant remedy",
+        "sro": "maskihkiy",
+        "syllabics": "ᒪᐢᑭᐦᑭᕀ",
+        "morphemes": [
+          {
+            "key": "maskihkiy-noun",
+            "sro": "maskihkiy",
+            "syllabics": "ᒪᐢᑭᐦᑭᕀ",
+            "gloss": "NI noun: 'medicine, herb' — the underlying noun the headword's initial is built from. Note the free form has short <strong>i</strong>; in compounds it lengthens to <strong>î</strong>."
+          }
+        ],
+        "note": "The base noun under the headword's first half."
+      },
+      {
+        "english": "Person, man, human being",
+        "sro": "iyiniw",
+        "syllabics": "ᐃᔨᓂᐤ",
+        "morphemes": [
+          {
+            "key": "iyiniw-stem",
+            "sro": "iyiniw",
+            "syllabics": "ᐃᔨᓂᐤ",
+            "gloss": "NA noun: 'person, man' (used as both standalone noun and as a compound-final marking '____-person')."
+          }
+        ],
+        "note": "Same noun appears as the head of many compound social nouns (e.g. <strong>nêhiyawiyiniw</strong>, <strong>okimâwiyiniw</strong>)."
+      },
+      {
+        "english": "Medicine men, doctors (plural)",
+        "sro": "maskihkîwiyiniwak",
+        "syllabics": "ᒪᐢᑭᐦᑮᐏᔨᓂᐘᐠ",
+        "morphemes": [
+          {
+            "key": "maskihkiwiyiniw-stem",
+            "sro": "maskihkîwiyiniw‑",
+            "syllabics": "ᒪᐢᑭᐦᑮᐏᔨᓂᐤ",
+            "gloss": "stem of the headword"
+          },
+          {
+            "key": "ak-plur3",
+            "sro": "‑ak",
+            "syllabics": "ᐘᐠ",
+            "gloss": "NA animate plural"
+          }
+        ],
+        "note": "Plural of the headword. Animate, so takes <strong>‑ak</strong>."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Medicine Man (the plaque)",
+        "sro": "maskihkîwiyiniw",
+        "syllabics": "ᒪᐢᑭᐦᑮᐏᔨᓂᐤ",
+        "note": "Animate noun. Carries the long î in the medial."
+      },
+      {
+        "english": "Medicine, herb",
+        "sro": "maskihkiy",
+        "syllabics": "ᒪᐢᑭᐦᑭᕀ",
+        "note": "NI noun. Base of the headword's initial."
+      },
+      {
+        "english": "Person, man, human",
+        "sro": "iyiniw",
+        "syllabics": "ᐃᔨᓂᐤ",
+        "note": "NA noun. Compound-final marker."
+      },
+      {
+        "english": "Cree person",
+        "sro": "nêhiyawiyiniw",
+        "syllabics": "ᓀᐦᐃᔭᐃᐧᔨᓂᐤ",
+        "note": "Same ‑iyiniw final, different initial. Parallel formation."
+      },
+      {
+        "english": "Doctor / physician (modern, healthcare)",
+        "sro": "maskihkîwiyiniw",
+        "syllabics": "ᒪᐢᑭᐦᑮᐏᔨᓂᐤ",
+        "note": "Same headword extends to modern Western-medical doctors as well."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "maskihkiy",
+        "english": "medicine, herb (NI)",
+        "syllabics": "ᒪᐢᑭᐦᑭᕀ"
+      },
+      {
+        "sro": "iyiniw",
+        "english": "person, man (NA)",
+        "syllabics": "ᐃᔨᓂᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About the Medicine Man",
+    "body": [
+      "<strong>maskihkîwiyiniw</strong> is the everyday Plains Cree word for a healer — historically a traditional medicine person who carried plant knowledge, ceremony, and the responsibility of caring for the body, mind and spirit of the people. The word is built transparently: <strong>maskihkîw‑</strong> 'of/with medicine' (the incorporated form of NI <strong>maskihkiy</strong> 'herb, medicine') + <strong>‑iyiniw</strong> 'person, man'. The same headword now extends naturally to modern doctors and physicians as well — the noun did not need a new coining.",
+      "The plaque art tilts that double meaning forward: a clean, modern clinician — scrub cap, surgical mask, glasses — rendered in tidy black line-work with a blue scrub top and a blue surgical mask. The carved English label is the short, plain <strong>Medicine Man</strong>. The red syllabics carved above the figure spell <strong>ᒪᐢᑭᐦᑮᐏᔨᓂᐤ</strong> with the long <strong>ᑮ</strong> (kî) in the fifth-glyph position — the same long î that Trailforks itself uses on the trail's listing (<em>maskihkîwiyiniw - Medicine Man</em>).",
+      "Medicine Man the trail is a short, fast, black-diamond singletrack drop in the Hawrelak network on Edmonton's northwest side — 'just what the doctor ordered, a quick downhill through the trees' in the Trailforks description, with bank turns leading into Riverside Traverse. It sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory)."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with the long-î form <strong>maskihkîwiyiniw</strong> / <strong>ᒪᐢᑭᐦᑮᐏᔨᓂᐤ</strong> (fifth glyph is <strong>ᑮ</strong> kî, not <strong>ᑭ</strong> ki). The current catalogue.json has <strong>maskihkiwiyiniw</strong> / <strong>ᒪᐢᑭᐦᑭᐏᔨᓂᐤ</strong> — both missing the long-î diacritic. The plaque's long-î form is independently confirmed by Trailforks' own listing for this trail (trailforks.com/trails/maskihkiwiyiniw-medicine-man/, which displays the name as <strong>ᒪᐢᑭᐦᑮᐃᐧᔨᓂᐤ - maskihkîwiyiniw - Medicine Man</strong>). Coordinator should update catalogue.json creeName 'maskihkiwiyiniw' → 'maskihkîwiyiniw' and creeSyllabics 'ᒪᐢᑭᐦᑭᐏᔨᓂᐤ' → 'ᒪᐢᑭᐦᑮᐏᔨᓂᐤ'.",
+    "Trailforks records the syllabics with the bare-w combining form <strong>ᐃᐧ</strong> rather than the single-syllable <strong>ᐏ</strong> ('wi'). Both are valid syllabics renderings of the medial '-wi-'; the fragment uses the single <strong>ᐏ</strong> for visual cleanliness on the page header (matches the kiwapamitin / backbreaker convention).",
+    "Trailforks pick: 'ᒪᐢᑭᐦᑮᐃᐧᔨᓂᐤ - maskihkîwiyiniw - Medicine Man' (trailId 377579), Hawrelak network, Northwest Edmonton. High confidence — exact name match including the Cree, contributed by 'kylemath' (the same project user). Trailhead (53.53526, -113.56008).",
+    "Photo wired to the existing root-folder design source 'drdagly-png.png' — copied as docs/assets/maskihkiwiyiniw/medicine_man_render.png. (Folder name kept as 'maskihkiwiyiniw' — short-i — to match the existing legacy directory; the public asset path uses that same legacy name.)"
+  ]
+}

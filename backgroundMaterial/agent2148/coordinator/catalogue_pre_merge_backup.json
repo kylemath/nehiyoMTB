@@ -1,0 +1,571 @@
+{
+  "id": "nehiyoMTB",
+  "title": "NehiyoMTB Trail Signs",
+  "oneLiner": "Nehiyawewin (Plains Cree) trail signs for Edmonton area mountain bike trails, 3D printed with bilingual syllabics",
+  "demoUrl": "https://kylemath.github.io/nehiyoMTB",
+  "screenshot": "https://raw.githubusercontent.com/kylemath/nehiyoMTB/main/screenshot.png",
+  "kind": "collection",
+  "categories": [
+    "3dPrinting",
+    "wayfinding",
+    "cree",
+    "trails"
+  ],
+  "tags": [
+    "cree",
+    "3dprinting",
+    "trails",
+    "syllabics",
+    "bilingual"
+  ],
+  "status": "published",
+  "models": [
+    {
+      "id": "kahkakiw",
+      "signNumber": 1,
+      "numberedFolder": "01-kahkakiw",
+      "title": "Kahkakiw",
+      "englishName": "Raven",
+      "creeName": "kahkakiw",
+      "creeSyllabics": "ᑲᐦᑲᑭᐤ",
+      "folder": "kahkakiw",
+      "stlPath": "kahkakiw/production.stl",
+      "docsStlPath": "kahkakiw/kahkakiw_plaque_hybrid_fixed.stl",
+      "imagePath": "kahkakiw/raven_wild.png",
+      "colors": [
+        "white",
+        "black",
+        "red"
+      ],
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 983.7,
+          "label": "white back and plaque base"
+        },
+        {
+          "color": "black",
+          "maxZ": 1653.483,
+          "label": "black lettering and raven"
+        },
+        {
+          "color": "red",
+          "label": "red top surface for syllabics"
+        }
+      ],
+      "description": "Raven trail sign with black raven graphic",
+      "status": "published",
+      "pageContent": {
+        "pageStatus": "agent-drafted",
+        "accentColor": "#000000",
+        "themeName": "black",
+        "headerTitle": "Raven • kahkakiw • ᑲᐦᑲᑭᐤ",
+        "photo": {
+          "src": "../assets/kahkakiw/raven_wild.png",
+          "alt": "Raven trail sign showing kahkakiw in Cree syllabics with black raven graphic",
+          "caption": "3D printed trail sign with black raven design"
+        },
+        "trailforks": {},
+        "linguistics": {
+          "meaning": "Raven",
+          "type": "noun",
+          "primarySection": {
+            "heading": "The Word",
+            "sro": "kahkakiw",
+            "syllabics": "ᑲᐦᑲᑭᐤ",
+            "morphemes": [
+              {
+                "key": "kahkakiw",
+                "sro": "kahkakiw",
+                "syllabics": "ᑲᐦᑲᑭᐤ",
+                "gloss": "raven (noun)"
+              }
+            ]
+          },
+          "relatedForms": [
+            {
+              "english": "Ravens",
+              "sro": "kahkakiwak",
+              "syllabics": "ᑲᐦᑲᑭᐘᐠ",
+              "morphemes": [
+                {
+                  "key": "kahkakiwak",
+                  "sro": "kahkakiwak",
+                  "syllabics": "ᑲᐦᑲᑭᐘᐠ",
+                  "gloss": "ravens (plural)"
+                }
+              ],
+              "note": ""
+            },
+            {
+              "english": "Little Raven",
+              "sro": "kahkakiwisis",
+              "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ",
+              "morphemes": [
+                {
+                  "key": "kahkakiwisis",
+                  "sro": "kahkakiwisis",
+                  "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ",
+                  "gloss": "little raven (diminutive)"
+                }
+              ],
+              "note": ""
+            }
+          ],
+          "quickReference": [
+            {
+              "english": "Raven",
+              "sro": "kahkakiw",
+              "syllabics": "ᑲᐦᑲᑭᐤ"
+            },
+            {
+              "english": "Ravens",
+              "sro": "kahkakiwak",
+              "syllabics": "ᑲᐦᑲᑭᐘᐠ"
+            },
+            {
+              "english": "Little Raven",
+              "sro": "kahkakiwisis",
+              "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ"
+            }
+          ],
+          "baseWords": [
+            {
+              "sro": "kahkakiw",
+              "english": "Raven",
+              "syllabics": "ᑲᐦᑲᑭᐤ"
+            }
+          ]
+        },
+        "culturalStory": {
+          "heading": "About the Raven",
+          "body": [
+            "The raven (<strong>kahkakiw</strong>) holds significant cultural importance in many Indigenous traditions, including Cree culture. Known for its intelligence, adaptability, and distinctive black plumage, the raven appears in numerous stories and teachings.",
+            "In Cree culture, the raven is often seen as a trickster figure and a messenger, playing important roles in traditional stories. The trail sign features a stylized raven graphic in black, representing this powerful and intelligent bird."
+          ]
+        },
+        "trailStory": {
+          "heading": "",
+          "body": []
+        },
+        "sources": [
+          "itwêwina",
+          "Online Cree Dictionary",
+          "Plains Cree Dictionary"
+        ],
+        "notes": [
+          "Initial pageContent transferred from hand-authored docs/kahkakiw/index.html so the renderer can be smoke-tested. Reviewed by curator."
+        ]
+      }
+    },
+    {
+      "id": "backbreaker",
+      "signNumber": 2,
+      "numberedFolder": "02-backbreaker",
+      "title": "Back Breaker",
+      "englishName": "Back Breaker",
+      "creeName": "kaskawikanênêw",
+      "creeSyllabics": "ᑲᐢᑲᐏᑲᓀᓀᐤ",
+      "folder": "backbreaker",
+      "stlPath": "backbreaker/production.stl",
+      "colors": [
+        "white",
+        "red"
+      ],
+      "description": "Back Breaker trail sign with red gear-like graphic",
+      "status": "published"
+    },
+    {
+      "id": "mistapiskihkoman",
+      "signNumber": 3,
+      "numberedFolder": "03-mistapiskihkoman",
+      "title": "Machete",
+      "englishName": "Machete",
+      "creeName": "mistâpiskihkomân",
+      "creeSyllabics": "ᒥᐢᑕᐱᐢᑭᐦᑯᒫᐣ",
+      "folder": "mistapiskihkoman",
+      "stlPath": "mistapiskihkoman/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Machete trail sign with black machete graphic",
+      "status": "published"
+    },
+    {
+      "id": "nicocwasaskanos",
+      "signNumber": 4,
+      "numberedFolder": "04-nicocwasaskanos",
+      "title": "Six Shooter",
+      "englishName": "Six Shooter",
+      "creeName": "nikocwâsaskanôs",
+      "creeSyllabics": "ᓂᑯᐚᓴᐢᑲᓄᐢ",
+      "folder": "nicocwasaskanos",
+      "stlPath": "nicocwasaskanos/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Six Shooter trail sign with black revolver graphic",
+      "status": "published"
+    },
+    {
+      "id": "nipamayatan-pekiseyahk",
+      "signNumber": 5,
+      "numberedFolder": "05-nipamayatan-pekiseyahk",
+      "title": "Purple Haze",
+      "englishName": "Purple Haze",
+      "creeName": "nipâmâyâtan pekisehyânik",
+      "creeSyllabics": "ᓂᐹᒫᔭᑕᐣ ᐯᑭᓭᐦᔮᓂᐠ",
+      "folder": "nipamayatan_pekiseyahk",
+      "stlPath": "nipamayatan_pekiseyahk/production.stl",
+      "colors": [
+        "purple",
+        "white"
+      ],
+      "description": "Purple Haze trail sign with purple abstract design",
+      "status": "published"
+    },
+    {
+      "id": "lovers-lane",
+      "signNumber": 6,
+      "numberedFolder": "06-lovers-lane",
+      "title": "Lovers Lane",
+      "englishName": "Lovers Lane",
+      "creeName": "nicimosak méskanâs",
+      "creeSyllabics": "ᓂᒋᒧᓴᐠ ᒣᐢᑲᓈᐢ",
+      "folder": "loversLane",
+      "stlPath": "loversLane/production.stl",
+      "colors": [
+        "white",
+        "red"
+      ],
+      "description": "Lovers Lane trail sign with red heart-shaped gear graphic",
+      "status": "published"
+    },
+    {
+      "id": "mamahtaw-iskwew",
+      "signNumber": 7,
+      "numberedFolder": "07-mamahtaw-iskwew",
+      "title": "Wonder Woman",
+      "englishName": "Wonder Woman",
+      "creeName": "mamahtaw iskwew",
+      "creeSyllabics": "ᒪᒪᐦᑕᐤ ᐃᐢᑲᐧᐤ",
+      "folder": "mamahtaw_askwew",
+      "stlPath": "mamahtaw_askwew/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Wonder Woman trail sign with black silhouette of Wonder Woman on motorcycle",
+      "status": "published"
+    },
+    {
+      "id": "sapwapahcikan-paskisikan",
+      "signNumber": 8,
+      "numberedFolder": "08-sapwapahcikan-paskisikan",
+      "title": "Ray Gun",
+      "englishName": "Ray Gun",
+      "creeName": "sâpwâpahcikan paskisikan",
+      "creeSyllabics": "ᓵᐚᐸᐦᒋᑲᐣ ᐸᐢᑭᓯᑲᐣ",
+      "folder": "sapwapahcikan-paskisikan",
+      "stlPath": "sapwapahcikan-paskisikan/production.stl",
+      "colors": [
+        "white",
+        "red"
+      ],
+      "description": "Ray Gun trail sign with red ray gun graphic",
+      "status": "published"
+    },
+    {
+      "id": "bed-springs",
+      "signNumber": 9,
+      "numberedFolder": "09-bed-springs",
+      "title": "Bed Springs",
+      "englishName": "Bed Springs",
+      "creeName": "kekokel sôniyâwâhkêsis",
+      "creeSyllabics": "ᑫᑯᑫᓬ ᓲᓂᔮᐁᐦᑫᓯᐢ",
+      "folder": "bedSprings",
+      "stlPath": "bedSprings/production.stl",
+      "colors": [
+        "blue",
+        "red",
+        "white"
+      ],
+      "description": "Bed Springs trail sign with blue and red abstract design",
+      "status": "published"
+    },
+    {
+      "id": "soniyawahkesis",
+      "signNumber": 10,
+      "numberedFolder": "10-soniyawahkesis",
+      "title": "Silverfox",
+      "englishName": "Silverfox",
+      "creeName": "sôniyâwâhkêsis",
+      "creeSyllabics": "ᓲᓂᔮᐁᐦᑫᓯᐢ",
+      "folder": "sôniyâwâhkêsîs",
+      "stlPath": "sôniyâwâhkêsîs/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Silverfox trail sign with black fox head graphic",
+      "status": "published"
+    },
+    {
+      "id": "maskihkiwiyiniw",
+      "signNumber": 11,
+      "numberedFolder": "11-maskihkiwiyiniw",
+      "title": "Medicine Man",
+      "englishName": "Medicine Man",
+      "creeName": "maskihkiwiyiniw",
+      "creeSyllabics": "ᒪᐢᑭᐦᑭᐏᔨᓂᐤ",
+      "folder": "maskihkiwiyiniw",
+      "stlPath": "maskihkiwiyiniw/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Medicine Man trail sign with black and white illustration of person wearing glasses and mask",
+      "status": "published"
+    },
+    {
+      "id": "bobsled",
+      "signNumber": 12,
+      "numberedFolder": "12-bobsled",
+      "title": "Bobsled",
+      "englishName": "Bobsled",
+      "creeName": "bobsled",
+      "creeSyllabics": "",
+      "folder": "bobsled",
+      "stlPath": "bobsled/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Bobsled trail sign with complex geometry and integrated iconography",
+      "status": "published"
+    },
+    {
+      "id": "purgatory",
+      "signNumber": 13,
+      "numberedFolder": "13-purgatory",
+      "title": "Purgatory",
+      "englishName": "Purgatory",
+      "creeName": "kâsenamâkew iskotew",
+      "creeSyllabics": "ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ",
+      "folder": "purgatory",
+      "stlPath": "purgatory/production.stl",
+      "colors": [
+        "white",
+        "orange",
+        "red"
+      ],
+      "description": "Purgatory trail sign with flame design",
+      "status": "published"
+    },
+    {
+      "id": "deliverance",
+      "signNumber": 14,
+      "numberedFolder": "14-deliverance",
+      "title": "Deliverance",
+      "englishName": "Deliverance",
+      "creeName": "deliverance",
+      "creeSyllabics": "",
+      "folder": "deliverance",
+      "stlPath": "deliverance/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Deliverance trail sign",
+      "status": "published"
+    },
+    {
+      "id": "ewok",
+      "signNumber": 15,
+      "numberedFolder": "15-ewok",
+      "title": "Ewok",
+      "englishName": "Ewok",
+      "creeName": "ewok",
+      "creeSyllabics": "",
+      "folder": "ewok",
+      "stlPath": "ewok/production.stl",
+      "colors": [
+        "brown",
+        "white"
+      ],
+      "description": "Ewok trail sign",
+      "status": "published"
+    },
+    {
+      "id": "farmers-daughter",
+      "signNumber": 16,
+      "numberedFolder": "16-farmers-daughter",
+      "title": "Farmer's Daughter",
+      "englishName": "Farmer's Daughter",
+      "creeName": "farmers-daughter",
+      "creeSyllabics": "",
+      "folder": "FarmersDaughter",
+      "stlPath": "FarmersDaughter/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Farmer's Daughter trail sign",
+      "status": "published"
+    },
+    {
+      "id": "kakwa",
+      "signNumber": 17,
+      "numberedFolder": "17-kakwa",
+      "title": "Kakwa",
+      "englishName": "Kakwa",
+      "creeName": "kakwa",
+      "creeSyllabics": "ᑲᑲᐧ",
+      "folder": "kakwa",
+      "stlPath": "kakwa/production.stl",
+      "colors": [
+        "white",
+        "black",
+        "red"
+      ],
+      "description": "Kakwa trail sign",
+      "status": "published",
+      "docsStlPath": "kakwa/kakwa_plaque_v3_admesh_fixed_1.stl",
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 1298.5770263671875
+        },
+        {
+          "color": "black",
+          "maxZ": 2150.44355566406
+        },
+        {
+          "color": "red"
+        }
+      ]
+    },
+    {
+      "id": "kiwapamitin",
+      "signNumber": 18,
+      "numberedFolder": "18-kiwapamitin",
+      "title": "I See You",
+      "englishName": "I See You",
+      "creeName": "kiwâpamitin",
+      "creeSyllabics": "ᑭᐚᐸᒥᑎᐣ",
+      "folder": "kiwapamitin",
+      "stlPath": "kiwapamitin/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "I See You trail sign - ICU connection with deep meaning",
+      "status": "published"
+    },
+    {
+      "id": "ocayisinakes",
+      "signNumber": 19,
+      "numberedFolder": "19-ocayisinakes",
+      "title": "Ocayisinakes",
+      "englishName": "Ocayisinakes",
+      "creeName": "ocayisinâkês",
+      "creeSyllabics": "ᐅᒐᔨᓯᓈᑫᐢ",
+      "folder": "ocayisinakes",
+      "stlPath": "ocayisinakes/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Ocayisinakes trail sign",
+      "status": "published"
+    },
+    {
+      "id": "oyoyow",
+      "signNumber": 20,
+      "numberedFolder": "20-oyoyow",
+      "title": "Oyoyow",
+      "englishName": "Oyoyow",
+      "creeName": "oyoyow",
+      "creeSyllabics": "ᐅᔪᔪᐤ",
+      "folder": "oyoyow",
+      "stlPath": "oyoyow/production.stl",
+      "colors": [
+        "multicolor",
+        "white"
+      ],
+      "description": "Oyoyow trail sign with multicolor design",
+      "status": "published"
+    },
+    {
+      "id": "nosemanicos",
+      "signNumber": 21,
+      "numberedFolder": "21-nosemanicos",
+      "title": "Nosemanicos",
+      "englishName": "Nosemanicos",
+      "creeName": "nôsemanicôs",
+      "creeSyllabics": "ᓄᓭᒪᓂᒑᐢ",
+      "folder": "nosemanicos",
+      "stlPath": "nosemanicos/production.stl",
+      "docsStlPath": "nosemanicos/nôsemanicôs_plaque_v4.stl",
+      "colors": [
+        "white",
+        "black",
+        "red"
+      ],
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 5.841,
+          "label": "white back and plaque base"
+        },
+        {
+          "color": "black",
+          "maxZ": 10.987,
+          "label": "black lettering and ladybug details"
+        },
+        {
+          "color": "red",
+          "label": "red top details"
+        }
+      ],
+      "description": "Nosemanicos trail sign with ladybug design",
+      "status": "published"
+    },
+    {
+      "id": "victoria-secret",
+      "signNumber": 22,
+      "numberedFolder": "22-victoria-secret",
+      "title": "Victoria's Secret",
+      "englishName": "Victoria's Secret",
+      "creeName": "vicSecret",
+      "creeSyllabics": "",
+      "folder": "victoriaSecret",
+      "stlPath": "victoriaSecret/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Victoria's Secret trail sign with cityscape silhouette",
+      "status": "published"
+    },
+    {
+      "id": "slinky",
+      "signNumber": 23,
+      "numberedFolder": "23-slinky",
+      "title": "Slinky",
+      "englishName": "Slinky",
+      "creeName": "slinky",
+      "creeSyllabics": "",
+      "folder": "slinky",
+      "stlPath": "slinky/production.stl",
+      "colors": [
+        "multicolor",
+        "white"
+      ],
+      "description": "Slinky trail sign",
+      "status": "published"
+    }
+  ]
+}

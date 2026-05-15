@@ -1,0 +1,975 @@
+{
+  "id": "nehiyoMTB",
+  "title": "NehiyoMTB Trail Signs",
+  "oneLiner": "Nehiyawewin (Plains Cree) trail signs for Edmonton area mountain bike trails, 3D printed with bilingual syllabics",
+  "demoUrl": "https://kylemath.github.io/nehiyoMTB",
+  "screenshot": "https://raw.githubusercontent.com/kylemath/nehiyoMTB/main/screenshot.png",
+  "kind": "collection",
+  "categories": [
+    "3dPrinting",
+    "wayfinding",
+    "cree",
+    "trails"
+  ],
+  "tags": [
+    "cree",
+    "3dprinting",
+    "trails",
+    "syllabics",
+    "bilingual"
+  ],
+  "status": "published",
+  "models": [
+    {
+      "id": "kahkakiw",
+      "signNumber": 1,
+      "numberedFolder": "01-kahkakiw",
+      "title": "Kahkakiw",
+      "englishName": "Raven",
+      "creeName": "kahkakiw",
+      "creeSyllabics": "ᑲᐦᑲᑭᐤ",
+      "folder": "kahkakiw",
+      "stlPath": "kahkakiw/production.stl",
+      "docsStlPath": "kahkakiw/kahkakiw_plaque_hybrid_fixed.stl",
+      "imagePath": "kahkakiw/raven_wild.png",
+      "colors": [
+        "white",
+        "black",
+        "red"
+      ],
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 983.7,
+          "label": "white back and plaque base"
+        },
+        {
+          "color": "black",
+          "maxZ": 1653.483,
+          "label": "black lettering and raven"
+        },
+        {
+          "color": "red",
+          "label": "red top surface for syllabics"
+        }
+      ],
+      "description": "Raven trail sign with black raven graphic",
+      "status": "published",
+      "pageContent": {
+        "pageStatus": "agent-drafted",
+        "accentColor": "#000000",
+        "themeName": "black",
+        "headerTitle": "Raven • kahkakiw • ᑲᐦᑲᑭᐤ",
+        "photo": {
+          "src": "../assets/kahkakiw/raven_wild.png",
+          "alt": "Raven trail sign with SRO 'kahkakiw' on top, red syllabics ᑲᐦᑲᑭᐤ across the black raven graphic, and 'RAVEN' below, mounted on a birch trunk.",
+          "caption": "3D printed trail sign: black raven silhouette with red syllabics, white plaque."
+        },
+        "trailforks": {
+          "trailId": "146421",
+          "trailUrl": "https://www.trailforks.com/trails/raven-146421/",
+          "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=146421&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+          "displayName": "Raven",
+          "mapCoords": { "lat": 53.51605, "lng": -113.53973, "source": "trailforks trailhead 146421" },
+          "mapEndCoords": { "lat": 53.51092, "lng": -113.53973, "source": "estimated: 570m southbound descent to river, per trailforks" }
+        },
+        "linguistics": {
+          "meaning": "Raven",
+          "type": "noun (animate)",
+          "primarySection": {
+            "heading": "The Word",
+            "sro": "kahkakiw",
+            "syllabics": "ᑲᐦᑲᑭᐤ",
+            "morphemes": [
+              {
+                "key": "kahkakiw",
+                "sro": "kahkakiw",
+                "syllabics": "ᑲᐦᑲᑭᐤ",
+                "gloss": "raven (animate noun)"
+              }
+            ]
+          },
+          "relatedForms": [
+            {
+              "english": "Ravens (plural)",
+              "sro": "kahkakiwak",
+              "syllabics": "ᑲᐦᑲᑭᐘᐠ",
+              "morphemes": [
+                {
+                  "key": "kahkakiw-stem",
+                  "sro": "kahkakiw",
+                  "syllabics": "ᑲᐦᑲᑭ",
+                  "gloss": "raven (stem)"
+                },
+                {
+                  "key": "ak-plural",
+                  "sro": "-ak",
+                  "syllabics": "ᐘᐠ",
+                  "gloss": "animate plural suffix"
+                }
+              ],
+              "note": "Animate plural — Cree treats animals, spirits, and certain culturally significant beings as animate."
+            },
+            {
+              "english": "Little Raven (diminutive)",
+              "sro": "kahkakiwisis",
+              "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ",
+              "morphemes": [
+                {
+                  "key": "kahkakiw-dim",
+                  "sro": "kahkakiw",
+                  "syllabics": "ᑲᐦᑲᑭᐤ",
+                  "gloss": "raven (stem)"
+                },
+                {
+                  "key": "isis-dim",
+                  "sro": "-isis",
+                  "syllabics": "ᐏᓯᐢ",
+                  "gloss": "diminutive suffix ('little')"
+                }
+              ],
+              "note": "Diminutive form. Syllabics carried over verbatim from the prior curator-reviewed draft; see notes for a syllabification flag."
+            }
+          ],
+          "quickReference": [
+            {
+              "english": "Raven",
+              "sro": "kahkakiw",
+              "syllabics": "ᑲᐦᑲᑭᐤ"
+            },
+            {
+              "english": "Ravens",
+              "sro": "kahkakiwak",
+              "syllabics": "ᑲᐦᑲᑭᐘᐠ"
+            },
+            {
+              "english": "Little Raven",
+              "sro": "kahkakiwisis",
+              "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ"
+            }
+          ],
+          "baseWords": [
+            {
+              "sro": "kahkakiw",
+              "english": "Raven",
+              "syllabics": "ᑲᐦᑲᑭᐤ"
+            }
+          ]
+        },
+        "culturalStory": {
+          "heading": "About the Raven",
+          "body": [
+            "The raven (<strong>kahkakiw</strong>) holds significant cultural importance in many Indigenous traditions, including Plains Cree (nēhiyawēwin). Known for its intelligence, adaptability, problem-solving ability, and distinctive black plumage and rasping call, the raven appears in numerous oral stories and teachings.",
+            "In Cree storytelling the raven is often a trickster and messenger figure — a bird that watches, remembers, and carries news between worlds. This trail sign honours that presence with a stylized black raven silhouette and the syllabics <strong>ᑲᐦᑲᑭᐤ</strong> set across its body in red, so that the Cree name is literally carried on the raven itself."
+          ]
+        },
+        "trailStory": {
+          "heading": "",
+          "body": []
+        },
+        "sources": [
+          "itwêwina",
+          "Online Cree Dictionary",
+          "Plains Cree Dictionary"
+        ],
+        "notes": [
+          "Sign text verified visually from docs/assets/kahkakiw/raven_wild.png: SRO 'kahkakiw' (black, top), syllabics 'ᑲᐦᑲᑭᐤ' (red, on raven body), 'RAVEN' (black, bottom). Sign primary colours are white plaque, black silhouette+lettering, red syllabics.",
+          "accentColor '#000000' kept as-is: the raven and lettering are black; red is used only for the syllabics accent and would over-dominate the page UI if used as the accent colour.",
+          "Diminutive 'kahkakiwisis' syllabics preserved from the prior curator-reviewed draft as 'ᑲᐦᑲᑭᐏᓯᓯᐢ'. A strict letter-by-letter syllabification of SRO 'kahkakiwisis' yields 'ᑲᐦᑲᑭᐏᓯᐢ' (7 syllabic characters, one fewer ᓯ). Flagging for human review: either the SRO form is actually 'kahkakiwisisis' (extra -is iteration) or the syllabics has one extra ᓯ. Recommend an elder/itwêwina cross-check before publishing.",
+          "Trailforks: confident match found by sub-subagent S2 — Trail ID 146421, slug 'raven-146421', region Buena Vista (Edmonton river valley park, verified via Trailforks Edmonton region directory and Edmonton conditions feed). S2 could not directly fetch the trail-detail page (Trailforks rate-limited the request), but the trail ID was read verbatim from two Trailforks-hosted Edmonton listings. Recommend a 5-second human eyeball on https://www.trailforks.com/trails/raven-146421/ before flipping pageStatus to 'user-reviewed'.",
+          "STL files in docs/kahkakiw/: kahkakiw_plaque.stl, kahkakiw_plaque_bk.stl, kahkakiw_plaque_hybrid_fixed.stl — filename matches sign id."
+        ]
+      }
+    },
+    {
+      "id": "backbreaker",
+      "signNumber": 2,
+      "numberedFolder": "02-backbreaker",
+      "title": "Back Breaker",
+      "englishName": "Back Breaker",
+      "creeName": "kaskâwikanênêw",
+      "creeSyllabics": "ᑲᐢᑳᐏᑲᓀᓀᐤ",
+      "folder": "backbreaker",
+      "stlPath": "backbreaker/production.stl",
+      "colors": [
+        "black",
+        "white",
+        "red"
+      ],
+      "description": "Back Breaker trail sign with red gear-like graphic",
+      "status": "published",
+      "pageContent": {
+        "pageStatus": "agent-drafted",
+        "accentColor": "#dc3545",
+        "themeName": "",
+        "headerTitle": "Back Breaker • kaskâwikanênêw • ᑲᐢᑳᐏᑲᓀᓀᐤ",
+        "photo": {
+          "src": "../assets/backbreaker/Screenshot_2026-05-14_at_10.49.33_PM.png",
+          "alt": "Back Breaker trail sign with white plaque, red syllabics ᑲᐢᑳᐏᑲᓀᓀᐤ, and a dangling red-and-white vertebra graphic.",
+          "caption": "3D printed trail sign render — white plaque with red syllabics and vertebra detail."
+        },
+        "trailforks": {
+          "trailId": "10634",
+          "trailUrl": "https://www.trailforks.com/trails/back-breaker/",
+          "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=10634&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+          "displayName": "back-breaker",
+          "mapCoords": { "lat": 53.53816, "lng": -113.56543, "source": "trailforks trailhead 10634" },
+          "mapEndCoords": { "lat": 53.53705, "lng": -113.55715, "source": "estimated: 549m descent through mckinnon ravine, eastbound to river, per trailforks" }
+        },
+        "linguistics": {
+          "meaning": "S/he breaks his/her back (by hand) — “Back Breaker”",
+          "type": "verb (VTA, 3→3′)",
+          "primarySection": {
+            "heading": "The Word",
+            "sro": "kaskâ‑wikan‑ê‑n‑êw",
+            "syllabics": "ᑲᐢᑳᐏᑲᓀᓀᐤ",
+            "morphemes": [
+              {
+                "key": "kaskaa-init",
+                "sro": "kaskâ‑",
+                "syllabics": "ᑲᐢᑳ",
+                "gloss": "initial: snap, break across, break in two — the same productive initial appears in many ‘snap/break-rigidly’ verbs (e.g. <strong>kaskâcihtin</strong> ‘it breaks right off’)"
+              },
+              {
+                "key": "wikan-med",
+                "sro": "‑wikan‑",
+                "syllabics": "ᐏᑲᐣ",
+                "gloss": "body-part medial: back, spine, backbone (incorporated form of the noun <strong>wîkan</strong> ‘back’; the long î shortens in medial position)"
+              },
+              {
+                "key": "e-connect",
+                "sro": "‑ê‑",
+                "syllabics": "ᐁ",
+                "gloss": "connective / thematic vowel"
+              },
+              {
+                "key": "n-manual",
+                "sro": "‑n‑",
+                "syllabics": "ᐣ",
+                "gloss": "VTA manual final: ‘by hand, by direct manipulation’ (same ‑n‑ as in <strong>pîkonêw</strong> ‘breaks him/her by hand’)"
+              },
+              {
+                "key": "ew-3to3p",
+                "sro": "‑êw",
+                "syllabics": "ᐁᐤ",
+                "gloss": "VTA 3→3′ indicative suffix: ‘he/she does it to him/her (animate object)’"
+              }
+            ]
+          },
+          "relatedForms": [
+            {
+              "english": "Back, spine, backbone (the body part)",
+              "sro": "wîkan",
+              "syllabics": "ᐑᑲᐣ",
+              "morphemes": [
+                {
+                  "key": "wiikan-noun",
+                  "sro": "wîkan",
+                  "syllabics": "ᐑᑲᐣ",
+                  "gloss": "NI noun: back, spine, backbone. The medial ‑wikan‑ inside the headword is the incorporated form of this root."
+                }
+              ],
+              "note": "The simplest underlying body-part noun. Inside the headword it shortens to ‑wikan‑ (short i)."
+            },
+            {
+              "english": "S/he breaks him/her by hand (generic, no body-part)",
+              "sro": "pîkonêw",
+              "syllabics": "ᐲᑯᓀᐤ",
+              "morphemes": [
+                {
+                  "key": "piikon-stem",
+                  "sro": "pîkon‑",
+                  "syllabics": "ᐲᑯᐣ",
+                  "gloss": "VTA stem: break (by hand)"
+                },
+                {
+                  "key": "ew-rel",
+                  "sro": "‑êw",
+                  "syllabics": "ᐁᐤ",
+                  "gloss": "VTA 3→3′ indicative suffix"
+                }
+              ],
+              "note": "Same ‑n‑êw VTA tail as the headword, but without back-incorporation — a structural minimal pair showing what the ‑wikan‑ medial adds."
+            },
+            {
+              "english": "S/he has a broken back (from falling)",
+              "sro": "kaskâwikanisin",
+              "syllabics": "ᑲᐢᑳᐏᑲᓂᓯᐣ",
+              "morphemes": [
+                {
+                  "key": "kaskaa-rel2",
+                  "sro": "kaskâ‑",
+                  "syllabics": "ᑲᐢᑳ",
+                  "gloss": "initial: break across, snap"
+                },
+                {
+                  "key": "wikan-rel2",
+                  "sro": "‑wikan‑",
+                  "syllabics": "ᐏᑲᐣ",
+                  "gloss": "body-part medial: back"
+                },
+                {
+                  "key": "isin-fall",
+                  "sro": "‑isin",
+                  "syllabics": "ᐃᓯᐣ",
+                  "gloss": "AI final: ‘by falling / by bodily impact’"
+                }
+              ],
+              "note": "Sister AI verb in the same paradigm: same kaskâ‑…‑wikan‑ spine, but with the ‘by falling’ final ‑isin instead of the manual ‑n‑êw."
+            }
+          ],
+          "quickReference": [
+            {
+              "english": "Back Breaker — s/he breaks s.o.’s back by hand",
+              "sro": "kaskâwikanênêw",
+              "syllabics": "ᑲᐢᑳᐏᑲᓀᓀᐤ",
+              "note": "Headword on the plaque; VTA, 3→3′."
+            },
+            {
+              "english": "Back, spine, backbone",
+              "sro": "wîkan",
+              "syllabics": "ᐑᑲᐣ",
+              "note": "NI noun. Source of the ‑wikan‑ medial in the headword."
+            },
+            {
+              "english": "Someone’s back (his/her back of the body)",
+              "sro": "mispiskwan",
+              "syllabics": "ᒥᐢᐱᐢᑲᐧᐣ",
+              "note": "Common everyday word for ‘back’: nispiskwan ‘my back’, kispiskwan ‘your back’, ospiskwan ‘his/her back’."
+            },
+            {
+              "english": "S/he breaks it by hand (inanimate object)",
+              "sro": "pîkonam",
+              "syllabics": "ᐲᑯᓇᒼ",
+              "note": "VTI generic ‘break it’."
+            },
+            {
+              "english": "S/he breaks him/her by hand (animate object)",
+              "sro": "pîkonêw",
+              "syllabics": "ᐲᑯᓀᐤ",
+              "note": "VTA generic ‘break him/her’. Same ‑n‑êw tail as the headword."
+            },
+            {
+              "english": "S/he is in pain, s/he hurts",
+              "sro": "wîsakêyihtam",
+              "syllabics": "ᐑᓴᑫᔨᐦᑕᒼ",
+              "note": "VTI ‘to feel pain’ — anchors the pain semantic field."
+            }
+          ],
+          "baseWords": [
+            {
+              "sro": "wîkan",
+              "english": "back, spine, backbone (NI noun)",
+              "syllabics": "ᐑᑲᐣ"
+            },
+            {
+              "sro": "kaskâ‑",
+              "english": "(verb initial) to snap, to break across, to break in two",
+              "syllabics": "ᑲᐢᑳ"
+            },
+            {
+              "sro": "pîkonêw",
+              "english": "s/he breaks him/her by hand (VTA)",
+              "syllabics": "ᐲᑯᓀᐤ"
+            }
+          ]
+        },
+        "culturalStory": {
+          "heading": "Spine of the Trail",
+          "body": [
+            "In mountain-bike vernacular, a trail earns the name <strong>Back Breaker</strong> by feel — by the rooty, rattling sections that hammer your spine through the bars, by the line that punishes a lazy posture and rewards a loose grip. The trail of that name drops through MacKinnon Ravine on Edmonton's west side as the rooty companion to Root Canal: short, sharp, and unforgiving enough that the name has stuck for years among the local riders who built and maintain it.",
+            "The plaque leans into the joke literally. A single white vertebra dangles like a charm against the black field, ringed with red the way a sore spine glows after a hard run. The accompanying parts in this sign's set — a five-vertebra column and a length of chain — push the pun further: a backbone built like a bike chain, each link a vertebra, the rider's spine and the bike's drivetrain merged into one rattling assembly. Red on black is the working-shop palette of grease, rust, and warning tape; the white SRO and English text keep the language clearly legible against it.",
+            "The Cree reading <strong>kaskâwikanênêw</strong> carries that same idea in its own register — a verb built from <strong>kaskâ‑</strong> ‘to snap, break across’ and the body-part medial <strong>‑wikan‑</strong> ‘back, spine’: literally, ‘s/he breaks his/her back (by hand).’ The syllabics above the SRO are picked out in the same red as the vertebra's accents, so the language and the image read as a single gesture. The sign sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), and is part of an Edmonton-area effort to put Plains Cree names back on the everyday landscape of trails that riders here have known by their English nicknames for a long time."
+          ]
+        },
+        "trailStory": {
+          "heading": "",
+          "body": []
+        },
+        "sources": [
+          "itwêwina",
+          "Online Cree Dictionary",
+          "Plains Cree Dictionary"
+        ],
+        "notes": [
+          "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with SRO 'kaskâwikanênêw' (circumflex on the third 'a') and syllabics 'ᑲᐢᑳᐏᑲᓀᓀᐤ' (long-â dot on the third glyph ᑳ). The current catalogue.json has 'kaskawikanênêw' / 'ᑲᐢᑲᐏᑲᓀᓀᐤ' — both missing the long-â diacritic in matched positions. The plaque is internally consistent and matches the itwêwina (Wolvengrey/CW) headword 'kaskâwikanênêw' = 's/he breaks s.o.’s back by hand'. Coordinator should update catalogue.json creeName + creeSyllabics to match the plaque when merging.",
+          "Photo placeholder pending — user to provide a dedicated 'docs/assets/backbreaker/' image, or crop the plaque from allSigns.jpg. The 'photo' field is intentionally left as {} so the renderer falls back to the three.js STL embed.",
+          "Morpheme bracketing of the verb tail '-n-êw' is one of two defensible analyses; an alternative is to collapse '-ê-n-êw' into a single VTA 3→3′ ‘by hand’ suffix. Either reading is linguistically valid; the 5-morpheme split is used here for teaching clarity.",
+          "The medial '-wikan-' is the body-part-incorporated form of the free noun 'wîkan' (long î). The shortening to short i in medial position is standard Plains Cree behavior.",
+          "relatedForms[2] (kaskâwikanisin, ‘s/he has a broken back from falling’) is reconstructed from the kaskâ- result list rather than confirmed by a single-word lookup; spelling carries roughly 80% confidence. May be replaced or dropped on user review.",
+          "mispiskwan syllabics use the decomposed form 'ᒥᐢᐱᐢᑲᐧᐣ'; the unified-syllabics combining form 'ᒁ' for 'kwa' is also valid. Pick whichever matches the rest of the site's convention.",
+          "The visible plaque on the wall shows only the dangling vertebra; the project STL set includes a 5-vertebra column and a chain motif which may belong to a larger composite design or a future installation.",
+          "Trailforks pick: 'Back Breaker' (trailId 10634), Hawrelak / MacKinnon Ravine, Northwest Edmonton — companion to Root Canal. A 'Lower Back Breaker' sibling trail also exists in the same network but is almost certainly not what the plaque commemorates."
+        ]
+      },
+      "docsStlPath": "backbreaker/backbreaker_plaque_admesh_fixed.stl",
+      "colorLayers": [
+        {
+          "color": "black",
+          "maxZ": 1706.2234497070312
+        },
+        {
+          "color": "white",
+          "maxZ": 2100.8446044921875
+        },
+        {
+          "color": "red"
+        }
+      ]
+    },
+    {
+      "id": "mistapiskihkoman",
+      "signNumber": 3,
+      "numberedFolder": "03-mistapiskihkoman",
+      "title": "Machete",
+      "englishName": "Machete",
+      "creeName": "mistâpiskihkomân",
+      "creeSyllabics": "ᒥᐢᑕᐱᐢᑭᐦᑯᒫᐣ",
+      "folder": "mistapiskihkoman",
+      "stlPath": "mistapiskihkoman/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Machete trail sign with black machete graphic",
+      "status": "published"
+    },
+    {
+      "id": "nicocwasaskanos",
+      "signNumber": 4,
+      "numberedFolder": "04-nicocwasaskanos",
+      "title": "Six Shooter",
+      "englishName": "Six Shooter",
+      "creeName": "nikocwâsaskanôs",
+      "creeSyllabics": "ᓂᑯᐚᓴᐢᑲᓄᐢ",
+      "folder": "nicocwasaskanos",
+      "stlPath": "nicocwasaskanos/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Six Shooter trail sign with black revolver graphic",
+      "status": "published"
+    },
+    {
+      "id": "nipamayatan-pekiseyahk",
+      "signNumber": 5,
+      "numberedFolder": "05-nipamayatan-pekiseyahk",
+      "title": "Purple Haze",
+      "englishName": "Purple Haze",
+      "creeName": "nipâmâyâtan pekisehyânik",
+      "creeSyllabics": "ᓂᐹᒫᔭᑕᐣ ᐯᑭᓭᐦᔮᓂᐠ",
+      "folder": "nipamayatan_pekiseyahk",
+      "stlPath": "nipamayatan_pekiseyahk/production.stl",
+      "colors": [
+        "purple",
+        "white"
+      ],
+      "description": "Purple Haze trail sign with purple abstract design",
+      "status": "published"
+    },
+    {
+      "id": "lovers-lane",
+      "signNumber": 6,
+      "numberedFolder": "06-lovers-lane",
+      "title": "Lovers Lane",
+      "englishName": "Lovers Lane",
+      "creeName": "nicimosak méskanâs",
+      "creeSyllabics": "ᓂᒋᒧᓴᐠ ᒣᐢᑲᓈᐢ",
+      "folder": "loversLane",
+      "stlPath": "loversLane/production.stl",
+      "colors": [
+        "white",
+        "red"
+      ],
+      "description": "Lovers Lane trail sign with red heart-shaped gear graphic",
+      "status": "published"
+    },
+    {
+      "id": "mamahtaw-iskwew",
+      "signNumber": 7,
+      "numberedFolder": "07-mamahtaw-iskwew",
+      "title": "Wonder Woman",
+      "englishName": "Wonder Woman",
+      "creeName": "mamahtaw iskwew",
+      "creeSyllabics": "ᒪᒪᐦᑕᐤ ᐃᐢᑲᐧᐤ",
+      "folder": "mamahtaw_askwew",
+      "stlPath": "mamahtaw_askwew/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Wonder Woman trail sign with black silhouette of Wonder Woman on motorcycle",
+      "status": "published"
+    },
+    {
+      "id": "sapwapahcikan-paskisikan",
+      "signNumber": 8,
+      "numberedFolder": "08-sapwapahcikan-paskisikan",
+      "title": "Ray Gun",
+      "englishName": "Ray Gun",
+      "creeName": "sâpwâpahcikan paskisikan",
+      "creeSyllabics": "ᓵᐚᐸᐦᒋᑲᐣ ᐸᐢᑭᓯᑲᐣ",
+      "folder": "sapwapahcikan-paskisikan",
+      "stlPath": "sapwapahcikan-paskisikan/production.stl",
+      "colors": [
+        "white",
+        "red"
+      ],
+      "description": "Ray Gun trail sign with red ray gun graphic",
+      "status": "published"
+    },
+    {
+      "id": "bed-springs",
+      "signNumber": 9,
+      "numberedFolder": "09-bed-springs",
+      "title": "Bed Springs",
+      "englishName": "Bed Springs",
+      "creeName": "kekokel sôniyâwâhkêsis",
+      "creeSyllabics": "ᑫᑯᑫᓬ ᓲᓂᔮᐁᐦᑫᓯᐢ",
+      "folder": "bedSprings",
+      "stlPath": "bedSprings/production.stl",
+      "colors": [
+        "blue",
+        "red",
+        "white"
+      ],
+      "description": "Bed Springs trail sign with blue and red abstract design",
+      "status": "published"
+    },
+    {
+      "id": "soniyawahkesis",
+      "signNumber": 10,
+      "numberedFolder": "10-soniyawahkesis",
+      "title": "Silverfox",
+      "englishName": "Silverfox",
+      "creeName": "sôniyâwâhkêsis",
+      "creeSyllabics": "ᓲᓂᔮᐁᐦᑫᓯᐢ",
+      "folder": "sôniyâwâhkêsîs",
+      "stlPath": "sôniyâwâhkêsîs/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Silverfox trail sign with black fox head graphic",
+      "status": "published"
+    },
+    {
+      "id": "maskihkiwiyiniw",
+      "signNumber": 11,
+      "numberedFolder": "11-maskihkiwiyiniw",
+      "title": "Medicine Man",
+      "englishName": "Medicine Man",
+      "creeName": "maskihkiwiyiniw",
+      "creeSyllabics": "ᒪᐢᑭᐦᑭᐏᔨᓂᐤ",
+      "folder": "maskihkiwiyiniw",
+      "stlPath": "maskihkiwiyiniw/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Medicine Man trail sign with black and white illustration of person wearing glasses and mask",
+      "status": "published"
+    },
+    {
+      "id": "bobsled",
+      "signNumber": 12,
+      "numberedFolder": "12-bobsled",
+      "title": "Bobsled",
+      "englishName": "Bobsled",
+      "creeName": "bobsled",
+      "creeSyllabics": "",
+      "folder": "bobsled",
+      "stlPath": "bobsled/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Bobsled trail sign with complex geometry and integrated iconography",
+      "status": "published"
+    },
+    {
+      "id": "purgatory",
+      "signNumber": 13,
+      "numberedFolder": "13-purgatory",
+      "title": "Purgatory",
+      "englishName": "Purgatory",
+      "creeName": "kâsenamâkew iskotew",
+      "creeSyllabics": "ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ",
+      "folder": "purgatory",
+      "stlPath": "purgatory/production.stl",
+      "colors": [
+        "white",
+        "orange",
+        "red"
+      ],
+      "description": "Purgatory trail sign with flame design",
+      "status": "published"
+    },
+    {
+      "id": "deliverance",
+      "signNumber": 14,
+      "numberedFolder": "14-deliverance",
+      "title": "Deliverance",
+      "englishName": "Deliverance",
+      "creeName": "deliverance",
+      "creeSyllabics": "",
+      "folder": "deliverance",
+      "stlPath": "deliverance/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Deliverance trail sign",
+      "status": "published"
+    },
+    {
+      "id": "ewok",
+      "signNumber": 15,
+      "numberedFolder": "15-ewok",
+      "title": "Ewok",
+      "englishName": "Ewok",
+      "creeName": "ewok",
+      "creeSyllabics": "",
+      "folder": "ewok",
+      "stlPath": "ewok/production.stl",
+      "colors": [
+        "brown",
+        "white"
+      ],
+      "description": "Ewok trail sign",
+      "status": "published"
+    },
+    {
+      "id": "farmers-daughter",
+      "signNumber": 16,
+      "numberedFolder": "16-farmers-daughter",
+      "title": "Farmer's Daughter",
+      "englishName": "Farmer's Daughter",
+      "creeName": "farmers-daughter",
+      "creeSyllabics": "",
+      "folder": "FarmersDaughter",
+      "stlPath": "FarmersDaughter/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Farmer's Daughter trail sign",
+      "status": "published"
+    },
+    {
+      "id": "kakwa",
+      "signNumber": 17,
+      "numberedFolder": "17-kakwa",
+      "title": "Kakwa",
+      "englishName": "Kakwa",
+      "creeName": "kâkwa",
+      "creeSyllabics": "ᑳᑿ",
+      "folder": "kakwa",
+      "stlPath": "kakwa/production.stl",
+      "colors": [
+        "white",
+        "black",
+        "red"
+      ],
+      "description": "Kakwa trail sign",
+      "status": "published",
+      "docsStlPath": "kakwa/kakwa_plaque_v3_admesh_fixed_1_admesh_fixed.stl",
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 1298.5770263671875
+        },
+        {
+          "color": "black",
+          "maxZ": 2150.44355566406
+        },
+        {
+          "color": "red"
+        }
+      ],
+      "pageContent": {
+        "pageStatus": "agent-drafted",
+        "accentColor": "#dc3545",
+        "themeName": "",
+        "headerTitle": "Porcupine • kâkwa • ᑳᑿ",
+        "photo": {
+          "src": "../assets/kakwa/Screenshot_2026-05-14_at_10.53.36_PM.png",
+          "alt": "Kakwa trail sign showing the Cree syllabics ᑳᑿ on a white plaque with red and black accents.",
+          "caption": "3D printed trail sign render — multi-layer plaque with red syllabics."
+        },
+        "trailforks": {
+          "trailId": "322561",
+          "trailUrl": "https://www.trailforks.com/trails/kakwa-porcupine-322561/",
+          "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=322561&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+          "displayName": "kakwa-porcupine-322561",
+          "mapCoords": { "lat": 53.54533, "lng": -113.54869, "source": "trailforks trailhead 322561" },
+          "mapEndCoords": { "lat": 53.54533, "lng": -113.54355, "source": "estimated: 342m mostly flat eastbound through hawrelak, per trailforks" }
+        },
+        "linguistics": {
+          "meaning": "Porcupine",
+          "type": "noun",
+          "primarySection": {
+            "heading": "The Word",
+            "sro": "kâkwa",
+            "syllabics": "ᑳᑿ",
+            "morphemes": [
+              {
+                "key": "kakwa-root",
+                "sro": "kâkwa",
+                "syllabics": "ᑳᑿ",
+                "gloss": "porcupine (animate noun, NA)"
+              }
+            ]
+          },
+          "relatedForms": [
+            {
+              "english": "Porcupines (plural)",
+              "sro": "kâkwak",
+              "syllabics": "ᑳᑿᐠ",
+              "morphemes": [
+                {
+                  "key": "kakwak-plural",
+                  "sro": "kâkwak",
+                  "syllabics": "ᑳᑿᐠ",
+                  "gloss": "porcupines (animate plural, -ak)"
+                }
+              ],
+              "note": "Regular animate plural in -ak."
+            },
+            {
+              "english": "Little porcupine (diminutive)",
+              "sro": "kâkwasis",
+              "syllabics": "ᑳᑿᓯᐢ",
+              "morphemes": [
+                {
+                  "key": "kakwasis-diminutive",
+                  "sro": "kâkwasis",
+                  "syllabics": "ᑳᑿᓯᐢ",
+                  "gloss": "little porcupine (diminutive, -sis)"
+                }
+              ],
+              "note": "Morphologically regular diminutive; not separately verified as a dictionary headword."
+            },
+            {
+              "english": "Porcupine quill",
+              "sro": "kâway",
+              "syllabics": "ᑳᐘᕀ",
+              "morphemes": [
+                {
+                  "key": "kaway-quill",
+                  "sro": "kâway",
+                  "syllabics": "ᑳᐘᕀ",
+                  "gloss": "porcupine quill (uncertain — see notes)"
+                }
+              ],
+              "note": "Attested forms vary across teaching materials (kâway / kâwiy / okâway); treat as tentative."
+            }
+          ],
+          "quickReference": [
+            {
+              "english": "Porcupine",
+              "sro": "kâkwa",
+              "syllabics": "ᑳᑿ",
+              "note": ""
+            },
+            {
+              "english": "Porcupines",
+              "sro": "kâkwak",
+              "syllabics": "ᑳᑿᐠ",
+              "note": ""
+            },
+            {
+              "english": "Little porcupine",
+              "sro": "kâkwasis",
+              "syllabics": "ᑳᑿᓯᐢ",
+              "note": ""
+            },
+            {
+              "english": "Porcupine quill",
+              "sro": "kâway",
+              "syllabics": "ᑳᐘᕀ",
+              "note": ""
+            },
+            {
+              "english": "I see a porcupine",
+              "sro": "niwâpamâw kâkwa",
+              "syllabics": "ᓂᐚᐸᒫᐤ ᑳᑿ",
+              "note": ""
+            }
+          ],
+          "baseWords": [
+            {
+              "sro": "kâkwa",
+              "english": "Porcupine",
+              "syllabics": "ᑳᑿ"
+            }
+          ]
+        },
+        "culturalStory": {
+          "heading": "About kâkwa — the Porcupine",
+          "body": [
+            "<strong>kâkwa</strong> (ᑳᑿ) is the Cree word for porcupine — a slow-moving, deeply self-possessed forest dweller of the boreal woods that stretch across nêhiyaw (Cree) territory. Unhurried and largely solitary, the porcupine is famously well-defended: rather than fight or flee, it lowers its head, raises its quills, and lets any aggressor make the mistake of pressing in. Cree teachings often hold up <strong>kâkwa</strong> as a quiet model of patience and gentle strength — protection through stillness rather than aggression, and the wisdom of knowing when not to move.",
+            "Long before glass beads arrived through the fur trade, porcupine quillwork was one of the most refined craft traditions of the Plains and Woodlands peoples, including the Cree. Quills were plucked, soaked, dyed with pigments drawn from roots, berries, lichens and ochres, then softened in the mouth, flattened with the teeth, and woven, wrapped, or sewn onto tanned hide, birchbark, moccasins, pipe stems, and lidded boxes. The geometric and floral patterns that later flourished in beadwork were first carried by quills — making <strong>kâkwa</strong> not only a forest neighbour but a literal source of artistic material, generously offered by an animal that asked only to be approached with care.",
+            "The red, black, and white of this trail sign carry an echo of those older quill-dye palettes — earth reds, charcoal blacks, and undyed natural whites that recur across many Indigenous quillwork traditions. (We note this resonance gently, as a visual rhyme rather than a claim about any specific tribal recipe.) Riding past <strong>kâkwa</strong> here in the river valley, it is worth pausing to remember an animal that taught generations of artists how to make beauty out of patience, and how to defend a small life with quiet, deliberate care."
+          ]
+        },
+        "trailStory": {
+          "heading": "",
+          "body": []
+        },
+        "sources": [
+          "itwêwina",
+          "Online Cree Dictionary",
+          "Plains Cree Dictionary"
+        ],
+        "notes": [
+          "Spelling discrepancy: catalogue currently records creeName \"kakwa\" and creeSyllabics \"ᑲᑲᐧ\", but the carved sign reads SRO \"kâkwa\" (circumflex on first a, high confidence) and syllabics best-read as \"ᑳᑿ\" (left glyph ᑳ confirmed by long-vowel dot; right glyph ᑿ chosen to match carved Roman \"kwa\", with bare ᑲ as secondary possibility at the photo resolution available). pageContent uses the carved form per the manager brief (trust the sign first).",
+          "Recommend the coordinator update catalogue.json creeName → \"kâkwa\" and creeSyllabics → \"ᑳᑿ\" when merging, so the catalogue summary matches the carved plaque. Flagging for curator review rather than editing catalogue here.",
+          "Second syllabic glyph (ka vs kwa) could not be resolved to certainty from the composite allSigns.jpg crop. A high-resolution single-panel photo would confirm whether the carved form is ᑳᑿ (kâ-kwa) or ᑳᑲ (kâ-ka). Best read used here: ᑳᑿ.",
+          "Trailforks: no Edmonton-area MTB trail named Kakwa, Kâkwa, or Porcupine was found across six search queries and direct grepping of trailforks.com Edmonton region pages on 2026-05-14. Only namesake is Kakwa Wildland Provincial Park near Grande Prairie (~160 km SW), an OHV/hike area geographically unrelated to Edmonton. trailforks left as {}; the sign likely commemorates the Cree word as cultural/linguistic content rather than naming an existing trail segment. Search was web-based, not Trailforks API-direct, so confidence is ~90% not 100%.",
+          "Photo placeholder pending — no asset exists in docs/assets/kakwa/. User to provide or crop sign #17 from /Users/kylemathewson/Coding/HARDWARE/nehiyoMTB/allSigns.jpg. photo field left as {} until then.",
+          "Linguistics uncertainties: kâkwasis \"little porcupine\" is a morphologically regular -sis diminutive but was not independently verified as a dictionary headword. kâway \"porcupine quill\" is attested in some teaching materials but competing forms (kâwiy, okâway) appear elsewhere; treat as tentative. Both are flagged inline in their relatedForms.note fields. Coordinator/curator may drop these two rows if a more conservative page is preferred.",
+          "Dialect assumption: Plains Cree (y-dialect / nêhiyawêwin), matching the rest of the catalogue.",
+          "Accent color set to #dc3545 (red) per brief, since the sign's syllabics layer is red. themeName \"red\". Curator may adjust."
+        ]
+      }
+    },
+    {
+      "id": "kiwapamitin",
+      "signNumber": 18,
+      "numberedFolder": "18-kiwapamitin",
+      "title": "I See You",
+      "englishName": "I See You",
+      "creeName": "kiwâpamitin",
+      "creeSyllabics": "ᑭᐚᐸᒥᑎᐣ",
+      "folder": "kiwapamitin",
+      "stlPath": "kiwapamitin/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "I See You trail sign - ICU connection with deep meaning",
+      "status": "published",
+      "pageContent": {
+        "pageStatus": "exemplar",
+        "photo": {
+          "src": "../assets/kiwapamitin/iseeyousign.png",
+          "alt": "I See You trail sign showing kiwâpamitin in Cree syllabics with decorative imagery",
+          "caption": "Hand-built exemplar page; map metadata only."
+        },
+        "trailforks": {
+          "trailId": "805899",
+          "trailUrl": "https://www.trailforks.com/trails/i-see-you/",
+          "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=805899&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+          "displayName": "I See You",
+          "mapCoords": { "lat": 53.53519, "lng": -113.55882, "source": "trailforks trailhead 805899" },
+          "mapEndCoords": { "lat": 53.53273, "lng": -113.55472, "source": "estimated: 386m descent toward river views (medicine man → bruce almighty connector), per trailforks" }
+        }
+      }
+    },
+    {
+      "id": "ocayisinakes",
+      "signNumber": 19,
+      "numberedFolder": "19-ocayisinakes",
+      "title": "Ocayisinakes",
+      "englishName": "Ocayisinakes",
+      "creeName": "ocayisinâkês",
+      "creeSyllabics": "ᐅᒐᔨᓯᓈᑫᐢ",
+      "folder": "ocayisinakes",
+      "stlPath": "ocayisinakes/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Ocayisinakes trail sign",
+      "status": "published"
+    },
+    {
+      "id": "oyoyow",
+      "signNumber": 20,
+      "numberedFolder": "20-oyoyow",
+      "title": "Oyoyow",
+      "englishName": "Oyoyow",
+      "creeName": "oyoyow",
+      "creeSyllabics": "ᐅᔪᔪᐤ",
+      "folder": "oyoyow",
+      "stlPath": "oyoyow/production.stl",
+      "colors": [
+        "multicolor",
+        "white"
+      ],
+      "description": "Oyoyow trail sign with multicolor design",
+      "status": "published"
+    },
+    {
+      "id": "nosemanicos",
+      "signNumber": 21,
+      "numberedFolder": "21-nosemanicos",
+      "title": "Nosemanicos",
+      "englishName": "Nosemanicos",
+      "creeName": "nôsemanicôs",
+      "creeSyllabics": "ᓄᓭᒪᓂᒑᐢ",
+      "folder": "nosemanicos",
+      "stlPath": "nosemanicos/production.stl",
+      "docsStlPath": "nosemanicos/nôsemanicôs_plaque_v4.stl",
+      "colors": [
+        "white",
+        "black",
+        "red"
+      ],
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 5.841,
+          "label": "white back and plaque base"
+        },
+        {
+          "color": "black",
+          "maxZ": 10.987,
+          "label": "black lettering and ladybug details"
+        },
+        {
+          "color": "red",
+          "label": "red top details"
+        }
+      ],
+      "description": "Nosemanicos trail sign with ladybug design",
+      "status": "published"
+    },
+    {
+      "id": "victoria-secret",
+      "signNumber": 22,
+      "numberedFolder": "22-victoria-secret",
+      "title": "Victoria's Secret",
+      "englishName": "Victoria's Secret",
+      "creeName": "vicSecret",
+      "creeSyllabics": "",
+      "folder": "victoriaSecret",
+      "stlPath": "victoriaSecret/production.stl",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "description": "Victoria's Secret trail sign with cityscape silhouette",
+      "status": "published"
+    },
+    {
+      "id": "slinky",
+      "signNumber": 23,
+      "numberedFolder": "23-slinky",
+      "title": "Slinky",
+      "englishName": "Slinky",
+      "creeName": "slinky",
+      "creeSyllabics": "",
+      "folder": "slinky",
+      "stlPath": "slinky/production.stl",
+      "colors": [
+        "multicolor",
+        "white"
+      ],
+      "description": "Slinky trail sign",
+      "status": "published"
+    }
+  ]
+}

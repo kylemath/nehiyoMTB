@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purgatory • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#dc3545;--accent2:#b42b39;--line:#dee2e6;--chip:#e9ecef;--ok:#dc3545;--primary-bg:#fae1e3;--primary-text:#000000;--formula-bg:#fef7f8;--formula-border:#dc3545;--secondary-bg:#fceff0;--secondary-border:#f4c2c7
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Purgatory • kâsenamâkêw iskotêw • ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Compound on the Plaque</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">kâsenamâkêw iskotêw</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="kaaseni-initial" data-tip="VTI initial: &lt;strong&gt;refuse, reject, hold back&lt;/strong&gt;. The kâ‑ here is the long‑â initial that anchors many Plains Cree verbs of &#x27;shutting off / blocking&#x27;; itwêwina lists the related VTI &lt;strong&gt;kâsenam&lt;/strong&gt; &#x27;s/he refuses, rejects it&#x27;." data-syll-id="kaaseni-initial-syll">kâseni‑</span>
+              <span class="part tooltip" data-key="am-vti" data-tip="VTI thematic: signals an inanimate object is being acted on (the &#x27;it&#x27; being refused). Hidden inside the surface form &lt;strong&gt;kâsenamâkêw&lt;/strong&gt;." data-syll-id="am-vti-syll">‑am‑</span>
+              <span class="part tooltip" data-key="aw-benef" data-tip="VTA benefactive / indefinite‑object suffix: &lt;strong&gt;&#x27;for / to people&#x27;&lt;/strong&gt;. Same applicative tail that turns &#x27;wipe it&#x27; into &#x27;wipe (it) for s.o.&#x27;, here turning &#x27;refuse it&#x27; into &#x27;refuse (it) to people&#x27;." data-syll-id="aw-benef-syll">‑âk(ê)‑</span>
+              <span class="part tooltip" data-key="ew-3to3p" data-tip="VTA 3→3′ indicative suffix: &lt;strong&gt;&#x27;s/he does it to him/her (an animate other)&#x27;&lt;/strong&gt;. Standard verb tail you also see on &lt;em&gt;kaskâwikanênêw&lt;/em&gt; &#x27;Back Breaker&#x27;." data-syll-id="ew-3to3p-syll">‑êw</span>
+              <span class="part tooltip" data-key="iskotew-fire" data-tip="NI noun: &lt;strong&gt;fire&lt;/strong&gt;. From Proto‑Algonquian *eškwete·wi; the same root sits inside &lt;em&gt;iskotêwâpoy&lt;/em&gt; &#x27;firewater / liquor&#x27; and &lt;em&gt;iskotêwân&lt;/em&gt; &#x27;matchstick&#x27;." data-syll-id="iskotew-fire-syll">iskotêw</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">kâsenamâkêw iskotêw</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="kaaseni-initial" data-tip="kâseni‑" id="kaaseni-initial-syll">ᑳᓭᓂ</span>
+              <span class="syll-part tooltip" data-key="am-vti" data-tip="‑am‑" id="am-vti-syll">ᐊᒼ</span>
+              <span class="syll-part tooltip" data-key="aw-benef" data-tip="‑âk(ê)‑" id="aw-benef-syll">ᐋᑫ</span>
+              <span class="syll-part tooltip" data-key="ew-3to3p" data-tip="‑êw" id="ew-3to3p-syll">ᐁᐤ</span>
+              <span class="syll-part tooltip" data-key="iskotew-fire" data-tip="iskotêw" id="iskotew-fire-syll">ᐃᐢᑯᑌᐤ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;Purgatory — literally &#x27;the fire that refuses (people)&#x27;, a cleansing-fire compound built from the verb kâsenamâkêw &#x27;s/he refuses (people)&#x27; and the noun iskotêw &#x27;fire&#x27;.&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/purgatory/purgatory_wall.jpg" alt="Purgatory trail sign — kâsenamâkêw iskotêw plaque against a backdrop of red and black flames around a meandering white river" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">The mounted Purgatory plaque on the wall: SRO &#x27;kâsenamâkêw iskotew&#x27; / syllabics ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ with red flames flanking a winding river of fire.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The In‑Between Fire</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">In Catholic theology, <strong>purgatory</strong> is the in‑between place — neither heaven nor hell — where souls are held until they are purified by fire. The Plains Cree carved onto this plaque, <strong>kâsenamâkêw iskotêw</strong>, is a compact and quite precise calque of that idea: a fire (<em>iskotêw</em>) that <em>refuses</em> people (<em>kâsenamâkêw</em> 's/he refuses, rejects people' — itwêwina/Wolvengrey). It is the fire that holds you back at the threshold; the fire that says <em>not yet</em>.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Visually the plaque leans hard into that reading. Red and black flames frame the panel on both sides while a single white river meanders down the middle — souls funnelled between walls of fire, the cool white path threading between the heat. The Cree syllabics float above the flames in clean white block letters, the English 'Purgatory' anchors the bottom in red script. The four points/sparks above the syllabics read as embers, or possibly as stars — small fixed lights set against the moving fire below.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The trail itself is part of an Edmonton mountain‑bike sequence — sitting on the wall right beside <em>paspîhiwêwin</em> / 'Deliverance', which is the formally‑mapped Patricia Ravine Upper. Where Deliverance is the rescue out, Purgatory is the holding‑fire before it: same flame‑and‑river palette, opposite sides of the same theological hinge. The whole sequence is hung on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), and is part of an ongoing effort to put Plains Cree names back on the everyday landscape of Edmonton trails.</p>
+        </div>
+
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <p class="muted" style="margin:2rem 0">Trail information coming soon</p>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;S/he refuses, s/he rejects it (the underlying VTI)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="kaaseni-rel1" data-tip="Initial: refuse, reject, hold back." data-syll-id="kaaseni-rel1-syll">kâseni‑</span>
+              <span class="part tooltip" data-key="am-vti-rel1" data-tip="VTI 3→inan. indicative suffix: &#x27;s/he does it to (something inanimate)&#x27;." data-syll-id="am-vti-rel1-syll">‑am</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">kâsenam</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="kaaseni-rel1" data-tip="kâseni‑" id="kaaseni-rel1-syll">ᑳᓭᓂ</span>
+              <span class="syll-part tooltip" data-key="am-vti-rel1" data-tip="‑am" id="am-vti-rel1-syll">ᐊᒼ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">itwêwina headword (Wolvengrey/CW). The plaque&#x27;s &lt;em&gt;kâsenamâkêw&lt;/em&gt; is the people‑object (VTA) sibling of this VTI &#x27;refuse it&#x27;.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Fire (the inanimate noun)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="iskotew-rel2" data-tip="NI noun: fire. The second word of the plaque, standing on its own." data-syll-id="iskotew-rel2-syll">iskotêw</span>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="iskotew-rel2" data-tip="iskotêw" id="iskotew-rel2-syll">ᐃᐢᑯᑌᐤ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Standalone form. Same noun used in &lt;em&gt;iskotêwâpoy&lt;/em&gt; &#x27;liquor&#x27; (lit. &#x27;fire‑water&#x27;) and &lt;em&gt;iskotêwân&lt;/em&gt; &#x27;a matchstick&#x27;.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;S/he wipes / cleans it (acoustic near‑neighbour — different stem)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="kaasii-rel3" data-tip="VTI initial: &lt;strong&gt;wipe clean, wash, erase&lt;/strong&gt; (long‑î, different stem)." data-syll-id="kaasii-rel3-syll">kâsî‑</span>
+              <span class="part tooltip" data-key="h-rel3" data-tip="Connective consonant before the VTI tail." data-syll-id="h-rel3-syll">‑h‑</span>
+              <span class="part tooltip" data-key="am-rel3" data-tip="VTI 3→inan. indicative suffix." data-syll-id="am-rel3-syll">‑am</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">kâsîham</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="kaasii-rel3" data-tip="kâsî‑" id="kaasii-rel3-syll">ᑳᓰ</span>
+              <span class="syll-part tooltip" data-key="h-rel3" data-tip="‑h‑" id="h-rel3-syll">ᐦ</span>
+              <span class="syll-part tooltip" data-key="am-rel3" data-tip="‑am" id="am-rel3-syll">ᐊᒼ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">&lt;em&gt;kâsî‑&lt;/em&gt; &#x27;wipe / cleanse&#x27; is a structural near‑neighbour of &lt;em&gt;kâseni‑&lt;/em&gt; &#x27;refuse&#x27;, and the two are easy to confuse by ear. The Purgatory plaque sits at exactly that semantic pun: &#x27;fire that refuses&#x27; vs. &#x27;cleansing‑fire&#x27; both read.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>Purgatory — &#x27;the fire that refuses (people)&#x27;</td><td class="tooltip" data-tip="Headline as carved on the plaque.">kâsenamâkêw iskotêw</td><td>ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ</td></tr>
+              <tr><td>S/he refuses, s/he rejects it (VTI base)</td><td class="tooltip" data-tip="Underlying verb stem. itwêwina (CW).">kâsenam</td><td>ᑳᓭᓇᒼ</td></tr>
+              <tr><td>Fire (NI)</td><td class="tooltip" data-tip="Second word of the plaque; from Proto‑Algonquian *eškwete·wi.">iskotêw</td><td>ᐃᐢᑯᑌᐤ</td></tr>
+              <tr><td>S/he refuses people, s/he rejects people (VTA)</td><td class="tooltip" data-tip="Same verb tail as &lt;em&gt;kaskâwikanênêw&lt;/em&gt; &#x27;Back Breaker&#x27; (‑âkêw / ‑êw VTA 3→3′).">kâsenamâkêw</td><td>ᑳᓭᓇᒫᑫᐤ</td></tr>
+              <tr><td>Hellfire / a fire that burns severely</td><td class="tooltip" data-tip="Literally &#x27;forever fire&#x27; — the missionary‑era calque for &#x27;hell&#x27; in Plains Cree liturgy. Contrasts with the trail&#x27;s &lt;em&gt;kâsenamâkêw iskotêw&lt;/em&gt;, which is the in‑between &#x27;refusing&#x27; fire, not the eternal one.">kâkikê iskotêw</td><td>ᑳᑭᑫ ᐃᐢᑯᑌᐤ</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">kâsenam</span><span class="muted">= &quot;s/he refuses / rejects it (VTI)&quot;</span><span class="chip">ᑳᓭᓇᒼ</span><button class="copy" data-copy-text="kâsenam">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">iskotêw</span><span class="muted">= &quot;fire (NI)&quot;</span><span class="chip">ᐃᐢᑯᑌᐤ</span><button class="copy" data-copy-text="iskotêw">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
+        </div>
+      </section>
+
+      <footer>
+        Purgatory • kâsenamâkêw iskotêw • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="am-rel3"]', syll: '#am-rel3-syll'},
+        {sro: '[data-key="am-vti"]', syll: '#am-vti-syll'},
+        {sro: '[data-key="am-vti-rel1"]', syll: '#am-vti-rel1-syll'},
+        {sro: '[data-key="aw-benef"]', syll: '#aw-benef-syll'},
+        {sro: '[data-key="ew-3to3p"]', syll: '#ew-3to3p-syll'},
+        {sro: '[data-key="h-rel3"]', syll: '#h-rel3-syll'},
+        {sro: '[data-key="iskotew-fire"]', syll: '#iskotew-fire-syll'},
+        {sro: '[data-key="iskotew-rel2"]', syll: '#iskotew-rel2-syll'},
+        {sro: '[data-key="kaaseni-initial"]', syll: '#kaaseni-initial-syll'},
+        {sro: '[data-key="kaaseni-rel1"]', syll: '#kaaseni-rel1-syll'},
+        {sro: '[data-key="kaasii-rel3"]', syll: '#kaasii-rel3-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+  </body>
+</html>

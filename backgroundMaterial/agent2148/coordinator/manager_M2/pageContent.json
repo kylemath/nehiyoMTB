@@ -1,0 +1,199 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Back Breaker • kaskâwikanênêw • ᑲᐢᑳᐏᑲᓀᓀᐤ",
+  "photo": {},
+  "trailforks": {
+    "trailId": "10634",
+    "trailUrl": "https://www.trailforks.com/trails/back-breaker/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=10634&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Back Breaker"
+  },
+  "linguistics": {
+    "meaning": "S/he breaks his/her back (by hand) — “Back Breaker”",
+    "type": "verb (VTA, 3→3′)",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "kaskâ‑wikan‑ê‑n‑êw",
+      "syllabics": "ᑲᐢᑳᐏᑲᓀᓀᐤ",
+      "morphemes": [
+        {
+          "key": "kaskaa-init",
+          "sro": "kaskâ‑",
+          "syllabics": "ᑲᐢᑳ",
+          "gloss": "initial: snap, break across, break in two — the same productive initial appears in many ‘snap/break-rigidly’ verbs (e.g. <strong>kaskâcihtin</strong> ‘it breaks right off’)"
+        },
+        {
+          "key": "wikan-med",
+          "sro": "‑wikan‑",
+          "syllabics": "ᐏᑲᐣ",
+          "gloss": "body-part medial: back, spine, backbone (incorporated form of the noun <strong>wîkan</strong> ‘back’; the long î shortens in medial position)"
+        },
+        {
+          "key": "e-connect",
+          "sro": "‑ê‑",
+          "syllabics": "ᐁ",
+          "gloss": "connective / thematic vowel"
+        },
+        {
+          "key": "n-manual",
+          "sro": "‑n‑",
+          "syllabics": "ᐣ",
+          "gloss": "VTA manual final: ‘by hand, by direct manipulation’ (same ‑n‑ as in <strong>pîkonêw</strong> ‘breaks him/her by hand’)"
+        },
+        {
+          "key": "ew-3to3p",
+          "sro": "‑êw",
+          "syllabics": "ᐁᐤ",
+          "gloss": "VTA 3→3′ indicative suffix: ‘he/she does it to him/her (animate object)’"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Back, spine, backbone (the body part)",
+        "sro": "wîkan",
+        "syllabics": "ᐑᑲᐣ",
+        "morphemes": [
+          {
+            "key": "wiikan-noun",
+            "sro": "wîkan",
+            "syllabics": "ᐑᑲᐣ",
+            "gloss": "NI noun: back, spine, backbone. The medial ‑wikan‑ inside the headword is the incorporated form of this root."
+          }
+        ],
+        "note": "The simplest underlying body-part noun. Inside the headword it shortens to ‑wikan‑ (short i)."
+      },
+      {
+        "english": "S/he breaks him/her by hand (generic, no body-part)",
+        "sro": "pîkonêw",
+        "syllabics": "ᐲᑯᓀᐤ",
+        "morphemes": [
+          {
+            "key": "piikon-stem",
+            "sro": "pîkon‑",
+            "syllabics": "ᐲᑯᐣ",
+            "gloss": "VTA stem: break (by hand)"
+          },
+          {
+            "key": "ew-rel",
+            "sro": "‑êw",
+            "syllabics": "ᐁᐤ",
+            "gloss": "VTA 3→3′ indicative suffix"
+          }
+        ],
+        "note": "Same ‑n‑êw VTA tail as the headword, but without back-incorporation — a structural minimal pair showing what the ‑wikan‑ medial adds."
+      },
+      {
+        "english": "S/he has a broken back (from falling)",
+        "sro": "kaskâwikanisin",
+        "syllabics": "ᑲᐢᑳᐏᑲᓂᓯᐣ",
+        "morphemes": [
+          {
+            "key": "kaskaa-rel2",
+            "sro": "kaskâ‑",
+            "syllabics": "ᑲᐢᑳ",
+            "gloss": "initial: break across, snap"
+          },
+          {
+            "key": "wikan-rel2",
+            "sro": "‑wikan‑",
+            "syllabics": "ᐏᑲᐣ",
+            "gloss": "body-part medial: back"
+          },
+          {
+            "key": "isin-fall",
+            "sro": "‑isin",
+            "syllabics": "ᐃᓯᐣ",
+            "gloss": "AI final: ‘by falling / by bodily impact’"
+          }
+        ],
+        "note": "Sister AI verb in the same paradigm: same kaskâ‑…‑wikan‑ spine, but with the ‘by falling’ final ‑isin instead of the manual ‑n‑êw."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Back Breaker — s/he breaks s.o.’s back by hand",
+        "sro": "kaskâwikanênêw",
+        "syllabics": "ᑲᐢᑳᐏᑲᓀᓀᐤ",
+        "note": "Headword on the plaque; VTA, 3→3′."
+      },
+      {
+        "english": "Back, spine, backbone",
+        "sro": "wîkan",
+        "syllabics": "ᐑᑲᐣ",
+        "note": "NI noun. Source of the ‑wikan‑ medial in the headword."
+      },
+      {
+        "english": "Someone’s back (his/her back of the body)",
+        "sro": "mispiskwan",
+        "syllabics": "ᒥᐢᐱᐢᑲᐧᐣ",
+        "note": "Common everyday word for ‘back’: nispiskwan ‘my back’, kispiskwan ‘your back’, ospiskwan ‘his/her back’."
+      },
+      {
+        "english": "S/he breaks it by hand (inanimate object)",
+        "sro": "pîkonam",
+        "syllabics": "ᐲᑯᓇᒼ",
+        "note": "VTI generic ‘break it’."
+      },
+      {
+        "english": "S/he breaks him/her by hand (animate object)",
+        "sro": "pîkonêw",
+        "syllabics": "ᐲᑯᓀᐤ",
+        "note": "VTA generic ‘break him/her’. Same ‑n‑êw tail as the headword."
+      },
+      {
+        "english": "S/he is in pain, s/he hurts",
+        "sro": "wîsakêyihtam",
+        "syllabics": "ᐑᓴᑫᔨᐦᑕᒼ",
+        "note": "VTI ‘to feel pain’ — anchors the pain semantic field."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "wîkan",
+        "english": "back, spine, backbone (NI noun)",
+        "syllabics": "ᐑᑲᐣ"
+      },
+      {
+        "sro": "kaskâ‑",
+        "english": "(verb initial) to snap, to break across, to break in two",
+        "syllabics": "ᑲᐢᑳ"
+      },
+      {
+        "sro": "pîkonêw",
+        "english": "s/he breaks him/her by hand (VTA)",
+        "syllabics": "ᐲᑯᓀᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "Spine of the Trail",
+    "body": [
+      "In mountain-bike vernacular, a trail earns the name <strong>Back Breaker</strong> by feel — by the rooty, rattling sections that hammer your spine through the bars, by the line that punishes a lazy posture and rewards a loose grip. The trail of that name drops through MacKinnon Ravine on Edmonton's west side as the rooty companion to Root Canal: short, sharp, and unforgiving enough that the name has stuck for years among the local riders who built and maintain it.",
+      "The plaque leans into the joke literally. A single white vertebra dangles like a charm against the black field, ringed with red the way a sore spine glows after a hard run. The accompanying parts in this sign's set — a five-vertebra column and a length of chain — push the pun further: a backbone built like a bike chain, each link a vertebra, the rider's spine and the bike's drivetrain merged into one rattling assembly. Red on black is the working-shop palette of grease, rust, and warning tape; the white SRO and English text keep the language clearly legible against it.",
+      "The Cree reading <strong>kaskâwikanênêw</strong> carries that same idea in its own register — a verb built from <strong>kaskâ‑</strong> ‘to snap, break across’ and the body-part medial <strong>‑wikan‑</strong> ‘back, spine’: literally, ‘s/he breaks his/her back (by hand).’ The syllabics above the SRO are picked out in the same red as the vertebra's accents, so the language and the image read as a single gesture. The sign sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), and is part of an Edmonton-area effort to put Plains Cree names back on the everyday landscape of trails that riders here have known by their English nicknames for a long time."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with SRO 'kaskâwikanênêw' (circumflex on the third 'a') and syllabics 'ᑲᐢᑳᐏᑲᓀᓀᐤ' (long-â dot on the third glyph ᑳ). The current catalogue.json has 'kaskawikanênêw' / 'ᑲᐢᑲᐏᑲᓀᓀᐤ' — both missing the long-â diacritic in matched positions. The plaque is internally consistent and matches the itwêwina (Wolvengrey/CW) headword 'kaskâwikanênêw' = 's/he breaks s.o.’s back by hand'. Coordinator should update catalogue.json creeName + creeSyllabics to match the plaque when merging.",
+    "Photo placeholder pending — user to provide a dedicated 'docs/assets/backbreaker/' image, or crop the plaque from allSigns.jpg. The 'photo' field is intentionally left as {} so the renderer falls back to the three.js STL embed.",
+    "Morpheme bracketing of the verb tail '-n-êw' is one of two defensible analyses; an alternative is to collapse '-ê-n-êw' into a single VTA 3→3′ ‘by hand’ suffix. Either reading is linguistically valid; the 5-morpheme split is used here for teaching clarity.",
+    "The medial '-wikan-' is the body-part-incorporated form of the free noun 'wîkan' (long î). The shortening to short i in medial position is standard Plains Cree behavior.",
+    "relatedForms[2] (kaskâwikanisin, ‘s/he has a broken back from falling’) is reconstructed from the kaskâ- result list rather than confirmed by a single-word lookup; spelling carries roughly 80% confidence. May be replaced or dropped on user review.",
+    "mispiskwan syllabics use the decomposed form 'ᒥᐢᐱᐢᑲᐧᐣ'; the unified-syllabics combining form 'ᒁ' for 'kwa' is also valid. Pick whichever matches the rest of the site's convention.",
+    "The visible plaque on the wall shows only the dangling vertebra; the project STL set includes a 5-vertebra column and a chain motif which may belong to a larger composite design or a future installation.",
+    "Trailforks pick: 'Back Breaker' (trailId 10634), Hawrelak / MacKinnon Ravine, Northwest Edmonton — companion to Root Canal. A 'Lower Back Breaker' sibling trail also exists in the same network but is almost certainly not what the plaque commemorates."
+  ]
+}

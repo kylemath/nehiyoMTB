@@ -1,0 +1,174 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Bobsled • capanaskos • ᒐᐸᓇᐢᑯᐢ",
+  "photo": {
+    "src": "../assets/bobsled/bobsled_render.jpg",
+    "alt": "Source design reference for the capanaskos / Bobsled trail sign — red toboggan with rider and dark forest backdrop",
+    "caption": "Source design reference for the Bobsled plaque (root folder design file)"
+  },
+  "trailforks": {
+    "trailId": "12400",
+    "trailUrl": "https://www.trailforks.com/trails/bobsled-12400/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=12400&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Bobsled",
+    "mapCoords": {
+      "lat": 53.5397,
+      "lng": -113.56046,
+      "source": "trailforks trailhead 12400"
+    }
+  },
+  "linguistics": {
+    "meaning": "Bobsled — literally 'little sled / little toboggan'",
+    "type": "noun (inanimate, NI, diminutive)",
+    "primarySection": {
+      "heading": "The Word",
+      "sro": "capanâskos",
+      "syllabics": "ᒐᐸᓇᐢᑯᐢ",
+      "morphemes": [
+        {
+          "key": "capanask-stem",
+          "sro": "capanâsk‑",
+          "syllabics": "ᒐᐸᓈᐢᐠ",
+          "gloss": "NI noun stem: 'sled, toboggan, sleigh-runner' — built from the root <strong>‑ahcap-</strong> / <strong>‑capan‑</strong> 'sled, drag' + the wood-medial <strong>‑âsk</strong> '(of) wood, wooden implement'"
+        },
+        {
+          "key": "os-dim",
+          "sro": "‑os",
+          "syllabics": "ᐅᐢ",
+          "gloss": "NI diminutive suffix: 'small, little, junior' — the same diminutive in <strong>asiniyos</strong> 'little stone' and <strong>mistikos</strong> 'little stick'"
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Sled, toboggan (the regular-size noun)",
+        "sro": "capanâsk",
+        "syllabics": "ᒐᐸᓈᐢᐠ",
+        "morphemes": [
+          {
+            "key": "capanask-base",
+            "sro": "capanâsk",
+            "syllabics": "ᒐᐸᓈᐢᐠ",
+            "gloss": "NI noun: 'sled, toboggan, sleigh' — the regular (non-diminutive) form. The plaque's <strong>capanaskos</strong> is the same noun with the diminutive <strong>‑os</strong> added."
+          }
+        ],
+        "note": "Strip the <strong>‑os</strong> from the headword and you get the everyday word for 'sled'."
+      },
+      {
+        "english": "Sleds, toboggans (plural)",
+        "sro": "capanâskwa",
+        "syllabics": "ᒐᐸᓈᐢᑿ",
+        "morphemes": [
+          {
+            "key": "capanask-stem2",
+            "sro": "capanâsk‑",
+            "syllabics": "ᒐᐸᓈᐢᐠ",
+            "gloss": "stem"
+          },
+          {
+            "key": "wa-plur",
+            "sro": "‑wa",
+            "syllabics": "ᐧᐊ",
+            "gloss": "NI inanimate plural"
+          }
+        ],
+        "note": "NI plural takes <strong>‑a</strong> / <strong>‑wa</strong>."
+      },
+      {
+        "english": "S/he slides downhill (by sled)",
+        "sro": "sôskwâciwêw",
+        "syllabics": "ᓲᐢᑳᒋᐍᐤ",
+        "morphemes": [
+          {
+            "key": "soskw-init",
+            "sro": "sôskw‑",
+            "syllabics": "ᓲᐢᑿ",
+            "gloss": "initial: 'slippery, smooth-sliding'"
+          },
+          {
+            "key": "aciwew-fin",
+            "sro": "‑âciwêw",
+            "syllabics": "ᐋᒋᐍᐤ",
+            "gloss": "VAI final: 'goes downhill, descends'"
+          }
+        ],
+        "note": "Semantic neighbour — the verb of sledding/sliding down. Anchors the activity, not the implement."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Bobsled (the plaque)",
+        "sro": "capanaskos",
+        "syllabics": "ᒐᐸᓇᐢᑯᐢ",
+        "note": "NI inanimate. Literal: 'little sled'."
+      },
+      {
+        "english": "Sled, toboggan",
+        "sro": "capanâsk",
+        "syllabics": "ᒐᐸᓈᐢᐠ",
+        "note": "NI. The base noun."
+      },
+      {
+        "english": "Sleds (plural)",
+        "sro": "capanâskwa",
+        "syllabics": "ᒐᐸᓈᐢᑿ",
+        "note": "NI plural."
+      },
+      {
+        "english": "It slides downhill",
+        "sro": "sôskwâciwêw",
+        "syllabics": "ᓲᐢᑳᒋᐍᐤ",
+        "note": "Semantic neighbour — the verb."
+      },
+      {
+        "english": "Snow",
+        "sro": "kôna",
+        "syllabics": "ᑰᓇ",
+        "note": "NI. Anchor for the winter-sport semantic field."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "capanâsk",
+        "english": "sled, toboggan (NI)",
+        "syllabics": "ᒐᐸᓈᐢᐠ"
+      },
+      {
+        "sro": "‑os",
+        "english": "diminutive ('little, small')",
+        "syllabics": "ᐅᐢ"
+      },
+      {
+        "sro": "sôskwâciwêw",
+        "english": "it slides downhill (VAI/II)",
+        "syllabics": "ᓲᐢᑳᒋᐍᐤ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "About the Little Sled",
+    "body": [
+      "The plaque reads <strong>capanaskos</strong> — 'little sled', the diminutive of <strong>capanâsk</strong> 'toboggan, sled'. <strong>capanâsk</strong> is the Plains Cree noun for the wood-runner sled — the long flat sleigh historically pulled across the snow for hauling goods, game, and children — and the suffix <strong>‑os</strong> shrinks it to the rider-sized 'bobsled' the trail is named for. The plaque's red toboggan-with-rider silhouette renders the diminutive literally: a small sled, a small bundled rider, ploughing down through a stylized stand of black evergreens against a snowy line.",
+      "Cree readers will notice that the carved spelling is <strong>capanaskos</strong> (short a in the third syllable), where a more standard published spelling would write <strong>capanâskos</strong> (long â). Both readings are attested in Plains Cree signage; the plaque preserves the shorter form. The red syllabics <strong>ᒐᐸᓇᐢᑯᐢ</strong> match the SRO carved above.",
+      "Bobsled the mountain-bike trail is a short, blue-rated downhill in the Hawrelak network on Edmonton's northwest side — a quick fall-line ribbon with a couple of line variations, drops, jumps, and berms, 'popular with downhillers' in the Trailforks description. It sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), in the same Hawrelak network as <strong>maskihkîwiyiniw / Medicine Man</strong> and <strong>kaskâwikanênêw / Back Breaker</strong>."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "PHYSICAL SIGN OVERRIDES CATALOGUE: The current catalogue.json creeName is the placeholder 'bobsled' (the English word) and creeSyllabics is empty. The plaque is carved with the Cree noun <strong>capanaskos</strong> / <strong>ᒐᐸᓇᐢᑯᐢ</strong>. Coordinator should set bobsled creeName to <strong>capanaskos</strong> and creeSyllabics to <strong>ᒐᐸᓇᐢᑯᐢ</strong>.",
+    "Spelling variant flagged: the plaque uses short-a <strong>capanaskos</strong>; some Plains Cree dictionaries write <strong>capanâskos</strong> with a long â. Wolvengrey's CW lists the base noun as <strong>capanâsk</strong> 'sled, sleigh'. The fragment keeps the plaque spelling on the header line and uses the long-â form <strong>capanâsk</strong> for the base-noun reference rows. Flagged for elder review.",
+    "Trailforks pick: 'Bobsled' (trailId 12400), Hawrelak, Northwest Edmonton — same network as Medicine Man and Back Breaker. High confidence: matches the Edmonton location, the wall context (companion trail), and the Indigenous-territory tag (Nêhiyaw-Askiy). The North Vancouver 'Bobsled' on Mount Fromme is a famous but unrelated trail.",
+    "Photo wired to the existing repo root design source (file-Y7tZOD4PCnI9yDOHh36c3Omm (2).jpg) — copied as docs/assets/bobsled/bobsled_render.jpg. A higher-quality wall-photo crop of the plaque itself would be a better future replacement."
+  ]
+}

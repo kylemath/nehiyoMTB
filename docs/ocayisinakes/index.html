@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ocayisinakes • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#dc3545;--accent2:#b42b39;--line:#dee2e6;--chip:#e9ecef;--ok:#dc3545;--primary-bg:#fae1e3;--primary-text:#000000;--formula-bg:#fef7f8;--formula-border:#dc3545;--secondary-bg:#fceff0;--secondary-border:#f4c2c7
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Monkey • ocayisinâkês • ᐅᒐᔨᓯᓈᑫᐢ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Word on the Plaque</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">ocayisinâkês</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="o-deriv" data-tip="&lt;strong&gt;Initial / derivational prefix.&lt;/strong&gt; Distinguishes the Plains Cree form &lt;em&gt;ocayisinâkês&lt;/em&gt; from the otherwise‑identical Northern Cree form &lt;em&gt;ayisinâkes&lt;/em&gt; (per itwêwina/CW). Plays the role of an animate‑actor / &#x27;one who&#x27; element." data-syll-id="o-deriv-syll">o‑</span>
+              <span class="part tooltip" data-key="cay-stem" data-tip="Stem element: &lt;strong&gt;part of the &#x27;monkey&#x27; lexicalization&lt;/strong&gt;. Likely related to the &lt;em&gt;ayisi‑&lt;/em&gt; family of &#x27;looking like / appearing as&#x27; morphemes that also surface in &lt;em&gt;ayisiyiniw&lt;/em&gt; &#x27;human being / person&#x27;." data-syll-id="cay-stem-syll">cay‑</span>
+              <span class="part tooltip" data-key="isinaakos-final" data-tip="VAI final: &lt;strong&gt;&#x27;look, appear, have the shape of&#x27;&lt;/strong&gt;. Same productive final that gives &lt;em&gt;nipiy‑isinâkosiw&lt;/em&gt; &#x27;s/he looks watery / liquid‑like&#x27;, &lt;em&gt;maskoso‑isinâkosiw&lt;/em&gt; &#x27;s/he looks bear‑like&#x27;, etc." data-syll-id="isinaakos-final-syll">‑isinâkos‑</span>
+              <span class="part tooltip" data-key="es-dim" data-tip="&lt;strong&gt;Diminutive / small‑animate suffix.&lt;/strong&gt; The reason &lt;em&gt;monkey&lt;/em&gt; ends in ‑ês and not the plain 3sg ‑w: it is conceived as &#x27;the little one that looks like (a person)&#x27; — a small primate, monkey‑sized. itwêwina lists the diminutive‑of‑diminutive &lt;em&gt;ocôcayisinâkês&lt;/em&gt; &#x27;the cute little monkey&#x27; on the same paradigm." data-syll-id="es-dim-syll">‑ês</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">ocayisinâkês</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="o-deriv" data-tip="o‑" id="o-deriv-syll">ᐅ</span>
+              <span class="syll-part tooltip" data-key="cay-stem" data-tip="cay‑" id="cay-stem-syll">ᒐᔨ</span>
+              <span class="syll-part tooltip" data-key="isinaakos-final" data-tip="‑isinâkos‑" id="isinaakos-final-syll">ᓯᓈᑯᐢ</span>
+              <span class="syll-part tooltip" data-key="es-dim" data-tip="‑ês" id="es-dim-syll">ᐁᐢ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;Monkey — the Plains Cree word ocayisinâkês &#x27;a monkey&#x27;, a Wolvengrey/CW headword used as the trail&#x27;s name.&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/ocayisinakes/monkey_render.png" alt="Monkey trail sign — ocayisinâkês plaque showing a black monkey silhouette with a long curled tail walking across a white plaque, red syllabics over the body" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">Design source for the Monkey plaque: black monkey silhouette with red Cree syllabics ᐅᒐᔨᓯᓈᑫᐢ across the body, the English headline &#x27;MONKEY&#x27; below.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The Little One Who Looks (Like a Person)</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6"><strong>Monkey</strong> is the English headline carved across the bottom of the plaque, but the larger Cree word painted across the body of the animal — <strong>ocayisinâkês</strong> — is where the linguistic interest lives. Plains Cree did not have monkeys in its pre‑contact ecological inventory, and so when monkeys arrived in the lexicon they arrived <em>described</em> rather than named: <em>ocayisinâkês</em> sits squarely on the productive <em>‑isinâkos‑</em> family of verbs and nouns of <em>looking like / appearing as</em>. The same final makes <em>nipiy‑isinâkosiw</em> 's/he looks watery' and <em>maskoso‑isinâkosiw</em> 's/he looks like a bear'. The <em>‑ês</em> tail is the small‑animate diminutive — these are the <em>little</em> ones who look (a little) like a person. It is a word built by an Algonquian language doing exactly what Algonquian languages do when they meet a new animal: describe it from the inside out, by what it <em>does</em> or <em>resembles</em>, and let the noun fall out of the description.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Visually the plaque is one of the most direct on the wall: a clean black silhouette of a long‑tailed primate walking the length of the panel, red Cree syllabics ᐅᒐᔨᓯᓈᑫᐢ painted across its body, the English block‑letter <strong>MONKEY</strong> sitting underneath. Red‑on‑black‑on‑white is the working palette of this wall: black silhouettes for the animals, red for Cree, black for English. The monkey's curled tail is what makes it instantly read as 'monkey' rather than as any of the other species on the wall.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">On the ground, 'Monkey' is one of the long‑standing nicknames for the Trailforks trail listed as <em>Lovers Lane</em> in Central Edmonton North (trail id 15796), with formal aliases <em>Lovers Lane</em>, <em>Groat Road Roller Coaster</em>, and <em>Monkey Trail</em> all on the same line. The trail winds through tight overhanging brush — the kind of tunnel‑of‑green section that earns names like <em>monkey trail</em> from riders who feel like they're swinging through the canopy. The trail sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), and the carved <em>ocayisinâkês</em> is the local naming committee's choice for the Plains Cree word for the same idea.</p>
+        </div>
+
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=15796&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/lovers-lane-15796/" style="font-size: 0.7em;">Monkey Trail (aka Lovers Lane / Groat Road Roller Coaster)</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Monkeys (plural)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="ocayisinaakees-stem-pl" data-tip="The full noun stem &#x27;monkey&#x27;." data-syll-id="ocayisinaakees-stem-pl-syll">ocayisinâkês</span>
+              <span class="part tooltip" data-key="ak-pl-anim" data-tip="Animate plural suffix: &#x27;‑s&#x27;. The same ‑ak that pluralizes &lt;em&gt;kahkakiwak&lt;/em&gt; &#x27;ravens&#x27; and &lt;em&gt;atimwak&lt;/em&gt; &#x27;dogs&#x27;." data-syll-id="ak-pl-anim-syll">‑ak</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">ocayisinâkêsak</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="ocayisinaakees-stem-pl" data-tip="ocayisinâkês" id="ocayisinaakees-stem-pl-syll">ᐅᒐᔨᓯᓈᑫᐢ</span>
+              <span class="syll-part tooltip" data-key="ak-pl-anim" data-tip="‑ak" id="ak-pl-anim-syll">ᐊᐠ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">itwêwina paradigm form (CW). Standard animate plural.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Monkey (obviative — &#x27;the other monkey&#x27;, when one is already in the discourse)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="ocayisinaakees-stem-obv" data-tip="The full noun stem &#x27;monkey&#x27;." data-syll-id="ocayisinaakees-stem-obv-syll">ocayisinâkês</span>
+              <span class="part tooltip" data-key="a-obv-monkey" data-tip="Obviative suffix on the animate noun. Same ‑a that puts &lt;em&gt;otânisa&lt;/em&gt; &#x27;his/her daughter&#x27; in obviative on the &lt;em&gt;Farmer&#x27;s Daughter&lt;/em&gt; plaque." data-syll-id="a-obv-monkey-syll">‑a</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">ocayisinâkêsa</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="ocayisinaakees-stem-obv" data-tip="ocayisinâkês" id="ocayisinaakees-stem-obv-syll">ᐅᒐᔨᓯᓈᑫᐢ</span>
+              <span class="syll-part tooltip" data-key="a-obv-monkey" data-tip="‑a" id="a-obv-monkey-syll">ᐊ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">itwêwina paradigm form (CW). Used when a third party is also in play (e.g. &#x27;the man saw a monkey&#x27; → the monkey is obviative).</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Monkey (Northern Cree variant)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="ayisinaakees-northern" data-tip="Northern Cree form: drops the &lt;em&gt;o‑&lt;/em&gt; derivational prefix that Plains Cree carries. From Wolvengrey/AECD." data-syll-id="ayisinaakees-northern-syll">ayisinâkes</span>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="ayisinaakees-northern" data-tip="ayisinâkes" id="ayisinaakees-northern-syll">ᐊᔨᓯᓈᑫᐢ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Same word, dialectal split. Plains Cree (the wall&#x27;s dialect) carries the &lt;em&gt;o‑&lt;/em&gt;; Northern Cree does not. Useful for any rider who learned the word from a Northern speaker and notices the dialect difference.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>Monkey (Plains Cree)</td><td class="tooltip" data-tip="Plaque headword. itwêwina/CW. NA animate.">ocayisinâkês</td><td>ᐅᒐᔨᓯᓈᑫᐢ</td></tr>
+              <tr><td>Monkeys (plural)</td><td class="tooltip" data-tip="Standard NA plural with ‑ak.">ocayisinâkêsak</td><td>ᐅᒐᔨᓯᓈᑫᓴᐠ</td></tr>
+              <tr><td>Monkey (obviative — &#x27;the other one&#x27;)</td><td class="tooltip" data-tip="Used when a third party is in the clause.">ocayisinâkêsa</td><td>ᐅᒐᔨᓯᓈᑫᓴ</td></tr>
+              <tr><td>My (pet / cute little) monkey</td><td class="tooltip" data-tip="1sg.poss diminutive form from the itwêwina paradigm. The doubled &lt;em&gt;co‑&lt;/em&gt; reduplication is the affectionate / diminutive‑of‑diminutive shape.">nicôcayisinâkêsim</td><td>ᓂᒍᒐᔨᓯᓈᑫᓯᒼ</td></tr>
+              <tr><td>Person, human being (the morphological cousin)</td><td class="tooltip" data-tip="Same &lt;em&gt;ayisi‑&lt;/em&gt; &#x27;look like / appear as&#x27; family. Side‑by‑side: &lt;em&gt;ayisiyiniw&lt;/em&gt; &#x27;one who looks like (a being)&#x27; vs &lt;em&gt;ocayisinâkês&lt;/em&gt; &#x27;a little one that looks (person‑like)&#x27;.">ayisiyiniw</td><td>ᐊᔨᓯᔨᓂᐤ</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">ocayisinâkês</span><span class="muted">= &quot;monkey (NA, Plains Cree)&quot;</span><span class="chip">ᐅᒐᔨᓯᓈᑫᐢ</span><button class="copy" data-copy-text="ocayisinâkês">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">‑isinâkos‑</span><span class="muted">= &quot;(VAI final) to look like, to appear as, to have the shape of&quot;</span><span class="chip">ᓯᓈᑯᐢ</span><button class="copy" data-copy-text="‑isinâkos‑">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a>, Trailforks</p>
+        </div>
+      </section>
+
+      <footer>
+        Ocayisinakes • ocayisinâkês • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="a-obv-monkey"]', syll: '#a-obv-monkey-syll'},
+        {sro: '[data-key="ak-pl-anim"]', syll: '#ak-pl-anim-syll'},
+        {sro: '[data-key="ayisinaakees-northern"]', syll: '#ayisinaakees-northern-syll'},
+        {sro: '[data-key="cay-stem"]', syll: '#cay-stem-syll'},
+        {sro: '[data-key="es-dim"]', syll: '#es-dim-syll'},
+        {sro: '[data-key="isinaakos-final"]', syll: '#isinaakos-final-syll'},
+        {sro: '[data-key="o-deriv"]', syll: '#o-deriv-syll'},
+        {sro: '[data-key="ocayisinaakees-stem-obv"]', syll: '#ocayisinaakees-stem-obv-syll'},
+        {sro: '[data-key="ocayisinaakees-stem-pl"]', syll: '#ocayisinaakees-stem-pl-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+  </body>
+</html>

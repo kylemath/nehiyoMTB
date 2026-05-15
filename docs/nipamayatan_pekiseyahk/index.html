@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purple Haze • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#7c4dff;--accent2:#663fd1;--line:#dee2e6;--chip:#e9ecef;--ok:#7c4dff;--primary-bg:#ebe4ff;--primary-text:#000000;--formula-bg:#faf8ff;--formula-border:#7c4dff;--secondary-bg:#f5f1ff;--secondary-border:#d8caff
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Purple Haze • nîpâmâyâtân pekiseyâhk • ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Phrase</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">nîpâ‑mâyâtân  pekiseyâhk</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="nipa-init" data-tip="initial: ‘at night, in the dark, dimly’ — the same root in &lt;strong&gt;nîpâ‑pimohtêw&lt;/strong&gt; ‘s/he walks at night’ and &lt;strong&gt;nîpâyâstêw&lt;/strong&gt; ‘the northern lights’" data-syll-id="nipa-init-syll">nîpâ‑</span>
+              <span class="part tooltip" data-key="maayatan-vii" data-tip="VII conjunct stem: ‘it is bad/ugly/unclear’ — combined with nîpâ‑ to give the sense ‘it is dark/hazy/obscured (like at night)’" data-syll-id="maayatan-vii-syll">‑mâyâtan</span>
+              <span class="part tooltip" data-key="pekiseyahk-conj" data-tip="AI conjunct, 1pl-incl: ‘when/while we (all of us) pass through, when we go through it’ — verb stem &lt;strong&gt;pekise‑&lt;/strong&gt; ‘pass through, ride through’ + ‑yâhk first-person plural inclusive conjunct ending" data-syll-id="pekiseyahk-conj-syll">pekiseyâhk</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">nîpâ‑mâyâtân  pekiseyâhk</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="nipa-init" data-tip="nîpâ‑" id="nipa-init-syll">ᓂᐹ</span>
+              <span class="syll-part tooltip" data-key="maayatan-vii" data-tip="‑mâyâtan" id="maayatan-vii-syll">ᒫᔮᑖᐣ</span>
+              <span class="syll-part tooltip" data-key="pekiseyahk-conj" data-tip="pekiseyâhk" id="pekiseyahk-conj-syll">ᐯᑭᓭᔮᕽ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;Purple Haze — ‘our way is hazy / we ride through the haze’ (community translation of the Hendrix-titled trail)&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/nipamayatan_pekiseyahk/purple_haze.png" alt="Purple Haze trail sign showing a hazy purple-and-pink mountain silhouette with the Cree name in white syllabics" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">3D printed plaque: pink-to-purple gradient sky over a purple mountain silhouette, with white syllabics ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ above ‘PURPLE HAZE.’</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">About nîpâmâyâtân pekiseyâhk — the Haze We Ride Through</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6"><strong>Purple Haze</strong> is a Hendrix song before it is a trail, and the trail name is itself a borrow — when the local builders carved the Cree, they did not try to translate the colour ‘purple’ literally (which Plains Cree does not have a single root for) but instead rendered the FEELING of the song and the trail: the dim, hazy way of moving through. The plaque on the wall is unusually pictorial for the set: a two-tone purple mountain silhouette under a pink-fading-to-violet sky, the syllabics <strong>ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ</strong> in clean white above the mountain, ‘PURPLE HAZE’ in white block letters across the violet base.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The Cree breaks into two parts. <strong>nîpâmâyâtân</strong> is a VII (it-verb): nîpâ‑ ‘in the dark, at night, dimly’ + ‑mâyâtan ‘it is bad / ugly / unclear,’ together meaning roughly ‘it is hazy / dim / hard to see’ (the sense Hendrix gets at with ‘purple haze all in my eyes’). <strong>pekiseyâhk</strong> is an AI conjunct in the first-person-plural inclusive: ‘when we (all of us) pass through it.’ Read together: ‘when it is hazy and we (all) pass through it’ — the rider’s phrase, not a colour name.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The trail itself is in the Hawrelak/Central Edmonton (North) network, neighbour to Wonder Woman, Lovers Lane, and Victoria’s Secret in the river-valley clusters under <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory). On the wall there are two Purple Haze plaques — a small portrait-format one in row 1 (the one wired here) and a fuller one further right — both reading the same Cree.</p>
+        </div>
+
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=15797&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/purple-haze-15797/" style="font-size: 0.7em;">Purple Haze</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Night, at night (the bare temporal form)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="tipiskaw-vii" data-tip="VII verb: ‘it is night, it is dark.’ The nîpâ‑ initial in the headword carries the same dim/dark idea but as a productive verb-initial." data-syll-id="tipiskaw-vii-syll">tipiskâw</span>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="tipiskaw-vii" data-tip="tipiskâw" id="tipiskaw-vii-syll">ᑎᐱᐢᑳᐤ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Free-standing verb for ‘it is night.’ The nîpâ‑ initial in the headword is the bound version of this dim/dark concept.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;It is bad / it is ugly (VII)&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="maayatan-noun" data-tip="VII verb: ‘it is bad, ugly, unpleasant, hard to see clearly.’ Inside the headword this stem is what nîpâ‑ modifies." data-syll-id="maayatan-noun-syll">mâyâtan</span>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="maayatan-noun" data-tip="mâyâtan" id="maayatan-noun-syll">ᒫᔮᑖᐣ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">‘It is bad/unclear.’ With the night-initial nîpâ‑ it produces ‘it is hazy / it is bad-as-at-night’ — the visibility-blurring sense the trail name plays on.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;S/he passes through, rides through&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="pekise-stem" data-tip="AI verb stem: ‘to pass through, to make one’s way through, to ride/walk through’" data-syll-id="pekise-stem-syll">pekise‑</span>
+              <span class="part tooltip" data-key="ew-3sg" data-tip="AI 3sg independent suffix: ‘he/she does it’" data-syll-id="ew-3sg-syll">‑ew</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">pekisew / pekisin</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="pekise-stem" data-tip="pekise‑" id="pekise-stem-syll">ᐯᑭᓭ</span>
+              <span class="syll-part tooltip" data-key="ew-3sg" data-tip="‑ew" id="ew-3sg-syll">ᐤ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">The independent (3sg) form. The plaque uses the conjunct 1pl-incl &lt;strong&gt;pekiseyâhk&lt;/strong&gt; ‘when we (all) ride through.’</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>Purple Haze (community translation of the Hendrix title)</td><td class="tooltip" data-tip="Headword on the plaque. Two-word phrase: VII (impersonal ‘it is dim/hazy’) + AI conjunct (‘when we ride through it’).">nîpâmâyâtân pekiseyâhk</td><td>ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ</td></tr>
+              <tr><td>It is night / it is dark</td><td class="tooltip" data-tip="The free-standing ‘night’ verb that the nîpâ‑ initial echoes.">tipiskâw</td><td>ᑎᐱᐢᑳᐤ</td></tr>
+              <tr><td>It is hazy / unclear / hard to see</td><td class="tooltip" data-tip="The first word of the plaque, treated as a stand-alone VII.">nîpâmâyâtan</td><td>ᓂᐹᒫᔮᑖᐣ</td></tr>
+              <tr><td>When we (all of us) pass through it</td><td class="tooltip" data-tip="AI conjunct, 1pl-incl. ‑yâhk is the inclusive ‘we including you’ ending.">pekiseyâhk</td><td>ᐯᑭᓭᔮᕽ</td></tr>
+              <tr><td>Purple (the colour adjective)</td><td class="tooltip" data-tip="There is no single ‘purple’ root in Plains Cree; common formations use sîpihko‑ ‘blue’ + a colour-shading final, or borrow from the wider colour vocabulary. The plaque deliberately does NOT translate the colour word but renders the IDEA — ‘the haze we ride through.’">wâpiskwêyâw / sîpihkonâkwan</td><td>ᐚᐱᐢᑵᔮᐤ</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">nîpâ‑</span><span class="muted">= &quot;(initial) at night, in the dark, dimly&quot;</span><span class="chip">ᓂᐹ</span><button class="copy" data-copy-text="nîpâ‑">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">mâyâtan</span><span class="muted">= &quot;it is bad, ugly, unclear (VII)&quot;</span><span class="chip">ᒫᔮᑖᐣ</span><button class="copy" data-copy-text="mâyâtan">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">pekise‑</span><span class="muted">= &quot;(verb stem) to pass / ride through&quot;</span><span class="chip">ᐯᑭᓭ</span><button class="copy" data-copy-text="pekise‑">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a>, Trailforks</p>
+        </div>
+      </section>
+
+      <footer>
+        Purple Haze • nîpâmâyâtân pekiseyâhk • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="ew-3sg"]', syll: '#ew-3sg-syll'},
+        {sro: '[data-key="maayatan-noun"]', syll: '#maayatan-noun-syll'},
+        {sro: '[data-key="maayatan-vii"]', syll: '#maayatan-vii-syll'},
+        {sro: '[data-key="nipa-init"]', syll: '#nipa-init-syll'},
+        {sro: '[data-key="pekise-stem"]', syll: '#pekise-stem-syll'},
+        {sro: '[data-key="pekiseyahk-conj"]', syll: '#pekiseyahk-conj-syll'},
+        {sro: '[data-key="tipiskaw-vii"]', syll: '#tipiskaw-vii-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+  </body>
+</html>

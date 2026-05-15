@@ -1,0 +1,183 @@
+{
+  "pageStatus": "agent-drafted",
+  "accentColor": "#dc3545",
+  "themeName": "red",
+  "headerTitle": "Monkey • ocayisinâkês • ᐅᒐᔨᓯᓈᑫᐢ",
+  "photo": {
+    "src": "../assets/ocayisinakes/monkey_render.png",
+    "alt": "Monkey trail sign — ocayisinâkês plaque showing a black monkey silhouette with a long curled tail walking across a white plaque, red syllabics over the body",
+    "caption": "Design source for the Monkey plaque: black monkey silhouette with red Cree syllabics ᐅᒐᔨᓯᓈᑫᐢ across the body, the English headline 'MONKEY' below."
+  },
+  "trailforks": {
+    "trailId": "15796",
+    "trailUrl": "https://www.trailforks.com/trails/lovers-lane-15796/",
+    "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=15796&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+    "displayName": "Monkey Trail (aka Lovers Lane / Groat Road Roller Coaster)",
+    "mapCoords": {
+      "lat": 53.54072,
+      "lng": -113.52975,
+      "source": "trailforks trail 15796 (Lovers Lane), Central Edmonton North"
+    }
+  },
+  "linguistics": {
+    "meaning": "Monkey — the Plains Cree word ocayisinâkês 'a monkey', a Wolvengrey/CW headword used as the trail's name.",
+    "type": "NA noun (animate; Plains Cree variant — Northern variant is ayisinâkes)",
+    "primarySection": {
+      "heading": "The Word on the Plaque",
+      "sro": "ocayisinâkês",
+      "syllabics": "ᐅᒐᔨᓯᓈᑫᐢ",
+      "morphemes": [
+        {
+          "key": "o-deriv",
+          "sro": "o‑",
+          "syllabics": "ᐅ",
+          "gloss": "<strong>Initial / derivational prefix.</strong> Distinguishes the Plains Cree form <em>ocayisinâkês</em> from the otherwise‑identical Northern Cree form <em>ayisinâkes</em> (per itwêwina/CW). Plays the role of an animate‑actor / 'one who' element."
+        },
+        {
+          "key": "cay-stem",
+          "sro": "cay‑",
+          "syllabics": "ᒐᔨ",
+          "gloss": "Stem element: <strong>part of the 'monkey' lexicalization</strong>. Likely related to the <em>ayisi‑</em> family of 'looking like / appearing as' morphemes that also surface in <em>ayisiyiniw</em> 'human being / person'."
+        },
+        {
+          "key": "isinaakos-final",
+          "sro": "‑isinâkos‑",
+          "syllabics": "ᓯᓈᑯᐢ",
+          "gloss": "VAI final: <strong>'look, appear, have the shape of'</strong>. Same productive final that gives <em>nipiy‑isinâkosiw</em> 's/he looks watery / liquid‑like', <em>maskoso‑isinâkosiw</em> 's/he looks bear‑like', etc."
+        },
+        {
+          "key": "es-dim",
+          "sro": "‑ês",
+          "syllabics": "ᐁᐢ",
+          "gloss": "<strong>Diminutive / small‑animate suffix.</strong> The reason <em>monkey</em> ends in ‑ês and not the plain 3sg ‑w: it is conceived as 'the little one that looks like (a person)' — a small primate, monkey‑sized. itwêwina lists the diminutive‑of‑diminutive <em>ocôcayisinâkês</em> 'the cute little monkey' on the same paradigm."
+        }
+      ]
+    },
+    "relatedForms": [
+      {
+        "english": "Monkeys (plural)",
+        "sro": "ocayisinâkêsak",
+        "syllabics": "ᐅᒐᔨᓯᓈᑫᓴᐠ",
+        "morphemes": [
+          {
+            "key": "ocayisinaakees-stem-pl",
+            "sro": "ocayisinâkês",
+            "syllabics": "ᐅᒐᔨᓯᓈᑫᐢ",
+            "gloss": "The full noun stem 'monkey'."
+          },
+          {
+            "key": "ak-pl-anim",
+            "sro": "‑ak",
+            "syllabics": "ᐊᐠ",
+            "gloss": "Animate plural suffix: '‑s'. The same ‑ak that pluralizes <em>kahkakiwak</em> 'ravens' and <em>atimwak</em> 'dogs'."
+          }
+        ],
+        "note": "itwêwina paradigm form (CW). Standard animate plural."
+      },
+      {
+        "english": "Monkey (obviative — 'the other monkey', when one is already in the discourse)",
+        "sro": "ocayisinâkêsa",
+        "syllabics": "ᐅᒐᔨᓯᓈᑫᓴ",
+        "morphemes": [
+          {
+            "key": "ocayisinaakees-stem-obv",
+            "sro": "ocayisinâkês",
+            "syllabics": "ᐅᒐᔨᓯᓈᑫᐢ",
+            "gloss": "The full noun stem 'monkey'."
+          },
+          {
+            "key": "a-obv-monkey",
+            "sro": "‑a",
+            "syllabics": "ᐊ",
+            "gloss": "Obviative suffix on the animate noun. Same ‑a that puts <em>otânisa</em> 'his/her daughter' in obviative on the <em>Farmer's Daughter</em> plaque."
+          }
+        ],
+        "note": "itwêwina paradigm form (CW). Used when a third party is also in play (e.g. 'the man saw a monkey' → the monkey is obviative)."
+      },
+      {
+        "english": "Monkey (Northern Cree variant)",
+        "sro": "ayisinâkes",
+        "syllabics": "ᐊᔨᓯᓈᑫᐢ",
+        "morphemes": [
+          {
+            "key": "ayisinaakees-northern",
+            "sro": "ayisinâkes",
+            "syllabics": "ᐊᔨᓯᓈᑫᐢ",
+            "gloss": "Northern Cree form: drops the <em>o‑</em> derivational prefix that Plains Cree carries. From Wolvengrey/AECD."
+          }
+        ],
+        "note": "Same word, dialectal split. Plains Cree (the wall's dialect) carries the <em>o‑</em>; Northern Cree does not. Useful for any rider who learned the word from a Northern speaker and notices the dialect difference."
+      }
+    ],
+    "quickReference": [
+      {
+        "english": "Monkey (Plains Cree)",
+        "sro": "ocayisinâkês",
+        "syllabics": "ᐅᒐᔨᓯᓈᑫᐢ",
+        "note": "Plaque headword. itwêwina/CW. NA animate."
+      },
+      {
+        "english": "Monkeys (plural)",
+        "sro": "ocayisinâkêsak",
+        "syllabics": "ᐅᒐᔨᓯᓈᑫᓴᐠ",
+        "note": "Standard NA plural with ‑ak."
+      },
+      {
+        "english": "Monkey (obviative — 'the other one')",
+        "sro": "ocayisinâkêsa",
+        "syllabics": "ᐅᒐᔨᓯᓈᑫᓴ",
+        "note": "Used when a third party is in the clause."
+      },
+      {
+        "english": "My (pet / cute little) monkey",
+        "sro": "nicôcayisinâkêsim",
+        "syllabics": "ᓂᒍᒐᔨᓯᓈᑫᓯᒼ",
+        "note": "1sg.poss diminutive form from the itwêwina paradigm. The doubled <em>co‑</em> reduplication is the affectionate / diminutive‑of‑diminutive shape."
+      },
+      {
+        "english": "Person, human being (the morphological cousin)",
+        "sro": "ayisiyiniw",
+        "syllabics": "ᐊᔨᓯᔨᓂᐤ",
+        "note": "Same <em>ayisi‑</em> 'look like / appear as' family. Side‑by‑side: <em>ayisiyiniw</em> 'one who looks like (a being)' vs <em>ocayisinâkês</em> 'a little one that looks (person‑like)'."
+      }
+    ],
+    "baseWords": [
+      {
+        "sro": "ocayisinâkês",
+        "english": "monkey (NA, Plains Cree)",
+        "syllabics": "ᐅᒐᔨᓯᓈᑫᐢ"
+      },
+      {
+        "sro": "‑isinâkos‑",
+        "english": "(VAI final) to look like, to appear as, to have the shape of",
+        "syllabics": "ᓯᓈᑯᐢ"
+      }
+    ]
+  },
+  "culturalStory": {
+    "heading": "The Little One Who Looks (Like a Person)",
+    "body": [
+      "<strong>Monkey</strong> is the English headline carved across the bottom of the plaque, but the larger Cree word painted across the body of the animal — <strong>ocayisinâkês</strong> — is where the linguistic interest lives. Plains Cree did not have monkeys in its pre‑contact ecological inventory, and so when monkeys arrived in the lexicon they arrived <em>described</em> rather than named: <em>ocayisinâkês</em> sits squarely on the productive <em>‑isinâkos‑</em> family of verbs and nouns of <em>looking like / appearing as</em>. The same final makes <em>nipiy‑isinâkosiw</em> 's/he looks watery' and <em>maskoso‑isinâkosiw</em> 's/he looks like a bear'. The <em>‑ês</em> tail is the small‑animate diminutive — these are the <em>little</em> ones who look (a little) like a person. It is a word built by an Algonquian language doing exactly what Algonquian languages do when they meet a new animal: describe it from the inside out, by what it <em>does</em> or <em>resembles</em>, and let the noun fall out of the description.",
+      "Visually the plaque is one of the most direct on the wall: a clean black silhouette of a long‑tailed primate walking the length of the panel, red Cree syllabics ᐅᒐᔨᓯᓈᑫᐢ painted across its body, the English block‑letter <strong>MONKEY</strong> sitting underneath. Red‑on‑black‑on‑white is the working palette of this wall: black silhouettes for the animals, red for Cree, black for English. The monkey's curled tail is what makes it instantly read as 'monkey' rather than as any of the other species on the wall.",
+      "On the ground, 'Monkey' is one of the long‑standing nicknames for the Trailforks trail listed as <em>Lovers Lane</em> in Central Edmonton North (trail id 15796), with formal aliases <em>Lovers Lane</em>, <em>Groat Road Roller Coaster</em>, and <em>Monkey Trail</em> all on the same line. The trail winds through tight overhanging brush — the kind of tunnel‑of‑green section that earns names like <em>monkey trail</em> from riders who feel like they're swinging through the canopy. The trail sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw‑Askiy</strong> (Plains Cree territory), and the carved <em>ocayisinâkês</em> is the local naming committee's choice for the Plains Cree word for the same idea."
+    ]
+  },
+  "trailStory": {
+    "heading": "",
+    "body": []
+  },
+  "sources": [
+    "itwêwina",
+    "Online Cree Dictionary",
+    "Plains Cree Dictionary",
+    "Trailforks"
+  ],
+  "notes": [
+    "CATALOGUE englishName FLAG: catalogue.json currently has englishName = 'Ocayisinakes' for this sign, but the carved English headline on the plaque is plainly <strong>MONKEY</strong> (all caps, single English word). The kiwapamitin‑style page header uses 'Monkey • ocayisinâkês • ᐅᒐᔨᓯᓈᑫᐢ' to put the English meaning first (matching the plaque). Propose changing catalogue.englishName from 'Ocayisinakes' to 'Monkey' so the catalogue card matches the page header and the plaque English. catalogue.title is currently 'Ocayisinakes' — also propose 'Monkey'. catalogue.creeName 'ocayisinâkês' and creeSyllabics 'ᐅᒐᔨᓯᓈᑫᐢ' already match the plaque and don't need editing.",
+    "Linguistics: ocayisinâkês is itwêwina/CW‑attested as 'a monkey (Plains)'. The morpheme split presented here (o‑ + cay‑ + ‑isinâkos‑ + ‑ês) is the teaching‑oriented analysis; an alternative collapses o‑cay‑ as a single Plains Cree variant marker and treats ‑isinâkês as a single 'small‑one‑looking‑like' nominal. Either reading is defensible. The Northern Cree variant <em>ayisinâkes</em> is included as a related form to make the dialect contrast visible.",
+    "Trailforks match for 'Monkey': trail id 15796 'Lovers Lane' in Central Edmonton North has 'Monkey Trail' as an explicit AKA. Same physical trail likely has both Cree plaques mounted at the trailhead (one for <em>Lovers Lane</em> = the heart/<em>nicimos mêskanâs</em>, one for <em>Monkey</em> = <em>ocayisinâkês</em>) because the trail is locally known by both names. Confidence ~70%: there is a non‑trivial chance 'Monkey' refers to a separate, locally‑unmapped section that just happens to share a nickname.",
+    "If the M1 manager (working lovers-lane) also wires the same trail id 15796 to that page, both pages will share the same Trailforks embed — that's intentional and matches the wall reality (multiple Cree plaques for one physical trail). The user can untangle this on review if a different trail is actually meant.",
+    "Image asset: docs/assets/ocayisinakes/monkey_render.png is the original ocayisanakes.png design source from the ocayisinakes/ folder. A second asset docs/assets/ocayisinakes/monkey_wall.jpg is a wall crop (box ≈ (2700, 1700, 3650, 2990) in 8160×6144 original) kept for the catalogue card view; the design PNG is used as the primary photo because it is cleaner and matches the plaque graphic 1:1.",
+    "mapCoords for trail 15796 (Lovers Lane / Monkey Trail) are estimated at the Groat Road Roller Coaster trailhead in Central Edmonton North (53.54072, ‑113.52975). The exact Trailforks FAQ trailhead value should be fetched and substituted if/when available; flagged as approximate."
+  ]
+}
