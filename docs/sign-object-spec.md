@@ -12,8 +12,8 @@ The goal is to keep every sign represented by one predictable data object that c
 
 Use these locations unless there is a strong reason to do otherwise.
 
-- `catalogue.json`: collection metadata and the list of sign objects.
-- `docs/index.html`: catalogue view that reads `catalogue.json`.
+- `docs/catalogue.json`: collection metadata and the list of sign objects. This is the file the static catalogue page and all `tools/*.py` editors / renderers read and write. (A separate, unrelated `./catalogue.json` stub at the repo root is consumed only by the author's external GitHub-file-organization API and is not touched by any sign tooling.)
+- `docs/index.html`: catalogue view that reads `catalogue.json` (resolved relative to itself, i.e. `docs/catalogue.json`).
 - `docs/stl-manifest.json`: public STL picker manifest keyed by sign folder.
 - `{folder}/`: source and production files for the physical sign.
 - `docs/{folder}/`: public sign folder containing `index.html` and web-ready `.stl` files for that sign.
@@ -471,7 +471,7 @@ Replaces the older single `pageStatus` corner pill which conflated mesh repair, 
 
 | Chip | Meaning                          | How it is determined                                                                       |
 | :--: | -------------------------------- | ------------------------------------------------------------------------------------------ |
-| `M`  | Mesh repaired (STL watertight)   | Manual: `model.checks.meshRepaired === true`. Tick after `admesh` / Blender repair confirms `0` open boundary edges. |
+| `M`  | Mesh repaired (STL watertight)   | `model.checks.meshRepaired === true`. Auto-set when the editor's `Run mesh closure repair` button calls `/api/repair-stl` and admesh reports `Total disconnected facets … Final: 0`. Also exposed as a manual checkbox in the editor for Blender-repaired meshes or hand-confirmed cases. |
 | `S`  | Final STL selected               | Auto: `model.docsStlPath` is set, i.e. the user has run `Set selected STL as final` (or it was hand-authored). |
 | `C`  | Colours and print layers         | Auto: `model.colorLayers` is non-empty and every entry has a non-empty `color`.            |
 | `T`  | Trailforks linked                | Auto: any of `pageContent.trailforks.trailUrl`, `trailId`, or `widgetUrl` is non-empty.    |

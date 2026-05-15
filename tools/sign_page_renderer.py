@@ -28,8 +28,11 @@ from typing import Any, Iterable
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-CATALOGUE_PATH = REPO_ROOT / "catalogue.json"
 DOCS_ROOT = REPO_ROOT / "docs"
+# The sign catalogue lives next to docs/index.html so the static page can
+# read it with a relative fetch on GitHub Pages. The repo-root catalogue.json
+# is an unrelated stub for the author's GitHub-file-organization API.
+CATALOGUE_PATH = DOCS_ROOT / "catalogue.json"
 
 RENDERABLE_STATUSES = {"agent-drafted", "user-reviewed", "published"}
 DEFAULT_SOURCES = {

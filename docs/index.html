@@ -1372,7 +1372,7 @@
                             <h3>Final STL</h3>
                             <p class="editor-note">Choose a candidate STL, repair it if needed, then designate it as the catalogue default.</p>
                             <div class="editor-actions">
-                                <button class="editor-button" id="repair-selected-stl" type="button" disabled>Run mesh closure repair</button>
+                                <button class="editor-button" id="repair-selected-stl" type="button" disabled>Repair &amp; solidify mesh</button>
                                 <button class="editor-button" id="set-final-stl" type="button" disabled>Set selected STL as final</button>
                             </div>
                         </div>
@@ -2012,6 +2012,18 @@
                             const center = new THREE.Vector3();
                             originalBoundingBox.getCenter(center);
                             geometry.translate(-center.x, -center.y, -center.z);
+
+                            // Some plaques are authored with a horizontal (landscape)
+                            // aspect ratio; rotate them 90° around the face normal so
+                            // they read upright in the viewer by default.
+                            const horizontalAspectModels = ['mistapiskihkoman', 'nicocwasaskanos'];
+                            const needsQuarterTurn = horizontalAspectModels.some(
+                                key => stlPath && stlPath.includes(key)
+                            );
+                            if (needsQuarterTurn) {
+                                geometry.rotateZ(Math.PI / 2);
+                                geometry.computeBoundingBox();
+                            }
 
                             const size = new THREE.Vector3();
                             originalBoundingBox.getSize(size);
@@ -2876,11 +2888,11 @@
 
             const stlPath = getModelSTLPath(selectedModel);
             if (!stlPath) {
-                setEditorLog('Select an STL before running mesh closure repair.');
+                setEditorLog('Select an STL before running mesh repair.');
                 return;
             }
 
-            updateEditorStatus('Running admesh mesh closure repair...');
+            updateEditorStatus('Running admesh closure + boolean union solidify...');
             document.getElementById('repair-selected-stl').disabled = true;
             document.getElementById('set-final-stl').disabled = true;
             document.getElementById('save-print-setup').disabled = true;
@@ -2891,7 +2903,8 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         modelId: selectedModel.id,
-                        stlPath
+                        stlPath,
+                        unionShells: true
                     })
                 });
                 const data = await response.json();
@@ -2907,11 +2920,50 @@
                     selectedSTLByModel[selectedModel.id] = data.repairedCandidate.path;
                 }
 
-                setEditorLog('Mesh closure repair complete.', data.operations || []);
+                // Server flips checks.meshRepaired based on admesh's "Total
+                // disconnected facets" final count AND, when the union step
+                // ran, the watertightness of the unioned solid. Merge the
+                // returned model back so the M chip on the catalogue card and
+                // the mesh-repaired checkbox reflect the new state.
+                if (data.model && typeof data.model === 'object') {
+                    Object.assign(selectedModel, data.model);
+                    const meshRepairedInput = document.getElementById('content-mesh-repaired');
+                    if (meshRepairedInput) {
+                        meshRepairedInput.checked = !!(selectedModel.checks && selectedModel.checks.meshRepaired);
+                    }
+                    renderCatalogue();
+                }
+
+                const admesh = data.admeshStats;
+                const union = data.unionStats;
+                const summaryParts = [];
+                if (admesh && admesh.totalDisconnectedFinal !== null && admesh.totalDisconnectedFinal !== undefined) {
+                    if (admesh.isWatertight) {
+                        summaryParts.push(`admesh: watertight (0 disconnected facets, was ${admesh.totalDisconnectedOriginal})`);
+                    } else {
+                        summaryParts.push(`admesh: ${admesh.totalDisconnectedFinal} disconnected facets remain (was ${admesh.totalDisconnectedOriginal})`);
+                    }
+                } else {
+                    summaryParts.push('admesh: complete');
+                }
+                if (union && !union.skipped) {
+                    summaryParts.push(
+                        `solidify: ${union.inputShells} shells → ${union.outputShells} ` +
+                        `(watertight=${union.outputWatertight ? 'yes' : 'no'})`
+                    );
+                } else if (union && union.skipped) {
+                    summaryParts.push('solidify: skipped (already a single shell)');
+                } else if (data.unionSkippedReason) {
+                    summaryParts.push(`solidify skipped: ${data.unionSkippedReason}`);
+                }
+                summaryParts.push(data.meshReady ? 'M chip flipped green.' : 'M chip stays pending.');
+                const summary = summaryParts.join(' • ');
+
+                setEditorLog(summary, data.operations || []);
                 updateDetailPane();
             } catch (error) {
-                setEditorLog(`Mesh closure repair failed: ${error.message}`);
-                updateEditorStatus(`Mesh closure repair failed: ${error.message}`);
+                setEditorLog(`Mesh repair failed: ${error.message}`);
+                updateEditorStatus(`Mesh repair failed: ${error.message}`);
             } finally {
                 updateEditorStatus();
             }

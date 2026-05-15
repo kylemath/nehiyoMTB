@@ -32,10 +32,29 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from sign_page_renderer import render_for_ids as render_pages_for_ids  # noqa: E402
 
+# Boolean-union helper. The mesh-fix pipeline runs admesh first (cheap, fixes
+# disconnected facets) and then this union pass to fold all disjoint shells
+# into a single solid so slicers like Creality Print don't treat embedded
+# silhouettes as hollow vases. The import is best-effort: if the optional
+# trimesh / manifold3d / shapely deps aren't installed we fall back to
+# admesh-only repair instead of failing the request.
+try:
+    from stl_union import union_stl as _union_stl  # noqa: E402
+    _UNION_IMPORT_ERROR: str | None = None
+except Exception as _exc:  # pragma: no cover - optional dependency
+    _union_stl = None  # type: ignore[assignment]
+    _UNION_IMPORT_ERROR = str(_exc)
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-CATALOGUE_PATH = REPO_ROOT / "catalogue.json"
 DOCS_ROOT = REPO_ROOT / "docs"
+# The real sign catalogue lives under docs/ so the static GitHub Pages site at
+# docs/index.html can load it via a relative `fetch('catalogue.json')` and so
+# that publishing the docs/ folder does not require any path rewriting. The
+# tiny `./catalogue.json` stub at the repo root is a separate file used by the
+# author's external GitHub-file-organization API and is intentionally left
+# alone by this server.
+CATALOGUE_PATH = DOCS_ROOT / "catalogue.json"
 MANIFEST_PATH = DOCS_ROOT / "stl-manifest.json"
 
 
@@ -287,6 +306,38 @@ def save_print_setup(payload: dict) -> dict:
     }
 
 
+_ADMESH_FACET_LINE_RE = re.compile(
+    r"^\s*(Facets with [123] disconnected edges?|Total disconnected facets)\s*:\s*"
+    r"(\d+)\s+(\d+)\s*$",
+    re.MULTILINE,
+)
+
+
+def parse_admesh_stats(output: str) -> dict:
+    """Parse admesh's ``=== Facet Status ===`` table for original/final counts.
+
+    admesh prints lines like::
+
+        Total disconnected facets        :     0                   0
+
+    where the first integer is the original (input) count and the second is
+    the final (post-repair) count. We surface both so the caller can decide
+    if the mesh ended up watertight.
+    """
+    stats: dict[str, dict[str, int]] = {}
+    for match in _ADMESH_FACET_LINE_RE.finditer(output or ""):
+        label, original, final = match.group(1).strip(), int(match.group(2)), int(match.group(3))
+        stats[label] = {"original": original, "final": final}
+    total = stats.get("Total disconnected facets")
+    is_watertight = total is not None and total["final"] == 0
+    return {
+        "byLabel": stats,
+        "isWatertight": is_watertight,
+        "totalDisconnectedFinal": total["final"] if total else None,
+        "totalDisconnectedOriginal": total["original"] if total else None,
+    }
+
+
 def repair_stl(payload: dict) -> dict:
     admesh_path = shutil.which("admesh")
     if not admesh_path:
@@ -330,28 +381,117 @@ def repair_stl(payload: dict) -> dict:
             repaired_path.unlink()
         raise ValueError((stderr_text or stdout_text or "admesh repair failed").strip())
 
+    admesh_stats = parse_admesh_stats(stdout_text + "\n" + stderr_text)
+
+    operations = [
+        f"Backed up {repo_relative(source_path)} to {repo_relative(backup_path)}",
+        f"Repaired {repo_relative(source_path)} to {repo_relative(repaired_path)}",
+    ]
+
+    # Boolean-union pass. Even an admesh-watertight mesh frequently still
+    # contains many disjoint shells (plaque body + embedded silhouettes) that
+    # share coincident faces; slicers like Creality Print cancel those facets
+    # and end up slicing the embedded shapes as open-bottomed vases. Running a
+    # manifold boolean union here merges everything that overlaps into a single
+    # solid and nudges shells apart by a sub-micron to defeat the cancellation.
+    union_stats: dict | None = None
+    union_skipped_reason: str | None = None
+    final_repair_path = repaired_path
+    union_requested = bool(payload.get("unionShells", True))
+
+    if not union_requested:
+        union_skipped_reason = "unionShells flag was false in the request"
+    elif _union_stl is None:
+        union_skipped_reason = (
+            f"Boolean-union deps unavailable ({_UNION_IMPORT_ERROR or 'unknown error'}); "
+            "install trimesh + manifold3d in the venv to enable solidify step"
+        )
+    else:
+        solid_path = unique_variant_path(
+            source_path.with_name(f"{source_path.stem}_solid{source_path.suffix}")
+        )
+        try:
+            union_stats = _union_stl(repaired_path, solid_path, verbose=False)
+        except Exception as exc:
+            union_skipped_reason = f"Boolean-union step failed: {exc}"
+        else:
+            if union_stats.get("skipped"):
+                operations.append(
+                    f"Boolean-union skipped: input was already a single shell "
+                    f"({union_stats['inputShells']} shell{'s' if union_stats['inputShells'] != 1 else ''})"
+                )
+                if solid_path.exists():
+                    solid_path.unlink()
+            else:
+                final_repair_path = solid_path
+                operations.append(
+                    f"Boolean-union merged {union_stats['inputShells']} shells "
+                    f"({union_stats['shellsFallback']} via silhouette fallback, "
+                    f"{union_stats['shellsDropped']} dropped) into "
+                    f"{union_stats['outputShells']} shell"
+                    f"{'s' if union_stats['outputShells'] != 1 else ''}; "
+                    f"wrote {repo_relative(solid_path)}"
+                )
+
+    if union_skipped_reason:
+        operations.append(union_skipped_reason)
+
     manifest = regenerate_manifest()
     candidates = candidate_records(model)
-    repaired_public_path = public_candidate_path(location, model, repaired_path)
+    repaired_public_path = public_candidate_path(location, model, final_repair_path)
     repaired_candidate = next(
         (candidate for candidate in candidates if candidate["path"] == repaired_public_path),
         {
             "location": location,
-            "filename": repaired_path.name,
+            "filename": final_repair_path.name,
             "path": repaired_public_path,
             "publicPath": repaired_public_path if location == "docs" else None,
         },
     )
+
+    # Mesh is "ready" when admesh found it watertight AND, if the union step
+    # ran, the solidified output is also watertight. The slicer-side hollow-
+    # shell bug only goes away when both are true.
+    admesh_ok = admesh_stats["totalDisconnectedFinal"] is not None and admesh_stats["isWatertight"]
+    union_ok = (
+        union_stats is None
+        or union_stats.get("skipped")
+        or union_stats.get("outputWatertight", False)
+    )
+    mesh_ready = bool(admesh_ok and union_ok)
+
+    if admesh_stats["totalDisconnectedFinal"] is not None:
+        existing_checks = model.get("checks") if isinstance(model.get("checks"), dict) else {}
+        merged_checks = dict(existing_checks)
+        merged_checks["meshRepaired"] = mesh_ready
+        model["checks"] = merged_checks
+        write_json(CATALOGUE_PATH, catalogue)
+        if mesh_ready:
+            operations.append(
+                "Mesh is watertight and solidified — flagged checks.meshRepaired=true"
+            )
+        else:
+            reasons: list[str] = []
+            if not admesh_ok and admesh_stats["totalDisconnectedFinal"] is not None:
+                reasons.append(f"{admesh_stats['totalDisconnectedFinal']} admesh-disconnected facets")
+            if union_stats and not union_stats.get("skipped") and not union_stats.get("outputWatertight"):
+                reasons.append("union output is not watertight")
+            joined = "; ".join(reasons) or "see above"
+            operations.append(
+                f"Mesh not yet ready ({joined}) — checks.meshRepaired set to false"
+            )
 
     return {
         "ok": True,
         "manifest": manifest,
         "candidates": candidates,
         "repairedCandidate": repaired_candidate,
-        "operations": [
-            f"Backed up {repo_relative(source_path)} to {repo_relative(backup_path)}",
-            f"Repaired {repo_relative(source_path)} to {repo_relative(repaired_path)}",
-        ],
+        "model": model,
+        "admeshStats": admesh_stats,
+        "unionStats": union_stats,
+        "unionSkippedReason": union_skipped_reason,
+        "meshReady": mesh_ready,
+        "operations": operations,
         "admeshOutput": "\n".join(part for part in [stdout_text.strip(), stderr_text.strip()] if part),
     }
 

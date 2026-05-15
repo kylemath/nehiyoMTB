@@ -30,7 +30,7 @@
       "creeSyllabics": "ᑲᐦᑲᑭᐤ",
       "folder": "kahkakiw",
       "stlPath": "kahkakiw/production.stl",
-      "docsStlPath": "kahkakiw/kahkakiw_plaque_hybrid_fixed.stl",
+      "docsStlPath": "kahkakiw/kahkakiw_plaque_admesh_fixed.stl",
       "imagePath": "kahkakiw/raven_wild.png",
       "colors": [
         "white",
@@ -56,9 +56,9 @@
       "description": "Raven trail sign with black raven graphic",
       "status": "published",
       "pageContent": {
-        "pageStatus": "agent-drafted",
+        "pageStatus": "user-reviewed",
         "accentColor": "#000000",
-        "themeName": "black",
+        "themeName": "",
         "headerTitle": "Raven • kahkakiw • ᑲᐦᑲᑭᐤ",
         "photo": {
           "src": "../assets/kahkakiw/raven_wild.png",
@@ -69,17 +69,7 @@
           "trailId": "146421",
           "trailUrl": "https://www.trailforks.com/trails/raven-146421/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=146421&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
-          "displayName": "Raven",
-          "mapCoords": {
-            "lat": 53.51605,
-            "lng": -113.53973,
-            "source": "trailforks trailhead 146421"
-          },
-          "mapEndCoords": {
-            "lat": 53.51092,
-            "lng": -113.53973,
-            "source": "estimated: 570m southbound descent to river, per trailforks"
-          }
+          "displayName": "raven-146421"
         },
         "linguistics": {
           "meaning": "Raven",
@@ -143,17 +133,20 @@
             {
               "english": "Raven",
               "sro": "kahkakiw",
-              "syllabics": "ᑲᐦᑲᑭᐤ"
+              "syllabics": "ᑲᐦᑲᑭᐤ",
+              "note": ""
             },
             {
               "english": "Ravens",
               "sro": "kahkakiwak",
-              "syllabics": "ᑲᐦᑲᑭᐘᐠ"
+              "syllabics": "ᑲᐦᑲᑭᐘᐠ",
+              "note": ""
             },
             {
               "english": "Little Raven",
               "sro": "kahkakiwisis",
-              "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ"
+              "syllabics": "ᑲᐦᑲᑭᐏᓯᓯᐢ",
+              "note": ""
             }
           ],
           "baseWords": [
@@ -187,6 +180,9 @@
           "Trailforks: confident match found by sub-subagent S2 — Trail ID 146421, slug 'raven-146421', region Buena Vista (Edmonton river valley park, verified via Trailforks Edmonton region directory and Edmonton conditions feed). S2 could not directly fetch the trail-detail page (Trailforks rate-limited the request), but the trail ID was read verbatim from two Trailforks-hosted Edmonton listings. Recommend a 5-second human eyeball on https://www.trailforks.com/trails/raven-146421/ before flipping pageStatus to 'user-reviewed'.",
           "STL files in docs/kahkakiw/: kahkakiw_plaque.stl, kahkakiw_plaque_bk.stl, kahkakiw_plaque_hybrid_fixed.stl — filename matches sign id."
         ]
+      },
+      "checks": {
+        "meshRepaired": true
       }
     },
     {

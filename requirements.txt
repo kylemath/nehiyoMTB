@@ -1,0 +1,25 @@
+# Python dependencies for the local catalogue editor server and STL pipeline.
+#
+# Install into the project venv (do not install globally):
+#
+#     python3 -m venv .venv
+#     source .venv/bin/activate
+#     pip install -r requirements.txt
+#
+# The editor server (`tools/catalogue_editor_server.py`) only needs the standard
+# library, but its `/api/repair-stl` endpoint runs a boolean-union pass after
+# admesh. That pass needs trimesh + manifold3d + shapely. Without them, repair
+# falls back to admesh-only and logs a "solidify skipped" reason in the UI.
+
+# Mesh I/O / fallbacks already in use elsewhere in the repo
+numpy-stl==3.2.0
+
+# Boolean-union pipeline (tools/stl_union.py)
+trimesh==4.12.2
+manifold3d==3.4.1
+shapely==2.0.7
+
+# trimesh runtime deps it doesn't pull in by default
+networkx==3.2.1
+scipy==1.13.1
+numpy==2.0.2

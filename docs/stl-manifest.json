@@ -44,9 +44,7 @@
     "toPrintV4.pngW100H100T2V4B0A0C0PS.stl"
   ],
   "kahkakiw": [
-    "kahkakiw_plaque.stl",
-    "kahkakiw_plaque_bk.stl",
-    "kahkakiw_plaque_hybrid_fixed.stl"
+    "kahkakiw_plaque_admesh_fixed.stl"
   ],
   "kakwa": [
     "kakwa_plaque_v3_admesh_fixed_1_admesh_fixed.stl"
