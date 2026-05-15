@@ -2381,7 +2381,7 @@
         async function loadCatalogue() {
             try {
                 const [catalogueResponse, stlManifestResponse] = await Promise.all([
-                    fetch('../catalogue.json'),
+                    fetch('catalogue.json'),
                     fetch('stl-manifest.json')
                 ]);
                 catalogue = await catalogueResponse.json();
