@@ -55,9 +55,9 @@ Required fields:
 - `id`: stable kebab-case identifier used by the web catalogue.
 - `signNumber`: stable integer sign number used in cards, labels, printed references, and numbered folder naming.
 - `numberedFolder`: canonical numbered folder slug, for example `01-kahkakiw`.
-- `title`: display name used on catalogue cards.
-- `englishName`: English trail or sign name.
-- `creeName`: Standard Roman Orthography text when available. Use an empty string only when no Cree form has been chosen yet.
+- `title`: legacy display name. Catalogue cards should prefer `englishName` as the primary visible name.
+- `englishName`: English trail or sign name. This is the primary card name.
+- `creeName`: Standard Roman Orthography transliteration when available. Use an empty string only when no Cree form has been chosen yet.
 - `creeSyllabics`: syllabics matching `creeName` when available. Use an empty string only when no syllabics have been chosen yet.
 - `folder`: source folder for the sign files.
 - `stlPath`: path to the production STL from the repository root.
@@ -381,6 +381,10 @@ Shape:
       "trailUrl": "https://www.trailforks.com/trails/i-see-you/",
       "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=805899&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
       "displayName": "I See You",
+      "trackSourcePath": "downloads/trails/i-see-you.xml",
+      "mapStatus": "Shows on map at the Trailforks trailhead with a detailed track.",
+      "iconStatus": "Marker icon can be generated from the selected final STL.",
+      "iconSrc": "../assets/kiwapamitin/map-icons/i-see-you.png",
       "mapCoords": { "lat": 53.51605, "lng": -113.53973, "source": "trailforks trailhead 805899" },
       "mapEndCoords": { "lat": 53.51092, "lng": -113.53973, "source": "estimated: 570m southbound descent" },
       "track": [[53.51605, -113.53973], [53.51610, -113.53980]]
@@ -441,6 +445,10 @@ Field rules:
 - `accentColor` is a CSS color used for the page's `--accent`. The renderer derives related CSS variables (`--accent2`, `--primary-bg`, `--formula-bg`) from it.
 - `photo.src` is relative to `docs/{folder}/index.html`. Use `../assets/{folder}/...` for assets under `docs/assets/`. If `photo` is omitted the renderer falls back to embedding the STL render via three.js.
 - `trailforks` is optional. When omitted, the renderer shows a "trail information coming soon" stub.
+- `trailforks.trackSourcePath` is optional. Use it for the repo-relative or local downloaded XML / GPX path that was used, or should be used, to build `track`. The local content editor's file selector copies selected `.xml`, `.gpx`, `.kml`, or `.tcx` files into `docs/assets/{folder}/tracks/` and fills this field automatically.
+- `trailforks.mapStatus` is optional editable curator text describing whether the sign currently appears on the catalogue map and what data is missing if it does not.
+- `trailforks.iconStatus` is optional editable curator text describing whether the map marker icon is generated from the final STL, falling back to a photo/image, or still missing.
+- `trailforks.iconSrc` is optional. When present, the catalogue map uses it as a manual marker icon override instead of generating a marker from the STL. The local editor's map-icon selector copies selected image files into `docs/assets/{folder}/map-icons/` and fills this field automatically.
 - `trailforks.mapCoords` is optional. When present, the catalogue map view in `docs/index.html` places a sign-image marker at `{lat, lng}` on an Edmonton map. Copy the trailhead coordinates from the Trailforks trail page FAQ ("The trailhead is located at coordinates ..."). The optional `source` string is a free-form provenance note.
 - `trailforks.mapEndCoords` is optional. When present alongside `mapCoords` (and no detailed `track` is set), the catalogue map view draws a dashed rough-estimate line from the trailhead to this point, with green start / blue end dot markers. Use this when you do not have a digitised path but can estimate the end coordinate from the Trailforks length + bearing description. The line tooltip labels it as a rough estimate.
 - `trailforks.track` is optional. When present, the catalogue map view draws a solid polyline from the array of `[lat, lng]` points, with green start / blue end dot markers (and takes precedence over `mapEndCoords`). Trailforks does not expose track GeoJSON over its public web (Cloudflare blocks scripted requests, and the JSON API requires `app_id`/`app_secret`), so populate this array manually using one of:

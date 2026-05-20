@@ -1,6 +1,6 @@
 {
   "backbreaker": [
-    "backbreaker_plaque_admesh_fixed.stl"
+    "Assembly.stl"
   ],
   "bedSprings": [
     "bed_springs_creeBed 2.stl",
@@ -47,7 +47,7 @@
     "kahkakiw_plaque_admesh_fixed.stl"
   ],
   "kakwa": [
-    "kakwa_plaque_v3_admesh_fixed_1_admesh_fixed.stl"
+    "kakwa_plaque_v3_admesh_fixed_1_admesh_fixed_admesh_fixed.stl"
   ],
   "kiwapamitin": [
     "kiwapamitin.stl",
@@ -101,9 +101,7 @@
     "maskihkîwiyiniw_plaque_multicolour_rulers_v4.stl"
   ],
   "mistapiskihkoman": [
-    "mistâpiskihkomân_plaque.stl",
-    "mistâpiskihkomân_plaque_v3.stl",
-    "v2_mistâpiskihkomân_plaque_v2.stl"
+    "mistâpiskihkomân_plaque_v3_solid_2.stl"
   ],
   "nicocwasaskanos": [
     "nicocwâsaskanôs_plaque.stl",
@@ -148,8 +146,7 @@
     "purgatory_plaque_v3.stl"
   ],
   "sapwapahcikan-paskisikan": [
-    "sapwapahcikan-paskisikan-plaque.stl",
-    "sapwapahcikan-paskisikan-plaque_v2.stl"
+    "sapwapahcikan-paskisikan-plaque_v2_admesh_fixed.stl"
   ],
   "slinky": [
     "classicspringo.stl",
@@ -159,7 +156,6 @@
     "Slinky_Remix.stl"
   ],
   "sôniyâwâhkêsîs": [
-    "sôniyâwâhkêsîs.stl",
     "sôniyâwâhkêsîs_plaque.stl"
   ],
   "victoriaSecret": [

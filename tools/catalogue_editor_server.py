@@ -17,6 +17,7 @@ import base64
 import filecmp
 import json
 import mimetypes
+import os
 import posixpath
 import re
 import shutil
@@ -338,23 +339,19 @@ def parse_admesh_stats(output: str) -> dict:
     }
 
 
-def repair_stl(payload: dict) -> dict:
+def _empty_admesh_stats() -> dict:
+    return {
+        "byLabel": {},
+        "isWatertight": False,
+        "totalDisconnectedFinal": None,
+        "totalDisconnectedOriginal": None,
+    }
+
+
+def _run_admesh_repair(source_path: Path, repaired_path: Path) -> tuple[dict, str, str]:
     admesh_path = shutil.which("admesh")
     if not admesh_path:
         raise ValueError("admesh is not installed. Run: brew install admesh")
-
-    catalogue = load_catalogue()
-    model = find_model(catalogue, str(payload.get("modelId", "")))
-    requested_path = str(payload.get("stlPath", ""))
-    location, source_path = resolve_candidate(model, requested_path)
-
-    if not source_path.exists():
-        raise ValueError(f"Selected STL does not exist: {requested_path}")
-
-    backup_path = unique_variant_path(source_path.with_name(f"{source_path.stem}_bk{source_path.suffix}"))
-    repaired_path = unique_variant_path(source_path.with_name(f"{source_path.stem}_admesh_fixed{source_path.suffix}"))
-
-    shutil.copy2(source_path, backup_path)
 
     command = [
         admesh_path,
@@ -381,26 +378,55 @@ def repair_stl(payload: dict) -> dict:
             repaired_path.unlink()
         raise ValueError((stderr_text or stdout_text or "admesh repair failed").strip())
 
-    admesh_stats = parse_admesh_stats(stdout_text + "\n" + stderr_text)
+    return parse_admesh_stats(stdout_text + "\n" + stderr_text), stdout_text, stderr_text
+
+
+def repair_stl(payload: dict) -> dict:
+    admesh_path = shutil.which("admesh")
+    if not admesh_path:
+        raise ValueError("admesh is not installed. Run: brew install admesh")
+
+    catalogue = load_catalogue()
+    model = find_model(catalogue, str(payload.get("modelId", "")))
+    requested_path = str(payload.get("stlPath", ""))
+    location, source_path = resolve_candidate(model, requested_path)
+
+    if not source_path.exists():
+        raise ValueError(f"Selected STL does not exist: {requested_path}")
+
+    backup_path = unique_variant_path(source_path.with_name(f"{source_path.stem}_bk{source_path.suffix}"))
+    repaired_path = unique_variant_path(source_path.with_name(f"{source_path.stem}_admesh_fixed{source_path.suffix}"))
+
+    shutil.copy2(source_path, backup_path)
+    stdout_text = ""
+    stderr_text = ""
+    admesh_stats = _empty_admesh_stats()
 
     operations = [
         f"Backed up {repo_relative(source_path)} to {repo_relative(backup_path)}",
-        f"Repaired {repo_relative(source_path)} to {repo_relative(repaired_path)}",
     ]
 
-    # Boolean-union pass. Even an admesh-watertight mesh frequently still
+    # Boolean-union pass. Even a watertight STL can still
     # contains many disjoint shells (plaque body + embedded silhouettes) that
     # share coincident faces; slicers like Creality Print cancel those facets
     # and end up slicing the embedded shapes as open-bottomed vases. Running a
-    # manifold boolean union here merges everything that overlaps into a single
-    # solid and nudges shells apart by a sub-micron to defeat the cancellation.
+    # manifold boolean union here turns the selected STL into multiple
+    # independent closed solids while preserving relief detail. Important:
+    # run this on the selected source STL, not on an admesh --fill-holes
+    # intermediate, because admesh can fill intentional fine negative detail
+    # (eyes, fur cuts, tiny text counters) before the boolean sees it.
     union_stats: dict | None = None
     union_skipped_reason: str | None = None
+    # `union_skipped_intentionally` distinguishes "user turned union off" from
+    # "we tried to union and couldn't". The mesh-ready calculation below only
+    # treats the former as still-acceptable.
+    union_skipped_intentionally = False
     final_repair_path = repaired_path
     union_requested = bool(payload.get("unionShells", True))
 
     if not union_requested:
         union_skipped_reason = "unionShells flag was false in the request"
+        union_skipped_intentionally = True
     elif _union_stl is None:
         union_skipped_reason = (
             f"Boolean-union deps unavailable ({_UNION_IMPORT_ERROR or 'unknown error'}); "
@@ -410,8 +436,21 @@ def repair_stl(payload: dict) -> dict:
         solid_path = unique_variant_path(
             source_path.with_name(f"{source_path.stem}_solid{source_path.suffix}")
         )
+        # Strategy passthrough: front-end can override with "clean" (drop
+        # cancelling triangle pairs only), "preserve" (solidify shells
+        # independently), "manifold" (boolean union), or "silhouette" (force
+        # flatten to single slab). The default "auto" runs the minimal-touch
+        # clean strategy that preserves the original artwork surface.
+        union_strategy = str(payload.get("unionStrategy", "auto"))
+        if union_strategy not in {"auto", "clean", "preserve", "manifold", "silhouette"}:
+            union_strategy = "auto"
         try:
-            union_stats = _union_stl(repaired_path, solid_path, verbose=False)
+            union_stats = _union_stl(
+                source_path,
+                solid_path,
+                strategy=union_strategy,
+                verbose=False,
+            )
         except Exception as exc:
             union_skipped_reason = f"Boolean-union step failed: {exc}"
         else:
@@ -424,17 +463,51 @@ def repair_stl(payload: dict) -> dict:
                     solid_path.unlink()
             else:
                 final_repair_path = solid_path
+                used = union_stats.get("strategyUsed") or "?"
+                fallback_note = ""
+                if union_stats.get("manifoldAttempted") and used == "silhouette":
+                    fallback_note = " (manifold attempt was not watertight; fell back to silhouette)"
+                verb = {
+                    "clean": "Cleaned",
+                    "preserve": "Solidified",
+                    "manifold": "Boolean-union",
+                    "silhouette": "Flattened",
+                }.get(used, "Processed")
                 operations.append(
-                    f"Boolean-union merged {union_stats['inputShells']} shells "
-                    f"({union_stats['shellsFallback']} via silhouette fallback, "
-                    f"{union_stats['shellsDropped']} dropped) into "
-                    f"{union_stats['outputShells']} shell"
-                    f"{'s' if union_stats['outputShells'] != 1 else ''}; "
-                    f"wrote {repo_relative(solid_path)}"
+                    f"{verb} [{used}] processed {union_stats['inputShells']} shells "
+                    f"into {union_stats['outputShells']} shell"
+                    f"{'s' if union_stats['outputShells'] != 1 else ''}"
+                    f"; output watertight={union_stats['outputWatertight']}"
+                    f"; wrote {repo_relative(solid_path)}{fallback_note}"
                 )
+                cleanup = union_stats.get("cleanupAdmesh")
+                if isinstance(cleanup, dict) and cleanup.get("ran"):
+                    nf = cleanup.get("normalsFixed", 0)
+                    dr = cleanup.get("degeneratesRemoved", 0)
+                    if nf or dr:
+                        operations.append(
+                            f"Post-union admesh cleanup: normals_fixed={nf}, "
+                            f"degenerates_removed={dr}"
+                        )
 
     if union_skipped_reason:
         operations.append(union_skipped_reason)
+
+    # Fallback / legacy path: if solidification didn't produce an output, run
+    # the old admesh repair so the button still does something useful when
+    # union deps are missing, union is intentionally disabled, or the boolean
+    # step fails. This path is deliberately after the union attempt to avoid
+    # losing fine relief details on signs like sôniyâwâhkêsîs.
+    if final_repair_path == repaired_path and not repaired_path.exists():
+        admesh_stats, stdout_text, stderr_text = _run_admesh_repair(source_path, repaired_path)
+        operations.append(f"Repaired {repo_relative(source_path)} to {repo_relative(repaired_path)}")
+    elif union_stats and union_stats.get("outputWatertight"):
+        admesh_stats = {
+            "byLabel": {},
+            "isWatertight": True,
+            "totalDisconnectedFinal": 0,
+            "totalDisconnectedOriginal": None,
+        }
 
     manifest = regenerate_manifest()
     candidates = candidate_records(model)
@@ -449,15 +522,18 @@ def repair_stl(payload: dict) -> dict:
         },
     )
 
-    # Mesh is "ready" when admesh found it watertight AND, if the union step
-    # ran, the solidified output is also watertight. The slicer-side hollow-
-    # shell bug only goes away when both are true.
+    # Mesh is "ready" when admesh found it watertight AND the solidify step
+    # either succeeded (output watertight), was a no-op (input was already a
+    # single shell), or was intentionally disabled by the caller. A failed or
+    # dep-missing union does NOT count as ready, because the slicer-side
+    # hollow-shell bug is precisely what the union step exists to fix.
     admesh_ok = admesh_stats["totalDisconnectedFinal"] is not None and admesh_stats["isWatertight"]
-    union_ok = (
-        union_stats is None
-        or union_stats.get("skipped")
-        or union_stats.get("outputWatertight", False)
-    )
+    if union_stats is None:
+        union_ok = union_skipped_intentionally
+    elif union_stats.get("skipped"):
+        union_ok = True
+    else:
+        union_ok = bool(union_stats.get("outputWatertight", False))
     mesh_ready = bool(admesh_ok and union_ok)
 
     if admesh_stats["totalDisconnectedFinal"] is not None:
@@ -467,14 +543,28 @@ def repair_stl(payload: dict) -> dict:
         model["checks"] = merged_checks
         write_json(CATALOGUE_PATH, catalogue)
         if mesh_ready:
-            operations.append(
-                "Mesh is watertight and solidified — flagged checks.meshRepaired=true"
-            )
+            ran_union = union_stats is not None and not union_stats.get("skipped")
+            if ran_union:
+                operations.append(
+                    "Mesh is watertight and solidified — flagged checks.meshRepaired=true"
+                )
+            elif union_stats and union_stats.get("skipped"):
+                operations.append(
+                    "Mesh is watertight (single-shell input, no solidify needed) "
+                    "— flagged checks.meshRepaired=true"
+                )
+            else:
+                operations.append(
+                    "Mesh is watertight (solidify intentionally disabled) "
+                    "— flagged checks.meshRepaired=true"
+                )
         else:
             reasons: list[str] = []
             if not admesh_ok and admesh_stats["totalDisconnectedFinal"] is not None:
                 reasons.append(f"{admesh_stats['totalDisconnectedFinal']} admesh-disconnected facets")
-            if union_stats and not union_stats.get("skipped") and not union_stats.get("outputWatertight"):
+            if union_stats is None and not union_skipped_intentionally:
+                reasons.append("boolean-union step did not run (see solidify reason)")
+            elif union_stats and not union_stats.get("skipped") and not union_stats.get("outputWatertight"):
                 reasons.append("union output is not watertight")
             joined = "; ".join(reasons) or "see above"
             operations.append(
@@ -506,6 +596,42 @@ def _clean_string(value: Any, *, allow_empty: bool = True) -> str:
     if not allow_empty and not text:
         raise ValueError("Empty string not allowed")
     return text
+
+
+def _is_number(value: Any) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def _clean_coord(raw: Any, field_name: str) -> dict:
+    if raw is None:
+        return {}
+    if not isinstance(raw, dict):
+        raise ValueError(f"trailforks.{field_name} must be an object")
+    lat = raw.get("lat")
+    lng = raw.get("lng")
+    if not _is_number(lat) or not _is_number(lng):
+        raise ValueError(f"trailforks.{field_name} must include numeric lat and lng")
+    coord = {"lat": lat, "lng": lng}
+    source = _clean_string(raw.get("source"))
+    if source:
+        coord["source"] = source
+    return coord
+
+
+def _clean_track(raw: Any) -> list[list[float]]:
+    if raw is None:
+        return []
+    if not isinstance(raw, list):
+        raise ValueError("trailforks.track must be a list")
+    cleaned: list[list[float]] = []
+    for index, point in enumerate(raw):
+        if not isinstance(point, list) or len(point) != 2:
+            raise ValueError(f"trailforks.track point {index} must be [lat, lng]")
+        lat, lng = point
+        if not _is_number(lat) or not _is_number(lng):
+            raise ValueError(f"trailforks.track point {index} must contain numeric lat/lng")
+        cleaned.append([lat, lng])
+    return cleaned if len(cleaned) > 1 else []
 
 
 def _clean_morphemes(raw: Any) -> list[dict]:
@@ -634,19 +760,38 @@ def _clean_trailforks(raw: Any) -> dict:
     trail_url = _clean_string(raw.get("trailUrl"))
     widget_url = _clean_string(raw.get("widgetUrl"))
     display_name = _clean_string(raw.get("displayName"))
-    if not trail_url and not widget_url and not trail_id:
-        return {}
+    track_source_path = _clean_string(raw.get("trackSourcePath"))
+    map_status = _clean_string(raw.get("mapStatus"))
+    icon_status = _clean_string(raw.get("iconStatus"))
+    icon_src = _clean_string(raw.get("iconSrc"))
+    map_coords = _clean_coord(raw.get("mapCoords"), "mapCoords") if raw.get("mapCoords") is not None else {}
+    map_end_coords = _clean_coord(raw.get("mapEndCoords"), "mapEndCoords") if raw.get("mapEndCoords") is not None else {}
+    track = _clean_track(raw.get("track")) if raw.get("track") is not None else []
     if trail_id and not widget_url:
         widget_url = (
             f"https://www.trailforks.com/widgets/trail/?trailid={trail_id}"
             "&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets"
             "&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1"
         )
-    return {
+    cleaned = {
         "trailId": trail_id,
         "trailUrl": trail_url,
         "widgetUrl": widget_url,
         "displayName": display_name,
+        "trackSourcePath": track_source_path,
+        "mapStatus": map_status,
+        "iconStatus": icon_status,
+        "iconSrc": icon_src,
+    }
+    if map_coords:
+        cleaned["mapCoords"] = map_coords
+    if map_end_coords:
+        cleaned["mapEndCoords"] = map_end_coords
+    if track:
+        cleaned["track"] = track
+    return {
+        key: value for key, value in cleaned.items()
+        if value not in ("", [], {})
     }
 
 
@@ -731,9 +876,28 @@ def _clean_checks(raw: Any, existing: Any) -> dict:
     return merged
 
 
+def _clean_name_fields(raw: Any) -> dict:
+    if raw is None:
+        return {}
+    if not isinstance(raw, dict):
+        raise ValueError("nameFields must be an object")
+    english_name = _clean_string(raw.get("englishName"))
+    if not english_name:
+        raise ValueError("English primary name is required")
+    return {
+        "englishName": english_name,
+        "creeName": _clean_string(raw.get("creeName")),
+        "creeSyllabics": _clean_string(raw.get("creeSyllabics")),
+    }
+
+
 def save_sign_content(payload: dict) -> dict:
     catalogue = load_catalogue()
     model = find_model(catalogue, str(payload.get("modelId", "")))
+
+    name_fields = _clean_name_fields(payload.get("nameFields"))
+    if name_fields:
+        model.update(name_fields)
 
     page_content = _clean_page_content(payload.get("pageContent"))
     model["pageContent"] = page_content
@@ -761,6 +925,8 @@ def save_sign_content(payload: dict) -> dict:
 
 ALLOWED_PHOTO_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 PHOTO_MAX_BYTES = 20 * 1024 * 1024  # 20 MB safety cap
+ALLOWED_TRAIL_SOURCE_EXTENSIONS = {".xml", ".gpx", ".kml", ".tcx"}
+TRAIL_SOURCE_MAX_BYTES = 10 * 1024 * 1024  # 10 MB safety cap
 
 
 def _sanitize_asset_filename(name: str) -> str:
@@ -844,6 +1010,111 @@ def upload_sign_photo(payload: dict) -> dict:
     }
 
 
+def upload_trail_source(payload: dict) -> dict:
+    catalogue = load_catalogue()
+    model = find_model(catalogue, str(payload.get("modelId", "")))
+    folder = model.get("folder")
+    if not folder:
+        raise ValueError("Model has no folder")
+
+    filename = _sanitize_asset_filename(str(payload.get("filename", "trail.gpx")))
+    ext = Path(filename).suffix.lower()
+    if ext not in ALLOWED_TRAIL_SOURCE_EXTENSIONS:
+        raise ValueError(
+            f"Unsupported trail file extension {ext!r}; "
+            f"allowed: {sorted(ALLOWED_TRAIL_SOURCE_EXTENSIONS)}"
+        )
+
+    data_b64 = payload.get("contentBase64") or ""
+    if not isinstance(data_b64, str) or not data_b64.strip():
+        raise ValueError("contentBase64 is required")
+    if data_b64.startswith("data:"):
+        comma = data_b64.find(",")
+        if comma >= 0:
+            data_b64 = data_b64[comma + 1 :]
+    try:
+        raw = base64.b64decode(data_b64, validate=False)
+    except Exception as exc:
+        raise ValueError(f"Could not decode base64 trail file: {exc}")
+
+    if len(raw) == 0:
+        raise ValueError("Decoded trail file is empty")
+    if len(raw) > TRAIL_SOURCE_MAX_BYTES:
+        raise ValueError(
+            f"Trail file is too large ({len(raw)} bytes); "
+            f"max {TRAIL_SOURCE_MAX_BYTES} bytes (10 MB)"
+        )
+
+    tracks_root = DOCS_ROOT / "assets" / folder / "tracks"
+    tracks_root.mkdir(parents=True, exist_ok=True)
+
+    destination = tracks_root / filename
+    if destination.exists():
+        destination = unique_variant_path(destination)
+
+    destination.write_bytes(raw)
+    repo_path = repo_relative(destination)
+
+    return {
+        "ok": True,
+        "filename": destination.name,
+        "path": repo_path,
+        "src": f"../assets/{folder}/tracks/{destination.name}",
+        "bytes": len(raw),
+    }
+
+
+def upload_map_icon(payload: dict) -> dict:
+    catalogue = load_catalogue()
+    model = find_model(catalogue, str(payload.get("modelId", "")))
+    folder = model.get("folder")
+    if not folder:
+        raise ValueError("Model has no folder")
+
+    filename = _sanitize_asset_filename(str(payload.get("filename", "map-icon.png")))
+    ext = Path(filename).suffix.lower()
+    if ext not in ALLOWED_PHOTO_EXTENSIONS:
+        raise ValueError(
+            f"Unsupported image extension {ext!r}; allowed: {sorted(ALLOWED_PHOTO_EXTENSIONS)}"
+        )
+
+    data_b64 = payload.get("contentBase64") or ""
+    if not isinstance(data_b64, str) or not data_b64.strip():
+        raise ValueError("contentBase64 is required")
+    if data_b64.startswith("data:"):
+        comma = data_b64.find(",")
+        if comma >= 0:
+            data_b64 = data_b64[comma + 1 :]
+    try:
+        raw = base64.b64decode(data_b64, validate=False)
+    except Exception as exc:
+        raise ValueError(f"Could not decode base64 map icon: {exc}")
+
+    if len(raw) == 0:
+        raise ValueError("Decoded map icon is empty")
+    if len(raw) > PHOTO_MAX_BYTES:
+        raise ValueError(
+            f"Map icon is too large ({len(raw)} bytes); max {PHOTO_MAX_BYTES} bytes (20 MB)"
+        )
+
+    icon_root = DOCS_ROOT / "assets" / folder / "map-icons"
+    icon_root.mkdir(parents=True, exist_ok=True)
+
+    destination = icon_root / filename
+    if destination.exists():
+        destination = unique_variant_path(destination)
+
+    destination.write_bytes(raw)
+    public_src = f"../assets/{folder}/map-icons/{destination.name}"
+
+    return {
+        "ok": True,
+        "filename": destination.name,
+        "src": public_src,
+        "bytes": len(raw),
+    }
+
+
 def regenerate_sign_page(payload: dict) -> dict:
     ids_raw = payload.get("modelIds")
     if ids_raw is None and payload.get("modelId"):
@@ -918,6 +1189,8 @@ class CatalogueEditorHandler(SimpleHTTPRequestHandler):
             "/api/save-sign-content",
             "/api/regenerate-sign-page",
             "/api/upload-sign-photo",
+            "/api/upload-trail-source",
+            "/api/upload-map-icon",
         }
         if parsed.path not in known_endpoints:
             self.send_error_json(404, "Unknown API endpoint")
@@ -941,8 +1214,68 @@ class CatalogueEditorHandler(SimpleHTTPRequestHandler):
             if parsed.path == "/api/upload-sign-photo":
                 self.send_json(200, upload_sign_photo(payload))
                 return
+            if parsed.path == "/api/upload-trail-source":
+                self.send_json(200, upload_trail_source(payload))
+                return
+            if parsed.path == "/api/upload-map-icon":
+                self.send_json(200, upload_map_icon(payload))
+                return
         except Exception as exc:  # pragma: no cover - local tool ergonomics
             self.send_error_json(400, str(exc))
+
+
+def _check_solidify_deps() -> None:
+    """Print a loud warning when the solidify pass won't be available.
+
+    The /api/repair-stl endpoint runs an stl_union solidify pass after admesh
+    that needs trimesh + manifold3d + shapely installed in the active Python.
+    When the server is started outside the project venv those imports fail
+    silently per request and only show up as "Boolean-union deps unavailable"
+    in the operations log. Shout about it at startup so it's obvious which
+    Python the server is running on.
+    """
+    venv_python = REPO_ROOT / ".venv" / "bin" / "python3"
+    in_venv = (
+        sys.prefix != getattr(sys, "base_prefix", sys.prefix)
+        or os.environ.get("VIRTUAL_ENV")
+    )
+
+    if _union_stl is not None:
+        print(
+            f"[catalogue_editor] solidify deps OK "
+            f"(python: {sys.executable}, venv active: {bool(in_venv)})"
+        )
+        return
+
+    print("=" * 78, file=sys.stderr)
+    print(
+        "[catalogue_editor] WARNING: solidify (boolean-union / preserve) deps "
+        "are not importable.",
+        file=sys.stderr,
+    )
+    print(f"  reason : {_UNION_IMPORT_ERROR}", file=sys.stderr)
+    print(f"  python : {sys.executable}", file=sys.stderr)
+    print(f"  prefix : {sys.prefix}", file=sys.stderr)
+    print(f"  venv   : {'active' if in_venv else 'NOT active'}", file=sys.stderr)
+    print(
+        "  -> /api/repair-stl will fall back to admesh-only repair and the M chip "
+        "will stay pending.",
+        file=sys.stderr,
+    )
+    print("  Fix:", file=sys.stderr)
+    print("    bash tools/run_catalogue_editor_server.sh", file=sys.stderr)
+    if venv_python.exists():
+        print(
+            f"    # or: source .venv/bin/activate && python3 tools/catalogue_editor_server.py",
+            file=sys.stderr,
+        )
+    else:
+        print(
+            "    # first create the venv: python3 -m venv .venv && "
+            "source .venv/bin/activate && pip install -r requirements.txt",
+            file=sys.stderr,
+        )
+    print("=" * 78, file=sys.stderr)
 
 
 def main() -> None:
@@ -953,6 +1286,8 @@ def main() -> None:
 
     mimetypes.add_type("model/stl", ".stl")
     regenerate_manifest()
+
+    _check_solidify_deps()
 
     server = ThreadingHTTPServer((args.host, args.port), CatalogueEditorHandler)
     print(f"Serving local catalogue editor at http://{args.host}:{args.port}/docs/index.html")

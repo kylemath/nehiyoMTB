@@ -224,10 +224,10 @@
         }
         
         .sign-info {
-            padding: 0.65rem;
+            padding: 0.45rem 0.55rem;
             display: grid;
-            grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
-            gap: 0.35rem 0.45rem;
+            grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+            gap: 0.25rem 0.5rem;
             align-items: center;
         }
 
@@ -245,10 +245,25 @@
 
         .sign-name-group {
             min-width: 0;
+            display: grid;
+            gap: 0.08rem;
         }
 
         .sign-cree-group {
             min-width: 0;
+            display: grid;
+            gap: 0.08rem;
+            text-align: right;
+        }
+
+        .sign-syllabics-cell {
+            min-width: 0;
+            text-align: center;
+        }
+
+        .sign-cree-cell {
+            min-width: 0;
+            text-align: right;
         }
 
         .sign-card.active .sign-number {
@@ -256,45 +271,39 @@
             border-color: var(--accent);
         }
 
-        /* Per-card readiness checklist row sits above the title and never overlaps it. */
+        /* Per-card readiness checklist renders as a thin barcode strip along the
+           bottom of the card so many cards can be stacked compactly. */
         .sign-checklist {
             display: flex;
-            justify-content: flex-end;
-            gap: 0.18rem;
-            padding: 0.35rem 0.5rem 0;
+            gap: 2px;
+            padding: 0 0.55rem 0.3rem;
             flex-wrap: nowrap;
+            align-items: stretch;
         }
 
         .sign-check {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 1.05rem;
-            height: 1.05rem;
-            padding: 0 0.32rem;
-            border-radius: 999px;
-            font-size: 0.58rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
+            flex: 1 1 0;
+            min-width: 0;
+            height: 6px;
+            border-radius: 2px;
             border: 1px solid rgba(120, 120, 120, 0.32);
             background: rgba(120, 120, 120, 0.10);
-            color: #888;
+            color: transparent;
+            font-size: 0;
+            line-height: 0;
             cursor: help;
-            white-space: nowrap;
             user-select: none;
+            overflow: hidden;
         }
 
         .sign-check.done {
             border-color: rgba(74, 222, 128, 0.55);
-            background: rgba(74, 222, 128, 0.18);
-            color: #bbf7d0;
+            background: rgba(74, 222, 128, 0.55);
         }
 
         .sign-check.exemplar {
-            border-color: rgba(167, 139, 250, 0.55);
-            background: rgba(167, 139, 250, 0.18);
-            color: #ddd6fe;
+            border-color: rgba(167, 139, 250, 0.65);
+            background: rgba(167, 139, 250, 0.65);
         }
 
         /* Legacy single-flag styles kept for backwards compatibility — no longer
@@ -357,18 +366,20 @@
             font-weight: 700;
             color: #fff;
             line-height: 1.2;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
         
         .sign-english {
             font-size: 0.78rem;
             color: var(--text-muted);
             line-height: 1.2;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .sign-placeholder {
+            opacity: 0.6;
         }
         
         .sign-cree {
@@ -376,9 +387,8 @@
             color: #fff;
             font-weight: 500;
             line-height: 1.2;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         .sign-syllabics {
@@ -386,9 +396,8 @@
             color: var(--accent);
             font-weight: 600;
             line-height: 1.2;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         @media (max-width: 520px) {
@@ -397,8 +406,11 @@
             }
 
             .sign-name-group,
-            .sign-cree-group {
+            .sign-cree-group,
+            .sign-syllabics-cell,
+            .sign-cree-cell {
                 grid-column: 2;
+                text-align: left;
             }
         }
         
@@ -1440,7 +1452,7 @@
                             </div>
                             <div class="content-field" style="flex:1 1 200px">
                                 <label for="content-header-title">Header title override (optional)</label>
-                                <input type="text" id="content-header-title" placeholder="English • SRO • Syllabics">
+                                <input type="text" id="content-header-title" placeholder="English • Syllabics • SRO">
                             </div>
                             <div class="content-field" style="flex:0 0 auto; align-self:flex-end">
                                 <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
@@ -1451,6 +1463,18 @@
                             </div>
                         </div>
                         <div class="content-grid">
+                            <div class="content-field">
+                                <label for="content-name-english">English primary name</label>
+                                <input type="text" id="content-name-english" placeholder="Machete">
+                            </div>
+                            <div class="content-field">
+                                <label for="content-name-syllabics">Cree syllabics</label>
+                                <input type="text" id="content-name-syllabics" placeholder="ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ">
+                            </div>
+                            <div class="content-field">
+                                <label for="content-name-transliteration">Cree transliteration (SRO)</label>
+                                <input type="text" id="content-name-transliteration" placeholder="mistâpiskihkomân">
+                            </div>
                             <div class="content-field wide">
                                 <label>Sign photo</label>
                                 <div class="photo-picker">
@@ -1492,6 +1516,33 @@
                             <div class="content-field wide">
                                 <label for="content-trail-widget">Trailforks widget URL (optional override)</label>
                                 <input type="url" id="content-trail-widget" placeholder="https://www.trailforks.com/widgets/trail/?trailid=...">
+                            </div>
+                            <div class="content-field wide">
+                                <label for="content-track-source-path">Downloaded XML / GPX path</label>
+                                <input type="text" id="content-track-source-path" placeholder="downloads/trails/machete.xml">
+                                <div class="photo-row">
+                                    <label class="editor-button photo-upload-button" for="content-track-source-file">Choose XML / GPX…</label>
+                                    <input type="file" id="content-track-source-file" accept=".xml,.gpx,.kml,.tcx,application/xml,text/xml" hidden />
+                                    <span class="field-hint" id="content-track-source-status">Selected files are copied into docs/assets/{folder}/tracks/.</span>
+                                </div>
+                            </div>
+                            <div class="content-field wide">
+                                <label for="content-map-status">Map visibility note</label>
+                                <textarea id="content-map-status" placeholder="Shows on map because mapCoords are present."></textarea>
+                            </div>
+                            <div class="content-field wide">
+                                <label for="content-icon-status">Map icon note</label>
+                                <textarea id="content-icon-status" placeholder="Marker icon can be generated from the final STL."></textarea>
+                            </div>
+                            <div class="content-field wide">
+                                <label for="content-map-icon-src">Map icon override</label>
+                                <input type="text" id="content-map-icon-src" placeholder="../assets/mistapiskihkoman/map-icons/machete.png">
+                                <div class="photo-row">
+                                    <label class="editor-button photo-upload-button" for="content-map-icon-file">Choose map icon…</label>
+                                    <input type="file" id="content-map-icon-file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+                                    <button type="button" class="editor-button" id="content-map-icon-clear" disabled>Clear</button>
+                                    <span class="field-hint" id="content-map-icon-status">Optional: selected icons are copied into docs/assets/{folder}/map-icons/.</span>
+                                </div>
                             </div>
                             <div class="content-field wide">
                                 <label for="content-cultural-heading">Cultural / contextual story heading</label>
@@ -2947,8 +2998,9 @@
                     summaryParts.push('admesh: complete');
                 }
                 if (union && !union.skipped) {
+                    const strat = union.strategyUsed || 'manifold';
                     summaryParts.push(
-                        `solidify: ${union.inputShells} shells → ${union.outputShells} ` +
+                        `solidify [${strat}]: ${union.inputShells} shells → ${union.outputShells} ` +
                         `(watertight=${union.outputWatertight ? 'yes' : 'no'})`
                     );
                 } else if (union && union.skipped) {
@@ -3062,7 +3114,9 @@
             }
 
             const signNumber = formatSignNumber(selectedModel);
-            const displayTitle = `${signNumber ? `<span class="detail-number">${signNumber}</span>` : ''}${selectedModel.title} • ${selectedModel.creeName || selectedModel.englishName}`;
+            const primaryName = selectedModel.englishName || selectedModel.title;
+            const secondaryName = selectedModel.creeSyllabics || selectedModel.creeName || '';
+            const displayTitle = `${signNumber ? `<span class="detail-number">${signNumber}</span>` : ''}${escapeHtml(primaryName)}${secondaryName ? ` • ${escapeHtml(secondaryName)}` : ''}`;
             title.innerHTML = displayTitle;
             detailColors.innerHTML = renderColorSwatches(selectedModel);
             renderLayerEditor();
@@ -3171,20 +3225,26 @@
             
             grid.innerHTML = filteredModels.map((model, index) => {
                 const signNumber = formatSignNumber(model);
+                const englishName = model.englishName || model.title || 'Untitled';
+                const creeSyllabics = model.creeSyllabics || '—';
+                const creeTransliteration = model.creeName || '—';
+                const syllClass = model.creeSyllabics ? 'sign-syllabics' : 'sign-syllabics sign-placeholder';
+                const transliterationClass = model.creeName ? 'sign-cree' : 'sign-cree sign-placeholder';
                 return `
                     <div class="sign-card ${selectedModel?.id === model.id ? 'active' : ''}" data-model-id="${model.id}">
-                        ${renderCardChecklist(model)}
                         <div class="sign-info">
                             <div class="sign-number">${signNumber || '-'}</div>
                             <div class="sign-name-group">
-                                <div class="sign-title">${model.title}</div>
-                                <div class="sign-english">${model.englishName}</div>
+                                <div class="sign-title">${escapeHtml(englishName)}</div>
                             </div>
-                            <div class="sign-cree-group">
-                                ${model.creeName ? `<div class="sign-cree">${model.creeName}</div>` : ''}
-                                ${model.creeSyllabics ? `<div class="sign-syllabics">${model.creeSyllabics}</div>` : ''}
+                            <div class="sign-syllabics-cell">
+                                <div class="${syllClass}">${escapeHtml(creeSyllabics)}</div>
+                            </div>
+                            <div class="sign-cree-cell">
+                                <div class="${transliterationClass}">${escapeHtml(creeTransliteration)}</div>
                             </div>
                         </div>
+                        ${renderCardChecklist(model)}
                     </div>
                 `;
             }).join('');
@@ -3238,6 +3298,9 @@
             'content-status-select',
             'content-accent',
             'content-header-title',
+            'content-name-english',
+            'content-name-syllabics',
+            'content-name-transliteration',
             'content-photo-src',
             'content-photo-alt',
             'content-photo-caption',
@@ -3247,6 +3310,13 @@
             'content-trail-id',
             'content-trail-url',
             'content-trail-widget',
+            'content-track-source-path',
+            'content-track-source-file',
+            'content-map-status',
+            'content-icon-status',
+            'content-map-icon-src',
+            'content-map-icon-file',
+            'content-map-icon-clear',
             'content-cultural-heading',
             'content-cultural-body',
             'content-trail-heading',
@@ -3367,6 +3437,89 @@
             }
         }
 
+        async function uploadTrailSourceFile(file) {
+            if (!editorApiAvailable || !selectedModel) {
+                setContentLog('Local editor server is not available; cannot upload trail files.');
+                return;
+            }
+            if (!file) return;
+
+            const reader = new FileReader();
+            const status = document.getElementById('content-track-source-status');
+            status.textContent = `Uploading ${file.name}…`;
+
+            const dataUrl = await new Promise((resolve, reject) => {
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = () => reject(reader.error);
+                reader.readAsDataURL(file);
+            });
+
+            try {
+                const response = await fetch('/api/upload-trail-source', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        modelId: selectedModel.id,
+                        filename: file.name,
+                        contentBase64: dataUrl
+                    })
+                });
+                const data = await response.json();
+                if (!response.ok || !data.ok) {
+                    throw new Error(data.error || 'Upload failed');
+                }
+                document.getElementById('content-track-source-path').value = data.path || '';
+                const kb = Math.max(1, Math.round((data.bytes || 0) / 1024));
+                status.textContent = `Selected ${data.filename} (${kb} KB). Click Save content to apply.`;
+            } catch (error) {
+                status.textContent = `Trail file upload failed: ${error.message}`;
+            } finally {
+                document.getElementById('content-track-source-file').value = '';
+            }
+        }
+
+        async function uploadMapIconFile(file) {
+            if (!editorApiAvailable || !selectedModel) {
+                setContentLog('Local editor server is not available; cannot upload map icons.');
+                return;
+            }
+            if (!file) return;
+
+            const reader = new FileReader();
+            const status = document.getElementById('content-map-icon-status');
+            status.textContent = `Uploading ${file.name}…`;
+
+            const dataUrl = await new Promise((resolve, reject) => {
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = () => reject(reader.error);
+                reader.readAsDataURL(file);
+            });
+
+            try {
+                const response = await fetch('/api/upload-map-icon', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        modelId: selectedModel.id,
+                        filename: file.name,
+                        contentBase64: dataUrl
+                    })
+                });
+                const data = await response.json();
+                if (!response.ok || !data.ok) {
+                    throw new Error(data.error || 'Upload failed');
+                }
+                document.getElementById('content-map-icon-src').value = data.src || '';
+                document.getElementById('content-map-icon-clear').disabled = !data.src;
+                const kb = Math.max(1, Math.round((data.bytes || 0) / 1024));
+                status.textContent = `Selected ${data.filename} (${kb} KB). Click Save content to apply.`;
+            } catch (error) {
+                status.textContent = `Map icon upload failed: ${error.message}`;
+            } finally {
+                document.getElementById('content-map-icon-file').value = '';
+            }
+        }
+
         function setContentLog(message, details = []) {
             const log = document.getElementById('content-log');
             if (!log) return;
@@ -3406,8 +3559,8 @@
             const english = model?.englishName || model?.title || '';
             const syll = model?.creeSyllabics || '';
             const parts = [english];
-            if (cree) parts.push(cree);
             if (syll) parts.push(syll);
+            if (cree) parts.push(cree);
 
             return {
                 pageStatus: 'draft',
@@ -3415,7 +3568,16 @@
                 themeName: '',
                 headerTitle: '',
                 photo: { src: '', alt: '', caption: '' },
-                trailforks: { trailId: '', trailUrl: '', widgetUrl: '', displayName: '' },
+                trailforks: {
+                    trailId: '',
+                    trailUrl: '',
+                    widgetUrl: '',
+                    displayName: '',
+                    trackSourcePath: '',
+                    mapStatus: '',
+                    iconStatus: '',
+                    iconSrc: ''
+                },
                 linguistics: {
                     meaning: english,
                     type: '',
@@ -3439,6 +3601,32 @@
                 sources: ['itwêwina', 'Online Cree Dictionary', 'Plains Cree Dictionary'],
                 notes: []
             };
+        }
+
+        function getMapVisibilityNote(model) {
+            const coords = getSignMapCoords(model);
+            const trackInfo = getSignTrackCoords(model);
+            if (coords && trackInfo) {
+                return `Shows on map at ${coords[0].toFixed(5)}, ${coords[1].toFixed(5)} with ${trackInfo.rough ? 'a rough line' : 'a detailed track'}.`;
+            }
+            if (coords) {
+                return `Shows on map at ${coords[0].toFixed(5)}, ${coords[1].toFixed(5)}. Add mapEndCoords or a track for a trail line.`;
+            }
+            return 'Not shown on map yet: add mapCoords or convert the downloaded XML / GPX into a track.';
+        }
+
+        function getIconStatusNote(model) {
+            const iconSrc = model && model.pageContent && model.pageContent.trailforks && model.pageContent.trailforks.iconSrc;
+            if (iconSrc) {
+                return 'Map marker uses a manual icon override.';
+            }
+            if (model && model.docsStlPath) {
+                return 'Marker icon can be generated from the selected final STL.';
+            }
+            if (getSignThumbUrl(model)) {
+                return 'No final STL marker yet; map marker falls back to the saved photo or imagePath.';
+            }
+            return 'No map icon source yet: add a final STL, sign photo, or imagePath.';
         }
 
         function updateContentStatusBadge(status) {
@@ -3478,6 +3666,9 @@
             document.getElementById('content-status-select').value = content.pageStatus || 'draft';
             document.getElementById('content-accent').value = content.accentColor || '#dc3545';
             document.getElementById('content-header-title').value = content.headerTitle || '';
+            document.getElementById('content-name-english').value = model?.englishName || model?.title || '';
+            document.getElementById('content-name-syllabics').value = model?.creeSyllabics || '';
+            document.getElementById('content-name-transliteration').value = model?.creeName || '';
             const meshRepairedInput = document.getElementById('content-mesh-repaired');
             if (meshRepairedInput) {
                 meshRepairedInput.checked = !!(model && model.checks && model.checks.meshRepaired);
@@ -3490,6 +3681,17 @@
             document.getElementById('content-trail-id').value = content.trailforks.trailId || '';
             document.getElementById('content-trail-url').value = content.trailforks.trailUrl || '';
             document.getElementById('content-trail-widget').value = content.trailforks.widgetUrl || '';
+            document.getElementById('content-track-source-path').value = content.trailforks.trackSourcePath || '';
+            document.getElementById('content-track-source-status').textContent = content.trailforks.trackSourcePath
+                ? 'Trail source file is set. Choose another file to replace the path.'
+                : 'Selected files are copied into docs/assets/{folder}/tracks/.';
+            document.getElementById('content-map-status').value = content.trailforks.mapStatus || getMapVisibilityNote(model);
+            document.getElementById('content-icon-status').value = content.trailforks.iconStatus || getIconStatusNote(model);
+            document.getElementById('content-map-icon-src').value = content.trailforks.iconSrc || '';
+            document.getElementById('content-map-icon-clear').disabled = !content.trailforks.iconSrc;
+            document.getElementById('content-map-icon-status').textContent = content.trailforks.iconSrc
+                ? 'Map icon override is set. Choose another file to replace it.'
+                : 'Optional: selected icons are copied into docs/assets/{folder}/map-icons/.';
             document.getElementById('content-cultural-heading').value = content.culturalStory.heading || '';
             document.getElementById('content-cultural-body').value = paragraphsToText(content.culturalStory.body);
             document.getElementById('content-trail-heading').value = content.trailStory.heading || '';
@@ -3499,6 +3701,18 @@
 
             updateContentStatusBadge(content.pageStatus);
             setContentLog(stored ? 'Loaded saved content.' : 'No saved content yet — showing defaults.');
+        }
+
+        function collectNameFieldsFromForm() {
+            const englishName = document.getElementById('content-name-english').value.trim();
+            if (!englishName) {
+                throw new Error('English primary name is required.');
+            }
+            return {
+                englishName,
+                creeSyllabics: document.getElementById('content-name-syllabics').value.trim(),
+                creeName: document.getElementById('content-name-transliteration').value.trim()
+            };
         }
 
         function collectContentFromForm() {
@@ -3514,6 +3728,14 @@
                 linguistics = {};
             }
 
+            const existingTrailforks = selectedModel?.pageContent?.trailforks || {};
+            const preservedTrailGeometry = {};
+            ['mapCoords', 'mapEndCoords', 'track'].forEach(key => {
+                if (existingTrailforks[key] !== undefined) {
+                    preservedTrailGeometry[key] = existingTrailforks[key];
+                }
+            });
+
             return {
                 pageStatus: document.getElementById('content-status-select').value,
                 accentColor: document.getElementById('content-accent').value,
@@ -3527,8 +3749,13 @@
                     trailId: document.getElementById('content-trail-id').value.trim(),
                     trailUrl: document.getElementById('content-trail-url').value.trim(),
                     widgetUrl: document.getElementById('content-trail-widget').value.trim(),
+                    trackSourcePath: document.getElementById('content-track-source-path').value.trim(),
+                    mapStatus: document.getElementById('content-map-status').value.trim(),
+                    iconStatus: document.getElementById('content-icon-status').value.trim(),
+                    iconSrc: document.getElementById('content-map-icon-src').value.trim(),
                     displayName: document.getElementById('content-trail-url').value
-                        .split('/').filter(Boolean).pop() || ''
+                        .split('/').filter(Boolean).pop() || '',
+                    ...preservedTrailGeometry
                 },
                 linguistics,
                 culturalStory: {
@@ -3551,8 +3778,10 @@
             }
 
             let pageContent;
+            let nameFields;
             try {
                 pageContent = collectContentFromForm();
+                nameFields = collectNameFieldsFromForm();
             } catch (error) {
                 setContentLog(error.message);
                 return;
@@ -3573,6 +3802,7 @@
                     body: JSON.stringify({
                         modelId: selectedModel.id,
                         pageContent,
+                        nameFields,
                         checks: checksPayload,
                         autoRender
                     })
@@ -3706,6 +3936,22 @@
             const file = event.target.files && event.target.files[0];
             if (file) uploadPhotoFile(file);
         });
+        document.getElementById('content-track-source-file').addEventListener('change', event => {
+            const file = event.target.files && event.target.files[0];
+            if (file) uploadTrailSourceFile(file);
+        });
+        document.getElementById('content-map-icon-file').addEventListener('change', event => {
+            const file = event.target.files && event.target.files[0];
+            if (file) uploadMapIconFile(file);
+        });
+        document.getElementById('content-map-icon-clear').addEventListener('click', () => {
+            document.getElementById('content-map-icon-src').value = '';
+            document.getElementById('content-map-icon-clear').disabled = true;
+            document.getElementById('content-map-icon-status').textContent = 'Map icon override cleared. Saving will return to generated STL markers.';
+        });
+        document.getElementById('content-map-icon-src').addEventListener('input', event => {
+            document.getElementById('content-map-icon-clear').disabled = !event.target.value.trim();
+        });
         document.getElementById('content-editor-toggle').addEventListener('click', () => {
             const panel = document.getElementById('content-editor-panel');
             const toggle = document.getElementById('content-editor-toggle');
@@ -3781,6 +4027,10 @@
         }
 
         function getSignThumbUrl(model) {
+            const iconSrc = model && model.pageContent && model.pageContent.trailforks && model.pageContent.trailforks.iconSrc;
+            if (iconSrc) {
+                return iconSrc.startsWith('../') ? iconSrc.slice(3) : iconSrc;
+            }
             const photoSrc = model && model.pageContent && model.pageContent.photo && model.pageContent.photo.src;
             if (photoSrc) {
                 // pageContent.photo.src is relative to docs/{folder}/index.html
@@ -3967,11 +4217,12 @@
         }
 
         function buildMarkerElement(model, options = {}) {
+            const overrideThumb = getSignThumbUrl(model);
             const cachedSnapshot = stlSnapshotCache[model.id];
-            const fallbackThumb = getSignThumbUrl(model);
-            const thumbUrl = cachedSnapshot || fallbackThumb;
+            const hasIconOverride = !!(model && model.pageContent && model.pageContent.trailforks && model.pageContent.trailforks.iconSrc);
+            const thumbUrl = hasIconOverride ? overrideThumb : (cachedSnapshot || overrideThumb);
             const isActive = selectedModel && selectedModel.id === model.id;
-            const isRendering = !cachedSnapshot;
+            const isRendering = !hasIconOverride && !cachedSnapshot;
             const signNumber = formatSignNumber(model);
             const el = document.createElement('div');
             el.className = `map-marker-thumb ${isActive ? 'active' : ''} ${isRendering ? 'is-rendering' : ''}`;

@@ -198,7 +198,9 @@
       "colors": [
         "black",
         "white",
-        "red"
+        "red",
+        "white",
+        "white"
       ],
       "description": "Back Breaker trail sign with red gear-like graphic",
       "status": "published",
@@ -414,18 +416,26 @@
           "Trailforks pick: 'Back Breaker' (trailId 10634), Hawrelak / MacKinnon Ravine, Northwest Edmonton — companion to Root Canal. A 'Lower Back Breaker' sibling trail also exists in the same network but is almost certainly not what the plaque commemorates."
         ]
       },
-      "docsStlPath": "backbreaker/backbreaker_plaque_admesh_fixed.stl",
+      "docsStlPath": "backbreaker/Assembly.stl",
       "colorLayers": [
         {
           "color": "black",
-          "maxZ": 1706.2234497070312
+          "maxZ": 1.75603006362915
         },
         {
           "color": "white",
-          "maxZ": 2100.8446044921875
+          "maxZ": 3.20650932312012
         },
         {
-          "color": "red"
+          "color": "red",
+          "maxZ": 5.79665085792542
+        },
+        {
+          "color": "white",
+          "maxZ": 35.11705303192139
+        },
+        {
+          "color": "white"
         }
       ]
     },
@@ -441,17 +451,18 @@
       "stlPath": "mistapiskihkoman/production.stl",
       "colors": [
         "white",
-        "black"
+        "black",
+        "red"
       ],
       "description": "Machete trail sign with black machete graphic",
       "status": "published",
       "pageContent": {
-        "pageStatus": "agent-drafted",
+        "pageStatus": "user-reviewed",
         "accentColor": "#000000",
-        "themeName": "black",
+        "themeName": "",
         "headerTitle": "Machete • mistâpiskihkomân • ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ",
         "photo": {
-          "src": "../assets/mistapiskihkoman/mistapiskihkoman.png",
+          "src": "../assets/mistapiskihkoman/Screenshot_2026-05-17_at_7.26.56_PM.png",
           "alt": "Machete trail sign showing a black machete silhouette with red Plains Cree syllabics carved into the blade",
           "caption": "3D printed plaque: black machete graphic with the syllabics ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ in red on the blade."
         },
@@ -459,12 +470,7 @@
           "trailId": "30260",
           "trailUrl": "https://www.trailforks.com/trails/machete/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=30260&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
-          "displayName": "Machete",
-          "mapCoords": {
-            "lat": 53.52164,
-            "lng": -113.5399,
-            "source": "trailforks trailhead 30260"
-          }
+          "displayName": "machete"
         },
         "linguistics": {
           "meaning": "Machete — literally ‘great iron knife’",
@@ -609,8 +615,7 @@
         "sources": [
           "itwêwina",
           "Online Cree Dictionary",
-          "Plains Cree Dictionary",
-          "Trailforks"
+          "Plains Cree Dictionary"
         ],
         "notes": [
           "PHYSICAL SIGN OVERRIDES CATALOGUE (syllabics): The plaque is carved with SRO 'mistâpiskihkomân' (matches catalogue) but with syllabics 'ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ' — note the long-â glyph ᑖ on the second position. The current catalogue.json creeSyllabics is 'ᒥᐢᑕᐱᐢᑭᐦᑯᒫᐣ' (with short-a ᑕ instead of ᑖ). Trailforks's AKA listing for trail #30260 also writes ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ. Coordinator should update catalogue creeSyllabics to ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ.",
@@ -618,6 +623,23 @@
           "The ‑(i)hkomân final is the bound form of free môhkomân 'knife'. The vowel quality difference (ô- vs. -i-) is a regular Cree phonological alternation in compound stems.",
           "Trailforks pick: 'Machete' (trail id 30260), Keillor / NW Edmonton — black-diamond singletrack. Trailhead 53.52164, -113.5399. High confidence (Trailforks AKA explicitly lists ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ mistâpiskihkomân)."
         ]
+      },
+      "docsStlPath": "mistapiskihkoman/mistâpiskihkomân_plaque_v3_solid_2.stl",
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 996.421842773432
+        },
+        {
+          "color": "black",
+          "maxZ": 2172.09417578125
+        },
+        {
+          "color": "red"
+        }
+      ],
+      "checks": {
+        "meshRepaired": true
       }
     },
     {
@@ -1429,22 +1451,26 @@
       "stlPath": "sapwapahcikan-paskisikan/production.stl",
       "colors": [
         "white",
+        "black",
         "red"
       ],
       "description": "Ray Gun trail sign with red ray gun graphic",
       "status": "published",
       "pageContent": {
-        "pageStatus": "agent-drafted",
+        "pageStatus": "user-reviewed",
         "accentColor": "#dc3545",
-        "themeName": "red",
+        "themeName": "",
         "headerTitle": "Ray Gun • sâpwâpahcikan pâskisikan • ᓵᐚᐸᐦᒋᑲᐣ ᐹᐢᑭᓯᑲᐣ",
         "photo": {
-          "src": "../assets/sapwapahcikan-paskisikan/ray_gun_render.png",
+          "src": "../assets/sapwapahcikan-paskisikan/Screenshot_2026-05-17_at_1.17.11_PM.png",
           "alt": "Retro sci-fi ray gun icon used as the source render for the sâpwâpahcikan pâskisikan trail sign",
           "caption": "Source render for the Ray Gun plaque — retro-futuristic silhouette in red on white"
         },
         "trailforks": {
-          "notes": "No dedicated Trailforks page found for the Edmonton 'Ray Gun' trail in the Kinsmen / Emily Murphy network. The trail is mentioned in the 'Shredders Kinsmen Loop #1' route description ('Ride Six Shooter, then RayGun and back over the road') but does not have its own /trails/raygun/ entry as of May 2026. A 'Ray Gun' page exists at trailforks.com/trails/ray-gun/ (trailId 20683) but it is the Forebay, Payson, Utah trail — a different trail. Left empty pending Edmonton trail-association upload."
+          "trailId": "201396",
+          "trailUrl": "https://www.trailforks.com/trails/ray-gun-201396/",
+          "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=201396&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+          "displayName": "ray-gun-201396"
         },
         "linguistics": {
           "meaning": "Ray Gun — literally 'through-shooting firearm' (a coined Cree compound)",
@@ -1609,7 +1635,24 @@
           "No dedicated Trailforks entry for the Edmonton 'Ray Gun' trail was found; only references inside the Shredders Kinsmen Loop #1 route description. Photo widget left empty rather than embedding the Utah 'Ray Gun' (trailId 20683) which is a different trail.",
           "Photo wired to the DALL·E source render that was already in the repo root folder — copied unchanged into docs/assets/sapwapahcikan-paskisikan/ray_gun_render.png. A clean wall-photo crop would be a better future replacement."
         ]
-      }
+      },
+      "checks": {
+        "meshRepaired": true
+      },
+      "docsStlPath": "sapwapahcikan-paskisikan/sapwapahcikan-paskisikan-plaque_v2_admesh_fixed.stl",
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 18.8470234375
+        },
+        {
+          "color": "black",
+          "maxZ": 79.71609765625
+        },
+        {
+          "color": "red"
+        }
+      ]
     },
     {
       "id": "bed-springs",
@@ -1833,24 +1876,25 @@
       "folder": "sôniyâwâhkêsîs",
       "stlPath": "sôniyâwâhkêsîs/production.stl",
       "colors": [
+        "black",
         "white",
-        "black"
+        "black",
+        "white",
+        "red"
       ],
       "description": "Silverfox trail sign with black fox head graphic",
       "status": "published",
       "pageContent": {
-        "pageStatus": "agent-drafted",
+        "pageStatus": "user-reviewed",
         "accentColor": "#9aa0a6",
-        "themeName": "silver",
+        "themeName": "",
         "headerTitle": "Silverfox • sôniyâwâhkêsis • ᓲᓂᔮᐚᐦᑫᓯᐢ",
         "photo": {
-          "src": "../assets/sôniyâwâhkêsîs/silverfox_render.png",
+          "src": "../assets/sôniyâwâhkêsîs/Screenshot_2026-05-17_at_1.25.30_PM.png",
           "alt": "Stylized black-and-white kitsune-like fox silhouette used as the source render for the sôniyâwâhkêsis trail sign",
           "caption": "Source design render for the Silverfox plaque — flowing kitsune-style fox silhouette"
         },
-        "trailforks": {
-          "notes": "No dedicated Trailforks page found for the Edmonton 'Silver Fox' trail. It is referenced in the Shredders Kinsmen Loop #1 route description ('Rip down Silver Fox (not shown on map — trail start is by the Emily Murphy Park sign at the entry to the park)') but the trail is explicitly noted as 'not shown on map' — i.e. unmapped in Trailforks as of May 2026. Left empty pending local upload."
-        },
+        "trailforks": {},
         "linguistics": {
           "meaning": "Silver Fox — literally 'money/silver little-fox'",
           "type": "noun (animate, NA, compound + diminutive)",
@@ -1992,7 +2036,32 @@
           "Photo wired to the existing screenshot source render in the repo root folder (sôniyâwâhkêsîs/Screenshot 2023-11-17 at 6.00.15 PM.png) — copied as docs/assets/sôniyâwâhkêsîs/silverfox_render.png.",
           "No dedicated Trailforks entry for Edmonton 'Silver Fox' trail — only a route-description reference noting the trail is 'not shown on map'. Trailforks widget block left empty with notes."
         ]
-      }
+      },
+      "checks": {
+        "meshRepaired": true
+      },
+      "docsStlPath": "sôniyâwâhkêsîs/sôniyâwâhkêsîs_plaque.stl",
+      "colorLayers": [
+        {
+          "color": "black",
+          "maxZ": 1052.90100146484
+        },
+        {
+          "color": "white",
+          "maxZ": 1466.30958544922
+        },
+        {
+          "color": "black",
+          "maxZ": 1769.47588037109
+        },
+        {
+          "color": "white",
+          "maxZ": 2062.30696069336
+        },
+        {
+          "color": "red"
+        }
+      ]
     },
     {
       "id": "maskihkiwiyiniw",
@@ -3146,7 +3215,7 @@
       ],
       "description": "Kakwa trail sign",
       "status": "published",
-      "docsStlPath": "kakwa/kakwa_plaque_v3_admesh_fixed_1_admesh_fixed.stl",
+      "docsStlPath": "kakwa/kakwa_plaque_v3_admesh_fixed_1_admesh_fixed_admesh_fixed.stl",
       "colorLayers": [
         {
           "color": "white",
@@ -3161,7 +3230,7 @@
         }
       ],
       "pageContent": {
-        "pageStatus": "agent-drafted",
+        "pageStatus": "user-reviewed",
         "accentColor": "#dc3545",
         "themeName": "",
         "headerTitle": "Porcupine • kâkwa • ᑳᑿ",
@@ -3174,17 +3243,7 @@
           "trailId": "322561",
           "trailUrl": "https://www.trailforks.com/trails/kakwa-porcupine-322561/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=322561&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
-          "displayName": "kakwa-porcupine-322561",
-          "mapCoords": {
-            "lat": 53.54533,
-            "lng": -113.54869,
-            "source": "trailforks trailhead 322561"
-          },
-          "mapEndCoords": {
-            "lat": 53.54533,
-            "lng": -113.54355,
-            "source": "estimated: 342m mostly flat eastbound through hawrelak, per trailforks"
-          }
+          "displayName": "kakwa-porcupine-322561"
         },
         "linguistics": {
           "meaning": "Porcupine",
@@ -3313,6 +3372,9 @@
           "Dialect assumption: Plains Cree (y-dialect / nêhiyawêwin), matching the rest of the catalogue.",
           "Accent color set to #dc3545 (red) per brief, since the sign's syllabics layer is red. themeName \"red\". Curator may adjust."
         ]
+      },
+      "checks": {
+        "meshRepaired": true
       }
     },
     {

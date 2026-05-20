@@ -576,10 +576,10 @@ def render_page(model: dict) -> str | None:
     cree = model.get("creeName") or ""
     syllabics = model.get("creeSyllabics") or ""
     parts = [escape(english)]
-    if cree:
-        parts.append(escape(cree))
     if syllabics:
         parts.append(escape(syllabics))
+    if cree:
+        parts.append(escape(cree))
     header_title = content.get("headerTitle") or " • ".join(parts)
     title_text = english or model.get("title") or "Trail Sign"
 
@@ -602,7 +602,13 @@ def render_page(model: dict) -> str | None:
         quick_reference=render_quick_reference(content),
         base_words=render_base_words(content),
         sources=render_sources(content),
-        footer_text=escape(f"{english} • {cree} • Interactive Poster" if cree else f"{english} • Interactive Poster"),
+        footer_text=escape(
+            f"{english} • {syllabics} • {cree} • Interactive Poster"
+            if syllabics and cree
+            else f"{english} • {cree or syllabics} • Interactive Poster"
+            if (cree or syllabics)
+            else f"{english} • Interactive Poster"
+        ),
         pairs_script=build_pairs_script(content),
     )
 
