@@ -4,7 +4,7 @@
   "oneLiner": "Nehiyawewin (Plains Cree) trail signs for Edmonton area mountain bike trails, 3D printed with bilingual syllabics",
   "demoUrl": "https://kylemath.github.io/nehiyoMTB",
   "screenshot": "https://raw.githubusercontent.com/kylemath/nehiyoMTB/main/screenshot.png",
-  "kind": "collection",
+  "kind": "page",
   "categories": [
     "3dPrinting",
     "wayfinding",
