@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Wonder Woman Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Wonder Woman
+</name>
+<link href="https://www.trailforks.com/trails/wonder-woman/">
+</link>
+<trkseg>
+<trkpt lat="53.54092" lon="-113.54308">
+<ele>651.5</ele>
+<time>2026-05-22T15:41:50-07:00</time>
+</trkpt>
+<trkpt lat="53.5408" lon="-113.54313">
+<ele>647.6</ele>
+<time>2026-05-22T15:41:51-07:00</time>
+</trkpt>
+<trkpt lat="53.54076" lon="-113.54319">
+<ele>647.6</ele>
+<time>2026-05-22T15:41:52-07:00</time>
+</trkpt>
+<trkpt lat="53.54072" lon="-113.54331">
+<ele>647.6</ele>
+<time>2026-05-22T15:41:53-07:00</time>
+</trkpt>
+<trkpt lat="53.54067" lon="-113.54364">
+<ele>650.1</ele>
+<time>2026-05-22T15:41:54-07:00</time>
+</trkpt>
+<trkpt lat="53.54058" lon="-113.54385">
+<ele>650.1</ele>
+<time>2026-05-22T15:41:55-07:00</time>
+</trkpt>
+<trkpt lat="53.54051" lon="-113.54411">
+<ele>646.4</ele>
+<time>2026-05-22T15:41:56-07:00</time>
+</trkpt>
+<trkpt lat="53.54043" lon="-113.54421">
+<ele>647.6</ele>
+<time>2026-05-22T15:41:57-07:00</time>
+</trkpt>
+<trkpt lat="53.54039" lon="-113.54442">
+<ele>647.6</ele>
+<time>2026-05-22T15:41:58-07:00</time>
+</trkpt>
+<trkpt lat="53.54039" lon="-113.54452">
+<ele>649</ele>
+<time>2026-05-22T15:41:59-07:00</time>
+</trkpt>
+<trkpt lat="53.54036" lon="-113.54461">
+<ele>649</ele>
+<time>2026-05-22T15:42:00-07:00</time>
+</trkpt>
+<trkpt lat="53.54035" lon="-113.54479">
+<ele>650.1</ele>
+<time>2026-05-22T15:42:01-07:00</time>
+</trkpt>
+<trkpt lat="53.5403" lon="-113.54501">
+<ele>650.6</ele>
+<time>2026-05-22T15:42:02-07:00</time>
+</trkpt>
+<trkpt lat="53.54028" lon="-113.54504">
+<ele>650.6</ele>
+<time>2026-05-22T15:42:03-07:00</time>
+</trkpt>
+<trkpt lat="53.54026" lon="-113.54521">
+<ele>644.9</ele>
+<time>2026-05-22T15:42:04-07:00</time>
+</trkpt>
+<trkpt lat="53.54029" lon="-113.54535">
+<ele>652</ele>
+<time>2026-05-22T15:42:05-07:00</time>
+</trkpt>
+<trkpt lat="53.54027" lon="-113.54546">
+<ele>646.3</ele>
+<time>2026-05-22T15:42:06-07:00</time>
+</trkpt>
+<trkpt lat="53.54029" lon="-113.54566">
+<ele>653.4</ele>
+<time>2026-05-22T15:42:07-07:00</time>
+</trkpt>
+<trkpt lat="53.54023" lon="-113.54577">
+<ele>647.5</ele>
+<time>2026-05-22T15:42:08-07:00</time>
+</trkpt>
+<trkpt lat="53.54013" lon="-113.54589">
+<ele>648</ele>
+<time>2026-05-22T15:42:09-07:00</time>
+</trkpt>
+<trkpt lat="53.54012" lon="-113.54594">
+<ele>648</ele>
+<time>2026-05-22T15:42:10-07:00</time>
+</trkpt>
+<trkpt lat="53.54001" lon="-113.54608">
+<ele>648</ele>
+<time>2026-05-22T15:42:11-07:00</time>
+</trkpt>
+<trkpt lat="53.53997" lon="-113.54609">
+<ele>641.6</ele>
+<time>2026-05-22T15:42:12-07:00</time>
+</trkpt>
+<trkpt lat="53.53994" lon="-113.54608">
+<ele>641.6</ele>
+<time>2026-05-22T15:42:13-07:00</time>
+</trkpt>
+<trkpt lat="53.53987" lon="-113.54613">
+<ele>642.9</ele>
+<time>2026-05-22T15:42:14-07:00</time>
+</trkpt>
+<trkpt lat="53.5398" lon="-113.54621">
+<ele>642.9</ele>
+<time>2026-05-22T15:42:15-07:00</time>
+</trkpt>
+<trkpt lat="53.53976" lon="-113.54619">
+<ele>642.9</ele>
+<time>2026-05-22T15:42:16-07:00</time>
+</trkpt>
+<trkpt lat="53.53973" lon="-113.54615">
+<ele>642.9</ele>
+<time>2026-05-22T15:42:17-07:00</time>
+</trkpt>
+<trkpt lat="53.53969" lon="-113.54605">
+<ele>633.9</ele>
+<time>2026-05-22T15:42:18-07:00</time>
+</trkpt>
+<trkpt lat="53.53969" lon="-113.54598">
+<ele>633.9</ele>
+<time>2026-05-22T15:42:19-07:00</time>
+</trkpt>
+<trkpt lat="53.53973" lon="-113.54591">
+<ele>641.6</ele>
+<time>2026-05-22T15:42:20-07:00</time>
+</trkpt>
+<trkpt lat="53.53974" lon="-113.54542">
+<ele>639.8</ele>
+<time>2026-05-22T15:42:21-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

@@ -470,7 +470,252 @@
           "trailId": "30260",
           "trailUrl": "https://www.trailforks.com/trails/machete/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=30260&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
-          "displayName": "machete"
+          "displayName": "machete",
+          "trackSourcePath": "docs/assets/mistapiskihkoman/tracks/machete_2.gpx",
+          "mapStatus": "Shows on map: 58 track points from uploaded machete_2.gpx.",
+          "iconStatus": "Marker icon can be generated from the selected final STL.",
+          "mapCoords": {
+            "lat": 53.52164,
+            "lng": -113.5399
+          },
+          "mapEndCoords": {
+            "lat": 53.51788,
+            "lng": -113.53962
+          },
+          "track": [
+            [
+              53.52164,
+              -113.5399
+            ],
+            [
+              53.52155,
+              -113.5399
+            ],
+            [
+              53.52147,
+              -113.53988
+            ],
+            [
+              53.52139,
+              -113.53988
+            ],
+            [
+              53.52134,
+              -113.5399
+            ],
+            [
+              53.5213,
+              -113.53993
+            ],
+            [
+              53.52125,
+              -113.53995
+            ],
+            [
+              53.5212,
+              -113.53997
+            ],
+            [
+              53.52113,
+              -113.53996
+            ],
+            [
+              53.52108,
+              -113.53986
+            ],
+            [
+              53.52102,
+              -113.53978
+            ],
+            [
+              53.52097,
+              -113.53972
+            ],
+            [
+              53.52093,
+              -113.5397
+            ],
+            [
+              53.52093,
+              -113.53975
+            ],
+            [
+              53.52097,
+              -113.53984
+            ],
+            [
+              53.52099,
+              -113.53992
+            ],
+            [
+              53.521,
+              -113.53999
+            ],
+            [
+              53.52098,
+              -113.54003
+            ],
+            [
+              53.52096,
+              -113.54002
+            ],
+            [
+              53.52092,
+              -113.53998
+            ],
+            [
+              53.52089,
+              -113.53991
+            ],
+            [
+              53.52086,
+              -113.53983
+            ],
+            [
+              53.52053,
+              -113.53972
+            ],
+            [
+              53.52048,
+              -113.5396
+            ],
+            [
+              53.52044,
+              -113.5396
+            ],
+            [
+              53.5204,
+              -113.53941
+            ],
+            [
+              53.52034,
+              -113.53933
+            ],
+            [
+              53.52028,
+              -113.53934
+            ],
+            [
+              53.52023,
+              -113.5394
+            ],
+            [
+              53.52016,
+              -113.53932
+            ],
+            [
+              53.52005,
+              -113.53931
+            ],
+            [
+              53.51998,
+              -113.53924
+            ],
+            [
+              53.51988,
+              -113.53925
+            ],
+            [
+              53.51989,
+              -113.53936
+            ],
+            [
+              53.51984,
+              -113.53946
+            ],
+            [
+              53.51973,
+              -113.53956
+            ],
+            [
+              53.51962,
+              -113.53959
+            ],
+            [
+              53.51941,
+              -113.53948
+            ],
+            [
+              53.51936,
+              -113.53951
+            ],
+            [
+              53.51934,
+              -113.53957
+            ],
+            [
+              53.51927,
+              -113.53963
+            ],
+            [
+              53.51923,
+              -113.53961
+            ],
+            [
+              53.51922,
+              -113.53955
+            ],
+            [
+              53.51926,
+              -113.53937
+            ],
+            [
+              53.51917,
+              -113.53928
+            ],
+            [
+              53.51911,
+              -113.53926
+            ],
+            [
+              53.51909,
+              -113.53938
+            ],
+            [
+              53.51906,
+              -113.53936
+            ],
+            [
+              53.51889,
+              -113.53941
+            ],
+            [
+              53.51876,
+              -113.53942
+            ],
+            [
+              53.51856,
+              -113.53935
+            ],
+            [
+              53.51845,
+              -113.53935
+            ],
+            [
+              53.51837,
+              -113.53937
+            ],
+            [
+              53.5183,
+              -113.53939
+            ],
+            [
+              53.51813,
+              -113.53942
+            ],
+            [
+              53.51799,
+              -113.53955
+            ],
+            [
+              53.51793,
+              -113.53954
+            ],
+            [
+              53.51788,
+              -113.53962
+            ]
+          ]
         },
         "linguistics": {
           "meaning": "Machete — literally ‘great iron knife’",
@@ -654,17 +899,18 @@
       "stlPath": "nicocwasaskanos/production.stl",
       "colors": [
         "white",
-        "black"
+        "black",
+        "red"
       ],
       "description": "Six Shooter trail sign with black revolver graphic",
       "status": "published",
       "pageContent": {
-        "pageStatus": "agent-drafted",
+        "pageStatus": "user-reviewed",
         "accentColor": "#000000",
-        "themeName": "black",
+        "themeName": "",
         "headerTitle": "Six Shooter • nikocwâsaskanôs • ᓂᑯᒑᐧᓴᐢᑲᓅᐢ",
         "photo": {
-          "src": "../assets/nicocwasaskanos/nikocwasaskanos.png",
+          "src": "../assets/nicocwasaskanos/PXL_20201102_000620422.jpg",
           "alt": "Six Shooter trail sign showing a black single-action revolver silhouette with red Plains Cree syllabics across the cylinder",
           "caption": "3D printed plaque: black revolver graphic with the syllabics ᓂᑯᒑᐧᓴᐢᑲᓅᐢ in red across the cylinder."
         },
@@ -672,12 +918,636 @@
           "trailId": "18858",
           "trailUrl": "https://www.trailforks.com/trails/six-shooter/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=18858&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
-          "displayName": "Six Shooter",
+          "displayName": "six-shooter",
+          "trackSourcePath": "docs/assets/nicocwasaskanos/tracks/six-shooter.gpx",
+          "mapStatus": "Shows on map: 154 track points from uploaded six-shooter.gpx.",
+          "iconStatus": "Marker icon can be generated from the selected final STL.",
           "mapCoords": {
             "lat": 53.52434,
-            "lng": -113.54104,
-            "source": "trailforks trailhead 18858"
-          }
+            "lng": -113.54104
+          },
+          "mapEndCoords": {
+            "lat": 53.53247,
+            "lng": -113.53593
+          },
+          "track": [
+            [
+              53.52434,
+              -113.54104
+            ],
+            [
+              53.52442,
+              -113.54114
+            ],
+            [
+              53.5245,
+              -113.54123
+            ],
+            [
+              53.52458,
+              -113.54133
+            ],
+            [
+              53.52466,
+              -113.54142
+            ],
+            [
+              53.52472,
+              -113.5415
+            ],
+            [
+              53.52477,
+              -113.54153
+            ],
+            [
+              53.52482,
+              -113.54156
+            ],
+            [
+              53.52488,
+              -113.54161
+            ],
+            [
+              53.52493,
+              -113.54161
+            ],
+            [
+              53.52499,
+              -113.5416
+            ],
+            [
+              53.52505,
+              -113.54154
+            ],
+            [
+              53.5251,
+              -113.54152
+            ],
+            [
+              53.52517,
+              -113.54153
+            ],
+            [
+              53.52525,
+              -113.54149
+            ],
+            [
+              53.52531,
+              -113.54145
+            ],
+            [
+              53.52536,
+              -113.54139
+            ],
+            [
+              53.52542,
+              -113.54132
+            ],
+            [
+              53.52548,
+              -113.54129
+            ],
+            [
+              53.52553,
+              -113.54126
+            ],
+            [
+              53.52558,
+              -113.54124
+            ],
+            [
+              53.52565,
+              -113.54123
+            ],
+            [
+              53.52571,
+              -113.5412
+            ],
+            [
+              53.52577,
+              -113.54116
+            ],
+            [
+              53.52582,
+              -113.54111
+            ],
+            [
+              53.52589,
+              -113.5411
+            ],
+            [
+              53.52598,
+              -113.5411
+            ],
+            [
+              53.52606,
+              -113.54107
+            ],
+            [
+              53.52613,
+              -113.54101
+            ],
+            [
+              53.5262,
+              -113.54096
+            ],
+            [
+              53.52626,
+              -113.54088
+            ],
+            [
+              53.5263,
+              -113.54081
+            ],
+            [
+              53.52635,
+              -113.54077
+            ],
+            [
+              53.52642,
+              -113.54072
+            ],
+            [
+              53.52648,
+              -113.54071
+            ],
+            [
+              53.52653,
+              -113.5407
+            ],
+            [
+              53.5266,
+              -113.54069
+            ],
+            [
+              53.52667,
+              -113.54065
+            ],
+            [
+              53.52673,
+              -113.5406
+            ],
+            [
+              53.52679,
+              -113.54052
+            ],
+            [
+              53.52684,
+              -113.54044
+            ],
+            [
+              53.52691,
+              -113.54038
+            ],
+            [
+              53.527,
+              -113.5403
+            ],
+            [
+              53.52708,
+              -113.54022
+            ],
+            [
+              53.52715,
+              -113.54016
+            ],
+            [
+              53.52721,
+              -113.54012
+            ],
+            [
+              53.52724,
+              -113.54005
+            ],
+            [
+              53.52727,
+              -113.53996
+            ],
+            [
+              53.52729,
+              -113.53986
+            ],
+            [
+              53.52731,
+              -113.5398
+            ],
+            [
+              53.52735,
+              -113.53977
+            ],
+            [
+              53.5274,
+              -113.53978
+            ],
+            [
+              53.52747,
+              -113.53982
+            ],
+            [
+              53.52753,
+              -113.53988
+            ],
+            [
+              53.52759,
+              -113.53991
+            ],
+            [
+              53.52766,
+              -113.53988
+            ],
+            [
+              53.52774,
+              -113.53984
+            ],
+            [
+              53.52783,
+              -113.53978
+            ],
+            [
+              53.52793,
+              -113.53972
+            ],
+            [
+              53.52802,
+              -113.53966
+            ],
+            [
+              53.52809,
+              -113.53962
+            ],
+            [
+              53.52815,
+              -113.53955
+            ],
+            [
+              53.5282,
+              -113.53948
+            ],
+            [
+              53.52823,
+              -113.53942
+            ],
+            [
+              53.52828,
+              -113.53941
+            ],
+            [
+              53.52832,
+              -113.53947
+            ],
+            [
+              53.52837,
+              -113.53953
+            ],
+            [
+              53.52842,
+              -113.53956
+            ],
+            [
+              53.52849,
+              -113.53955
+            ],
+            [
+              53.52855,
+              -113.5395
+            ],
+            [
+              53.5286,
+              -113.53944
+            ],
+            [
+              53.52864,
+              -113.53936
+            ],
+            [
+              53.52866,
+              -113.53926
+            ],
+            [
+              53.52867,
+              -113.53918
+            ],
+            [
+              53.52866,
+              -113.53911
+            ],
+            [
+              53.52863,
+              -113.53905
+            ],
+            [
+              53.52859,
+              -113.53905
+            ],
+            [
+              53.52855,
+              -113.53903
+            ],
+            [
+              53.52852,
+              -113.53897
+            ],
+            [
+              53.52851,
+              -113.53888
+            ],
+            [
+              53.52855,
+              -113.53881
+            ],
+            [
+              53.52862,
+              -113.53875
+            ],
+            [
+              53.52868,
+              -113.53876
+            ],
+            [
+              53.52872,
+              -113.53879
+            ],
+            [
+              53.52875,
+              -113.53886
+            ],
+            [
+              53.5288,
+              -113.53892
+            ],
+            [
+              53.52884,
+              -113.53891
+            ],
+            [
+              53.52888,
+              -113.53889
+            ],
+            [
+              53.52894,
+              -113.53886
+            ],
+            [
+              53.52898,
+              -113.53887
+            ],
+            [
+              53.52898,
+              -113.53896
+            ],
+            [
+              53.52897,
+              -113.53905
+            ],
+            [
+              53.529,
+              -113.53906
+            ],
+            [
+              53.52903,
+              -113.53903
+            ],
+            [
+              53.52907,
+              -113.53896
+            ],
+            [
+              53.52911,
+              -113.53891
+            ],
+            [
+              53.52919,
+              -113.53889
+            ],
+            [
+              53.52926,
+              -113.53887
+            ],
+            [
+              53.52933,
+              -113.53885
+            ],
+            [
+              53.52942,
+              -113.53882
+            ],
+            [
+              53.52952,
+              -113.53876
+            ],
+            [
+              53.52961,
+              -113.53869
+            ],
+            [
+              53.52966,
+              -113.53859
+            ],
+            [
+              53.52972,
+              -113.53852
+            ],
+            [
+              53.52981,
+              -113.53845
+            ],
+            [
+              53.52989,
+              -113.5384
+            ],
+            [
+              53.52997,
+              -113.53833
+            ],
+            [
+              53.53002,
+              -113.53828
+            ],
+            [
+              53.53007,
+              -113.53822
+            ],
+            [
+              53.53012,
+              -113.53817
+            ],
+            [
+              53.53017,
+              -113.53811
+            ],
+            [
+              53.53023,
+              -113.53803
+            ],
+            [
+              53.53031,
+              -113.53794
+            ],
+            [
+              53.53037,
+              -113.53786
+            ],
+            [
+              53.53044,
+              -113.53778
+            ],
+            [
+              53.53049,
+              -113.53771
+            ],
+            [
+              53.53055,
+              -113.53763
+            ],
+            [
+              53.5306,
+              -113.53759
+            ],
+            [
+              53.53066,
+              -113.53754
+            ],
+            [
+              53.53069,
+              -113.53746
+            ],
+            [
+              53.53072,
+              -113.53736
+            ],
+            [
+              53.53077,
+              -113.53731
+            ],
+            [
+              53.53083,
+              -113.53728
+            ],
+            [
+              53.53086,
+              -113.53717
+            ],
+            [
+              53.53091,
+              -113.53706
+            ],
+            [
+              53.53097,
+              -113.53695
+            ],
+            [
+              53.53102,
+              -113.5369
+            ],
+            [
+              53.53107,
+              -113.53684
+            ],
+            [
+              53.53113,
+              -113.53676
+            ],
+            [
+              53.53121,
+              -113.53669
+            ],
+            [
+              53.53126,
+              -113.53666
+            ],
+            [
+              53.53132,
+              -113.53662
+            ],
+            [
+              53.5314,
+              -113.53658
+            ],
+            [
+              53.53145,
+              -113.53652
+            ],
+            [
+              53.53151,
+              -113.53645
+            ],
+            [
+              53.53158,
+              -113.53637
+            ],
+            [
+              53.53163,
+              -113.53629
+            ],
+            [
+              53.53168,
+              -113.53619
+            ],
+            [
+              53.53172,
+              -113.53611
+            ],
+            [
+              53.53174,
+              -113.53602
+            ],
+            [
+              53.53174,
+              -113.53592
+            ],
+            [
+              53.53175,
+              -113.53583
+            ],
+            [
+              53.53179,
+              -113.53578
+            ],
+            [
+              53.53186,
+              -113.53579
+            ],
+            [
+              53.53192,
+              -113.53581
+            ],
+            [
+              53.53199,
+              -113.53585
+            ],
+            [
+              53.53204,
+              -113.53587
+            ],
+            [
+              53.53209,
+              -113.53589
+            ],
+            [
+              53.53216,
+              -113.53593
+            ],
+            [
+              53.53222,
+              -113.53597
+            ],
+            [
+              53.53229,
+              -113.53596
+            ],
+            [
+              53.53237,
+              -113.53594
+            ],
+            [
+              53.53242,
+              -113.53594
+            ],
+            [
+              53.53247,
+              -113.53593
+            ]
+          ]
         },
         "linguistics": {
           "meaning": "Six Shooter — the ‘little six-er’, a six-cartridge revolver",
@@ -828,8 +1698,7 @@
         "sources": [
           "itwêwina",
           "Online Cree Dictionary",
-          "Plains Cree Dictionary",
-          "Trailforks"
+          "Plains Cree Dictionary"
         ],
         "notes": [
           "PHYSICAL SIGN OVERRIDES CATALOGUE (syllabics): The plaque carving and Trailforks both write the syllabics as 'ᓂᑯᒑᐧᓴᐢᑲᓅᐢ' (with ᒑᐧ for cwâ and ᓅ for nô). The current catalogue creeSyllabics 'ᓂᑯᐚᓴᐢᑲᓄᐢ' is missing the c-glyph and the long-ô on the diminutive. Coordinator should update catalogue creeSyllabics to ᓂᑯᒑᐧᓴᐢᑲᓅᐢ. The catalogue creeName 'nikocwâsaskanôs' is already correct.",
@@ -838,6 +1707,23 @@
           "The diminutive ‑ôs is a regular Plains Cree diminutive ending; for animate nouns ‑sis is more common. Here the gun is grammatically inanimate (NI), so ‑ôs is the expected ending.",
           "Trailforks pick: 'Six Shooter' (trail id 18858), Central Edmonton (South) / NW Edmonton — blue singletrack. Trailhead 53.52434, -113.54104. High confidence (Trailforks lists AKA ᓂᑯᒑᐧᓴᐢᑲᓅᐢ nikocwâsaskanôs explicitly)."
         ]
+      },
+      "docsStlPath": "nicocwasaskanos/nicocwâsaskanôs_plaque.stl",
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 1132.10325292969
+        },
+        {
+          "color": "black",
+          "maxZ": 1495.99358422852
+        },
+        {
+          "color": "red"
+        }
+      ],
+      "checks": {
+        "meshRepaired": false
       }
     },
     {
@@ -1252,17 +2138,18 @@
       "stlPath": "mamahtaw_askwew/production.stl",
       "colors": [
         "white",
-        "black"
+        "black",
+        "red"
       ],
       "description": "Wonder Woman trail sign with black silhouette of Wonder Woman on motorcycle",
       "status": "published",
       "pageContent": {
-        "pageStatus": "agent-drafted",
+        "pageStatus": "user-reviewed",
         "accentColor": "#dc3545",
-        "themeName": "red",
+        "themeName": "",
         "headerTitle": "Wonder Woman • mamahtâw iskwew • ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ",
         "photo": {
-          "src": "../assets/mamahtaw_askwew/mamahtaw_iskwew.png",
+          "src": "../assets/mamahtaw_askwew/PXL_20201105_063836246.jpg",
           "alt": "Wonder Woman trail sign showing a black female-warrior silhouette with hair, star tiara, and lariat, with red Plains Cree syllabics across the torso",
           "caption": "3D printed plaque: black Wonder-Woman silhouette with star tiara and lariat, the syllabics ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ in red across the body."
         },
@@ -1270,12 +2157,149 @@
           "trailId": "31377",
           "trailUrl": "https://www.trailforks.com/trails/wonder-woman/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=31377&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
-          "displayName": "Wonder Woman",
+          "displayName": "wonder-woman",
+          "trackSourcePath": "docs/assets/mamahtaw_askwew/tracks/wonder-woman.gpx",
+          "mapStatus": "Shows on map: 32 track points from uploaded wonder-woman.gpx.",
+          "iconStatus": "Map marker uses an STL-rendered PNG icon override.",
+          "iconSrc": "../assets/mamahtaw_askwew/map-icons/wonder-woman-stl-icon.png",
           "mapCoords": {
             "lat": 53.54092,
-            "lng": -113.54308,
-            "source": "trailforks trailhead 31377"
-          }
+            "lng": -113.54308
+          },
+          "mapEndCoords": {
+            "lat": 53.53974,
+            "lng": -113.54542
+          },
+          "track": [
+            [
+              53.54092,
+              -113.54308
+            ],
+            [
+              53.5408,
+              -113.54313
+            ],
+            [
+              53.54076,
+              -113.54319
+            ],
+            [
+              53.54072,
+              -113.54331
+            ],
+            [
+              53.54067,
+              -113.54364
+            ],
+            [
+              53.54058,
+              -113.54385
+            ],
+            [
+              53.54051,
+              -113.54411
+            ],
+            [
+              53.54043,
+              -113.54421
+            ],
+            [
+              53.54039,
+              -113.54442
+            ],
+            [
+              53.54039,
+              -113.54452
+            ],
+            [
+              53.54036,
+              -113.54461
+            ],
+            [
+              53.54035,
+              -113.54479
+            ],
+            [
+              53.5403,
+              -113.54501
+            ],
+            [
+              53.54028,
+              -113.54504
+            ],
+            [
+              53.54026,
+              -113.54521
+            ],
+            [
+              53.54029,
+              -113.54535
+            ],
+            [
+              53.54027,
+              -113.54546
+            ],
+            [
+              53.54029,
+              -113.54566
+            ],
+            [
+              53.54023,
+              -113.54577
+            ],
+            [
+              53.54013,
+              -113.54589
+            ],
+            [
+              53.54012,
+              -113.54594
+            ],
+            [
+              53.54001,
+              -113.54608
+            ],
+            [
+              53.53997,
+              -113.54609
+            ],
+            [
+              53.53994,
+              -113.54608
+            ],
+            [
+              53.53987,
+              -113.54613
+            ],
+            [
+              53.5398,
+              -113.54621
+            ],
+            [
+              53.53976,
+              -113.54619
+            ],
+            [
+              53.53973,
+              -113.54615
+            ],
+            [
+              53.53969,
+              -113.54605
+            ],
+            [
+              53.53969,
+              -113.54598
+            ],
+            [
+              53.53973,
+              -113.54591
+            ],
+            [
+              53.53974,
+              -113.54542
+            ]
+          ]
         },
         "linguistics": {
           "meaning": "Wonder Woman — literally ‘wondrous / miraculous woman’",
@@ -1426,8 +2450,7 @@
         "sources": [
           "itwêwina",
           "Online Cree Dictionary",
-          "Plains Cree Dictionary",
-          "Trailforks"
+          "Plains Cree Dictionary"
         ],
         "notes": [
           "PHYSICAL SIGN OVERRIDES CATALOGUE: The plaque is carved with SRO 'mamahtâw iskwew' (with circumflex on the â). The current catalogue creeName 'mamahtaw iskwew' is missing the â circumflex. Trailforks's AKA listing for trail #31377 also writes 'mamahtâw iskwew' (with â). Coordinator should update catalogue creeName to 'mamahtâw iskwew'.",
@@ -1437,6 +2460,23 @@
           "Morpheme analysis treats mamahtâw as an indeclinable pre-noun (the VII bare stem used adjectivally) plus the NA noun iskwew. An alternative analysis writes it as a single compound 'mamahtâwiskwew' meaning ‘wondrous-woman’ (single word). Both readings are linguistically defensible; the two-word reading is preferred here because the plaque visually separates the words and Trailforks’s AKA also separates them.",
           "Trailforks pick: 'Wonder Woman' (trail id 31377), Hawrelak / NW Edmonton — 327m blue singletrack with a black-diamond climb, behind Government House. Trailhead 53.54092, -113.54308. High confidence (Trailforks lists AKA ‘mamahtâw iskwew’)."
         ]
+      },
+      "docsStlPath": "mamahtaw_askwew/mamahtâw_iskwew_plaque_v2.stl",
+      "colorLayers": [
+        {
+          "color": "white",
+          "maxZ": 993.921342773438
+        },
+        {
+          "color": "black",
+          "maxZ": 1889.887921875
+        },
+        {
+          "color": "red"
+        }
+      ],
+      "checks": {
+        "meshRepaired": false
       }
     },
     {
@@ -3203,7 +4243,7 @@
       "signNumber": 17,
       "numberedFolder": "17-kakwa",
       "title": "Kakwa",
-      "englishName": "Kakwa",
+      "englishName": "Porcupine",
       "creeName": "kâkwa",
       "creeSyllabics": "ᑳᑿ",
       "folder": "kakwa",
@@ -3243,7 +4283,232 @@
           "trailId": "322561",
           "trailUrl": "https://www.trailforks.com/trails/kakwa-porcupine-322561/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=322561&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
-          "displayName": "kakwa-porcupine-322561"
+          "displayName": "kakwa-porcupine-322561",
+          "trackSourcePath": "docs/assets/kakwa/tracks/kakwa-porcupine-322561.gpx",
+          "mapStatus": "Shows on map: 53 track points from uploaded kakwa-porcupine-322561.gpx.",
+          "iconStatus": "Marker icon can be generated from the selected final STL.",
+          "mapCoords": {
+            "lat": 53.54533,
+            "lng": -113.54869
+          },
+          "mapEndCoords": {
+            "lat": 53.54304,
+            "lng": -113.54759
+          },
+          "track": [
+            [
+              53.54533,
+              -113.54869
+            ],
+            [
+              53.54528,
+              -113.54869
+            ],
+            [
+              53.54523,
+              -113.54862
+            ],
+            [
+              53.54522,
+              -113.54855
+            ],
+            [
+              53.54526,
+              -113.54838
+            ],
+            [
+              53.54524,
+              -113.54832
+            ],
+            [
+              53.54529,
+              -113.54821
+            ],
+            [
+              53.54529,
+              -113.54812
+            ],
+            [
+              53.54524,
+              -113.54812
+            ],
+            [
+              53.54517,
+              -113.54806
+            ],
+            [
+              53.54514,
+              -113.54806
+            ],
+            [
+              53.54506,
+              -113.54793
+            ],
+            [
+              53.54503,
+              -113.54792
+            ],
+            [
+              53.54496,
+              -113.54794
+            ],
+            [
+              53.54494,
+              -113.54789
+            ],
+            [
+              53.54491,
+              -113.54786
+            ],
+            [
+              53.54487,
+              -113.54785
+            ],
+            [
+              53.54485,
+              -113.54781
+            ],
+            [
+              53.54472,
+              -113.54769
+            ],
+            [
+              53.5447,
+              -113.54763
+            ],
+            [
+              53.54467,
+              -113.5476
+            ],
+            [
+              53.54462,
+              -113.5476
+            ],
+            [
+              53.54461,
+              -113.54762
+            ],
+            [
+              53.54458,
+              -113.54762
+            ],
+            [
+              53.54457,
+              -113.54759
+            ],
+            [
+              53.54449,
+              -113.54753
+            ],
+            [
+              53.54445,
+              -113.54757
+            ],
+            [
+              53.54442,
+              -113.54751
+            ],
+            [
+              53.54433,
+              -113.54742
+            ],
+            [
+              53.54428,
+              -113.5474
+            ],
+            [
+              53.54418,
+              -113.5473
+            ],
+            [
+              53.54409,
+              -113.54727
+            ],
+            [
+              53.54404,
+              -113.5472
+            ],
+            [
+              53.544,
+              -113.54718
+            ],
+            [
+              53.54396,
+              -113.5473
+            ],
+            [
+              53.54391,
+              -113.54731
+            ],
+            [
+              53.54389,
+              -113.54733
+            ],
+            [
+              53.54377,
+              -113.54721
+            ],
+            [
+              53.54373,
+              -113.5472
+            ],
+            [
+              53.5437,
+              -113.54726
+            ],
+            [
+              53.54365,
+              -113.54731
+            ],
+            [
+              53.54364,
+              -113.5474
+            ],
+            [
+              53.5436,
+              -113.54743
+            ],
+            [
+              53.54355,
+              -113.54745
+            ],
+            [
+              53.54348,
+              -113.54744
+            ],
+            [
+              53.54341,
+              -113.54746
+            ],
+            [
+              53.54337,
+              -113.54749
+            ],
+            [
+              53.54332,
+              -113.54749
+            ],
+            [
+              53.54331,
+              -113.54751
+            ],
+            [
+              53.54327,
+              -113.54752
+            ],
+            [
+              53.54324,
+              -113.54758
+            ],
+            [
+              53.54316,
+              -113.5476
+            ],
+            [
+              53.54304,
+              -113.54759
+            ]
+          ]
         },
         "linguistics": {
           "meaning": "Porcupine",
@@ -3423,7 +4688,7 @@
       "signNumber": 19,
       "numberedFolder": "19-ocayisinakes",
       "title": "Ocayisinakes",
-      "englishName": "Ocayisinakes",
+      "englishName": "Monkey",
       "creeName": "ocayisinâkês",
       "creeSyllabics": "ᐅᒐᔨᓯᓈᑫᐢ",
       "folder": "ocayisinakes",
@@ -3437,7 +4702,7 @@
       "pageContent": {
         "pageStatus": "agent-drafted",
         "accentColor": "#dc3545",
-        "themeName": "red",
+        "themeName": "",
         "headerTitle": "Monkey • ocayisinâkês • ᐅᒐᔨᓯᓈᑫᐢ",
         "photo": {
           "src": "../assets/ocayisinakes/monkey_render.png",
@@ -3448,7 +4713,9 @@
           "trailId": "15796",
           "trailUrl": "https://www.trailforks.com/trails/lovers-lane-15796/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=15796&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
-          "displayName": "Monkey Trail (aka Lovers Lane / Groat Road Roller Coaster)",
+          "displayName": "lovers-lane-15796",
+          "mapStatus": "Shows on map at 53.54072, -113.52975. Add mapEndCoords or a track for a trail line.",
+          "iconStatus": "No final STL marker yet; map marker falls back to the saved photo or imagePath.",
           "mapCoords": {
             "lat": 53.54072,
             "lng": -113.52975,
@@ -3605,8 +4872,7 @@
         "sources": [
           "itwêwina",
           "Online Cree Dictionary",
-          "Plains Cree Dictionary",
-          "Trailforks"
+          "Plains Cree Dictionary"
         ],
         "notes": [
           "CATALOGUE englishName FLAG: catalogue.json currently has englishName = 'Ocayisinakes' for this sign, but the carved English headline on the plaque is plainly <strong>MONKEY</strong> (all caps, single English word). The kiwapamitin‑style page header uses 'Monkey • ocayisinâkês • ᐅᒐᔨᓯᓈᑫᐢ' to put the English meaning first (matching the plaque). Propose changing catalogue.englishName from 'Ocayisinakes' to 'Monkey' so the catalogue card matches the page header and the plaque English. catalogue.title is currently 'Ocayisinakes' — also propose 'Monkey'. catalogue.creeName 'ocayisinâkês' and creeSyllabics 'ᐅᒐᔨᓯᓈᑫᐢ' already match the plaque and don't need editing.",
@@ -3616,6 +4882,9 @@
           "Image asset: docs/assets/ocayisinakes/monkey_render.png is the original ocayisanakes.png design source from the ocayisinakes/ folder. A second asset docs/assets/ocayisinakes/monkey_wall.jpg is a wall crop (box ≈ (2700, 1700, 3650, 2990) in 8160×6144 original) kept for the catalogue card view; the design PNG is used as the primary photo because it is cleaner and matches the plaque graphic 1:1.",
           "mapCoords for trail 15796 (Lovers Lane / Monkey Trail) are estimated at the Groat Road Roller Coaster trailhead in Central Edmonton North (53.54072, ‑113.52975). The exact Trailforks FAQ trailhead value should be fetched and substituted if/when available; flagged as approximate."
         ]
+      },
+      "checks": {
+        "meshRepaired": false
       }
     },
     {
@@ -3623,7 +4892,7 @@
       "signNumber": 20,
       "numberedFolder": "20-oyoyow",
       "title": "Oyoyow",
-      "englishName": "Oyoyow",
+      "englishName": "Howl",
       "creeName": "oyôyow",
       "creeSyllabics": "ᐅᔫᔪᐤ",
       "folder": "oyoyow",
@@ -3637,14 +4906,17 @@
       "pageContent": {
         "pageStatus": "agent-drafted",
         "accentColor": "#dc3545",
-        "themeName": "red",
+        "themeName": "",
         "headerTitle": "Howl • oyôyow • ᐅᔫᔪᐤ",
         "photo": {
           "src": "../assets/oyoyow/oyoyow_render.png",
           "alt": "Oyôyow / HOWL trail sign showing a black silhouette of a howling wolf overlaid with red Plains Cree syllabics",
           "caption": "3D printed plaque: black howling-wolf silhouette with the syllabics ᐅᔫᔪᐤ in red across the muzzle and chest."
         },
-        "trailforks": {},
+        "trailforks": {
+          "mapStatus": "Not shown on map yet: add mapCoords or convert the downloaded XML / GPX into a track.",
+          "iconStatus": "No final STL marker yet; map marker falls back to the saved photo or imagePath."
+        },
         "linguistics": {
           "meaning": "Howl — the long, drawn-out cry of a wolf",
           "type": "verb (AI, animate intransitive) — onomatopoeic / imitative",
@@ -3814,6 +5086,9 @@
           "Two near-identical 'oyôyow / HOWL' plaques are mounted on the wall (one far-left as a tall plaque, one in the upper-row cluster). The asset wired here is the canonical design render at oyoyow/oyoyo.png; both wall plaques match this design.",
           "Trailforks pick: NO confident match. Direct trail name 'Howl' returned no hits in the Edmonton-area Trailforks network on three queries. There is a 'Wolfman' / 'Wolf Bait' family of trail names but nothing carrying 'Howl' itself. Leaving trailforks: {} and surfacing here for human follow-up — a single Trailforks click by a local rider would settle whether this is an unmapped community trail or a named line in another region."
         ]
+      },
+      "checks": {
+        "meshRepaired": false
       }
     },
     {
@@ -3821,7 +5096,7 @@
       "signNumber": 21,
       "numberedFolder": "21-nosemanicos",
       "title": "Nosemanicos",
-      "englishName": "Nosemanicos",
+      "englishName": "Ladybug",
       "creeName": "nôsemanicôs",
       "creeSyllabics": "ᓅᓭᒪᓂᒎᐢ",
       "folder": "nosemanicos",
@@ -3853,14 +5128,17 @@
       "pageContent": {
         "pageStatus": "agent-drafted",
         "accentColor": "#dc3545",
-        "themeName": "red",
+        "themeName": "",
         "headerTitle": "Ladybug • nôsemanicôs • ᓅᓭᒪᓂᒎᐢ",
         "photo": {
           "src": "../assets/nosemanicos/nosemanicos_render.png",
           "alt": "Nôsemanicôs / LADYBUG trail sign showing a red ladybug with black head and black spots, with white Plains Cree syllabics carved across the wing case",
           "caption": "3D printed plaque: red ladybug with black head, black spots, and the syllabics ᓅᓭᒪᓂᒎᐢ in white across its wing case."
         },
-        "trailforks": {},
+        "trailforks": {
+          "mapStatus": "Not shown on map yet: add mapCoords or convert the downloaded XML / GPX into a track.",
+          "iconStatus": "Marker icon can be generated from the selected final STL."
+        },
         "linguistics": {
           "meaning": "Ladybug — literally ‘the female little bug’ (the female-of-the-bug, with maternal/feminine reading)",
           "type": "noun (NA, animate)",
@@ -4008,6 +5286,9 @@
           "Trailforks pick: NO confident match. A direct search for 'Ladybug' in the Edmonton-area Trailforks network returned no hits across three queries. The trail may be unmapped on Trailforks, or be a community/builder name not yet listed. Leaving trailforks: {} and flagging here for a single human-rider Trailforks lookup.",
           "Mapping syllabic ᒎ (CANS U+128E COO) for the 'cô' position assumes the Plains Cree convention where long ô after c is written ᒎ. Some materials use ᒍ (CO, short) with an external long-vowel mark; either is readable but the long-vowel glyph matches the SRO circumflex more transparently."
         ]
+      },
+      "checks": {
+        "meshRepaired": false
       }
     },
     {

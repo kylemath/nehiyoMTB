@@ -22,6 +22,7 @@ import posixpath
 import re
 import shutil
 import subprocess
+import xml.etree.ElementTree as ET
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
@@ -57,6 +58,17 @@ DOCS_ROOT = REPO_ROOT / "docs"
 # alone by this server.
 CATALOGUE_PATH = DOCS_ROOT / "catalogue.json"
 MANIFEST_PATH = DOCS_ROOT / "stl-manifest.json"
+EDITOR_API_VERSION = 3
+EDITOR_API_FEATURES = [
+    "savePrintSetup",
+    "repairStl",
+    "saveSignContent",
+    "regenerateSignPage",
+    "uploadSignPhoto",
+    "uploadTrailSource",
+    "uploadMapIcon",
+    "parseTrailTrack",
+]
 
 
 def load_catalogue() -> dict:
@@ -927,6 +939,110 @@ ALLOWED_PHOTO_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 PHOTO_MAX_BYTES = 20 * 1024 * 1024  # 20 MB safety cap
 ALLOWED_TRAIL_SOURCE_EXTENSIONS = {".xml", ".gpx", ".kml", ".tcx"}
 TRAIL_SOURCE_MAX_BYTES = 10 * 1024 * 1024  # 10 MB safety cap
+TRAIL_TRACK_MAX_POINTS = 4000
+
+
+def _strip_xml_namespaces(elem: ET.Element) -> None:
+    """Drop ``{ns}tag`` prefixes so tag lookups work regardless of schema."""
+    for node in elem.iter():
+        tag = node.tag
+        if isinstance(tag, str) and tag.startswith("{"):
+            node.tag = tag.split("}", 1)[1]
+
+
+def _round_coord(value: float) -> float:
+    return round(float(value), 6)
+
+
+def parse_trail_track(raw: bytes, suffix: str) -> list[list[float]]:
+    """Parse GPX/KML/TCX/XML track files into ``[[lat, lng], ...]`` pairs.
+
+    Trailforks "Download GPX" exports, Garmin TCX, and KML LineStrings all
+    funnel through one entry point so the editor can hydrate
+    ``pageContent.trailforks.track`` automatically right after the file is
+    uploaded. Unknown / unrecognised formats raise ``ValueError`` so the
+    caller can surface a clear error instead of saving a half-broken trail.
+    """
+    try:
+        root = ET.fromstring(raw)
+    except ET.ParseError as exc:
+        raise ValueError(f"Could not parse XML trail file: {exc}") from exc
+
+    _strip_xml_namespaces(root)
+    points: list[list[float]] = []
+
+    for trkpt in root.iter("trkpt"):
+        lat = trkpt.get("lat")
+        lon = trkpt.get("lon")
+        if lat is None or lon is None:
+            continue
+        try:
+            points.append([_round_coord(lat), _round_coord(lon)])
+        except (TypeError, ValueError):
+            continue
+
+    if not points:
+        for rtept in root.iter("rtept"):
+            lat = rtept.get("lat")
+            lon = rtept.get("lon")
+            if lat is None or lon is None:
+                continue
+            try:
+                points.append([_round_coord(lat), _round_coord(lon)])
+            except (TypeError, ValueError):
+                continue
+
+    if not points:
+        for tp in root.iter("Trackpoint"):
+            pos = tp.find("Position")
+            if pos is None:
+                continue
+            lat_el = pos.find("LatitudeDegrees")
+            lon_el = pos.find("LongitudeDegrees")
+            if lat_el is None or lon_el is None:
+                continue
+            try:
+                points.append(
+                    [_round_coord(lat_el.text or ""), _round_coord(lon_el.text or "")]
+                )
+            except (TypeError, ValueError):
+                continue
+
+    if not points:
+        for coords_el in root.iter("coordinates"):
+            text = (coords_el.text or "").strip()
+            if not text:
+                continue
+            for chunk in re.split(r"\s+", text):
+                parts = chunk.split(",")
+                if len(parts) < 2:
+                    continue
+                try:
+                    lng = _round_coord(parts[0])
+                    lat = _round_coord(parts[1])
+                except ValueError:
+                    continue
+                points.append([lat, lng])
+
+    if not points:
+        raise ValueError(
+            f"No track points found in {suffix or 'file'}. "
+            "Expected GPX <trkpt>, KML <coordinates>, or TCX <Trackpoint>."
+        )
+
+    deduped: list[list[float]] = []
+    for pt in points:
+        if not deduped or deduped[-1] != pt:
+            deduped.append(pt)
+
+    if len(deduped) > TRAIL_TRACK_MAX_POINTS:
+        step = len(deduped) / TRAIL_TRACK_MAX_POINTS
+        sampled = [deduped[int(i * step)] for i in range(TRAIL_TRACK_MAX_POINTS)]
+        if sampled[-1] != deduped[-1]:
+            sampled.append(deduped[-1])
+        deduped = sampled
+
+    return deduped
 
 
 def _sanitize_asset_filename(name: str) -> str:
@@ -1055,12 +1171,31 @@ def upload_trail_source(payload: dict) -> dict:
     destination.write_bytes(raw)
     repo_path = repo_relative(destination)
 
+    track: list[list[float]] = []
+    parse_error: str | None = None
+    try:
+        track = parse_trail_track(raw, ext)
+    except ValueError as exc:
+        parse_error = str(exc)
+
+    map_coords: dict[str, float] | None = None
+    map_end_coords: dict[str, float] | None = None
+    if track:
+        map_coords = {"lat": track[0][0], "lng": track[0][1]}
+        if len(track) > 1:
+            map_end_coords = {"lat": track[-1][0], "lng": track[-1][1]}
+
     return {
         "ok": True,
         "filename": destination.name,
-        "path": repo_path,
+        "path": repo_path.as_posix(),
         "src": f"../assets/{folder}/tracks/{destination.name}",
         "bytes": len(raw),
+        "track": track,
+        "trackPoints": len(track),
+        "mapCoords": map_coords,
+        "mapEndCoords": map_end_coords,
+        "parseError": parse_error,
     }
 
 
@@ -1154,7 +1289,12 @@ class CatalogueEditorHandler(SimpleHTTPRequestHandler):
 
         try:
             if parsed.path == "/api/health":
-                self.send_json(200, {"ok": True, "repoRoot": str(REPO_ROOT)})
+                self.send_json(200, {
+                    "ok": True,
+                    "repoRoot": str(REPO_ROOT),
+                    "apiVersion": EDITOR_API_VERSION,
+                    "features": EDITOR_API_FEATURES,
+                })
                 return
 
             if parsed.path == "/api/stl-candidates":

@@ -1540,6 +1540,7 @@
                                 <div class="photo-row">
                                     <label class="editor-button photo-upload-button" for="content-map-icon-file">Choose map icon…</label>
                                     <input type="file" id="content-map-icon-file" accept="image/png,image/jpeg,image/webp,image/gif" hidden />
+                                    <button type="button" class="editor-button" id="content-map-icon-render" disabled>Render STL icon</button>
                                     <button type="button" class="editor-button" id="content-map-icon-clear" disabled>Clear</button>
                                     <span class="field-hint" id="content-map-icon-status">Optional: selected icons are copied into docs/assets/{folder}/map-icons/.</span>
                                 </div>
@@ -1745,6 +1746,22 @@
             'victoria-secret': 'victoriaSecret/vicSecret_plaque.stl',
             'slinky': 'slinky/slinky_plaque.stl'
         };
+
+        // Some plaques are authored with a horizontal (landscape) aspect
+        // ratio in their STL; rotating 90° around the face normal makes them
+        // read upright in the catalogue STL viewer, in offscreen map-marker
+        // snapshots, and in any other STL render driven from this page.
+        const HORIZONTAL_ASPECT_MODEL_KEYS = ['mistapiskihkoman'];
+
+        function needsHorizontalQuarterTurn(model, stlPath) {
+            if (model && model.id && HORIZONTAL_ASPECT_MODEL_KEYS.includes(model.id)) {
+                return true;
+            }
+            if (stlPath) {
+                return HORIZONTAL_ASPECT_MODEL_KEYS.some(key => stlPath.includes(key));
+            }
+            return false;
+        }
 
         class SignViewer {
             constructor(container, stlPath, modelData = null, options = {}) {
@@ -2064,14 +2081,7 @@
                             originalBoundingBox.getCenter(center);
                             geometry.translate(-center.x, -center.y, -center.z);
 
-                            // Some plaques are authored with a horizontal (landscape)
-                            // aspect ratio; rotate them 90° around the face normal so
-                            // they read upright in the viewer by default.
-                            const horizontalAspectModels = ['mistapiskihkoman', 'nicocwasaskanos'];
-                            const needsQuarterTurn = horizontalAspectModels.some(
-                                key => stlPath && stlPath.includes(key)
-                            );
-                            if (needsQuarterTurn) {
+                            if (needsHorizontalQuarterTurn(this.modelData, stlPath)) {
                                 geometry.rotateZ(Math.PI / 2);
                                 geometry.computeBoundingBox();
                             }
@@ -2249,6 +2259,8 @@
         let detailViewer = null;
         let stlManifest = {};
         let editorApiAvailable = false;
+        let editorApiStatusDetail = '';
+        const REQUIRED_EDITOR_API_VERSION = 3;
         let currentGeometryMeta = null;
         const selectedSTLByModel = {};
         const stlCandidatesByModel = {};
@@ -2467,9 +2479,14 @@
             try {
                 const response = await fetch('/api/health', { cache: 'no-store' });
                 const data = response.ok ? await response.json() : null;
-                editorApiAvailable = Boolean(data && data.ok);
+                const apiVersion = Number(data && data.apiVersion);
+                editorApiAvailable = Boolean(data && data.ok && apiVersion >= REQUIRED_EDITOR_API_VERSION);
+                editorApiStatusDetail = data && data.ok && !editorApiAvailable
+                    ? 'Local editor server is running old code. Stop it and rerun bash tools/run_catalogue_editor_server.sh, then reload this page.'
+                    : '';
             } catch (error) {
                 editorApiAvailable = false;
+                editorApiStatusDetail = '';
             }
 
             updateEditorStatus();
@@ -2485,14 +2502,15 @@
             const status = document.getElementById('editor-status');
             const canSave = editorApiAvailable && Boolean(selectedModel);
             const canSelectSTL = editorApiAvailable && Boolean(selectedModel) && getModelSTLFiles(selectedModel).length > 0;
+            const showEditorPanel = editorApiAvailable || Boolean(editorApiStatusDetail);
 
-            editorPanel.classList.toggle('is-hidden', !editorApiAvailable);
+            editorPanel.classList.toggle('is-hidden', !showEditorPanel);
             stlSelectWrap.classList.toggle('is-hidden', !canSelectSTL);
             status.classList.toggle('ready', editorApiAvailable);
             status.classList.toggle('offline', !editorApiAvailable);
-            status.textContent = message || (editorApiAvailable
+            status.textContent = message || editorApiStatusDetail || (editorApiAvailable
                 ? 'Local editor connected. Saves will update catalogue.json and docs folders.'
-                : 'Local editor offline. Run python3 tools/catalogue_editor_server.py to enable saving.');
+                : 'Local editor offline. Run bash tools/run_catalogue_editor_server.sh to enable saving.');
 
             document.getElementById('repair-selected-stl').disabled = !canSave || !getModelSTLPath(selectedModel);
             document.getElementById('set-final-stl').disabled = !canSave || !getModelSTLPath(selectedModel);
@@ -2867,6 +2885,7 @@
             const draft = cleanedLayerDraft(selectedModel);
             selectedModel.colors = draft.map(layer => layer.color);
             selectedModel.colorLayers = draft;
+            invalidateSTLSnapshot(selectedModel);
             document.getElementById('detail-colors').innerHTML = renderColorSwatches(selectedModel);
 
             if (detailViewer) {
@@ -2920,6 +2939,7 @@
                 stlCandidatesByModel[selectedModel.id] = data.candidates || stlCandidatesByModel[selectedModel.id] || [];
                 selectedSTLByModel[selectedModel.id] = selectedModel.docsStlPath;
                 layerDraftsByModel[selectedModel.id] = (selectedModel.colorLayers || []).map(layer => ({ ...layer }));
+                invalidateSTLSnapshot(selectedModel);
 
                 setEditorLog('Saved print setup.', data.operations || []);
                 updateDetailPane();
@@ -2969,6 +2989,7 @@
 
                 if (data.repairedCandidate?.path) {
                     selectedSTLByModel[selectedModel.id] = data.repairedCandidate.path;
+                    invalidateSTLSnapshot(selectedModel);
                 }
 
                 // Server flips checks.meshRepaired based on admesh's "Total
@@ -3267,6 +3288,7 @@
             }
 
             selectedSTLByModel[selectedModel.id] = event.target.value;
+            invalidateSTLSnapshot(selectedModel);
             updateDetailPane();
         });
 
@@ -3316,6 +3338,7 @@
             'content-icon-status',
             'content-map-icon-src',
             'content-map-icon-file',
+            'content-map-icon-render',
             'content-map-icon-clear',
             'content-cultural-heading',
             'content-cultural-body',
@@ -3469,8 +3492,33 @@
                     throw new Error(data.error || 'Upload failed');
                 }
                 document.getElementById('content-track-source-path').value = data.path || '';
+
+                if (!selectedModel.pageContent) selectedModel.pageContent = {};
+                if (!selectedModel.pageContent.trailforks) selectedModel.pageContent.trailforks = {};
+                const trailforks = selectedModel.pageContent.trailforks;
+                trailforks.trackSourcePath = data.path || trailforks.trackSourcePath || '';
+
+                const pointCount = Number(data.trackPoints) || (Array.isArray(data.track) ? data.track.length : 0);
+                if (Array.isArray(data.track) && data.track.length > 1) {
+                    trailforks.track = data.track;
+                }
+                if (data.mapCoords && typeof data.mapCoords.lat === 'number') {
+                    trailforks.mapCoords = data.mapCoords;
+                }
+                if (data.mapEndCoords && typeof data.mapEndCoords.lat === 'number') {
+                    trailforks.mapEndCoords = data.mapEndCoords;
+                }
+
+                const mapStatusField = document.getElementById('content-map-status');
+                if (mapStatusField && pointCount > 1) {
+                    mapStatusField.value = `Shows on map: ${pointCount} track points from uploaded ${data.filename}.`;
+                }
+
                 const kb = Math.max(1, Math.round((data.bytes || 0) / 1024));
-                status.textContent = `Selected ${data.filename} (${kb} KB). Click Save content to apply.`;
+                const summary = pointCount > 1
+                    ? `Parsed ${pointCount} track points from ${data.filename} (${kb} KB). Click Save content to apply.`
+                    : `Selected ${data.filename} (${kb} KB). ${data.parseError || 'No track points parsed.'} Click Save content to apply.`;
+                status.textContent = summary;
             } catch (error) {
                 status.textContent = `Trail file upload failed: ${error.message}`;
             } finally {
@@ -3517,6 +3565,67 @@
                 status.textContent = `Map icon upload failed: ${error.message}`;
             } finally {
                 document.getElementById('content-map-icon-file').value = '';
+            }
+        }
+
+        function stlIconFilename(model) {
+            const source = model?.englishName || model?.title || model?.id || 'map-icon';
+            const safe = String(source)
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '') || 'map-icon';
+            return `${safe}-stl-icon.png`;
+        }
+
+        async function renderMapIconFromSelectedSTL() {
+            const status = document.getElementById('content-map-icon-status');
+            if (!editorApiAvailable || !selectedModel) {
+                setContentLog('Local editor server is not available; cannot save rendered map icons.');
+                return;
+            }
+
+            const stlPath = getModelSTLPath(selectedModel);
+            if (!stlPath) {
+                status.textContent = 'No STL is selected for this sign.';
+                return;
+            }
+
+            setContentInputsDisabled(true);
+            status.textContent = 'Rendering STL icon…';
+
+            try {
+                invalidateSTLSnapshot(selectedModel);
+                const dataUrl = await renderSTLSnapshot(selectedModel);
+                if (!dataUrl) {
+                    throw new Error('Could not render STL snapshot');
+                }
+
+                const response = await fetch('/api/upload-map-icon', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        modelId: selectedModel.id,
+                        filename: stlIconFilename(selectedModel),
+                        contentBase64: dataUrl
+                    })
+                });
+                const data = await response.json();
+                if (!response.ok || !data.ok) {
+                    throw new Error(data.error || 'Upload failed');
+                }
+
+                stlSnapshotCache[selectedModel.id] = dataUrl;
+                document.getElementById('content-map-icon-src').value = data.src || '';
+                document.getElementById('content-map-icon-clear').disabled = !data.src;
+                document.getElementById('content-icon-status').value = 'Map marker uses an STL-rendered PNG icon override.';
+                const kb = Math.max(1, Math.round((data.bytes || 0) / 1024));
+                status.textContent = `Rendered ${data.filename} (${kb} KB). Click Save content to apply.`;
+            } catch (error) {
+                status.textContent = `STL icon render failed: ${error.message}`;
+            } finally {
+                syncContentEditorAvailability();
             }
         }
 
@@ -3648,6 +3757,14 @@
             document.getElementById('content-save').disabled = disabled;
             document.getElementById('content-regenerate').disabled = disabled;
             document.getElementById('content-open').disabled = disabled || !selectedModel;
+            const renderIconButton = document.getElementById('content-map-icon-render');
+            if (renderIconButton) {
+                renderIconButton.disabled = disabled || !editorApiAvailable || !selectedModel || !getModelSTLPath(selectedModel);
+            }
+            const clearIconButton = document.getElementById('content-map-icon-clear');
+            if (clearIconButton) {
+                clearIconButton.disabled = disabled || !document.getElementById('content-map-icon-src').value.trim();
+            }
         }
 
         function loadContentIntoForm(model) {
@@ -3944,6 +4061,9 @@
             const file = event.target.files && event.target.files[0];
             if (file) uploadMapIconFile(file);
         });
+        document.getElementById('content-map-icon-render').addEventListener('click', () => {
+            renderMapIconFromSelectedSTL();
+        });
         document.getElementById('content-map-icon-clear').addEventListener('click', () => {
             document.getElementById('content-map-icon-src').value = '';
             document.getElementById('content-map-icon-clear').disabled = true;
@@ -3973,6 +4093,8 @@
             document.getElementById('content-save').disabled = !enabled;
             document.getElementById('content-regenerate').disabled = !enabled;
             document.getElementById('content-open').disabled = !selectedModel || !getModelPagePath(selectedModel);
+            document.getElementById('content-map-icon-render').disabled = !enabled || !getModelSTLPath(selectedModel);
+            document.getElementById('content-map-icon-clear').disabled = !enabled || !document.getElementById('content-map-icon-src').value.trim();
         }
 
         const _originalSetSelected = setSelectedModel;
@@ -4565,6 +4687,12 @@
         let snapshotCamera = null;
         let snapshotQueue = Promise.resolve();
 
+        function invalidateSTLSnapshot(model) {
+            if (!model || !model.id) return;
+            delete stlSnapshotCache[model.id];
+            delete stlSnapshotPromises[model.id];
+        }
+
         function initSnapshotRenderer() {
             if (snapshotRenderer) return;
             snapshotRenderer = new THREE.WebGLRenderer({
@@ -4677,6 +4805,13 @@
             const center = new THREE.Vector3();
             originalBox.getCenter(center);
             geometry.translate(-center.x, -center.y, -center.z);
+
+            if (needsHorizontalQuarterTurn(model, getModelSTLPath(model))) {
+                geometry.rotateZ(Math.PI / 2);
+                geometry.computeBoundingBox();
+                originalBox.copy(geometry.boundingBox);
+            }
+
             const size = new THREE.Vector3();
             originalBox.getSize(size);
             // Frame the printed face. STL prints are flat on Z; we fit the
