@@ -397,7 +397,12 @@ def _build_map_preview(
     }
 
 
-def render_track_mini_map(trail: dict, *, segment_url: str = "") -> str:
+def render_track_mini_map(
+    trail: dict,
+    *,
+    link_url: str = "",
+    link_label: str = "linked trail page",
+) -> str:
     points = _track_points(trail)
     preview = _build_map_preview(points)
     if not preview:
@@ -422,11 +427,11 @@ def render_track_mini_map(trail: dict, *, segment_url: str = "") -> str:
                 <circle class="trail-mini-map-dot" cx="{preview["endX"]}" cy="{preview["endY"]}" r="6" fill="#ef4444" />
                 <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
               </svg>
-              <div class="trail-mini-map-caption">Uploaded GPX over map context: {point_count} track points. Click to open the Strava segment.</div>
+              <div class="trail-mini-map-caption">Uploaded GPX over map context: {point_count} track points. Click to open the {escape(link_label)}.</div>
             </div>"""
-    if segment_url:
+    if link_url:
         return (
-            f'<a class="trail-mini-map-link" href="{escape(segment_url)}" '
+            f'<a class="trail-mini-map-link" href="{escape(link_url)}" '
             f'target="_blank" rel="noopener noreferrer">{mini_map}</a>'
         )
     return mini_map
@@ -455,7 +460,11 @@ def render_trailforks_block(content: dict) -> str:
             f'<div style="margin-top:8px"><a href="{escape(segment_url)}" style="font-size: 0.7em;">'
             f"{escape(display_name) if display_name else escape(segment_url)}</a></div>"
         )
-        mini_map_html = render_track_mini_map(trail, segment_url=segment_url)
+        mini_map_html = render_track_mini_map(
+            trail,
+            link_url=segment_url,
+            link_label="Strava segment",
+        )
         track_note = ""
         if not mini_map_html and trail.get("track"):
             track_note = (
@@ -473,8 +482,18 @@ def render_trailforks_block(content: dict) -> str:
 
     widget_url = trail.get("widgetUrl")
     trail_url = trail.get("trailUrl")
+    map_embed_mode = str(trail.get("mapEmbedMode") or "").strip().lower()
+    use_local_map = map_embed_mode == "local" or (not widget_url and bool(trail.get("track")))
 
-    if not widget_url and not trail_url:
+    mini_map_html = ""
+    if use_local_map:
+        mini_map_html = render_track_mini_map(
+            trail,
+            link_url=trail_url,
+            link_label="Trailforks trail page",
+        )
+
+    if not widget_url and not trail_url and not mini_map_html:
         return """
         <h2>Trail Information</h2>
         <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
@@ -483,7 +502,7 @@ def render_trailforks_block(content: dict) -> str:
         </div>"""
 
     widget_html = ""
-    if widget_url:
+    if widget_url and not mini_map_html:
         widget_html = f'<iframe width="100%" height="350" frameborder="0" src="{escape(widget_url)}"></iframe>'
 
     link_html = ""
@@ -495,8 +514,9 @@ def render_trailforks_block(content: dict) -> str:
 
     return f"""
         <h2>Trail Information</h2>
-        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks{', with a local preview from the uploaded GPX' if mini_map_html else ' for maps, conditions, and details'}.</p>
         <div style="text-align:center;margin-bottom:24px">
+            {mini_map_html}
             {widget_html}
             {link_html}
         </div>"""

@@ -1593,6 +1593,15 @@
                                 </div>
                             </div>
                             <div class="content-field wide">
+                                <label for="content-map-embed-mode">Trail information map card</label>
+                                <select id="content-map-embed-mode">
+                                    <option value="">Auto / Trailforks widget when available</option>
+                                    <option value="widget">Force Trailforks widget</option>
+                                    <option value="local">Use uploaded GPX basemap preview</option>
+                                </select>
+                                <span class="field-hint">Use the GPX preview for hidden Trailforks map trails that still have a useful Trailforks page.</span>
+                            </div>
+                            <div class="content-field wide">
                                 <label for="content-map-status">Map visibility note</label>
                                 <textarea id="content-map-status" placeholder="Shows on map because mapCoords are present."></textarea>
                             </div>
@@ -3463,6 +3472,7 @@
             'content-strava-segment-url',
             'content-track-source-path',
             'content-track-source-file',
+            'content-map-embed-mode',
             'content-map-status',
             'content-icon-status',
             'content-map-icon-src',
@@ -3813,6 +3823,7 @@
                     widgetUrl: '',
                     stravaSegmentId: '',
                     stravaSegmentUrl: '',
+                    mapEmbedMode: '',
                     displayName: '',
                     trackSourcePath: '',
                     mapStatus: '',
@@ -3977,6 +3988,7 @@
             document.getElementById('content-strava-segment-url').value = content.trailforks.stravaSegmentUrl
                 || (stravaSegmentId ? `https://www.strava.com/segments/${stravaSegmentId}` : '');
             document.getElementById('content-track-source-path').value = content.trailforks.trackSourcePath || '';
+            document.getElementById('content-map-embed-mode').value = content.trailforks.mapEmbedMode || '';
             document.getElementById('content-track-source-status').textContent = content.trailforks.trackSourcePath
                 ? 'Trail source file is set. Choose another file to replace the path.'
                 : 'Trailforks GPX or a Strava activity export — copied into docs/assets/{folder}/tracks/.';
@@ -4039,6 +4051,7 @@
             const sharedTrailFields = {
                 trailSource,
                 trackSourcePath: document.getElementById('content-track-source-path').value.trim(),
+                mapEmbedMode: document.getElementById('content-map-embed-mode').value,
                 mapStatus: document.getElementById('content-map-status').value.trim(),
                 iconStatus: document.getElementById('content-icon-status').value.trim(),
                 iconSrc: document.getElementById('content-map-icon-src').value.trim(),

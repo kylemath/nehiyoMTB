@@ -4775,6 +4775,7 @@
           "trailId": "81341",
           "trailUrl": "https://www.trailforks.com/trails/purgatory-81341/",
           "widgetUrl": "https://www.trailforks.com/widgets/trail/?trailid=81341&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1",
+          "mapEmbedMode": "local",
           "displayName": "purgatory-81341",
           "trackSourcePath": "docs/assets/purgatory/tracks/Evening_Ski_Hike-trimmed.gpx",
           "mapStatus": "Shows on map: 2317 track points from uploaded Evening_Ski_Hike-trimmed.gpx.",

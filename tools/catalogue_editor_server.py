@@ -790,6 +790,13 @@ def _infer_trail_source(raw: dict) -> str:
     return "trailforks"
 
 
+def _clean_map_embed_mode(raw: Any) -> str:
+    mode = _clean_string(raw)
+    if mode in {"local", "widget"}:
+        return mode
+    return ""
+
+
 def _clean_trailforks(raw: Any) -> dict:
     if raw is None:
         return {}
@@ -798,6 +805,7 @@ def _clean_trailforks(raw: Any) -> dict:
 
     trail_source = _infer_trail_source(raw)
     display_name = _clean_string(raw.get("displayName"))
+    map_embed_mode = _clean_map_embed_mode(raw.get("mapEmbedMode"))
     track_source_path = _clean_string(raw.get("trackSourcePath"))
     map_status = _clean_string(raw.get("mapStatus"))
     icon_status = _clean_string(raw.get("iconStatus"))
@@ -823,7 +831,7 @@ def _clean_trailforks(raw: Any) -> dict:
         trail_id = _clean_string(raw.get("trailId"))
         trail_url = _clean_string(raw.get("trailUrl"))
         widget_url = _clean_string(raw.get("widgetUrl"))
-        if trail_id and not widget_url:
+        if trail_id and not widget_url and map_embed_mode != "local":
             widget_url = (
                 f"https://www.trailforks.com/widgets/trail/?trailid={trail_id}"
                 "&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets"
@@ -839,6 +847,7 @@ def _clean_trailforks(raw: Any) -> dict:
         "widgetUrl": widget_url,
         "stravaSegmentId": strava_segment_id,
         "stravaSegmentUrl": strava_segment_url,
+        "mapEmbedMode": map_embed_mode,
         "displayName": display_name,
         "trackSourcePath": track_source_path,
         "mapStatus": map_status,
