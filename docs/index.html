@@ -1336,10 +1336,12 @@
             }
         }
 
-        /* Mobile catalogue drawer – defaults hide the trigger and overlay so
-           desktop layout stays untouched; the @media block below activates the
-           drawer on small screens. */
+        /* Mobile catalogue drawer + top tabbar – defaults hide the controls
+           and overlay so desktop layout stays untouched; the @media block
+           below activates them on small screens. */
+        .mobile-toolbar,
         .mobile-menu-toggle,
+        .mobile-view-bar,
         .mobile-menu-backdrop,
         .mobile-menu-close {
             display: none;
@@ -1353,10 +1355,94 @@
             .catalogue-layout {
                 grid-template-columns: 1fr;
                 gap: 0.75rem;
-                padding-top: 3.25rem;
+                padding-top: 3.5rem;
             }
 
             .column-resizer {
+                display: none;
+            }
+
+            /* Fixed top toolbar that holds the drawer trigger plus the
+               STL/Page/Map view tabs. Acts as a primary navigation on small
+               screens since each pane is too tall to stack. */
+            .mobile-toolbar {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 60;
+                padding: 0.4rem 0.5rem;
+                background: rgba(10, 10, 10, 0.92);
+                border-bottom: 1px solid var(--border);
+                backdrop-filter: blur(8px);
+            }
+
+            .mobile-toolbar .mobile-menu-toggle {
+                position: static;
+                top: auto;
+                left: auto;
+                box-shadow: none;
+                padding: 0.45rem 0.7rem;
+                font-size: 0.85rem;
+            }
+
+            .mobile-view-bar {
+                display: flex;
+                flex: 1 1 auto;
+                background: #141414;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            .mobile-view-bar button {
+                flex: 1;
+                background: transparent;
+                color: var(--text-muted);
+                border: 0;
+                padding: 0.5rem 0.4rem;
+                font: inherit;
+                font-size: 0.78rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                cursor: pointer;
+                border-right: 1px solid var(--border);
+                transition: color 0.15s ease, background 0.15s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .mobile-view-bar button:last-child {
+                border-right: 0;
+            }
+
+            .mobile-view-bar button:hover {
+                color: var(--text);
+                background: rgba(255, 255, 255, 0.04);
+            }
+
+            .mobile-view-bar button.active {
+                color: #fff;
+                background: rgba(220, 53, 69, 0.18);
+                box-shadow: inset 0 -2px 0 var(--accent);
+            }
+
+            /* Mobile pane visibility is driven by a body class so a single
+               toolbar can swap between STL render, Page, and Map views. */
+            body.mobile-view-stl .page-pane,
+            body.mobile-view-page .render-pane,
+            body.mobile-view-map .render-pane {
+                display: none;
+            }
+
+            /* On mobile the page-pane already hosts both Page and Map via its
+               internal view-tabs; we hide that secondary tab strip because the
+               new top-level toolbar replaces it. */
+            body.mobile-view-page .view-tabs,
+            body.mobile-view-map .view-tabs {
                 display: none;
             }
 
@@ -1477,10 +1563,15 @@
                 outline: none;
             }
 
+            /* Let the visible pane fill the remaining vertical space below
+               the fixed mobile toolbar (3.5rem) and the catalogue-layout's
+               own top padding (3.5rem) plus container padding (1rem * 2).
+               Using 100dvh keeps the iOS dynamic viewport (URL bar collapse)
+               accurate. */
             .detail-pane {
                 position: static;
-                height: auto;
-                min-height: 520px;
+                height: calc(100dvh - 4.75rem);
+                min-height: 0;
             }
 
             .detail-toolbar {
@@ -1501,7 +1592,12 @@
             .detail-content,
             .large-viewer,
             .detail-frame {
-                min-height: 520px;
+                min-height: 0;
+            }
+
+            /* Container padding eats vertical space we don't have on mobile. */
+            .container {
+                padding: 0.5rem;
             }
 
             .editor-grid {
@@ -1515,19 +1611,26 @@
     </style>
 </head>
 <body>
-    <button
-        class="mobile-menu-toggle"
-        type="button"
-        id="mobile-menu-toggle"
-        aria-controls="catalogue-list"
-        aria-expanded="false"
-        aria-label="Open trail signs menu"
-    >
-        <span class="toggle-icon" aria-hidden="true">
-            <span></span><span></span><span></span>
-        </span>
-        <span>Signs</span>
-    </button>
+    <div class="mobile-toolbar" id="mobile-toolbar" role="navigation" aria-label="Mobile navigation">
+        <button
+            class="mobile-menu-toggle"
+            type="button"
+            id="mobile-menu-toggle"
+            aria-controls="catalogue-list"
+            aria-expanded="false"
+            aria-label="Open trail signs menu"
+        >
+            <span class="toggle-icon" aria-hidden="true">
+                <span></span><span></span><span></span>
+            </span>
+            <span>Signs</span>
+        </button>
+        <nav class="mobile-view-bar" id="mobile-view-bar" role="tablist" aria-label="Active view">
+            <button type="button" class="" data-mobile-view="stl" role="tab" aria-selected="false">STL</button>
+            <button type="button" class="active" data-mobile-view="page" role="tab" aria-selected="true">Page</button>
+            <button type="button" class="" data-mobile-view="map" role="tab" aria-selected="false">Map</button>
+        </nav>
+    </div>
     <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
     <div class="container">
         <div class="catalogue-layout">
@@ -1812,10 +1915,10 @@
                     <div class="map-container is-hidden" id="map-3d-view" role="tabpanel" aria-labelledby="view-tab-map">
                         <div id="catalogue-map-3d"></div>
                         <div class="map-pitch-toggle" id="map-pitch-toggle" role="group" aria-label="Map tilt">
-                            <button type="button" class="pitch-btn" data-pitch="tilt" aria-pressed="true">Tilt</button>
-                            <button type="button" class="pitch-btn" data-pitch="flat" aria-pressed="false">Top-down</button>
+                            <button type="button" class="pitch-btn" data-pitch="tilt" aria-pressed="false">Tilt</button>
+                            <button type="button" class="pitch-btn" data-pitch="flat" aria-pressed="true">Top-down</button>
                         </div>
-                        <div class="map-style-toggle is-hidden" id="map-style-toggle" role="group" aria-label="Basemap style">
+                        <div class="map-style-toggle" id="map-style-toggle" role="group" aria-label="Basemap style">
                             <button type="button" class="style-btn" data-style="sat" aria-pressed="true">Satellite</button>
                             <button type="button" class="style-btn" data-style="cartoon" aria-pressed="false">Cartoon</button>
                         </div>
@@ -4571,8 +4674,13 @@
             'https://d.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'
         ];
         const DEFAULT_3D_CENTER = [-113.5286, 53.5337];
-        const DEFAULT_3D_PITCH = 62;
-        const DEFAULT_3D_BEARING = -28;
+        // The map opens in flat top-down orientation; users can opt into the
+        // oblique tilt via the pitch toggle, which targets these tilt-mode
+        // defaults instead.
+        const DEFAULT_3D_PITCH = 0;
+        const DEFAULT_3D_BEARING = 0;
+        const TILT_3D_PITCH = 62;
+        const TILT_3D_BEARING = -28;
         const TERRAIN_EXAGGERATION = 1.8;
 
         let map3D = null;
@@ -4882,24 +4990,33 @@
         }
 
         function highlight3DMarkerForSelected() {
+            // Only updates the visual active state on markers. Camera framing
+            // is handled by render3DMapMarkers' fitBounds (when first opening
+            // the map) and by panTo3DMarkerForSelected (when a sign is picked
+            // while the map is already visible) so that single-trail selection
+            // doesn't slam the zoom in to the start of one trail – the user
+            // wants to see all trails in context first.
             if (!map3DInitialized || !map3D) return;
             Object.entries(map3DMarkers).forEach(([id, marker]) => {
                 const el = marker.getElement();
                 if (!el) return;
                 el.classList.toggle('active', Boolean(selectedModel && selectedModel.id === id));
             });
-            if (selectedModel) {
-                const marker = map3DMarkers[selectedModel.id];
-                if (marker) {
-                    const lngLat = marker.getLngLat();
-                    map3D.flyTo({
-                        center: lngLat,
-                        zoom: Math.max(map3D.getZoom(), 14.5),
-                        pitch: DEFAULT_3D_PITCH,
-                        duration: 800
-                    });
-                }
-            }
+        }
+
+        function panTo3DMarkerForSelected() {
+            if (!map3DInitialized || !map3D || !selectedModel) return;
+            const marker = map3DMarkers[selectedModel.id];
+            if (!marker) return;
+            const lngLat = marker.getLngLat();
+            // Ease the centre to the selected marker without changing the
+            // current zoom or pitch – preserves the broad overview the user
+            // sees when they first open the map and respects any tilt they
+            // have manually chosen.
+            map3D.easeTo({
+                center: lngLat,
+                duration: 600
+            });
         }
 
         function setView(view) {
@@ -4959,10 +5076,15 @@
         };
 
         // Wrap setSelectedModel so the map highlight follows the selection.
+        // Only pan when the map is the current view; otherwise the camera
+        // would silently re-center while the user is on the Page tab.
         const _setSelectedModelBeforeMap = setSelectedModel;
         setSelectedModel = function (model) {
             _setSelectedModelBeforeMap(model);
-            if (map3DInitialized) highlight3DMarkerForSelected();
+            if (map3DInitialized) {
+                highlight3DMarkerForSelected();
+                if (currentView === 'map') panTo3DMarkerForSelected();
+            }
         };
 
         // Wrap loadCatalogue so the map repopulates once catalogue data is
@@ -5030,7 +5152,7 @@
                         // surface stays photographic.
                         setBasemapStyle('sat');
                         setStyleToggleVisible(false);
-                        map3D.easeTo({ pitch: DEFAULT_3D_PITCH, bearing: DEFAULT_3D_BEARING, duration: 600 });
+                        map3D.easeTo({ pitch: TILT_3D_PITCH, bearing: TILT_3D_BEARING, duration: 600 });
                     }
                 });
             });
@@ -5307,10 +5429,38 @@
 
         // Mobile drawer that hides the trail-selection cards behind a
         // hamburger button so the selected sign's page is visible on small
-        // screens. The drawer auto-closes once a card is picked.
+        // screens. The drawer auto-closes once a card is picked. A second
+        // top-level toolbar lets the user swap between STL render / Page /
+        // Map without scrolling between full-height stacked panes.
         const MOBILE_MENU_QUERY = window.matchMedia('(max-width: 900px)');
+        const MOBILE_VIEW_CLASSES = ['mobile-view-stl', 'mobile-view-page', 'mobile-view-map'];
+        let mobileView = 'page';
         function isMobileMenuActive() {
             return MOBILE_MENU_QUERY.matches;
+        }
+        function applyMobileViewClass() {
+            const cls = `mobile-view-${mobileView}`;
+            MOBILE_VIEW_CLASSES.forEach(c => {
+                if (c === cls) document.body.classList.add(c);
+                else document.body.classList.remove(c);
+            });
+            document.querySelectorAll('#mobile-view-bar button[data-mobile-view]').forEach(btn => {
+                const isActive = btn.dataset.mobileView === mobileView;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+        }
+        function setMobileView(view) {
+            if (!['stl', 'page', 'map'].includes(view)) return;
+            mobileView = view;
+            applyMobileViewClass();
+            // Map the mobile tab choice onto the page-pane's internal Page/Map
+            // tabs so the right content renders inside the page-pane container.
+            if (view === 'map') {
+                if (typeof setView === 'function') setView('map');
+            } else if (view === 'page') {
+                if (typeof setView === 'function') setView('page');
+            }
         }
         function openMobileMenu() {
             if (!isMobileMenuActive()) return;
@@ -5361,6 +5511,10 @@
             const handleViewportChange = () => {
                 if (!isMobileMenuActive()) {
                     closeMobileMenu();
+                    // Strip mobile-view-* classes so desktop shows all panes.
+                    MOBILE_VIEW_CLASSES.forEach(c => document.body.classList.remove(c));
+                } else {
+                    applyMobileViewClass();
                 }
             };
             if (typeof MOBILE_MENU_QUERY.addEventListener === 'function') {
@@ -5370,10 +5524,21 @@
             }
         }
 
+        function initMobileViewTabs() {
+            const buttons = document.querySelectorAll('#mobile-view-bar button[data-mobile-view]');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => setMobileView(btn.dataset.mobileView));
+            });
+            if (isMobileMenuActive()) {
+                applyMobileViewClass();
+            }
+        }
+
         // Load on page load
         document.addEventListener('DOMContentLoaded', () => {
             initResizableCatalogueColumns();
             initMobileCatalogueMenu();
+            initMobileViewTabs();
             attachViewTabHandlers();
             attachPitchToggleHandlers();
             attachStyleToggleHandlers();
