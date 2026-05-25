@@ -1336,6 +1336,15 @@
             }
         }
 
+        /* Mobile catalogue drawer – defaults hide the trigger and overlay so
+           desktop layout stays untouched; the @media block below activates the
+           drawer on small screens. */
+        .mobile-menu-toggle,
+        .mobile-menu-backdrop,
+        .mobile-menu-close {
+            display: none;
+        }
+
         @media (max-width: 900px) {
             header h1 {
                 font-size: 2.5rem;
@@ -1344,10 +1353,128 @@
             .catalogue-layout {
                 grid-template-columns: 1fr;
                 gap: 0.75rem;
+                padding-top: 3.25rem;
             }
 
             .column-resizer {
                 display: none;
+            }
+
+            /* Slide the trail-selection cards off-canvas on mobile so the
+               selected sign's page is visible immediately. The drawer slides
+               in from the left when the menu toggle is pressed. */
+            .catalogue-list {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: min(360px, 88vw);
+                height: 100dvh;
+                max-height: 100dvh;
+                z-index: 70;
+                background: var(--bg);
+                border-right: 1px solid var(--border);
+                padding: 3.25rem 0.85rem 1rem;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                transform: translateX(-105%);
+                transition: transform 0.28s ease;
+                box-shadow: 8px 0 32px rgba(0, 0, 0, 0.55);
+            }
+
+            body.mobile-menu-open .catalogue-list {
+                transform: translateX(0);
+            }
+
+            body.mobile-menu-open {
+                overflow: hidden;
+            }
+
+            .mobile-menu-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.55rem;
+                position: fixed;
+                top: 0.75rem;
+                left: 0.75rem;
+                z-index: 60;
+                padding: 0.55rem 0.85rem;
+                background: var(--panel);
+                color: var(--text);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                font: inherit;
+                font-weight: 600;
+                font-size: 0.9rem;
+                cursor: pointer;
+                box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .mobile-menu-toggle:hover,
+            .mobile-menu-toggle:focus-visible {
+                border-color: var(--accent);
+                outline: none;
+            }
+
+            .mobile-menu-toggle .toggle-icon {
+                display: inline-flex;
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .mobile-menu-toggle .toggle-icon span {
+                display: block;
+                width: 18px;
+                height: 2px;
+                background: currentColor;
+                border-radius: 1px;
+            }
+
+            body.mobile-menu-open .mobile-menu-toggle {
+                visibility: hidden;
+            }
+
+            .mobile-menu-backdrop {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.55);
+                backdrop-filter: blur(2px);
+                z-index: 65;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease;
+            }
+
+            body.mobile-menu-open .mobile-menu-backdrop {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-menu-close {
+                display: inline-flex;
+                position: absolute;
+                top: 0.75rem;
+                right: 0.75rem;
+                width: 36px;
+                height: 36px;
+                align-items: center;
+                justify-content: center;
+                background: var(--panel);
+                color: var(--text);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 1.4rem;
+                line-height: 1;
+                z-index: 1;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .mobile-menu-close:hover,
+            .mobile-menu-close:focus-visible {
+                border-color: var(--accent);
+                outline: none;
             }
 
             .detail-pane {
@@ -1388,9 +1515,29 @@
     </style>
 </head>
 <body>
+    <button
+        class="mobile-menu-toggle"
+        type="button"
+        id="mobile-menu-toggle"
+        aria-controls="catalogue-list"
+        aria-expanded="false"
+        aria-label="Open trail signs menu"
+    >
+        <span class="toggle-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+        </span>
+        <span>Signs</span>
+    </button>
+    <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
     <div class="container">
         <div class="catalogue-layout">
-            <aside class="catalogue-list">
+            <aside class="catalogue-list" id="catalogue-list">
+                <button
+                    class="mobile-menu-close"
+                    type="button"
+                    id="mobile-menu-close"
+                    aria-label="Close trail signs menu"
+                >&times;</button>
                 <div class="catalogue-grid" id="catalogue-grid">
                     <div class="loading">Loading catalogue...</div>
                 </div>
@@ -5158,9 +5305,75 @@
             return promise;
         }
 
+        // Mobile drawer that hides the trail-selection cards behind a
+        // hamburger button so the selected sign's page is visible on small
+        // screens. The drawer auto-closes once a card is picked.
+        const MOBILE_MENU_QUERY = window.matchMedia('(max-width: 900px)');
+        function isMobileMenuActive() {
+            return MOBILE_MENU_QUERY.matches;
+        }
+        function openMobileMenu() {
+            if (!isMobileMenuActive()) return;
+            document.body.classList.add('mobile-menu-open');
+            const toggle = document.getElementById('mobile-menu-toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'true');
+        }
+        function closeMobileMenu() {
+            document.body.classList.remove('mobile-menu-open');
+            const toggle = document.getElementById('mobile-menu-toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }
+        function initMobileCatalogueMenu() {
+            const toggle = document.getElementById('mobile-menu-toggle');
+            const closeBtn = document.getElementById('mobile-menu-close');
+            const backdrop = document.getElementById('mobile-menu-backdrop');
+            const list = document.getElementById('catalogue-list');
+            if (toggle) {
+                toggle.addEventListener('click', () => {
+                    if (document.body.classList.contains('mobile-menu-open')) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+            }
+            if (closeBtn) closeBtn.addEventListener('click', closeMobileMenu);
+            if (backdrop) backdrop.addEventListener('click', closeMobileMenu);
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && document.body.classList.contains('mobile-menu-open')) {
+                    closeMobileMenu();
+                }
+            });
+            // Close drawer when a card inside the list is selected on mobile.
+            if (list) {
+                list.addEventListener('click', (event) => {
+                    if (!isMobileMenuActive()) return;
+                    const card = event.target.closest('.sign-card');
+                    if (card) {
+                        // Defer slightly so the existing card-click handler can
+                        // run and update the selected sign before we close.
+                        setTimeout(closeMobileMenu, 60);
+                    }
+                });
+            }
+            // If the viewport grows past mobile (e.g. rotating to landscape on
+            // a tablet), make sure we don't leave the body locked.
+            const handleViewportChange = () => {
+                if (!isMobileMenuActive()) {
+                    closeMobileMenu();
+                }
+            };
+            if (typeof MOBILE_MENU_QUERY.addEventListener === 'function') {
+                MOBILE_MENU_QUERY.addEventListener('change', handleViewportChange);
+            } else if (typeof MOBILE_MENU_QUERY.addListener === 'function') {
+                MOBILE_MENU_QUERY.addListener(handleViewportChange);
+            }
+        }
+
         // Load on page load
         document.addEventListener('DOMContentLoaded', () => {
             initResizableCatalogueColumns();
+            initMobileCatalogueMenu();
             attachViewTabHandlers();
             attachPitchToggleHandlers();
             attachStyleToggleHandlers();
