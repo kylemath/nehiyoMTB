@@ -10,9 +10,6 @@
     "spring (6.2mm inner, 9mm outer, 10mm height, with rings at top and bottom) - 2588116__files__spring_with_rings_at_top_and_bottom_6.2mm_inner_hole.stl"
   ],
   "bobsled": [
-    "bobsled_plaque.stl",
-    "bobsled_plaque_v2.stl",
-    "bobsled_plaque_v3.stl",
     "bobsled_plaque_v4.stl"
   ],
   "deliverance": [
@@ -54,20 +51,7 @@
     "kiwapamitin_V2.stl"
   ],
   "loversLane": [
-    "backbreaker_plaque.stl",
-    "lovers_lane_plaque_v2.stl",
-    "lovers_lane_plaque_v3.stl",
-    "lovers_lane_plaque_v4.stl",
-    "lovers_lane_plaque_v5_bk.stl",
-    "lovers_lane_plaque_v6.stl",
-    "OTHER GEARS__UrbanAtWork_Geared_HeartV1.stl",
-    "OTHER GEARS__UrbanAtWork_Geared_HeartV1_A.stl",
-    "OTHER GEARS__UrbanAtWork_Geared_HeartV1_B.stl",
-    "OTHER GEARS__UrbanAtWork_GearedHeartV1_5-wGearHoles.stl",
-    "OTHER GEARS__UrbanAtWork_GearHeart_BigGap_PLA (1).stl",
-    "OTHER GEARS__UrbanAtWork_GearHeart_BigGap_PLA.stl",
-    "OTHER GEARS__UrbanAtWork_GearHeart_V1_8.stl",
-    "UrbanAtWork_GearHeart_BigGap_PLA (1).stl"
+    "lovers_lane_plaque_v6.stl"
   ],
   "mamahtaw_askwew": [
     "mamahtâw_iskwew_plaque_v2.stl"
@@ -110,19 +94,7 @@
     "nipamayatan_pekiseyahk_plaque_v3.stl"
   ],
   "nosemanicos": [
-    "nôsemanicôs.stl",
-    "nôsemanicôs_plaque.stl",
-    "nôsemanicôs_plaque_admesh_fixed.stl",
-    "nôsemanicôs_plaque_bk.stl",
-    "nôsemanicôs_plaque_v2.stl",
-    "nôsemanicôs_plaque_v2_admesh_fixed.stl",
-    "nôsemanicôs_plaque_v2_bk.stl",
-    "nôsemanicôs_plaque_v4.stl",
-    "nôsemanicôs_plaque_v4_admesh_fixed.stl",
-    "nôsemanicôs_plaque_v4_bk.stl",
-    "v3_nôsemanicôs_plaque_v3.stl",
-    "v3_nôsemanicôs_plaque_v3_admesh_fixed.stl",
-    "v3_nôsemanicôs_plaque_v3_bk.stl"
+    "nôsemanicôs_plaque_v4_solid_solid 2.stl"
   ],
   "ocayisinakes": [
     "ocayisinâkês_plaque.stl",
@@ -130,16 +102,9 @@
     "ocâyisanakes.stl"
   ],
   "oyoyow": [
-    "NBBDPorcupine.stl",
-    "oyoyo.stl",
-    "oyoyo_plaque.stl",
-    "oyoyo_plaque_moveholes.stl",
-    "oyoyo_plaque_moveholes_v3_multicolour.stl",
-    "oyoyo_plaque_moveholes_v4_multicolour.stl"
+    "oyoyo_plaque_moveholes_v4_multicolour_solid_solid_redown.stl"
   ],
   "purgatory": [
-    "purgatory_plaque.stl",
-    "purgatory_plaque_v2-5.stl",
     "purgatory_plaque_v3.stl"
   ],
   "sapwapahcikan-paskisikan": [

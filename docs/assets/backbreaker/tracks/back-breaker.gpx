@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Back Breaker Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Back Breaker
+</name>
+<link href="https://www.trailforks.com/trails/back-breaker/">
+</link>
+<trkseg>
+<trkpt lat="53.53816" lon="-113.56543">
+<ele>663.6</ele>
+<time>2026-05-23T15:11:16-07:00</time>
+</trkpt>
+<trkpt lat="53.53812" lon="-113.56522">
+<ele>663.6</ele>
+<time>2026-05-23T15:11:17-07:00</time>
+</trkpt>
+<trkpt lat="53.53808" lon="-113.565">
+<ele>663.6</ele>
+<time>2026-05-23T15:11:18-07:00</time>
+</trkpt>
+<trkpt lat="53.53796" lon="-113.56454">
+<ele>664</ele>
+<time>2026-05-23T15:11:19-07:00</time>
+</trkpt>
+<trkpt lat="53.538" lon="-113.56408">
+<ele>663.3</ele>
+<time>2026-05-23T15:11:20-07:00</time>
+</trkpt>
+<trkpt lat="53.53794" lon="-113.5636">
+<ele>661.9</ele>
+<time>2026-05-23T15:11:21-07:00</time>
+</trkpt>
+<trkpt lat="53.53786" lon="-113.56324">
+<ele>661.3</ele>
+<time>2026-05-23T15:11:22-07:00</time>
+</trkpt>
+<trkpt lat="53.53791" lon="-113.56266">
+<ele>659.9</ele>
+<time>2026-05-23T15:11:23-07:00</time>
+</trkpt>
+<trkpt lat="53.53789" lon="-113.56235">
+<ele>659.4</ele>
+<time>2026-05-23T15:11:24-07:00</time>
+</trkpt>
+<trkpt lat="53.53792" lon="-113.56231">
+<ele>659.4</ele>
+<time>2026-05-23T15:11:25-07:00</time>
+</trkpt>
+<trkpt lat="53.53797" lon="-113.56233">
+<ele>659.4</ele>
+<time>2026-05-23T15:11:26-07:00</time>
+</trkpt>
+<trkpt lat="53.53798" lon="-113.5621">
+<ele>658</ele>
+<time>2026-05-23T15:11:27-07:00</time>
+</trkpt>
+<trkpt lat="53.53787" lon="-113.56134">
+<ele>655</ele>
+<time>2026-05-23T15:11:28-07:00</time>
+</trkpt>
+<trkpt lat="53.53783" lon="-113.56116">
+<ele>655</ele>
+<time>2026-05-23T15:11:29-07:00</time>
+</trkpt>
+<trkpt lat="53.53779" lon="-113.56072">
+<ele>653.3</ele>
+<time>2026-05-23T15:11:30-07:00</time>
+</trkpt>
+<trkpt lat="53.53774" lon="-113.56057">
+<ele>656.9</ele>
+<time>2026-05-23T15:11:31-07:00</time>
+</trkpt>
+<trkpt lat="53.53769" lon="-113.56049">
+<ele>656</ele>
+<time>2026-05-23T15:11:32-07:00</time>
+</trkpt>
+<trkpt lat="53.53767" lon="-113.56013">
+<ele>655.8</ele>
+<time>2026-05-23T15:11:33-07:00</time>
+</trkpt>
+<trkpt lat="53.53755" lon="-113.55942">
+<ele>654.2</ele>
+<time>2026-05-23T15:11:34-07:00</time>
+</trkpt>
+<trkpt lat="53.53758" lon="-113.55898">
+<ele>654.1</ele>
+<time>2026-05-23T15:11:35-07:00</time>
+</trkpt>
+<trkpt lat="53.53757" lon="-113.5588">
+<ele>654.1</ele>
+<time>2026-05-23T15:11:36-07:00</time>
+</trkpt>
+<trkpt lat="53.53766" lon="-113.55851">
+<ele>653.9</ele>
+<time>2026-05-23T15:11:37-07:00</time>
+</trkpt>
+<trkpt lat="53.5378" lon="-113.5583">
+<ele>649.3</ele>
+<time>2026-05-23T15:11:38-07:00</time>
+</trkpt>
+<trkpt lat="53.53784" lon="-113.55827">
+<ele>649.3</ele>
+<time>2026-05-23T15:11:39-07:00</time>
+</trkpt>
+<trkpt lat="53.53787" lon="-113.55817">
+<ele>649.3</ele>
+<time>2026-05-23T15:11:40-07:00</time>
+</trkpt>
+<trkpt lat="53.53793" lon="-113.55815">
+<ele>649.3</ele>
+<time>2026-05-23T15:11:41-07:00</time>
+</trkpt>
+<trkpt lat="53.53809" lon="-113.55788">
+<ele>646.8</ele>
+<time>2026-05-23T15:11:42-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

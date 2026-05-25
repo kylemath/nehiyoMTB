@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from html import escape
 from pathlib import Path
 from typing import Any, Iterable
@@ -121,6 +122,17 @@ def build_css(accent: str) -> str:
     .hint{{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}}
     .syllabics-emphasis{{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}}
     .trail-iframe{{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}}
+    .trail-mini-map-link{{display:block;color:inherit;text-decoration:none;border-bottom:0}}
+    .trail-mini-map-link:hover{{border-bottom:0}}
+    .trail-mini-map{{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}}
+    .trail-mini-map-link:hover .trail-mini-map{{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}}
+    .trail-mini-map svg{{display:block;width:100%;height:auto}}
+    .trail-mini-map-tile{{image-rendering:auto}}
+    .trail-mini-map-halo{{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}}
+    .trail-mini-map-track{{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}}
+    .trail-mini-map-dot{{stroke:#ffffff;stroke-width:3}}
+    .trail-mini-map-attrib{{font-size:10px;fill:#5f6368;paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}}
+    .trail-mini-map-caption{{padding:8px 10px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:left;background:rgba(255,255,255,0.82)}}
     .kvs{{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}}
     .kv{{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}}
     .kv strong{{color:#000000}}
@@ -258,11 +270,209 @@ def render_story_block(story: dict | None) -> str:
         </div>"""
 
 
+def _has_trailforks_link(trail: dict) -> bool:
+    return bool(
+        str(trail.get("trailUrl") or "").strip()
+        or str(trail.get("trailId") or "").strip()
+        or str(trail.get("widgetUrl") or "").strip()
+    )
+
+
+def _strava_segment_id(trail: dict) -> str:
+    segment_id = str(trail.get("stravaSegmentId") or "").strip()
+    if segment_id:
+        return segment_id
+    display_name = str(trail.get("displayName") or "").strip()
+    if display_name.isdigit() and len(display_name) >= 5 and not _has_trailforks_link(trail):
+        return display_name
+    return ""
+
+
+def _trail_map_source(trail: dict) -> str:
+    source = (trail.get("trailSource") or "").strip().lower()
+    if source in {"trailforks", "strava"}:
+        return source
+    if trail.get("stravaSegmentUrl") or _strava_segment_id(trail):
+        return "strava"
+    return "trailforks"
+
+
+def _track_points(trail: dict) -> list[tuple[float, float]]:
+    points: list[tuple[float, float]] = []
+    for point in trail.get("track") or []:
+        if not isinstance(point, list) or len(point) != 2:
+            continue
+        lat, lng = point
+        if isinstance(lat, bool) or isinstance(lng, bool):
+            continue
+        if not isinstance(lat, (int, float)) or not isinstance(lng, (int, float)):
+            continue
+        points.append((float(lat), float(lng)))
+    return points
+
+
+def _mercator_pixel(lat: float, lng: float, zoom: int, tile_size: int = 256) -> tuple[float, float]:
+    lat = max(-85.05112878, min(85.05112878, lat))
+    lat_rad = math.radians(lat)
+    scale = tile_size * (2**zoom)
+    x = (lng + 180.0) / 360.0 * scale
+    y = (
+        1.0
+        - math.log(math.tan(lat_rad) + (1.0 / math.cos(lat_rad))) / math.pi
+    ) / 2.0 * scale
+    return x, y
+
+
+def _build_map_preview(
+    points: list[tuple[float, float]],
+    *,
+    width: int = 640,
+    height: int = 260,
+    padding: int = 36,
+) -> dict[str, str]:
+    if len(points) < 2:
+        return {}
+
+    chosen_zoom = 11
+    chosen_pixels: list[tuple[float, float]] = []
+    for zoom in range(17, 10, -1):
+        pixels = [_mercator_pixel(lat, lng, zoom) for lat, lng in points]
+        span_x = max(x for x, _y in pixels) - min(x for x, _y in pixels)
+        span_y = max(y for _x, y in pixels) - min(y for _x, y in pixels)
+        if span_x <= width - padding * 2 and span_y <= height - padding * 2:
+            chosen_zoom = zoom
+            chosen_pixels = pixels
+            break
+
+    if not chosen_pixels:
+        chosen_pixels = [_mercator_pixel(lat, lng, chosen_zoom) for lat, lng in points]
+
+    min_x = min(x for x, _y in chosen_pixels)
+    max_x = max(x for x, _y in chosen_pixels)
+    min_y = min(y for _x, y in chosen_pixels)
+    max_y = max(y for _x, y in chosen_pixels)
+    center_x = (min_x + max_x) / 2
+    center_y = (min_y + max_y) / 2
+    top_left_x = center_x - width / 2
+    top_left_y = center_y - height / 2
+
+    # Keep the SVG compact when a dense GPX has thousands of points.
+    step = max(1, len(chosen_pixels) // 350)
+    sampled = chosen_pixels[::step]
+    if sampled[-1] != chosen_pixels[-1]:
+        sampled.append(chosen_pixels[-1])
+
+    coords = [
+        f"{(x - top_left_x):.1f},{(y - top_left_y):.1f}"
+        for x, y in sampled
+    ]
+    start_x, start_y = chosen_pixels[0]
+    end_x, end_y = chosen_pixels[-1]
+
+    tile_size = 256
+    tile_count = 2**chosen_zoom
+    tile_min_x = math.floor(top_left_x / tile_size)
+    tile_max_x = math.floor((top_left_x + width) / tile_size)
+    tile_min_y = max(0, math.floor(top_left_y / tile_size))
+    tile_max_y = min(tile_count - 1, math.floor((top_left_y + height) / tile_size))
+
+    tile_html = []
+    for tile_y in range(tile_min_y, tile_max_y + 1):
+        for tile_x in range(tile_min_x, tile_max_x + 1):
+            wrapped_x = tile_x % tile_count
+            x = tile_x * tile_size - top_left_x
+            y = tile_y * tile_size - top_left_y
+            href = f"https://a.basemaps.cartocdn.com/light_all/{chosen_zoom}/{wrapped_x}/{tile_y}.png"
+            tile_html.append(
+                f'<image class="trail-mini-map-tile" href="{href}" x="{x:.1f}" y="{y:.1f}" width="{tile_size}" height="{tile_size}" />'
+            )
+
+    return {
+        "points": " ".join(coords),
+        "tiles": "\n                ".join(tile_html),
+        "startX": f"{start_x - top_left_x:.1f}",
+        "startY": f"{start_y - top_left_y:.1f}",
+        "endX": f"{end_x - top_left_x:.1f}",
+        "endY": f"{end_y - top_left_y:.1f}",
+    }
+
+
+def render_track_mini_map(trail: dict, *, segment_url: str = "") -> str:
+    points = _track_points(trail)
+    preview = _build_map_preview(points)
+    if not preview:
+        return ""
+
+    point_count = len(points)
+    mini_map = f"""
+            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
+              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
+                <defs>
+                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#f7f8fa" />
+                    <stop offset="100%" stop-color="#eef1f5" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
+                {preview["tiles"]}
+                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
+                <polyline class="trail-mini-map-halo" points="{preview["points"]}" />
+                <polyline class="trail-mini-map-track" points="{preview["points"]}" />
+                <circle class="trail-mini-map-dot" cx="{preview["startX"]}" cy="{preview["startY"]}" r="6" fill="#22c55e" />
+                <circle class="trail-mini-map-dot" cx="{preview["endX"]}" cy="{preview["endY"]}" r="6" fill="#ef4444" />
+                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
+              </svg>
+              <div class="trail-mini-map-caption">Uploaded GPX over map context: {point_count} track points. Click to open the Strava segment.</div>
+            </div>"""
+    if segment_url:
+        return (
+            f'<a class="trail-mini-map-link" href="{escape(segment_url)}" '
+            f'target="_blank" rel="noopener noreferrer">{mini_map}</a>'
+        )
+    return mini_map
+
+
 def render_trailforks_block(content: dict) -> str:
     trail = content.get("trailforks") or {}
+    trail_source = _trail_map_source(trail)
+    display_name = trail.get("displayName") or ""
+
+    if trail_source == "strava":
+        segment_id = _strava_segment_id(trail)
+        segment_url = str(trail.get("stravaSegmentUrl") or "").strip()
+        if not segment_url and segment_id:
+            segment_url = f"https://www.strava.com/segments/{segment_id}"
+
+        if not segment_url:
+            return """
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail segment on Strava for maps, efforts, and details.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <p class="muted" style="margin:2rem 0">Trail information coming soon</p>
+        </div>"""
+
+        link_html = (
+            f'<div style="margin-top:8px"><a href="{escape(segment_url)}" style="font-size: 0.7em;">'
+            f"{escape(display_name) if display_name else escape(segment_url)}</a></div>"
+        )
+        mini_map_html = render_track_mini_map(trail, segment_url=segment_url)
+        track_note = ""
+        if not mini_map_html and trail.get("track"):
+            track_note = (
+                '<p class="muted" style="margin:1rem 0 0;font-size:0.85em">'
+                "Trail line on the site map comes from your uploaded GPX.</p>"
+            )
+        return f"""
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail segment on Strava, with a local preview from the uploaded GPX.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            {mini_map_html}
+            {link_html}
+            {track_note}
+        </div>"""
+
     widget_url = trail.get("widgetUrl")
     trail_url = trail.get("trailUrl")
-    display_name = trail.get("displayName") or ""
 
     if not widget_url and not trail_url:
         return """

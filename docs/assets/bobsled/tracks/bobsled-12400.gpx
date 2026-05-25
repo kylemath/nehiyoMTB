@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Bobsled Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Bobsled
+</name>
+<link href="https://www.trailforks.com/trails/bobsled-12400/">
+</link>
+<trkseg>
+<trkpt lat="53.5397" lon="-113.56046">
+<ele>666.358</ele>
+<time>2026-05-23T23:08:48-07:00</time>
+</trkpt>
+<trkpt lat="53.5397" lon="-113.56042">
+<ele>666.427</ele>
+<time>2026-05-23T23:08:49-07:00</time>
+</trkpt>
+<trkpt lat="53.53974" lon="-113.56026">
+<ele>666.495</ele>
+<time>2026-05-23T23:08:50-07:00</time>
+</trkpt>
+<trkpt lat="53.53971" lon="-113.55992">
+<ele>666.427</ele>
+<time>2026-05-23T23:08:51-07:00</time>
+</trkpt>
+<trkpt lat="53.53969" lon="-113.55986">
+<ele>666.348</ele>
+<time>2026-05-23T23:08:52-07:00</time>
+</trkpt>
+<trkpt lat="53.5394" lon="-113.55925">
+<ele>665</ele>
+<time>2026-05-23T23:08:53-07:00</time>
+</trkpt>
+<trkpt lat="53.53939" lon="-113.55919">
+<ele>665</ele>
+<time>2026-05-23T23:08:54-07:00</time>
+</trkpt>
+<trkpt lat="53.53932" lon="-113.5591">
+<ele>665</ele>
+<time>2026-05-23T23:08:55-07:00</time>
+</trkpt>
+<trkpt lat="53.53928" lon="-113.55906">
+<ele>665</ele>
+<time>2026-05-23T23:08:56-07:00</time>
+</trkpt>
+<trkpt lat="53.5392" lon="-113.55882">
+<ele>664.613</ele>
+<time>2026-05-23T23:08:57-07:00</time>
+</trkpt>
+<trkpt lat="53.53918" lon="-113.55875">
+<ele>664.476</ele>
+<time>2026-05-23T23:08:58-07:00</time>
+</trkpt>
+<trkpt lat="53.53912" lon="-113.55866">
+<ele>663.606</ele>
+<time>2026-05-23T23:08:59-07:00</time>
+</trkpt>
+<trkpt lat="53.5391" lon="-113.55861">
+<ele>662.995</ele>
+<time>2026-05-23T23:09:00-07:00</time>
+</trkpt>
+<trkpt lat="53.53907" lon="-113.55844">
+<ele>662.158</ele>
+<time>2026-05-23T23:09:01-07:00</time>
+</trkpt>
+<trkpt lat="53.53905" lon="-113.55837">
+<ele>661.693</ele>
+<time>2026-05-23T23:09:02-07:00</time>
+</trkpt>
+<trkpt lat="53.53898" lon="-113.55826">
+<ele>660.9</ele>
+<time>2026-05-23T23:09:03-07:00</time>
+</trkpt>
+<trkpt lat="53.53894" lon="-113.55821">
+<ele>660.049</ele>
+<time>2026-05-23T23:09:04-07:00</time>
+</trkpt>
+<trkpt lat="53.53868" lon="-113.558">
+<ele>655.946</ele>
+<time>2026-05-23T23:09:05-07:00</time>
+</trkpt>
+<trkpt lat="53.53863" lon="-113.55796">
+<ele>655.178</ele>
+<time>2026-05-23T23:09:06-07:00</time>
+</trkpt>
+<trkpt lat="53.53859" lon="-113.55794">
+<ele>654.308</ele>
+<time>2026-05-23T23:09:07-07:00</time>
+</trkpt>
+<trkpt lat="53.53837" lon="-113.55795">
+<ele>652.96</ele>
+<time>2026-05-23T23:09:08-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

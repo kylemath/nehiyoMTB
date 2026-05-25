@@ -763,14 +763,40 @@ def _clean_photo(raw: Any) -> dict:
     }
 
 
+def _has_trailforks_link(raw: dict) -> bool:
+    return bool(
+        _clean_string(raw.get("trailUrl"))
+        or _clean_string(raw.get("trailId"))
+        or _clean_string(raw.get("widgetUrl"))
+    )
+
+
+def _legacy_strava_segment_id(raw: dict) -> str:
+    segment_id = _clean_string(raw.get("stravaSegmentId"))
+    if segment_id:
+        return segment_id
+    display_name = _clean_string(raw.get("displayName"))
+    if display_name.isdigit() and len(display_name) >= 5 and not _has_trailforks_link(raw):
+        return display_name
+    return ""
+
+
+def _infer_trail_source(raw: dict) -> str:
+    trail_source = _clean_string(raw.get("trailSource"))
+    if trail_source in {"trailforks", "strava"}:
+        return trail_source
+    if _clean_string(raw.get("stravaSegmentUrl")) or _legacy_strava_segment_id(raw):
+        return "strava"
+    return "trailforks"
+
+
 def _clean_trailforks(raw: Any) -> dict:
     if raw is None:
         return {}
     if not isinstance(raw, dict):
         raise ValueError("trailforks must be an object")
-    trail_id = _clean_string(raw.get("trailId"))
-    trail_url = _clean_string(raw.get("trailUrl"))
-    widget_url = _clean_string(raw.get("widgetUrl"))
+
+    trail_source = _infer_trail_source(raw)
     display_name = _clean_string(raw.get("displayName"))
     track_source_path = _clean_string(raw.get("trackSourcePath"))
     map_status = _clean_string(raw.get("mapStatus"))
@@ -779,16 +805,40 @@ def _clean_trailforks(raw: Any) -> dict:
     map_coords = _clean_coord(raw.get("mapCoords"), "mapCoords") if raw.get("mapCoords") is not None else {}
     map_end_coords = _clean_coord(raw.get("mapEndCoords"), "mapEndCoords") if raw.get("mapEndCoords") is not None else {}
     track = _clean_track(raw.get("track")) if raw.get("track") is not None else []
-    if trail_id and not widget_url:
-        widget_url = (
-            f"https://www.trailforks.com/widgets/trail/?trailid={trail_id}"
-            "&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets"
-            "&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1"
-        )
-    cleaned = {
+
+    trail_id = ""
+    trail_url = ""
+    widget_url = ""
+    strava_segment_id = ""
+    strava_segment_url = ""
+
+    if trail_source == "strava":
+        strava_segment_id = _legacy_strava_segment_id(raw)
+        strava_segment_url = _clean_string(raw.get("stravaSegmentUrl"))
+        if strava_segment_id and not strava_segment_url:
+            strava_segment_url = f"https://www.strava.com/segments/{strava_segment_id}"
+        if not display_name and strava_segment_url:
+            display_name = strava_segment_url.rstrip("/").split("/")[-1]
+    else:
+        trail_id = _clean_string(raw.get("trailId"))
+        trail_url = _clean_string(raw.get("trailUrl"))
+        widget_url = _clean_string(raw.get("widgetUrl"))
+        if trail_id and not widget_url:
+            widget_url = (
+                f"https://www.trailforks.com/widgets/trail/?trailid={trail_id}"
+                "&w=50%&h=350px&activitytype=6&map=1&basemap=trailforks-streets"
+                "&elevation=1&photos=1&title=1&info=1&trail_opacity=50&v=2&basicmap=1"
+            )
+        if not display_name and trail_url:
+            display_name = trail_url.rstrip("/").split("/")[-1]
+
+    cleaned: dict[str, Any] = {
+        "trailSource": trail_source,
         "trailId": trail_id,
         "trailUrl": trail_url,
         "widgetUrl": widget_url,
+        "stravaSegmentId": strava_segment_id,
+        "stravaSegmentUrl": strava_segment_url,
         "displayName": display_name,
         "trackSourcePath": track_source_path,
         "mapStatus": map_status,

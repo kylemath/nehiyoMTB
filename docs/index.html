@@ -167,10 +167,21 @@
             background: var(--panel);
             border: 1px solid var(--border);
             border-radius: 8px;
-            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, opacity 0.15s ease, transform 0.15s ease;
+            cursor: grab;
             min-width: 0;
             position: relative;
+        }
+
+        .sign-card.dragging {
+            opacity: 0.35;
+            cursor: grabbing;
+        }
+
+        .sign-card.drag-over {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.35);
+            transform: translateY(-2px);
         }
         
         .sign-card:hover {
@@ -979,6 +990,40 @@
             font-style: italic;
         }
 
+        .trail-source-toggle {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .trail-source-toggle label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.35rem 0.65rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            text-transform: none;
+            letter-spacing: normal;
+            color: var(--text);
+        }
+
+        .trail-source-toggle label:has(input:checked) {
+            border-color: var(--accent);
+            background: rgba(220, 53, 69, 0.12);
+        }
+
+        .trail-source-toggle input {
+            accent-color: var(--accent);
+        }
+
+        .trail-source-panel.is-hidden {
+            display: none;
+        }
+
         .large-viewer {
             height: 100%;
             min-height: 0;
@@ -1504,26 +1549,47 @@
                                 <label for="content-photo-caption">Photo caption</label>
                                 <input type="text" id="content-photo-caption" placeholder="3D printed trail sign with multi-color design">
                             </div>
-                            <div class="content-field">
-                                <label for="content-trail-id">Trailforks trail ID</label>
-                                <input type="text" id="content-trail-id" placeholder="805899">
-                                <span class="field-hint">Widget URL is auto-built from the ID if you leave it blank.</span>
-                            </div>
-                            <div class="content-field">
-                                <label for="content-trail-url">Trailforks trail URL</label>
-                                <input type="url" id="content-trail-url" placeholder="https://www.trailforks.com/trails/...">
-                            </div>
                             <div class="content-field wide">
-                                <label for="content-trail-widget">Trailforks widget URL (optional override)</label>
-                                <input type="url" id="content-trail-widget" placeholder="https://www.trailforks.com/widgets/trail/?trailid=...">
+                                <label>Trail map source</label>
+                                <div class="trail-source-toggle" role="radiogroup" aria-label="Trail map source">
+                                    <label><input type="radio" name="content-trail-source" id="content-trail-source-trailforks" value="trailforks" checked> Trailforks</label>
+                                    <label><input type="radio" name="content-trail-source" id="content-trail-source-strava" value="strava"> Strava segment</label>
+                                </div>
+                                <span class="field-hint">Use Strava when the Trailforks page is hidden or missing; upload your ride GPX below for the site map.</span>
+                            </div>
+                            <div id="content-trailforks-panel" class="trail-source-panel">
+                                <div class="content-field">
+                                    <label for="content-trail-id">Trailforks trail ID</label>
+                                    <input type="text" id="content-trail-id" placeholder="805899">
+                                    <span class="field-hint">Widget URL is auto-built from the ID if you leave it blank.</span>
+                                </div>
+                                <div class="content-field">
+                                    <label for="content-trail-url">Trailforks trail URL</label>
+                                    <input type="url" id="content-trail-url" placeholder="https://www.trailforks.com/trails/...">
+                                </div>
+                                <div class="content-field wide">
+                                    <label for="content-trail-widget">Trailforks widget URL (optional override)</label>
+                                    <input type="url" id="content-trail-widget" placeholder="https://www.trailforks.com/widgets/trail/?trailid=...">
+                                </div>
+                            </div>
+                            <div id="content-strava-panel" class="trail-source-panel is-hidden">
+                                <div class="content-field">
+                                    <label for="content-strava-segment-id">Strava segment ID</label>
+                                    <input type="text" id="content-strava-segment-id" placeholder="12345678" inputmode="numeric" pattern="[0-9]*">
+                                    <span class="field-hint">Numeric ID from the segment URL (e.g. …/segments/<strong>12345678</strong>).</span>
+                                </div>
+                                <div class="content-field wide">
+                                    <label for="content-strava-segment-url">Strava segment URL</label>
+                                    <input type="url" id="content-strava-segment-url" placeholder="https://www.strava.com/segments/...">
+                                </div>
                             </div>
                             <div class="content-field wide">
                                 <label for="content-track-source-path">Downloaded XML / GPX path</label>
-                                <input type="text" id="content-track-source-path" placeholder="downloads/trails/machete.xml">
+                                <input type="text" id="content-track-source-path" placeholder="downloads/trails/machete.gpx">
                                 <div class="photo-row">
                                     <label class="editor-button photo-upload-button" for="content-track-source-file">Choose XML / GPX…</label>
                                     <input type="file" id="content-track-source-file" accept=".xml,.gpx,.kml,.tcx,application/xml,text/xml" hidden />
-                                    <span class="field-hint" id="content-track-source-status">Selected files are copied into docs/assets/{folder}/tracks/.</span>
+                                    <span class="field-hint" id="content-track-source-status">Trailforks GPX or a Strava activity export — copied into docs/assets/{folder}/tracks/.</span>
                                 </div>
                             </div>
                             <div class="content-field wide">
@@ -2256,6 +2322,8 @@
         let catalogueModels = [];
         let filteredModels = [];
         let selectedModel = null;
+        let customOrder = null;
+        try { customOrder = JSON.parse(localStorage.getItem('nehiyoMTB.catalogueOrder')); } catch(e) {}
         let detailViewer = null;
         let stlManifest = {};
         let editorApiAvailable = false;
@@ -2465,7 +2533,7 @@
                 catalogueModels = (catalogue.models || [])
                     .sort((a, b) => (a.signNumber || 9999) - (b.signNumber || 9999));
                 
-                filteredModels = catalogueModels;
+                filteredModels = applyCustomOrder([...catalogueModels]);
                 renderCatalogue();
                 checkLocalEditor();
             } catch (error) {
@@ -3205,7 +3273,12 @@
                 && colorLayers.every(layer => layer && typeof layer.color === 'string' && layer.color.trim() !== '');
             const trailforks = content.trailforks || {};
             const photo = content.photo || {};
-            const trailforksOk = !!(trailforks.trailUrl || trailforks.trailId || trailforks.widgetUrl);
+            const trailSource = trailforks.trailSource || (
+                (trailforks.stravaSegmentUrl || trailforks.stravaSegmentId) ? 'strava' : 'trailforks'
+            );
+            const trailforksOk = trailSource === 'strava'
+                ? !!(trailforks.stravaSegmentUrl || trailforks.stravaSegmentId)
+                : !!(trailforks.trailUrl || trailforks.trailId || trailforks.widgetUrl);
             const photoOk = !!(photo.src && String(photo.src).trim());
             const pageStatus = content.pageStatus || 'draft';
             const draftConfirmed = pageStatus === 'user-reviewed' || pageStatus === 'published';
@@ -3214,10 +3287,18 @@
                 { key: 'M', label: 'Mesh repaired (STL watertight)', ok: isExemplar || !!checks.meshRepaired },
                 { key: 'S', label: 'Final STL selected',             ok: isExemplar || !!(model && model.docsStlPath) },
                 { key: 'C', label: 'Colours and layers configured',  ok: isExemplar || colorsConfigured },
-                { key: 'T', label: 'Trailforks linked',              ok: isExemplar || trailforksOk },
+                { key: 'T', label: 'Trail map linked',               ok: isExemplar || trailforksOk },
                 { key: 'P', label: 'Sign photo set',                 ok: isExemplar || photoOk },
                 { key: 'D', label: 'Page draft confirmed by user',   ok: isExemplar || draftConfirmed },
             ];
+        }
+
+        function applyCustomOrder(models) {
+            if (!customOrder || customOrder.length === 0) return models;
+            const idToModel = new Map(models.map(m => [m.id, m]));
+            const ordered = customOrder.map(id => idToModel.get(id)).filter(Boolean);
+            const extra = models.filter(m => !customOrder.includes(m.id));
+            return [...ordered, ...extra];
         }
 
         function renderCardChecklist(model) {
@@ -3252,7 +3333,7 @@
                 const syllClass = model.creeSyllabics ? 'sign-syllabics' : 'sign-syllabics sign-placeholder';
                 const transliterationClass = model.creeName ? 'sign-cree' : 'sign-cree sign-placeholder';
                 return `
-                    <div class="sign-card ${selectedModel?.id === model.id ? 'active' : ''}" data-model-id="${model.id}">
+                    <div class="sign-card ${selectedModel?.id === model.id ? 'active' : ''}" draggable="true" data-model-id="${model.id}">
                         <div class="sign-info">
                             <div class="sign-number">${signNumber || '-'}</div>
                             <div class="sign-name-group">
@@ -3270,12 +3351,56 @@
                 `;
             }).join('');
 
+            let dragSrcId = null;
+
             grid.querySelectorAll('.sign-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const model = filteredModels.find(item => item.id === card.dataset.modelId);
                     if (model) {
                         setSelectedModel(model);
                     }
+                });
+
+                card.addEventListener('dragstart', e => {
+                    dragSrcId = card.dataset.modelId;
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', dragSrcId);
+                    requestAnimationFrame(() => card.classList.add('dragging'));
+                });
+
+                card.addEventListener('dragend', () => {
+                    card.classList.remove('dragging');
+                    grid.querySelectorAll('.sign-card').forEach(c => c.classList.remove('drag-over'));
+                    dragSrcId = null;
+                });
+
+                card.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    if (card.dataset.modelId !== dragSrcId) {
+                        grid.querySelectorAll('.sign-card').forEach(c => c.classList.remove('drag-over'));
+                        card.classList.add('drag-over');
+                    }
+                });
+
+                card.addEventListener('dragleave', e => {
+                    if (!card.contains(e.relatedTarget)) {
+                        card.classList.remove('drag-over');
+                    }
+                });
+
+                card.addEventListener('drop', e => {
+                    e.preventDefault();
+                    const targetId = card.dataset.modelId;
+                    if (!dragSrcId || dragSrcId === targetId) return;
+                    const srcIdx = filteredModels.findIndex(m => m.id === dragSrcId);
+                    const tgtIdx = filteredModels.findIndex(m => m.id === targetId);
+                    if (srcIdx === -1 || tgtIdx === -1) return;
+                    const [moved] = filteredModels.splice(srcIdx, 1);
+                    filteredModels.splice(tgtIdx, 0, moved);
+                    customOrder = filteredModels.map(m => m.id);
+                    try { localStorage.setItem('nehiyoMTB.catalogueOrder', JSON.stringify(customOrder)); } catch(e) {}
+                    renderCatalogue();
                 });
             });
 
@@ -3329,9 +3454,13 @@
             'content-photo-select',
             'content-photo-file',
             'content-photo-clear',
+            'content-trail-source-trailforks',
+            'content-trail-source-strava',
             'content-trail-id',
             'content-trail-url',
             'content-trail-widget',
+            'content-strava-segment-id',
+            'content-strava-segment-url',
             'content-track-source-path',
             'content-track-source-file',
             'content-map-status',
@@ -3678,9 +3807,12 @@
                 headerTitle: '',
                 photo: { src: '', alt: '', caption: '' },
                 trailforks: {
+                    trailSource: 'trailforks',
                     trailId: '',
                     trailUrl: '',
                     widgetUrl: '',
+                    stravaSegmentId: '',
+                    stravaSegmentUrl: '',
                     displayName: '',
                     trackSourcePath: '',
                     mapStatus: '',
@@ -3736,6 +3868,47 @@
                 return 'No final STL marker yet; map marker falls back to the saved photo or imagePath.';
             }
             return 'No map icon source yet: add a final STL, sign photo, or imagePath.';
+        }
+
+        function hasTrailforksLink(tf) {
+            return !!(tf.trailUrl || tf.trailId || tf.widgetUrl);
+        }
+
+        function getStravaSegmentIdFromContent(tf) {
+            if (tf.stravaSegmentId) return String(tf.stravaSegmentId).trim();
+            const display = String(tf.displayName || '').trim();
+            if (/^\d{5,}$/.test(display) && !hasTrailforksLink(tf)) {
+                return display;
+            }
+            return '';
+        }
+
+        function getTrailSourceFromContent(trailforks) {
+            const tf = trailforks || {};
+            if (tf.trailSource === 'strava' || tf.trailSource === 'trailforks') {
+                return tf.trailSource;
+            }
+            if (tf.stravaSegmentUrl || getStravaSegmentIdFromContent(tf)) {
+                return 'strava';
+            }
+            return 'trailforks';
+        }
+
+        function syncTrailSourcePanels() {
+            const source = document.getElementById('content-trail-source-strava')?.checked
+                ? 'strava'
+                : 'trailforks';
+            const tfPanel = document.getElementById('content-trailforks-panel');
+            const stravaPanel = document.getElementById('content-strava-panel');
+            if (tfPanel) tfPanel.classList.toggle('is-hidden', source !== 'trailforks');
+            if (stravaPanel) stravaPanel.classList.toggle('is-hidden', source !== 'strava');
+        }
+
+        function setTrailSourceInForm(source) {
+            const isStrava = source === 'strava';
+            document.getElementById('content-trail-source-strava').checked = isStrava;
+            document.getElementById('content-trail-source-trailforks').checked = !isStrava;
+            syncTrailSourcePanels();
         }
 
         function updateContentStatusBadge(status) {
@@ -3795,13 +3968,18 @@
             document.getElementById('content-photo-caption').value = content.photo.caption || '';
             populatePhotoSelect(model, content.photo.src || '');
             fetchSignAssets(model);
+            setTrailSourceInForm(getTrailSourceFromContent(content.trailforks));
             document.getElementById('content-trail-id').value = content.trailforks.trailId || '';
             document.getElementById('content-trail-url').value = content.trailforks.trailUrl || '';
             document.getElementById('content-trail-widget').value = content.trailforks.widgetUrl || '';
+            const stravaSegmentId = getStravaSegmentIdFromContent(content.trailforks);
+            document.getElementById('content-strava-segment-id').value = content.trailforks.stravaSegmentId || stravaSegmentId;
+            document.getElementById('content-strava-segment-url').value = content.trailforks.stravaSegmentUrl
+                || (stravaSegmentId ? `https://www.strava.com/segments/${stravaSegmentId}` : '');
             document.getElementById('content-track-source-path').value = content.trailforks.trackSourcePath || '';
             document.getElementById('content-track-source-status').textContent = content.trailforks.trackSourcePath
                 ? 'Trail source file is set. Choose another file to replace the path.'
-                : 'Selected files are copied into docs/assets/{folder}/tracks/.';
+                : 'Trailforks GPX or a Strava activity export — copied into docs/assets/{folder}/tracks/.';
             document.getElementById('content-map-status').value = content.trailforks.mapStatus || getMapVisibilityNote(model);
             document.getElementById('content-icon-status').value = content.trailforks.iconStatus || getIconStatusNote(model);
             document.getElementById('content-map-icon-src').value = content.trailforks.iconSrc || '';
@@ -3853,6 +4031,32 @@
                 }
             });
 
+            const trailSource = document.getElementById('content-trail-source-strava').checked
+                ? 'strava'
+                : 'trailforks';
+            const trailUrl = document.getElementById('content-trail-url').value.trim();
+            const stravaUrl = document.getElementById('content-strava-segment-url').value.trim();
+            const sharedTrailFields = {
+                trailSource,
+                trackSourcePath: document.getElementById('content-track-source-path').value.trim(),
+                mapStatus: document.getElementById('content-map-status').value.trim(),
+                iconStatus: document.getElementById('content-icon-status').value.trim(),
+                iconSrc: document.getElementById('content-map-icon-src').value.trim(),
+                ...preservedTrailGeometry
+            };
+            const trailforks = trailSource === 'strava'
+                ? Object.assign(sharedTrailFields, {
+                    stravaSegmentId: document.getElementById('content-strava-segment-id').value.trim(),
+                    stravaSegmentUrl: stravaUrl,
+                    displayName: stravaUrl.split('/').filter(Boolean).pop() || ''
+                })
+                : Object.assign(sharedTrailFields, {
+                    trailId: document.getElementById('content-trail-id').value.trim(),
+                    trailUrl,
+                    widgetUrl: document.getElementById('content-trail-widget').value.trim(),
+                    displayName: trailUrl.split('/').filter(Boolean).pop() || ''
+                });
+
             return {
                 pageStatus: document.getElementById('content-status-select').value,
                 accentColor: document.getElementById('content-accent').value,
@@ -3862,18 +4066,7 @@
                     alt: document.getElementById('content-photo-alt').value.trim(),
                     caption: document.getElementById('content-photo-caption').value.trim()
                 },
-                trailforks: {
-                    trailId: document.getElementById('content-trail-id').value.trim(),
-                    trailUrl: document.getElementById('content-trail-url').value.trim(),
-                    widgetUrl: document.getElementById('content-trail-widget').value.trim(),
-                    trackSourcePath: document.getElementById('content-track-source-path').value.trim(),
-                    mapStatus: document.getElementById('content-map-status').value.trim(),
-                    iconStatus: document.getElementById('content-icon-status').value.trim(),
-                    iconSrc: document.getElementById('content-map-icon-src').value.trim(),
-                    displayName: document.getElementById('content-trail-url').value
-                        .split('/').filter(Boolean).pop() || '',
-                    ...preservedTrailGeometry
-                },
+                trailforks,
                 linguistics,
                 culturalStory: {
                     heading: document.getElementById('content-cultural-heading').value.trim(),
@@ -4027,6 +4220,17 @@
             return '';
         }
 
+        function extractStravaSegmentIdFromUrl(url) {
+            if (!url) return '';
+            const segmentMatch = url.match(/\/segments\/(?:[^/?#]*-)?(\d{5,})\/?(?:[?#]|$)/i);
+            if (segmentMatch) return segmentMatch[1];
+            return '';
+        }
+
+        document.querySelectorAll('input[name="content-trail-source"]').forEach(radio => {
+            radio.addEventListener('change', () => syncTrailSourcePanels());
+        });
+
         document.getElementById('content-trail-url').addEventListener('blur', event => {
             const idField = document.getElementById('content-trail-id');
             if (idField.value.trim()) return;
@@ -4038,6 +4242,18 @@
             if (idField.value.trim()) return;
             const extracted = extractTrailforksIdFromUrl(event.target.value.trim());
             if (extracted) idField.value = extracted;
+        });
+        document.getElementById('content-strava-segment-url').addEventListener('blur', event => {
+            const idField = document.getElementById('content-strava-segment-id');
+            if (idField.value.trim()) return;
+            const extracted = extractStravaSegmentIdFromUrl(event.target.value.trim());
+            if (extracted) idField.value = extracted;
+        });
+        document.getElementById('content-strava-segment-id').addEventListener('blur', event => {
+            const urlField = document.getElementById('content-strava-segment-url');
+            if (urlField.value.trim()) return;
+            const id = event.target.value.trim().replace(/\D/g, '');
+            if (id) urlField.value = `https://www.strava.com/segments/${id}`;
         });
         document.getElementById('content-photo-select').addEventListener('change', event => {
             setPhotoSrc(event.target.value);

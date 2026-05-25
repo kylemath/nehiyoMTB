@@ -41,6 +41,17 @@
     .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
     .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
     .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .trail-mini-map-link{display:block;color:inherit;text-decoration:none;border-bottom:0}
+    .trail-mini-map-link:hover{border-bottom:0}
+    .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
+    .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
+    .trail-mini-map svg{display:block;width:100%;height:auto}
+    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
+    .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
+    .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
+    .trail-mini-map-attrib{font-size:10px;fill:#5f6368;paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}
+    .trail-mini-map-caption{padding:8px 10px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:left;background:rgba(255,255,255,0.82)}
     .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
     .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
     .kv strong{color:#000000}
@@ -96,7 +107,7 @@
 
         <h2 style="margin-top:16px">Trail Sign Design</h2>
         <div style="text-align:center;margin-bottom:16px">
-            <img src="../assets/loversLane/sign_render.png" alt="Lovers Lane trail sign: a red heart filled with three interlocking gear-discs carrying white Cree syllabics, with the SRO ‘nicimos mêskanâs’ above and ‘Lovers Lane’ below" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <img src="../assets/loversLane/Screenshot_2026-05-17_at_7.24.55_PM.png" alt="Lovers Lane trail sign: a red heart filled with three interlocking gear-discs carrying white Cree syllabics, with the SRO ‘nicimos mêskanâs’ above and ‘Lovers Lane’ below" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
             <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">3D printed plaque: red heart with three gear-discs, each carrying a piece of the syllabics ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ in white. Cropped from the wall photo (allSigns.jpg).</p>
         </div>
 
@@ -115,7 +126,7 @@
         <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
         <div style="text-align:center;margin-bottom:24px">
             <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=15796&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
-            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/lovers-lane-15796/" style="font-size: 0.7em;">Lovers Lane</a></div>
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/lovers-lane-15796/" style="font-size: 0.7em;">lovers-lane-15796</a></div>
         </div>
 
         <h2>Building Other Forms</h2>
@@ -186,12 +197,12 @@
         <h3 style="margin:18px 0 12px 0">Sources</h3>
         <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
         <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
-        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a>, Trailforks</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
         </div>
       </section>
 
       <footer>
-        Lovers Lane • nicimos mêskanâs • Interactive Poster
+        Lovers Lane • ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ • nicimos mêskanâs • Interactive Poster
       </footer>
     </div>
 
