@@ -183,6 +183,12 @@
       },
       "checks": {
         "meshRepaired": true
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -552,6 +558,12 @@
       ],
       "checks": {
         "meshRepaired": false
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -1000,6 +1012,12 @@
       ],
       "checks": {
         "meshRepaired": true
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -1839,6 +1857,12 @@
       ],
       "checks": {
         "meshRepaired": false
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -2028,6 +2052,12 @@
           "Trailforks pick: 'Purple Haze' (trail id 15797), neighbour to Wonder Woman in the Hawrelak / Central Edmonton (North) network. High confidence (the trail page is referenced from the Wonder Woman 'Nearby Trails' list). Trailhead coords not extracted; the trail sits in the same river-valley cluster as the other M1 Edmonton trails.",
           "On the wall there are TWO Purple Haze plaques (a small portrait-format upper plaque and a fuller plaque further right). Both carry the same Cree wording. The rendered photo here uses the dedicated design source 'purple_haze.png' which represents the same composition."
         ]
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -2523,6 +2553,12 @@
       ],
       "checks": {
         "meshRepaired": false
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -2876,6 +2912,12 @@
       ],
       "checks": {
         "meshRepaired": false
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -3091,7 +3133,13 @@
         {
           "color": "red"
         }
-      ]
+      ],
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
+      }
     },
     {
       "id": "bed-springs",
@@ -3302,6 +3350,12 @@
           "Trailforks pick: 'Bed Springs' (trailId 15537), Patricia Ravine, Edmonton. High confidence — exact slug match, single result, located in Edmonton. There is also a 'Lower Bed Springs' adjacent trail (slug lower-bed-springs) which is a separate continuation segment.",
           "Photo cropped from allSigns.jpg at box (4150, 4200, 5350, 5800) — this is the plaque-and-label pair, not the upper-row 'Bed Springs' variant. The upper variant in the wall is the same plaque art."
         ]
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -4259,7 +4313,13 @@
         {
           "color": "red"
         }
-      ]
+      ],
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
+      }
     },
     {
       "id": "maskihkiwiyiniw",
@@ -4439,6 +4499,12 @@
           "Trailforks pick: 'ᒪᐢᑭᐦᑮᐃᐧᔨᓂᐤ - maskihkîwiyiniw - Medicine Man' (trailId 377579), Hawrelak network, Northwest Edmonton. High confidence — exact name match including the Cree, contributed by 'kylemath' (the same project user). Trailhead (53.53526, -113.56008).",
           "Photo wired to the existing root-folder design source 'drdagly-png.png' — copied as docs/assets/maskihkiwiyiniw/medicine_man_render.png. (Folder name kept as 'maskihkiwiyiniw' — short-i — to match the existing legacy directory; the public asset path uses that same legacy name.)"
         ]
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -4740,6 +4806,12 @@
       ],
       "checks": {
         "meshRepaired": false
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -14252,6 +14324,12 @@
       ],
       "checks": {
         "meshRepaired": false
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -14469,6 +14547,12 @@
           "Morpheme bracketing: paspî‑ + ‑h‑ + ‑iwê‑ + ‑win is one defensible split (the one used in this page). An alternative collapses ‑hiwê‑ into a single 'cause‑people' VAI final and treats ‑h‑ as part of that final rather than a separate causative connector. Either is teachably correct.",
           "The <em>paspî‑</em> initial is the same one that gives <em>paspiw</em> 's/he escapes (alive)' and <em>paspâpiw</em> 's/he peeks out'. The reduction paspî‑ → paspi‑ in <em>paspiw</em> is the standard initial‑vowel shortening before a bare VAI ‑w; flagged for completeness."
         ]
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -14592,6 +14676,12 @@
           "If/when a Cree calque is later added by the community, the obvious morphological scaffolding is <em>memekwêsiw</em> 'little forest being' (NA, Plains Cree oral tradition; cf. Wolvengrey). NOT carving that on the page now, only flagging it for future consideration.",
           "Primary section has a single morpheme row (acceptance criterion: morphemes.length >= 1), mirroring the brief's instruction for English‑vernacular signs. relatedForms has 2 rows (>=1). quickReference has 3 rows (>=3). All keys are unique within the page."
         ]
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -14813,6 +14903,12 @@
           "Morpheme bracketing is presented at 6 morphemes (o‑ + kistikê‑ + ‑w + o‑ + ‑tânis + ‑a) for maximum teaching clarity across the two words of the noun phrase. The two <em>o‑</em>'s are deliberately distinguished by key (o-actor vs o-poss) — they are homophonous but functionally different. Hover‑highlight pairing should still work because keys are unique.",
           "Obviative ‑a explanation in the cultural story is simplified for non‑linguists; the formal account is that obviation is obligatory on any 3rd‑person animate whose possessor is also a 3rd‑person animate, regardless of whether the contrasting 3rd person is overt in the clause."
         ]
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -15217,6 +15313,12 @@
       },
       "checks": {
         "meshRepaired": true
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -15258,6 +15360,12 @@
             "source": "estimated: 386m descent toward river views (medicine man → bruce almighty connector), per trailforks"
           }
         }
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -15462,6 +15570,12 @@
       },
       "checks": {
         "meshRepaired": false
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -15897,7 +16011,13 @@
         {
           "color": "red"
         }
-      ]
+      ],
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
+      }
     },
     {
       "id": "nosemanicos",
@@ -16331,6 +16451,12 @@
       },
       "checks": {
         "meshRepaired": true
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -16560,6 +16686,12 @@
           "Map coordinates {53.54268, -113.53953} are the Trailforks-listed trailhead. No mapEndCoords or track populated — the trail is short (1.0 km / 3,338 ft) and largely east-west; a future revision could trace a polyline over satellite imagery.",
           "accentColor #4a90c2 (themeName 'blue') chosen to match the pale-blue plaque background; the existing catalogue colors array is ['white', 'black'] but the carved plaque is unmistakably blue-on-blue with black-and-white print. Coordinator may want to update catalogue.colors to include 'blue'."
         ]
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     },
     {
@@ -16716,6 +16848,12 @@
           "linguistics.relatedForms uses descriptive Cree paraphrases (kwêskwêkotêw, piwâpisk) rather than calqued nouns. This is a deliberate choice: there is no widely-attested Plains Cree word for a coiled mechanical spring, and inventing one would conflict with the spec rule 'do not silently replace a checked local spelling with a dictionary spelling unless the change is intentional.' Surfaced as a related-forms section so the page still teaches Plains Cree morphology adjacent to the loanword.",
           "headerTitle is just 'Slinky' (no Cree segment) per brief: 'for slinky just `Slinky` if no Cree.' This deviates from the kiwapamitin three-part 'English • SRO • Syllabics' pattern but matches the loanword-only nature of the installation."
         ]
+      },
+      "shopify": {
+        "productId": "",
+        "variantId": "",
+        "priceCAD": null,
+        "available": false
       }
     }
   ]

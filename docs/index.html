@@ -237,7 +237,10 @@
         .sign-info {
             padding: 0.45rem 0.55rem;
             display: grid;
-            grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+            /* Trailing `auto` column reserved for the Shopify price chip
+               (see `.sign-price` below). The chip is omitted when a sign is
+               not for sale, so the column collapses naturally. */
+            grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) auto;
             gap: 0.25rem 0.5rem;
             align-items: center;
         }
@@ -419,7 +422,8 @@
             .sign-name-group,
             .sign-cree-group,
             .sign-syllabics-cell,
-            .sign-cree-cell {
+            .sign-cree-cell,
+            .sign-price-cell {
                 grid-column: 2;
                 text-align: left;
             }
@@ -1608,6 +1612,70 @@
                 gap: 1.5rem;
             }
         }
+
+        /* ───────────────────────────────────────────────────────────────
+           Shopify storefront integration (see docs/shop.js).
+           All rules below are scoped to the buy-button UI and the price
+           chip rendered on catalogue cards. They are inert when shop.js
+           is missing or Shopify is not configured.
+           ─────────────────────────────────────────────────────────────── */
+        .sign-price-cell {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            min-width: 0;
+        }
+
+        .sign-price {
+            display: inline-block;
+            padding: 0.1rem 0.45rem;
+            border-radius: 999px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+
+        .detail-shop {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-shop:empty {
+            display: none;
+        }
+
+        .shop-disabled-note {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Safety override: the Shopify Buy SDK injects its sticky cart toggle
+           with `position: fixed` itself when `sticky: true`, but force the
+           placement so it can't collide with the page header or mobile bar. */
+        .shopify-buy-frame--toggle,
+        .shopify-buy__cart-toggle,
+        [class*="shopify-buy"][class*="toggle"] {
+            position: fixed !important;
+            right: 1rem !important;
+            top: 1rem !important;
+            z-index: 1000 !important;
+        }
+
+        @media (max-width: 900px) {
+            /* Below the mobile breakpoint there is a fixed top toolbar
+               (.mobile-toolbar, ~3.5rem tall). Push the cart toggle below it
+               so it doesn't overlap the navigation. */
+            .shopify-buy-frame--toggle,
+            .shopify-buy__cart-toggle,
+            [class*="shopify-buy"][class*="toggle"] {
+                top: 4rem !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1669,6 +1737,11 @@
                             <select class="stl-select" id="stl-file-select"></select>
                         </div>
                         <a class="detail-action is-disabled" id="download-stl-link" aria-disabled="true">Download STL</a>
+                        <!-- Shopify "Add to cart" button mounts here via
+                             window.NehiyoShop.mountProduct() from updateDetailPane().
+                             Stays empty (and hidden via `.detail-shop:empty`) when
+                             the selected sign has no Shopify product configured. -->
+                        <div class="detail-shop" id="detail-shop" data-product-id=""></div>
                     </div>
                 </div>
 
@@ -3421,6 +3494,15 @@
             const pageFrame = document.getElementById('detail-page-frame');
             const downloadLink = document.getElementById('download-stl-link');
             const detailColors = document.getElementById('detail-colors');
+            // Shopify buy-button host (see docs/shop.js). Always cleared on
+            // every detail update so a stale button from a previous sign
+            // doesn't bleed into the currently-selected one. Re-mounted
+            // below only when the selected sign is for sale.
+            const detailShopEl = document.getElementById('detail-shop');
+            if (detailShopEl) {
+                detailShopEl.innerHTML = '';
+                detailShopEl.removeAttribute('data-product-id');
+            }
 
             if (!selectedModel) {
                 title.textContent = 'Select a sign';
@@ -3440,6 +3522,16 @@
                 renderLayerEditor();
                 disposeDetailViewer();
                 return;
+            }
+
+            // Mount the Shopify "Add to cart" button for this sign, if it is
+            // configured and marked available in catalogue.json. The helper
+            // is a no-op when shop.js is missing or Shopify is unconfigured.
+            const shop = selectedModel.shopify;
+            if (detailShopEl && shop && shop.productId && shop.available === true
+                && window.NehiyoShop && typeof window.NehiyoShop.mountProduct === 'function') {
+                detailShopEl.setAttribute('data-product-id', String(shop.productId));
+                window.NehiyoShop.mountProduct(detailShopEl, shop.productId, { buttonText: 'Add to cart' });
             }
 
             const pagePath = getModelPagePath(selectedModel);
@@ -3591,6 +3683,18 @@
                 const creeTransliteration = model.creeName || '—';
                 const syllClass = model.creeSyllabics ? 'sign-syllabics' : 'sign-syllabics sign-placeholder';
                 const transliterationClass = model.creeName ? 'sign-cree' : 'sign-cree sign-placeholder';
+                // Shopify price chip: shown only when this sign has a
+                // configured & available Shopify product. The chip is purely
+                // informational on the card; the actual buy button lives in
+                // the detail pane.
+                const shop = model.shopify;
+                const shopAvailable = !!(shop && shop.productId && shop.available === true);
+                const priceLabel = shopAvailable
+                    ? (shop.priceCAD != null ? `$${shop.priceCAD} CAD` : '— CAD')
+                    : '';
+                const priceCellHTML = shopAvailable
+                    ? `<div class="sign-price-cell"><span class="sign-price" title="Available in store">${escapeHtml(priceLabel)}</span></div>`
+                    : '<div class="sign-price-cell"></div>';
                 return `
                     <div class="sign-card ${selectedModel?.id === model.id ? 'active' : ''}" draggable="true" data-model-id="${model.id}">
                         <div class="sign-info">
@@ -3604,6 +3708,7 @@
                             <div class="sign-cree-cell">
                                 <div class="${transliterationClass}">${escapeHtml(creeTransliteration)}</div>
                             </div>
+                            ${priceCellHTML}
                         </div>
                         ${renderCardChecklist(model)}
                     </div>
@@ -5543,7 +5648,20 @@
             attachPitchToggleHandlers();
             attachStyleToggleHandlers();
             loadCatalogue();
+            // Mount the Shopify floating cart drawer (see docs/shop.js).
+            // Guarded so the page works fine even if shop.js is missing or
+            // Shopify is not yet configured — the helper itself is a no-op
+            // in that case.
+            if (window.NehiyoShop && typeof window.NehiyoShop.mountCart === 'function') {
+                window.NehiyoShop.mountCart();
+            }
         });
     </script>
+    <!-- Shopify storefront integration. Single source of truth for store
+         config + a tiny window.NehiyoShop API used by this page and by the
+         per-sign pages under docs/<sign>/. Deferred so it never blocks the
+         catalogue's first paint, and entirely optional — the page degrades
+         gracefully when this file or the Shopify config is missing. -->
+    <script src="shop.js" defer></script>
 </body>
 </html>

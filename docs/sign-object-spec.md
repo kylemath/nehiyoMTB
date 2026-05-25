@@ -79,6 +79,7 @@ Recommended fields:
 - `notes`: internal notes that should not necessarily be displayed.
 - `pageContent`: complete per-sign content object used by `tools/sign_page_renderer.py` to generate the public `docs/{folder}/index.html`. See [Page Content Object](#page-content-object) below.
 - `checks`: per-sign readiness checklist booleans surfaced as small chips on each catalogue card. See [Card Readiness Checklist](#card-readiness-checklist) below.
+- `shopify`: per-sign Shopify storefront binding. See [Shopify Binding](#shopify-binding) below.
 
 Status values:
 
@@ -501,6 +502,50 @@ Replaces the older single `pageStatus` corner pill which conflated mesh repair, 
 Only `meshRepaired` is persisted today because the other five chips read directly from existing fields. If a future check needs a manual toggle (for example a "language reviewed by elder" flag), add another boolean to `checks` rather than overloading `pageStatus`.
 
 The local catalogue editor exposes `checks.meshRepaired` as a checkbox in the Sign Page Content panel; saving the panel sends the new value alongside `pageContent` to `/api/save-sign-content`.
+
+## Shopify Binding
+
+Each sign can advertise itself as a Shopify product. The catalogue and per-sign
+pages both read the `shopify` block to decide whether to render an "Add to cart"
+button and a price chip. The actual cart UI and checkout are powered by the
+[Shopify Buy Button SDK](https://shopify.dev/docs/api/buy-button-sdk) loaded
+once from `docs/shop.js`; no Shopify storefront theme is involved.
+
+Shape:
+
+```json
+{
+  "shopify": {
+    "productId": "8123456789012",
+    "variantId": "",
+    "priceCAD": 35,
+    "available": true
+  }
+}
+```
+
+Field rules:
+
+- `productId`: numeric Shopify product id as a string. Get it from the Shopify
+  admin URL of the product (`/admin/products/8123456789012`) or from the Buy
+  Button "embed code" snippet. Required; the button stays hidden when empty.
+- `variantId`: optional specific variant id. Leave empty when the product has a
+  single variant or you want the SDK to pick the first one. Required only when
+  you have multiple sizes/colors per sign and want to target one.
+- `priceCAD`: advisory CAD price shown as the chip on the catalogue card and as
+  the headline price on the per-sign page. The SDK overwrites this on the actual
+  button with the live Shopify price when the script loads, so this field is a
+  fallback for pre-load and for users with JavaScript disabled.
+- `available`: explicit kill switch. When `false`, the button is hidden even if
+  a `productId` is present. Use to pull a sign off the store without deleting
+  data.
+
+Run `python3 tools/add_shopify_field.py` once to insert empty blocks on every
+sign that does not yet have one; the script is idempotent.
+
+The global Shopify store domain (e.g. `nehiyomtb.myshopify.com`) lives in
+`docs/shop.js`, not in `catalogue.json`. There is exactly one store for the
+whole catalogue.
 
 ## Page Checklist
 

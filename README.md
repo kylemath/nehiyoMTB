@@ -12,3 +12,9 @@ I now pause at certain layers in the slicer and then change the filment to make 
 Old:
 After printing in PLA, I spray praint with white primer, then use Acrylic paints for colour.
 ![Screenshot](whiteprimer.png)
+
+## Online Store
+
+The catalogue at `docs/` doubles as the storefront for [nehiyomtb.ca](https://nehiyomtb.ca). Purchases are powered by the Shopify Buy Button SDK — Shopify handles checkout, payments, taxes, and shipping while every visible page stays here on GitHub Pages.
+
+To wire up Shopify, the custom domain, and per-sign products, follow the step-by-step guide in [`docs/SHOPIFY_SETUP.md`](docs/SHOPIFY_SETUP.md). Until then, buy buttons stay hidden and the site keeps working as a pure catalogue.
