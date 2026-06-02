@@ -193,6 +193,16 @@
   #v3dpanel .v3dp-sws{display:inline-flex;gap:3px;margin-right:3px;flex:none}
   #v3dpanel .v3dp-sw{width:13px;height:13px;border-radius:3px;border:1px solid #0007;cursor:pointer;display:inline-block;flex:none}
   #v3dpanel .v3dp-sw:hover{outline:1px solid var(--accent);outline-offset:1px}
+  /* per-component relief-height (Z-thickness) steppers */
+  #v3dpanel .v3dp-heights{display:flex;flex-direction:column;gap:3px;margin-top:6px;padding-top:6px;border-top:1px dashed #2a331d}
+  #v3dpanel .v3dp-hhdr{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px;margin-bottom:1px}
+  #v3dpanel .v3dp-hrow{display:flex;align-items:center;gap:6px;font-size:11px}
+  #v3dpanel .v3dp-hrow .v3dp-sw{width:11px;height:11px}
+  #v3dpanel .v3dp-hlbl{flex:1;color:var(--text)}
+  #v3dpanel .v3dp-hval{font:11px ui-monospace,Menlo,monospace;color:var(--muted);min-width:40px;text-align:right}
+  #v3dpanel .v3dp-hbtn{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:5px;
+    cursor:pointer;font-size:11px;line-height:1;padding:0;width:28px;height:21px;display:flex;align-items:center;justify-content:center;flex:none}
+  #v3dpanel .v3dp-hbtn:hover{border-color:var(--accent);color:var(--accent)}
   /* recolour palette popup */
   .v3dpalpop{position:fixed;z-index:80;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:7px;
     display:grid;grid-template-columns:repeat(6,18px);gap:4px;box-shadow:0 8px 24px #000a}
@@ -323,9 +333,9 @@ const DATA = [
  {s:"ᐊᔭᔭᐳᔭᐤ ᒣᐢᑲᓇᐤ",t:"kayâs-ayisiyiniw meskanaw",g:"trail of the old-time folk",why:"kayâs 'long ago' + ayisiyiniw 'person'.",inn:"Nostalgic, of the old days."},
  {s:"ᑭᓭᔨᓂᐗᐠ ᐅᒣᐢᑲᓇᐤ",t:"kisêyiniwak omeskanawâw",g:"the elders' trail",why:"Plural elders' shared path.",inn:"Respectful."}]},
 {en:"Walters Folly",loc:"Central Edmonton (South)",dist:"458 m",distM:458,desc:"-1 m",descM:1,asc:"3 m",ascM:3,rank:453,views:6135,checkins:22882,cree:[
- {s:"ᐗᓪᑐᕒ ᐅᑮᐱᑣᐎᐣ",t:"Waltor okîpitwâwin",g:"Walter's foolishness",why:"Walter phonetic; kîpit-/kîmôt? use 'foolish act': kakêpâtisiwin 'foolishness'.",inn:"'Folly' = a silly costly project; mocking but affectionate."},
- {s:"ᐗᓪᑐᕒ ᐅᑲᑫᐹᑎᓯᐎᐣ",t:"Waltor okakêpâtisiwin",g:"Walter's folly/foolish deed",why:"kakêpâtisiwin 'foolishness' possessed by Walter.",inn:"Same gentle ridicule."},
- {s:"ᐗᓪᑐᕒ ᐅᐱᑭᐢᑲᐤ",t:"Waltor opîkiskwâw",g:"Walter's whim/blunder",why:"Names a misguided personal project.",inn:"None strong."}]},
+ {s:"ᐗᓪᑐᕒ ᐅᑲᑫᐹᑎᓯᐎᐣ",t:"waltor okakêpâtisiwin",g:"Walter's folly / foolishness",why:"kakêpâtisiwin 'foolishness/folly' (attested, NI) possessed by Walter (o-kakêpâtisiwin); plural 'Walters' in English nods to the succession of crossings here.",inn:"The literal 'folly' — gentle, affectionate ridicule of an overambitious build (the trail rides harder than its mostly-green traffic)."},
+ {s:"ᐋᓱᑲᐣ ᑳ ᐋᔨᒪᕽ",t:"âsokan kâ-âyimahk",g:"the crossing that is hard",why:"Bridge-homage alternate: âsokan 'bridge/crossing' + kâ-âyimahk 'the one that is difficult' — ties to the Walterdale bridges shown in the icon.",inn:"Folly = a costly, overambitious crossing, harder than it needs to be."},
+ {s:"ᐗᓪᑐᕒ ᐅᑖᓱᑲᐣ",t:"waltor otâsokan",g:"Walter's bridge",why:"Possessed âsokan (ot-âsokan); pure bridge homage to the Walterdale crossing lineage.",inn:"Faint wink that the hard trail is 'Walter's' overambitious crossing."}]},
 {en:"Dave's Trail",loc:"Terwillegar",dist:"340 m",distM:340,desc:"-11 m",descM:11,asc:"10 m",ascM:10,rank:667,views:"",checkins:22076,cree:[
  {s:"ᑌᐺ ᐅᒣᐢᑲᓇᐤ",t:"Têv omeskanaw",g:"Dave's trail",why:"Dave phonetic (Têv) + omeskanaw 'his trail'.",inn:"None."},
  {s:"ᑌᐃᐍ ᐅᒣᐢᑲᓇᐤ",t:"Têyiv omeskanaw",g:"Dave's path",why:"Alternate phonetic spelling.",inn:"None."},
@@ -351,9 +361,9 @@ const DATA = [
  {s:"ᐁᑳ ᒥᓴᑎᒧᐠ",t:"êkâ misatimwak",g:"no horses (prohibitive)",why:"êkâ 'don't/none' + horses.",inn:"Sign-like."},
  {s:"ᓇᒨᔭ ᐅᑌᐦᑌᐗᐠ ᒥᓴᑎᒧᐠ",t:"namôya otêhtêwak misatimwak",g:"horses don't go here",why:"Adds a verb for 'go/be' here.",inn:"None."}]},
 {en:"Walterdale Park Access",loc:"Central Edmonton (South)",dist:"712 m",distM:712,desc:"-15 m",descM:15,asc:"24 m",ascM:24,rank:1934,views:"",checkins:19570,cree:[
- {s:"ᐗᓪᑐᕒᑌᓪ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ",t:"Waltordêl pîhtokêwi-meskanaw",g:"Walterdale access trail",why:"Walterdale phonetic + pîhtokêwi 'entry' + meskanaw.",inn:"None."},
- {s:"ᐗᓪᑐᕒᑌᓪ ᐃᓱᑫᐎᐣ",t:"Waltordêl isi-pîhtokêwin",g:"way into Walterdale",why:"isi-pîhtokêwin 'way/entry into'.",inn:"None."},
- {s:"ᐗᓪᑐᕒᑌᓪ ᒣᐢᑲᓇᐢ",t:"Waltordêl meskanas",g:"little Walterdale connector",why:"Diminutive connector road.",inn:"None."}]},
+ {s:"ᐗᓪᑐᕒᑌᓪ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ",t:"waltordêl pîhtokêwi-meskanaw",g:"Walterdale access trail",why:"Walterdale phonetic + pîhtokêwi 'entry' + meskanaw.",inn:"None."},
+ {s:"ᐗᓪᑐᕒᑌᓪ ᐃᓱᑫᐎᐣ",t:"waltordêl isi-pîhtokêwin",g:"way into Walterdale",why:"isi-pîhtokêwin 'way/entry into'.",inn:"None."},
+ {s:"ᐗᓪᑐᕒᑌᓪ ᒣᐢᑲᓇᐢ",t:"waltordêl meskanas",g:"little Walterdale connector",why:"Diminutive connector road.",inn:"None."}]},
 {en:"Curvin Murvin",loc:"Terwillegar",dist:"267 m",distM:267,desc:"-8 m",descM:8,asc:"",ascM:0,rank:1645,views:3070,checkins:19117,cree:[
  {s:"ᐗᐗᓂ ᒣᐢᑲᓇᐤ",t:"wâwani-meskanaw",g:"curvy/winding trail",why:"wâwani- 'twisting, curving' for 'curvin', + meskanaw; 'Murvin' is rhyme filler.",inn:"Nonsense rhyme; Cree keeps the curvy feel."},
  {s:"ᐗᐍᔭᔮᐤ ᒣᐢᑲᓇᐤ",t:"wâwiyêyâw meskanaw",g:"the round/curving trail",why:"wâwiyê- 'round, curved'.",inn:"None."},
@@ -431,16 +441,16 @@ const DATA = [
  {s:"ᐗᐍᔭᐱᔭᐤ ᓵᐚᓄᐦᐠ",t:"wâwiyêpayiw sâwanohk",g:"the springy/coiling one, south",why:"wâwiyê- round + -payiw motion.",inn:"None."},
  {s:"ᐢᓕᕄᑭ ᓵᐚᓄᐦᐠ",t:"slinki sâwanohk",g:"Slinky south (phonetic)",why:"Brand kept phonetic + south.",inn:"None."}]},
 {en:"GO Trail",loc:"Terwillegar",dist:"2 km",distM:2000,desc:"-56 m",descM:56,asc:"54 m",ascM:54,rank:968,views:8595,checkins:15046,cree:[
+ {s:"ᐃᑑᐦᑌ ᒣᐢᑲᓇᐤ",t:"itohtê meskanaw",g:"go-on trail",why:"itohtê (ee-toh-tay) is the Plains Cree root command 'go on' — the green-light counterpart to nakî 'stop'.",inn:"'GO' as in stop-and-go: the word you'd say when the light turns green."},
  {s:"ᐋᐦᑲᒣ ᒣᐢᑲᓇᐤ",t:"âhkamê-meskanaw",g:"keep-going trail",why:"âhkamêyi- 'persevere, keep going' + meskanaw.",inn:"'GO' as encouragement."},
- {s:"ᒫᒋ ᐱᒧᐦᑌ ᒣᐢᑲᓇᐤ",t:"mâci-pimohtê meskanaw",g:"start-walking / go trail",why:"mâci- 'begin' + pimohtê- 'walk' = get going.",inn:"None."},
  {s:"ᑰ ᒣᐢᑲᓇᐤ",t:"Kô meskanaw",g:"GO (phonetic) trail",why:"If 'GO' is a proper acronym, keep phonetic.",inn:"None."}]},
 {en:"The Trap",loc:"Mill Creek Ravine",dist:"669 m",distM:669,desc:"-31 m",descM:31,asc:"13 m",ascM:13,rank:1138,views:6492,checkins:14818,cree:[
  {s:"ᑆᑭᑲᐣ",t:"wanihikan",g:"a trap/snare",why:"wanihikan is the Cree word for a trap/snare used in hunting.",inn:"'It's a trap!' (Star Wars) energy; ensnaring sense literal."},
  {s:"ᐊᑯᐱᐗᑖᐱᐢᑲᐦᐃᑲᐣ",t:"akwâpicikan",g:"a snare/catch",why:"Alt term for a catching device.",inn:"None."},
  {s:"ᐗᓂᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ",t:"wanihikan meskanaw",g:"the trap trail",why:"Adds meskanaw.",inn:"None."}]},
 {en:"GO Trail - alt climb",loc:"Terwillegar",dist:"89 m",distM:89,desc:"-6 m",descM:6,asc:"9 m",ascM:9,rank:7907,views:"",checkins:14761,cree:[
- {s:"ᐋᐦᑲᒣ ᒣᐢᑲᓇᐤ ᑯᑕᐠ ᐊᒥᐢᑎᑲᐤ",t:"âhkamê-meskanaw kotak amaciwêwin",g:"GO trail, other climb",why:"As GO Trail + kotak 'other' + amaciwê- 'climb up'.",inn:"None."},
- {s:"ᐋᐦᑲᒣ ᒣᐢᑲᓇᐤ ᐊᒥᐢᑎᑲᐤ",t:"âhkamê-meskanaw amaciwêwin",g:"GO trail climb",why:"amaciwêwin 'the climb/ascent'.",inn:"None."},
+ {s:"ᐃᑑᐦᑌ ᒣᐢᑲᓇᐤ ᐊᒥᐢᑎᑲᐤ",t:"itohtê meskanaw amaciwêwin",g:"go-on trail climb",why:"itohtê 'go on' (green-light root command, vs nakî 'stop') + amaciwêwin 'the climb/ascent'.",inn:"GO as in stop-and-go."},
+ {s:"ᐃᑑᐦᑌ ᒣᐢᑲᓇᐤ ᑯᑕᐠ ᐊᒥᐢᑎᑲᐤ",t:"itohtê meskanaw kotak amaciwêwin",g:"go-on trail, other climb",why:"As GO Trail + kotak 'other' + amaciwê- 'climb up'.",inn:"None."},
  {s:"ᑰ ᒣᐢᑲᓇᐤ ᐊᒥᐢᑎᑲᐤ",t:"Kô meskanaw amaciwêwin",g:"GO (phonetic) climb",why:"If GO is an acronym.",inn:"None."}]},
 {en:"Hustler",loc:"Gold Bar/Capilano Park",dist:"2 km",distM:2000,desc:"-79 m",descM:79,asc:"84 m",ascM:84,rank:404,views:13075,checkins:14689,cree:[
  {s:"ᐅᑮᒧᑎᐢᐠ ᐊᑑᐢᑫᐤ",t:"okîmotisk-atoskêw",g:"one who works fast/sneaky",why:"Hustle = work hard/sharp; okîmoc 'secretly, slyly' + atoskêw 'works'.",inn:"Hustler magazine + street hustler; sly/secret sense kept via kîmoc."},
@@ -731,8 +741,8 @@ const DATA = [
  {s:"ᐅᐱᒧᐦᑌᐤ ᐅᑖᓂᓯ",t:"opamihâw otânisa",g:"the rancher's daughter",why:"Farming/herding caretaker + daughter.",inn:"Same trope."},
  {s:"ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ ᒣᐢᑲᓇᐤ",t:"okistikêw otânisa meskanaw",g:"farmer's-daughter trail",why:"Adds meskanaw.",inn:"None."}]},
 {en:"Coalminer's Daughter",loc:"Whitemud",dist:"",distM:0,desc:"",descM:0,asc:"",ascM:0,rank:"",views:"",checkins:"",cree:[
+ {s:"ᑲᐢᑭᑌᐤ ᐊᓯᓂ ᒧᓇᐦᐃᑫᐤ ᐅᑖᓂᓴ",t:"kaskitêw-asini-monahikêw otânisa",g:"the coal (black-stone) miner's daughter",why:"kaskitêwâw 'black' + asiniy 'stone' = coal, + monahikêw 'miner' + otânisa 'daughter'.",inn:"Spells out 'coal' literally; 'Coal Miner's Daughter' (Loretta Lynn) nod + sibling to The Farmer's Daughter trope."},
  {s:"ᐅᒧᓇᐦᐃᑫᐤ ᐅᑖᓂᓴ",t:"omonahikêw otânisa",g:"the miner's daughter",why:"monahikêw 'one who digs/mines out of the earth' + otânis 'his daughter'; coal implied by the digging.",inn:"'Coal Miner's Daughter' (Loretta Lynn) nod + sibling to The Farmer's Daughter risqué trope; the phrase carries the wink."},
- {s:"ᑲᐢᑭᑌᐤ ᐊᓯᓂ ᒧᓇᐦᐃᑫᐤ ᐅᑖᓂᓴ",t:"kaskitêw-asini-monahikêw otânisa",g:"the coal (black-stone) miner's daughter",why:"kaskitêwâw 'black' + asiniy 'stone' = coal, + monahikêw 'miner' + otânisa 'daughter'.",inn:"Spells out 'coal' literally; same trope."},
  {s:"ᐅᒧᓇᐦᐃᑫᐤ ᐅᑖᓂᓴ ᒣᐢᑲᓇᐤ",t:"omonahikêw otânisa meskanaw",g:"miner's-daughter trail",why:"Adds meskanaw 'trail'.",inn:"None."}]},
 {en:"Farmers Daughter's Cousin",loc:"Riverbend",dist:"",distM:0,desc:"",descM:0,asc:"",ascM:0,rank:"",views:"",checkins:"",cree:[
  {s:"ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ ᐅᐑᒋᓵᓇ",t:"okistikêw otânisa owîcisâna",g:"the farmer's daughter's cousin",why:"Builds on The Farmer's Daughter (okistikêw otânisa) + owîcisâna 'his/her same-generation relative (cousin)'.",inn:"Extends the farmer's-daughter wink one branch further into the family tree."},
@@ -1270,8 +1280,12 @@ function draftFor(en){
    fields the factory rewrites on every build (icon colours + heights + size). */
 function signVer(rec){
   const c = rec.components || {};
-  const raw = [c.color_ztop, (c.colors||[]).join('-'), (c.icon_size_mm||[]).join('x')].join('|');
-  if(raw === '||') return '';
+  // Include rec.built (a per-build epoch the factory stamps on every rebuild) so
+  // a TEXT-only change (new Cree name) — which leaves the icon colours/heights/
+  // size untouched — still produces a fresh token. Icon-geometry fields stay in
+  // the mix so older manifest entries without `built` still cache-bust on edits.
+  const raw = [rec.built||'', c.color_ztop, (c.colors||[]).join('-'), (c.icon_size_mm||[]).join('x')].join('|');
+  if(raw === '|||') return '';
   let h = 0; for(let i=0;i<raw.length;i++){ h = (h*31 + raw.charCodeAt(i)) | 0; }
   return '?v=' + (h>>>0).toString(36);
 }
@@ -1708,7 +1722,7 @@ fetch('sign-drafts/manifest.json', {cache:'no-store'})
           <button id="v3dp-dl-stl">⬇ adjusted .stl (combined)</button>
           <button id="v3dp-dl-parts">⬇ adjusted parts (per colour)</button>
         </div>
-        <div class="v3dp-note">Use the arrows to <b>push</b> a piece and <b>＋ / －</b> to <b>grow / shrink</b> it; <b>Z+ / Z−</b> change relief height. The icon's colours move &amp; scale as one unit. Click a <b>colour square</b> to recolour that piece (e.g. a number to black). The diagram and 3D update live; values save per sign. <b>Build print-ready (server)</b> bakes the tweaks + recolours into the assembled <code>.stl</code> + colour <code>.3mf</code> so they flow through to <i>Move to production</i>.</div>
+        <div class="v3dp-note">Use the arrows to <b>push</b> a piece and <b>＋ / －</b> to <b>grow / shrink</b> it; <b>Z+ / Z−</b> raise/lower the piece, and <b>H＋ / H－</b> (under <i>relief height</i>) make a piece <b>stick out more / less</b> — each icon colour has its own height while staying locked in position. The icon's colours move &amp; scale as one unit. Click a <b>colour square</b> to recolour that piece (e.g. a number to black). The diagram and 3D update live; values save per sign. <b>Build print-ready (server)</b> bakes the tweaks + recolours into the assembled <code>.stl</code> + colour <code>.3mf</code> so they flow through to <i>Move to production</i>.</div>
       </div>
     </div>
   </div>
@@ -1785,26 +1799,30 @@ function closeViewer(){
 }
 function v3dStatus(msg){ const s=document.getElementById('v3dstatus'); if(s) s.textContent=msg||''; }
 
-/* gather {key,url} STL components for a sign, repo-relative -> page-relative */
+/* gather {key,url} STL components for a sign, repo-relative -> page-relative.
+   The same per-build cache-bust token used for the preview PNG is appended to
+   each STL URL so the 3D viewer reloads fresh geometry after a regenerate (the
+   browser would otherwise serve the cached mesh from the unchanged URL). */
 function stlPartsFor(rec){
   const parts=[];
+  const ver=signVer(rec);
   if(rec.components){
     // load in a sensible stacking order; ignore non-stl metadata fields
     const order=['plaque','icon_outline','icon_color','english','translit','syllabics'];
     const seen=new Set();
     order.forEach(k=>{ const v=rec.components[k];
-      if(typeof v==='string' && v.endsWith('.stl')){ parts.push({key:k,url:'../'+v}); seen.add(k); }});
+      if(typeof v==='string' && v.endsWith('.stl')){ parts.push({key:k,url:'../'+v+ver}); seen.add(k); }});
     Object.keys(rec.components).forEach(k=>{ const v=rec.components[k];
-      if(!seen.has(k) && typeof v==='string' && v.endsWith('.stl')) parts.push({key:k,url:'../'+v}); });
+      if(!seen.has(k) && typeof v==='string' && v.endsWith('.stl')) parts.push({key:k,url:'../'+v+ver}); });
   } else if(rec.stl){
-    parts.push({key:'_single',url:'../'+rec.stl});
+    parts.push({key:'_single',url:'../'+rec.stl+ver});
   }
   return parts;
 }
 
 /* hex int -> #rrggbb for the colour-dot swatches on the STL download links */
 function hexCss(n){ return '#'+(n>>>0 & 0xffffff).toString(16).padStart(6,'0'); }
-function baseName(p){ return p.split('/').pop(); }
+function baseName(p){ return p.split('/').pop().split('?')[0]; }
 
 /* build the download buttons for a sign: the print-ready assembled STL + hi-fi
    multi-object .3mf (single CGAL pipeline, slices cleanly), plus the raw
@@ -1918,7 +1936,10 @@ function openViewer(en){
       group.add(mesh);
       geo.computeBoundingBox();
       const bc=geo.boundingBox.getCenter(new THREE.Vector3());
-      v3d.partMeshes[i]={part:p, mesh, baseCenter:bc};
+      // baseBottom = the piece's lowest Z (where it sits on the plaque); the
+      // relief-height control scales thickness about this anchor so pieces grow
+      // upward (stick out more) rather than sinking into the plaque.
+      v3d.partMeshes[i]={part:p, mesh, baseCenter:bc, baseBottom:geo.boundingBox.min.z};
       anyOK=true;
       if(--pending===0) finalize();
     }, undefined, err=>{ console.warn('STL load failed',p.url,err); if(--pending===0) finalize(); });
@@ -1964,7 +1985,7 @@ function v3dAdjKey(en){ return 'nmtb-v3d-adj:'+en; }
 /* a fresh, no-op adjustment set: global 1×, every UNIT 1× scale, 0 offset, no
    colour overrides. `n` is the number of adjustment units (icon parts collapse
    into one unit). */
-function freshAdj(n){ return {global:1, units:Array.from({length:n},()=>({s:1,x:0,y:0,z:0})), colors:{}}; }
+function freshAdj(n){ return {global:1, units:Array.from({length:n},()=>({s:1,x:0,y:0,z:0})), colors:{}, heights:{}}; }
 /* load saved tweaks for a sign from localStorage (sized to current units) */
 function loadAdjustments(en, n){
   const base=freshAdj(n);
@@ -1977,9 +1998,18 @@ function loadAdjustments(en, n){
       if(arr) arr.forEach((p,i)=>{ if(i<n && p) base.units[i]={
         s:+p.s||1, x:+p.x||0, y:+p.y||0, z:+p.z||0}; });
       if(j.colors && typeof j.colors==='object') base.colors=Object.assign({}, j.colors);
+      // per-component relief-height multipliers (keyed by component key)
+      if(j.heights && typeof j.heights==='object'){
+        Object.keys(j.heights).forEach(k=>{ const v=+j.heights[k]; if(v>0) base.heights[k]=v; });
+      }
     }
   }catch(e){ /* ignore corrupt entries */ }
   return base;
+}
+/* relief-height multiplier for a component key (1 = unchanged thickness) */
+function v3dHeightFor(key){
+  const h = v3d && v3d.adj && v3d.adj.heights ? +v3d.adj.heights[key] : 0;
+  return (h>0) ? h : 1;
 }
 let _saveAdjServerTimer=null;
 function saveAdjustments(){
@@ -2006,9 +2036,14 @@ function applyAdjustments(){
     const a=v3d.adj.units[ui]||{s:1,x:0,y:0,z:0};
     const s=a.s||1, c=u.center;
     u.members.forEach(idx=>{
-      const mesh=v3d.partMeshes[idx].mesh;
-      mesh.scale.setScalar(s);
-      mesh.position.set(c.x*(1-s)+(a.x||0), c.y*(1-s)+(a.y||0), c.z*(1-s)+(a.z||0));
+      const pm=v3d.partMeshes[idx], mesh=pm.mesh;
+      // per-component relief height scales ONLY the Z thickness (about the
+      // piece's base), so icon sub-colours can stick out by different amounts
+      // while x/y position + planar scale stay locked to the unit.
+      const hz=v3dHeightFor(pm.part.key), zmin=(pm.baseBottom||0);
+      mesh.scale.set(s, s, s*hz);
+      mesh.position.set(c.x*(1-s)+(a.x||0), c.y*(1-s)+(a.y||0),
+                        c.z*(1-s)+(a.z||0)+zmin*s*(1-hz));
     });
   });
   v3d.group.updateMatrixWorld(true);
@@ -2078,6 +2113,10 @@ function v3dPanelRefresh(){
       sw.style.background=hexCss(partColorHex(k));
       sw.title=partColorName(k)+' — click to recolour';
     });
+    row.querySelectorAll('.v3dp-hrow').forEach(hr=>{
+      const v=hr.querySelector('.v3dp-hval');
+      if(v) v.textContent=v3dHeightFor(hr.dataset.comp).toFixed(2)+'×';
+    });
   });
   const stage=document.getElementById('v3dp-stage');
   if(stage) stage.innerHTML=v3dStageSvg();
@@ -2113,9 +2152,34 @@ function buildLayoutPanel(en){
           <button data-act="zup" title="raise relief (Z+)">Z+</button>
           <button data-act="zdown" title="lower relief (Z−)">Z−</button>
         </div>
-      </div></div>`;
+      </div>
+      ${v3dHeightRows(u)}</div>`;
   });
   host.innerHTML=rows.join('');
+}
+/* per-member label for the relief-height steppers: icon sub-parts show their
+   colour so each can be tuned individually; single-member units show "height" */
+function v3dMemberHeightLabel(key, single){
+  if(key==='icon_outline') return 'outline';
+  if(key && key.indexOf('icon_')===0) return key.slice(5);
+  return single ? 'height' : partLabel(key);
+}
+/* build the relief-height (Z-thickness) control block for a unit — one stepper
+   per member so different-colour icon pieces can stick out by different amounts
+   while their X/Y position + planar scale stay linked to the unit. */
+function v3dHeightRows(u){
+  const single=u.members.length===1;
+  const rows=u.members.map(idx=>{
+    const k=v3d.partMeshes[idx].part.key, hz=v3dHeightFor(k);
+    return `<div class="v3dp-hrow" data-comp="${esc(k)}">
+        <span class="v3dp-sw" data-comp="${esc(k)}" style="background:${hexCss(partColorHex(k))}" title="${esc(partColorName(k))} — click to recolour"></span>
+        <span class="v3dp-hlbl">${esc(v3dMemberHeightLabel(k,single))}</span>
+        <button class="v3dp-hbtn" data-hact="hdown" data-comp="${esc(k)}" title="thinner (lower relief)">H−</button>
+        <span class="v3dp-hval">${hz.toFixed(2)}×</span>
+        <button class="v3dp-hbtn" data-hact="hup" data-comp="${esc(k)}" title="thicker (stick out more)">H+</button>
+      </div>`;
+  }).join('');
+  return `<div class="v3dp-heights"><div class="v3dp-hhdr">relief height</div>${rows}</div>`;
 }
 /* whole-sign scale input -> live apply */
 function v3dOnGlobalInput(e){
@@ -2139,9 +2203,29 @@ function v3dUnitAct(ui, act){
     case 'zdown': a.z-=zs; break;
     case 'grow':   a.s=Math.min(20, (a.s||1)+gs); break;
     case 'shrink': a.s=Math.max(0.1,(a.s||1)-gs); break;
-    case 'reset': v3d.adj.units[ui]={s:1,x:0,y:0,z:0}; break;
+    case 'reset':
+      v3d.adj.units[ui]={s:1,x:0,y:0,z:0};
+      // also clear this unit's per-member relief-height overrides
+      if(v3d.adj.heights && v3d.units && v3d.units[ui]){
+        v3d.units[ui].members.forEach(idx=>{ delete v3d.adj.heights[v3d.partMeshes[idx].part.key]; });
+      }
+      break;
     default: return;
   }
+  applyAdjustments(); saveAdjustments();
+}
+/* raise/lower the relief height (Z thickness) of ONE component by key. Stored
+   per component so different-colour icon pieces tune independently. */
+function v3dCompHeightAct(compKey, act){
+  if(!v3d||!v3d.adj||!compKey) return;
+  if(!v3d.adj.heights) v3d.adj.heights={};
+  const step=0.25, cur=v3dHeightFor(compKey);
+  let hz=cur;
+  if(act==='hup')   hz=Math.min(8, cur+step);
+  else if(act==='hdown') hz=Math.max(0.1, cur-step);
+  else return;
+  if(Math.abs(hz-1)<1e-6) delete v3d.adj.heights[compKey];   // 1× = no override
+  else v3d.adj.heights[compKey]=hz;
   applyAdjustments(); saveAdjustments();
 }
 /* group component meshes into adjustment UNITS: all icon sub-parts (outline +
@@ -2243,7 +2327,8 @@ function v3dCollectAdjustments(){
           s:s,
           x:(+a.x||0)+(1-s)*(C.x-c.x),
           y:(+a.y||0)+(1-s)*(C.y-c.y),
-          z:(+a.z||0)+(1-s)*(C.z-c.z)
+          z:(+a.z||0)+(1-s)*(C.z-c.z),
+          hz:v3dHeightFor(pm.part.key)   // per-component Z-thickness multiplier
         };
       });
     });
@@ -2285,6 +2370,8 @@ async function v3dBuildAdjustedServer(){
   if(host) host.addEventListener('click', e=>{
     const sw=e.target.closest('.v3dp-sw');
     if(sw){ v3dOpenPalette(sw.dataset.comp, e.clientX, e.clientY); return; }
+    const hb=e.target.closest('button[data-hact]');
+    if(hb){ v3dCompHeightAct(hb.dataset.comp, hb.dataset.hact); return; }
     const b=e.target.closest('button[data-act]'); if(!b) return;
     const row=b.closest('.v3dp-row'); if(!row) return;
     v3dUnitAct(+row.dataset.unit, b.dataset.act);
@@ -2372,11 +2459,15 @@ function snapshotSign(en){
       geo.computeBoundingBox();
       const mat=new THREE.MeshStandardMaterial({color:colHex(p.key),roughness:0.62,metalness:0.04});
       const mesh=new THREE.Mesh(geo,mat); mesh.userData.key=p.key;
-      // bake the saved per-part transform (scale about own centroid + offset)
+      // bake the saved per-part transform (scale about own centroid + offset,
+      // plus a per-component relief-height multiplier hz on the Z thickness,
+      // anchored at the piece's base so it grows upward).
       const a=adjParts[p.key];
-      if(a){ const s=+a.s||1, bc=geo.boundingBox.getCenter(new THREE.Vector3());
-        mesh.scale.setScalar(s);
-        mesh.position.set(bc.x*(1-s)+(+a.x||0), bc.y*(1-s)+(+a.y||0), bc.z*(1-s)+(+a.z||0)); }
+      if(a){ const s=+a.s||1, hz=(+a.hz>0?+a.hz:1), bc=geo.boundingBox.getCenter(new THREE.Vector3());
+        const zmin=geo.boundingBox.min.z;
+        mesh.scale.set(s, s, s*hz);
+        mesh.position.set(bc.x*(1-s)+(+a.x||0), bc.y*(1-s)+(+a.y||0),
+                          bc.z*(1-s)+(+a.z||0)+zmin*s*(1-hz)); }
       group.add(mesh); anyOK=true;
       if(--pending===0) done();
     }, undefined, ()=>{ if(--pending===0) done(); }));

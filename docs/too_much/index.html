@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Too Much • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#2e6eb9;--accent2:#265a98;--line:#dee2e6;--chip:#e9ecef;--ok:#2e6eb9;--primary-bg:#e0e9f4;--primary-text:#000000;--formula-bg:#f7f9fc;--formula-border:#2e6eb9;--secondary-bg:#eef3f9;--secondary-border:#c0d4ea
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .trail-mini-map-link{display:block;color:inherit;text-decoration:none;border-bottom:0}
+    .trail-mini-map-link:hover{border-bottom:0}
+    .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
+    .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
+    .trail-mini-map svg{display:block;width:100%;height:auto}
+    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
+    .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
+    .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
+    .trail-mini-map-attrib{font-size:10px;fill:#5f6368;paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}
+    .trail-mini-map-caption{padding:8px 10px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:left;background:rgba(255,255,255,0.82)}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    .buy-panel{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+    .buy-panel h2{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}
+    .buy-price{font-size:24px;font-weight:800;color:#000}
+    .buy-mount{flex:1 1 200px;min-width:200px}
+    .buy-fineprint{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
+    .buy-panel--soon{border-style:dashed}
+    @media (max-width:600px){.buy-panel{flex-direction:column;align-items:stretch;text-align:center}}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Too Much • osâm mistahi • ᐅᓵᒼ ᒥᐢᑕᐦᐃ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
+        <h2>Get one</h2>
+        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Name on the Plaque</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">osâm mistahi</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="too_much_0" data-tip="osâm — &#x27;too, excessively, overly.&#x27; The word that carries the over-the-top sense: not just &#x27;a lot&#x27; but &#x27;more than is good for you.&#x27; (Can also mean &#x27;because&#x27; in other contexts.)" data-syll-id="too_much_0-syll">osâm</span>
+              <span class="part tooltip" data-key="too_much_1" data-tip="mistahi — &#x27;much, a lot, greatly.&#x27; Built on the mist- &#x27;big, great&#x27; root you also meet in mistatim &#x27;horse (big dog)&#x27; and mistâpiskihkomân &#x27;machete (big iron knife).&#x27;" data-syll-id="too_much_1-syll">mistahi</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">osâm mistahi</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="too_much_0" data-tip="osâm" id="too_much_0-syll">ᐅᓵᒼ</span>
+              <span class="syll-part tooltip" data-key="too_much_1" data-tip="mistahi" id="too_much_1-syll">ᒥᐢᑕᐦᐃ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;Too much — osâm &#x27;too / excessively&#x27; stacked on mistahi &#x27;a lot&#x27; for an emphatic &#x27;way too much.&#x27;&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/too_much/too_much_sign.png" alt="Too Much trail sign — an overflowing measuring cup with the syllabics ᐅᓵᒼ ᒥᐢᑕᐦᐃ" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">Draft 3D-printed sign preview — overflowing measuring-cup icon, the syllabics ᐅᓵᒼ ᒥᐢᑕᐦᐃ, transliteration, and the English name.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">Two Words That Both Mean &quot;A Lot&quot;</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6"><strong>Too Much</strong> is a short, cheeky trail name, and the Cree leans into it by stacking <em>two</em> intensifiers. <strong>mistahi</strong> already means 'much, a lot' — plenty on its own. Put <strong>osâm</strong> 'too, excessively' in front of it and you tip from 'a lot' over into '<em>too</em> much, over the top, more than is good for you.' That extra <em>osâm</em> is doing exactly what the trail name is doing: a wink that something here is delightfully excessive.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The plaque art — an overflowing measuring cup — reads the name literally, but <em>osâm</em> also carries the slang colour of "you're <em>too much</em>": too funny, too wild, too far. It's the same shrug-and-grin register the English nickname has. And there's a tidy family connection lurking in <strong>mistahi</strong>: the <em>mist-</em> 'big, great' root it's built on is the very same root that makes a horse a 'big dog' (<em>mistatim</em>) and a machete a 'big iron knife' (<em>mistâpiskihkomân</em>) on the neighbouring signs. Bigness is one of Cree's most productive ideas, and "Too Much" is just bigness taken one step past sensible.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The trail is appropriately modest about all this excess: a short, quick ribbon (~221&nbsp;m, gently downhill) in the central Edmonton river valley that turns up as a quick hit inside long link-up routes like the <em>E-Town Crusher</em>. It runs on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw-Askiy</strong> — Plains Cree territory, Treaty 6, and a homeland of the Métis Nation.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The Trail</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">A short, quick singletrack (~221&nbsp;m, ~7&nbsp;m drop) in the central Edmonton (south) river valley — a brief but fun segment that strings into longer river-valley routes like the <em>E-Town Crusher</em>. Explore the wider network on Trailforks.</p>
+        </div>
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/too-much/" target="_blank" rel="noopener noreferrer">
+            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
+              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
+                <defs>
+                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#f7f8fa" />
+                    <stop offset="100%" stop-color="#eef1f5" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12107/21186.png" x="-31.7" y="-177.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12108/21186.png" x="224.3" y="-177.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12109/21186.png" x="480.3" y="-177.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12107/21187.png" x="-31.7" y="78.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12108/21187.png" x="224.3" y="78.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12109/21187.png" x="480.3" y="78.8" width="256" height="256" />
+                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
+                <polyline class="trail-mini-map-halo" points="311.8,203.7 317.0,198.2 320.7,194.3 322.6,186.5 322.1,181.0 326.3,159.8 328.2,150.4 327.2,131.6 327.7,122.2 326.3,108.8 324.9,104.1 323.0,77.5 322.6,72.0 321.2,67.3 317.9,60.2 312.8,56.3" />
+                <polyline class="trail-mini-map-track" points="311.8,203.7 317.0,198.2 320.7,194.3 322.6,186.5 322.1,181.0 326.3,159.8 328.2,150.4 327.2,131.6 327.7,122.2 326.3,108.8 324.9,104.1 323.0,77.5 322.6,72.0 321.2,67.3 317.9,60.2 312.8,56.3" />
+                <circle class="trail-mini-map-dot" cx="311.8" cy="203.7" r="6" fill="#22c55e" />
+                <circle class="trail-mini-map-dot" cx="312.8" cy="56.3" r="6" fill="#ef4444" />
+                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
+              </svg>
+              <div class="trail-mini-map-caption">Uploaded GPX over map context: 16 track points. Click to open the Trailforks trail page.</div>
+            </div></a>
+            
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/too-much/" style="font-size: 0.7em;">too-much</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;too much / excessive (on the plaque)&quot;</div>
+          <div class="formula" style="justify-content:flex-start"><strong>osâm mistahi</strong></div>
+          <div class="syllabics-emphasis"><span class="syll-part">ᐅᓵᒼ ᒥᐢᑕᐦᐃ</span></div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">★ On the plaque. Two intensifiers stacked: &#x27;a lot&#x27; pushed over into &#x27;too much.&#x27; Carries the playful &#x27;you&#x27;re too much&#x27; overtone the English name has.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;more than enough / surplus&quot;</div>
+          <div class="formula" style="justify-content:flex-start"><strong>ayiwâk</strong></div>
+          <div class="syllabics-emphasis"><span class="syll-part">ᐊᔨᐗᐠ</span></div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">One tidy word for &#x27;more than enough.&#x27; Leans toward &#x27;surplus / overflow&#x27; — closest to the measuring-cup image — but loses the slang bite.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;it&#x27;s just too big / too much&quot;</div>
+          <div class="formula" style="justify-content:flex-start"><strong>osâm ê-mistakisik</strong></div>
+          <div class="syllabics-emphasis"><span class="syll-part">ᐅᓵᒼ ᐁ ᒥᔅᑕᑭᐢᐠ</span></div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">A full little clause — &#x27;it&#x27;s just too big.&#x27; Most explicit about overwhelming size, but wordier than a sign wants.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>too much / excessive (the plaque)</td><td class="tooltip" data-tip="osâm &#x27;too&#x27; + mistahi &#x27;a lot&#x27;.">osâm mistahi</td><td>ᐅᓵᒼ ᒥᐢᑕᐦᐃ</td></tr>
+              <tr><td>too, excessively, over the top</td><td class="tooltip" data-tip="The intensifier doing the &#x27;too&#x27; work.">osâm</td><td>ᐅᓵᒼ</td></tr>
+              <tr><td>much, a lot, greatly</td><td class="tooltip" data-tip="Built on mist- &#x27;big, great&#x27;.">mistahi</td><td>ᒥᐢᑕᐦᐃ</td></tr>
+              <tr><td>more than enough / surplus</td><td class="tooltip" data-tip="ayiwâk &#x27;more, beyond, in excess&#x27;.">ayiwâk</td><td>ᐊᔨᐗᐠ</td></tr>
+              <tr><td>it&#x27;s just too big / too much</td><td class="tooltip" data-tip="Full clause stressing overwhelming size.">osâm ê-mistakisik</td><td>ᐅᓵᒼ ᐁ ᒥᔅᑕᑭᐢᐠ</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">osâm</span><span class="muted">= &quot;too, excessively&quot;</span><span class="chip">ᐅᓵᒼ</span><button class="copy" data-copy-text="osâm">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">mistahi</span><span class="muted">= &quot;much, a lot&quot;</span><span class="chip">ᒥᐢᑕᐦᐃ</span><button class="copy" data-copy-text="mistahi">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">ayiwâk</span><span class="muted">= &quot;more, in excess, surplus&quot;</span><span class="chip">ᐊᔨᐗᐠ</span><button class="copy" data-copy-text="ayiwâk">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">mist-</span><span class="muted">= &quot;big, great (root)&quot;</span><span class="chip">ᒥᐢᐟ</span><button class="copy" data-copy-text="mist-">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
+        </div>
+      </section>
+
+      <footer>
+        Too Much • ᐅᓵᒼ ᒥᐢᑕᐦᐃ • osâm mistahi • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="too_much_0"]', syll: '#too_much_0-syll'},
+        {sro: '[data-key="too_much_1"]', syll: '#too_much_1-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+
+  </body>
+</html>

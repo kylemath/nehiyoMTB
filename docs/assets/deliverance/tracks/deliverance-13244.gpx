@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Deliverance Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Deliverance
+</name>
+<link href="https://www.trailforks.com/trails/deliverance-13244/">
+</link>
+<trkseg>
+<trkpt lat="53.50799" lon="-113.59977">
+<ele>666.363</ele>
+<time>2026-05-27T13:40:13-07:00</time>
+</trkpt>
+<trkpt lat="53.50806" lon="-113.59985">
+<ele>666.142</ele>
+<time>2026-05-27T13:40:14-07:00</time>
+</trkpt>
+<trkpt lat="53.50811" lon="-113.59992">
+<ele>665.992</ele>
+<time>2026-05-27T13:40:15-07:00</time>
+</trkpt>
+<trkpt lat="53.50815" lon="-113.60017">
+<ele>666.46</ele>
+<time>2026-05-27T13:40:16-07:00</time>
+</trkpt>
+<trkpt lat="53.5082" lon="-113.60052">
+<ele>669.162</ele>
+<time>2026-05-27T13:40:17-07:00</time>
+</trkpt>
+<trkpt lat="53.50832" lon="-113.60081">
+<ele>669.589</ele>
+<time>2026-05-27T13:40:18-07:00</time>
+</trkpt>
+<trkpt lat="53.50835" lon="-113.60098">
+<ele>669.555</ele>
+<time>2026-05-27T13:40:19-07:00</time>
+</trkpt>
+<trkpt lat="53.50834" lon="-113.60107">
+<ele>670.018</ele>
+<time>2026-05-27T13:40:20-07:00</time>
+</trkpt>
+<trkpt lat="53.50855" lon="-113.60175">
+<ele>670.667</ele>
+<time>2026-05-27T13:40:21-07:00</time>
+</trkpt>
+<trkpt lat="53.50857" lon="-113.60186">
+<ele>670.92</ele>
+<time>2026-05-27T13:40:22-07:00</time>
+</trkpt>
+<trkpt lat="53.5088" lon="-113.60244">
+<ele>672.439</ele>
+<time>2026-05-27T13:40:23-07:00</time>
+</trkpt>
+<trkpt lat="53.50894" lon="-113.60275">
+<ele>673.204</ele>
+<time>2026-05-27T13:40:24-07:00</time>
+</trkpt>
+<trkpt lat="53.50913" lon="-113.60405">
+<ele>671.124</ele>
+<time>2026-05-27T13:40:25-07:00</time>
+</trkpt>
+<trkpt lat="53.50919" lon="-113.60426">
+<ele>668.93</ele>
+<time>2026-05-27T13:40:26-07:00</time>
+</trkpt>
+<trkpt lat="53.50929" lon="-113.60442">
+<ele>666.833</ele>
+<time>2026-05-27T13:40:27-07:00</time>
+</trkpt>
+<trkpt lat="53.50934" lon="-113.60441">
+<ele>665.821</ele>
+<time>2026-05-27T13:40:28-07:00</time>
+</trkpt>
+<trkpt lat="53.50945" lon="-113.60447">
+<ele>666.135</ele>
+<time>2026-05-27T13:40:29-07:00</time>
+</trkpt>
+<trkpt lat="53.50938" lon="-113.60471">
+<ele>669.578</ele>
+<time>2026-05-27T13:40:30-07:00</time>
+</trkpt>
+<trkpt lat="53.50936" lon="-113.60577">
+<ele>672.637</ele>
+<time>2026-05-27T13:40:31-07:00</time>
+</trkpt>
+<trkpt lat="53.5095" lon="-113.60659">
+<ele>674.175</ele>
+<time>2026-05-27T13:40:32-07:00</time>
+</trkpt>
+<trkpt lat="53.50947" lon="-113.60717">
+<ele>671.108</ele>
+<time>2026-05-27T13:40:33-07:00</time>
+</trkpt>
+<trkpt lat="53.50952" lon="-113.60752">
+<ele>670.687</ele>
+<time>2026-05-27T13:40:34-07:00</time>
+</trkpt>
+<trkpt lat="53.50959" lon="-113.60779">
+<ele>668.433</ele>
+<time>2026-05-27T13:40:35-07:00</time>
+</trkpt>
+<trkpt lat="53.50956" lon="-113.608">
+<ele>670.719</ele>
+<time>2026-05-27T13:40:36-07:00</time>
+</trkpt>
+<trkpt lat="53.50958" lon="-113.60814">
+<ele>671.184</ele>
+<time>2026-05-27T13:40:37-07:00</time>
+</trkpt>
+<trkpt lat="53.50957" lon="-113.60824">
+<ele>671.266</ele>
+<time>2026-05-27T13:40:38-07:00</time>
+</trkpt>
+<trkpt lat="53.50971" lon="-113.60891">
+<ele>669.561</ele>
+<time>2026-05-27T13:40:39-07:00</time>
+</trkpt>
+<trkpt lat="53.50974" lon="-113.60945">
+<ele>670.897</ele>
+<time>2026-05-27T13:40:40-07:00</time>
+</trkpt>
+<trkpt lat="53.5098" lon="-113.60965">
+<ele>671.312</ele>
+<time>2026-05-27T13:40:41-07:00</time>
+</trkpt>
+<trkpt lat="53.51001" lon="-113.60986">
+<ele>675.508</ele>
+<time>2026-05-27T13:40:42-07:00</time>
+</trkpt>
+<trkpt lat="53.51023" lon="-113.6103">
+<ele>675.69</ele>
+<time>2026-05-27T13:40:43-07:00</time>
+</trkpt>
+<trkpt lat="53.51033" lon="-113.61044">
+<ele>674.069</ele>
+<time>2026-05-27T13:40:44-07:00</time>
+</trkpt>
+<trkpt lat="53.51059" lon="-113.61057">
+<ele>674.43</ele>
+<time>2026-05-27T13:40:45-07:00</time>
+</trkpt>
+<trkpt lat="53.51063" lon="-113.61057">
+<ele>674.609</ele>
+<time>2026-05-27T13:40:46-07:00</time>
+</trkpt>
+<trkpt lat="53.51075" lon="-113.61075">
+<ele>674.923</ele>
+<time>2026-05-27T13:40:47-07:00</time>
+</trkpt>
+<trkpt lat="53.51085" lon="-113.61073">
+<ele>675.149</ele>
+<time>2026-05-27T13:40:48-07:00</time>
+</trkpt>
+<trkpt lat="53.51107" lon="-113.61075">
+<ele>674.176</ele>
+<time>2026-05-27T13:40:49-07:00</time>
+</trkpt>
+<trkpt lat="53.51112" lon="-113.61072">
+<ele>674.074</ele>
+<time>2026-05-27T13:40:50-07:00</time>
+</trkpt>
+<trkpt lat="53.51116" lon="-113.61062">
+<ele>673.826</ele>
+<time>2026-05-27T13:40:51-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

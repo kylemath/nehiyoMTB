@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peckers Hollow • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#c4362c;--accent2:#a12c24;--line:#dee2e6;--chip:#e9ecef;--ok:#c4362c;--primary-bg:#f6e1df;--primary-text:#000000;--formula-bg:#fdf7f7;--formula-border:#c4362c;--secondary-bg:#faefee;--secondary-border:#edc3c0
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .trail-mini-map-link{display:block;color:inherit;text-decoration:none;border-bottom:0}
+    .trail-mini-map-link:hover{border-bottom:0}
+    .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
+    .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
+    .trail-mini-map svg{display:block;width:100%;height:auto}
+    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
+    .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
+    .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
+    .trail-mini-map-attrib{font-size:10px;fill:#5f6368;paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}
+    .trail-mini-map-caption{padding:8px 10px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:left;background:rgba(255,255,255,0.82)}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    .buy-panel{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+    .buy-panel h2{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}
+    .buy-price{font-size:24px;font-weight:800;color:#000}
+    .buy-mount{flex:1 1 200px;min-width:200px}
+    .buy-fineprint{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
+    .buy-panel--soon{border-style:dashed}
+    @media (max-width:600px){.buy-panel{flex-direction:column;align-items:stretch;text-align:center}}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Peckers Hollow • pâpascês wâyatinâw • ᐹᐸᐢᒉᐢ ᐚᔭᑎᓈᐤ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
+        <h2>Get one</h2>
+        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Name on the Plaque</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">pâpascês wâyatinâw</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="m0" data-tip="woodpecker" data-syll-id="m0-syll">pâpascês</span>
+              <span class="part tooltip" data-key="m1" data-tip="a hollow or depression in the land" data-syll-id="m1-syll">wâyatinâw</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">pâpascês wâyatinâw</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="m0" data-tip="pâpascês" id="m0-syll">ᐹᐸᐢᒉᐢ</span>
+              <span class="syll-part tooltip" data-key="m1" data-tip="wâyatinâw" id="m1-syll">ᐚᔭᑎᓈᐤ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;woodpecker hollow&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/peckers_hollow/peckers_hollow_sign.png" alt="Peckers Hollow trail sign — 3D render" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">Screenprinted woodpecker on a hollow tree — front view of the 3D-printed multi-colour sign.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">Woodpecker Hollow</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The English trail name <strong>Peckers Hollow</strong> names a dip in the terrain where a woodpecker would work a hollow tree — and the plaque carries that picture into nêhiyawêwin as <strong>pâpascês wâyatinâw</strong>: <em>pâpascês</em> 'woodpecker' paired with <em>wâyatinâw</em> 'a hollow or depression in the land.' Two words, no borrowed English: the bird stays a bird, and the land-form carries the hollow.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">English does not leave it there. <em>Pecker</em> is also slang for penis, so the nickname winks at a body-part joke the Cree never has to make. <em>Pâpascês</em> keeps the avian reading honest; <em>wâyatinâw</em> names the terrain dip and lets the innuendo ride on the English side. The screenprint makes the straight reading visible: a woodpecker perched on a hollow tree trunk, beak at a round knot-hole — bird, tree, hollow, all literal.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Two other renderings stayed off the plaque but show how builders weighed the joke. <em>Pâpascês omeskanaw wâyatinihk</em> 'the woodpecker's trail in the hollow' foregrounds the bird and keeps the locative hollow suggestive; <em>wâyatinâw meskanaw</em> 'the hollow trail' strips the bird out entirely and lets the terrain dip do all the talking. On the same Buena Vista hillside the nicknames answer each other: neighbour <strong>Raven</strong> (<em>kâhkâkiw</em>), <strong>Buenavista Alt Track</strong> (<em>Bwênavista meskanaw kotak</em>), and <strong>Tin Pan Alley</strong> (<em>nikamowin meskanaw</em>) braid English humour into one local web beside this sign.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Like every sign in this series, Peckers Hollow sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw-Askiy</strong> — Plains Cree territory, Treaty 6, and a homeland of the Métis Nation. These plaques are one way of putting <em>nêhiyawêwin</em> back on the land it was always spoken on.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The Trail</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">About 640&nbsp;m of singletrack in Buena Vista — 17&nbsp;m of descent and 19&nbsp;m of ascent through the river-valley network. Tap through to <a href="https://www.trailforks.com/trails/peckers-hollow/">Trailforks (peckers-hollow)</a> for the mapped line and 45-point GPX track.</p>
+        </div>
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/peckers-hollow/" target="_blank" rel="noopener noreferrer">
+            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
+              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
+                <defs>
+                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#f7f8fa" />
+                    <stop offset="100%" stop-color="#eef1f5" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6046/10594.png" x="-203.7" y="-208.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6047/10594.png" x="52.3" y="-208.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6048/10594.png" x="308.3" y="-208.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6049/10594.png" x="564.3" y="-208.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6046/10595.png" x="-203.7" y="47.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6047/10595.png" x="52.3" y="47.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6048/10595.png" x="308.3" y="47.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6049/10595.png" x="564.3" y="47.2" width="256" height="256" />
+                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
+                <polyline class="trail-mini-map-halo" points="361.6,177.2 363.9,175.3 362.3,171.0 361.1,165.1 360.9,157.2 360.0,152.1 358.8,149.0 355.5,146.3 349.7,143.9 345.0,139.2 340.9,137.6 335.5,137.3 329.9,138.4 321.7,138.4 318.7,140.0 313.4,141.6 310.3,143.9 304.0,144.3 298.0,143.5 290.5,148.6 284.7,151.0 280.7,153.3 279.6,152.9 278.9,149.8 277.0,146.3 277.7,143.9 276.8,139.6 276.5,136.1 276.1,134.9 277.5,132.9 283.1,129.8 298.2,127.5 301.5,127.8 304.5,126.3 307.3,122.4 310.6,121.6 314.5,118.4 317.1,115.3 320.1,113.0 324.1,107.9 326.9,105.9 328.5,102.0 333.9,97.7 336.4,94.5 340.4,82.8" />
+                <polyline class="trail-mini-map-track" points="361.6,177.2 363.9,175.3 362.3,171.0 361.1,165.1 360.9,157.2 360.0,152.1 358.8,149.0 355.5,146.3 349.7,143.9 345.0,139.2 340.9,137.6 335.5,137.3 329.9,138.4 321.7,138.4 318.7,140.0 313.4,141.6 310.3,143.9 304.0,144.3 298.0,143.5 290.5,148.6 284.7,151.0 280.7,153.3 279.6,152.9 278.9,149.8 277.0,146.3 277.7,143.9 276.8,139.6 276.5,136.1 276.1,134.9 277.5,132.9 283.1,129.8 298.2,127.5 301.5,127.8 304.5,126.3 307.3,122.4 310.6,121.6 314.5,118.4 317.1,115.3 320.1,113.0 324.1,107.9 326.9,105.9 328.5,102.0 333.9,97.7 336.4,94.5 340.4,82.8" />
+                <circle class="trail-mini-map-dot" cx="361.6" cy="177.2" r="6" fill="#22c55e" />
+                <circle class="trail-mini-map-dot" cx="340.4" cy="82.8" r="6" fill="#ef4444" />
+                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
+              </svg>
+              <div class="trail-mini-map-caption">Uploaded GPX over map context: 45 track points. Click to open the Trailforks trail page.</div>
+            </div></a>
+            
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/peckers-hollow/" style="font-size: 0.7em;">peckers-hollow</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;the woodpecker&#x27;s trail in the hollow&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="rf0" data-tip="woodpecker" data-syll-id="rf0-syll">pâpascês</span>
+              <span class="part tooltip" data-key="rf1" data-tip="his trail" data-syll-id="rf1-syll">omeskanaw</span>
+              <span class="part tooltip" data-key="rf2" data-tip="in the hollow (locative of wâyatinâw)" data-syll-id="rf2-syll">wâyatinihk</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">pâpascês omeskanaw wâyatinihk</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="rf0" data-tip="pâpascês" id="rf0-syll">ᐹᐸᐢᒉᐢ</span>
+              <span class="syll-part tooltip" data-key="rf1" data-tip="omeskanaw" id="rf1-syll">ᐅᒣᐢᑲᓇᐤ</span>
+              <span class="syll-part tooltip" data-key="rf2" data-tip="wâyatinihk" id="rf2-syll">ᐚᔭᑎᓂᕽ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">omeskanaw &#x27;his trail&#x27; + wâyatinihk &#x27;in the hollow&#x27; (locative). Bird reading foregrounded; the hollow stays suggestive.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;the hollow/valley trail&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="rf3" data-tip="a hollow or depression in the land" data-syll-id="rf3-syll">wâyatinâw</span>
+              <span class="part tooltip" data-key="rf4" data-tip="trail, path" data-syll-id="rf4-syll">meskanaw</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">wâyatinâw meskanaw</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="rf3" data-tip="wâyatinâw" id="rf3-syll">ᐚᔭᑎᓈᐤ</span>
+              <span class="syll-part tooltip" data-key="rf4" data-tip="meskanaw" id="rf4-syll">ᒣᐢᑲᓇᐤ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Focus on the dip in the terrain: wâyatinâw + meskanaw. Leaves &#x27;pecker&#x27; implicit; the clean reading.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>woodpecker hollow</td><td class="tooltip" data-tip="pâpascês &#x27;woodpecker&#x27; + wâyatinâw &#x27;a hollow/depression in the land&#x27;.">pâpascês wâyatinâw</td><td>ᐹᐸᐢᒉᐢ ᐚᔭᑎᓈᐤ</td></tr>
+              <tr><td>the woodpecker&#x27;s trail in the hollow</td><td class="tooltip" data-tip="omeskanaw &#x27;his trail&#x27; + wâyatinihk &#x27;in the hollow&#x27; (locative).">pâpascês omeskanaw wâyatinihk</td><td>ᐹᐸᐢᒉᐢ ᐅᒣᐢᑲᓇᐤ ᐚᔭᑎᓂᕽ</td></tr>
+              <tr><td>the hollow/valley trail</td><td class="tooltip" data-tip="Focus on the dip in the terrain: wâyatinâw + meskanaw.">wâyatinâw meskanaw</td><td>ᐚᔭᑎᓈᐤ ᒣᐢᑲᓇᐤ</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">pâpascês</span><span class="muted">= &quot;woodpecker&quot;</span><span class="chip">ᐹᐸᐢᒉᐢ</span><button class="copy" data-copy-text="pâpascês">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">wâyatinâw</span><span class="muted">= &quot;hollow, depression in the land&quot;</span><span class="chip">ᐚᔭᑎᓈᐤ</span><button class="copy" data-copy-text="wâyatinâw">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">meskanaw</span><span class="muted">= &quot;trail, path&quot;</span><span class="chip">ᒣᐢᑲᓇᐤ</span><button class="copy" data-copy-text="meskanaw">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">omeskanaw</span><span class="muted">= &quot;his trail&quot;</span><span class="chip">ᐅᒣᐢᑲᓇᐤ</span><button class="copy" data-copy-text="omeskanaw">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">wâyatinihk</span><span class="muted">= &quot;in the hollow&quot;</span><span class="chip">ᐚᔭᑎᓂᕽ</span><button class="copy" data-copy-text="wâyatinihk">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
+        </div>
+      </section>
+
+      <footer>
+        Peckers Hollow • ᐹᐸᐢᒉᐢ ᐚᔭᑎᓈᐤ • pâpascês wâyatinâw • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="m0"]', syll: '#m0-syll'},
+        {sro: '[data-key="m1"]', syll: '#m1-syll'},
+        {sro: '[data-key="rf0"]', syll: '#rf0-syll'},
+        {sro: '[data-key="rf1"]', syll: '#rf1-syll'},
+        {sro: '[data-key="rf2"]', syll: '#rf2-syll'},
+        {sro: '[data-key="rf3"]', syll: '#rf3-syll'},
+        {sro: '[data-key="rf4"]', syll: '#rf4-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+
+  </body>
+</html>

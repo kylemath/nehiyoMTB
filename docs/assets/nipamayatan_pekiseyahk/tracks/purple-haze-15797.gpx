@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Purple Haze Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Purple Haze
+</name>
+<link href="https://www.trailforks.com/trails/purple-haze-15797/">
+</link>
+<trkseg>
+<trkpt lat="53.53974" lon="-113.54542">
+<ele>640.415</ele>
+<time>2026-05-27T13:51:59-07:00</time>
+</trkpt>
+<trkpt lat="53.53969" lon="-113.54476">
+<ele>640.617</ele>
+<time>2026-05-27T13:52:00-07:00</time>
+</trkpt>
+<trkpt lat="53.5398" lon="-113.54431">
+<ele>642.25</ele>
+<time>2026-05-27T13:52:01-07:00</time>
+</trkpt>
+<trkpt lat="53.53997" lon="-113.54413">
+<ele>646.153</ele>
+<time>2026-05-27T13:52:02-07:00</time>
+</trkpt>
+<trkpt lat="53.54026" lon="-113.54367">
+<ele>650.369</ele>
+<time>2026-05-27T13:52:03-07:00</time>
+</trkpt>
+<trkpt lat="53.54044" lon="-113.54331">
+<ele>652.489</ele>
+<time>2026-05-27T13:52:04-07:00</time>
+</trkpt>
+<trkpt lat="53.54047" lon="-113.54316">
+<ele>652.379</ele>
+<time>2026-05-27T13:52:05-07:00</time>
+</trkpt>
+<trkpt lat="53.54051" lon="-113.5429">
+<ele>651.563</ele>
+<time>2026-05-27T13:52:06-07:00</time>
+</trkpt>
+<trkpt lat="53.54057" lon="-113.54267">
+<ele>651.279</ele>
+<time>2026-05-27T13:52:07-07:00</time>
+</trkpt>
+<trkpt lat="53.54068" lon="-113.54242">
+<ele>653.17</ele>
+<time>2026-05-27T13:52:08-07:00</time>
+</trkpt>
+<trkpt lat="53.54079" lon="-113.54232">
+<ele>654.402</ele>
+<time>2026-05-27T13:52:09-07:00</time>
+</trkpt>
+<trkpt lat="53.54095" lon="-113.54232">
+<ele>656.92</ele>
+<time>2026-05-27T13:52:10-07:00</time>
+</trkpt>
+<trkpt lat="53.54111" lon="-113.54238">
+<ele>658.572</ele>
+<time>2026-05-27T13:52:11-07:00</time>
+</trkpt>
+<trkpt lat="53.54123" lon="-113.54237">
+<ele>659.542</ele>
+<time>2026-05-27T13:52:12-07:00</time>
+</trkpt>
+<trkpt lat="53.54135" lon="-113.54235">
+<ele>660.94</ele>
+<time>2026-05-27T13:52:13-07:00</time>
+</trkpt>
+<trkpt lat="53.54148" lon="-113.5424">
+<ele>661.727</ele>
+<time>2026-05-27T13:52:14-07:00</time>
+</trkpt>
+<trkpt lat="53.54157" lon="-113.54255">
+<ele>662.252</ele>
+<time>2026-05-27T13:52:15-07:00</time>
+</trkpt>
+<trkpt lat="53.54165" lon="-113.54258">
+<ele>662.718</ele>
+<time>2026-05-27T13:52:16-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

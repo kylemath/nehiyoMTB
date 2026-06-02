@@ -64,11 +64,12 @@ offset(r=0.06, $fn=8) {
   }
   color([0.149, 0.149, 0.149]) {
   // transliteration (above top hole)
-  translate([0, 54.600, 0.900]) linear_extrude(height=0.900) text("âhkamê-meskanaw", size=5.189, halign="center", valign="center", font="Helvetica Neue:style=Bold");
+  translate([0, 60.390, 0.900]) linear_extrude(height=0.900) text("itohtê", size=9.492, halign="center", valign="center", font="Helvetica Neue:style=Bold");
+  translate([0, 48.810, 0.900]) linear_extrude(height=0.900) text("meskanaw", size=9.492, halign="center", valign="center", font="Helvetica Neue:style=Bold");
   }
   color([0.753, 0.224, 0.169]) {
   // syllabics (overlaid on icon, tallest)
-  translate([0, 5.430, 0.900]) linear_extrude(height=2.900) text("ᐋᐦᑲᒣ", size=13.000, halign="center", valign="center", font="Euphemia UCAS:style=Bold");
+  translate([0, 5.430, 0.900]) linear_extrude(height=2.900) text("ᐃᑑᐦᑌ", size=13.000, halign="center", valign="center", font="Euphemia UCAS:style=Bold");
   translate([0, -10.430, 0.900]) linear_extrude(height=2.900) text("ᒣᐢᑲᓇᐤ", size=13.000, halign="center", valign="center", font="Euphemia UCAS:style=Bold");
   }
 }

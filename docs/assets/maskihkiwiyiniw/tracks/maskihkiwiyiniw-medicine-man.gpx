@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>ᒪᐢᑭᐦᑮᐃᐧᔨᓂᐤ - maskihkîwiyiniw - Medicine Man Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+ᒪᐢᑭᐦᑮᐃᐧᔨᓂᐤ - maskihkîwiyiniw - Medicine Man
+</name>
+<link href="https://www.trailforks.com/trails/maskihkiwiyiniw-medicine-man/">
+</link>
+<trkseg>
+<trkpt lat="53.53526" lon="-113.56008">
+<ele>662.3</ele>
+<time>2026-05-27T14:11:14-07:00</time>
+</trkpt>
+<trkpt lat="53.53522" lon="-113.55997">
+<ele>660.4</ele>
+<time>2026-05-27T14:11:15-07:00</time>
+</trkpt>
+<trkpt lat="53.53522" lon="-113.55955">
+<ele>657.3</ele>
+<time>2026-05-27T14:11:16-07:00</time>
+</trkpt>
+<trkpt lat="53.53522" lon="-113.55944">
+<ele>654.2</ele>
+<time>2026-05-27T14:11:17-07:00</time>
+</trkpt>
+<trkpt lat="53.53521" lon="-113.55923">
+<ele>654.2</ele>
+<time>2026-05-27T14:11:18-07:00</time>
+</trkpt>
+<trkpt lat="53.53521" lon="-113.55918">
+<ele>654.2</ele>
+<time>2026-05-27T14:11:19-07:00</time>
+</trkpt>
+<trkpt lat="53.53521" lon="-113.55916">
+<ele>650.9</ele>
+<time>2026-05-27T14:11:20-07:00</time>
+</trkpt>
+<trkpt lat="53.53522" lon="-113.55913">
+<ele>650.9</ele>
+<time>2026-05-27T14:11:21-07:00</time>
+</trkpt>
+<trkpt lat="53.53522" lon="-113.55909">
+<ele>650.9</ele>
+<time>2026-05-27T14:11:22-07:00</time>
+</trkpt>
+<trkpt lat="53.53521" lon="-113.55899">
+<ele>650.9</ele>
+<time>2026-05-27T14:11:23-07:00</time>
+</trkpt>
+<trkpt lat="53.5352" lon="-113.55892">
+<ele>650.9</ele>
+<time>2026-05-27T14:11:24-07:00</time>
+</trkpt>
+<trkpt lat="53.53519" lon="-113.55882">
+<ele>646.2</ele>
+<time>2026-05-27T14:11:25-07:00</time>
+</trkpt>
+<trkpt lat="53.53517" lon="-113.55873">
+<ele>646.2</ele>
+<time>2026-05-27T14:11:26-07:00</time>
+</trkpt>
+<trkpt lat="53.53515" lon="-113.55865">
+<ele>646.2</ele>
+<time>2026-05-27T14:11:27-07:00</time>
+</trkpt>
+<trkpt lat="53.53513" lon="-113.55856">
+<ele>641.8</ele>
+<time>2026-05-27T14:11:28-07:00</time>
+</trkpt>
+<trkpt lat="53.5351" lon="-113.55848">
+<ele>641.8</ele>
+<time>2026-05-27T14:11:29-07:00</time>
+</trkpt>
+<trkpt lat="53.53506" lon="-113.55839">
+<ele>641.8</ele>
+<time>2026-05-27T14:11:30-07:00</time>
+</trkpt>
+<trkpt lat="53.53502" lon="-113.55829">
+<ele>637.5</ele>
+<time>2026-05-27T14:11:31-07:00</time>
+</trkpt>
+<trkpt lat="53.53501" lon="-113.55822">
+<ele>637.5</ele>
+<time>2026-05-27T14:11:32-07:00</time>
+</trkpt>
+<trkpt lat="53.535" lon="-113.55814">
+<ele>637.5</ele>
+<time>2026-05-27T14:11:33-07:00</time>
+</trkpt>
+<trkpt lat="53.53499" lon="-113.55799">
+<ele>630</ele>
+<time>2026-05-27T14:11:34-07:00</time>
+</trkpt>
+<trkpt lat="53.53496" lon="-113.55795">
+<ele>630</ele>
+<time>2026-05-27T14:11:35-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

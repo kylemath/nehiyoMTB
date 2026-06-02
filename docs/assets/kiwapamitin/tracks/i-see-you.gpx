@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>I See You Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+I See You
+</name>
+<link href="https://www.trailforks.com/trails/i-see-you/">
+</link>
+<trkseg>
+<trkpt lat="53.53519" lon="-113.55882">
+<ele>646.2</ele>
+<time>2026-05-27T14:09:54-07:00</time>
+</trkpt>
+<trkpt lat="53.53504" lon="-113.5587">
+<ele>646.2</ele>
+<time>2026-05-27T14:09:55-07:00</time>
+</trkpt>
+<trkpt lat="53.5349" lon="-113.55866">
+<ele>643</ele>
+<time>2026-05-27T14:09:56-07:00</time>
+</trkpt>
+<trkpt lat="53.53481" lon="-113.55871">
+<ele>643</ele>
+<time>2026-05-27T14:09:57-07:00</time>
+</trkpt>
+<trkpt lat="53.5347" lon="-113.55877">
+<ele>640</ele>
+<time>2026-05-27T14:09:58-07:00</time>
+</trkpt>
+<trkpt lat="53.53454" lon="-113.55887">
+<ele>640</ele>
+<time>2026-05-27T14:09:59-07:00</time>
+</trkpt>
+<trkpt lat="53.53451" lon="-113.5589">
+<ele>644.1</ele>
+<time>2026-05-27T14:10:00-07:00</time>
+</trkpt>
+<trkpt lat="53.53441" lon="-113.55899">
+<ele>640.5</ele>
+<time>2026-05-27T14:10:01-07:00</time>
+</trkpt>
+<trkpt lat="53.5343" lon="-113.55917">
+<ele>644.9</ele>
+<time>2026-05-27T14:10:02-07:00</time>
+</trkpt>
+<trkpt lat="53.53421" lon="-113.55926">
+<ele>644.9</ele>
+<time>2026-05-27T14:10:03-07:00</time>
+</trkpt>
+<trkpt lat="53.53411" lon="-113.5593">
+<ele>641.5</ele>
+<time>2026-05-27T14:10:04-07:00</time>
+</trkpt>
+<trkpt lat="53.53401" lon="-113.55937">
+<ele>641.5</ele>
+<time>2026-05-27T14:10:05-07:00</time>
+</trkpt>
+<trkpt lat="53.53383" lon="-113.55946">
+<ele>644</ele>
+<time>2026-05-27T14:10:06-07:00</time>
+</trkpt>
+<trkpt lat="53.53374" lon="-113.55944">
+<ele>639.6</ele>
+<time>2026-05-27T14:10:07-07:00</time>
+</trkpt>
+<trkpt lat="53.53358" lon="-113.55945">
+<ele>642.6</ele>
+<time>2026-05-27T14:10:08-07:00</time>
+</trkpt>
+<trkpt lat="53.53342" lon="-113.55955">
+<ele>642.6</ele>
+<time>2026-05-27T14:10:09-07:00</time>
+</trkpt>
+<trkpt lat="53.53338" lon="-113.55961">
+<ele>642.6</ele>
+<time>2026-05-27T14:10:10-07:00</time>
+</trkpt>
+<trkpt lat="53.53327" lon="-113.55968">
+<ele>642.1</ele>
+<time>2026-05-27T14:10:11-07:00</time>
+</trkpt>
+<trkpt lat="53.53323" lon="-113.55972">
+<ele>642.1</ele>
+<time>2026-05-27T14:10:12-07:00</time>
+</trkpt>
+<trkpt lat="53.53319" lon="-113.55975">
+<ele>645.3</ele>
+<time>2026-05-27T14:10:13-07:00</time>
+</trkpt>
+<trkpt lat="53.53302" lon="-113.55983">
+<ele>645.1</ele>
+<time>2026-05-27T14:10:14-07:00</time>
+</trkpt>
+<trkpt lat="53.53294" lon="-113.55988">
+<ele>645.1</ele>
+<time>2026-05-27T14:10:15-07:00</time>
+</trkpt>
+<trkpt lat="53.53282" lon="-113.55986">
+<ele>645.1</ele>
+<time>2026-05-27T14:10:16-07:00</time>
+</trkpt>
+<trkpt lat="53.53274" lon="-113.55998">
+<ele>644.8</ele>
+<time>2026-05-27T14:10:17-07:00</time>
+</trkpt>
+<trkpt lat="53.5326" lon="-113.56007">
+<ele>648.1</ele>
+<time>2026-05-27T14:10:18-07:00</time>
+</trkpt>
+<trkpt lat="53.53249" lon="-113.56002">
+<ele>647.3</ele>
+<time>2026-05-27T14:10:19-07:00</time>
+</trkpt>
+<trkpt lat="53.53232" lon="-113.56005">
+<ele>647.3</ele>
+<time>2026-05-27T14:10:20-07:00</time>
+</trkpt>
+<trkpt lat="53.53226" lon="-113.56004">
+<ele>647.3</ele>
+<time>2026-05-27T14:10:21-07:00</time>
+</trkpt>
+<trkpt lat="53.53223" lon="-113.56">
+<ele>643.4</ele>
+<time>2026-05-27T14:10:22-07:00</time>
+</trkpt>
+<trkpt lat="53.5322" lon="-113.55986">
+<ele>642.1</ele>
+<time>2026-05-27T14:10:23-07:00</time>
+</trkpt>
+<trkpt lat="53.53215" lon="-113.55979">
+<ele>642.1</ele>
+<time>2026-05-27T14:10:24-07:00</time>
+</trkpt>
+<trkpt lat="53.53211" lon="-113.5596">
+<ele>638</ele>
+<time>2026-05-27T14:10:25-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

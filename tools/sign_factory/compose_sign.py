@@ -131,8 +131,11 @@ def compose(icon_path, en, translit, syllabics, out_path,
 
     avail_w = W - 2 * margin
     # --- transliteration (top) ---
+    # treat hyphens in compounds (e.g. "âhkamê-meskanaw") as wrap points so the
+    # transliteration can break onto two lines and render at a larger size.
+    tl_text = (translit or en).replace("-", " ")
     tl_top = int(H * tl_top_f)
-    f_tl, tl_lines, lh_tl = _fit(draw, translit or en, LATIN_FONT, avail_w,
+    f_tl, tl_lines, lh_tl = _fit(draw, tl_text, LATIN_FONT, avail_w,
                                  H * tl_h_f, int(W * tl_font_f))
     _draw_block(draw, tl_lines, f_tl, lh_tl, W / 2,
                 tl_top + lh_tl * len(tl_lines) / 2, INK)

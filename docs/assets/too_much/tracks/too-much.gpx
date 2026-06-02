@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Too Much Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Too Much
+</name>
+<link href="https://www.trailforks.com/trails/too-much/">
+</link>
+<trkseg>
+<trkpt lat="53.52892" lon="-113.48689">
+<ele>648.1</ele>
+<time>2026-06-04T17:21:50-07:00</time>
+</trkpt>
+<trkpt lat="53.52899" lon="-113.48678">
+<ele>648.1</ele>
+<time>2026-06-04T17:21:51-07:00</time>
+</trkpt>
+<trkpt lat="53.52904" lon="-113.4867">
+<ele>648.1</ele>
+<time>2026-06-04T17:21:52-07:00</time>
+</trkpt>
+<trkpt lat="53.52914" lon="-113.48666">
+<ele>649.7</ele>
+<time>2026-06-04T17:21:53-07:00</time>
+</trkpt>
+<trkpt lat="53.52921" lon="-113.48667">
+<ele>646.3</ele>
+<time>2026-06-04T17:21:54-07:00</time>
+</trkpt>
+<trkpt lat="53.52948" lon="-113.48658">
+<ele>646.7</ele>
+<time>2026-06-04T17:21:55-07:00</time>
+</trkpt>
+<trkpt lat="53.5296" lon="-113.48654">
+<ele>646.7</ele>
+<time>2026-06-04T17:21:56-07:00</time>
+</trkpt>
+<trkpt lat="53.52984" lon="-113.48656">
+<ele>645.3</ele>
+<time>2026-06-04T17:21:57-07:00</time>
+</trkpt>
+<trkpt lat="53.52996" lon="-113.48655">
+<ele>645.3</ele>
+<time>2026-06-04T17:21:58-07:00</time>
+</trkpt>
+<trkpt lat="53.53013" lon="-113.48658">
+<ele>644</ele>
+<time>2026-06-04T17:21:59-07:00</time>
+</trkpt>
+<trkpt lat="53.53019" lon="-113.48661">
+<ele>644</ele>
+<time>2026-06-04T17:22:00-07:00</time>
+</trkpt>
+<trkpt lat="53.53053" lon="-113.48665">
+<ele>642.6</ele>
+<time>2026-06-04T17:22:01-07:00</time>
+</trkpt>
+<trkpt lat="53.5306" lon="-113.48666">
+<ele>642.6</ele>
+<time>2026-06-04T17:22:02-07:00</time>
+</trkpt>
+<trkpt lat="53.53066" lon="-113.48669">
+<ele>640.6</ele>
+<time>2026-06-04T17:22:03-07:00</time>
+</trkpt>
+<trkpt lat="53.53075" lon="-113.48676">
+<ele>640.6</ele>
+<time>2026-06-04T17:22:04-07:00</time>
+</trkpt>
+<trkpt lat="53.5308" lon="-113.48687">
+<ele>640.6</ele>
+<time>2026-06-04T17:22:05-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

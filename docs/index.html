@@ -12,6 +12,7 @@
             }
         }
     </script>
+    <script src="https://scrtwpns.com/mixbox.js"></script>
     <style>
         * {
             margin: 0;
@@ -464,6 +465,15 @@
             flex-direction: column;
         }
 
+        .render-pane {
+            --render-editor-height: min(34%, 330px);
+            --render-viewer-min-height: 22%;
+        }
+
+        .page-pane {
+            --content-editor-height: min(42%, 320px);
+        }
+
         .detail-toolbar {
             display: flex;
             justify-content: space-between;
@@ -552,7 +562,7 @@
 
         .detail-content {
             position: relative;
-            flex: 1;
+            flex: 1 1 0;
             min-height: 0;
             background:
                 radial-gradient(circle at 50% 50%, transparent 0%, transparent 30%, rgba(5, 5, 5, 0.6) 60%, #050505 90%),
@@ -568,7 +578,23 @@
             overflow: hidden;
         }
 
+        .render-pane .detail-content {
+            flex: 1 1 var(--render-viewer-min-height);
+        }
+
+        .editor-panel.is-hidden + .render-editor-resizer {
+            display: none;
+        }
+
         .editor-panel {
+            flex: 0 0 var(--render-editor-height);
+            min-height: 112px;
+            max-height: calc(100% - 220px);
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            min-block-size: 0;
+            overflow: hidden;
             padding: 1rem;
             border-bottom: 1px solid var(--border);
             background: #141414;
@@ -578,6 +604,7 @@
             margin-bottom: 0.85rem;
             color: var(--text-muted);
             font-size: 0.85rem;
+            flex: 0 0 auto;
         }
 
         .editor-status.ready {
@@ -593,6 +620,63 @@
             grid-template-columns: minmax(220px, 0.8fr) minmax(300px, 1.2fr);
             gap: 1rem;
             align-items: start;
+            flex: 1 1 auto;
+            overflow-y: auto;
+            min-height: 0;
+            padding-right: 0.2rem;
+        }
+
+        .editor-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .editor-grid::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 999px;
+        }
+
+        .render-editor-resizer {
+            flex: 0 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            border-bottom: 1px solid var(--border);
+            background: #101010;
+            cursor: row-resize;
+            touch-action: none;
+        }
+
+        .render-editor-resizer::before {
+            content: '';
+            width: 3.25rem;
+            height: 3px;
+            border-radius: 999px;
+            background: var(--border);
+            transition: background 0.2s ease, width 0.2s ease;
+        }
+
+        .render-editor-resizer:hover::before,
+        .render-editor-resizer:focus-visible::before,
+        .render-editor-resizer.is-active::before {
+            width: 4.5rem;
+            background: var(--accent);
+        }
+
+        .render-editor-resizer:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: -2px;
+        }
+
+        body.is-resizing-render-editor {
+            cursor: row-resize;
+            user-select: none;
+        }
+
+        body.is-resizing-render-editor * {
+            cursor: row-resize !important;
         }
 
         .editor-section {
@@ -600,6 +684,39 @@
             border-radius: 10px;
             padding: 0.85rem;
             background: var(--panel);
+        }
+
+        .editor-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .editor-section-header h3 {
+            margin-bottom: 0;
+        }
+
+        .editor-section-toggle {
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: #111;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.55rem;
+        }
+
+        .editor-section-toggle:hover,
+        .editor-section-toggle:focus-visible {
+            color: #fff;
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .editor-section.is-collapsed .editor-section-body {
+            display: none;
         }
 
         .editor-section h3 {
@@ -720,10 +837,146 @@
             margin: 0.55rem 0 0.8rem 5.6rem;
         }
 
+        .print-effect-toggle {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.35rem;
+        }
+
+        .print-effect-option {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #111;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 0.5rem 0.4rem;
+            text-align: center;
+        }
+
+        .print-effect-option[aria-pressed="true"] {
+            border-color: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.22);
+        }
+
+        .print-effect-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.45;
+        }
+
+        .gradient-controls {
+            margin: 0.45rem 0 0.8rem 5.6rem;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .gradient-controls-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 4.5rem;
+            gap: 0.45rem;
+            align-items: center;
+        }
+
+        .gradient-controls-row label {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .gradient-controls-row input[type="range"] {
+            width: 100%;
+        }
+
+        .gradient-settings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.65rem;
+            margin-top: 0.7rem;
+        }
+
+        .gradient-preview {
+            margin-top: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #111;
+            padding: 0.65rem;
+        }
+
+        .gradient-layer-plan {
+            display: grid;
+            gap: 0.25rem;
+            align-content: start;
+            margin-top: 0.5rem;
+        }
+
+        .gradient-layer-plan-row {
+            display: grid;
+            grid-template-columns: 1rem minmax(0, 1fr) 4.4rem;
+            gap: 0.4rem;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+        }
+
+        .gradient-layer-plan-row .swatch {
+            width: 1rem;
+            height: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+        }
+
+        .gradient-layer-plan-row strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
         .layer-readout,
         .editor-note {
             color: var(--text-muted);
             font-size: 0.78rem;
+        }
+
+        /* Live side-profile diagram: a standardized graphic of the STL's Z
+           build, sliced into 0.20 mm print layers and coloured per band. The
+           transition arrows track the sliders live. */
+        .layer-profile {
+            margin-top: 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #111;
+            padding: 0.7rem;
+        }
+
+        .layer-profile-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 0.55rem;
+        }
+
+        .layer-profile-head .layer-color-label {
+            margin: 0;
+        }
+
+        .layer-profile-head .layer-profile-meta {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            text-align: right;
+        }
+
+        .layer-profile-figure {
+            width: 100%;
+            display: block;
+        }
+
+        .layer-profile-empty {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+
+        .layer-profile-figure text {
+            font-family: inherit;
         }
 
         .editor-actions {
@@ -770,9 +1023,15 @@
             background: var(--panel);
             display: flex;
             flex-direction: column;
-            flex: 0 0 auto;
-            max-height: 60%;
+            flex: 0 0 var(--content-editor-height);
+            max-height: calc(100% - 220px);
+            min-height: 3rem;
             overflow: hidden;
+        }
+
+        .content-editor-panel.is-hidden + .content-editor-resizer,
+        .content-editor-panel.is-collapsed + .content-editor-resizer {
+            display: none;
         }
 
         .content-editor-panel.is-collapsed .content-editor-body {
@@ -780,7 +1039,52 @@
         }
 
         .content-editor-panel.is-collapsed {
+            flex-basis: auto;
             max-height: none;
+        }
+
+        .content-editor-resizer {
+            flex: 0 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            border-bottom: 1px solid var(--border);
+            background: #101010;
+            cursor: row-resize;
+            touch-action: none;
+        }
+
+        .content-editor-resizer::before {
+            content: '';
+            width: 3.25rem;
+            height: 3px;
+            border-radius: 999px;
+            background: var(--border);
+            transition: background 0.2s ease, width 0.2s ease;
+        }
+
+        .content-editor-resizer:hover::before,
+        .content-editor-resizer:focus-visible::before,
+        .content-editor-resizer.is-active::before {
+            width: 4.5rem;
+            background: var(--accent);
+        }
+
+        .content-editor-resizer:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: -2px;
+        }
+
+        body.is-resizing-content-editor {
+            cursor: row-resize;
+            user-select: none;
+        }
+
+        body.is-resizing-content-editor * {
+            cursor: row-resize !important;
         }
 
         .content-editor-header {
@@ -821,6 +1125,7 @@
 
         .content-editor-body {
             padding: 0.9rem 1rem 1rem;
+            flex: 1 1 auto;
             overflow-y: auto;
             min-height: 0;
         }
@@ -1366,6 +1671,14 @@
                 display: none;
             }
 
+            .render-editor-resizer {
+                display: none;
+            }
+
+            .content-editor-resizer {
+                display: none;
+            }
+
             /* Fixed top toolbar that holds the drawer trigger plus the
                STL/Page/Map view tabs. Acts as a primary navigation on small
                screens since each pane is too tall to stack. */
@@ -1737,6 +2050,7 @@
                             <select class="stl-select" id="stl-file-select"></select>
                         </div>
                         <a class="detail-action is-disabled" id="download-stl-link" aria-disabled="true">Download STL</a>
+                        <a class="detail-action is-hidden" id="download-3mf-link" title="Print-ready multi-colour .3mf: one object per filament colour, split from the production STL so it slices with the same fidelity">Download 3MF</a>
                         <!-- Shopify "Add to cart" button mounts here via
                              window.NehiyoShop.mountProduct() from updateDetailPane().
                              Stays empty (and hidden via `.detail-shop:empty`) when
@@ -1756,26 +2070,57 @@
                                 <button class="editor-button" id="set-final-stl" type="button" disabled>Set selected STL as final</button>
                             </div>
                         </div>
-                        <div class="editor-section">
-                            <h3>Colours & Layer Changes</h3>
-                            <div class="editor-field">
-                                <label for="layer-count-select">Number of colours</label>
-                                <select id="layer-count-select" disabled>
-                                    <option value="1">1 colour</option>
-                                    <option value="2">2 colours</option>
-                                    <option value="3">3 colours</option>
-                                    <option value="4">4 colours</option>
-                                    <option value="5">5 colours</option>
-                                </select>
+                        <div class="editor-section layer-editor-section" id="layer-editor-section">
+                            <div class="editor-section-header">
+                                <h3>Colours & Layer Changes</h3>
+                                <button
+                                    class="editor-section-toggle"
+                                    id="layer-editor-toggle"
+                                    type="button"
+                                    aria-controls="layer-editor-body"
+                                    aria-expanded="true"
+                                >Minimize</button>
                             </div>
-                            <div id="layer-editor"></div>
-                            <div class="editor-actions">
-                                <button class="editor-button primary" id="save-print-setup" type="button" disabled>Save print setup</button>
+                            <div class="editor-section-body" id="layer-editor-body">
+                                <div class="editor-field">
+                                    <label>Print effect</label>
+                                    <div class="print-effect-toggle" role="group" aria-label="Print effect mode">
+                                        <button class="print-effect-option" id="print-effect-discrete" type="button" data-print-effect="discrete" aria-pressed="true">Layer swaps</button>
+                                        <button class="print-effect-option" id="print-effect-threshold" type="button" data-print-effect="threshold" aria-pressed="false">IllumiStack gradient</button>
+                                    </div>
+                                    <p class="editor-note" id="print-effect-note">Discrete colour bands — set the boundary height for each filament swap.</p>
+                                </div>
+                                <div class="editor-field">
+                                    <label for="layer-count-select">Number of colours</label>
+                                    <select id="layer-count-select" disabled>
+                                        <option value="1">1 colour</option>
+                                        <option value="2">2 colours</option>
+                                        <option value="3">3 colours</option>
+                                        <option value="4">4 colours</option>
+                                        <option value="5">5 colours</option>
+                                        <option value="6">6 colours</option>
+                                        <option value="7">7 colours</option>
+                                        <option value="8">8 colours</option>
+                                    </select>
+                                </div>
+                                <div id="layer-editor"></div>
+                                <div class="editor-actions">
+                                    <button class="editor-button primary" id="save-print-setup" type="button" disabled>Save print setup</button>
+                                </div>
+                                <div class="editor-log" id="editor-log"></div>
                             </div>
-                            <div class="editor-log" id="editor-log"></div>
                         </div>
                     </div>
                 </div>
+
+                <button
+                    class="render-editor-resizer"
+                    id="render-editor-resizer"
+                    type="button"
+                    aria-label="Resize colour editor and STL preview"
+                    aria-orientation="horizontal"
+                    title="Drag to resize editor and STL preview. Double-click to reset."
+                ></button>
 
                 <div class="detail-content">
                     <div class="pane-empty" id="pane-empty">Select a sign card to preview its STL.</div>
@@ -1828,6 +2173,13 @@
                                     <span>Mesh repaired (STL watertight)</span>
                                 </label>
                                 <span class="field-hint">Tick after admesh / Blender repair confirms 0 open boundary edges.</span>
+                            </div>
+                            <div class="content-field" style="flex:0 0 auto; align-self:flex-end">
+                                <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+                                    <input type="checkbox" id="content-hide-from-map">
+                                    <span>Hide from public site</span>
+                                </label>
+                                <span class="field-hint">Removes this sign from the public catalogue, detail pane, and map. Still visible here in the editor.</span>
                             </div>
                         </div>
                         <div class="content-grid">
@@ -1972,12 +2324,22 @@
                         <div class="editor-actions">
                             <button class="editor-button" id="content-load" type="button" disabled>Reload from catalogue</button>
                             <button class="editor-button primary" id="content-save" type="button" disabled>Save content</button>
+                            <button class="editor-button" id="content-flesh" type="button" disabled title="Ask a Cursor agent to author the rich page content from the trail's Cree options, icon, and stats (saved as an agent-drafted draft for review)">✦ Flesh out details (AI)</button>
                             <button class="editor-button" id="content-regenerate" type="button" disabled>Regenerate page</button>
                             <button class="editor-button" id="content-open" type="button" disabled>Open rendered page</button>
                         </div>
                         <div class="editor-log" id="content-log"></div>
                     </div>
                 </div>
+                <button
+                    class="content-editor-resizer"
+                    id="content-editor-resizer"
+                    type="button"
+                    role="separator"
+                    aria-label="Resize sign page content editor and page/map preview"
+                    aria-orientation="horizontal"
+                    title="Drag to resize content editor and page/map preview. Double-click to reset."
+                ></button>
                 <div class="view-tabs" id="view-tabs" role="tablist" aria-label="Right column view">
                     <button class="view-tab active" type="button" data-view="page" id="view-tab-page" role="tab" aria-selected="true">Page</button>
                     <button class="view-tab" type="button" data-view="map" id="view-tab-map" role="tab" aria-selected="false">Map</button>
@@ -2006,19 +2368,46 @@
         import * as THREE from 'three';
         import { STLLoader } from 'three/addons/loaders/STLLoader.js';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import {
+            buildLayerPlan
+        } from './tools/hueforge/hueforge-core.js';
 
-        // Color mapping
+        // Color mapping. Covers the filament-slots.json palette plus the
+        // common named filaments the arrangement tool (cree-trail-names.html)
+        // can assign, so a sign imported "up to production" renders with the
+        // exact colours it was designed with instead of a grey fallback.
         const colorMap = {
-            'black': '#444444',
             'white': '#ffffff',
+            'black': '#444444',
             'red': '#dc3545',
-            'blue': '#007bff',
+            'teal': '#14b8a6',
+            'pink': '#ff5fa2',
+            'yellow': '#f5c518',
             'purple': '#6f42c1',
+            'grey': '#9aa0a6',
+            'gray': '#9aa0a6',
+            'green': '#1ca919',
+            'blue': '#007bff',
             'orange': '#fd7e14',
-            'brown': '#8b4513'
+            'brown': '#8b4513',
+            'silver': '#c8ccd0',
+            'gold': '#d4af37',
+            'beige': '#e8d8b0',
+            'tan': '#d2b48c',
+            'navy': '#1f3a93',
+            'cyan': '#19c3d6',
+            'magenta': '#d6249f',
+            'lime': '#84cc16',
+            'maroon': '#7b1f2b'
         };
 
-        const builtInEditableColors = ['white', 'black', 'red', 'blue', 'purple', 'orange', 'brown'];
+        // Swatches offered in the layer editor. Filament-slot colours come
+        // first so the most likely choices are easiest to reach; aliases
+        // (gray) are intentionally omitted to avoid duplicate swatches.
+        const builtInEditableColors = [
+            'white', 'black', 'red', 'teal', 'pink', 'yellow', 'purple', 'grey',
+            'green', 'blue', 'orange', 'brown', 'silver', 'gold', 'beige', 'tan', 'navy'
+        ];
         const customColorStorageKey = 'nehiyoMTB.customLayerColors';
         let editableColors = [...builtInEditableColors, ...loadCustomColors()];
 
@@ -2294,6 +2683,53 @@
                 this._suppressTiltUntil = performance.now() + 450;
             }
 
+            captureViewState() {
+                return {
+                    position: this.camera.position.clone(),
+                    quaternion: this.camera.quaternion.clone(),
+                    zoom: this.camera.zoom,
+                    target: this.controls ? this.controls.target.clone() : new THREE.Vector3(0, 0, 0),
+                    targetRotX: this.targetRotX,
+                    targetRotY: this.targetRotY,
+                    currentRotX: this.currentRotX,
+                    currentRotY: this.currentRotY
+                };
+            }
+
+            restoreViewState(state) {
+                if (!state) {
+                    return;
+                }
+
+                this.camera.position.copy(state.position);
+                this.camera.quaternion.copy(state.quaternion);
+                this.camera.zoom = state.zoom;
+                this.camera.updateProjectionMatrix();
+                if (this.controls) {
+                    this.controls.target.copy(state.target);
+                    this.controls.update();
+                }
+                this.targetRotX = state.targetRotX;
+                this.targetRotY = state.targetRotY;
+                this.currentRotX = state.currentRotX;
+                this.currentRotY = state.currentRotY;
+                this.applyMeshTilt();
+            }
+
+            applyMeshTilt() {
+                if (this.mesh) {
+                    this.mesh.rotation.y = this.currentRotY;
+                    this.mesh.rotation.x = this.currentRotX;
+                }
+
+                if (this.meshes && this.mesh) {
+                    this.meshes.forEach(m => {
+                        m.rotation.y = this.mesh.rotation.y;
+                        m.rotation.x = this.mesh.rotation.x;
+                    });
+                }
+            }
+
             getMaterialColor(colorName) {
                 try {
                     return new THREE.Color(getColorValue(colorName)).getHex();
@@ -2321,25 +2757,33 @@
                 const zEpsilon = Math.max((bounds.maxZ - bounds.minZ) * 0.0005, 0.000001);
 
                 if (configuredLayers.length > 0) {
+                    /* Sort by maxZ so a slider dragged above its neighbour can't
+                       produce an invisible or zero-height band, and clamp all
+                       boundaries to [minZ, maxZ] so out-of-range values are safe. */
+                    const validLayers = configuredLayers.filter(layer => layer && layer.color);
+                    const sorted = validLayers.slice().sort((a, b) => {
+                        const az = Number.isFinite(a.maxZ) ? a.maxZ : Infinity;
+                        const bz = Number.isFinite(b.maxZ) ? b.maxZ : Infinity;
+                        return az - bz;
+                    });
+
                     let previousMaxZ = bounds.minZ;
-
-                    return configuredLayers
-                        .filter(layer => layer && layer.color)
-                        .map((layer, index, layers) => {
-                            const isLastLayer = index === layers.length - 1;
-                            const layerMinZ = index === 0 ? bounds.minZ : previousMaxZ + zEpsilon;
-                            const layerMaxZ = Number.isFinite(layer.maxZ)
-                                ? (layer.maxZ - bounds.originalCenterZ) * bounds.scale
-                                : bounds.maxZ + zEpsilon;
-
-                            previousMaxZ = layerMaxZ;
-
-                            return {
-                                colorName: layer.color,
-                                minZ: Math.max(bounds.minZ, layerMinZ),
-                                maxZ: isLastLayer ? bounds.maxZ + zEpsilon : Math.min(bounds.maxZ, layerMaxZ)
-                            };
-                        });
+                    return sorted.map((layer, index) => {
+                        const isLastLayer = index === sorted.length - 1;
+                        const layerMinZ = previousMaxZ + (index === 0 ? 0 : zEpsilon);
+                        const rawMaxZ = Number.isFinite(layer.maxZ)
+                            ? (layer.maxZ - bounds.originalCenterZ) * bounds.scale
+                            : bounds.maxZ + zEpsilon;
+                        const layerMaxZ = isLastLayer
+                            ? bounds.maxZ + zEpsilon
+                            : Math.min(bounds.maxZ, Math.max(layerMinZ + zEpsilon, rawMaxZ));
+                        previousMaxZ = layerMaxZ;
+                        return {
+                            colorName: layer.color,
+                            minZ: Math.max(bounds.minZ, layerMinZ),
+                            maxZ: layerMaxZ
+                        };
+                    });
                 }
 
                 const hasWhite = actualColors.some(c => c.toLowerCase() === 'white');
@@ -2367,76 +2811,231 @@
                 this.colorLayerOverride = layers;
 
                 if (this.geometry && this.layerBounds) {
-                    this.renderColorLayers();
+                    this.renderColorLayers({ preserveView: true });
                 }
             }
 
-            renderColorLayers() {
+            setPrintEffect(effect) {
+                this.printEffectOverride = effect || null;
+
+                if (this.geometry && this.layerBounds) {
+                    this.renderColorLayers({ preserveView: true });
+                }
+            }
+
+            getActivePrintEffect() {
+                const effect = this.printEffectOverride !== undefined
+                    ? this.printEffectOverride
+                    : (this.modelData && this.modelData.printEffect);
+                return effect && isGradientPrintMode(effect.mode) ? effect : null;
+            }
+
+            getGradientStops(effect) {
+                const totalLayers = Math.max(2, Math.round(Number(effect.totalLayers) || 2));
+                return (Array.isArray(effect.palette) ? effect.palette : [])
+                    .filter(stop => stop && stop.color)
+                    .map((stop, index) => {
+                        const startLayer = Math.max(1, Math.min(totalLayers, Math.round(Number(stop.startLayer) || (index + 1))));
+                        return {
+                            color: new THREE.Color(this.getMaterialColor(stop.color)),
+                            position: totalLayers === 1 ? 0 : (startLayer - 1) / (totalLayers - 1)
+                        };
+                    })
+                    .sort((a, b) => a.position - b.position);
+            }
+
+            sampleGradientColor(stops, t) {
+                if (stops.length === 0) {
+                    return new THREE.Color(0xffffff);
+                }
+                if (stops.length === 1 || t <= stops[0].position) {
+                    return stops[0].color.clone();
+                }
+
+                for (let index = 0; index < stops.length - 1; index++) {
+                    const current = stops[index];
+                    const next = stops[index + 1];
+                    if (t <= next.position) {
+                        const span = Math.max(0.0001, next.position - current.position);
+                        return current.color.clone().lerp(next.color, (t - current.position) / span);
+                    }
+                }
+
+                return stops[stops.length - 1].color.clone();
+            }
+
+            renderGradientPrintEffect(effect) {
+                const stops = this.getGradientStops(effect);
+                const stopColors = stops.slice(0, 8).map(stop => stop.color);
+                const stopPositions = stops.slice(0, 8).map(stop => stop.position);
+
+                while (stopColors.length < 8) {
+                    stopColors.push(stopColors[stopColors.length - 1]?.clone() || new THREE.Color(0xffffff));
+                    stopPositions.push(stopPositions[stopPositions.length - 1] ?? 0);
+                }
+
+                const material = new THREE.ShaderMaterial({
+                    uniforms: {
+                        minZ: { value: this.layerBounds.minZ },
+                        zRange: { value: Math.max(0.0001, this.layerBounds.maxZ - this.layerBounds.minZ) },
+                        stopCount: { value: Math.max(1, Math.min(stops.length, 8)) },
+                        stopPositions: { value: stopPositions },
+                        stopColors: { value: stopColors },
+                        ambient: { value: 0.42 },
+                        lightDirection: { value: new THREE.Vector3(0.45, 0.65, 0.62).normalize() }
+                    },
+                    vertexShader: `
+                        varying float vZ;
+                        varying vec3 vNormal;
+                        void main() {
+                            vZ = position.z;
+                            vNormal = normalize(normalMatrix * normal);
+                            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                        }
+                    `,
+                    fragmentShader: `
+                        uniform float minZ;
+                        uniform float zRange;
+                        uniform int stopCount;
+                        uniform float stopPositions[8];
+                        uniform vec3 stopColors[8];
+                        uniform float ambient;
+                        uniform vec3 lightDirection;
+                        varying float vZ;
+                        varying vec3 vNormal;
+
+                        vec3 sampleGradient(float t) {
+                            if (stopCount <= 1 || t <= stopPositions[0]) {
+                                return stopColors[0];
+                            }
+
+                            for (int i = 0; i < 7; i++) {
+                                if (i >= stopCount - 1) {
+                                    break;
+                                }
+                                float a = stopPositions[i];
+                                float b = stopPositions[i + 1];
+                                if (t <= b) {
+                                    float localT = clamp((t - a) / max(0.0001, b - a), 0.0, 1.0);
+                                    return mix(stopColors[i], stopColors[i + 1], localT);
+                                }
+                            }
+
+                            return stopColors[stopCount - 1];
+                        }
+
+                        void main() {
+                            float t = clamp((vZ - minZ) / zRange, 0.0, 1.0);
+                            vec3 baseColor = sampleGradient(t);
+                            float diffuse = max(dot(normalize(vNormal), lightDirection), 0.0);
+                            float light = ambient + diffuse * 0.72;
+                            gl_FragColor = vec4(baseColor * light, 1.0);
+                        }
+                    `,
+                    side: THREE.DoubleSide
+                });
+
+                this.mesh = new THREE.Mesh(this.geometry, material);
+                this.scene.add(this.mesh);
+                this.camera.position.set(3, 2, 3);
+                this.camera.lookAt(0, 0, 0);
+            }
+
+            renderColorLayers({ preserveView = false } = {}) {
+                const viewState = preserveView ? this.captureViewState() : null;
                 this.clearMeshes();
 
-                const colors = (this.modelData && this.modelData.colors) || ['white'];
-                const actualColors = colors.filter(c => c.toLowerCase() !== 'multicolor');
-                const colorLayers = this.getColorLayers(actualColors, this.layerBounds);
-
-                if (colorLayers.length <= 1) {
-                    const material = new THREE.MeshPhongMaterial({
-                        color: this.getMaterialColor(colorLayers[0]?.colorName || 'white'),
-                        specular: 0x111111,
-                        shininess: 200
-                    });
-
-                    this.mesh = new THREE.Mesh(this.geometry, material);
-                    this.scene.add(this.mesh);
+                const effect = this.getActivePrintEffect();
+                if (effect) {
+                    this.renderGradientPrintEffect(effect);
                 } else {
-                    this.meshes = [];
+                    const colors = (this.modelData && this.modelData.colors) || ['white'];
+                    const actualColors = colors.filter(c => c.toLowerCase() !== 'multicolor');
+                    const colorLayers = this.getColorLayers(actualColors, this.layerBounds);
 
-                    colorLayers.forEach((layer, index) => {
-                        const layerGeometry = this.geometry.clone();
-                        const color = new THREE.Color(this.getMaterialColor(layer.colorName));
+                    if (colorLayers.length <= 1) {
+                        const material = new THREE.MeshPhongMaterial({
+                            color: this.getMaterialColor(colorLayers[0]?.colorName || 'white'),
+                            specular: 0x111111,
+                            shininess: 200
+                        });
+
+                        this.mesh = new THREE.Mesh(this.geometry, material);
+                        this.scene.add(this.mesh);
+                    } else {
+                        /* Render all discrete colour bands in a single mesh using a
+                           multi-stop Z shader. This avoids geometry.clone() per layer,
+                           which OOMs on large STL files, and is also immune to the
+                           "invisible STL" bug that occurs when a user slides layer N+1
+                           above layer N (clamped & sorted before entering the shader). */
+                        const sorted = colorLayers
+                            .slice()
+                            .sort((a, b) => a.minZ - b.minZ);
+                        const stopCount = Math.min(sorted.length, 8);
+                        const stopMins = Array.from({ length: 8 }, (_, i) =>
+                            i < stopCount ? sorted[i].minZ : sorted[stopCount - 1].minZ);
+                        const stopMaxes = Array.from({ length: 8 }, (_, i) =>
+                            i < stopCount ? sorted[i].maxZ : sorted[stopCount - 1].maxZ);
+                        const stopColors = Array.from({ length: 8 }, (_, i) => {
+                            const name = i < stopCount ? sorted[i].colorName : (sorted[stopCount - 1]?.colorName || 'white');
+                            return new THREE.Color(this.getMaterialColor(name));
+                        });
+
                         const material = new THREE.ShaderMaterial({
                             uniforms: {
-                                layerMinZ: { value: layer.minZ },
-                                layerMaxZ: { value: layer.maxZ },
-                                baseColor: { value: color }
+                                stopCount:  { value: stopCount },
+                                stopMins:   { value: stopMins },
+                                stopMaxes:  { value: stopMaxes },
+                                stopColors: { value: stopColors },
+                                ambient:    { value: 0.46 },
+                                lightDir:   { value: new THREE.Vector3(0.5, 0.7, 0.6).normalize() }
                             },
                             vertexShader: `
                                 varying float vZ;
+                                varying vec3  vNormal;
                                 void main() {
-                                    vZ = position.z;
+                                    vZ      = position.z;
+                                    vNormal = normalize(normalMatrix * normal);
                                     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
                                 }
                             `,
                             fragmentShader: `
-                                uniform float layerMinZ;
-                                uniform float layerMaxZ;
-                                uniform vec3 baseColor;
+                                uniform int   stopCount;
+                                uniform float stopMins[8];
+                                uniform float stopMaxes[8];
+                                uniform vec3  stopColors[8];
+                                uniform float ambient;
+                                uniform vec3  lightDir;
                                 varying float vZ;
-
+                                varying vec3  vNormal;
                                 void main() {
-                                    if (vZ < layerMinZ || vZ > layerMaxZ) {
-                                        discard;
+                                    vec3 col = stopColors[stopCount - 1];
+                                    for (int i = 0; i < 8; i++) {
+                                        if (i >= stopCount) break;
+                                        if (vZ >= stopMins[i] && vZ <= stopMaxes[i]) {
+                                            col = stopColors[i];
+                                            break;
+                                        }
                                     }
-                                    gl_FragColor = vec4(baseColor, 1.0);
+                                    float diff  = max(dot(normalize(vNormal), lightDir), 0.0);
+                                    float light = ambient + diff * (1.0 - ambient);
+                                    gl_FragColor = vec4(col * light, 1.0);
                                 }
                             `,
-                            side: THREE.DoubleSide,
-                            depthWrite: index === 0,
-                            polygonOffset: index > 0,
-                            polygonOffsetFactor: -2 * index,
-                            polygonOffsetUnits: -2 * index
+                            side: THREE.DoubleSide
                         });
 
-                        const mesh = new THREE.Mesh(layerGeometry, material);
-                        mesh.renderOrder = index;
-                        this.meshes.push(mesh);
-                        this.scene.add(mesh);
-                    });
+                        this.mesh = new THREE.Mesh(this.geometry, material);
+                        this.scene.add(this.mesh);
+                    }
 
-                    this.mesh = this.meshes.length > 0 ? this.meshes[0] : null;
+                    this.camera.position.set(3, 2, 3);
+                    this.camera.lookAt(0, 0, 0);
                 }
 
-                this.camera.position.set(3, 2, 3);
-                this.camera.lookAt(0, 0, 0);
+                if (preserveView) {
+                    this.restoreViewState(viewState);
+                }
             }
 
             loadSTL(stlPath) {
@@ -2608,15 +3207,7 @@
                     const ease = 0.09;
                     this.currentRotY += (this.targetRotY - this.currentRotY) * ease;
                     this.currentRotX += (this.targetRotX - this.currentRotX) * ease;
-                    this.mesh.rotation.y = this.currentRotY;
-                    this.mesh.rotation.x = this.currentRotX;
-                }
-
-                if (this.meshes && this.mesh) {
-                    this.meshes.forEach(m => {
-                        m.rotation.y = this.mesh.rotation.y;
-                        m.rotation.x = this.mesh.rotation.x;
-                    });
+                    this.applyMeshTilt();
                 }
 
                 this.renderer.render(this.scene, this.camera);
@@ -2660,13 +3251,57 @@
         let stlManifest = {};
         let editorApiAvailable = false;
         let editorApiStatusDetail = '';
-        const REQUIRED_EDITOR_API_VERSION = 3;
+        const REQUIRED_EDITOR_API_VERSION = 4;
         let currentGeometryMeta = null;
         const selectedSTLByModel = {};
         const stlCandidatesByModel = {};
         const candidateRequests = {};
         const layerDraftsByModel = {};
+        const printEffectDraftsByModel = {};
+        let gradientPreviewToken = 0;
         const catalogueColumnStorageKey = 'nehiyoMTB.catalogueColumnWidths';
+        const printDraftStorageKey = 'nehiyoMTB.printSetupDrafts';
+
+        const gradientPrintPresets = {
+            'farmers-daughter': {
+                mode: 'threshold',
+                totalLayers: 20,
+                layerHeightMm: 0.08,
+                baseLayers: 3,
+                backgroundColor: '#0a0a0a',
+                palette: [
+                    { color: '#5b2a86', startLayer: 1, mixFactor: 0.35, td: 4, label: 'Deep purple' },
+                    { color: '#9b6cb3', startLayer: 6, mixFactor: 0.30, td: 5, label: 'Mid purple' },
+                    { color: '#e7c9a9', startLayer: 12, mixFactor: 0.30, td: 6, label: 'Sepia skin' },
+                    { color: '#ffffff', startLayer: 17, mixFactor: 0.50, td: 8, label: 'White highlight' }
+                ]
+            },
+            'kiwapamitin': {
+                mode: 'threshold',
+                totalLayers: 15,
+                layerHeightMm: 0.08,
+                baseLayers: 3,
+                backgroundColor: '#ffffff',
+                palette: [
+                    { color: '#ffffff', startLayer: 1, mixFactor: 0.50, td: 6, label: 'White background' },
+                    { color: '#202020', startLayer: 6, mixFactor: 0.55, td: 3, label: 'Black syllabics' },
+                    { color: '#dc3545', startLayer: 11, mixFactor: 0.45, td: 4, label: 'Red accent' }
+                ]
+            },
+            'nipamayatan-pekiseyahk': {
+                mode: 'transmission',
+                totalLayers: 24,
+                layerHeightMm: 0.08,
+                baseLayers: 3,
+                backgroundColor: '#0a0a0a',
+                palette: [
+                    { color: '#3a1a4e', startLayer: 1, mixFactor: 0.40, td: 3, label: 'Mountain silhouette' },
+                    { color: '#7c4dff', startLayer: 7, mixFactor: 0.35, td: 5, label: 'Purple haze' },
+                    { color: '#c779d0', startLayer: 14, mixFactor: 0.30, td: 6, label: 'Pink sky' },
+                    { color: '#ffd6e7', startLayer: 20, mixFactor: 0.30, td: 8, label: 'Soft white glow' }
+                ]
+            }
+        };
 
         function initResizableCatalogueColumns() {
             const layout = document.querySelector('.catalogue-layout');
@@ -2865,7 +3500,7 @@
                 catalogueModels = (catalogue.models || [])
                     .sort((a, b) => (a.signNumber || 9999) - (b.signNumber || 9999));
                 
-                filteredModels = applyCustomOrder([...catalogueModels]);
+                rebuildFilteredModels();
                 renderCatalogue();
                 checkLocalEditor();
             } catch (error) {
@@ -2890,6 +3525,15 @@
             }
 
             updateEditorStatus();
+
+            // Editor availability changes which signs are visible: hidden
+            // signs are shown in the editor but stripped from the public
+            // catalogue. Rebuild and re-render so the list matches the mode.
+            const hasHiddenSigns = catalogueModels.some(isModelPublicHidden);
+            if (hasHiddenSigns) {
+                rebuildFilteredModels();
+                renderCatalogue();
+            }
 
             if (selectedModel && editorApiAvailable) {
                 ensureSTLCandidates(selectedModel);
@@ -2916,6 +3560,9 @@
             document.getElementById('set-final-stl').disabled = !canSave || !getModelSTLPath(selectedModel);
             document.getElementById('save-print-setup').disabled = !canSave;
             document.getElementById('layer-count-select').disabled = !canSave;
+            document.querySelectorAll('[data-print-effect]').forEach(button => {
+                button.disabled = !canSave;
+            });
         }
 
         function getModelPagePath(model) {
@@ -3002,7 +3649,11 @@
                 return '<div class="color-label">No color info</div>';
             }
 
-            return displayColors.map(color => {
+            const gradientLabel = isGradientPrintMode(model.printEffect?.mode)
+                ? `<div class="color-label" style="width:100%;text-align:center;">${model.printEffect.mode === 'transmission' ? 'Transparent TD gradient' : 'IllumiStack gradient'}</div>`
+                : '';
+
+            return gradientLabel + displayColors.map(color => {
                 const normalized = normalizeColorValue(color);
                 const colorValue = getColorValue(normalized);
                 const borderColor = normalized === 'white' ? '#666' : 'var(--border)';
@@ -3040,6 +3691,177 @@
             return `${heightMm.toFixed(2)} mm • approx layer ${layer} at 0.20 mm`;
         }
 
+        // Print layer height the side-profile diagram and readouts assume.
+        const PRINT_LAYER_MM = 0.2;
+
+        // Build the ordered colour bands exactly the way the STL shader does
+        // (sort the transitions ascending, last colour stays open-topped) so the
+        // 2D side-profile diagram is a faithful, standardized stand-in for the
+        // 3D STL preview. Heights are in original STL Z units.
+        function buildProfileBands(draft, minZ, maxZ) {
+            const sorted = draft.slice().sort((a, b) => {
+                const az = Number.isFinite(a.maxZ) ? a.maxZ : Infinity;
+                const bz = Number.isFinite(b.maxZ) ? b.maxZ : Infinity;
+                return az - bz;
+            });
+            const bands = [];
+            let prev = minZ;
+            sorted.forEach((layer, index) => {
+                const isLast = index === sorted.length - 1;
+                const rawTop = Number.isFinite(layer.maxZ) ? layer.maxZ : maxZ;
+                const top = isLast ? maxZ : Math.min(maxZ, Math.max(prev, rawTop));
+                bands.push({ color: normalizeColorValue(layer.color), from: prev, to: top });
+                prev = top;
+            });
+            return bands;
+        }
+
+        // Force the layer-change sliders to stay strictly in increasing order by
+        // clamping each slider's [min,max] to its neighbours (with a one-layer
+        // gap), so transition N+1 can never be dragged below transition N.
+        // Runs live on every slider input and once after each editor render.
+        function updateBoundarySliderConstraints() {
+            if (!selectedModel || !currentGeometryMeta) {
+                return;
+            }
+            const draft = getLayerDraft(selectedModel);
+            const unitScale = getDisplayUnitScale(currentGeometryMeta) || 1;
+            const minZ = currentGeometryMeta.originalMinZ;
+            const maxZ = currentGeometryMeta.originalMaxZ;
+            const gap = Math.max(PRINT_LAYER_MM / unitScale, (maxZ - minZ) / 500, 1e-6);
+
+            for (let i = 0; i < draft.length - 1; i++) {
+                const el = document.getElementById(`layer-boundary-${i}`);
+                if (!el) {
+                    continue;
+                }
+                const prevZ = (i > 0 && Number.isFinite(draft[i - 1].maxZ)) ? draft[i - 1].maxZ : minZ;
+                const nextZ = (i + 1 < draft.length - 1 && Number.isFinite(draft[i + 1].maxZ)) ? draft[i + 1].maxZ : maxZ;
+                const lo = Math.min(prevZ + gap, maxZ);
+                const hi = Math.max(nextZ - gap, lo);
+                el.min = lo;
+                el.max = hi;
+
+                let value = Number(el.value);
+                if (!Number.isFinite(value)) {
+                    value = lo;
+                }
+                value = Math.min(hi, Math.max(lo, value));
+                el.value = value;
+                draft[i].maxZ = value;
+
+                const readout = document.getElementById(`layer-readout-${i}`);
+                if (readout) {
+                    readout.textContent = formatLayerReadout(value, currentGeometryMeta);
+                }
+            }
+        }
+
+        // Render the live side-profile diagram: a vertical bar that mirrors the
+        // STL's Z build, sliced into 0.20 mm print layers, each coloured by the
+        // band it falls in, with arrows marking the slider-controlled
+        // transitions. Updates live as colours/sliders change.
+        function renderLayerProfileDiagram() {
+            const host = document.getElementById('layer-profile');
+            if (!host || !selectedModel) {
+                return;
+            }
+
+            const meta = currentGeometryMeta;
+            if (!meta) {
+                host.innerHTML = '<div class="layer-color-label">Layer profile</div>'
+                    + '<p class="layer-profile-empty">Load the STL to see the printed layer stack.</p>';
+                return;
+            }
+
+            const draft = getLayerDraft(selectedModel);
+            const unitScale = getDisplayUnitScale(meta) || 1;
+            const minZ = meta.originalMinZ;
+            const maxZ = meta.originalMaxZ;
+            const span = Math.max(maxZ - minZ, 1e-9);
+            const heightMm = span * unitScale;
+            const nLayers = Math.max(1, Math.round(heightMm / PRINT_LAYER_MM));
+            const bands = buildProfileBands(draft, minZ, maxZ);
+
+            const colorAt = z => {
+                for (let i = 0; i < bands.length; i++) {
+                    if (z <= bands[i].to || i === bands.length - 1) {
+                        return bands[i].color;
+                    }
+                }
+                return bands.length ? bands[bands.length - 1].color : 'white';
+            };
+
+            // SVG geometry (a fixed user-space the bar/labels live in; the SVG
+            // itself scales to the panel width via viewBox).
+            const W = 320;
+            const barTop = 14;
+            const barH = 270;
+            const barX = 18;
+            const barW = 76;
+            const H = barTop + barH + 22;
+            const yFor = z => barTop + (1 - (z - minZ) / span) * barH;
+
+            // Per-print-layer rectangles, coloured by band. A faint divider on
+            // each layer's top edge communicates the 0.20 mm slicing. Tall signs
+            // are drawn with capped resolution so dragging stays smooth; the
+            // true layer count is still reported in the readout.
+            const drawSlabs = Math.min(nLayers, 400);
+            const layerZ = span / drawSlabs;
+            const showDividers = nLayers <= 120;
+            let rects = '';
+            for (let k = 0; k < drawSlabs; k++) {
+                const zLo = minZ + k * layerZ;
+                const zHi = minZ + (k + 1) * layerZ;
+                const yHi = yFor(zHi);
+                const yLo = yFor(zLo);
+                const fill = getColorValue(colorAt((zLo + zHi) / 2));
+                rects += `<rect x="${barX}" y="${yHi.toFixed(2)}" width="${barW}" height="${(yLo - yHi).toFixed(2)}" fill="${fill}"></rect>`;
+                if (showDividers && k > 0) {
+                    rects += `<line x1="${barX}" y1="${yHi.toFixed(2)}" x2="${barX + barW}" y2="${yHi.toFixed(2)}" stroke="rgba(0,0,0,0.28)" stroke-width="0.5"></line>`;
+                }
+            }
+
+            // Transition arrows + labels for each colour change (every band but
+            // the open-topped last one). These line up with the sliders above.
+            let markers = '';
+            for (let i = 0; i < bands.length - 1; i++) {
+                const z = bands[i].to;
+                const y = yFor(z);
+                const mm = Math.max(0, (z - minZ) * unitScale);
+                const layerNo = Math.max(1, Math.round(mm / PRINT_LAYER_MM));
+                const nextColor = bands[i + 1] ? bands[i + 1].color : '';
+                const labelColor = colorLabel(nextColor);
+                markers += `
+                    <line x1="${barX}" y1="${y.toFixed(2)}" x2="${barX + barW}" y2="${y.toFixed(2)}" stroke="#fff" stroke-width="1.3" stroke-dasharray="3 2"></line>
+                    <path d="M ${barX + barW + 2} ${y.toFixed(2)} l 7 -3.4 v 6.8 z" fill="var(--accent)"></path>
+                    <text x="${barX + barW + 13}" y="${(y - 1).toFixed(2)}" fill="var(--text)" font-size="9">after L${layerNo} → ${escapeHtml(labelColor)}</text>
+                    <text x="${barX + barW + 13}" y="${(y + 8.5).toFixed(2)}" fill="var(--text-muted)" font-size="8">${mm.toFixed(2)} mm</text>
+                `;
+            }
+
+            const topMm = heightMm.toFixed(2);
+            const svg = `
+                <svg class="layer-profile-figure" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Side profile of the printed layer stack">
+                    <rect x="${barX - 1}" y="${barTop - 1}" width="${barW + 2}" height="${barH + 2}" fill="none" stroke="var(--border)" stroke-width="1"></rect>
+                    ${rects}
+                    ${markers}
+                    <text x="${barX - 4}" y="${(barTop + 3).toFixed(2)}" text-anchor="end" fill="var(--text-muted)" font-size="8">${topMm} mm</text>
+                    <text x="${barX - 4}" y="${(barTop + 11).toFixed(2)}" text-anchor="end" fill="var(--text-muted)" font-size="8">L${nLayers}</text>
+                    <text x="${barX - 4}" y="${(barTop + barH).toFixed(2)}" text-anchor="end" fill="var(--text-muted)" font-size="8">0.00 mm</text>
+                    <text x="${barX - 4}" y="${(barTop + barH + 8).toFixed(2)}" text-anchor="end" fill="var(--text-muted)" font-size="8">L1</text>
+                </svg>
+            `;
+
+            host.innerHTML = `
+                <div class="layer-profile-head">
+                    <span class="layer-color-label">Printed layer profile</span>
+                    <span class="layer-profile-meta">${topMm} mm tall • ${nLayers} layers @ 0.20 mm<br>side profile of the STL</span>
+                </div>
+                ${svg}
+            `;
+        }
+
         function normalizeEditableColor(color, fallbackIndex = 0) {
             const normalized = normalizeColorValue(color);
             if (editableColors.includes(normalized)) {
@@ -3050,7 +3872,44 @@
                 return normalized;
             }
 
+            // Any named colour we know how to render (filament names from the
+            // arrangement tool) is preserved verbatim even if it isn't one of
+            // the default swatches, so an imported sign keeps its colours.
+            if (normalized && Object.prototype.hasOwnProperty.call(colorMap, normalized)) {
+                return normalized;
+            }
+
             return editableColors[fallbackIndex % editableColors.length] || 'white';
+        }
+
+        // Make sure every colour a model carries (imported from the arrangement
+        // tool) is available as a selectable swatch — registering custom hex
+        // colours and surfacing any named filament colour — so the layer editor
+        // and STL preview show exactly what was designed without a manual
+        // "reselect". This is what "create any new colours needed" means.
+        function ensureModelColorsRegistered(model) {
+            if (!model) {
+                return;
+            }
+            const seen = [];
+            const collect = value => {
+                if (typeof value !== 'string') return;
+                const c = normalizeColorValue(value);
+                if (c && c !== 'multicolor') seen.push(c);
+            };
+            (Array.isArray(model.colors) ? model.colors : []).forEach(collect);
+            (Array.isArray(model.colorLayers) ? model.colorLayers : []).forEach(l => collect(l && l.color));
+            if (model.printEffect && Array.isArray(model.printEffect.palette)) {
+                model.printEffect.palette.forEach(stop => collect(stop && stop.color));
+                collect(model.printEffect.backgroundColor);
+            }
+            seen.forEach(c => {
+                if (isHexColor(c)) {
+                    rememberCustomColor(c);
+                } else if (!editableColors.includes(c) && Object.prototype.hasOwnProperty.call(colorMap, c)) {
+                    editableColors = [...editableColors, c];
+                }
+            });
         }
 
         function colorLabel(color) {
@@ -3064,6 +3923,296 @@
             return normalized;
         }
 
+        function finiteNumber(value) {
+            const number = Number(value);
+            return Number.isFinite(number) ? number : undefined;
+        }
+
+        function loadStoredPrintDrafts() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(printDraftStorageKey) || '{}');
+                return stored && typeof stored === 'object' && !Array.isArray(stored) ? stored : {};
+            } catch (error) {
+                return {};
+            }
+        }
+
+        function getStoredPrintDraft(model) {
+            if (!model || !model.id) {
+                return null;
+            }
+
+            const stored = loadStoredPrintDrafts()[model.id];
+            return stored && typeof stored === 'object' ? stored : null;
+        }
+
+        function persistPrintDraft(model, { dirty = true } = {}) {
+            if (!model || !model.id) {
+                return;
+            }
+
+            try {
+                const stored = loadStoredPrintDrafts();
+                stored[model.id] = {
+                    colorLayers: getLayerDraft(model).map((layer, index, layers) => {
+                        const saved = {
+                            color: normalizeEditableColor(layer.color, index)
+                        };
+                        const maxZ = finiteNumber(layer.maxZ);
+                        if (index < layers.length - 1 && maxZ !== undefined) {
+                            saved.maxZ = maxZ;
+                        }
+                        if (layer.label) {
+                            saved.label = layer.label;
+                        }
+                        const startLayer = finiteNumber(layer.startLayer);
+                        if (startLayer !== undefined) {
+                            saved.startLayer = startLayer;
+                        }
+                        const mixFactor = finiteNumber(layer.mixFactor);
+                        if (mixFactor !== undefined) {
+                            saved.mixFactor = mixFactor;
+                        }
+                        const td = finiteNumber(layer.td);
+                        if (td !== undefined) {
+                            saved.td = td;
+                        }
+                        return saved;
+                    }),
+                    printEffect: cleanedPrintEffectDraft(model),
+                    dirty,
+                    updatedAt: Date.now()
+                };
+                localStorage.setItem(printDraftStorageKey, JSON.stringify(stored));
+            } catch (error) {
+                // Boundary edits still work when draft persistence is unavailable.
+            }
+        }
+
+        function isGradientPrintMode(mode) {
+            /* Transparent TD was removed from the UI; treat any saved 'transmission'
+               values identically to 'threshold' so old data still renders correctly. */
+            return mode === 'threshold' || mode === 'transmission';
+        }
+
+        function canonicalGradientMode(mode) {
+            return (mode === 'transmission') ? 'threshold' : mode;
+        }
+
+        function clonePrintEffectPreset(preset) {
+            return {
+                mode: preset.mode,
+                totalLayers: preset.totalLayers,
+                layerHeightMm: preset.layerHeightMm,
+                baseLayers: preset.baseLayers,
+                backgroundColor: preset.backgroundColor,
+                palette: (preset.palette || []).map(layer => ({ ...layer }))
+            };
+        }
+
+        function getPrintEffectDraft(model) {
+            if (!model) {
+                return { mode: 'discrete' };
+            }
+
+            if (printEffectDraftsByModel[model.id]) {
+                return printEffectDraftsByModel[model.id];
+            }
+
+            const storedDraft = getStoredPrintDraft(model);
+            const storedEffect = storedDraft?.dirty && storedDraft.printEffect && typeof storedDraft.printEffect === 'object'
+                ? storedDraft.printEffect
+                : null;
+            // Committed catalogue printEffect (from an imported/promoted sign)
+            // wins over a left-over localStorage draft, mirroring getLayerDraft,
+            // so the gradient setup an imported sign carries renders immediately.
+            const committedEffect = model.printEffect && typeof model.printEffect === 'object'
+                ? model.printEffect
+                : null;
+            const source = committedEffect || storedEffect;
+
+            printEffectDraftsByModel[model.id] = {
+                mode: isGradientPrintMode(source?.mode) ? source.mode : 'discrete',
+                totalLayers: Number.isFinite(Number(source?.totalLayers)) ? Number(source.totalLayers) : 15,
+                layerHeightMm: Number.isFinite(Number(source?.layerHeightMm)) ? Number(source.layerHeightMm) : 0.08,
+                baseLayers: Number.isFinite(Number(source?.baseLayers)) ? Number(source.baseLayers) : 3,
+                backgroundColor: isHexColor(source?.backgroundColor) ? source.backgroundColor : '#000000'
+            };
+
+            return printEffectDraftsByModel[model.id];
+        }
+
+        function applyPrintEffectPresetToDraft(model, mode) {
+            const preset = gradientPrintPresets[model?.id];
+            if (!preset) {
+                return;
+            }
+
+            const effect = getPrintEffectDraft(model);
+            effect.mode = mode || preset.mode;
+            effect.totalLayers = preset.totalLayers;
+            effect.layerHeightMm = preset.layerHeightMm;
+            effect.baseLayers = preset.baseLayers;
+            effect.backgroundColor = preset.backgroundColor;
+            layerDraftsByModel[model.id] = preset.palette.map(layer => ({
+                color: normalizeEditableColor(layer.color),
+                startLayer: layer.startLayer,
+                mixFactor: layer.mixFactor,
+                td: layer.td,
+                label: layer.label || ''
+            }));
+        }
+
+        function normalizeGradientLayerMetadata(model) {
+            const effect = getPrintEffectDraft(model);
+            const draft = getLayerDraft(model);
+            const totalLayers = Math.max(2, Math.round(effect.totalLayers || 15));
+            effect.totalLayers = totalLayers;
+            effect.layerHeightMm = Math.max(0.01, Number(effect.layerHeightMm) || 0.08);
+            effect.baseLayers = Math.max(0, Math.round(Number(effect.baseLayers) || 0));
+            effect.backgroundColor = isHexColor(effect.backgroundColor) ? effect.backgroundColor : '#000000';
+
+            draft.forEach((layer, index) => {
+                layer.startLayer = Math.max(1, Math.min(totalLayers, Math.round(Number(layer.startLayer) || Math.round(1 + index * totalLayers / Math.max(1, draft.length)))));
+                layer.mixFactor = Math.max(0.05, Math.min(1, Number(layer.mixFactor) || 0.3));
+                layer.td = Math.max(0.5, Math.min(30, Number(layer.td) || 4));
+            });
+        }
+
+        function getDisplayColorHex(color) {
+            const value = getColorValue(color);
+            if (/^#[0-9a-f]{6}$/i.test(value)) {
+                return value;
+            }
+            if (/^#[0-9a-f]{3}$/i.test(value)) {
+                return `#${value[1]}${value[1]}${value[2]}${value[2]}${value[3]}${value[3]}`;
+            }
+            return '#888888';
+        }
+
+        function getGradientPalette(model) {
+            normalizeGradientLayerMetadata(model);
+            const mode = getPrintEffectDraft(model).mode;
+            return getLayerDraft(model).map((layer, index) => ({
+                color: getDisplayColorHex(layer.color),
+                startLayer: layer.startLayer,
+                mixFactor: layer.mixFactor,
+                td: layer.td,
+                label: layer.label || colorLabel(layer.color) || `Colour ${index + 1}`
+            }));
+        }
+
+        function buildGradientApproxColorLayers(model) {
+            const effect = getPrintEffectDraft(model);
+            const draft = getLayerDraft(model);
+            if (!currentGeometryMeta || draft.length === 0) {
+                return draft.map(layer => ({
+                    color: normalizeEditableColor(layer.color),
+                    label: layer.label || ''
+                }));
+            }
+
+            const totalLayers = Math.max(2, effect.totalLayers || 15);
+            const unitScale = getDisplayUnitScale(currentGeometryMeta);
+            const minZ = currentGeometryMeta.originalMinZ;
+            const range = currentGeometryMeta.originalMaxZ - currentGeometryMeta.originalMinZ;
+            return draft.map((layer, index) => {
+                const cleaned = {
+                    color: normalizeEditableColor(layer.color, index),
+                    label: layer.label || ''
+                };
+                const next = draft[index + 1];
+                if (next) {
+                    const transitionHeightMm = effect.baseLayers * effect.layerHeightMm
+                        + (Math.max(1, Number(next.startLayer)) - 1) * effect.layerHeightMm;
+                    const fraction = Math.max(0, Math.min(1, transitionHeightMm / Math.max(0.0001, range * unitScale)));
+                    cleaned.maxZ = minZ + (fraction * range);
+                }
+                return cleaned;
+            });
+        }
+
+        function cleanedPrintEffectDraft(model) {
+            const effect = getPrintEffectDraft(model);
+            if (!isGradientPrintMode(effect.mode)) {
+                return null;
+            }
+
+            return {
+                mode: effect.mode,
+                source: 'IllumiStack',
+                totalLayers: Math.max(2, Math.round(effect.totalLayers || 15)),
+                layerHeightMm: Number(effect.layerHeightMm || 0.08),
+                baseLayers: Math.max(0, Math.round(effect.baseLayers || 0)),
+                backgroundColor: getDisplayColorHex(effect.backgroundColor || '#000000'),
+                palette: getLayerDraft(model).map((layer, index) => {
+                    const cleaned = {
+                        color: normalizeEditableColor(layer.color, index),
+                        startLayer: Math.max(1, Math.round(Number(layer.startLayer) || 1)),
+                        label: layer.label || ''
+                    };
+                    if (effect.mode === 'threshold') {
+                        cleaned.mixFactor = Math.max(0.05, Math.min(1, Number(layer.mixFactor) || 0.3));
+                    } else {
+                        cleaned.td = Math.max(0.5, Math.min(30, Number(layer.td) || 4));
+                    }
+                    return cleaned;
+                })
+            };
+        }
+
+        function updatePrintEffectButtons(mode) {
+            document.querySelectorAll('[data-print-effect]').forEach(button => {
+                button.setAttribute('aria-pressed', button.dataset.printEffect === mode ? 'true' : 'false');
+            });
+
+            const note = document.getElementById('print-effect-note');
+            if (!note) return;
+            if (mode === 'threshold' || mode === 'transmission') {
+                note.textContent = 'IllumiStack: smooth Z-height gradient blended across thin layers. Adjust colour stops and their start layers below.';
+            } else {
+                note.textContent = 'Discrete colour bands — set the boundary height for each filament swap.';
+            }
+        }
+
+        function renderGradientPrediction() {
+            const plan = document.getElementById('gradient-layer-plan');
+            if (!selectedModel || !plan) {
+                return;
+            }
+
+            const token = ++gradientPreviewToken;
+            const effect = getPrintEffectDraft(selectedModel);
+            if (!isGradientPrintMode(effect.mode)) {
+                return;
+            }
+
+            normalizeGradientLayerMetadata(selectedModel);
+            if (token !== gradientPreviewToken) return;
+
+            if (!currentGeometryMeta) {
+                plan.innerHTML = '<p class="editor-note">Load an STL to compute exact print heights. The 3D viewer will show the STL gradient after loading.</p>';
+                return;
+            }
+
+            const layerPlan = buildLayerPlan({
+                palette: getGradientPalette(selectedModel),
+                backgroundColor: getDisplayColorHex(effect.backgroundColor),
+                totalLayers: effect.totalLayers,
+                layerHeight: effect.layerHeightMm,
+                baseLayers: effect.baseLayers,
+                compensateFirstLayer: true
+            });
+
+            plan.innerHTML = layerPlan.map(row => `
+                <div class="gradient-layer-plan-row">
+                    <span class="swatch" style="background:${row.color}"></span>
+                    <span><strong>${escapeHtml(row.label)}</strong><br>${row.fromLayer === row.toLayer ? `Layer ${row.fromLayer}` : `Layers ${row.fromLayer}-${row.toLayer}`}</span>
+                    <span>${row.fromZ.toFixed(2)}-${row.toZ.toFixed(2)} mm</span>
+                </div>
+            `).join('') + '<p class="editor-note" style="margin-top:0.4rem;">The STL preview uses a smooth Z-height gradient. Use these ranges as the filament-change plan in the slicer.</p>';
+        }
+
         function getLayerDraft(model) {
             if (!model) {
                 return [];
@@ -3073,16 +4222,41 @@
                 return layerDraftsByModel[model.id];
             }
 
+            ensureModelColorsRegistered(model);
+
+            const effect = getPrintEffectDraft(model);
+            const presetPalette = gradientPrintPresets[model.id]?.palette;
+            const configuredGradient = isGradientPrintMode(effect.mode)
+                && (Array.isArray(model.printEffect?.palette) || Array.isArray(presetPalette))
+                ? (Array.isArray(model.printEffect?.palette) ? model.printEffect.palette : presetPalette)
+                : null;
+            const storedDraft = getStoredPrintDraft(model);
+            const storedLayers = storedDraft?.dirty && Array.isArray(storedDraft.colorLayers)
+                ? storedDraft.colorLayers
+                : null;
             const configuredLayers = Array.isArray(model.colorLayers) ? model.colorLayers : [];
             const colors = (model.colors || ['white']).filter(color => color && color.toLowerCase() !== 'multicolor');
-            const source = configuredLayers.length > 0
+            // Committed catalogue data wins over a left-over localStorage draft so
+            // a sign imported (promoted) from the arrangement tool shows its
+            // designed colours + layer transitions immediately, with no manual
+            // reselect. In-session, unsaved edits live in layerDraftsByModel
+            // (returned above) so active editing is never lost; the stored draft
+            // is only a cross-reload fallback used when nothing is committed yet.
+            const source = configuredGradient && configuredGradient.length > 0
+                ? configuredGradient
+                : configuredLayers.length > 0
                 ? configuredLayers
+                : storedLayers && storedLayers.length > 0
+                ? storedLayers
                 : colors.map(color => ({ color }));
 
             layerDraftsByModel[model.id] = source.map((layer, index) => ({
                 color: normalizeEditableColor(layer.color, index),
-                maxZ: Number.isFinite(layer.maxZ) ? layer.maxZ : undefined,
-                label: layer.label || ''
+                maxZ: finiteNumber(layer.maxZ),
+                label: layer.label || '',
+                startLayer: finiteNumber(layer.startLayer),
+                mixFactor: finiteNumber(layer.mixFactor),
+                td: finiteNumber(layer.td)
             }));
 
             if (layerDraftsByModel[model.id].length === 0) {
@@ -3115,6 +4289,22 @@
                 });
             }
 
+            const effect = getPrintEffectDraft(model);
+            if (isGradientPrintMode(effect.mode)) {
+                const totalLayers = Math.max(2, Math.round(effect.totalLayers || 15));
+                draft.forEach((layer, index) => {
+                    if (!Number.isFinite(Number(layer.startLayer))) {
+                        layer.startLayer = Math.max(1, Math.round(1 + index * totalLayers / Math.max(1, draft.length)));
+                    }
+                    if (!Number.isFinite(Number(layer.mixFactor))) {
+                        layer.mixFactor = 0.3;
+                    }
+                    if (!Number.isFinite(Number(layer.td))) {
+                        layer.td = 4;
+                    }
+                });
+            }
+
             return draft;
         }
 
@@ -3138,14 +4328,45 @@
             if (!selectedModel) {
                 container.innerHTML = '<p class="editor-note">Select a sign to edit print colours.</p>';
                 countSelect.value = '1';
+                updatePrintEffectButtons('discrete');
                 updateEditorStatus();
                 return;
             }
 
+            const effect = getPrintEffectDraft(selectedModel);
+            const isGradient = isGradientPrintMode(effect.mode);
             const draft = normalizeLayerDraft(selectedModel, getLayerDraft(selectedModel).length);
+            if (isGradient) {
+                normalizeGradientLayerMetadata(selectedModel);
+            }
             countSelect.value = String(draft.length);
+            updatePrintEffectButtons(effect.mode);
 
-            container.innerHTML = draft.map((layer, index) => {
+            const gradientSettings = isGradient ? `
+                <div class="gradient-settings-grid">
+                    <div class="editor-field">
+                        <label for="gradient-total-layers">Total relief layers</label>
+                        <input type="range" id="gradient-total-layers" data-gradient-setting="totalLayers" min="2" max="80" value="${effect.totalLayers}">
+                        <div class="layer-readout">${effect.totalLayers} layers</div>
+                    </div>
+                    <div class="editor-field">
+                        <label for="gradient-layer-height">Layer height</label>
+                        <input type="range" id="gradient-layer-height" data-gradient-setting="layerHeightMm" min="0.04" max="0.32" step="0.01" value="${effect.layerHeightMm}">
+                        <div class="layer-readout">${Number(effect.layerHeightMm).toFixed(2)} mm</div>
+                    </div>
+                    <div class="editor-field">
+                        <label for="gradient-base-layers">Base layers</label>
+                        <input type="range" id="gradient-base-layers" data-gradient-setting="baseLayers" min="0" max="20" value="${effect.baseLayers}">
+                        <div class="layer-readout">${effect.baseLayers} base layers</div>
+                    </div>
+                    <div class="editor-field">
+                        <label for="gradient-background">Deepest colour</label>
+                        <input type="color" id="gradient-background" data-gradient-background value="${getDisplayColorHex(effect.backgroundColor)}">
+                    </div>
+                </div>
+            ` : '';
+
+            container.innerHTML = gradientSettings + draft.map((layer, index) => {
                 layer.color = normalizeEditableColor(layer.color, index);
                 const paletteColors = [...new Set([
                     ...editableColors,
@@ -3198,7 +4419,37 @@
                         aria-label="Choose a new colour for layer ${index + 1}"
                     >
                 `;
-                const boundary = index < draft.length - 1 ? `
+                const gradientControls = isGradient ? `
+                    <div class="gradient-controls">
+                        <div class="gradient-controls-row">
+                            <label for="gradient-start-${index}">Starts at print layer ${layer.startLayer}</label>
+                            <input
+                                type="range"
+                                id="gradient-start-${index}"
+                                data-gradient-layer="${index}"
+                                data-gradient-field="startLayer"
+                                min="1"
+                                max="${effect.totalLayers}"
+                                step="1"
+                                value="${layer.startLayer}"
+                            >
+                        </div>
+                        <div class="gradient-controls-row">
+                            <label for="gradient-mix-${index}">Blend strength ${Number(layer.mixFactor).toFixed(2)}</label>
+                            <input
+                                type="range"
+                                id="gradient-mix-${index}"
+                                data-gradient-layer="${index}"
+                                data-gradient-field="mixFactor"
+                                min="0.05"
+                                max="1"
+                                step="0.05"
+                                value="${Number(layer.mixFactor).toFixed(2)}"
+                            >
+                        </div>
+                    </div>
+                ` : '';
+                const boundary = !isGradient && index < draft.length - 1 ? `
                     <div class="layer-boundary">
                         <div class="editor-field">
                             <label for="layer-boundary-${index}">Change after layer ${index + 1}</label>
@@ -3225,9 +4476,18 @@
                             ${addColorControl}
                         </div>
                     </div>
+                    ${gradientControls}
                     ${boundary}
                 `;
-            }).join('');
+            }).join('') + (isGradient ? `
+                <div class="gradient-preview">
+                    <div class="layer-color-label">STL gradient layer plan</div>
+                    <p class="editor-note">The 3D preview applies this gradient directly over the loaded STL height, not from an image.</p>
+                    <div class="gradient-layer-plan" id="gradient-layer-plan">
+                        <p class="editor-note">Load an STL to compute exact print heights.</p>
+                    </div>
+                </div>
+            ` : '<div class="layer-profile" id="layer-profile"></div>');
 
             container.querySelectorAll('[data-layer-color]').forEach(button => {
                 button.addEventListener('click', event => {
@@ -3269,28 +4529,82 @@
                     const index = Number(event.target.dataset.layerBoundary);
                     const draft = getLayerDraft(selectedModel);
                     draft[index].maxZ = Number(event.target.value);
+                    // Keep every transition strictly ascending (clamps this
+                    // slider and re-bounds its neighbours), then mirror the
+                    // change into the readout, 3D preview and side profile.
+                    updateBoundarySliderConstraints();
                     document.getElementById(`layer-readout-${index}`).textContent = formatLayerReadout(draft[index].maxZ, currentGeometryMeta);
                     applyLayerDraft();
                 });
             });
 
+            container.querySelectorAll('[data-gradient-setting]').forEach(input => {
+                input.addEventListener('input', event => {
+                    const effect = getPrintEffectDraft(selectedModel);
+                    const field = event.target.dataset.gradientSetting;
+                    effect[field] = field === 'layerHeightMm'
+                        ? Number(event.target.value)
+                        : Math.round(Number(event.target.value));
+                    renderLayerEditor();
+                    applyLayerDraft();
+                });
+            });
+
+            container.querySelectorAll('[data-gradient-background]').forEach(input => {
+                input.addEventListener('input', event => {
+                    getPrintEffectDraft(selectedModel).backgroundColor = event.target.value;
+                    applyLayerDraft();
+                });
+            });
+
+            container.querySelectorAll('[data-gradient-layer]').forEach(input => {
+                input.addEventListener('input', event => {
+                    const index = Number(event.target.dataset.gradientLayer);
+                    const field = event.target.dataset.gradientField;
+                    const draft = getLayerDraft(selectedModel);
+                    draft[index][field] = field === 'startLayer'
+                        ? Math.round(Number(event.target.value))
+                        : Number(event.target.value);
+                    renderLayerEditor();
+                    applyLayerDraft();
+                });
+            });
+
+            updateBoundarySliderConstraints();
             updateEditorStatus();
+            renderGradientPrediction();
+            renderLayerProfileDiagram();
         }
 
-        function applyLayerDraft() {
+        function applyLayerDraft({ persist = true } = {}) {
             if (!selectedModel) {
                 return;
             }
 
-            const draft = cleanedLayerDraft(selectedModel);
+            const effect = getPrintEffectDraft(selectedModel);
+            const isGradient = isGradientPrintMode(effect.mode);
+            const draft = isGradient
+                ? buildGradientApproxColorLayers(selectedModel)
+                : cleanedLayerDraft(selectedModel);
             selectedModel.colors = draft.map(layer => layer.color);
             selectedModel.colorLayers = draft;
+            if (isGradient) {
+                selectedModel.printEffect = cleanedPrintEffectDraft(selectedModel);
+            } else {
+                delete selectedModel.printEffect;
+            }
+            if (persist) {
+                persistPrintDraft(selectedModel);
+            }
             invalidateSTLSnapshot(selectedModel);
             document.getElementById('detail-colors').innerHTML = renderColorSwatches(selectedModel);
 
             if (detailViewer) {
+                detailViewer.setPrintEffect(isGradient ? selectedModel.printEffect : null);
                 detailViewer.setColorLayers(draft);
             }
+            renderGradientPrediction();
+            renderLayerProfileDiagram();
         }
 
         function setEditorLog(message, operations = []) {
@@ -3307,10 +4621,13 @@
             }
 
             const stlPath = getModelSTLPath(selectedModel);
+            const effect = getPrintEffectDraft(selectedModel);
+            const isGradient = isGradientPrintMode(effect.mode);
             const payload = {
                 modelId: selectedModel.id,
                 colors: cleanedLayerDraft(selectedModel).map(layer => layer.color),
-                colorLayers: cleanedLayerDraft(selectedModel)
+                colorLayers: isGradient ? buildGradientApproxColorLayers(selectedModel) : cleanedLayerDraft(selectedModel),
+                printEffect: isGradient ? cleanedPrintEffectDraft(selectedModel) : null
             };
 
             if (includeFinalSTL && stlPath) {
@@ -3338,7 +4655,10 @@
                 stlManifest = data.manifest || stlManifest;
                 stlCandidatesByModel[selectedModel.id] = data.candidates || stlCandidatesByModel[selectedModel.id] || [];
                 selectedSTLByModel[selectedModel.id] = selectedModel.docsStlPath;
-                layerDraftsByModel[selectedModel.id] = (selectedModel.colorLayers || []).map(layer => ({ ...layer }));
+                delete layerDraftsByModel[selectedModel.id];
+                delete printEffectDraftsByModel[selectedModel.id];
+                getLayerDraft(selectedModel);
+                persistPrintDraft(selectedModel, { dirty: false });
                 invalidateSTLSnapshot(selectedModel);
 
                 setEditorLog('Saved print setup.', data.operations || []);
@@ -3518,6 +4838,8 @@
                 downloadLink.classList.add('is-disabled');
                 downloadLink.setAttribute('aria-disabled', 'true');
                 downloadLink.removeAttribute('href');
+                const dl3mfEmpty = document.getElementById('download-3mf-link');
+                if (dl3mfEmpty) { dl3mfEmpty.classList.add('is-hidden'); dl3mfEmpty.removeAttribute('href'); }
                 populateSTLSelector(null);
                 renderLayerEditor();
                 disposeDetailViewer();
@@ -3551,6 +4873,22 @@
                 downloadLink.classList.add('is-disabled');
                 downloadLink.setAttribute('aria-disabled', 'true');
                 downloadLink.removeAttribute('href');
+            }
+
+            // Print-ready multi-colour .3mf (one object per filament colour,
+            // split from the production STL so it slices with the same
+            // fidelity). Shown only when the sign has one.
+            const download3mf = document.getElementById('download-3mf-link');
+            if (download3mf) {
+                const p3mf = selectedModel.docs3mfPath;
+                if (p3mf) {
+                    download3mf.href = p3mf;
+                    download3mf.download = `${selectedModel.id || 'sign'}.3mf`;
+                    download3mf.classList.remove('is-hidden');
+                } else {
+                    download3mf.classList.add('is-hidden');
+                    download3mf.removeAttribute('href');
+                }
             }
 
             const signNumber = formatSignNumber(selectedModel);
@@ -3593,7 +4931,7 @@
                     currentGeometryMeta = meta;
                     normalizeLayerDraft(selectedModel, getLayerDraft(selectedModel).length);
                     renderLayerEditor();
-                    applyLayerDraft();
+                    applyLayerDraft({ persist: false });
                 }
             });
         }
@@ -3620,7 +4958,10 @@
             const content = (model && model.pageContent) || {};
             const checks = (model && model.checks) || {};
             const colorLayers = Array.isArray(model && model.colorLayers) ? model.colorLayers : [];
-            const colorsConfigured = colorLayers.length >= 1
+            const gradientConfigured = isGradientPrintMode(model?.printEffect?.mode)
+                && Array.isArray(model.printEffect.palette)
+                && model.printEffect.palette.length >= 1;
+            const colorsConfigured = gradientConfigured || colorLayers.length >= 1
                 && colorLayers.every(layer => layer && typeof layer.color === 'string' && layer.color.trim() !== '');
             const trailforks = content.trailforks || {};
             const photo = content.photo || {};
@@ -3650,6 +4991,20 @@
             const ordered = customOrder.map(id => idToModel.get(id)).filter(Boolean);
             const extra = models.filter(m => !customOrder.includes(m.id));
             return [...ordered, ...extra];
+        }
+
+        // Signs flagged with pageContent.hideFromMap are hidden from the
+        // public site entirely (catalogue list, detail pane, and map). They
+        // remain visible inside the local editor so the flag can be toggled.
+        function isModelPublicHidden(model) {
+            return !!(model && model.pageContent && model.pageContent.hideFromMap);
+        }
+
+        function rebuildFilteredModels() {
+            const visible = editorApiAvailable
+                ? [...catalogueModels]
+                : catalogueModels.filter(m => !isModelPublicHidden(m));
+            filteredModels = applyCustomOrder(visible);
         }
 
         function renderCardChecklist(model) {
@@ -3789,6 +5144,23 @@
             normalizeLayerDraft(selectedModel, Number(event.target.value));
             renderLayerEditor();
             applyLayerDraft();
+        });
+
+        document.querySelectorAll('[data-print-effect]').forEach(button => {
+            button.addEventListener('click', event => {
+                if (!selectedModel) {
+                    return;
+                }
+
+                const mode = event.currentTarget.dataset.printEffect;
+                const previousMode = getPrintEffectDraft(selectedModel).mode;
+                getPrintEffectDraft(selectedModel).mode = mode;
+                if (isGradientPrintMode(mode) && !isGradientPrintMode(previousMode) && gradientPrintPresets[selectedModel.id]) {
+                    applyPrintEffectPresetToDraft(selectedModel, mode);
+                }
+                renderLayerEditor();
+                applyLayerDraft();
+            });
         });
 
         document.getElementById('set-final-stl').addEventListener('click', () => {
@@ -4170,6 +5542,7 @@
                 accentColor: '#dc3545',
                 themeName: '',
                 headerTitle: '',
+                hideFromMap: false,
                 photo: { src: '', alt: '', caption: '' },
                 trailforks: {
                     trailSource: 'trailforks',
@@ -4294,6 +5667,8 @@
             });
             document.getElementById('content-load').disabled = disabled;
             document.getElementById('content-save').disabled = disabled;
+            const fleshBtn = document.getElementById('content-flesh');
+            if (fleshBtn) fleshBtn.disabled = disabled || !editorApiAvailable || !selectedModel;
             document.getElementById('content-regenerate').disabled = disabled;
             document.getElementById('content-open').disabled = disabled || !selectedModel;
             const renderIconButton = document.getElementById('content-map-icon-render');
@@ -4328,6 +5703,10 @@
             const meshRepairedInput = document.getElementById('content-mesh-repaired');
             if (meshRepairedInput) {
                 meshRepairedInput.checked = !!(model && model.checks && model.checks.meshRepaired);
+            }
+            const hideFromMapInput = document.getElementById('content-hide-from-map');
+            if (hideFromMapInput) {
+                hideFromMapInput.checked = !!content.hideFromMap;
             }
             setPhotoSrc(content.photo.src || '');
             document.getElementById('content-photo-alt').value = content.photo.alt || '';
@@ -4429,6 +5808,7 @@
                 pageStatus: document.getElementById('content-status-select').value,
                 accentColor: document.getElementById('content-accent').value,
                 headerTitle: document.getElementById('content-header-title').value.trim(),
+                hideFromMap: document.getElementById('content-hide-from-map').checked,
                 photo: {
                     src: document.getElementById('content-photo-src').value.trim(),
                     alt: document.getElementById('content-photo-alt').value.trim(),
@@ -4555,6 +5935,43 @@
             }
         }
 
+        async function fleshOutSign() {
+            if (!editorApiAvailable || !selectedModel) {
+                setContentLog('Local editor server is not available.');
+                return;
+            }
+            const modelId = selectedModel.id;
+            setContentInputsDisabled(true);
+            setContentLog('Asking the Cursor agent to author the page content… (this can take a minute or two)');
+            try {
+                const response = await fetch('/api/flesh-out-sign', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ modelId })
+                });
+                const data = await response.json();
+                if (!response.ok || !data.ok) {
+                    throw new Error(data.error || 'Flesh-out failed');
+                }
+                setContentLog('Drafted ✓ (pageStatus: agent-drafted). Review it, then set status to user-reviewed to lock it.');
+                // pull the freshly-authored pageContent back into the editor form
+                try {
+                    const fresh = await fetch('catalogue.json', { cache: 'no-store' }).then(r => r.json());
+                    const m = (fresh.models || []).find(x => x.id === modelId);
+                    if (m) { selectedModel = m; loadContentIntoForm(m); }
+                } catch (e) { /* non-fatal: form refresh only */ }
+                const frame = document.getElementById('detail-page-frame');
+                if (frame && frame.src) {
+                    const src = frame.src.split('?')[0];
+                    frame.src = `${src}?t=${Date.now()}`;
+                }
+            } catch (error) {
+                setContentLog(`Flesh out failed: ${error.message}`);
+            } finally {
+                setContentInputsDisabled(false);
+            }
+        }
+
         function openRenderedSignPage() {
             if (!selectedModel) return;
             const pagePath = getModelPagePath(selectedModel);
@@ -4568,6 +5985,9 @@
         });
         document.getElementById('content-save').addEventListener('click', () => {
             saveSignContent();
+        });
+        document.getElementById('content-flesh').addEventListener('click', () => {
+            fleshOutSign();
         });
         document.getElementById('content-regenerate').addEventListener('click', () => {
             regenerateSignPage();
@@ -4675,6 +6095,8 @@
             });
             document.getElementById('content-load').disabled = !enabled;
             document.getElementById('content-save').disabled = !enabled;
+            const fleshBtnT = document.getElementById('content-flesh');
+            if (fleshBtnT) fleshBtnT.disabled = !enabled || !selectedModel;
             document.getElementById('content-regenerate').disabled = !enabled;
             document.getElementById('content-open').disabled = !selectedModel || !getModelPagePath(selectedModel);
             document.getElementById('content-map-icon-render').disabled = !enabled || !getModelSTLPath(selectedModel);
@@ -4966,6 +6388,7 @@
             const bounds = new maplibregl.LngLatBounds();
 
             (catalogueModels || []).forEach(model => {
+                if (!editorApiAvailable && isModelPublicHidden(model)) return;
                 const coords = getSignMapCoords(model);
                 if (!coords) { missing++; return; }
                 const { el, isRendering } = buildMarkerElement(model, {
@@ -5263,6 +6686,241 @@
             });
         }
 
+        function initRenderEditorResize() {
+            const renderPane = document.querySelector('.render-pane');
+            const editorPanel = document.getElementById('editor-panel');
+            const resizer = document.getElementById('render-editor-resizer');
+            const layerSection = document.getElementById('layer-editor-section');
+            const layerToggle = document.getElementById('layer-editor-toggle');
+            const storageKey = 'nehiyoMTB.renderEditorHeight';
+            const expandedStorageKey = 'nehiyoMTB.renderEditorExpandedHeight';
+            const collapsedStorageKey = 'nehiyoMTB.layerEditorCollapsed';
+
+            if (!renderPane || !editorPanel || !resizer || !layerSection || !layerToggle) {
+                return;
+            }
+
+            const setEditorHeight = (heightPx, persist = true) => {
+                const renderRect = renderPane.getBoundingClientRect();
+                const panelTop = editorPanel.getBoundingClientRect().top;
+                const minHeight = 96;
+                const minViewerHeight = Math.max(170, renderRect.height * 0.2);
+                const maxHeight = Math.max(minHeight, renderRect.bottom - panelTop - minViewerHeight - resizer.offsetHeight);
+                const clamped = Math.max(minHeight, Math.min(maxHeight, heightPx));
+                renderPane.style.setProperty('--render-editor-height', `${Math.round(clamped)}px`);
+                if (persist) {
+                    try {
+                        localStorage.setItem(storageKey, String(Math.round(clamped)));
+                    } catch (error) {
+                        // Resizing still works without localStorage.
+                    }
+                }
+            };
+
+            try {
+                const storedHeight = Number(localStorage.getItem(storageKey));
+                if (Number.isFinite(storedHeight) && storedHeight > 0) {
+                    setEditorHeight(storedHeight, false);
+                }
+            } catch (error) {
+                // Keep CSS default.
+            }
+
+            const setLayerCollapsed = (collapsed, { persist = true, resize = true } = {}) => {
+                layerSection.classList.toggle('is-collapsed', collapsed);
+                layerToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+                layerToggle.textContent = collapsed ? 'Restore' : 'Minimize';
+                if (persist) {
+                    try {
+                        localStorage.setItem(collapsedStorageKey, collapsed ? '1' : '0');
+                    } catch (error) {
+                        // Collapse state is optional.
+                    }
+                }
+                if (resize) {
+                    if (collapsed) {
+                        const currentHeight = editorPanel.getBoundingClientRect().height;
+                        if (currentHeight > 180) {
+                            try {
+                                localStorage.setItem(expandedStorageKey, String(Math.round(currentHeight)));
+                            } catch (error) {
+                                // Restoring to the default still works.
+                            }
+                        }
+                        setEditorHeight(150, true);
+                    } else {
+                        const restored = Number(localStorage.getItem(expandedStorageKey));
+                        setEditorHeight(Number.isFinite(restored) && restored > 180 ? restored : 330, true);
+                    }
+                }
+            };
+
+            try {
+                setLayerCollapsed(localStorage.getItem(collapsedStorageKey) === '1', {
+                    persist: false,
+                    resize: false
+                });
+            } catch (error) {
+                // Keep expanded default.
+            }
+
+            layerToggle.addEventListener('click', () => {
+                setLayerCollapsed(!layerSection.classList.contains('is-collapsed'));
+            });
+
+            resizer.addEventListener('dblclick', () => {
+                renderPane.style.removeProperty('--render-editor-height');
+                try {
+                    localStorage.removeItem(storageKey);
+                } catch (error) {
+                    // Reset still works without persistence.
+                }
+            });
+
+            const startDrag = event => {
+                if (editorPanel.classList.contains('is-hidden')) {
+                    return;
+                }
+
+                event.preventDefault();
+                resizer.classList.add('is-active');
+                document.body.classList.add('is-resizing-render-editor');
+                resizer.setPointerCapture?.(event.pointerId);
+
+                const onMove = moveEvent => {
+                    const panelTop = editorPanel.getBoundingClientRect().top;
+                    setEditorHeight(moveEvent.clientY - panelTop, true);
+                };
+
+                const onUp = upEvent => {
+                    resizer.classList.remove('is-active');
+                    document.body.classList.remove('is-resizing-render-editor');
+                    resizer.releasePointerCapture?.(upEvent.pointerId);
+                    window.removeEventListener('pointermove', onMove);
+                    window.removeEventListener('pointerup', onUp);
+                    window.removeEventListener('pointercancel', onUp);
+                };
+
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', onUp);
+                window.addEventListener('pointercancel', onUp);
+            };
+
+            resizer.addEventListener('pointerdown', startDrag);
+            window.addEventListener('resize', () => {
+                const current = editorPanel.getBoundingClientRect().height;
+                if (current > 0 && !editorPanel.classList.contains('is-hidden')) {
+                    setEditorHeight(current, false);
+                }
+            });
+        }
+
+        function initContentEditorResize() {
+            const pagePane = document.querySelector('.page-pane');
+            const editorPanel = document.getElementById('content-editor-panel');
+            const resizer = document.getElementById('content-editor-resizer');
+            const viewTabs = document.getElementById('view-tabs');
+            const storageKey = 'nehiyoMTB.contentEditorHeight';
+
+            if (!pagePane || !editorPanel || !resizer) {
+                return;
+            }
+
+            const resizeMapIfVisible = () => {
+                if (currentView === 'map' && map3D) {
+                    window.requestAnimationFrame(() => map3D.resize());
+                }
+            };
+
+            const setEditorHeight = (heightPx, persist = true) => {
+                const pageRect = pagePane.getBoundingClientRect();
+                const panelTop = editorPanel.getBoundingClientRect().top;
+                const minHeight = 96;
+                const minPreviewHeight = Math.max(170, pageRect.height * 0.22);
+                const fixedChromeHeight = resizer.offsetHeight + (viewTabs ? viewTabs.getBoundingClientRect().height : 0);
+                const maxHeight = Math.max(minHeight, pageRect.bottom - panelTop - minPreviewHeight - fixedChromeHeight);
+                const clamped = Math.max(minHeight, Math.min(maxHeight, heightPx));
+                pagePane.style.setProperty('--content-editor-height', `${Math.round(clamped)}px`);
+                resizer.setAttribute('aria-valuenow', String(Math.round(clamped)));
+                resizeMapIfVisible();
+                if (persist) {
+                    try {
+                        localStorage.setItem(storageKey, String(Math.round(clamped)));
+                    } catch (error) {
+                        // Resizing still works without localStorage.
+                    }
+                }
+            };
+
+            try {
+                const storedHeight = Number(localStorage.getItem(storageKey));
+                if (Number.isFinite(storedHeight) && storedHeight > 0) {
+                    setEditorHeight(storedHeight, false);
+                }
+            } catch (error) {
+                // Keep CSS default.
+            }
+
+            resizer.addEventListener('dblclick', () => {
+                pagePane.style.removeProperty('--content-editor-height');
+                resizer.removeAttribute('aria-valuenow');
+                resizeMapIfVisible();
+                try {
+                    localStorage.removeItem(storageKey);
+                } catch (error) {
+                    // Reset still works without persistence.
+                }
+            });
+
+            resizer.addEventListener('keydown', event => {
+                if (!['ArrowUp', 'ArrowDown'].includes(event.key) || editorPanel.classList.contains('is-hidden') || editorPanel.classList.contains('is-collapsed')) {
+                    return;
+                }
+
+                event.preventDefault();
+                const current = editorPanel.getBoundingClientRect().height;
+                const step = event.shiftKey ? 40 : 20;
+                setEditorHeight(current + (event.key === 'ArrowDown' ? step : -step), true);
+            });
+
+            const startDrag = event => {
+                if (editorPanel.classList.contains('is-hidden') || editorPanel.classList.contains('is-collapsed')) {
+                    return;
+                }
+
+                event.preventDefault();
+                resizer.classList.add('is-active');
+                document.body.classList.add('is-resizing-content-editor');
+                resizer.setPointerCapture?.(event.pointerId);
+
+                const onMove = moveEvent => {
+                    const panelTop = editorPanel.getBoundingClientRect().top;
+                    setEditorHeight(moveEvent.clientY - panelTop, true);
+                };
+
+                const onUp = upEvent => {
+                    resizer.classList.remove('is-active');
+                    document.body.classList.remove('is-resizing-content-editor');
+                    resizer.releasePointerCapture?.(upEvent.pointerId);
+                    window.removeEventListener('pointermove', onMove);
+                    window.removeEventListener('pointerup', onUp);
+                    window.removeEventListener('pointercancel', onUp);
+                };
+
+                window.addEventListener('pointermove', onMove);
+                window.addEventListener('pointerup', onUp);
+                window.addEventListener('pointercancel', onUp);
+            };
+
+            resizer.addEventListener('pointerdown', startDrag);
+            window.addEventListener('resize', () => {
+                const current = editorPanel.getBoundingClientRect().height;
+                if (current > 0 && !editorPanel.classList.contains('is-hidden') && !editorPanel.classList.contains('is-collapsed')) {
+                    setEditorHeight(current, false);
+                }
+            });
+        }
+
         function attachStyleToggleHandlers() {
             const buttons = document.querySelectorAll('#map-style-toggle .style-btn');
             buttons.forEach(btn => {
@@ -5339,22 +6997,29 @@
             const configured = Array.isArray(model.colorLayers) ? model.colorLayers : [];
             const zEpsilon = Math.max((bounds.maxZ - bounds.minZ) * 0.0005, 0.000001);
             if (configured.length > 0) {
+                const validLayers = configured.filter(l => l && l.color);
+                const sorted = validLayers.slice().sort((a, b) => {
+                    const az = Number.isFinite(a.maxZ) ? a.maxZ : Infinity;
+                    const bz = Number.isFinite(b.maxZ) ? b.maxZ : Infinity;
+                    return az - bz;
+                });
                 let previousMaxZ = bounds.minZ;
-                return configured
-                    .filter(l => l && l.color)
-                    .map((layer, index, layers) => {
-                        const isLast = index === layers.length - 1;
-                        const layerMinZ = index === 0 ? bounds.minZ : previousMaxZ + zEpsilon;
-                        const layerMaxZ = Number.isFinite(layer.maxZ)
-                            ? (layer.maxZ - bounds.originalCenterZ) * bounds.scale
-                            : bounds.maxZ + zEpsilon;
-                        previousMaxZ = layerMaxZ;
-                        return {
-                            colorName: layer.color,
-                            minZ: Math.max(bounds.minZ, layerMinZ),
-                            maxZ: isLast ? bounds.maxZ + zEpsilon : Math.min(bounds.maxZ, layerMaxZ)
-                        };
-                    });
+                return sorted.map((layer, index) => {
+                    const isLast = index === sorted.length - 1;
+                    const layerMinZ = previousMaxZ + (index === 0 ? 0 : zEpsilon);
+                    const rawMaxZ = Number.isFinite(layer.maxZ)
+                        ? (layer.maxZ - bounds.originalCenterZ) * bounds.scale
+                        : bounds.maxZ + zEpsilon;
+                    const layerMaxZ = isLast
+                        ? bounds.maxZ + zEpsilon
+                        : Math.min(bounds.maxZ, Math.max(layerMinZ + zEpsilon, rawMaxZ));
+                    previousMaxZ = layerMaxZ;
+                    return {
+                        colorName: layer.color,
+                        minZ: Math.max(bounds.minZ, layerMinZ),
+                        maxZ: layerMaxZ
+                    };
+                });
             }
             const colors = (model.colors || ['white']).filter(c => c.toLowerCase() !== 'multicolor');
             const hasWhite = colors.some(c => c.toLowerCase() === 'white');
@@ -5374,6 +7039,94 @@
                     ? bounds.maxZ + zEpsilon
                     : bounds.minZ + ((index + 1) * layerHeight)
             }));
+        }
+
+        function snapshotGradientStops(effect) {
+            const totalLayers = Math.max(2, Math.round(Number(effect.totalLayers) || 2));
+            return (Array.isArray(effect.palette) ? effect.palette : [])
+                .filter(stop => stop && stop.color)
+                .map((stop, index) => {
+                    const startLayer = Math.max(1, Math.min(totalLayers, Math.round(Number(stop.startLayer) || (index + 1))));
+                    return {
+                        color: new THREE.Color(getColorValue(stop.color)),
+                        position: totalLayers === 1 ? 0 : (startLayer - 1) / (totalLayers - 1)
+                    };
+                })
+                .sort((a, b) => a.position - b.position);
+        }
+
+        function buildSnapshotGradientMesh(geometry, bounds, effect) {
+            const stops = snapshotGradientStops(effect).slice(0, 8);
+            const stopColors = stops.map(stop => stop.color);
+            const stopPositions = stops.map(stop => stop.position);
+
+            while (stopColors.length < 8) {
+                stopColors.push(stopColors[stopColors.length - 1]?.clone() || new THREE.Color(0xffffff));
+                stopPositions.push(stopPositions[stopPositions.length - 1] ?? 0);
+            }
+
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    minZ: { value: bounds.minZ },
+                    zRange: { value: Math.max(0.0001, bounds.maxZ - bounds.minZ) },
+                    stopCount: { value: Math.max(1, Math.min(stops.length, 8)) },
+                    stopPositions: { value: stopPositions },
+                    stopColors: { value: stopColors },
+                    ambient: { value: 0.46 },
+                    lightDirection: { value: new THREE.Vector3(0.45, 0.65, 0.62).normalize() }
+                },
+                vertexShader: `
+                    varying float vZ;
+                    varying vec3 vNormal;
+                    void main() {
+                        vZ = position.z;
+                        vNormal = normalize(normalMatrix * normal);
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform float minZ;
+                    uniform float zRange;
+                    uniform int stopCount;
+                    uniform float stopPositions[8];
+                    uniform vec3 stopColors[8];
+                    uniform float ambient;
+                    uniform vec3 lightDirection;
+                    varying float vZ;
+                    varying vec3 vNormal;
+
+                    vec3 sampleGradient(float t) {
+                        if (stopCount <= 1 || t <= stopPositions[0]) {
+                            return stopColors[0];
+                        }
+
+                        for (int i = 0; i < 7; i++) {
+                            if (i >= stopCount - 1) {
+                                break;
+                            }
+                            float a = stopPositions[i];
+                            float b = stopPositions[i + 1];
+                            if (t <= b) {
+                                float localT = clamp((t - a) / max(0.0001, b - a), 0.0, 1.0);
+                                return mix(stopColors[i], stopColors[i + 1], localT);
+                            }
+                        }
+
+                        return stopColors[stopCount - 1];
+                    }
+
+                    void main() {
+                        float t = clamp((vZ - minZ) / zRange, 0.0, 1.0);
+                        vec3 baseColor = sampleGradient(t);
+                        float diffuse = max(dot(normalize(vNormal), lightDirection), 0.0);
+                        float light = ambient + diffuse * 0.72;
+                        gl_FragColor = vec4(baseColor * light, 1.0);
+                    }
+                `,
+                side: THREE.DoubleSide
+            });
+
+            return new THREE.Mesh(geometry, material);
         }
 
         function loadSnapshotGeometry(stlPath) {
@@ -5434,6 +7187,10 @@
                 originalCenterZ: center.z,
                 scale
             };
+            const effect = model && model.printEffect;
+            if (effect && isGradientPrintMode(effect.mode)) {
+                return [buildSnapshotGradientMesh(geometry, bounds, effect)];
+            }
             const layers = computeSnapshotColorLayers(model, bounds);
             const meshes = [];
             if (layers.length <= 1) {
@@ -5642,6 +7399,8 @@
         // Load on page load
         document.addEventListener('DOMContentLoaded', () => {
             initResizableCatalogueColumns();
+            initRenderEditorResize();
+            initContentEditorResize();
             initMobileCatalogueMenu();
             initMobileViewTabs();
             attachViewTabHandlers();

@@ -24,7 +24,7 @@ Usage:
   # old procedural OpenSCAD drafts
   python3 tools/sign_factory/build_signs.py --all --procedural
 """
-import argparse, base64, json, os, re, shutil, subprocess, sys, urllib.request, urllib.error
+import argparse, base64, json, os, re, shutil, subprocess, sys, time, urllib.request, urllib.error
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -213,7 +213,7 @@ def _img_blank_snippet():
 def assemble_scad(en, translit, syllabics, icon_stl, icon_ztop):
     avail = 90.0 - 16.0
     fs_en, en_l = pg.fit_text(en, avail, 26, pg.CWF_LATIN, fs_max=16)
-    fs_tl, tl_l = pg.fit_text(translit or en, avail, 16, pg.CWF_LATIN, fs_max=12)
+    fs_tl, tl_l = pg.fit_text((translit or en).replace("-", " "), avail, 16, pg.CWF_LATIN, fs_max=12)
     fs_sy, sy_l = pg.fit_text(syllabics or "—", avail, 26, pg.CWF_SYLL, fs_max=17)
     syll_h = icon_ztop + 1.4          # protrude ~1.4 mm in front of the icon
     out = ["// Auto image-pipeline draft (tools/sign_factory/build_signs.py)",
@@ -461,7 +461,7 @@ def render_sign_components(en, td, icon_path, oscad, orient="portrait",
     text_jobs = [
         ("english", en, L["text_w"], L["en_h"], L["en_y"], TEXT_DEPTH, LATIN_FONT,
          "English (below bottom hole)", 24),
-        ("translit", td.get("t", "") or en, L["text_w"], L["tl_h"], L["tl_y"], TEXT_DEPTH,
+        ("translit", (td.get("t", "") or en).replace("-", " "), L["text_w"], L["tl_h"], L["tl_y"], TEXT_DEPTH,
          LATIN_FONT, "transliteration (above top hole)", 22),
         ("syllabics", td.get("s", "") or "—", L["text_w"], L["ic_box_h"] * 0.46, L["ic_y"],
          syll_h, SYLL_FONT, "syllabics (overlaid on icon, tallest)", 30),
@@ -631,7 +631,7 @@ def _icon_module(motif):
 
 def _procedural_scad(en, translit, syllabics, motif):
     fs_en, en_l = pg.fit_text(en, AVAIL_W, 26, pg.CWF_LATIN, fs_max=16)
-    fs_tl, tl_l = pg.fit_text(translit or en, AVAIL_W, 16, pg.CWF_LATIN, fs_max=12)
+    fs_tl, tl_l = pg.fit_text((translit or en).replace("-", " "), AVAIL_W, 16, pg.CWF_LATIN, fs_max=12)
     fs_sy, sy_l = pg.fit_text(syllabics or "—", AVAIL_W, 30, pg.CWF_SYLL, fs_max=20)
     out = ["// Auto procedural draft (tools/sign_factory --procedural)",
            f"$fn = 40;\n", _blank_snippet(), _icon_module(motif)+"\n", "module lettering() {",
@@ -793,6 +793,10 @@ def main():
             rec["needs_icon"] = True
             miss += 1
             print(f"· {en:32s} no icon yet (run with --gen-icons or drop a PNG in {os.path.relpath(ICONS_DIR, REPO_ROOT)})")
+        # stamp the build time so the workbench can cache-bust the preview PNG and
+        # the per-part STLs even on a text-only change (new Cree name), where the
+        # icon geometry — and thus the old colour/size token — stays identical.
+        rec["built"] = int(time.time())
         manifest[en] = rec
 
     json.dump(manifest, open(MANIFEST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -825,6 +829,7 @@ def run_procedural(targets, gfx, text_data, manifest, args):
             rec["stl"] = os.path.relpath(stl_path, REPO_ROOT)
         if _render(scad_path, png_path, "png", args.openscad):
             rec["png"] = "sign-drafts/" + name + ".png"; ok += 1
+        rec["built"] = int(time.time())
         manifest[en] = rec
         print(f"✓ {en:32s} icon={motif}")
     json.dump(manifest, open(MANIFEST, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

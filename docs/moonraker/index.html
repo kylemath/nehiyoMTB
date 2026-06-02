@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moonraker • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#e27a37;--accent2:#b9642d;--line:#dee2e6;--chip:#e9ecef;--ok:#e27a37;--primary-bg:#fbebe1;--primary-text:#000000;--formula-bg:#fefaf7;--formula-border:#e27a37;--secondary-bg:#fdf4ef;--secondary-border:#f6d7c3
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .trail-mini-map-link{display:block;color:inherit;text-decoration:none;border-bottom:0}
+    .trail-mini-map-link:hover{border-bottom:0}
+    .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
+    .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
+    .trail-mini-map svg{display:block;width:100%;height:auto}
+    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
+    .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
+    .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
+    .trail-mini-map-attrib{font-size:10px;fill:#5f6368;paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}
+    .trail-mini-map-caption{padding:8px 10px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:left;background:rgba(255,255,255,0.82)}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    .buy-panel{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+    .buy-panel h2{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}
+    .buy-price{font-size:24px;font-weight:800;color:#000}
+    .buy-mount{flex:1 1 200px;min-width:200px}
+    .buy-fineprint{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
+    .buy-panel--soon{border-style:dashed}
+    @media (max-width:600px){.buy-panel{flex-direction:column;align-items:stretch;text-align:center}}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Moonraker • tipiskâw-pîsim kâ-manahât • ᑎᐱᐢᑳᐤ ᐲᓯᒼ ᑳ ᒪᓇᐊᐟ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
+        <h2>Get one</h2>
+        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Name on the Plaque</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">tipiskâw-pîsim kâ-manahât</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="m0" data-tip="tipiskâwi-pîsim — the moon, literally the &#x27;night-sun&#x27; (tipiskâw &#x27;it is night / dark&#x27; + pîsim &#x27;sun, moon&#x27;). Names what is being gathered." data-syll-id="m0-syll">tipiskâw-pîsim</span>
+              <span class="part tooltip" data-key="m1" data-tip="kâ- relative &#x27;the one who…&#x27; + manah- &#x27;gather, scrape up, rake together&#x27; + -ât participle. A person (or fool) who rakes the moon off the sky." data-syll-id="m1-syll">kâ-manahât</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">tipiskâw-pîsim kâ-manahât</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="m0" data-tip="tipiskâw-pîsim" id="m0-syll">ᑎᐱᐢᑳᐤ ᐲᓯᒼ</span>
+              <span class="syll-part tooltip" data-key="m1" data-tip="kâ-manahât" id="m1-syll">ᑳ ᒪᓇᐦᐊᐟ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;one who rakes/gathers the moon&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/moonraker/moonraker_sign.png" alt="Moonraker trail sign — 3D render" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">3D-printed Moonraker sign — Bond-era space-spy screenprint with an astronaut, orange shuttle wing, crescent station arc, and a garden rake as the orbital trail.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">One Who Rakes the Night-Sun</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The English trail nickname <strong>Moonraker</strong> comes from the 1979 James Bond space-opera film — and, older still, from smugglers said to rake moonlight to guide ships — but riders here also hear the rural prank called "mooning." The carved plaque does not transliterate the English; it reads <strong>tipiskâw-pîsim kâ-manahât</strong> — "one who rakes/gathers the moon." The first half names the target: <em>tipiskâwi-pîsim</em>, the moon understood as the night-sun. The second half, <em>kâ-manahât</em>, is a relative clause built on <em>manah-</em> "gather, scrape up, rake together" — the same scrape-and-gather image as a garden rake dragged across a yard, only aimed at the sky.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">That absurd rake is not an accident. The screenprinted sign icon is a deliberate Bond homage: a white-suited astronaut spy on a bold orange shuttle wing, a crescent moon bent like a space-station arc, and the rake hidden in plain sight as the orbital trail. <em>Manah-</em> keeps the joke honest in Cree — you are not politely "visiting" the moon, you are scraping it toward you. A sister rendering, <em>pîsim omanahikêw</em> (the moon-gatherer), stresses the fool who digs for something unreachable; <em>itê-pîsim</em> (reaching for the moon) stresses the impossible grab. The plaque chose the rake verb on purpose.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">In Gold Bar/Capilano Park the pun trails talk to each other. Nearby <strong>Kêsal pimipahtâwin</strong> (Kessel Run) brags a Star Wars speed run while Moonraker tips its hat to Bond — two blockbuster space plots on the same hillside. The same network holds <strong>Mârk Mesiye</strong> (Mark Messier), <strong>Kapilâno wâwiyêyâw</strong> (Capilano Crescent), <strong>opamê-meskanaw</strong> (Sideline), <strong>têpwêwin mîna kitowin</strong> (Hoot and Holler), <strong>kâ-ayâhastêk atoskêwin</strong> (Risky Business), <strong>okîmotisk-atoskêw</strong> (Hustler) and <strong>okîmotisk amaciwêwin</strong> (Hustler Uphill), <strong>osâwâ-sôniyâw omonahikêw</strong> (Gold Digger), and <strong>cimâsin mîna wîhkasin</strong> (Short 'n Sweet) — English nicknames with nêhiyawêwin names set beside them on the land.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">This sign sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw-Askiy</strong> — Plains Cree territory, Treaty 6, a homeland of the Métis Nation.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The Trail</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">About 778&nbsp;m of mellow singletrack in Gold Bar/Capilano Park — only 7&nbsp;m of ascent and 2&nbsp;m of descent — a low-profile connector in a neighbourhood dense with pun-named trails. Tap through to <a href="https://www.trailforks.com/trails/moonraker-40151/">Trailforks (moonraker-40151)</a> for the full map and 64-point GPX track.</p>
+        </div>
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=40151&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/moonraker-40151/" style="font-size: 0.7em;">moonraker-40151</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;the moon-gatherer&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="rf0a" data-tip="pîsim — &#x27;sun, moon.&#x27; The celestial object being gathered." data-syll-id="rf0a-syll">pîsim</span>
+              <span class="part tooltip" data-key="rf0b" data-tip="omanahikêw — &#x27;one who gathers / digs&#x27; (omanah- + -ikêw agent). Keeps the digger/gatherer image without the rake verb." data-syll-id="rf0b-syll">omanahikêw</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">pîsim omanahikêw</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="rf0a" data-tip="pîsim" id="rf0a-syll">ᐲᓯᒼ</span>
+              <span class="syll-part tooltip" data-key="rf0b" data-tip="omanahikêw" id="rf0b-syll">ᐅᒪᓇᐦᐃᑫᐤ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Foolish over-reacher — comedic. pîsim &#x27;moon/sun&#x27; + omanahikêw &#x27;one who gathers/digs&#x27;.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;reaching for the moon&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="rf1a" data-tip="itê- — &#x27;reach for, grasp at, stretch toward.&#x27; The impossible reach." data-syll-id="rf1a-syll">itê-</span>
+              <span class="part tooltip" data-key="rf1b" data-tip="pîsim — &#x27;sun, moon.&#x27; What cannot be held." data-syll-id="rf1b-syll">pîsim</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">itê-pîsim</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="rf1a" data-tip="itê-" id="rf1a-syll">ᐃᑌ</span>
+              <span class="syll-part tooltip" data-key="rf1b" data-tip="pîsim" id="rf1b-syll">ᐲᓯᒼ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Romantic/impossible-desire reading. Idiom of grasping at the moon for an impossible task.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>one who rakes/gathers the moon (the plaque)</td><td class="tooltip" data-tip="tipiskâwi-pîsim &#x27;moon (night-sun)&#x27; + manah- &#x27;gather/scrape up&#x27;.">tipiskâw-pîsim kâ-manahât</td><td>ᑎᐱᐢᑳᐤ ᐲᓯᒼ ᑳ ᒪᓇᐦᐊᐟ</td></tr>
+              <tr><td>the moon-gatherer</td><td class="tooltip" data-tip="pîsim &#x27;moon/sun&#x27; + omanahikêw &#x27;one who gathers/digs&#x27;.">pîsim omanahikêw</td><td>ᐲᓯᒼ ᐅᒪᓇᐦᐃᑫᐤ</td></tr>
+              <tr><td>reaching for the moon</td><td class="tooltip" data-tip="Idiom of grasping at the moon for an impossible task.">itê-pîsim</td><td>ᐃᑌ ᐲᓯᒼ</td></tr>
+              <tr><td>moon (night-sun)</td><td class="tooltip" data-tip="tipiskâw + pîsim — the headword&#x27;s celestial target.">tipiskâw-pîsim</td><td>ᑎᐱᐢᑳᐤ ᐲᓯᒼ</td></tr>
+              <tr><td>sun, moon</td><td class="tooltip" data-tip="Shared in all three candidate renderings.">pîsim</td><td>ᐲᓯᒼ</td></tr>
+              <tr><td>gather, scrape up, rake (root)</td><td class="tooltip" data-tip="Behind kâ-manahât and omanahikêw.">manah-</td><td></td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">tipiskâw-pîsim</span><span class="muted">= &quot;moon (night-sun)&quot;</span><span class="chip">ᑎᐱᐢᑳᐤ ᐲᓯᒼ</span><button class="copy" data-copy-text="tipiskâw-pîsim">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">pîsim</span><span class="muted">= &quot;sun, moon&quot;</span><span class="chip">ᐲᓯᒼ</span><button class="copy" data-copy-text="pîsim">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">omanahikêw</span><span class="muted">= &quot;one who gathers/digs&quot;</span><span class="chip">ᐅᒪᓇᐦᐃᑫᐤ</span><button class="copy" data-copy-text="omanahikêw">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">itê-</span><span class="muted">= &quot;reach for, grasp at&quot;</span><span class="chip">ᐃᑌ</span><button class="copy" data-copy-text="itê-">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
+        </div>
+      </section>
+
+      <footer>
+        Moonraker • ᑎᐱᐢᑳᐤ ᐲᓯᒼ ᑳ ᒪᓇᐦᐊᐟ • tipiskâw-pîsim kâ-manahât • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="m0"]', syll: '#m0-syll'},
+        {sro: '[data-key="m1"]', syll: '#m1-syll'},
+        {sro: '[data-key="rf0a"]', syll: '#rf0a-syll'},
+        {sro: '[data-key="rf0b"]', syll: '#rf0b-syll'},
+        {sro: '[data-key="rf1a"]', syll: '#rf1a-syll'},
+        {sro: '[data-key="rf1b"]', syll: '#rf1b-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+
+  </body>
+</html>

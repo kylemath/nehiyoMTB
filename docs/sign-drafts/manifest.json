@@ -765,15 +765,15 @@
    "fs_tl": 6.5,
    "fs_sy": 11.5
   },
-  "prompt": "a gold prospecting pan with a pickaxe and gold nuggets, flat 2D screen-print style icon, bold clean vector shapes, limited palette of 3 flat colours, thick confident black outlines, minimal detail, high contrast, single centered subject on a plain solid white background, no text, no lettering, no border, vinyl decal / screenprint sticker look, 1024x1024",
+  "prompt": "a 19th-century prospector in a bowler hat tipping a shovel-load of gravel into an inclined wooden sluice box (grizzly) at a riverbank, a low evergreen treeline and water ripples behind, a round gold pan revealing gold nuggets and a stack of gold bars in the foreground, flat 2D screen-print style icon, bold clean vector shapes, limited palette of 3 flat colours, thick confident black outlines, minimal detail, high contrast, single centered subject on a plain solid white background, no text, no lettering, no border, vinyl decal / screenprint sticker look, 1024x1024",
   "icon": "sign-drafts/icons/gold_digger.png",
   "source": "image",
   "components": {
    "orient": "portrait",
    "icon_outline": "signs/gold_digger/gold_digger_icon_outline.stl",
+   "icon_midbrown": "signs/gold_digger/gold_digger_icon_midbrown.stl",
    "icon_yellow": "signs/gold_digger/gold_digger_icon_yellow.stl",
-   "icon_brown": "signs/gold_digger/gold_digger_icon_brown.stl",
-   "icon_red": "signs/gold_digger/gold_digger_icon_red.stl",
+   "icon_blue": "signs/gold_digger/gold_digger_icon_blue.stl",
    "plaque": "signs/gold_digger/gold_digger_plaque.stl",
    "english": "signs/gold_digger/gold_digger_english.stl",
    "translit": "signs/gold_digger/gold_digger_translit.stl",
@@ -783,7 +783,7 @@
    "color_ztop": 3.0,
    "icon_size_mm": [
     73.0,
-    59.7
+    54.9
    ],
    "colorLayers": [
     {
@@ -797,19 +797,19 @@
      "label": "text + icon outline"
     },
     {
-     "color": "yellow",
+     "color": "midbrown",
      "maxZ": 2.2,
+     "label": "icon midbrown"
+    },
+    {
+     "color": "yellow",
+     "maxZ": 2.6,
      "label": "icon yellow"
     },
     {
-     "color": "brown",
-     "maxZ": 2.6,
-     "label": "icon brown"
-    },
-    {
-     "color": "red",
+     "color": "blue",
      "maxZ": 3.0,
-     "label": "icon red"
+     "label": "icon blue"
     },
     {
      "color": "red",
@@ -819,13 +819,121 @@
    "colors": [
     "white",
     "black",
+    "midbrown",
     "yellow",
-    "brown",
+    "blue",
     "red"
    ],
    "color_mode": "staggered"
   },
-  "assembly_png": "signs/gold_digger/gold_digger_assembly.png"
+  "assembly_png": "signs/gold_digger/gold_digger_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "icon_outline": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": -9.0,
+     "z": -0.030000001192092923,
+     "hz": 1.0
+    },
+    "icon_midbrown": {
+     "s": 1.05,
+     "x": -0.267224979400635,
+     "y": -9.000000047683717,
+     "z": -0.01999999880790712,
+     "hz": 1.0
+    },
+    "icon_yellow": {
+     "s": 1.05,
+     "x": 0.24767494201660178,
+     "y": -9.104300022125244,
+     "z": -0.0100000023841858,
+     "hz": 1.0
+    },
+    "icon_blue": {
+     "s": 1.05,
+     "x": -0.1955250263214113,
+     "y": -9.65505027472973,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "english": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "translit": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "syllabics": {
+     "s": 1.1,
+     "x": 0.0,
+     "y": 32.0,
+     "z": 0.0,
+     "hz": 1.0
+    }
+   },
+   "colors": {
+    "syllabics": "red"
+   }
+  },
+  "assembled_stl": "signs/gold_digger/gold_digger_adj.stl",
+  "print_3mf": "signs/gold_digger/gold_digger_adj.3mf",
+  "adjustedComponents": {
+   "icon_outline": "signs/gold_digger/gold_digger_icon_outline_adj.stl",
+   "icon_midbrown": "signs/gold_digger/gold_digger_icon_midbrown_adj.stl",
+   "icon_yellow": "signs/gold_digger/gold_digger_icon_yellow_adj.stl",
+   "icon_blue": "signs/gold_digger/gold_digger_icon_blue_adj.stl",
+   "plaque": "signs/gold_digger/gold_digger_plaque_adj.stl",
+   "english": "signs/gold_digger/gold_digger_english_adj.stl",
+   "translit": "signs/gold_digger/gold_digger_translit_adj.stl",
+   "syllabics": "signs/gold_digger/gold_digger_syllabics_adj.stl"
+  },
+  "adjustedColorLayers": [
+   {
+    "color": "white",
+    "label": "white",
+    "maxZ": 1.7
+   },
+   {
+    "color": "black",
+    "label": "black",
+    "maxZ": 1.8
+   },
+   {
+    "color": "midbrown",
+    "label": "midbrown",
+    "maxZ": 2.213
+   },
+   {
+    "color": "yellow",
+    "label": "yellow",
+    "maxZ": 2.632
+   },
+   {
+    "color": "blue",
+    "label": "blue",
+    "maxZ": 3.053
+   },
+   {
+    "color": "red",
+    "label": "red"
+   }
+  ]
  },
  "Prime Rib": {
   "en": "Prime Rib",
@@ -1297,7 +1405,92 @@
    ],
    "color_mode": "staggered"
   },
-  "assembly_png": "signs/the_holy_trail/the_holy_trail_assembly.png"
+  "assembly_png": "signs/the_holy_trail/the_holy_trail_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0
+    },
+    "icon_outline": {
+     "s": 1.3000000000000003,
+     "x": -0.00017995834350585953,
+     "y": 5.718200302124021,
+     "z": -0.11999999284744273
+    },
+    "icon_yellow": {
+     "s": 1.3000000000000003,
+     "x": 0.0,
+     "y": 8.094349670410157,
+     "z": -0.059999978542327935
+    },
+    "icon_orange": {
+     "s": 1.3000000000000003,
+     "x": 0.01889991760253908,
+     "y": 7.472000217437744,
+     "z": 0.0
+    },
+    "english": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": -1.0,
+     "z": 0.0
+    },
+    "translit": {
+     "s": 1.1,
+     "x": 0.0,
+     "y": 2.0,
+     "z": 0.0
+    },
+    "syllabics": {
+     "s": 1.1,
+     "x": 0.0,
+     "y": 6.0,
+     "z": 0.0
+    }
+   },
+   "colors": {}
+  },
+  "adjustedComponents": {
+   "icon_outline": "signs/the_holy_trail/the_holy_trail_icon_outline_adj.stl",
+   "icon_yellow": "signs/the_holy_trail/the_holy_trail_icon_yellow_adj.stl",
+   "icon_orange": "signs/the_holy_trail/the_holy_trail_icon_orange_adj.stl",
+   "plaque": "signs/the_holy_trail/the_holy_trail_plaque_adj.stl",
+   "english": "signs/the_holy_trail/the_holy_trail_english_adj.stl",
+   "translit": "signs/the_holy_trail/the_holy_trail_translit_adj.stl",
+   "syllabics": "signs/the_holy_trail/the_holy_trail_syllabics_adj.stl"
+  },
+  "adjustedColorLayers": [
+   {
+    "color": "white",
+    "label": "white",
+    "maxZ": 1.7
+   },
+   {
+    "color": "black",
+    "label": "black",
+    "maxZ": 1.845
+   },
+   {
+    "color": "yellow",
+    "label": "yellow",
+    "maxZ": 2.335
+   },
+   {
+    "color": "orange",
+    "label": "orange",
+    "maxZ": 2.855
+   },
+   {
+    "color": "red",
+    "label": "red"
+   }
+  ],
+  "assembled_stl": "signs/the_holy_trail/the_holy_trail_adj.stl",
+  "print_3mf": "signs/the_holy_trail/the_holy_trail_adj.3mf"
  },
  "Sideline": {
   "en": "Sideline",
@@ -1386,7 +1579,7 @@
   "icon": "sign-drafts/icons/caddytrack.png",
   "source": "image",
   "components": {
-   "orient": "landscape",
+   "orient": "portrait",
    "icon_outline": "signs/caddytrack/caddytrack_icon_outline.stl",
    "icon_red": "signs/caddytrack/caddytrack_icon_red.stl",
    "icon_silver": "signs/caddytrack/caddytrack_icon_silver.stl",
@@ -1398,8 +1591,8 @@
    "assembly_scad": "signs/caddytrack/caddytrack_assembly.scad",
    "color_ztop": 2.6,
    "icon_size_mm": [
-    42.8,
-    28.0
+    73.0,
+    47.7
    ],
    "colorLayers": [
     {
@@ -1446,25 +1639,25 @@
      "z": 0.0
     },
     "icon_outline": {
-     "s": 1.1500000000000001,
+     "s": 0.95,
      "x": 0.0,
-     "y": 0.0,
-     "z": -0.05999999642372136
+     "y": 15.0,
+     "z": 0.01999999880790712
     },
     "icon_red": {
-     "s": 1.1500000000000001,
-     "x": -0.005999994277954107,
-     "y": -0.017175006866455095,
-     "z": -0.029999989271163967
+     "s": 0.95,
+     "x": 0.0033275127410888703,
+     "y": 15.00974998474121,
+     "z": 0.009999996423721322
     },
     "icon_silver": {
-     "s": 1.1500000000000001,
-     "x": -0.005774974822998052,
-     "y": -0.3040507793426516,
+     "s": 0.95,
+     "x": 0.0032500028610229523,
+     "y": 15.172699987888336,
      "z": 0.0
     },
     "english": {
-     "s": 1.5500000000000005,
+     "s": 1.1,
      "x": 0.0,
      "y": 0.0,
      "z": 0.0
@@ -1476,15 +1669,16 @@
      "z": 0.2
     },
     "syllabics": {
-     "s": 1.2000000000000002,
+     "s": 1.1500000000000001,
      "x": 0.0,
-     "y": 10.0,
+     "y": -18.0,
      "z": 0.0
     }
    },
    "colors": {
     "syllabics": "green",
-    "plaque": "white"
+    "plaque": "white",
+    "english": "black"
    }
   },
   "adjustedComponents": {
@@ -1505,17 +1699,17 @@
    {
     "color": "black",
     "label": "black",
-    "maxZ": 2.048
+    "maxZ": 2.045
    },
    {
     "color": "red",
     "label": "red",
-    "maxZ": 2.268
+    "maxZ": 2.177
    },
    {
     "color": "silver",
     "label": "silver",
-    "maxZ": 2.728
+    "maxZ": 2.558
    },
    {
     "color": "green",
@@ -1675,7 +1869,75 @@
    ],
    "color_mode": "staggered"
   },
-  "assembly_png": "signs/moonraker/moonraker_assembly.png"
+  "assembly_png": "signs/moonraker/moonraker_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "icon_outline": {
+     "s": 1.1500000000000001,
+     "x": -0.20534992218017598,
+     "y": -37.0,
+     "z": -0.09000000357627877,
+     "hz": 1.0
+    },
+    "icon_orange": {
+     "s": 1.1500000000000001,
+     "x": 0.10755014419555674,
+     "y": -37.0586501121521,
+     "z": -0.05999999642372136,
+     "hz": 1.0
+    },
+    "icon_silver": {
+     "s": 1.1500000000000001,
+     "x": -1.3883241891860973,
+     "y": -38.08517506122589,
+     "z": -0.0300000071525574,
+     "hz": 1.0
+    },
+    "icon_yellow": {
+     "s": 1.1500000000000001,
+     "x": 0.26400003433227565,
+     "y": -35.54327433109283,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "english": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": 112.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "translit": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": -54.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "syllabics": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": 29.0,
+     "z": 0.0,
+     "hz": 1.0
+    }
+   },
+   "colors": {
+    "plaque": "grey",
+    "icon_orange": "yellow",
+    "icon_yellow": "yellow"
+   }
+  },
+  "assembled_stl": "signs/moonraker/moonraker.stl",
+  "print_3mf": "signs/moonraker/moonraker.3mf"
  },
  "Risky Business": {
   "en": "Risky Business",
@@ -2116,32 +2378,27 @@
   "motif": null,
   "type": "screenprint",
   "scad": "signs/walters_folly/walters_folly.scad",
-  "stl": "signs/walters_folly/walters_folly_plaque.stl",
+  "stl": "signs/walters_folly/walters_folly_engraving.stl",
   "png": "sign-drafts/walters_folly.png",
   "fits": {
    "fs_en": 10.5,
    "fs_tl": 6.5,
    "fs_sy": 12.0
   },
-  "prompt": "a whimsical crooked leaning folly tower, flat 2D screen-print style icon, bold clean vector shapes, limited palette of 3 flat colours, thick confident black outlines, minimal detail, high contrast, single centered subject on a plain solid white background, no text, no lettering, no border, vinyl decal / screenprint sticker look, 1024x1024",
+  "prompt": "a grayscale engraving triptych of the Walterdale river crossing through three eras — 1882 cable ferry, 1913 steel truss bridge, 2017 twin-arch bridge — continuous-tone (lithophane/IllumiStack) relief, black and white, 3:2 landscape, no text",
   "icon": "sign-drafts/icons/walters_folly.png",
   "source": "image",
   "components": {
-   "orient": "portrait",
-   "icon_outline": "signs/walters_folly/walters_folly_icon_outline.stl",
-   "icon_silver": "signs/walters_folly/walters_folly_icon_silver.stl",
-   "icon_brown": "signs/walters_folly/walters_folly_icon_brown.stl",
-   "icon_grey": "signs/walters_folly/walters_folly_icon_grey.stl",
-   "plaque": "signs/walters_folly/walters_folly_plaque.stl",
+   "orient": "landscape",
+   "icon_grey": "signs/walters_folly/walters_folly_engraving.stl",
    "english": "signs/walters_folly/walters_folly_english.stl",
    "translit": "signs/walters_folly/walters_folly_translit.stl",
    "syllabics": "signs/walters_folly/walters_folly_syllabics.stl",
-   "threemf": "signs/walters_folly/walters_folly.3mf",
-   "assembly_scad": "signs/walters_folly/walters_folly_assembly.scad",
-   "color_ztop": 3.0,
+   "assembly_scad": "signs/walters_folly/walters_folly.scad",
+   "color_ztop": 3.4,
    "icon_size_mm": [
-    36.8,
-    70.4
+    149.0,
+    99.0
    ],
    "colorLayers": [
     {
@@ -2150,24 +2407,14 @@
      "label": "plaque base"
     },
     {
-     "color": "black",
-     "maxZ": 1.8,
-     "label": "text + icon outline"
-    },
-    {
-     "color": "silver",
-     "maxZ": 2.2,
-     "label": "icon silver"
-    },
-    {
-     "color": "brown",
-     "maxZ": 2.6,
-     "label": "icon brown"
-    },
-    {
      "color": "grey",
-     "maxZ": 3.0,
-     "label": "icon grey"
+     "maxZ": 3.4,
+     "label": "engraving tile (B&W triptych)"
+    },
+    {
+     "color": "black",
+     "maxZ": 4.0,
+     "label": "english + translit"
     },
     {
      "color": "red",
@@ -2176,15 +2423,84 @@
    ],
    "colors": [
     "white",
-    "black",
-    "silver",
-    "brown",
     "grey",
+    "black",
     "red"
    ],
    "color_mode": "staggered"
   },
-  "assembly_png": "signs/walters_folly/walters_folly_assembly.png"
+  "assembly_png": "signs/walters_folly/walters_folly_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "english": {
+     "s": 1.2500000000000002,
+     "x": 0.0,
+     "y": 13.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "translit": {
+     "s": 1.4500000000000004,
+     "x": 0.0,
+     "y": -15.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "syllabics": {
+     "s": 1.1500000000000001,
+     "x": 0.0,
+     "y": 2.0,
+     "z": 0.0,
+     "hz": 1.5
+    },
+    "icon_grey": {
+     "s": 0.95,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.2,
+     "hz": 1.0
+    }
+   },
+   "colors": {}
+  },
+  "adjustedComponents": {
+   "plaque": "signs/walters_folly/walters_folly_plaque_adj.stl",
+   "icon_grey": "signs/walters_folly/walters_folly_engraving_adj.stl",
+   "english": "signs/walters_folly/walters_folly_english_adj.stl",
+   "translit": "signs/walters_folly/walters_folly_translit_adj.stl",
+   "syllabics": "signs/walters_folly/walters_folly_syllabics_adj.stl"
+  },
+  "adjustedColorLayers": [
+   {
+    "color": "white",
+    "label": "white",
+    "maxZ": 1.7
+   },
+   {
+    "color": "grey",
+    "label": "grey",
+    "maxZ": 3.07
+   },
+   {
+    "color": "black",
+    "label": "black",
+    "maxZ": 4.943
+   },
+   {
+    "color": "red",
+    "label": "red"
+   }
+  ],
+  "assembled_stl": "signs/walters_folly/walters_folly.stl",
+  "print_3mf": "signs/walters_folly/walters_folly.3mf"
  },
  "Dave's Trail": {
   "en": "Dave's Trail",
@@ -2398,7 +2714,90 @@
    ],
    "color_mode": "staggered"
   },
-  "assembly_png": "signs/flat_pete/flat_pete_assembly.png"
+  "assembly_png": "signs/flat_pete/flat_pete_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "icon_outline": {
+     "s": 0.8999999999999999,
+     "x": 0.0,
+     "y": -27.0,
+     "z": 0.0200000047683716,
+     "hz": 1.25
+    },
+    "icon_orange": {
+     "s": 0.8999999999999999,
+     "x": 0.01184997558593751,
+     "y": -26.988199996948243,
+     "z": 0.0,
+     "hz": 1.5
+    },
+    "english": {
+     "s": 1.1500000000000001,
+     "x": 0.0,
+     "y": 57.0,
+     "z": 0.0,
+     "hz": 1.25
+    },
+    "translit": {
+     "s": 1.2000000000000002,
+     "x": 0.0,
+     "y": -38.0,
+     "z": 0.0,
+     "hz": 1.25
+    },
+    "syllabics": {
+     "s": 1.7500000000000007,
+     "x": 0.0,
+     "y": 11.0,
+     "z": 0.0,
+     "hz": 1.0
+    }
+   },
+   "colors": {
+    "icon_orange": "purple",
+    "syllabics": "green",
+    "plaque": "white"
+   }
+  },
+  "adjustedComponents": {
+   "icon_outline": "signs/flat_pete/flat_pete_icon_outline_adj.stl",
+   "icon_orange": "signs/flat_pete/flat_pete_icon_orange_adj.stl",
+   "plaque": "signs/flat_pete/flat_pete_plaque_adj.stl",
+   "english": "signs/flat_pete/flat_pete_english_adj.stl",
+   "translit": "signs/flat_pete/flat_pete_translit_adj.stl",
+   "syllabics": "signs/flat_pete/flat_pete_syllabics_adj.stl"
+  },
+  "adjustedColorLayers": [
+   {
+    "color": "white",
+    "label": "white",
+    "maxZ": 1.7
+   },
+   {
+    "color": "black",
+    "label": "black",
+    "maxZ": 1.89
+   },
+   {
+    "color": "purple",
+    "label": "purple",
+    "maxZ": 2.135
+   },
+   {
+    "color": "green",
+    "label": "green"
+   }
+  ],
+  "assembled_stl": "signs/flat_pete/flat_pete.stl",
+  "print_3mf": "signs/flat_pete/flat_pete.3mf"
  },
  "Too Much": {
   "en": "Too Much",
@@ -3020,7 +3419,51 @@
    ],
    "color_mode": "staggered"
   },
-  "assembly_png": "signs/won_t_die/won_t_die_assembly.png"
+  "assembly_png": "signs/won_t_die/won_t_die_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0
+    },
+    "icon_outline": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0
+    },
+    "icon_red": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0
+    },
+    "english": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0
+    },
+    "translit": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0
+    },
+    "syllabics": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0
+    }
+   },
+   "colors": {
+    "syllabics": "black"
+   }
+  }
  },
  "Low Class": {
   "en": "Low Class",
@@ -3605,7 +4048,110 @@
    ],
    "color_mode": "staggered"
   },
-  "assembly_png": "signs/go_trail/go_trail_assembly.png"
+  "assembly_png": "signs/go_trail/go_trail_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 2.25
+    },
+    "icon_outline": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 1.9699999988079069,
+     "hz": 1.75
+    },
+    "icon_green": {
+     "s": 1.05,
+     "x": -2.4986267089843773e-05,
+     "y": -0.5877152681350714,
+     "z": 1.9800000011920926,
+     "hz": 3.75
+    },
+    "icon_yellow": {
+     "s": 1.05,
+     "x": -2.474784851074221e-05,
+     "y": 0.2671497464179995,
+     "z": 1.989999997615814,
+     "hz": 1.75
+    },
+    "icon_red": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": 1.0685750007629404,
+     "z": 1.9999999999999998,
+     "hz": 1.75
+    },
+    "english": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": 110.0,
+     "z": 0.20000000000000007,
+     "hz": 3.25
+    },
+    "translit": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": -111.0,
+     "z": 0.0,
+     "hz": 3.25
+    },
+    "syllabics": {
+     "s": 1.1500000000000001,
+     "x": 2.0,
+     "y": 17.0,
+     "z": 0.0,
+     "hz": 2.25
+    }
+   },
+   "colors": {
+    "plaque": "white",
+    "syllabics": "green"
+   }
+  },
+  "adjustedComponents": {
+   "icon_outline": "signs/go_trail/go_trail_icon_outline_adj.stl",
+   "icon_green": "signs/go_trail/go_trail_icon_green_adj.stl",
+   "icon_yellow": "signs/go_trail/go_trail_icon_yellow_adj.stl",
+   "icon_red": "signs/go_trail/go_trail_icon_red_adj.stl",
+   "plaque": "signs/go_trail/go_trail_plaque_adj.stl",
+   "english": "signs/go_trail/go_trail_english_adj.stl",
+   "translit": "signs/go_trail/go_trail_translit_adj.stl",
+   "syllabics": "signs/go_trail/go_trail_syllabics_adj.stl"
+  },
+  "adjustedColorLayers": [
+   {
+    "color": "white",
+    "label": "white",
+    "maxZ": 3.825
+   },
+   {
+    "color": "black",
+    "label": "black",
+    "maxZ": 4.501
+   },
+   {
+    "color": "yellow",
+    "label": "yellow",
+    "maxZ": 5.971
+   },
+   {
+    "color": "red",
+    "label": "red",
+    "maxZ": 6.706
+   },
+   {
+    "color": "green",
+    "label": "green"
+   }
+  ],
+  "assembled_stl": "signs/go_trail/go_trail.stl",
+  "print_3mf": "signs/go_trail/go_trail.3mf"
  },
  "Hustler": {
   "en": "Hustler",
@@ -4335,7 +4881,113 @@
    ],
    "color_mode": "staggered"
   },
-  "assembly_png": "signs/root_canal/root_canal_assembly.png"
+  "assembly_png": "signs/root_canal/root_canal_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "icon_outline": {
+     "s": 1.4500000000000004,
+     "x": 0.0,
+     "y": 0.0,
+     "z": -0.2700000107288363,
+     "hz": 1.0
+    },
+    "icon_green": {
+     "s": 1.4500000000000004,
+     "x": -0.0004720687866210942,
+     "y": 8.12452515363694,
+     "z": -0.1799999892711641,
+     "hz": 1.0
+    },
+    "icon_midbrown": {
+     "s": 1.4500000000000004,
+     "x": 0.11745028495788584,
+     "y": -3.2262794494628935,
+     "z": -0.0900000214576722,
+     "hz": 1.0
+    },
+    "icon_brown": {
+     "s": 1.4500000000000004,
+     "x": 0.14692497253417983,
+     "y": -2.083342337608339,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "english": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "translit": {
+     "s": 1.05,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "syllabics": {
+     "s": 1.1500000000000001,
+     "x": -1.0,
+     "y": 1.0,
+     "z": 0.6000000000000001,
+     "hz": 1.0
+    }
+   },
+   "colors": {}
+  },
+  "assembled_stl": "signs/root_canal/root_canal_adj.stl",
+  "print_3mf": "signs/root_canal/root_canal_adj.3mf",
+  "adjustedComponents": {
+   "icon_outline": "signs/root_canal/root_canal_icon_outline_adj.stl",
+   "icon_green": "signs/root_canal/root_canal_icon_green_adj.stl",
+   "icon_midbrown": "signs/root_canal/root_canal_icon_midbrown_adj.stl",
+   "icon_brown": "signs/root_canal/root_canal_icon_brown_adj.stl",
+   "plaque": "signs/root_canal/root_canal_plaque_adj.stl",
+   "english": "signs/root_canal/root_canal_english_adj.stl",
+   "translit": "signs/root_canal/root_canal_translit_adj.stl",
+   "syllabics": "signs/root_canal/root_canal_syllabics_adj.stl"
+  },
+  "adjustedColorLayers": [
+   {
+    "color": "white",
+    "label": "white",
+    "maxZ": 1.7
+   },
+   {
+    "color": "black",
+    "label": "black",
+    "maxZ": 1.823
+   },
+   {
+    "color": "green",
+    "label": "green",
+    "maxZ": 2.313
+   },
+   {
+    "color": "midbrown",
+    "label": "midbrown",
+    "maxZ": 2.892
+   },
+   {
+    "color": "brown",
+    "label": "brown",
+    "maxZ": 3.473
+   },
+   {
+    "color": "red",
+    "label": "red"
+   }
+  ],
+  "built": 1781053635
  },
  "Scona Hill Rip": {
   "en": "Scona Hill Rip",
@@ -6178,24 +6830,26 @@
    "fs_tl": 6.5,
    "fs_sy": 12.0
   },
-  "prompt": "a medieval knight's helmet with a plume, flat 2D screen-print style icon, bold clean vector shapes, limited palette of 3 flat colours, thick confident black outlines, minimal detail, high contrast, single centered subject on a plain solid white background, no text, no lettering, no border, vinyl decal / screenprint sticker look, 1024x1024",
+  "prompt": "two early-1800s soldiers in scarlet red coats and tall black shakos riding antique 1817 wooden dandy-horse bicycles (draisines) down a winding trail, one with De Meuron sky-blue facings and trousers, dark brown wooden frames and spoked wheels, flat 2D screen-print style icon, bold clean vector shapes, limited palette of 3 flat colours, thick confident black outlines, minimal detail, high contrast, single centered subject on a plain solid white background, no text, no lettering, no border, vinyl decal / screenprint sticker look, 1024x1024",
   "needs_icon": false,
   "icon": "sign-drafts/icons/selkirk_knights.png",
   "source": "image",
   "components": {
    "orient": "portrait",
    "icon_outline": "signs/selkirk_knights/selkirk_knights_icon_outline.stl",
-   "icon_grey": "signs/selkirk_knights/selkirk_knights_icon_grey.stl",
+   "icon_brown": "signs/selkirk_knights/selkirk_knights_icon_brown.stl",
+   "icon_red": "signs/selkirk_knights/selkirk_knights_icon_red.stl",
+   "icon_blue": "signs/selkirk_knights/selkirk_knights_icon_blue.stl",
    "plaque": "signs/selkirk_knights/selkirk_knights_plaque.stl",
    "english": "signs/selkirk_knights/selkirk_knights_english.stl",
    "translit": "signs/selkirk_knights/selkirk_knights_translit.stl",
    "syllabics": "signs/selkirk_knights/selkirk_knights_syllabics.stl",
    "threemf": "signs/selkirk_knights/selkirk_knights.3mf",
    "assembly_scad": "signs/selkirk_knights/selkirk_knights_assembly.scad",
-   "color_ztop": 2.2,
+   "color_ztop": 3.0,
    "icon_size_mm": [
-    59.1,
-    70.4
+    73.0,
+    59.1
    ],
    "colorLayers": [
     {
@@ -6209,9 +6863,19 @@
      "label": "text + icon outline"
     },
     {
-     "color": "grey",
+     "color": "brown",
      "maxZ": 2.2,
-     "label": "icon grey"
+     "label": "icon brown"
+    },
+    {
+     "color": "red",
+     "maxZ": 2.6,
+     "label": "icon red"
+    },
+    {
+     "color": "blue",
+     "maxZ": 3.0,
+     "label": "icon blue"
     },
     {
      "color": "red",
@@ -6221,8 +6885,9 @@
    "colors": [
     "white",
     "black",
-    "grey",
-    "red"
+    "brown",
+    "red",
+    "blue"
    ],
    "color_mode": "staggered"
   },
@@ -10056,7 +10721,75 @@
    "color_mode": "staggered"
   },
   "stl": "signs/peckers_hollow/peckers_hollow_plaque.stl",
-  "assembly_png": "signs/peckers_hollow/peckers_hollow_assembly.png"
+  "assembly_png": "signs/peckers_hollow/peckers_hollow_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "icon_outline": {
+     "s": 1.4500000000000004,
+     "x": 0.0,
+     "y": -6.0,
+     "z": -0.2700000107288363,
+     "hz": 1.0
+    },
+    "icon_silver": {
+     "s": 1.4500000000000004,
+     "x": -3.733924734592441,
+     "y": -5.858699941635131,
+     "z": -0.1799999892711641,
+     "hz": 1.0
+    },
+    "icon_grey": {
+     "s": 1.4500000000000004,
+     "x": -0.9902700394392022,
+     "y": -1.87034976482391,
+     "z": -0.0900000214576722,
+     "hz": 1.0
+    },
+    "icon_red": {
+     "s": 1.4500000000000004,
+     "x": 4.468677592277531,
+     "y": -3.2846998214721657,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "english": {
+     "s": 1.1,
+     "x": 0.0,
+     "y": -5.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "translit": {
+     "s": 1.1500000000000001,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "syllabics": {
+     "s": 1.2000000000000002,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    }
+   },
+   "colors": {
+    "icon_grey": "yellow",
+    "icon_silver": "midbrown",
+    "syllabics": "green"
+   }
+  },
+  "assembled_stl": "signs/peckers_hollow/peckers_hollow.stl",
+  "print_3mf": "signs/peckers_hollow/peckers_hollow.3mf"
  },
  "Tin Pan Alley": {
   "en": "Tin Pan Alley",
@@ -11359,7 +12092,7 @@
    "color_ztop": 3.0,
    "icon_size_mm": [
     73.0,
-    69.1
+    47.8
    ],
    "colorLayers": [
     {
@@ -11403,7 +12136,75 @@
    "color_mode": "staggered"
   },
   "stl": "signs/coalminer_s_daughter/coalminer_s_daughter_plaque.stl",
-  "assembly_png": "signs/coalminer_s_daughter/coalminer_s_daughter_assembly.png"
+  "assembly_png": "signs/coalminer_s_daughter/coalminer_s_daughter_assembly.png",
+  "adjusted": {
+   "global": 1.0,
+   "parts": {
+    "plaque": {
+     "s": 1.0,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "icon_outline": {
+     "s": 1.1,
+     "x": 0.0,
+     "y": 7.0,
+     "z": 0.13999999761581416,
+     "hz": 1.0
+    },
+    "icon_brown": {
+     "s": 1.1,
+     "x": -0.006450080871582037,
+     "y": 7.058649921417237,
+     "z": 0.16000000238418577,
+     "hz": 1.0
+    },
+    "icon_yellow": {
+     "s": 1.1,
+     "x": 1.4730510950088513,
+     "y": 6.817549991607666,
+     "z": 0.1799999952316284,
+     "hz": 1.0
+    },
+    "icon_green": {
+     "s": 1.1,
+     "x": 1.6229495286941542,
+     "y": 6.876200008392334,
+     "z": 0.2,
+     "hz": 1.0
+    },
+    "english": {
+     "s": 1.2500000000000002,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "translit": {
+     "s": 1.1,
+     "x": 0.0,
+     "y": 0.0,
+     "z": 0.0,
+     "hz": 1.0
+    },
+    "syllabics": {
+     "s": 1.1500000000000001,
+     "x": 0.0,
+     "y": -14.0,
+     "z": 0.0,
+     "hz": 1.0
+    }
+   },
+   "colors": {
+    "icon_yellow": "brown",
+    "icon_green": "black",
+    "icon_brown": "lightbrown"
+   }
+  },
+  "assembled_stl": "signs/coalminer_s_daughter/coalminer_s_daughter.stl",
+  "print_3mf": "signs/coalminer_s_daughter/coalminer_s_daughter.3mf"
  },
  "Farmers Daughter's Cousin": {
   "en": "Farmers Daughter's Cousin",

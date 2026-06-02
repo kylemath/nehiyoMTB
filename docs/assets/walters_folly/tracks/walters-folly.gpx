@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Walters Folly Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Walters Folly
+</name>
+<link href="https://www.trailforks.com/trails/walters-folly/">
+</link>
+<trkseg>
+<trkpt lat="53.5279" lon="-113.50336">
+<ele>619</ele>
+<time>2026-06-04T14:05:44-07:00</time>
+</trkpt>
+<trkpt lat="53.52792" lon="-113.50335">
+<ele>619</ele>
+<time>2026-06-04T14:05:45-07:00</time>
+</trkpt>
+<trkpt lat="53.52796" lon="-113.50338">
+<ele>619</ele>
+<time>2026-06-04T14:05:46-07:00</time>
+</trkpt>
+<trkpt lat="53.52824" lon="-113.50398">
+<ele>618.9</ele>
+<time>2026-06-04T14:05:47-07:00</time>
+</trkpt>
+<trkpt lat="53.52831" lon="-113.50414">
+<ele>618.9</ele>
+<time>2026-06-04T14:05:48-07:00</time>
+</trkpt>
+<trkpt lat="53.52836" lon="-113.50435">
+<ele>618</ele>
+<time>2026-06-04T14:05:49-07:00</time>
+</trkpt>
+<trkpt lat="53.52837" lon="-113.50445">
+<ele>618.2</ele>
+<time>2026-06-04T14:05:50-07:00</time>
+</trkpt>
+<trkpt lat="53.52841" lon="-113.50452">
+<ele>618.2</ele>
+<time>2026-06-04T14:05:51-07:00</time>
+</trkpt>
+<trkpt lat="53.52842" lon="-113.50457">
+<ele>618.2</ele>
+<time>2026-06-04T14:05:52-07:00</time>
+</trkpt>
+<trkpt lat="53.52842" lon="-113.50476">
+<ele>619.4</ele>
+<time>2026-06-04T14:05:53-07:00</time>
+</trkpt>
+<trkpt lat="53.52849" lon="-113.50495">
+<ele>619.4</ele>
+<time>2026-06-04T14:05:54-07:00</time>
+</trkpt>
+<trkpt lat="53.5285" lon="-113.50512">
+<ele>619.8</ele>
+<time>2026-06-04T14:05:55-07:00</time>
+</trkpt>
+<trkpt lat="53.52859" lon="-113.50526">
+<ele>619.8</ele>
+<time>2026-06-04T14:05:56-07:00</time>
+</trkpt>
+<trkpt lat="53.52861" lon="-113.50549">
+<ele>620.3</ele>
+<time>2026-06-04T14:05:57-07:00</time>
+</trkpt>
+<trkpt lat="53.52868" lon="-113.50568">
+<ele>620</ele>
+<time>2026-06-04T14:05:58-07:00</time>
+</trkpt>
+<trkpt lat="53.52872" lon="-113.50581">
+<ele>620</ele>
+<time>2026-06-04T14:05:59-07:00</time>
+</trkpt>
+<trkpt lat="53.52883" lon="-113.5063">
+<ele>620</ele>
+<time>2026-06-04T14:06:00-07:00</time>
+</trkpt>
+<trkpt lat="53.52886" lon="-113.50643">
+<ele>620.3</ele>
+<time>2026-06-04T14:06:01-07:00</time>
+</trkpt>
+<trkpt lat="53.52895" lon="-113.50671">
+<ele>619.3</ele>
+<time>2026-06-04T14:06:02-07:00</time>
+</trkpt>
+<trkpt lat="53.52904" lon="-113.50702">
+<ele>619.3</ele>
+<time>2026-06-04T14:06:03-07:00</time>
+</trkpt>
+<trkpt lat="53.52911" lon="-113.50737">
+<ele>619.4</ele>
+<time>2026-06-04T14:06:04-07:00</time>
+</trkpt>
+<trkpt lat="53.52915" lon="-113.50758">
+<ele>619.7</ele>
+<time>2026-06-04T14:06:05-07:00</time>
+</trkpt>
+<trkpt lat="53.52917" lon="-113.50781">
+<ele>618.4</ele>
+<time>2026-06-04T14:06:06-07:00</time>
+</trkpt>
+<trkpt lat="53.52913" lon="-113.50805">
+<ele>619.6</ele>
+<time>2026-06-04T14:06:07-07:00</time>
+</trkpt>
+<trkpt lat="53.52921" lon="-113.50842">
+<ele>619.3</ele>
+<time>2026-06-04T14:06:08-07:00</time>
+</trkpt>
+<trkpt lat="53.52925" lon="-113.50867">
+<ele>620.4</ele>
+<time>2026-06-04T14:06:09-07:00</time>
+</trkpt>
+<trkpt lat="53.52926" lon="-113.50907">
+<ele>620.3</ele>
+<time>2026-06-04T14:06:10-07:00</time>
+</trkpt>
+<trkpt lat="53.52923" lon="-113.5096">
+<ele>621.4</ele>
+<time>2026-06-04T14:06:11-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

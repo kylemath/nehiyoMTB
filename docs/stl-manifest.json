@@ -3,42 +3,38 @@
     "Assembly.stl"
   ],
   "bedSprings": [
-    "bed_springs_creeBed 2.stl",
-    "bed_springs_creeBed.stl",
-    "bed_springs_plaque 2.stl",
-    "bed_springs_plaque.stl",
-    "spring (6.2mm inner, 9mm outer, 10mm height, with rings at top and bottom) - 2588116__files__spring_with_rings_at_top_and_bottom_6.2mm_inner_hole.stl"
+    "bed_springs_plaque 2.stl"
   ],
   "bobsled": [
     "bobsled_plaque_v4.stl"
   ],
+  "caddytrack": [
+    "caddytrack.stl"
+  ],
+  "coalminer_s_daughter": [
+    "coalminer_s_daughter.stl"
+  ],
   "deliverance": [
-    "deliverance_plaque.stl",
-    "deliverance_plaque_v2.stl",
-    "deliverance_plaque_v3.stl"
+    "deliverance_plaque_v3_solid.stl"
   ],
   "ewok": [
     "Screenshot 2023-12-11 at 7.14.23 PM.pngW100H89T2V4B0A0C0NS (1).stl",
     "Screenshot 2023-12-11 at 7.14.23 PM.pngW100H89T2V4B0A0C0NS.stl"
   ],
   "FarmersDaughter": [
-    "farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (8).stl",
-    "FarmersDaughter_Plaque_blank.stl",
-    "printDev__farmerDaughter_reduced.pngW100H100T2V4B0A0C0PS (1).stl",
-    "printDev__farmerDaughter_reduced.pngW100H100T2V4B0A0C0PS.stl",
-    "printDev__farmerDaughter_reduced22.pngW100H100T2V4B0A0C0PS.stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (1).stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (2).stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (3).stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (4).stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (5).stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (6).stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (7).stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS (8).stl",
-    "printDev__farmerDaughterPrint.pngW100H100T2V4B0A0C0PS.stl",
-    "printDev__fd.pngW100H100T2V4B0A0C0PS.stl",
-    "toPrintV3.pngW100H100T2V4B0A0C0PS.stl",
-    "toPrintV4.pngW100H100T2V4B0A0C0PS.stl"
+    "Assembly_plaqueandpic.stl"
+  ],
+  "flat_pete": [
+    "flat_pete.stl"
+  ],
+  "gnome_trail": [
+    "gnome_trail.stl"
+  ],
+  "go_trail": [
+    "go_trail.stl"
+  ],
+  "gold_digger": [
+    "gold_digger.stl"
   ],
   "kahkakiw": [
     "kahkakiw_plaque_admesh_fixed.stl"
@@ -47,8 +43,7 @@
     "kakwa_plaque_v3_admesh_fixed_1_admesh_fixed_admesh_fixed.stl"
   ],
   "kiwapamitin": [
-    "kiwapamitin.stl",
-    "kiwapamitin_V2.stl"
+    "kiwapamitin.stl"
   ],
   "loversLane": [
     "lovers_lane_plaque_v6.stl"
@@ -57,41 +52,22 @@
     "mamahtâw_iskwew_plaque_v2.stl"
   ],
   "maskihkiwiyiniw": [
-    "bk__maskihkîwiyiniw_3d.stl",
-    "bk__maskihkîwiyiniw_3d2_colors.stl",
-    "bk__maskihkîwiyiniw_3d2_colors_plaque.stl",
-    "bk__maskihkîwiyiniw_3d2_lines.stl",
-    "bk__maskihkîwiyiniw_3d_redo.stl",
-    "bk__maskihkîwiyiniw_plaque.stl",
-    "bk__maskihkîwiyiniw_plaque_multicolour.stl",
-    "bk__maskihkîwiyiniw_plaque_multicolour_rulers_v2.stl",
-    "bk__maskihkîwiyiniw_plaque_multicolour_rulers_v3.stl",
-    "bk__maskihkîwiyiniw_plaque_multicolour_rulers_v4.stl",
-    "bk__maskihkîwiyiniw_plaque_multicolour_v2.stl",
-    "bk__maskihkîwiyiniw_plaque_multicolour_v3.stl",
-    "bk__maskihkîwiyiniw_plaque_v2.stl",
-    "bk__maskihkîwiyiniw_plaque_v3.stl",
-    "bk__maskihkîwiyiniw_plaque_v4.stl",
-    "bk__maskihkîwiyiniw_plaque_v5.stl",
-    "bk__maskihkîwiyiniw_plaque~.stl",
-    "maskihkiwiyiniw_new.stl",
-    "maskihkiwiyiniw_new_v2.stl",
-    "maskihkiwiyiniw_new_v3.stl",
-    "maskihkiwiyiniw_new_v4.stl",
-    "maskihkiwiyiniw_new_v5.stl",
-    "maskihkiwiyiniw_new_v6.stl",
-    "maskihkîwiyiniw_plaque_multicolour_rulers_v4.stl"
+    "maskihkiwiyiniw_new_v6.stl"
   ],
   "mistapiskihkoman": [
     "mistâpiskihkomân_plaque_v3_solid_2.stl"
+  ],
+  "moonraker": [
+    "moonraker.stl"
   ],
   "nicocwasaskanos": [
     "nicocwâsaskanôs_plaque.stl"
   ],
   "nipamayatan_pekiseyahk": [
-    "nipamayatan_pekiseyahk_plaque.stl",
-    "nipamayatan_pekiseyahk_plaque_v2.stl",
     "nipamayatan_pekiseyahk_plaque_v3.stl"
+  ],
+  "no_horses": [
+    "no_horses.stl"
   ],
   "nosemanicos": [
     "nôsemanicôs_plaque_v4_solid_solid 2.stl"
@@ -104,23 +80,40 @@
   "oyoyow": [
     "oyoyo_plaque_moveholes_v4_multicolour_solid_solid_redown.stl"
   ],
+  "peckers_hollow": [
+    "peckers_hollow.stl"
+  ],
   "purgatory": [
     "purgatory_plaque_v3.stl"
+  ],
+  "root_canal": [
+    "root_canal.stl"
   ],
   "sapwapahcikan-paskisikan": [
     "sapwapahcikan-paskisikan-plaque_v2_admesh_fixed.stl"
   ],
+  "scalpel": [
+    "scalpel.stl"
+  ],
+  "sideline": [
+    "sideline.stl"
+  ],
   "slinky": [
-    "classicspringo.stl",
-    "Slinky.stl",
-    "slinky_plaque.stl",
-    "Slinky_Remix 2.stl",
-    "Slinky_Remix.stl"
+    "SlinkyAssembly.stl"
   ],
   "sôniyâwâhkêsîs": [
     "sôniyâwâhkêsîs_plaque.stl"
   ],
+  "the_holy_trail": [
+    "the_holy_trail.stl"
+  ],
+  "too_much": [
+    "too_much.stl"
+  ],
   "victoriaSecret": [
     "vicSecret_plaque.stl"
+  ],
+  "walters_folly": [
+    "walters_folly.stl"
   ]
 }

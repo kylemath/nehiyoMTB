@@ -712,9 +712,10 @@ def _clean_adjustments(raw: Any) -> tuple[float, dict[str, dict[str, float]], di
     sent by the viewer.
 
     Mirrors the viewer's transform model exactly: a per-part uniform scale `s`
-    about the part's own bbox centroid, an (x,y,z) mm offset, and a whole-sign
-    `global` scale about the origin. ``colors`` carries per-component filament
-    recolour overrides."""
+    about the part's own bbox centroid, an (x,y,z) mm offset, a per-part relief
+    height multiplier `hz` that scales ONLY the Z thickness about the piece's
+    base (so it sticks out more), and a whole-sign `global` scale about the
+    origin. ``colors`` carries per-component filament recolour overrides."""
     if not isinstance(raw, dict):
         raw = {}
 
@@ -737,11 +738,15 @@ def _clean_adjustments(raw: Any) -> tuple[float, dict[str, dict[str, float]], di
             s = _num(val.get("s"), 1.0)
             if not (0.05 <= s <= 20.0):
                 s = 1.0
+            hz = _num(val.get("hz"), 1.0)
+            if not (0.1 <= hz <= 8.0):
+                hz = 1.0
             parts[str(key)] = {
                 "s": s,
                 "x": _num(val.get("x"), 0.0),
                 "y": _num(val.get("y"), 0.0),
                 "z": _num(val.get("z"), 0.0),
+                "hz": hz,
             }
 
     colors: dict[str, str] = {}
@@ -840,11 +845,18 @@ def _bake_adjusted_core(comps: dict, slug: str, sdir: Path,
             mesh = trimesh.util.concatenate(tuple(mesh.dump()))
         if mesh is None or len(getattr(mesh, "faces", [])) == 0:
             continue
-        a = parts_adj.get(key, {"s": 1.0, "x": 0.0, "y": 0.0, "z": 0.0})
+        a = parts_adj.get(key, {"s": 1.0, "x": 0.0, "y": 0.0, "z": 0.0, "hz": 1.0})
         s = a["s"] or 1.0
+        hz = a.get("hz", 1.0) or 1.0
         centre = (mesh.bounds[0] + mesh.bounds[1]) / 2.0
         offset = np.array([a["x"], a["y"], a["z"]], dtype=float)
-        mesh.vertices = gscale * (s * (mesh.vertices - centre) + centre + offset)
+        verts = s * (mesh.vertices - centre) + centre + offset
+        if hz != 1.0:
+            # scale ONLY the Z thickness about the (transformed) base so the
+            # piece grows upward — matches the viewer's relief-height control.
+            zmin = float(verts[:, 2].min())
+            verts[:, 2] = hz * (verts[:, 2] - zmin) + zmin
+        mesh.vertices = gscale * verts
         adjusted[key] = mesh
         out_part = sdir / f"{src.stem}_adj.stl"
         try:
@@ -1004,6 +1016,7 @@ def save_adjustments(payload: dict) -> dict:
     gscale, parts_adj, colors = _clean_adjustments(payload.get("adjustments"))
     has_tweaks = (abs(gscale - 1.0) > 1e-6
                   or any(abs(p.get("s", 1) - 1) > 1e-6 or p.get("x") or p.get("y") or p.get("z")
+                         or abs(p.get("hz", 1) - 1) > 1e-6
                          for p in parts_adj.values())
                   or bool(colors))
     if has_tweaks:

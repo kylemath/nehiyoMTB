@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>The Holy Trail Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+The Holy Trail
+</name>
+<link href="https://www.trailforks.com/trails/the-holy-trail-12414/">
+</link>
+<trkseg>
+<trkpt lat="53.53988" lon="-113.4611">
+<ele>644.1</ele>
+<time>2026-06-02T17:21:40-07:00</time>
+</trkpt>
+<trkpt lat="53.53984" lon="-113.46111">
+<ele>644.1</ele>
+<time>2026-06-02T17:21:41-07:00</time>
+</trkpt>
+<trkpt lat="53.53979" lon="-113.46114">
+<ele>640</ele>
+<time>2026-06-02T17:21:42-07:00</time>
+</trkpt>
+<trkpt lat="53.53974" lon="-113.46119">
+<ele>640</ele>
+<time>2026-06-02T17:21:43-07:00</time>
+</trkpt>
+<trkpt lat="53.53963" lon="-113.46138">
+<ele>643</ele>
+<time>2026-06-02T17:21:44-07:00</time>
+</trkpt>
+<trkpt lat="53.53956" lon="-113.46149">
+<ele>638.9</ele>
+<time>2026-06-02T17:21:45-07:00</time>
+</trkpt>
+<trkpt lat="53.53945" lon="-113.46179">
+<ele>635.8</ele>
+<time>2026-06-02T17:21:46-07:00</time>
+</trkpt>
+<trkpt lat="53.53938" lon="-113.46194">
+<ele>639</ele>
+<time>2026-06-02T17:21:47-07:00</time>
+</trkpt>
+<trkpt lat="53.53936" lon="-113.46203">
+<ele>635.8</ele>
+<time>2026-06-02T17:21:48-07:00</time>
+</trkpt>
+<trkpt lat="53.5393" lon="-113.46208">
+<ele>635.8</ele>
+<time>2026-06-02T17:21:49-07:00</time>
+</trkpt>
+<trkpt lat="53.53912" lon="-113.46234">
+<ele>635.5</ele>
+<time>2026-06-02T17:21:50-07:00</time>
+</trkpt>
+<trkpt lat="53.53903" lon="-113.46244">
+<ele>635.5</ele>
+<time>2026-06-02T17:21:51-07:00</time>
+</trkpt>
+<trkpt lat="53.53896" lon="-113.46249">
+<ele>635.5</ele>
+<time>2026-06-02T17:21:52-07:00</time>
+</trkpt>
+<trkpt lat="53.53891" lon="-113.46259">
+<ele>632.8</ele>
+<time>2026-06-02T17:21:53-07:00</time>
+</trkpt>
+<trkpt lat="53.53883" lon="-113.46277">
+<ele>635.7</ele>
+<time>2026-06-02T17:21:54-07:00</time>
+</trkpt>
+<trkpt lat="53.53873" lon="-113.46292">
+<ele>633</ele>
+<time>2026-06-02T17:21:55-07:00</time>
+</trkpt>
+<trkpt lat="53.5387" lon="-113.46299">
+<ele>633</ele>
+<time>2026-06-02T17:21:56-07:00</time>
+</trkpt>
+<trkpt lat="53.53868" lon="-113.46307">
+<ele>630.6</ele>
+<time>2026-06-02T17:21:57-07:00</time>
+</trkpt>
+<trkpt lat="53.53869" lon="-113.46322">
+<ele>630.6</ele>
+<time>2026-06-02T17:21:58-07:00</time>
+</trkpt>
+<trkpt lat="53.53867" lon="-113.46346">
+<ele>628.7</ele>
+<time>2026-06-02T17:21:59-07:00</time>
+</trkpt>
+<trkpt lat="53.53864" lon="-113.46356">
+<ele>628.7</ele>
+<time>2026-06-02T17:22:00-07:00</time>
+</trkpt>
+<trkpt lat="53.5386" lon="-113.46365">
+<ele>631.1</ele>
+<time>2026-06-02T17:22:01-07:00</time>
+</trkpt>
+<trkpt lat="53.53853" lon="-113.46391">
+<ele>628.9</ele>
+<time>2026-06-02T17:22:02-07:00</time>
+</trkpt>
+<trkpt lat="53.53852" lon="-113.46417">
+<ele>626.9</ele>
+<time>2026-06-02T17:22:03-07:00</time>
+</trkpt>
+<trkpt lat="53.53852" lon="-113.46452">
+<ele>625.4</ele>
+<time>2026-06-02T17:22:04-07:00</time>
+</trkpt>
+<trkpt lat="53.53852" lon="-113.4646">
+<ele>625.4</ele>
+<time>2026-06-02T17:22:05-07:00</time>
+</trkpt>
+<trkpt lat="53.53856" lon="-113.46462">
+<ele>625.4</ele>
+<time>2026-06-02T17:22:06-07:00</time>
+</trkpt>
+<trkpt lat="53.53859" lon="-113.46463">
+<ele>625.4</ele>
+<time>2026-06-02T17:22:07-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>
