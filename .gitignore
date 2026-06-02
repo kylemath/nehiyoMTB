@@ -1,2 +1,18 @@
 .DS_Store
 .venv
+.vscode/
+
+# STL/3MF meshes are large and regenerable from the .scad sources
+# (tools/sign_factory/build_signs.py / *_assembly.scad), so they're ignored by
+# default. This stops the per-sign working .stl that pile up in root-level
+# directories from ever being tracked again.
+*.stl
+signs/*/*.3mf
+
+# Exceptions that DO stay tracked:
+#   - finalized meshes published with the site under docs/
+#   - blank plaque inputs that the per-part .scad files import()
+#   - the assembled signs/<name>/<name>.stl per sign, force-added individually
+#     (git add -f) as instant-restore insurance; their subcomponents stay ignored.
+!docs/**/*.stl
+!blanks/*.stl
