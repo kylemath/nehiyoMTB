@@ -1,0 +1,5 @@
+{
+  "comment": "Filaments currently loaded in the printer, in slot order (slot 1 first). Edit this to match your CFS. The catalogue editor server bakes these as the .3mf per-object filament (extruder) assignment, with a nearest-colour fallback for any colour not loaded. The Translation Workbench colours column flags which signs print with exactly this set so you can batch them.",
+  "slotCount": 8,
+  "slots": ["teal", "pink", "yellow", "purple", "grey", "white", "black", "red"]
+}

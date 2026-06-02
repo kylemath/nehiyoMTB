@@ -40,6 +40,7 @@ CLI usage::
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import subprocess
 import sys
@@ -831,6 +832,120 @@ def union_stl(
         "outputWatertightDiag": output_diag,
         "outputVolume": float(abs(signed_volume)),
     }
+
+
+# Colour-name -> RGB for layered .3mf face colours. Mirrors the plaque/ink/
+# syllabics filaments plus the icon palette (icon_to_stl.FILAMENT_PALETTE) and
+# the catalogue viewer's FILL_HEX so a sign's .3mf objects carry the right tint.
+_LAYER_NAME_RGB = {
+    "white": (232, 225, 207), "plaque": (232, 225, 207),
+    "black": (38, 38, 38), "ink": (38, 38, 38),
+    "red": (192, 57, 43),
+    "blue": (46, 110, 185), "navy": (32, 54, 104), "teal": (40, 150, 150),
+    "green": (60, 140, 75), "grey": (150, 150, 150), "silver": (200, 202, 205),
+    "tan": (205, 170, 110), "lightbrown": (195, 150, 85), "midbrown": (165, 100, 45),
+    "brown": (120, 78, 46), "orange": (226, 122, 55), "yellow": (234, 198, 58),
+    "purple": (132, 72, 160), "pink": (221, 123, 162),
+}
+
+
+def _layer_color_to_rgb(color: str) -> tuple[int, int, int]:
+    """Resolve a colorLayers colour (name or #hex) to an RGB triple."""
+    c = (color or "").strip()
+    if c.startswith("#"):
+        h = c[1:]
+        if len(h) == 3:
+            h = "".join(ch * 2 for ch in h)
+        if len(h) == 6:
+            try:
+                return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))  # type: ignore[return-value]
+            except ValueError:
+                pass
+    return _LAYER_NAME_RGB.get(c.lower(), (200, 200, 200))
+
+
+def _sanitize_part_key(text: str, index: int) -> str:
+    cleaned = re.sub(r"[^A-Za-z0-9]+", "_", (text or "").strip()).strip("_")
+    return f"{index:02d}_{cleaned or 'layer'}"
+
+
+def build_layered_3mf(
+    combined_stl: Path,
+    color_layers: list[dict],
+    out_3mf: Path,
+    *,
+    verbose: bool = False,
+) -> dict | None:
+    """Split a clean combined sign solid into per-colour objects by the
+    ``colorLayers`` height bands and bundle them into ONE multi-object .3mf.
+
+    The combined solid (the production STL rendered by OpenSCAD/CGAL) slices
+    perfectly but is a single object with no colour separation. The per-part
+    extrude STLs carry colour separation but overlap each other (features sink
+    into the plaque), so a naive bundle slices with cancelled/merged faces.
+
+    This intersects the combined solid with each colour band's Z slab, yielding
+    mutually-exclusive, individually-watertight, vertically-stacked objects whose
+    union is exactly the combined solid — i.e. object separation WITH the
+    combined solid's slicing fidelity, from a single render pipeline. The colour
+    bands follow the staggered height-swap model the signs already use, so each
+    object prints the same colour a single-nozzle height swap would.
+
+    Returns a small stats dict (or None on failure)."""
+    mesh = trimesh.load(combined_stl, force="mesh")
+    if isinstance(mesh, trimesh.Scene):
+        mesh = trimesh.util.concatenate(tuple(mesh.dump()))
+    if mesh is None or len(mesh.faces) == 0 or not color_layers:
+        return None
+
+    import trimesh.creation as _tc
+
+    z_min = float(mesh.bounds[0][2])
+    z_max = float(mesh.bounds[1][2])
+    ext = mesh.bounds[1] - mesh.bounds[0]
+    cx, cy = ((mesh.bounds[0] + mesh.bounds[1]) / 2.0)[:2]
+    pad = float(max(ext[0], ext[1])) * 2.0 + 10.0
+
+    geoms: dict[str, trimesh.Trimesh] = {}
+    objects: list[dict] = []
+    lo = z_min - 1.0
+    for i, layer in enumerate(color_layers):
+        hi_raw = layer.get("maxZ")
+        hi = (z_max + 1.0) if hi_raw in (None, "") else float(hi_raw)
+        if hi <= lo:
+            lo = hi
+            continue
+        box = _tc.box(extents=[pad, pad, hi - lo])
+        box.apply_translation([float(cx), float(cy), (lo + hi) / 2.0])
+        try:
+            part = trimesh.boolean.intersection([mesh, box], engine="manifold")
+        except Exception as exc:  # pragma: no cover - engine hiccup
+            if verbose:
+                print(f"[build_layered_3mf] band {i} intersection failed: {exc}")
+            part = None
+        if part is not None and len(part.faces) > 0:
+            rgb = _layer_color_to_rgb(layer.get("color"))
+            part.visual.face_colors = list(rgb) + [255]
+            key = _sanitize_part_key(layer.get("label") or layer.get("color"), i)
+            geoms[key] = part
+            objects.append({"key": key, "color": layer.get("color"),
+                            "faces": int(len(part.faces)),
+                            "watertight": bool(part.is_watertight)})
+        lo = hi
+
+    if not geoms:
+        return None
+    out_3mf = Path(out_3mf)
+    out_3mf.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        trimesh.Scene(geoms).export(out_3mf)
+    except Exception as exc:
+        if verbose:
+            print(f"[build_layered_3mf] export failed: {exc}")
+        return None
+    if verbose:
+        print(f"[build_layered_3mf] wrote {out_3mf} with {len(objects)} objects")
+    return {"ok": True, "out": str(out_3mf), "objects": objects}
 
 
 def _default_dst(src: Path) -> Path:

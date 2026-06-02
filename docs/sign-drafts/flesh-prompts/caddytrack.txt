@@ -1,0 +1,44 @@
+You are authoring the rich content for a 3D-printed Plains Cree (nêhiyawêwin) mountain-bike trail sign page. Produce ONLY a single JSON object (no prose, no markdown fences) matching the schema below. It will be validated and rendered verbatim.
+
+TRAIL
+  English name : Caddytrack
+  Location     : Forest Heights
+  Stats        : distance 691 m, descent -42 m, ascent 36 m
+  Sign icon    : Caddyshack homage — red lips biting Carl Spackler's bucket-hat face as the golf ball, trestle bridge behind.  (screenprint)
+  Trailforks: https://www.trailforks.com/trails/caddytrack-17761/ Shows on map: 57 track points from uploaded caddytrack-17761.gpx.
+  Nearby trails (for cross-reference, optional): The Holy Trail (kâ-kihcitwâwik meskanaw), Happy Ending (sîkinikêwin iskwayâk), Lower Ewok (tahkohc? îwâk), Master Yoda (okiskinwahamâkêw Yôta), Andre's Trail (Ândrê omeskanaw), Rattlesnake (sîsîkwan-kinêpik), Prime Rib (miywâs-ospikay), McAloon R.I.P. (Makalûn kâ-nipit), Drop In (pîhcipayi), Upper Caddytrack (ispimihk otâpânâsko-meskanaw), Shooter McGavin (pâskisikêw Makâpin)
+
+THE NAME ON THE PLAQUE — write the page (especially the cultural story and primarySection) about THIS name, not any other:
+  pêyahikan meskanaw  [ᐯᔭᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ]  — carrying/hauling trail  (why: If 'caddy'=one who carries, use a hauling-helper sense + trail.; innuendo: Servant/porter overtone.)
+
+OTHER CANDIDATE RENDERINGS that were considered — use ONLY to fill relatedForms / quickReference (they are NOT on the plaque):
+  - otâpânâsko-meskanaw  [ᐅᑖᐹᓇᐢᑯ ᒣᐢᑲᓇᐤ]  — vehicle/cart trail  (why: Pun on 'track'; otâpânâsk 'wagon/cart' + meskanaw 'trail' = a track for a rolling cart (caddy).)
+  - otâpânâsk meskanaw  [ᐅᑖᐹᓈᐢᐠ ᒣᐢᑲᓇᐤ]  — cart's road  (why: Literal: caddy=cart otâpânâsk; track=meskanaw road.)
+
+OUTPUT JSON SHAPE (omit a field only if you truly have nothing real to say):
+{
+  "headerTitle": "<English> • <sro> • <syllabics>",
+  "photoCaption": "one-line caption for the sign render",
+  "linguistics": {
+    "meaning": "short gloss of the plaque name (plain text)",
+    "primarySection": {
+      "heading": "The Name on the Plaque",
+      "sro": "pêyahikan meskanaw",
+      "syllabics": "ᐯᔭᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ",
+      "morphemes": [ {"key":"m0","sro":"…","syllabics":"…","gloss":"plain-text tooltip"} ]
+    },
+    "relatedForms": [ {"english":"…","sro":"…","syllabics":"…","note":"plain-text italic note","morphemes":[]} ],
+    "quickReference": [ {"english":"…","sro":"…","syllabics":"…","note":"tooltip"} ],
+    "baseWords": [ {"sro":"…","english":"…","syllabics":"…"} ]
+  },
+  "culturalStory": { "heading":"…", "body":[ "paragraph (may use <strong>/<em>)", "…" ] },
+  "trailStory":   { "heading":"The Trail", "body":[ "1-2 sentences on the ride + tap-through to Trailforks" ] },
+  "sources": ["itwêwina","Online Cree Dictionary","Plains Cree Dictionary"]
+}
+
+RULES
+- Build relatedForms / quickReference / baseWords from the candidate renderings above and their morphemes; do not invent Cree words you are unsure of.
+- HTML (<strong>, <em>, &nbsp;) is allowed ONLY inside culturalStory.body[] and trailStory.body[]. Everything else is plain text.
+- The cultural story should explain the name, any wordplay/innuendo, ties to neighbouring trails, and end acknowledging it sits on ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw-Askiy — Plains Cree territory, Treaty 6, a homeland of the Métis Nation.
+- Do NOT invent specific people, dates, or trail-difficulty ratings unless they are given above. Keep trailStory to the stats provided.
+- Output the JSON object only.

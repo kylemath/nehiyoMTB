@@ -42,9 +42,11 @@ from sign_page_renderer import render_for_ids as render_pages_for_ids  # noqa: E
 # admesh-only repair instead of failing the request.
 try:
     from stl_union import union_stl as _union_stl  # noqa: E402
+    from stl_union import build_layered_3mf as _build_layered_3mf  # noqa: E402
     _UNION_IMPORT_ERROR: str | None = None
 except Exception as _exc:  # pragma: no cover - optional dependency
     _union_stl = None  # type: ignore[assignment]
+    _build_layered_3mf = None  # type: ignore[assignment]
     _UNION_IMPORT_ERROR = str(_exc)
 
 
@@ -58,7 +60,7 @@ DOCS_ROOT = REPO_ROOT / "docs"
 # alone by this server.
 CATALOGUE_PATH = DOCS_ROOT / "catalogue.json"
 MANIFEST_PATH = DOCS_ROOT / "stl-manifest.json"
-EDITOR_API_VERSION = 3
+EDITOR_API_VERSION = 8
 EDITOR_API_FEATURES = [
     "savePrintSetup",
     "repairStl",
@@ -68,6 +70,12 @@ EDITOR_API_FEATURES = [
     "uploadTrailSource",
     "uploadMapIcon",
     "parseTrailTrack",
+    "buildSign",
+    "promoteSign",
+    "buildAssembled",
+    "buildAdjusted",
+    "fleshOutSign",
+    "saveAdjustments",
 ]
 
 
@@ -131,6 +139,1026 @@ def regenerate_manifest() -> dict[str, list[str]]:
     manifest = build_manifest()
     write_json(MANIFEST_PATH, manifest)
     return manifest
+
+
+# --- draft sign factory + promotion ---------------------------------------- #
+SIGNS_DIR = REPO_ROOT / "signs"
+BUILD_SIGNS = REPO_ROOT / "tools" / "sign_factory" / "build_signs.py"
+DRAFTS_MANIFEST = DOCS_ROOT / "sign-drafts" / "manifest.json"
+
+
+def _slugify(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "_", (text or "").lower()).strip("_") or "sign"
+
+
+def _load_drafts() -> dict:
+    if DRAFTS_MANIFEST.exists():
+        try:
+            return json.loads(DRAFTS_MANIFEST.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+
+# Filament colour-name -> hex, mirrors the icon palette + viewer FILL_HEX so the
+# generated page's accent colour can track the sign's dominant icon colour.
+_FILAMENT_HEX = {
+    "red": "#c4362c", "blue": "#2e6eb9", "navy": "#203668", "teal": "#289696",
+    "green": "#3c8c4b", "grey": "#969696", "silver": "#c8cacd", "tan": "#cdaa6e",
+    "lightbrown": "#c39655", "midbrown": "#a5642d", "brown": "#784e2e",
+    "orange": "#e27a37", "yellow": "#eac63a", "purple": "#8448a0", "pink": "#dd7ba2",
+}
+
+
+def _accent_from_colors(colors: list) -> str:
+    """Pick a page accent from the sign's icon fill colours.
+
+    Prefer a saturated fill (skip plaque white, ink black, and the neutral
+    silver/grey which make a washed-out page accent); fall back to a neutral
+    only if that's all there is, then to a warm brown default."""
+    neutral = ("white", "black", "silver", "grey")
+    for name in colors or []:
+        if name not in neutral and name in _FILAMENT_HEX:
+            return _FILAMENT_HEX[name]
+    for name in colors or []:
+        if name in ("silver", "grey") and name in _FILAMENT_HEX:
+            return _FILAMENT_HEX[name]
+    return "#b5651d"  # warm brown default (fits the trail-sign palette)
+
+
+def _split_words(text: str) -> list[str]:
+    return [w for w in re.split(r"\s+", (text or "").strip()) if w]
+
+
+def _is_meaningful(text: str) -> bool:
+    """A reasoning/innuendo note worth showing (skip empty + bare 'None')."""
+    t = (text or "").strip().rstrip(".")
+    return bool(t) and t.lower() != "none"
+
+
+def _word_morphemes(sro: str, syll: str, meaning: str, slug: str) -> list[dict]:
+    """Split the chosen rendering into word-level parts for the formula display.
+
+    We carve at word boundaries (not sub-morpheme) because the workbench data
+    gives us the full transliteration + syllabics but not a vetted per-affix
+    gloss; the reasoning text is surfaced separately in the story box. A single
+    word collapses to one part glossed with the overall meaning."""
+    sros = _split_words(sro)
+    sylls = _split_words(syll)
+    base = (slug or "word").replace("-", "_")
+    if len(sros) <= 1:
+        return [{"key": base, "sro": sro, "syllabics": syll, "gloss": meaning}]
+    out = []
+    for i, word in enumerate(sros):
+        out.append({
+            "key": f"{base}_{i}",
+            "sro": word,
+            "syllabics": sylls[i] if i < len(sylls) else "",
+            "gloss": "",
+        })
+    return out
+
+
+def _trail_facts_sentence(trail: dict) -> str:
+    """Compose a short 'Trail: location; distance; descent/ascent' line."""
+    if not isinstance(trail, dict):
+        return ""
+    bits: list[str] = []
+    loc = str(trail.get("loc") or "").strip()
+    if loc:
+        bits.append(f"Located in {loc}")
+    dist = str(trail.get("dist") or "").strip()
+    if dist:
+        bits.append(f"about {dist} long")
+    desc = str(trail.get("desc") or "").strip()
+    asc = str(trail.get("asc") or "").strip()
+    if desc and asc:
+        bits.append(f"{desc} descent / {asc} ascent")
+    elif desc:
+        bits.append(f"{desc} descent")
+    elif asc:
+        bits.append(f"{asc} ascent")
+    if not bits:
+        return ""
+    return "Trail stats: " + "; ".join(bits) + "."
+
+
+def _resolve_repo_or_docs(rel: str) -> Path | None:
+    """Resolve a sign asset path that may be docs-relative (e.g.
+    'sign-drafts/x.png') or repo-relative (e.g. 'signs/x/x_assembly.png')."""
+    rel = (rel or "").strip().lstrip("/")
+    if not rel:
+        return None
+    for base in (DOCS_ROOT, REPO_ROOT):
+        candidate = (base / rel).resolve()
+        try:
+            ensure_inside(candidate, base)
+        except Exception:
+            continue
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def _image_orientation(path: Path) -> str:
+    """'landscape' | 'portrait' | 'square' | '' for an image file (best-effort)."""
+    try:
+        from PIL import Image
+        with Image.open(path) as im:
+            w, h = im.size
+        if w > h:
+            return "landscape"
+        if h > w:
+            return "portrait"
+        return "square"
+    except Exception:
+        return ""
+
+
+def _copy_preview_photo(slug: str, preview_png: str, assembly_png: str = "",
+                        orient: str = "portrait") -> dict:
+    """Copy a sign preview into docs/assets/<slug>/ for the page's 'Trail Sign
+    Design' image, choosing an image whose aspect matches the sign orientation.
+
+    The composed flat poster (``sign-drafts/<slug>.png``) is preferred when its
+    aspect matches the sign's orientation; otherwise the OpenSCAD assembly
+    render (``signs/<slug>/<slug>_assembly.png``) is used, since it is always
+    rendered in the correct orientation. This prevents a stale portrait preview
+    from landing on a landscape sign page (and vice-versa). Best-effort."""
+    composed = _resolve_repo_or_docs(preview_png)
+    assembly = _resolve_repo_or_docs(assembly_png)
+    want = orient if orient in ("landscape", "portrait") else ""
+
+    # Prefer a candidate whose orientation matches the sign; the composed poster
+    # wins ties (nicer flat artwork), else the always-correct assembly render.
+    source = None
+    for cand in (composed, assembly):
+        if cand and (not want or _image_orientation(cand) in (want, "square", "")):
+            source = cand
+            break
+    if source is None:
+        source = composed or assembly
+    if source is None:
+        return {}
+
+    is_assembly = source == assembly
+    assets_dir = DOCS_ROOT / "assets" / slug
+    assets_dir.mkdir(parents=True, exist_ok=True)
+    dest = assets_dir / f"{slug}_sign.png"
+    try:
+        shutil.copy2(source, dest)
+    except Exception:
+        return {}
+    caption = ("3D render of the multi-colour printed sign — icon, Cree "
+               "syllabics, transliteration, and English name."
+               if is_assembly else
+               "Draft 3D-printed sign preview — transliteration, icon, "
+               "syllabics overlay, and English name.")
+    return {
+        "src": f"../assets/{slug}/{dest.name}",
+        "alt": f"{slug} trail sign design with Cree name and icon",
+        "caption": caption,
+    }
+
+
+def build_auto_page_content(en: str, slug: str, rec: dict, payload: dict) -> dict:
+    """Assemble a full kiwapamitin-style pageContent object from the workbench
+    data chosen for a sign (translation + reasoning + alternates + trail facts +
+    icon/design concept), so 'Move to production' yields a rich page, not a stub.
+
+    Everything is best-effort and degrades gracefully when a field is absent.
+    pageStatus is 'agent-drafted' so the renderer emits the page while the card's
+    review chip stays pending until a human confirms it."""
+    comps = rec.get("components") or {}
+    cree_name = (payload.get("creeName") or rec.get("translit") or "").strip()
+    syllabics = (payload.get("creeSyllabics") or "").strip()
+    meaning = (payload.get("meaning") or "").strip()
+    reasoning = (payload.get("reasoning") or "").strip()
+    innuendo = (payload.get("innuendo") or "").strip()
+    design = payload.get("design") or {}
+    trail = payload.get("trail") or {}
+    alternates = payload.get("alternates") or []
+    try:
+        chosen_index = int(payload.get("chosenIndex") or 0)
+    except (TypeError, ValueError):
+        chosen_index = 0
+
+    header_bits = [en]
+    if cree_name:
+        header_bits.append(cree_name)
+    if syllabics:
+        header_bits.append(syllabics)
+
+    content: dict[str, Any] = {
+        "pageStatus": "agent-drafted",
+        "accentColor": _accent_from_colors(comps.get("colors", [])),
+        "headerTitle": " • ".join(header_bits),
+        "linguistics": {
+            "meaning": meaning,
+            "type": "",
+            "primarySection": {
+                "heading": "The Name",
+                "sro": cree_name,
+                "syllabics": syllabics,
+                "morphemes": _word_morphemes(cree_name, syllabics, meaning, slug),
+            },
+            "relatedForms": [],
+            "quickReference": [],
+            "baseWords": [],
+        },
+        "culturalStory": {"heading": "", "body": []},
+        "trailStory": {"heading": "", "body": []},
+        "sources": ["itwêwina", "Online Cree Dictionary", "Plains Cree Dictionary"],
+        "notes": ["Draft Cree rendering chosen in the translation workbench; "
+                  "awaiting review by a fluent speaker."],
+    }
+
+    # The Name & Its Meaning — meaning + the reasoning behind the rendering.
+    name_body: list[str] = []
+    if meaning:
+        name_body.append(f'The chosen Plains Cree rendering for \u201c{en}\u201d means '
+                          f'\u201c{meaning}.\u201d')
+    if _is_meaningful(reasoning):
+        name_body.append(reasoning)
+    if name_body:
+        content["culturalStory"] = {"heading": "The Name & Its Meaning", "body": name_body}
+
+    # Design & Trail — icon concept, wordplay, and trail stats.
+    trail_body: list[str] = []
+    concept = str(design.get("concept") or "").strip()
+    subject = str(design.get("subject") or "").strip()
+    if concept:
+        trail_body.append(f"Sign icon: {concept}")
+    elif subject:
+        trail_body.append(f"Sign icon: {subject}.")
+    if _is_meaningful(innuendo):
+        trail_body.append(f"Wordplay / second meaning: {innuendo}")
+    facts = _trail_facts_sentence(trail)
+    if facts:
+        trail_body.append(facts)
+    if trail_body:
+        content["trailStory"] = {"heading": "Design & Trail", "body": trail_body}
+
+    # Alternate renderings -> related forms + quick-reference table.
+    related: list[dict] = []
+    quick: list[dict] = []
+    for i, opt in enumerate(alternates):
+        if not isinstance(opt, dict):
+            continue
+        t = str(opt.get("t") or "").strip()
+        s = str(opt.get("s") or "").strip()
+        g = str(opt.get("g") or "").strip()
+        why = str(opt.get("why") or "").strip()
+        if not t and not s:
+            continue
+        quick.append({"english": g, "sro": t, "syllabics": s,
+                      "note": why if _is_meaningful(why) else ""})
+        if i != chosen_index:
+            related.append({"english": g, "sro": t, "syllabics": s,
+                            "morphemes": [], "note": why if _is_meaningful(why) else ""})
+    content["linguistics"]["relatedForms"] = related
+    content["linguistics"]["quickReference"] = quick
+
+    # Trail Sign Design photo — pick an image matching the sign orientation.
+    photo = _copy_preview_photo(
+        slug,
+        payload.get("previewPng") or rec.get("png") or "",
+        payload.get("assemblyPng") or (comps.get("assembly_scad") and
+            f"signs/{slug}/{slug}_assembly.png") or "",
+        comps.get("orient") or "portrait",
+    )
+    if photo:
+        content["photo"] = photo
+
+    return content
+
+
+def build_sign(payload: dict) -> dict:
+    """Run the draft factory for ONE trail (optionally with overridden Cree
+    text / orientation), then return its refreshed sign-drafts manifest entry."""
+    en = (payload.get("en") or "").strip()
+    if not en:
+        raise ValueError("en (English trail name) is required")
+    orient = payload.get("orient") or "auto"
+    if orient not in ("auto", "portrait", "landscape"):
+        orient = "auto"
+    cmd = [sys.executable, str(BUILD_SIGNS), "--only", en, "--orient", orient]
+    if payload.get("translit") is not None:
+        cmd += ["--translit", str(payload["translit"])]
+    if payload.get("syllabics") is not None:
+        cmd += ["--syllabics", str(payload["syllabics"])]
+    if payload.get("colorMode") in ("staggered", "flat"):
+        cmd += ["--color-mode", payload["colorMode"]]
+    proc = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, timeout=600)
+    if proc.returncode != 0:
+        raise ValueError("build failed: " + (proc.stderr or proc.stdout or "")[-400:])
+    entry = _load_drafts().get(en)
+    return {"ok": True, "en": en, "orient": orient, "entry": entry,
+            "log": (proc.stdout or "").strip()[-400:]}
+
+
+def _write_drafts(drafts: dict) -> None:
+    write_json(DRAFTS_MANIFEST, drafts)
+
+
+def build_assembled(payload: dict) -> dict:
+    """Render a draft sign's ONE combined assembled STL (the production pipeline)
+    and split it into a print-ready multi-object .3mf, both under signs/<slug>/.
+
+    This is the same render the production page uses, made available in the
+    workbench so a draft can be slice-tested before promotion. The assembled STL
+    slices cleanly (single CGAL solid); the .3mf carries that same fidelity with
+    one object per filament colour. Paths are recorded back on the draft manifest
+    entry so the workbench can offer them as downloads."""
+    en = (payload.get("en") or "").strip()
+    if not en:
+        raise ValueError("en (English trail name) is required")
+    drafts = _load_drafts()
+    rec = drafts.get(en)
+    if not rec or not rec.get("components"):
+        raise ValueError(f"No built draft components for '{en}' — build it first.")
+    comps = rec["components"]
+    slug = rec.get("slug") or _slugify(en)
+    sdir = SIGNS_DIR / slug
+    asm = sdir / f"{slug}_assembly.scad"
+    if not asm.exists():
+        raise ValueError(f"Missing assembly scad: {asm}")
+
+    openscad = shutil.which("openscad") or "/opt/homebrew/bin/openscad"
+    out_stl = sdir / f"{slug}.stl"
+    force = bool(payload.get("force"))
+    if force or not out_stl.exists():
+        proc = subprocess.run([openscad, "-o", str(out_stl), str(asm)],
+                              capture_output=True, text=True, timeout=900)
+        if proc.returncode != 0 or not out_stl.exists():
+            raise ValueError("OpenSCAD render failed: " + (proc.stderr or "")[-300:])
+
+    objects = None
+    out_3mf = sdir / f"{slug}.3mf"
+    if _build_layered_3mf is not None:
+        try:
+            res = _build_layered_3mf(out_stl, comps.get("colorLayers", []), out_3mf)
+            if res:
+                objects = res.get("objects")
+        except Exception as exc:  # pragma: no cover
+            print(f"[build_assembled] layered 3mf build failed: {exc}")
+    if objects and out_3mf.exists():
+        try:
+            inject_3mf_slots(out_3mf, objects)   # pre-assign objects to filament slots
+        except Exception as exc:  # pragma: no cover
+            print(f"[build_assembled] slot pre-assignment skipped: {exc}")
+
+    rec["assembled_stl"] = f"signs/{slug}/{slug}.stl"
+    if out_3mf.exists():
+        rec["print_3mf"] = f"signs/{slug}/{slug}.3mf"
+    drafts[en] = rec
+    _write_drafts(drafts)
+    return {"ok": True, "en": en, "slug": slug,
+            "assembledStl": rec["assembled_stl"],
+            "print3mf": rec.get("print_3mf"),
+            "objects": objects, "entry": rec}
+
+
+# --- adjusted (re-laid-out) sign builder ----------------------------------- #
+# Filament RGBs for the non-icon parts, mirroring build_signs.py so the baked
+# .3mf objects carry the right tint. Icon fills use _FILAMENT_HEX (defined above).
+_PLAQUE_RGB = (232, 225, 207)   # cream/white plaque base
+_TEXT_RGB = (38, 38, 38)        # english + transliteration + icon outline
+_SYLL_RGB = (192, 57, 43)       # syllabics + group number accent
+
+
+def _hex_to_rgb(hex_str: str) -> tuple[int, int, int]:
+    h = (hex_str or "").lstrip("#")
+    if len(h) == 3:
+        h = "".join(ch * 2 for ch in h)
+    try:
+        return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))  # type: ignore[return-value]
+    except (ValueError, IndexError):
+        return (200, 200, 200)
+
+
+def _filament_rgb(name: str) -> tuple[int, int, int]:
+    """Resolve a filament NAME to RGB (white/black/red + the icon palette)."""
+    n = (name or "").strip().lower()
+    if n == "white":
+        return _PLAQUE_RGB
+    if n == "black":
+        return _TEXT_RGB
+    if n == "red":
+        return _SYLL_RGB
+    if n in _FILAMENT_HEX:
+        return _hex_to_rgb(_FILAMENT_HEX[n])
+    return (200, 200, 200)
+
+
+def _adjusted_part_color(key: str, colors: dict | None = None) -> tuple[str, tuple[int, int, int]]:
+    """Map a component key to its (filament-name, RGB) so adjusted parts can be
+    grouped into one coloured object per filament in the baked .3mf. A per-key
+    override in ``colors`` (from the viewer's recolour swatches) wins."""
+    if colors:
+        ov = colors.get(key)
+        if isinstance(ov, str) and ov.strip():
+            return ov.strip(), _filament_rgb(ov)
+    if key == "plaque":
+        return "white", _PLAQUE_RGB
+    if key in ("english", "translit", "icon_outline"):
+        return "black", _TEXT_RGB
+    if key in ("syllabics", "number"):
+        return "red", _SYLL_RGB
+    if key.startswith("icon_"):
+        fil = key[5:]
+        return fil, _hex_to_rgb(_FILAMENT_HEX.get(fil, "#c8cacd"))
+    return key or "other", (200, 200, 200)
+
+
+# --- printer filament slots + .3mf extruder pre-assignment ----------------- #
+FILAMENT_SLOTS_PATH = DOCS_ROOT / "filament-slots.json"
+_DEFAULT_SLOTS = ["teal", "pink", "yellow", "purple", "grey", "white", "black", "red"]
+
+
+def load_filament_slots() -> list[str]:
+    """The filaments loaded per printer slot (slot 1 first), from
+    docs/filament-slots.json. Falls back to a sensible default set."""
+    try:
+        if FILAMENT_SLOTS_PATH.exists():
+            data = json.loads(FILAMENT_SLOTS_PATH.read_text(encoding="utf-8"))
+            slots = data.get("slots")
+            if isinstance(slots, list) and slots:
+                cleaned = [str(s).strip().lower() for s in slots if str(s).strip()]
+                if cleaned:
+                    return cleaned
+    except Exception:
+        pass
+    return list(_DEFAULT_SLOTS)
+
+
+def slot_for_filament(name: str, slots: list[str]) -> int:
+    """1-based slot index for a filament name. Exact match wins; otherwise the
+    nearest loaded colour by RGB distance (so an un-loaded colour still maps to
+    the closest available filament)."""
+    if not slots:
+        return 1
+    n = (name or "").strip().lower()
+    if n in slots:
+        return slots.index(n) + 1
+    target = _filament_rgb(n)
+    best_i, best_d = 0, None
+    for i, s in enumerate(slots):
+        sr = _filament_rgb(s)
+        d = (target[0] - sr[0]) ** 2 + (target[1] - sr[1]) ** 2 + (target[2] - sr[2]) ** 2
+        if best_d is None or d < best_d:
+            best_d, best_i = d, i
+    return best_i + 1
+
+
+def _xml_attr(text: str) -> str:
+    return (str(text or "").replace("&", "&amp;").replace("<", "&lt;")
+            .replace(">", "&gt;").replace('"', "&quot;"))
+
+
+def _ensure_config_content_type(content_types_xml: str) -> str:
+    """Make sure the OPC [Content_Types].xml declares the .config extension so a
+    strict reader accepts the added Metadata/*.config part."""
+    if 'Extension="config"' in content_types_xml:
+        return content_types_xml
+    inject = '<Default Extension="config" ContentType="text/xml"/>'
+    if "</Types>" in content_types_xml:
+        return content_types_xml.replace("</Types>", inject + "</Types>")
+    return content_types_xml
+
+
+def inject_3mf_slots(out_3mf: Path, objects: list[dict] | None,
+                     slots: list[str] | None = None) -> dict | None:
+    """Add a Bambu/Orca-style ``Metadata/model_settings.config`` to a freshly
+    written .3mf so Creality Print opens with each object already assigned to the
+    filament SLOT whose loaded colour matches (nearest-colour fallback).
+
+    ``objects`` is the builder's list of ``{key, color}`` where ``key`` is the
+    object name written into the 3mf and ``color`` is the filament name. Returns
+    a small summary (or None on failure / nothing to do)."""
+    import zipfile
+
+    out_3mf = Path(out_3mf)
+    if not out_3mf.exists():
+        return None
+    if slots is None:
+        slots = load_filament_slots()
+
+    try:
+        with zipfile.ZipFile(out_3mf, "r") as z:
+            names = z.namelist()
+            model_name = next((n for n in names if n.endswith("3dmodel.model")), None)
+            if not model_name:
+                return None
+            model_xml = z.read(model_name).decode("utf-8", errors="replace")
+            content_types = None
+            for n in names:
+                if n.endswith("[Content_Types].xml"):
+                    content_types = z.read(n).decode("utf-8", errors="replace")
+                    ct_name = n
+                    break
+    except Exception:
+        return None
+
+    # object id <-> name from the model (trimesh writes name="<scene key>")
+    id_name = re.findall(r'<object\s+id="(\d+)"[^>]*?name="([^"]*)"', model_xml)
+    if not id_name:
+        return None
+
+    color_by_name = {(o.get("key") or ""): (o.get("color") or "") for o in (objects or [])}
+
+    cfg = ['<?xml version="1.0" encoding="UTF-8"?>', "<config>"]
+    assigns: list[dict] = []
+    for oid, oname in id_name:
+        fil = color_by_name.get(oname, "")
+        slot = slot_for_filament(fil, slots) if fil else 1
+        cfg.append(f'  <object id="{oid}">')
+        cfg.append(f'    <metadata key="name" value="{_xml_attr(oname)}"/>')
+        cfg.append(f'    <metadata key="extruder" value="{slot}"/>')
+        cfg.append(f'    <part id="{oid}" subtype="normal_part">')
+        cfg.append(f'      <metadata key="name" value="{_xml_attr(oname)}"/>')
+        cfg.append(f'      <metadata key="extruder" value="{slot}"/>')
+        cfg.append("    </part>")
+        cfg.append("  </object>")
+        assigns.append({"name": oname, "color": fil, "slot": slot})
+    cfg.append("</config>")
+    cfg_text = "\n".join(cfg) + "\n"
+
+    cfg_path = "Metadata/model_settings.config"
+    tmp = out_3mf.with_name(out_3mf.name + ".tmp")
+    try:
+        with zipfile.ZipFile(out_3mf, "r") as zin, \
+                zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+            for item in zin.infolist():
+                fn = item.filename.replace("\\", "/")
+                if fn == cfg_path:
+                    continue  # we re-write it below
+                data = zin.read(item.filename)
+                if content_types is not None and item.filename == ct_name:
+                    data = _ensure_config_content_type(content_types).encode("utf-8")
+                zout.writestr(item, data)
+            zout.writestr(cfg_path, cfg_text)
+        tmp.replace(out_3mf)
+    except Exception as exc:  # pragma: no cover
+        print(f"[inject_3mf_slots] failed to rewrite {out_3mf.name}: {exc}")
+        if tmp.exists():
+            tmp.unlink()
+        return None
+    return {"slots": slots, "assignments": assigns}
+
+
+def _clean_adjustments(raw: Any) -> tuple[float, dict[str, dict[str, float]], dict[str, str]]:
+    """Validate/clamp the {global, parts:{key:{s,x,y,z}}, colors:{key:name}} set
+    sent by the viewer.
+
+    Mirrors the viewer's transform model exactly: a per-part uniform scale `s`
+    about the part's own bbox centroid, an (x,y,z) mm offset, and a whole-sign
+    `global` scale about the origin. ``colors`` carries per-component filament
+    recolour overrides."""
+    if not isinstance(raw, dict):
+        raw = {}
+
+    def _num(value: Any, default: float) -> float:
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            return default
+
+    gscale = _num(raw.get("global"), 1.0)
+    if not (0.05 <= gscale <= 20.0):
+        gscale = 1.0
+
+    parts: dict[str, dict[str, float]] = {}
+    praw = raw.get("parts")
+    if isinstance(praw, dict):
+        for key, val in praw.items():
+            if not isinstance(val, dict):
+                continue
+            s = _num(val.get("s"), 1.0)
+            if not (0.05 <= s <= 20.0):
+                s = 1.0
+            parts[str(key)] = {
+                "s": s,
+                "x": _num(val.get("x"), 0.0),
+                "y": _num(val.get("y"), 0.0),
+                "z": _num(val.get("z"), 0.0),
+            }
+
+    colors: dict[str, str] = {}
+    craw = raw.get("colors")
+    if isinstance(craw, dict):
+        for key, name in craw.items():
+            if isinstance(name, str) and name.strip():
+                colors[str(key)] = name.strip()
+
+    return gscale, parts, colors
+
+
+def _bundle_adjusted_3mf(meshes_by_key: dict, out_3mf: Path,
+                         colors: dict | None = None) -> list[dict] | None:
+    """Bundle adjusted component meshes into ONE multi-object .3mf, merging all
+    parts that share a filament into a single coloured object (one object per
+    print colour). Per-component recolour overrides in ``colors`` are honoured.
+    Returns a small objects list or None."""
+    import trimesh
+
+    groups: dict[str, dict] = {}
+    for key, mesh in meshes_by_key.items():
+        fil, rgb = _adjusted_part_color(key, colors)
+        grp = groups.setdefault(fil, {"rgb": rgb, "meshes": []})
+        grp["meshes"].append(mesh.copy())
+
+    geoms: dict[str, Any] = {}
+    objects: list[dict] = []
+    for i, (fil, grp) in enumerate(groups.items()):
+        ms = grp["meshes"]
+        merged = ms[0] if len(ms) == 1 else trimesh.util.concatenate(ms)
+        merged.visual.face_colors = list(grp["rgb"]) + [255]
+        key = f"{i:02d}_{fil}"
+        geoms[key] = merged
+        objects.append({"key": key, "color": fil, "faces": int(len(merged.faces))})
+
+    if not geoms:
+        return None
+    out_3mf = Path(out_3mf)
+    out_3mf.parent.mkdir(parents=True, exist_ok=True)
+    trimesh.Scene(geoms).export(str(out_3mf))
+    return objects
+
+
+def _recompute_color_layers(meshes_by_key: dict, colors: dict | None = None) -> list[dict]:
+    """Derive bottom->top ``colorLayers`` height bands from the adjusted meshes.
+
+    Groups parts by filament, takes each colour's highest Z, and orders the
+    colours ascending so ``build_layered_3mf`` can split the clean combined solid
+    into the same stacked colour bands the signs use — but adapted to whatever
+    sizes/offsets the user dialled in (so a raised/scaled syllabics still ends up
+    in the top band, etc.). The tallest colour gets no ``maxZ`` (open top)."""
+    by_color: dict[str, float] = {}
+    for key, mesh in meshes_by_key.items():
+        fil, _rgb = _adjusted_part_color(key, colors)
+        ztop = float(mesh.bounds[1][2])
+        by_color[fil] = max(by_color.get(fil, ztop), ztop)
+    ordered = sorted(by_color.items(), key=lambda kv: kv[1])
+    layers: list[dict] = []
+    for i, (fil, ztop) in enumerate(ordered):
+        layer = {"color": fil, "label": fil}
+        if i < len(ordered) - 1:           # tallest colour stays open-topped
+            layer["maxZ"] = round(ztop, 3)
+        layers.append(layer)
+    return layers
+
+
+def _bake_adjusted_core(comps: dict, slug: str, sdir: Path,
+                        gscale: float, parts_adj: dict, colors: dict,
+                        out_stl: Path, out_3mf: Path) -> dict:
+    """Apply the viewer's per-part transform to each component STL and produce a
+    clean combined solid (``out_stl``) + colour-correct multi-object ``out_3mf``.
+
+    Shared by ``build_adjusted`` (writes the draft's ``_adj`` files) and
+    ``promote_sign`` (writes the published ``docs/<slug>/`` files) so a promoted
+    sign carries the exact same size/spacing/recolour tweaks as the viewer.
+    Returns ``{adjusted, adj_paths, objects, color_layers}``."""
+    import numpy as np
+    import trimesh
+
+    stl_keys = [k for k, v in comps.items() if isinstance(v, str) and v.endswith(".stl")]
+    if not stl_keys:
+        raise ValueError("draft has no per-component STLs to adjust")
+
+    adjusted: dict[str, Any] = {}
+    adj_paths: dict[str, str] = {}
+    for key in stl_keys:
+        src = (REPO_ROOT / comps[key]).resolve()
+        if not src.exists():
+            continue
+        try:
+            mesh = trimesh.load(str(src), process=False, force="mesh")
+        except Exception:
+            continue
+        if isinstance(mesh, trimesh.Scene):
+            mesh = trimesh.util.concatenate(tuple(mesh.dump()))
+        if mesh is None or len(getattr(mesh, "faces", [])) == 0:
+            continue
+        a = parts_adj.get(key, {"s": 1.0, "x": 0.0, "y": 0.0, "z": 0.0})
+        s = a["s"] or 1.0
+        centre = (mesh.bounds[0] + mesh.bounds[1]) / 2.0
+        offset = np.array([a["x"], a["y"], a["z"]], dtype=float)
+        mesh.vertices = gscale * (s * (mesh.vertices - centre) + centre + offset)
+        adjusted[key] = mesh
+        out_part = sdir / f"{src.stem}_adj.stl"
+        try:
+            mesh.export(str(out_part))
+            adj_paths[key] = str(out_part.relative_to(REPO_ROOT))
+        except Exception:
+            pass
+
+    if not adjusted:
+        raise ValueError("no component STLs could be loaded for adjustment")
+
+    # Combined assembled solid. The per-component relief/text STLs are not all
+    # closed volumes on their own, so a trimesh boolean union refuses them. We
+    # instead CGAL-union the adjusted parts via OpenSCAD (the same clean engine
+    # the rest of the pipeline uses), falling back to a concatenation if OpenSCAD
+    # is missing so the action still produces a (sliceable) file.
+    openscad = shutil.which("openscad") or "/opt/homebrew/bin/openscad"
+    union_scad = sdir / f"{slug}_adj_union.scad"
+    imports = "\n".join(
+        f'  import("{(REPO_ROOT / p).resolve().as_posix()}", convexity=10);'
+        for p in adj_paths.values()
+    )
+    union_scad.write_text(f"$fn = 48;\nunion() {{\n{imports}\n}}\n", encoding="utf-8")
+    out_stl.parent.mkdir(parents=True, exist_ok=True)
+    combined_ok = False
+    if os.path.exists(openscad):
+        proc = subprocess.run([openscad, "-o", str(out_stl), str(union_scad)],
+                              capture_output=True, text=True, timeout=900)
+        combined_ok = proc.returncode == 0 and out_stl.exists()
+        if not combined_ok:
+            print(f"[bake_adjusted] OpenSCAD union failed: {(proc.stderr or '')[-300:]}")
+    if not combined_ok:
+        print("[bake_adjusted] falling back to trimesh concatenation for combined STL")
+        combined = trimesh.util.concatenate(list(adjusted.values()))
+        combined.export(str(out_stl))
+
+    # Print-ready multi-object .3mf — one coloured object per filament, keeping
+    # each component WHOLE (avoids the Z-band split that can clip thin glyph tops)
+    # and honouring recolour overrides. Then pre-assign filament slots.
+    objects = None
+    color_layers = _recompute_color_layers(adjusted, colors)
+    try:
+        objects = _bundle_adjusted_3mf(adjusted, out_3mf, colors)
+    except Exception as exc:  # pragma: no cover
+        print(f"[bake_adjusted] 3mf bundle failed: {exc}")
+    if objects and out_3mf.exists():
+        try:
+            inject_3mf_slots(out_3mf, objects)
+        except Exception as exc:  # pragma: no cover
+            print(f"[bake_adjusted] slot pre-assignment skipped: {exc}")
+
+    return {"adjusted": adjusted, "adj_paths": adj_paths,
+            "objects": objects, "color_layers": color_layers}
+
+
+def _render_flat_projection(out_png: Path, *, adj_paths: dict | None = None,
+                            colors: dict | None = None, scad_path: Path | None = None,
+                            orient: str = "portrait") -> bool:
+    """Render a flat, front-on, COLOURED 2D projection of the 3D sign to a PNG —
+    the sign-face "photo" that replaces the hand-composed poster so the page art
+    always matches the actual (possibly adjusted/recoloured) geometry.
+
+    Either renders a given ``scad_path`` (the assembly, which already carries
+    colours) or, for adjusted signs, a generated scad that imports each adjusted
+    part STL wrapped in its filament colour. Orthographic top-down camera."""
+    openscad = shutil.which("openscad") or "/opt/homebrew/bin/openscad"
+    if not os.path.exists(openscad):
+        return False
+    render_scad = scad_path
+    tmp_scad = None
+    if render_scad is None:
+        if not adj_paths:
+            return False
+        lines = ["$fn = 48;"]
+        for key, rel in adj_paths.items():
+            _fil, rgb = _adjusted_part_color(key, colors)
+            r, g, b = rgb[0] / 255.0, rgb[1] / 255.0, rgb[2] / 255.0
+            p = (REPO_ROOT / rel).resolve().as_posix()
+            lines.append(f'color([{r:.3f}, {g:.3f}, {b:.3f}]) import("{p}", convexity=10);')
+        tmp_scad = out_png.with_suffix(".proj.scad")
+        tmp_scad.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        render_scad = tmp_scad
+    imgsize = "1100,560" if orient == "landscape" else "620,1140"
+    cmd = [openscad, "-o", str(out_png), f"--imgsize={imgsize}",
+           "--projection=ortho", "--viewall", "--autocenter",
+           "--camera=0,0,0,0,0,0,500", "--colorscheme=Tomorrow", str(render_scad)]
+    ok = subprocess.run(cmd, capture_output=True, text=True).returncode == 0 and out_png.exists()
+    if tmp_scad is not None:
+        try:
+            tmp_scad.unlink()
+        except Exception:
+            pass
+    return ok
+
+
+def build_adjusted(payload: dict) -> dict:
+    """Bake the workbench viewer's per-component size/spacing/recolour tweaks into
+    the draft's ``signs/<slug>/<slug>_adj.stl`` + ``_adj.3mf`` and record the
+    adjustment set so promotion can carry the tweaks straight into production."""
+    en = (payload.get("en") or "").strip()
+    if not en:
+        raise ValueError("en (English trail name) is required")
+    drafts = _load_drafts()
+    rec = drafts.get(en)
+    if not rec or not rec.get("components"):
+        raise ValueError(f"No built draft components for '{en}' — build it first.")
+    comps = rec["components"]
+    slug = rec.get("slug") or _slugify(en)
+    sdir = SIGNS_DIR / slug
+
+    try:
+        import numpy  # noqa: F401
+        import trimesh  # noqa: F401
+    except Exception as exc:  # pragma: no cover - optional dependency
+        raise ValueError(
+            "trimesh + numpy are required for adjusted builds; install them in "
+            f"the venv (see requirements.txt). Import error: {exc}"
+        )
+
+    gscale, parts_adj, colors = _clean_adjustments(payload.get("adjustments"))
+    out_stl = sdir / f"{slug}_adj.stl"
+    out_3mf = sdir / f"{slug}_adj.3mf"
+    res = _bake_adjusted_core(comps, slug, sdir, gscale, parts_adj, colors, out_stl, out_3mf)
+
+    rec["adjusted"] = {"global": gscale, "parts": parts_adj, "colors": colors}
+    rec["adjustedComponents"] = res["adj_paths"]
+    rec["adjustedColorLayers"] = res["color_layers"]
+    rec["assembled_stl"] = str(out_stl.relative_to(REPO_ROOT))
+    if out_3mf.exists():
+        rec["print_3mf"] = str(out_3mf.relative_to(REPO_ROOT))
+    drafts[en] = rec
+    _write_drafts(drafts)
+    return {
+        "ok": True,
+        "en": en,
+        "slug": slug,
+        "assembledStl": rec["assembled_stl"],
+        "print3mf": rec.get("print_3mf"),
+        "objects": res["objects"],
+        "adjustedComponents": res["adj_paths"],
+        "entry": rec,
+    }
+
+
+def save_adjustments(payload: dict) -> dict:
+    """Persist the viewer's current adjustment set onto the draft WITHOUT a heavy
+    rebuild. The viewer calls this (debounced) as the user nudges/recolours, so
+    "Move to production" can bake the latest tweaks even if the per-sign print
+    bake was never run explicitly."""
+    en = (payload.get("en") or "").strip()
+    if not en:
+        raise ValueError("en (English trail name) is required")
+    drafts = _load_drafts()
+    rec = drafts.get(en)
+    if not rec:
+        raise ValueError(f"Unknown draft '{en}'")
+    gscale, parts_adj, colors = _clean_adjustments(payload.get("adjustments"))
+    has_tweaks = (abs(gscale - 1.0) > 1e-6
+                  or any(abs(p.get("s", 1) - 1) > 1e-6 or p.get("x") or p.get("y") or p.get("z")
+                         for p in parts_adj.values())
+                  or bool(colors))
+    if has_tweaks:
+        rec["adjusted"] = {"global": gscale, "parts": parts_adj, "colors": colors}
+    else:
+        rec.pop("adjusted", None)   # cleared back to default -> drop so promote uses original
+    drafts[en] = rec
+    _write_drafts(drafts)
+    return {"ok": True, "en": en, "hasAdjustments": has_tweaks}
+
+
+def promote_sign(payload: dict) -> dict:
+    """Promote a draft sign into the published catalogue: F6-render its assembly
+    to one combined STL under docs/<slug>/, then append/update a catalogue.json
+    model (with auto colorLayers) and render its page."""
+    en = (payload.get("en") or "").strip()
+    if not en:
+        raise ValueError("en (English trail name) is required")
+    drafts = _load_drafts()
+    rec = drafts.get(en)
+    if not rec or not rec.get("components"):
+        raise ValueError(f"No built draft components for '{en}' — build it first.")
+    comps = rec["components"]
+    slug = rec.get("slug") or _slugify(en)
+    asm = SIGNS_DIR / slug / f"{slug}_assembly.scad"
+    if not asm.exists():
+        raise ValueError(f"Missing assembly scad: {asm}")
+
+    openscad = shutil.which("openscad") or "/opt/homebrew/bin/openscad"
+    docs_folder = DOCS_ROOT / slug
+    docs_folder.mkdir(parents=True, exist_ok=True)
+    out_stl = docs_folder / f"{slug}.stl"
+    out_3mf = docs_folder / f"{slug}.3mf"
+    threemf_objects = None
+    model_colors = comps.get("colors", [])
+    model_layers = comps.get("colorLayers", [])
+
+    # If the draft carries the viewer's size/spacing/recolour tweaks, BAKE the
+    # published STL + .3mf directly from the adjusted components (so production
+    # matches the 3D editor exactly). Otherwise F6-render the assembly scad.
+    adjustments = rec.get("adjusted") if isinstance(rec.get("adjusted"), dict) else None
+    bake = None
+    if adjustments:
+        try:
+            gscale = float(adjustments.get("global") or 1.0)
+            parts_adj = adjustments.get("parts") or {}
+            colors = adjustments.get("colors") or {}
+            bake = _bake_adjusted_core(comps, slug, SIGNS_DIR / slug, gscale,
+                                       parts_adj, colors, out_stl, out_3mf)
+            threemf_objects = bake.get("objects")
+            if bake.get("color_layers"):
+                model_layers = bake["color_layers"]
+                model_colors = []
+                for ly in model_layers:
+                    c = ly.get("color")
+                    if c and c not in model_colors:
+                        model_colors.append(c)
+        except Exception as exc:  # pragma: no cover
+            print(f"[promote_sign] adjusted bake failed ({exc}); using assembly render")
+            bake = None
+
+    if bake is None:
+        if not asm.exists():
+            raise ValueError(f"Missing assembly scad: {asm}")
+        proc = subprocess.run([openscad, "-o", str(out_stl), str(asm)],
+                              capture_output=True, text=True, timeout=600)
+        if proc.returncode != 0 or not out_stl.exists():
+            raise ValueError("OpenSCAD render failed: " + (proc.stderr or "")[-300:])
+        if _build_layered_3mf is not None:
+            try:
+                res = _build_layered_3mf(out_stl, comps.get("colorLayers", []), out_3mf)
+                if res:
+                    threemf_objects = res.get("objects")
+                    if out_3mf.exists():
+                        inject_3mf_slots(out_3mf, threemf_objects)
+            except Exception as exc:  # pragma: no cover
+                print(f"[promote_sign] layered 3mf build skipped: {exc}")
+
+    # Flat, front-on coloured 2D projection of the ACTUAL 3D sign -> the page
+    # "Trail Sign Design" photo (replaces the hand-composed poster so the art
+    # always matches the current geometry + colours).
+    orient = comps.get("orient") or "portrait"
+    assets_dir = DOCS_ROOT / "assets" / slug
+    assets_dir.mkdir(parents=True, exist_ok=True)
+    proj_png = assets_dir / f"{slug}_sign.png"
+    proj_ok = False
+    try:
+        if bake is not None and bake.get("adj_paths"):
+            proj_ok = _render_flat_projection(proj_png, adj_paths=bake["adj_paths"],
+                                              colors=(adjustments or {}).get("colors"),
+                                              orient=orient)
+        elif asm.exists():
+            proj_ok = _render_flat_projection(proj_png, scad_path=asm, orient=orient)
+    except Exception as exc:  # pragma: no cover
+        print(f"[promote_sign] flat projection render skipped: {exc}")
+
+    catalogue = load_catalogue()
+    models = catalogue.setdefault("models", [])
+    model = next((m for m in models if m.get("id") == slug), None)
+    if model is None:
+        model = {"id": slug}
+        next_num = max([int(m.get("signNumber") or 0) for m in models], default=0) + 1
+        model["signNumber"] = next_num
+        models.append(model)
+    meaning = payload.get("meaning") or ""
+    model.update({
+        "numberedFolder": f"{int(model.get('signNumber') or 0):02d}-{slug}",
+        "title": payload.get("englishName") or en,
+        "englishName": payload.get("englishName") or en,
+        "creeName": payload.get("creeName") or (rec.get("translit") or ""),
+        "creeSyllabics": payload.get("creeSyllabics") or "",
+        "folder": slug,
+        "pagePath": f"{slug}/",
+        "stlPath": f"{slug}/{slug}.stl",
+        "docsStlPath": f"{slug}/{slug}.stl",
+        "colors": model_colors,
+        "colorLayers": model_layers,
+        "status": payload.get("status") or "draft",
+    })
+    if out_3mf.exists():
+        model["docs3mfPath"] = f"{slug}/{slug}.3mf"
+    # Build a full kiwapamitin-style page from the chosen translation, its
+    # reasoning, the alternate renderings, the icon/design concept, and the
+    # trail facts — so promotion produces a rich page, not a bare stub. An
+    # already-reviewed/published page is left alone so we never clobber human
+    # edits; only draft/agent-drafted (or missing) pages are regenerated.
+    existing_pc = model.get("pageContent") if isinstance(model.get("pageContent"), dict) else {}
+    existing_status = (existing_pc or {}).get("pageStatus", "")
+    if existing_status in ("user-reviewed", "published"):
+        pc = existing_pc
+    else:
+        pc = build_auto_page_content(en, slug, rec, payload)
+        model["pageContent"] = pc
+        # Use the flat 3D projection as the sign-design photo (the 2D poster is
+        # retired) so the page art tracks the real, possibly-adjusted geometry.
+        if proj_ok:
+            pc["photo"] = {
+                "src": f"../assets/{slug}/{proj_png.name}",
+                "alt": f"{model.get('englishName') or en} trail sign — 3D render",
+                "caption": "Front view of the 3D-printed multi-colour sign, "
+                           "rendered from the print geometry.",
+            }
+    model.setdefault("checks", {})
+
+    write_json(CATALOGUE_PATH, catalogue)
+    manifest = regenerate_manifest()
+    rendered = []
+    try:
+        rendered = render_pages_for_ids([slug], force=True)
+    except Exception as exc:  # pragma: no cover
+        print(f"[promote_sign] page render skipped: {exc}")
+    return {"ok": True, "model": model, "manifest": manifest,
+            "docsStlPath": model["docsStlPath"],
+            "docs3mfPath": model.get("docs3mfPath"),
+            "threemfObjects": threemf_objects, "rendered": rendered}
 
 
 def unique_destination(path: Path) -> Path:
@@ -306,6 +1334,52 @@ def save_print_setup(payload: dict) -> dict:
             cleaned_layers.append(cleaned)
         model["colorLayers"] = cleaned_layers
         operations.append("Updated colorLayers")
+
+    if "printEffect" in payload:
+        effect = payload["printEffect"]
+        if effect in (None, ""):
+            if "printEffect" in model:
+                del model["printEffect"]
+                operations.append("Removed gradient print effect")
+        else:
+            if not isinstance(effect, dict):
+                raise ValueError("printEffect must be an object or null")
+            mode = effect.get("mode")
+            if mode not in ("threshold", "transmission"):
+                raise ValueError("printEffect.mode must be threshold or transmission")
+            palette = effect.get("palette")
+            if not isinstance(palette, list) or len(palette) == 0:
+                raise ValueError("printEffect.palette must be a non-empty array")
+
+            cleaned_palette = []
+            for layer in palette:
+                if not isinstance(layer, dict) or not isinstance(layer.get("color"), str) or not layer["color"]:
+                    raise ValueError("Each printEffect palette layer needs a color")
+                cleaned_layer = {
+                    "color": layer["color"],
+                    "startLayer": int(layer.get("startLayer") or 1),
+                }
+                if isinstance(layer.get("label"), str) and layer["label"]:
+                    cleaned_layer["label"] = layer["label"]
+                if mode == "threshold":
+                    cleaned_layer["mixFactor"] = float(layer.get("mixFactor") or 0.3)
+                else:
+                    cleaned_layer["td"] = float(layer.get("td") or 4)
+                cleaned_palette.append(cleaned_layer)
+
+            cleaned_effect = {
+                "mode": mode,
+                "source": effect.get("source") if isinstance(effect.get("source"), str) else "IllumiStack",
+                "totalLayers": int(effect.get("totalLayers") or 15),
+                "layerHeightMm": float(effect.get("layerHeightMm") or 0.08),
+                "baseLayers": int(effect.get("baseLayers") or 0),
+                "backgroundColor": effect.get("backgroundColor") if isinstance(effect.get("backgroundColor"), str) else "#000000",
+                "palette": cleaned_palette,
+            }
+            if isinstance(effect.get("previewImage"), str) and effect["previewImage"]:
+                cleaned_effect["previewImage"] = effect["previewImage"]
+            model["printEffect"] = cleaned_effect
+            operations.append("Updated gradient print effect")
 
     write_json(CATALOGUE_PATH, catalogue)
     manifest = regenerate_manifest()
@@ -1325,6 +2399,41 @@ def regenerate_sign_page(payload: dict) -> dict:
     return {"ok": True, "summaries": summaries}
 
 
+def flesh_out_sign(payload: dict) -> dict:
+    """Ask a Cursor agent to author rich pageContent for a sign, then apply it.
+
+    Gathers the sign's Cree options / graphic / trail facts, runs the
+    ``cursor-agent`` CLI headless (uses the local Cursor login, no API key),
+    validates the returned JSON through the schema cleaner, and re-renders the
+    page at pageStatus=agent-drafted for human review. Implemented in
+    tools/flesh_out_sign.py; imported lazily to avoid an import cycle."""
+    model_id = str(payload.get("modelId", "")).strip()
+    if not model_id:
+        raise ValueError("modelId is required")
+
+    import flesh_out_sign as fos  # lazy: fos imports this module at top level
+
+    catalogue = load_catalogue()
+    model = find_model(catalogue, model_id)
+    ctx = fos.gather_context(model)
+    prompt = fos.build_prompt(ctx)
+
+    agent_bin = fos.find_cursor_agent(payload.get("cursorAgentPath") or None)
+    if not agent_bin:
+        raise ValueError(
+            "cursor-agent CLI not found. Install it once and log in: "
+            "`curl https://cursor.com/install -fsS | bash` then `cursor-agent login`. "
+            "(Or author the JSON in chat and apply with "
+            "`tools/flesh_out_sign.py --model <id> --from-json <file>`.)")
+
+    model_name = str(payload.get("modelName") or "")  # empty -> account default
+    text = fos.run_cursor_agent(prompt, agent_bin, model_name)
+    authored = fos.extract_json_object(text)
+    summaries = fos.apply_authored(model_id, authored)
+    summary = next((s for s in summaries if s.get("id") == model_id), None)
+    return {"ok": True, "model": model_name, "summaries": summaries, "rendered": summary}
+
+
 class CatalogueEditorHandler(SimpleHTTPRequestHandler):
     server_version = "CatalogueEditor/1.0"
 
@@ -1390,6 +2499,12 @@ class CatalogueEditorHandler(SimpleHTTPRequestHandler):
             "/api/upload-sign-photo",
             "/api/upload-trail-source",
             "/api/upload-map-icon",
+            "/api/build-sign",
+            "/api/build-assembled",
+            "/api/build-adjusted",
+            "/api/save-adjustments",
+            "/api/promote-sign",
+            "/api/flesh-out-sign",
         }
         if parsed.path not in known_endpoints:
             self.send_error_json(404, "Unknown API endpoint")
@@ -1418,6 +2533,24 @@ class CatalogueEditorHandler(SimpleHTTPRequestHandler):
                 return
             if parsed.path == "/api/upload-map-icon":
                 self.send_json(200, upload_map_icon(payload))
+                return
+            if parsed.path == "/api/build-sign":
+                self.send_json(200, build_sign(payload))
+                return
+            if parsed.path == "/api/build-assembled":
+                self.send_json(200, build_assembled(payload))
+                return
+            if parsed.path == "/api/build-adjusted":
+                self.send_json(200, build_adjusted(payload))
+                return
+            if parsed.path == "/api/save-adjustments":
+                self.send_json(200, save_adjustments(payload))
+                return
+            if parsed.path == "/api/promote-sign":
+                self.send_json(200, promote_sign(payload))
+                return
+            if parsed.path == "/api/flesh-out-sign":
+                self.send_json(200, flesh_out_sign(payload))
                 return
         except Exception as exc:  # pragma: no cover - local tool ergonomics
             self.send_error_json(400, str(exc))

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trail-Sign Graphic Style Guide · nehiyoMTB</title>
+<style>
+  :root{
+    --bg:#11140f; --panel:#1b1f17; --panel2:#232a1d; --line:#39432c;
+    --text:#e8efdc; --muted:#9bab84; --accent:#a3c14a; --accent2:#e0b04a; --syl:#cfe39a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{padding:20px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#1c2316,#141811)}
+  a{color:var(--accent)}
+  h1{margin:0 0 4px;font-size:22px}
+  h2{margin:34px 0 10px;font-size:18px;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:6px}
+  h3{margin:20px 0 6px;font-size:15px;color:var(--accent2)}
+  .sub{color:var(--muted);font-size:13px;max-width:900px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px 80px}
+  .nav{display:flex;gap:14px;flex-wrap:wrap;padding:12px 24px;border-bottom:1px solid var(--line);background:var(--panel);font-size:13px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:14px 0}
+  .card.sp{border-left:4px solid var(--accent)}
+  .card.hf{border-left:4px solid var(--accent2)}
+  .card.ob{border-left:4px solid #6fb0e0}
+  code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  pre{background:#0d100a;border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow:auto;font-size:12.5px;color:var(--syl);white-space:pre-wrap}
+  .pill{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;background:#2a331d;color:var(--accent);border:1px solid var(--line);margin-left:6px}
+  ul,ol{margin:6px 0 6px 0;padding-left:22px}
+  li{margin:3px 0}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:var(--muted);text-transform:uppercase;font-size:11px;letter-spacing:.4px}
+  .swatch{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid #0006;vertical-align:middle;margin-right:6px}
+  .do{color:var(--accent)} .dont{color:#e06a5a}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Trail-Sign Graphic Style Guide</h1>
+  <div class="sub">How to design, prompt, and export the icon graphics that sit behind the syllabics on each nêhiyaw MTB trail sign — in a form that reduces cleanly to extrudable, multi-colour 3D shapes. Pairs with the <a href="cree-trail-names.html">Translation Workbench</a>, the <a href="tools/icon-extruder/index.html">Icon&nbsp;Extruder</a>, and the <a href="tools/hueforge/index.html">HueForge Designer</a>.</div>
+</header>
+<div class="nav">
+  <a href="#why">Why this matters</a>
+  <a href="#screenprint">① Screenprint icon</a>
+  <a href="#hueforge">② HueForge tonal</a>
+  <a href="#object">③ Embedded object</a>
+  <a href="#output">Output / extrudability spec</a>
+  <a href="#layers">Colour → layer mapping</a>
+  <a href="#prompts">Prompt templates</a>
+  <a href="#workflow">End-to-end workflow</a>
+</div>
+<div class="wrap">
+
+<h2 id="why">Why this matters</h2>
+<p>Every sign is a 3D print: a <code>blank_plaque_thinner.stl</code> plank, raised English + transliteration + protruding syllabics, and — usually — an <b>icon</b> on the plaque that captures the meaning of the trail name (its English sense, its Cree sense, and the place/activity). The icon is the hard part. To turn a generated picture into a printable icon we must be able to:</p>
+<ol>
+  <li><b>Separate it into a small number of closed regions</b> (so the Icon Extruder can outline each one).</li>
+  <li><b>Map each region to a filament colour</b> from a small palette.</li>
+  <li><b>Lift each region to a different height</b> — usually in monotonic steps of the plaque layer thickness — so colours print as stacked layers without filament changes mid-layer being required everywhere.</li>
+</ol>
+<p>That goal drives every rule below. The enemy is anything that can't be cleanly thresholded: gradients (except in HueForge mode), soft shadows, anti-aliased fuzz, photographic texture, and thin disconnected specks.</p>
+
+<h2 id="screenprint">① Screenprint icon <span class="pill">default · ~80% of signs</span></h2>
+<div class="card sp">
+<p>A bold, flat <b>silkscreen / vinyl-decal</b> look: solid shapes, thick keylines, a handful of flat spot colours. This is the workhorse style and the easiest to extrude.</p>
+<div class="grid2">
+<div>
+<h3 class="do">Do</h3>
+<ul>
+  <li>Solid <b>flat fills</b> — each colour is one constant value.</li>
+  <li><b>2–4 colours max</b>, including the keyline black.</li>
+  <li>Thick, continuous <b>black outlines</b> around every shape.</li>
+  <li><b>Closed</b> shapes (no open strokes that don't enclose area).</li>
+  <li>One clear subject, centred, with a margin.</li>
+  <li>Pure white <code>#ffffff</code> background.</li>
+</ul>
+</div>
+<div>
+<h3 class="dont">Don't</h3>
+<ul>
+  <li>No gradients, grayscale ramps, or halftone dots.</li>
+  <li>No drop shadows, glows, or soft edges.</li>
+  <li>No photographic texture or noise.</li>
+  <li>No tiny isolated specks or hairline details.</li>
+  <li>No lettering/text baked into the image (the plaque adds text).</li>
+  <li>No frame/border box around the icon.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<h2 id="hueforge">② HueForge tonal image <span class="pill">~10% of signs</span></h2>
+<div class="card hf">
+<p>For signs whose meaning is carried by a <b>photographic / scenic / portrait</b> subject (e.g. <i>West Coast Trail</i>, <i>Breathless</i>, <i>Bohemian Maid</i>), a flat stencil loses the magic. Instead generate a <b>continuous-tone</b> image and print it as stacked translucent filament layers using the <a href="tools/hueforge/index.html">HueForge Designer</a>. Here the smooth <b>luminance gradient is the height map</b> — darker = thicker stack.</p>
+<ul>
+  <li>Smooth light→dark tonal range; <b>no hard black outlines</b>.</li>
+  <li>Subject fills the frame; simple, uncluttered background.</li>
+  <li>Even, single-direction lighting (avoid blown highlights / crushed blacks).</li>
+  <li>Think in 4–8 tonal bands — that's how many filament swaps you'll realistically use.</li>
+</ul>
+<p class="sub">Use HueForge mode sparingly (~10%): it costs filament swaps and tuning. Everything else should be a screenprint icon.</p>
+</div>
+
+<h2 id="object">③ Embedded printable object <span class="pill">~10% of signs</span></h2>
+<div class="card ob">
+<p>Following the newest signs (<i>Lovers Lane</i>, <i>Slinky</i>, <i>Bed Springs</i>, <i>Back Breaker</i>) that fuse a real printed object into the plaque, some trail names beg for a literal embedded model — e.g. a mini <b>birdhouse</b>, <b>bottle rocket</b>, print-in-place <b>articulated snake</b>, <b>garden gnome</b>, or <b>paddlewheel boat</b>.</p>
+<ul>
+  <li>The sign still gets a <b>screenprint icon</b> as a backdrop, but its prompt asks for <b>clear negative space in the centre</b> where the object insets.</li>
+  <li>Source the object STL from <a href="https://www.printables.com">Printables</a>/<a href="https://www.thingiverse.com">Thingiverse</a>, or model it yourself with a small OpenSCAD file.</li>
+  <li>The object is fused onto the plaque by the <a href="#workflow">plaque generator</a> (drop its STL in as the <code>--icon</code>), protruding from the surface.</li>
+  <li>Keep it small, single-piece, and printable without supports where possible (or print-in-place).</li>
+</ul>
+</div>
+
+<h2 id="output">Output / extrudability spec (read this before generating)</h2>
+<p>Regardless of style, request and save the image so the Icon Extruder can reduce it to shapes:</p>
+<table>
+  <tr><th>Property</th><th>Screenprint / Object</th><th>HueForge</th></tr>
+  <tr><td>Format</td><td>PNG (lossless) or SVG</td><td>PNG (lossless), 8-bit+</td></tr>
+  <tr><td>Size</td><td>1024×1024, square</td><td>1024×1024, square</td></tr>
+  <tr><td>Background</td><td>pure white <code>#ffffff</code></td><td>plain, light</td></tr>
+  <tr><td>Tones</td><td>2–4 flat, separable colours</td><td>continuous, but ≤ 8 usable bands</td></tr>
+  <tr><td>Edges</td><td>crisp, anti-aliasing minimal</td><td>smooth ok</td></tr>
+  <tr><td>Detail floor</td><td>nothing thinner than ~3% of frame</td><td>n/a</td></tr>
+  <tr><td>Best of all</td><td><b>SVG with named, closed paths</b> — the extruder can use the vector shapes directly, skipping edge-detection.</td><td>—</td></tr>
+</table>
+<p><b>SVG is ideal.</b> If your image service can emit SVG (or you trace the PNG to SVG), the Icon Extruder will lift each closed path to its own height with perfect edges. PNG is the fallback: it gets posterized to N tones, then each connected region is contoured.</p>
+
+<h2 id="layers">Colour → layer-height mapping</h2>
+<p>Each separable colour becomes a printed layer at a monotonic multiple of the plaque layer step. Default step = the plaque's print layer height stack (e.g. 0.6&nbsp;mm groups). Typical convention:</p>
+<table>
+  <tr><th>Region</th><th>Filament</th><th>Height (steps)</th><th>Notes</th></tr>
+  <tr><td>Background plane</td><td><span class="swatch" style="background:#eee"></span>plaque base</td><td>0</td><td>the plaque surface itself</td></tr>
+  <tr><td>Main fill / silhouette</td><td><span class="swatch" style="background:#111"></span>black</td><td>1</td><td>lowest icon layer</td></tr>
+  <tr><td>Secondary colour</td><td><span class="swatch" style="background:#d23"></span>red</td><td>2</td><td>e.g. raven's eye/accent</td></tr>
+  <tr><td>Tertiary colour</td><td><span class="swatch" style="background:#fff;border-color:#999"></span>white/other</td><td>3</td><td>top highlights</td></tr>
+  <tr><td>Syllabics</td><td>contrast</td><td>highest</td><td>protrudes in front, set by plaque generator</td></tr>
+</table>
+<p>The Icon Extruder lets you click a region, assign a filament swatch, and set its layer index; it then extrudes a manifold STL with each region at its mapped height. Keep heights <b>monotonic</b> (taller = printed later / on top) so the AMS/manual swaps go in one direction.</p>
+
+<h2 id="prompts">Prompt templates</h2>
+<p>The Workbench builds each editable prompt as <code>subject&nbsp;+&nbsp;", "&nbsp;+&nbsp;STYLE_FRAGMENT</code>. The fragments below are the single source of truth (kept in <code>graphics-data.js</code> as <code>STYLE_FRAGMENTS</code>). Edit the subject freely; keep the style fragment so the output stays extrudable.</p>
+<h3>Screenprint fragment</h3>
+<pre id="frag-sp">loading…</pre>
+<h3>HueForge fragment</h3>
+<pre id="frag-hf">loading…</pre>
+<h3>Embedded-object fragment</h3>
+<pre id="frag-ob">loading…</pre>
+<p class="sub">Example full prompt (Raven): <code>a black raven with spread wings, &lt;screenprint fragment&gt;</code></p>
+
+<h2 id="workflow">End-to-end workflow</h2>
+<ol>
+  <li><b>Pick the concept</b> in the <a href="cree-trail-names.html">Workbench</a> — each trail has a suggested concept, type badge, and an editable prompt.</li>
+  <li><b>Generate the image</b> (button calls your configured image API) or paste your own. Aim for the output spec above; export SVG if you can.</li>
+  <li><b>Reduce to shapes</b> in the <a href="tools/icon-extruder/index.html">Icon Extruder</a>: posterize / load SVG → review detected regions.</li>
+  <li><b>Paint with filament</b>: click each closed region, assign a palette colour, set its layer height.</li>
+  <li><b>Export the icon STL</b> (each region at its mapped height; manifold, ready to fuse).</li>
+  <li><b>Generate the plaque</b> with <code>tools/plaque_gen/plaque_gen.py</code>: pass English + transliteration + syllabics and the icon STL; it writes a <code>.scad</code> and renders a draft <code>.stl</code> with text auto-fit (multi-line, centred) and syllabics protruding in front.</li>
+  <li><b>Print</b>, swapping filament at the layer heights you assigned.</li>
+</ol>
+
+</div>
+<script src="graphics-data.js"></script>
+<script>
+  document.getElementById('frag-sp').textContent = window.STYLE_FRAGMENTS.screenprint;
+  document.getElementById('frag-hf').textContent = window.STYLE_FRAGMENTS.hueforge;
+  document.getElementById('frag-ob').textContent = window.STYLE_FRAGMENTS.object;
+</script>
+</body>
+</html>

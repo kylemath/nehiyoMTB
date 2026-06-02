@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HueForge Gradient Designer · nehiyoMTB</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.157.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/"
+            }
+        }
+    </script>
+    <!-- Mixbox for pigment-accurate color mixing (same as IllumiStack). -->
+    <script src="https://scrtwpns.com/mixbox.js"></script>
+    <link rel="stylesheet" href="hueforge.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-left">
+            <a class="back-link" href="../../index.html">← Back to catalogue</a>
+            <h1>HueForge Gradient Designer</h1>
+            <p class="subtitle">
+                Predict translucent / stacked-layer colour effects for thin-layer prints &mdash;
+                a HueForge-style alternative to the catalogue's 2&ndash;4 layer swap editor.
+            </p>
+        </div>
+        <div class="header-right">
+            <label class="preset-label" for="preset-select">Sign preset</label>
+            <select id="preset-select">
+                <option value="">— choose a sign —</option>
+                <option value="farmers-daughter">Farmer's Daughter (portrait)</option>
+                <option value="i-see-you">I See You (kiwâpamitin)</option>
+                <option value="purple-haze">Purple Haze (sky gradient)</option>
+                <option value="purple-haze-sky">Purple Haze (sky only, pink→purple)</option>
+            </select>
+        </div>
+    </header>
+
+    <main class="app-grid">
+        <!-- ============ CONTROLS COLUMN ============ -->
+        <aside class="controls">
+            <section class="panel">
+                <h2>Image</h2>
+                <div class="control-row">
+                    <input type="file" id="image-input" accept="image/*">
+                </div>
+                <div class="control-row">
+                    <button class="btn" id="recompute-btn" type="button">Recompute</button>
+                    <button class="btn ghost" id="reset-btn" type="button">Reset stack</button>
+                </div>
+                <div class="hint" id="image-info">No image loaded. Pick a preset or upload one.</div>
+            </section>
+
+            <section class="panel">
+                <h2>Print Stack</h2>
+                <div class="control-row">
+                    <label for="total-layers">Total relief layers</label>
+                    <div class="slider-row">
+                        <input type="range" id="total-layers" min="2" max="80" value="15">
+                        <span class="readout" id="total-layers-readout">15</span>
+                    </div>
+                </div>
+                <div class="control-row">
+                    <label for="layer-height">Layer height (mm)</label>
+                    <div class="slider-row">
+                        <input type="range" id="layer-height" min="0.04" max="0.32" step="0.01" value="0.08">
+                        <span class="readout" id="layer-height-readout">0.08</span>
+                    </div>
+                </div>
+                <div class="control-row">
+                    <label for="base-layers">Base layers (opaque)</label>
+                    <div class="slider-row">
+                        <input type="range" id="base-layers" min="0" max="20" value="3">
+                        <span class="readout" id="base-layers-readout">3</span>
+                    </div>
+                </div>
+                <div class="control-row inline">
+                    <label class="check">
+                        <input type="checkbox" id="compensate-first-layer" checked>
+                        Compensate first layer (extra 1× height)
+                    </label>
+                </div>
+            </section>
+
+            <section class="panel">
+                <h2>Colour Mode</h2>
+                <div class="control-row inline">
+                    <label class="radio">
+                        <input type="radio" name="mode" value="threshold" checked>
+                        Threshold transitions <span class="hint">(IllumiStack)</span>
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="mode" value="transmission">
+                        Transmission stacking <span class="hint">(translucent filament, TD)</span>
+                    </label>
+                </div>
+                <div class="hint">
+                    <strong>Threshold:</strong> picture darkest pixels show through more layers — pick
+                    colours and the layer at which each colour "comes in".
+                    <strong>Transmission:</strong> simulate translucent filament with a transmission
+                    distance (TD) — light passes through several layers and blends.
+                </div>
+            </section>
+
+            <section class="panel" id="palette-panel">
+                <h2>Palette &amp; transitions</h2>
+                <div id="palette-list"></div>
+                <div class="control-row">
+                    <button class="btn" id="add-color-btn" type="button">＋ Add colour layer</button>
+                </div>
+                <div class="control-row">
+                    <label for="background-color">Background (deepest) colour</label>
+                    <input type="color" id="background-color" value="#000000">
+                </div>
+                <div class="control-row inline" id="mix-strength-row">
+                    <label for="mix-strength">Mix factor per layer</label>
+                    <div class="slider-row">
+                        <input type="range" id="mix-strength" min="0.05" max="1.0" step="0.05" value="0.3">
+                        <span class="readout" id="mix-strength-readout">0.30</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel">
+                <h2>3D Export</h2>
+                <div class="control-row">
+                    <label for="model-width">Model width (mm)</label>
+                    <div class="slider-row">
+                        <input type="number" id="model-width" min="20" max="500" value="100" step="1">
+                    </div>
+                </div>
+                <div class="control-row">
+                    <button class="btn primary" id="generate-mesh-btn" type="button">🔮 Generate 3D mesh</button>
+                </div>
+                <div class="control-row">
+                    <button class="btn" id="download-stl-btn" type="button" disabled>💾 Download STL</button>
+                </div>
+                <div class="hint" id="mesh-info"></div>
+            </section>
+        </aside>
+
+        <!-- ============ VIEWS COLUMN ============ -->
+        <section class="views">
+            <article class="view">
+                <h3>Original image</h3>
+                <div class="canvas-frame" id="original-frame">
+                    <canvas id="original-canvas"></canvas>
+                </div>
+            </article>
+
+            <article class="view">
+                <h3>Predicted print appearance</h3>
+                <div class="canvas-frame" id="modified-frame">
+                    <canvas id="modified-canvas"></canvas>
+                </div>
+            </article>
+
+            <article class="view">
+                <h3>3D height-map preview</h3>
+                <div class="canvas-frame" id="three-frame">
+                    <div class="placeholder" id="three-placeholder">Generate 3D mesh to preview</div>
+                </div>
+            </article>
+
+            <article class="view full">
+                <h3>Print layer plan</h3>
+                <div class="layer-plan" id="layer-plan">
+                    Load an image and pick colours to see the predicted per-layer plan.
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- App scripts are plain ES modules so the math can be unit-tested in isolation. -->
+    <script type="module" src="hueforge-app.js"></script>
+</body>
+</html>

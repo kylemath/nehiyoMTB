@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Icon Extruder · nehiyoMTB</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.157.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.157.0/examples/jsm/"
+  }
+}
+</script>
+<link rel="stylesheet" href="extruder.css">
+</head>
+<body>
+<header class="app-header">
+  <a class="back-link" href="../../cree-trail-names.html">← Back to Translation Workbench</a>
+  <h1>Icon Extruder</h1>
+  <p class="subtitle">Turn a flat screenprint icon (PNG or SVG) into an extrudable, multi-colour 3D icon STL: posterize to a few tones, click each closed region to assign a filament colour and layer height, preview the solid, then export an STL to fuse onto a plaque.</p>
+</header>
+
+<div class="grid">
+  <!-- ============ LEFT: input + processing ============ -->
+  <div class="col">
+    <div class="panel">
+      <h2>1 · Image</h2>
+      <label>Upload PNG / JPG / SVG</label>
+      <input type="file" id="fileInput" accept="image/*,.svg">
+      <label>…or paste an image URL</label>
+      <div class="row"><input type="url" id="urlInput" placeholder="https://…"><button class="btn" id="loadUrl" style="flex:none">Load</button></div>
+      <div class="hint">You can also paste an image from the clipboard (Ctrl/Cmd-V).</div>
+      <canvas id="srcCanvas" style="margin-top:10px;display:none"></canvas>
+    </div>
+
+    <div class="panel">
+      <h2>2 · Reduce to tones</h2>
+      <label>Tone levels (K) — <span class="val" id="kVal">3</span></label>
+      <input type="range" id="kRange" min="2" max="6" value="3">
+      <label>Mesh resolution (max px) — <span class="val" id="resVal">140</span></label>
+      <input type="range" id="resRange" min="60" max="220" step="10" value="140">
+      <label>Drop specks smaller than (px) — <span class="val" id="minVal">25</span></label>
+      <input type="range" id="minRange" min="0" max="400" step="5" value="25">
+      <div class="row" style="margin-top:8px">
+        <label style="margin:0;flex:none"><input type="checkbox" id="voidBg" checked> lightest band = background (cut to plaque)</label>
+      </div>
+      <div class="row" style="margin-top:6px">
+        <label style="margin:0;flex:none"><input type="checkbox" id="invert"> invert (dark = background)</label>
+      </div>
+      <button class="btn primary full" id="processBtn" style="margin-top:10px">Process →</button>
+    </div>
+
+    <div class="panel">
+      <h2>3 · Print dimensions</h2>
+      <label>Icon width (mm) — <span class="val" id="wVal">60</span></label>
+      <input type="range" id="wRange" min="20" max="90" step="1" value="60">
+      <label>Base / first-layer thickness (mm)</label>
+      <input type="number" id="baseH" value="0.6" step="0.1" min="0">
+      <label>Layer step per tone (mm)</label>
+      <input type="number" id="stepH" value="0.6" step="0.1" min="0.1">
+      <div class="hint">Each tone's height defaults to <code>base + level × step</code> (monotonic). You can override any region's height in the panel on the right.</div>
+      <button class="btn full" id="reheightBtn" style="margin-top:8px">Re-apply default heights</button>
+    </div>
+  </div>
+
+  <!-- ============ CENTER: 2D segments + 3D preview ============ -->
+  <div class="center-col">
+    <div class="panel" style="margin:0">
+      <h2>Segments — click a region to select it</h2>
+      <canvas id="segCanvas"></canvas>
+      <div class="statusbar" id="status">Load an image and press “Process”.</div>
+    </div>
+    <div class="panel viewer-wrap" style="margin:0;display:flex;flex-direction:column">
+      <h2>3D preview</h2>
+      <div id="view"></div>
+    </div>
+  </div>
+
+  <!-- ============ RIGHT: palette + segments + export ============ -->
+  <div class="col">
+    <div class="panel">
+      <h2>Filament palette</h2>
+      <div class="swatches" id="swatches"></div>
+      <div class="row" style="margin-top:8px">
+        <input type="color" id="newColor" value="#1a1a1a" style="flex:none;width:42px;height:32px;padding:2px">
+        <input type="text" id="newName" placeholder="name (e.g. Black PLA)">
+        <button class="btn" id="addSw" style="flex:none">＋</button>
+      </div>
+      <div class="hint">Select a swatch, then click a region (left) to paint it. Or use the list below.</div>
+    </div>
+
+    <div class="panel">
+      <h2>Regions</h2>
+      <div class="seglist" id="segList"><div class="hint">No regions yet.</div></div>
+    </div>
+
+    <div class="panel">
+      <h2>Export</h2>
+      <label>File name</label>
+      <input type="text" id="fname" value="icon">
+      <button class="btn primary full" id="exportBtn" style="margin-top:8px">⬇ Export combined STL</button>
+      <button class="btn full" id="exportColorBtn" style="margin-top:6px">⬇ Export one STL per colour</button>
+      <div class="hint">Combined STL = single solid for filament-swap-by-height printing (add a colour change at each layer height). Per-colour STLs = one body per filament for multi-material / AMS plates.</div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="extruder.js"></script>
+</body>
+</html>
