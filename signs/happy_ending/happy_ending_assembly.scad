@@ -61,12 +61,12 @@ offset(r=0.06, $fn=8) {
   }
   color([0.149, 0.149, 0.149]) {
   // transliteration (above top hole)
-  translate([0, 60.257, 0.900]) linear_extrude(height=0.900) text("sîkinikêwin", size=9.274, halign="center", valign="center", font="Helvetica Neue:style=Bold");
-  translate([0, 48.943, 0.900]) linear_extrude(height=0.900) text("iskwayâk", size=9.274, halign="center", valign="center", font="Helvetica Neue:style=Bold");
+  translate([0, 58.459, 0.900]) linear_extrude(height=0.900) text("miyawâtamowin", size=6.326, halign="center", valign="center", font="Helvetica Neue:style=Bold");
+  translate([0, 50.741, 0.900]) linear_extrude(height=0.900) text("iskwayâk", size=6.326, halign="center", valign="center", font="Helvetica Neue:style=Bold");
   }
   color([0.753, 0.224, 0.169]) {
   // syllabics (overlaid on icon, tallest)
-  translate([0, 4.820, 0.900]) linear_extrude(height=2.900) text("ᓰᑭᓂᑫᐎᐣ", size=11.999, halign="center", valign="center", font="Euphemia UCAS:style=Bold");
-  translate([0, -9.820, 0.900]) linear_extrude(height=2.900) text("ᐃᐢᑿᔮᐠ", size=11.999, halign="center", valign="center", font="Euphemia UCAS:style=Bold");
+  translate([0, 2.630, 0.900]) linear_extrude(height=2.900) text("ᒥᔭᐗᔨᐦᑕᒧᐎᐣ", size=8.410, halign="center", valign="center", font="Euphemia UCAS:style=Bold");
+  translate([0, -7.630, 0.900]) linear_extrude(height=2.900) text("ᐃᐢᑿᔮᐠ", size=8.410, halign="center", valign="center", font="Euphemia UCAS:style=Bold");
   }
 }

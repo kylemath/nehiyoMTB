@@ -7,6 +7,7 @@ import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, View } from 'rea
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ShareLevelPicker } from '@/components/share-level-picker';
+import { TrailIconBadge } from '@/components/trail-icon';
 import { Body, Button, Card, Screen, Subtitle, Title } from '@/components/ui';
 import { Brand, ShareLevel } from '@/constants/brand';
 import { CAPTURE_RADIUS_M, nearestSign, saveCapture, uploadCapture } from '@/lib/captures';
@@ -123,10 +124,13 @@ export default function CaptureScreen() {
           <Card>
             {near && nearTrail ? (
               <>
-                <Body style={{ fontWeight: '700' }}>
-                  {inRange ? 'Matched: ' : 'Nearest sign: '}
-                  {nearTrail.title} — {near.sign.kind === 'start' ? 'start' : 'end'} sign
-                </Body>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                  <TrailIconBadge trail={nearTrail} size={36} />
+                  <Body style={{ fontWeight: '700', flex: 1 }}>
+                    {inRange ? 'Matched: ' : 'Nearest sign: '}
+                    {nearTrail.title} — {near.sign.kind === 'start' ? 'start' : 'end'} sign
+                  </Body>
+                </View>
                 <Subtitle>
                   {Math.round(near.distanceM)} m away
                   {inRange

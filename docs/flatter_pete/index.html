@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flatter Pete • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#e27a37;--accent2:#b9642d;--line:#dee2e6;--chip:#e9ecef;--ok:#e27a37;--primary-bg:#fbebe1;--primary-text:#000000;--formula-bg:#fefaf7;--formula-border:#e27a37;--secondary-bg:#fdf4ef;--secondary-border:#f6d7c3
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .trail-mini-map-link{display:block;color:inherit;text-decoration:none;border-bottom:0}
+    .trail-mini-map-link:hover{border-bottom:0}
+    .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
+    .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
+    .trail-mini-map svg{display:block;width:100%;height:auto}
+    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
+    .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
+    .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
+    .trail-mini-map-attrib{font-size:10px;fill:#5f6368;paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}
+    .trail-mini-map-caption{padding:8px 10px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:left;background:rgba(255,255,255,0.82)}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    .buy-panel{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+    .buy-panel h2{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}
+    .buy-price{font-size:24px;font-weight:800;color:#000}
+    .buy-mount{flex:1 1 200px;min-width:200px}
+    .buy-fineprint{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
+    .buy-panel--soon{border-style:dashed}
+    @media (max-width:600px){.buy-panel{flex-direction:column;align-items:stretch;text-align:center}}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Flatter Pete • awasi-nâpakaskâw Pît • ᐊᐍᓯ ᓈᐸᑲᐢᑳᐤ ᐲᐟ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
+        <h2>Get one</h2>
+        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Name on the Plaque</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">awasi-nâpakaskâw Pît</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="m0" data-tip="comparative prefix: more, beyond; pushes flatness one step further." data-syll-id="m0-syll">awasi-</span>
+              <span class="part tooltip" data-key="m1" data-tip="root: flat; also describes a flattened or squashed object." data-syll-id="m1-syll">nâpak-</span>
+              <span class="part tooltip" data-key="m2" data-tip="VIP suffix: land or ground is…; here, even flatter terrain." data-syll-id="m2-syll">-askâw</span>
+              <span class="part tooltip" data-key="m3" data-tip="Pete — kept as a phonetic borrowing from the English nickname." data-syll-id="m3-syll">Pît</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">awasi-nâpakaskâw Pît</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="m0" data-tip="awasi-" id="m0-syll">ᐊᐍᓯ</span>
+              <span class="syll-part tooltip" data-key="m1" data-tip="nâpak-" id="m1-syll">ᓈᐸᑲ</span>
+              <span class="syll-part tooltip" data-key="m2" data-tip="-askâw" id="m2-syll">ᐢᑳᐤ</span>
+              <span class="syll-part tooltip" data-key="m3" data-tip="Pît" id="m3-syll">ᐲᐟ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;even flatter Pete&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/flatter_pete/flatter_pete_sign.png" alt="Flatter Pete trail sign — 3D render" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">3D-printed sign preview — even flatter happy cat stretched out longer (screenprint); syllabics ᐊᐍᓯ ᓈᐸᑲᐢᑳᐤ ᐲᐟ and the English name.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">Flatter Pete &amp; the Stretched Cat</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6"><strong>Flatter Pete</strong> is Terwillegar wordplay pushed one notch further: English reads like a deflated <em>Pete</em> who has been squashed <em>even flatter</em>, and the plaque keeps that joke in nêhiyawêwin as <strong>awasi-nâpakaskâw Pît</strong> 'even-flatter-ground Pete'. <em>awasi-</em> 'more, beyond' stacks onto the same <em>nâpak-</em> 'flat' root and <em>-askâw</em> 'land/ground is…' pattern as sibling trail <em>Flat Pete</em> (<em>Pît nâpakaskâw</em>), so the name names terrain — not a trail word — while <em>Pît</em> stays a phonetic ᐲᐟ beside the Cree flatness.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">English <em>flatter</em> carries a second joke: beside the comparative profile it can also mean to compliment — so the trail flatters <em>Pete</em> as it flattens him. The screenprint makes the visual pun explicit: an even flatter, more stretched-out happy cat, grinning wide and loving every limp inch. Two renderings stay off the plaque but show other readings: <em>nawac nâpakâw Pît</em> 'Pete is more flat' states the comparison plainly; <em>Pît kâ-awasi-nâpakât</em> 'Pete, the even-flatter one' turns the joke into a relative-clause trail name.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">On the same Terwillegar hillside the nicknames answer each other: sibling <em>Flat Pete</em> (<em>Pît nâpakaskâw</em>) sets the baseline; <em>Dave's Trail</em> (<em>Têv omeskanaw</em>), <em>Upper Corkscrew</em> (<em>ispimihk wâwaniyâw meskanaw</em>), <em>Curvin Murvin</em> (<em>wâwani-meskanaw</em>), <em>Hyperloop</em> (<em>kayipî-wâsâkêwayiw</em>), the <em>GO Trail</em> pair (<em>itohtê meskanaw</em> and <em>itohtê meskanaw amaciwêwin</em>), <em>Dancing with the Trees</em> (<em>nîmihitom mistikwak wîcêwakan</em>), and <em>Switchback Slicer</em> (<em>wâni-meskanaw kîskatahikêw</em>) braid English humour into one local web beside <em>Logarythmic</em> (<em>mistiko-akihcikêwin</em>), <em>Oleskiw Meadow</em> (<em>Olêskîw maskosiskâw</em>), and <em>Terwillegar&nbsp;-&nbsp;7</em> (<em>Têrwiligar têpakohp</em>).</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Like every sign in this series, Flatter Pete sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw-Askiy</strong> — Plains Cree territory, Treaty 6, and a homeland of the Métis Nation. These plaques are one way of putting <em>nêhiyawêwin</em> back on the land it was always spoken on.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The Trail</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">A ~2&nbsp;km Terwillegar line with about 4&nbsp;m of climbing and 4&nbsp;m of descent — a nearly flat ribbon that earns its nickname one step beyond <em>Flat Pete</em>. Tap through to <a href="https://www.trailforks.com/trails/flatter-pete/">Trailforks</a> on the poster for the mapped line and rider reports.</p>
+        </div>
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/flatter-pete/" target="_blank" rel="noopener noreferrer">
+            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
+              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
+                <defs>
+                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#f7f8fa" />
+                    <stop offset="100%" stop-color="#eef1f5" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6043/10599.png" x="-97.2" y="-76.5" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6044/10599.png" x="158.8" y="-76.5" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6045/10599.png" x="414.8" y="-76.5" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6043/10600.png" x="-97.2" y="179.5" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6044/10600.png" x="158.8" y="179.5" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6045/10600.png" x="414.8" y="179.5" width="256" height="256" />
+                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
+                <polyline class="trail-mini-map-halo" points="350.4,201.3 350.6,200.1 350.6,198.9 351.1,198.1 351.8,197.4 352.5,197.0 353.0,196.6 353.4,195.8 354.4,194.6 356.2,192.3 358.3,193.4 360.4,195.4 362.8,195.0 361.8,191.9 361.1,189.1 360.2,188.0 359.7,186.8 359.3,186.0 361.1,182.1 360.9,179.3 357.6,177.8 353.9,179.7 352.3,181.3 350.4,181.3 348.3,181.3 344.8,182.9 342.3,184.8 339.9,184.4 338.8,182.9 337.6,181.3 336.2,180.1 334.3,179.3 331.8,180.1 326.6,179.3 324.3,179.7 322.7,180.1 319.0,182.5 315.9,183.3 312.2,182.9 308.9,181.3 306.1,177.4 305.4,173.9 308.2,174.6 310.3,175.8 311.0,175.0 311.3,173.5 310.3,172.3 310.1,172.3 309.9,170.7 310.8,169.6 312.7,166.8 312.4,164.1 311.5,160.9 310.8,158.6 310.3,155.8 311.5,154.7 313.8,154.7 314.8,155.1 316.2,155.5 317.6,155.1 317.6,153.5 316.9,151.9 315.0,149.6 311.7,146.8 309.6,145.3 308.7,144.9 307.1,143.3 305.9,141.0 304.7,138.6 302.6,135.9 301.7,135.1 300.1,133.1 298.0,132.0 295.4,128.8 295.4,126.1 296.3,123.0 297.3,119.8 296.3,117.9 295.0,117.1 293.1,117.5 291.2,118.6 289.8,117.5 289.6,115.5 288.7,114.7 288.0,114.3 287.5,113.6 286.8,112.8 287.3,112.0 289.8,109.2 290.8,108.5 291.5,107.7 292.2,106.9 292.2,106.1 291.5,105.3 290.3,104.9 288.2,104.5 286.6,104.2 285.4,102.6 285.6,101.0 285.9,99.8 284.9,99.1 284.5,97.9 283.8,95.9 284.7,95.1 285.2,94.4 285.9,93.6 286.1,92.0 284.7,90.1 282.4,89.7 281.2,89.3 281.0,88.5 281.2,87.3 281.7,86.1 281.9,85.0 281.4,83.0 280.7,81.0 279.8,79.5 278.6,78.3 278.4,76.3 279.1,74.8 279.8,73.2 279.6,69.7 280.3,67.7 280.0,65.8 277.2,64.6 277.5,60.7 279.3,58.7 281.7,60.3 282.8,61.5 283.5,61.9 284.9,61.1 286.1,60.3 287.5,59.9 289.6,60.7 291.2,62.6 292.6,64.2 294.3,66.6 293.8,68.5 293.3,71.3 293.6,73.6 294.0,76.7 294.3,79.1 293.1,80.3 292.2,81.0 291.9,82.2 291.9,83.8 293.3,86.1 296.6,87.3 298.9,86.9 300.8,85.0 302.4,81.8 303.8,79.9 304.7,79.1 305.9,77.9 307.8,79.1 308.7,80.3 310.8,81.4 313.6,86.9 313.6,88.9 313.1,90.8 310.6,93.6 308.0,93.2 307.1,95.1 306.1,97.1 306.4,99.8 306.8,101.0 307.5,101.8 308.0,103.4 308.2,105.7 309.9,106.9 311.7,107.3 314.3,107.3 316.9,108.1 317.6,108.9 317.8,109.6 317.1,111.6 316.6,115.1 319.2,115.5 320.6,115.9 321.3,116.7 322.7,117.9 323.4,119.8 321.3,124.5 322.9,127.7 324.8,128.0 326.2,125.3 327.8,123.0 328.5,122.2 329.7,121.8 331.3,123.0 332.2,124.9 331.8,127.3 332.5,129.2 333.2,129.6 334.3,129.6 335.0,127.7 337.4,124.9 339.2,125.3 340.6,125.7 342.3,125.7 343.0,124.5 343.0,123.7 343.2,123.3 343.4,123.0 343.9,122.6 344.8,119.4 345.0,116.3 344.6,112.8 342.3,110.0 341.1,107.3 340.9,105.7 342.0,105.3 343.4,104.9 346.4,103.0 347.8,100.2 346.2,99.5 344.6,99.8 341.6,100.6 340.2,99.8 336.2,96.3 333.6,94.8 330.1,92.4 327.1,89.7 326.2,87.7 327.6,86.9 329.4,87.3 330.8,88.5 332.5,88.5 333.9,87.7 334.8,88.1 335.7,88.1 336.0,88.9 336.9,89.3 338.5,87.7 339.7,86.1 340.9,85.4 342.0,85.7 342.7,86.9 343.2,88.1 342.5,89.7 342.3,91.2 343.2,92.4 344.4,92.4 345.5,91.2 345.7,90.1 346.0,88.9 346.0,87.7 345.7,86.5 345.5,84.6 345.0,83.0 344.1,82.2 341.8,81.0 342.0,78.3 341.3,74.8 340.2,73.2" />
+                <polyline class="trail-mini-map-track" points="350.4,201.3 350.6,200.1 350.6,198.9 351.1,198.1 351.8,197.4 352.5,197.0 353.0,196.6 353.4,195.8 354.4,194.6 356.2,192.3 358.3,193.4 360.4,195.4 362.8,195.0 361.8,191.9 361.1,189.1 360.2,188.0 359.7,186.8 359.3,186.0 361.1,182.1 360.9,179.3 357.6,177.8 353.9,179.7 352.3,181.3 350.4,181.3 348.3,181.3 344.8,182.9 342.3,184.8 339.9,184.4 338.8,182.9 337.6,181.3 336.2,180.1 334.3,179.3 331.8,180.1 326.6,179.3 324.3,179.7 322.7,180.1 319.0,182.5 315.9,183.3 312.2,182.9 308.9,181.3 306.1,177.4 305.4,173.9 308.2,174.6 310.3,175.8 311.0,175.0 311.3,173.5 310.3,172.3 310.1,172.3 309.9,170.7 310.8,169.6 312.7,166.8 312.4,164.1 311.5,160.9 310.8,158.6 310.3,155.8 311.5,154.7 313.8,154.7 314.8,155.1 316.2,155.5 317.6,155.1 317.6,153.5 316.9,151.9 315.0,149.6 311.7,146.8 309.6,145.3 308.7,144.9 307.1,143.3 305.9,141.0 304.7,138.6 302.6,135.9 301.7,135.1 300.1,133.1 298.0,132.0 295.4,128.8 295.4,126.1 296.3,123.0 297.3,119.8 296.3,117.9 295.0,117.1 293.1,117.5 291.2,118.6 289.8,117.5 289.6,115.5 288.7,114.7 288.0,114.3 287.5,113.6 286.8,112.8 287.3,112.0 289.8,109.2 290.8,108.5 291.5,107.7 292.2,106.9 292.2,106.1 291.5,105.3 290.3,104.9 288.2,104.5 286.6,104.2 285.4,102.6 285.6,101.0 285.9,99.8 284.9,99.1 284.5,97.9 283.8,95.9 284.7,95.1 285.2,94.4 285.9,93.6 286.1,92.0 284.7,90.1 282.4,89.7 281.2,89.3 281.0,88.5 281.2,87.3 281.7,86.1 281.9,85.0 281.4,83.0 280.7,81.0 279.8,79.5 278.6,78.3 278.4,76.3 279.1,74.8 279.8,73.2 279.6,69.7 280.3,67.7 280.0,65.8 277.2,64.6 277.5,60.7 279.3,58.7 281.7,60.3 282.8,61.5 283.5,61.9 284.9,61.1 286.1,60.3 287.5,59.9 289.6,60.7 291.2,62.6 292.6,64.2 294.3,66.6 293.8,68.5 293.3,71.3 293.6,73.6 294.0,76.7 294.3,79.1 293.1,80.3 292.2,81.0 291.9,82.2 291.9,83.8 293.3,86.1 296.6,87.3 298.9,86.9 300.8,85.0 302.4,81.8 303.8,79.9 304.7,79.1 305.9,77.9 307.8,79.1 308.7,80.3 310.8,81.4 313.6,86.9 313.6,88.9 313.1,90.8 310.6,93.6 308.0,93.2 307.1,95.1 306.1,97.1 306.4,99.8 306.8,101.0 307.5,101.8 308.0,103.4 308.2,105.7 309.9,106.9 311.7,107.3 314.3,107.3 316.9,108.1 317.6,108.9 317.8,109.6 317.1,111.6 316.6,115.1 319.2,115.5 320.6,115.9 321.3,116.7 322.7,117.9 323.4,119.8 321.3,124.5 322.9,127.7 324.8,128.0 326.2,125.3 327.8,123.0 328.5,122.2 329.7,121.8 331.3,123.0 332.2,124.9 331.8,127.3 332.5,129.2 333.2,129.6 334.3,129.6 335.0,127.7 337.4,124.9 339.2,125.3 340.6,125.7 342.3,125.7 343.0,124.5 343.0,123.7 343.2,123.3 343.4,123.0 343.9,122.6 344.8,119.4 345.0,116.3 344.6,112.8 342.3,110.0 341.1,107.3 340.9,105.7 342.0,105.3 343.4,104.9 346.4,103.0 347.8,100.2 346.2,99.5 344.6,99.8 341.6,100.6 340.2,99.8 336.2,96.3 333.6,94.8 330.1,92.4 327.1,89.7 326.2,87.7 327.6,86.9 329.4,87.3 330.8,88.5 332.5,88.5 333.9,87.7 334.8,88.1 335.7,88.1 336.0,88.9 336.9,89.3 338.5,87.7 339.7,86.1 340.9,85.4 342.0,85.7 342.7,86.9 343.2,88.1 342.5,89.7 342.3,91.2 343.2,92.4 344.4,92.4 345.5,91.2 345.7,90.1 346.0,88.9 346.0,87.7 345.7,86.5 345.5,84.6 345.0,83.0 344.1,82.2 341.8,81.0 342.0,78.3 341.3,74.8 340.2,73.2" />
+                <circle class="trail-mini-map-dot" cx="350.4" cy="201.3" r="6" fill="#22c55e" />
+                <circle class="trail-mini-map-dot" cx="340.2" cy="73.2" r="6" fill="#ef4444" />
+                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
+              </svg>
+              <div class="trail-mini-map-caption">Uploaded GPX over map context: 255 track points. Click to open the Trailforks trail page.</div>
+            </div></a>
+            
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/flatter-pete/" style="font-size: 0.7em;">flatter-pete</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Pete is more flat&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="rf0a" data-tip="more; comparative adverb." data-syll-id="rf0a-syll">nawac</span>
+              <span class="part tooltip" data-key="rf0b" data-tip="it is flat." data-syll-id="rf0b-syll">nâpakâw</span>
+              <span class="part tooltip" data-key="rf0c" data-tip="Pete, phonetic borrowing." data-syll-id="rf0c-syll">Pît</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">nawac nâpakâw Pît</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="rf0a" data-tip="nawac" id="rf0a-syll">ᓇᐗᐨ</span>
+              <span class="syll-part tooltip" data-key="rf0b" data-tip="nâpakâw" id="rf0b-syll">ᓈᐸᑳᐤ</span>
+              <span class="syll-part tooltip" data-key="rf0c" data-tip="Pît" id="rf0c-syll">ᐲᐟ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">nawac &#x27;more&#x27; + flat.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Pete, the even-flatter one&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="rf1a" data-tip="Pete, phonetic borrowing." data-syll-id="rf1a-syll">Pît</span>
+              <span class="part tooltip" data-key="rf1b" data-tip="relative-clause marker: the one that…" data-syll-id="rf1b-syll">kâ-</span>
+              <span class="part tooltip" data-key="rf1c" data-tip="more, beyond; comparative prefix." data-syll-id="rf1c-syll">awasi-</span>
+              <span class="part tooltip" data-key="rf1d" data-tip="is even flatter; relative-clause ending." data-syll-id="rf1d-syll">nâpakât</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">Pît kâ-awasi-nâpakât</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="rf1a" data-tip="Pît" id="rf1a-syll">ᐲᐟ</span>
+              <span class="syll-part tooltip" data-key="rf1b" data-tip="kâ-" id="rf1b-syll">ᑳ</span>
+              <span class="syll-part tooltip" data-key="rf1c" data-tip="awasi-" id="rf1c-syll">ᐊᐗᓯ</span>
+              <span class="syll-part tooltip" data-key="rf1d" data-tip="nâpakât" id="rf1d-syll">ᓈᐸᑳᐟ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Relative-clause trail name.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>even flatter Pete</td><td class="tooltip" data-tip="awasi- &#x27;more, beyond&#x27; + nâpak- &#x27;flat&#x27; = &#x27;flatter&#x27;, beside phonetic Pête.">awasi-nâpakaskâw Pît</td><td>ᐊᐍᓯ ᓈᐸᑲᐢᑳᐤ ᐲᐟ</td></tr>
+              <tr><td>Pete is more flat</td><td class="tooltip" data-tip="nawac &#x27;more&#x27; + flat.">nawac nâpakâw Pît</td><td>ᓇᐗᐨ ᓈᐸᑳᐤ ᐲᐟ</td></tr>
+              <tr><td>Pete, the even-flatter one</td><td class="tooltip" data-tip="Relative-clause trail name.">Pît kâ-awasi-nâpakât</td><td>ᐲᐟ ᑳ ᐊᐗᓯᓈᐸᑳᐟ</td></tr>
+              <tr><td>flat (root)</td><td class="tooltip" data-tip="Terrain or object that is flat, level, or squashed flat.">nâpak-</td><td>ᓈᐸᑲ</td></tr>
+              <tr><td>more, beyond (prefix)</td><td class="tooltip" data-tip="Comparative prefix that pushes a quality one step further.">awasi-</td><td>ᐊᐍᓯ</td></tr>
+              <tr><td>Pete (phonetic)</td><td class="tooltip" data-tip="English nickname carried into Cree spelling.">Pît</td><td>ᐲᐟ</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">awasi-</span><span class="muted">= &quot;more, beyond (comparative prefix)&quot;</span><span class="chip">ᐊᐍᓯ</span><button class="copy" data-copy-text="awasi-">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">nawac</span><span class="muted">= &quot;more&quot;</span><span class="chip">ᓇᐗᐨ</span><button class="copy" data-copy-text="nawac">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">nâpak-</span><span class="muted">= &quot;flat (root)&quot;</span><span class="chip">ᓈᐸᑲ</span><button class="copy" data-copy-text="nâpak-">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">Pît</span><span class="muted">= &quot;Pete (phonetic borrowing)&quot;</span><span class="chip">ᐲᐟ</span><button class="copy" data-copy-text="Pît">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">kâ-</span><span class="muted">= &quot;relative-clause marker&quot;</span><span class="chip">ᑳ</span><button class="copy" data-copy-text="kâ-">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
+        </div>
+      </section>
+
+      <footer>
+        Flatter Pete • ᐊᐍᓯ ᓈᐸᑲᐢᑳᐤ ᐲᐟ • awasi-nâpakaskâw Pît • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="m0"]', syll: '#m0-syll'},
+        {sro: '[data-key="m1"]', syll: '#m1-syll'},
+        {sro: '[data-key="m2"]', syll: '#m2-syll'},
+        {sro: '[data-key="m3"]', syll: '#m3-syll'},
+        {sro: '[data-key="rf0a"]', syll: '#rf0a-syll'},
+        {sro: '[data-key="rf0b"]', syll: '#rf0b-syll'},
+        {sro: '[data-key="rf0c"]', syll: '#rf0c-syll'},
+        {sro: '[data-key="rf1a"]', syll: '#rf1a-syll'},
+        {sro: '[data-key="rf1b"]', syll: '#rf1b-syll'},
+        {sro: '[data-key="rf1c"]', syll: '#rf1c-syll'},
+        {sro: '[data-key="rf1d"]', syll: '#rf1d-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+
+  </body>
+</html>

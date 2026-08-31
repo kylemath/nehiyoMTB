@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Root Canal Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Root Canal
+</name>
+<link href="https://www.trailforks.com/trails/root-canal-10628/">
+</link>
+<trkseg>
+<trkpt lat="53.53818" lon="-113.56543">
+<ele>665.651</ele>
+<time>2026-06-09T18:22:00-07:00</time>
+</trkpt>
+<trkpt lat="53.53818" lon="-113.56554">
+<ele>665.868</ele>
+<time>2026-06-09T18:22:01-07:00</time>
+</trkpt>
+<trkpt lat="53.53817" lon="-113.56579">
+<ele>666.702</ele>
+<time>2026-06-09T18:22:02-07:00</time>
+</trkpt>
+<trkpt lat="53.53825" lon="-113.56596">
+<ele>666.263</ele>
+<time>2026-06-09T18:22:03-07:00</time>
+</trkpt>
+<trkpt lat="53.53895" lon="-113.56754">
+<ele>664.708</ele>
+<time>2026-06-09T18:22:04-07:00</time>
+</trkpt>
+<trkpt lat="53.53898" lon="-113.56784">
+<ele>665.778</ele>
+<time>2026-06-09T18:22:05-07:00</time>
+</trkpt>
+<trkpt lat="53.53909" lon="-113.56819">
+<ele>665.815</ele>
+<time>2026-06-09T18:22:06-07:00</time>
+</trkpt>
+<trkpt lat="53.53915" lon="-113.56862">
+<ele>666.27</ele>
+<time>2026-06-09T18:22:07-07:00</time>
+</trkpt>
+<trkpt lat="53.53916" lon="-113.56934">
+<ele>668.311</ele>
+<time>2026-06-09T18:22:08-07:00</time>
+</trkpt>
+<trkpt lat="53.53925" lon="-113.57006">
+<ele>669.374</ele>
+<time>2026-06-09T18:22:09-07:00</time>
+</trkpt>
+<trkpt lat="53.53953" lon="-113.57075">
+<ele>668.048</ele>
+<time>2026-06-09T18:22:10-07:00</time>
+</trkpt>
+<trkpt lat="53.53963" lon="-113.57093">
+<ele>667.685</ele>
+<time>2026-06-09T18:22:11-07:00</time>
+</trkpt>
+<trkpt lat="53.53974" lon="-113.57126">
+<ele>668.427</ele>
+<time>2026-06-09T18:22:12-07:00</time>
+</trkpt>
+<trkpt lat="53.53987" lon="-113.57153">
+<ele>669.265</ele>
+<time>2026-06-09T18:22:13-07:00</time>
+</trkpt>
+<trkpt lat="53.54008" lon="-113.57239">
+<ele>668.856</ele>
+<time>2026-06-09T18:22:14-07:00</time>
+</trkpt>
+<trkpt lat="53.5402" lon="-113.57278">
+<ele>669.365</ele>
+<time>2026-06-09T18:22:15-07:00</time>
+</trkpt>
+<trkpt lat="53.54043" lon="-113.57317">
+<ele>670.182</ele>
+<time>2026-06-09T18:22:16-07:00</time>
+</trkpt>
+<trkpt lat="53.54054" lon="-113.57351">
+<ele>671.786</ele>
+<time>2026-06-09T18:22:17-07:00</time>
+</trkpt>
+<trkpt lat="53.54104" lon="-113.57443">
+<ele>670.213</ele>
+<time>2026-06-09T18:22:18-07:00</time>
+</trkpt>
+<trkpt lat="53.54115" lon="-113.57467">
+<ele>670.558</ele>
+<time>2026-06-09T18:22:19-07:00</time>
+</trkpt>
+<trkpt lat="53.54131" lon="-113.57524">
+<ele>670.366</ele>
+<time>2026-06-09T18:22:20-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

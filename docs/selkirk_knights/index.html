@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selkirk Knights • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#784e2e;--accent2:#624026;--line:#dee2e6;--chip:#e9ecef;--ok:#784e2e;--primary-bg:#ebe4e0;--primary-text:#000000;--formula-bg:#faf8f7;--formula-border:#784e2e;--secondary-bg:#f4f1ee;--secondary-border:#d6cac0
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .trail-mini-map-link{display:block;color:inherit;text-decoration:none;border-bottom:0}
+    .trail-mini-map-link:hover{border-bottom:0}
+    .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
+    .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
+    .trail-mini-map svg{display:block;width:100%;height:auto}
+    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
+    .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
+    .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
+    .trail-mini-map-attrib{font-size:10px;fill:#5f6368;paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}
+    .trail-mini-map-caption{padding:8px 10px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:left;background:rgba(255,255,255,0.82)}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    .buy-panel{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+    .buy-panel h2{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}
+    .buy-price{font-size:24px;font-weight:800;color:#000}
+    .buy-mount{flex:1 1 200px;min-width:200px}
+    .buy-fineprint{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
+    .buy-panel--soon{border-style:dashed}
+    @media (max-width:600px){.buy-panel{flex-direction:column;align-items:stretch;text-align:center}}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Selkirk Knights • Selkirk simâkanisak • ᓭᓪᑭᕒᐠ ᓯᒫᑲᓂᓴᐠ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
+        <h2>Get one</h2>
+        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Name on the Plaque</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">Selkirk simâkanisak</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="m0" data-tip="phonetic borrowing — the Selkirk name (settlers, regiment, and place)." data-syll-id="m0-syll">Selkirk</span>
+              <span class="part tooltip" data-key="m1" data-tip="soldier, warrior (NA) — the closest everyday word to English &#x27;knight&#x27;." data-syll-id="m1-syll">simâkanis</span>
+              <span class="part tooltip" data-key="m2" data-tip="plural suffix." data-syll-id="m2-syll">-ak</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">Selkirk simâkanisak</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="m0" data-tip="Selkirk" id="m0-syll">ᓭᓪᑭᕒᐠ</span>
+              <span class="syll-part tooltip" data-key="m1" data-tip="simâkanis" id="m1-syll">ᓯᒫᑲᓂᓴ</span>
+              <span class="syll-part tooltip" data-key="m2" data-tip="-ak" id="m2-syll">ᐠ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;Selkirk soldiers/knights&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/selkirk_knights/selkirk_knights_sign.png" alt="Selkirk Knights trail sign — 3D render" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">3D-printed sign preview — scarlet British officer and De Meuron soldier on 1817 wooden dandy-horses down a winding trail (screenprint).</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">Selkirk Soldiers &amp; Wooden Steeds</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6"><strong>Selkirk Knights</strong> is rendered on the plaque as <strong>Selkirk simâkanisak</strong> — 'Selkirk soldiers/knights.' <em>Selkirk</em> stays a phonetic ᓭᓪᑭᕒᐠ beside the Cree; <em>simâkanis</em> 'soldier, warrior' is the everyday word closest to English <em>knight</em>, and <em>-ak</em> marks the plural. Plains Cree has no medieval title for 'knight'; the name keeps the warrior order of the English while naming real fighters, not horsemen.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The English looks back to the Selkirk settlers and the early-1800s regiments tied to that name — the screenprint makes that history literal: a scarlet British officer and a De Meuron regiment soldier with sky-blue facings, but both ride antique 1817 wooden dandy-horse bicycles down a winding trail instead of cavalry mounts. That is why the plaque keeps <em>simâkanisak</em> rather than the alternate <em>Selkirk omisatimiwak simâkanisak</em> 'Selkirk mounted knights' — the soldiers are knights in the warrior sense, while the art swaps horses for two-wheeled wooden steeds. A plainer reading, <em>Selkirk nôtinikêwak</em> 'Selkirk fighters,' foregrounds combat without the knightly echo.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The name also winks at sibling trail <strong>Knights of Ren</strong> (<em>Rên osimâkanisimak</em>, ᕒᐁᐣ ᐅᓯᒫᑲᓂᓯᒪᐠ) — another warrior-order pun on a different borrowed name — while both share the <em>simâkanis</em> stem for 'soldier/knight.' In the same Edmonton river-valley web, nearby nicknames braid English humour into Cree: <em>Capilano Access</em> (<em>Kapilâno isi-pîhtokêwin</em>), <em>Fort Edmonton Park Double Track</em> (<em>amiskwacî nîso-meskanaw</em>), <em>Wolf Willow Access</em> (<em>mahihkani-nîpisiy pîhtokêwi-meskanaw</em>), <em>Machete-climb</em> (<em>mistikokahikan amaciwêwin</em>), <em>Breathless</em> (<em>namôya kî-yêhyêw</em>), and <em>Deliverance</em> (<em>pâspinâwin</em>) among others on the same hillside network.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">This sign sits on <strong>ᓀᐦᐃᔭᐤ ᐊᐢᑭᕀ Nêhiyaw-Askiy</strong> — Plains Cree territory, Treaty 6, a homeland of the Métis Nation. These plaques are one way of putting <em>nêhiyawêwin</em> back on the land it was always spoken on.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The Trail</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">A ~2&nbsp;km Edmonton line with about 31&nbsp;m of descent and 36&nbsp;m of ascent — a winding ribbon in the local river-valley network beside Capilano Access, Fort Edmonton Park Double Track, and the other nickname trails on this hillside. Tap through to <a href="https://www.trailforks.com/trails/selkirk-knights/">Trailforks</a> on the poster for the mapped line and rider reports.</p>
+        </div>
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/selkirk-knights/" target="_blank" rel="noopener noreferrer">
+            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
+              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
+                <defs>
+                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#f7f8fa" />
+                    <stop offset="100%" stop-color="#eef1f5" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3021/5298.png" x="-179.9" y="-143.4" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3022/5298.png" x="76.1" y="-143.4" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3023/5298.png" x="332.1" y="-143.4" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3024/5298.png" x="588.1" y="-143.4" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3021/5299.png" x="-179.9" y="112.6" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3022/5299.png" x="76.1" y="112.6" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3023/5299.png" x="332.1" y="112.6" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3024/5299.png" x="588.1" y="112.6" width="256" height="256" />
+                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
+                <polyline class="trail-mini-map-halo" points="434.0,43.6 434.6,49.3 434.0,50.7 429.1,53.8 425.6,56.7 423.6,57.7 421.4,59.5 416.9,65.6 414.7,67.7 413.0,74.0 413.4,77.7 413.0,81.4 411.3,83.8 411.5,85.7 409.9,86.9 409.2,87.9 410.2,90.0 407.4,91.6 408.6,92.4 403.1,93.0 399.9,94.4 397.7,96.3 395.0,97.7 394.2,100.2 389.4,100.2 388.6,102.4 385.1,101.4 382.3,102.4 381.5,102.8 381.2,103.2 378.1,102.8 375.2,104.5 371.6,104.1 368.5,106.1 366.7,108.5 362.0,108.3 361.2,107.9 362.2,107.3 362.0,106.9 359.4,106.3 360.8,104.7 357.8,105.1 355.1,107.9 354.2,109.4 354.1,110.0 354.3,110.4 355.6,110.6 355.9,111.2 355.5,112.6 355.6,114.1 353.7,114.1 353.5,117.5 354.0,118.6 352.8,118.8 351.7,118.4 349.9,119.6 349.8,120.4 349.3,121.2 348.7,121.2 348.0,121.0 347.1,121.4 347.2,122.2 347.3,123.0 347.7,124.3 347.3,124.9 346.7,125.3 345.8,124.9 346.6,124.3 344.8,124.3 343.5,124.1 342.0,124.9 340.4,125.3 340.9,124.7 343.0,123.5 343.7,122.6 340.3,123.0 335.1,125.5 332.1,126.1 331.1,127.3 329.3,127.7 329.0,129.0 328.3,129.4 327.4,129.2 323.9,129.8 324.0,131.0 325.2,132.6 325.3,133.7 316.8,138.4 311.0,139.0 312.7,141.6 312.4,142.1 309.6,141.2 306.3,142.5 303.9,142.9 300.5,144.5 297.9,146.8 297.5,150.4 296.9,151.2 295.6,151.2 292.1,150.0 288.5,150.2 287.4,153.3 287.2,153.5 283.5,153.9 280.0,153.3 278.6,153.7 278.0,155.5 274.4,156.6 272.5,156.3 270.4,156.6 266.3,158.0 261.5,161.5 261.0,163.5 261.2,164.5 260.1,167.0 257.6,167.0 256.2,168.0 255.6,169.2 253.9,170.7 252.5,170.7 250.3,174.3 247.9,176.4 247.8,177.4 247.0,179.2 246.2,184.3 243.0,187.0 240.9,190.5 239.4,193.7 237.6,195.6 237.6,199.7 236.4,202.9 235.6,206.2 236.2,208.9 233.7,209.5 224.9,207.6 221.1,206.2 218.6,205.8 215.6,206.4 211.2,213.1 205.4,216.4" />
+                <polyline class="trail-mini-map-track" points="434.0,43.6 434.6,49.3 434.0,50.7 429.1,53.8 425.6,56.7 423.6,57.7 421.4,59.5 416.9,65.6 414.7,67.7 413.0,74.0 413.4,77.7 413.0,81.4 411.3,83.8 411.5,85.7 409.9,86.9 409.2,87.9 410.2,90.0 407.4,91.6 408.6,92.4 403.1,93.0 399.9,94.4 397.7,96.3 395.0,97.7 394.2,100.2 389.4,100.2 388.6,102.4 385.1,101.4 382.3,102.4 381.5,102.8 381.2,103.2 378.1,102.8 375.2,104.5 371.6,104.1 368.5,106.1 366.7,108.5 362.0,108.3 361.2,107.9 362.2,107.3 362.0,106.9 359.4,106.3 360.8,104.7 357.8,105.1 355.1,107.9 354.2,109.4 354.1,110.0 354.3,110.4 355.6,110.6 355.9,111.2 355.5,112.6 355.6,114.1 353.7,114.1 353.5,117.5 354.0,118.6 352.8,118.8 351.7,118.4 349.9,119.6 349.8,120.4 349.3,121.2 348.7,121.2 348.0,121.0 347.1,121.4 347.2,122.2 347.3,123.0 347.7,124.3 347.3,124.9 346.7,125.3 345.8,124.9 346.6,124.3 344.8,124.3 343.5,124.1 342.0,124.9 340.4,125.3 340.9,124.7 343.0,123.5 343.7,122.6 340.3,123.0 335.1,125.5 332.1,126.1 331.1,127.3 329.3,127.7 329.0,129.0 328.3,129.4 327.4,129.2 323.9,129.8 324.0,131.0 325.2,132.6 325.3,133.7 316.8,138.4 311.0,139.0 312.7,141.6 312.4,142.1 309.6,141.2 306.3,142.5 303.9,142.9 300.5,144.5 297.9,146.8 297.5,150.4 296.9,151.2 295.6,151.2 292.1,150.0 288.5,150.2 287.4,153.3 287.2,153.5 283.5,153.9 280.0,153.3 278.6,153.7 278.0,155.5 274.4,156.6 272.5,156.3 270.4,156.6 266.3,158.0 261.5,161.5 261.0,163.5 261.2,164.5 260.1,167.0 257.6,167.0 256.2,168.0 255.6,169.2 253.9,170.7 252.5,170.7 250.3,174.3 247.9,176.4 247.8,177.4 247.0,179.2 246.2,184.3 243.0,187.0 240.9,190.5 239.4,193.7 237.6,195.6 237.6,199.7 236.4,202.9 235.6,206.2 236.2,208.9 233.7,209.5 224.9,207.6 221.1,206.2 218.6,205.8 215.6,206.4 211.2,213.1 205.4,216.4" />
+                <circle class="trail-mini-map-dot" cx="434.0" cy="43.6" r="6" fill="#22c55e" />
+                <circle class="trail-mini-map-dot" cx="205.4" cy="216.4" r="6" fill="#ef4444" />
+                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
+              </svg>
+              <div class="trail-mini-map-caption">Uploaded GPX over map context: 140 track points. Click to open the Trailforks trail page.</div>
+            </div></a>
+            
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/selkirk-knights/" style="font-size: 0.7em;">selkirk-knights</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Selkirk fighters&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="rf0a" data-tip="phonetic borrowing — the Selkirk name." data-syll-id="rf0a-syll">Selkirk</span>
+              <span class="part tooltip" data-key="rf0b" data-tip="one who fights; warrior." data-syll-id="rf0b-syll">nôtinikêw</span>
+              <span class="part tooltip" data-key="rf0c" data-tip="plural suffix." data-syll-id="rf0c-syll">-ak</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">Selkirk nôtinikêwak</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="rf0a" data-tip="Selkirk" id="rf0a-syll">ᓭᓪᑭᕒᐠ</span>
+              <span class="syll-part tooltip" data-key="rf0b" data-tip="nôtinikêw" id="rf0b-syll">ᓅᑎᓂᑫᐤ</span>
+              <span class="syll-part tooltip" data-key="rf0c" data-tip="-ak" id="rf0c-syll">ᐠ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">nôtinikêw &#x27;one who fights/warriors&#x27;.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Selkirk mounted knights&quot;</div>
+          <div class="formula">
+              <span class="part tooltip" data-key="rf1a" data-tip="phonetic borrowing — the Selkirk name." data-syll-id="rf1a-syll">Selkirk</span>
+              <span class="part tooltip" data-key="rf1b" data-tip="those on horseback; mounted ones." data-syll-id="rf1b-syll">omisatimiwak</span>
+              <span class="part tooltip" data-key="rf1c" data-tip="soldiers, warriors (plural)." data-syll-id="rf1c-syll">simâkanisak</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">Selkirk omisatimiwak simâkanisak</strong>
+          </div>
+          <div class="syllabics-emphasis">
+              <span class="syll-part tooltip" data-key="rf1a" data-tip="Selkirk" id="rf1a-syll">ᓭᓪᑭᕒᐠ</span>
+              <span class="syll-part tooltip" data-key="rf1b" data-tip="omisatimiwak" id="rf1b-syll">ᐅᒥᓴᑎᒥᐗᐠ</span>
+              <span class="syll-part tooltip" data-key="rf1c" data-tip="simâkanisak" id="rf1c-syll">ᓯᒫᑲᓂᓴᐠ</span>
+          </div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Adds mounted-horse imagery for knights.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>Selkirk soldiers/knights</td><td class="tooltip" data-tip="Selkirk phonetic + simâkanis &#x27;soldier/warrior&#x27; (closest to &#x27;knight&#x27;).">Selkirk simâkanisak</td><td>ᓭᓪᑭᕒᐠ ᓯᒫᑲᓂᓴᐠ</td></tr>
+              <tr><td>Selkirk fighters</td><td class="tooltip" data-tip="nôtinikêw &#x27;one who fights/warriors&#x27;.">Selkirk nôtinikêwak</td><td>ᓭᓪᑭᕒᐠ ᓅᑎᓂᑫᐗᐠ</td></tr>
+              <tr><td>Selkirk mounted knights</td><td class="tooltip" data-tip="Adds mounted-horse imagery for knights.">Selkirk omisatimiwak simâkanisak</td><td>ᓭᓪᑭᕒᐠ ᐅᒥᓴᑎᒥᐗᐠ ᓯᒫᑲᓂᓴᐠ</td></tr>
+              <tr><td>soldier, warrior</td><td class="tooltip" data-tip="Plaque stem; warrior sense closest to &#x27;knight&#x27;.">simâkanis</td><td>ᓯᒫᑲᓂᓴ</td></tr>
+              <tr><td>one who fights</td><td class="tooltip" data-tip="Fighter, warrior — alternate stem in nôtinikêwak.">nôtinikêw</td><td>ᓅᑎᓂᑫᐤ</td></tr>
+              <tr><td>horse</td><td class="tooltip" data-tip="Stem in omisatimiwak &#x27;mounted ones&#x27;.">omisatim</td><td>ᐅᒥᓴᑎᒥ</td></tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin:18px 0 12px 0">Base words</h3>
+        <div class="row" style="margin-top:6px"><span class="chip">simâkanis</span><span class="muted">= &quot;soldier, warrior (NA)&quot;</span><span class="chip">ᓯᒫᑲᓂᓴ</span><button class="copy" data-copy-text="simâkanis">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">nôtinikêw</span><span class="muted">= &quot;one who fights, warrior&quot;</span><span class="chip">ᓅᑎᓂᑫᐤ</span><button class="copy" data-copy-text="nôtinikêw">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">omisatim</span><span class="muted">= &quot;horse&quot;</span><span class="chip">ᐅᒥᓴᑎᒥ</span><button class="copy" data-copy-text="omisatim">Copy</button></div>
+          <div class="row" style="margin-top:6px"><span class="chip">Selkirk</span><span class="muted">= &quot;Selkirk (phonetic borrowing)&quot;</span><span class="chip">ᓭᓪᑭᕒᐠ</span><button class="copy" data-copy-text="Selkirk">Copy</button></div>
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
+        </div>
+      </section>
+
+      <footer>
+        Selkirk Knights • ᓭᓪᑭᕒᐠ ᓯᒫᑲᓂᓴᐠ • Selkirk simâkanisak • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="m0"]', syll: '#m0-syll'},
+        {sro: '[data-key="m1"]', syll: '#m1-syll'},
+        {sro: '[data-key="m2"]', syll: '#m2-syll'},
+        {sro: '[data-key="rf0a"]', syll: '#rf0a-syll'},
+        {sro: '[data-key="rf0b"]', syll: '#rf0b-syll'},
+        {sro: '[data-key="rf0c"]', syll: '#rf0c-syll'},
+        {sro: '[data-key="rf1a"]', syll: '#rf1a-syll'},
+        {sro: '[data-key="rf1b"]', syll: '#rf1b-syll'},
+        {sro: '[data-key="rf1c"]', syll: '#rf1c-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+
+  </body>
+</html>

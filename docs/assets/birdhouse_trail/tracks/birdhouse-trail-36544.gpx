@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Birdhouse Trail Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Birdhouse Trail
+</name>
+<link href="https://www.trailforks.com/trails/birdhouse-trail-36544/">
+</link>
+<trkseg>
+<trkpt lat="53.53842" lon="-113.46781">
+<ele>617.4</ele>
+<time>2026-06-15T15:48:45-07:00</time>
+</trkpt>
+<trkpt lat="53.53851" lon="-113.46814">
+<ele>617.4</ele>
+<time>2026-06-15T15:48:46-07:00</time>
+</trkpt>
+<trkpt lat="53.53855" lon="-113.46835">
+<ele>617.4</ele>
+<time>2026-06-15T15:48:47-07:00</time>
+</trkpt>
+<trkpt lat="53.53858" lon="-113.46863">
+<ele>617.4</ele>
+<time>2026-06-15T15:48:48-07:00</time>
+</trkpt>
+<trkpt lat="53.53857" lon="-113.46882">
+<ele>617.4</ele>
+<time>2026-06-15T15:48:49-07:00</time>
+</trkpt>
+<trkpt lat="53.53859" lon="-113.46908">
+<ele>616.6</ele>
+<time>2026-06-15T15:48:50-07:00</time>
+</trkpt>
+<trkpt lat="53.53861" lon="-113.46935">
+<ele>616.4</ele>
+<time>2026-06-15T15:48:51-07:00</time>
+</trkpt>
+<trkpt lat="53.53878" lon="-113.47107">
+<ele>615.9</ele>
+<time>2026-06-15T15:48:52-07:00</time>
+</trkpt>
+<trkpt lat="53.53879" lon="-113.47129">
+<ele>617</ele>
+<time>2026-06-15T15:48:53-07:00</time>
+</trkpt>
+<trkpt lat="53.53881" lon="-113.47138">
+<ele>617</ele>
+<time>2026-06-15T15:48:54-07:00</time>
+</trkpt>
+<trkpt lat="53.53882" lon="-113.47156">
+<ele>617</ele>
+<time>2026-06-15T15:48:55-07:00</time>
+</trkpt>
+<trkpt lat="53.53891" lon="-113.47208">
+<ele>616.6</ele>
+<time>2026-06-15T15:48:56-07:00</time>
+</trkpt>
+<trkpt lat="53.53891" lon="-113.47222">
+<ele>616.6</ele>
+<time>2026-06-15T15:48:57-07:00</time>
+</trkpt>
+<trkpt lat="53.53896" lon="-113.4725">
+<ele>616.6</ele>
+<time>2026-06-15T15:48:58-07:00</time>
+</trkpt>
+<trkpt lat="53.539" lon="-113.47269">
+<ele>616.8</ele>
+<time>2026-06-15T15:48:59-07:00</time>
+</trkpt>
+<trkpt lat="53.53902" lon="-113.47289">
+<ele>617.7</ele>
+<time>2026-06-15T15:49:00-07:00</time>
+</trkpt>
+<trkpt lat="53.53902" lon="-113.47301">
+<ele>617.7</ele>
+<time>2026-06-15T15:49:01-07:00</time>
+</trkpt>
+<trkpt lat="53.53905" lon="-113.47321">
+<ele>617.6</ele>
+<time>2026-06-15T15:49:02-07:00</time>
+</trkpt>
+<trkpt lat="53.53906" lon="-113.47351">
+<ele>617.6</ele>
+<time>2026-06-15T15:49:03-07:00</time>
+</trkpt>
+<trkpt lat="53.53914" lon="-113.47378">
+<ele>617.6</ele>
+<time>2026-06-15T15:49:04-07:00</time>
+</trkpt>
+<trkpt lat="53.53917" lon="-113.47404">
+<ele>616.4</ele>
+<time>2026-06-15T15:49:05-07:00</time>
+</trkpt>
+<trkpt lat="53.5392" lon="-113.47448">
+<ele>616.3</ele>
+<time>2026-06-15T15:49:06-07:00</time>
+</trkpt>
+<trkpt lat="53.53924" lon="-113.47497">
+<ele>616.3</ele>
+<time>2026-06-15T15:49:07-07:00</time>
+</trkpt>
+<trkpt lat="53.53927" lon="-113.47511">
+<ele>616.8</ele>
+<time>2026-06-15T15:49:08-07:00</time>
+</trkpt>
+<trkpt lat="53.53928" lon="-113.47528">
+<ele>617.1</ele>
+<time>2026-06-15T15:49:09-07:00</time>
+</trkpt>
+<trkpt lat="53.53929" lon="-113.47538">
+<ele>617.1</ele>
+<time>2026-06-15T15:49:10-07:00</time>
+</trkpt>
+<trkpt lat="53.53928" lon="-113.47559">
+<ele>617.1</ele>
+<time>2026-06-15T15:49:11-07:00</time>
+</trkpt>
+<trkpt lat="53.53932" lon="-113.47624">
+<ele>617.1</ele>
+<time>2026-06-15T15:49:12-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

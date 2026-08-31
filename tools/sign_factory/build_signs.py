@@ -467,14 +467,38 @@ def render_sign_components(en, td, icon_path, oscad, orient="portrait",
          syll_h, SYLL_FONT, "syllabics (overlaid on icon, tallest)", 30),
     ]
     text_native = {}    # key -> native text_block scad (for the source assembly)
+    syll_rows = 0
     for key, text, bw, bh, yy, depth, font, comment, fsmax in text_jobs:
         cstl = os.path.join(sdir, f"{name}_{key}.stl")
         rel, fs, lines, block = _fit_export_text(text, bw, bh, yy, depth, font, comment,
                                                  os.path.join(sdir, f"{name}_{key}.scad"), cstl,
                                                  oscad, fs_max=fsmax)
-        if rel:
-            comps[key] = rel
-        text_native[key] = block
+        # The syllabics overlay is exported as ONE STL PER ROW (syllabics,
+        # syllabics_2, …) — each line becomes its own movable piece, so the rider
+        # can space the rows apart with the normal nudge control in the editor
+        # WITHOUT scaling the glyphs. Single-line syllabics stays one part. The
+        # font size + line layout come from the fitted whole block, so the rows
+        # line up exactly as before until intentionally moved.
+        if key == "syllabics" and len(lines) > 1:
+            lineh = fs * pg.LINE_GAP
+            top = yy + (len(lines) - 1) / 2.0 * lineh
+            for i, ln in enumerate(lines):
+                ly = top - i * lineh
+                rk = "syllabics" if i == 0 else f"syllabics_{i + 1}"
+                rblock = pg.text_block([ln], fs, ly, PLQ_T - EMBED, depth + EMBED, font,
+                                       f"{comment} — row {i + 1}")
+                rstl = os.path.join(sdir, f"{name}_{rk}.stl")
+                if _run_oscad_export("$fn = 48;\n" + rblock + "\n",
+                                     os.path.join(sdir, f"{name}_{rk}.scad"), rstl, oscad):
+                    comps[rk] = os.path.relpath(rstl, REPO_ROOT)
+                text_native[rk] = rblock
+            syll_rows = len(lines)
+        else:
+            if rel:
+                comps[key] = rel
+            text_native[key] = block
+    if syll_rows:
+        comps["syllabics_rows"] = syll_rows
 
     # 6) group number badge (numbered minor-trail groups) ------------------- #
     # Members of a numbered group (e.g. Terwillegar - 6/7/19, Canada Cup
@@ -518,8 +542,9 @@ def render_sign_components(en, td, icon_path, oscad, orient="portrait",
     for k in ("english", "translit"):
         if k in text_native:
             body.append(f"  {_scad_color(TEXT_RGB)} {{\n{text_native[k]}\n  }}")
-    if "syllabics" in text_native:
-        body.append(f"  {_scad_color(SYLL_RGB)} {{\n{text_native['syllabics']}\n  }}")
+    for k in sorted(text_native):
+        if k == "syllabics" or k.startswith("syllabics_"):
+            body.append(f"  {_scad_color(SYLL_RGB)} {{\n{text_native[k]}\n  }}")
     if number_native:
         body.append(f"  {_scad_color(SYLL_RGB)} {{\n{number_native}\n  }}")
     body.append("}")
@@ -543,6 +568,10 @@ def render_sign_components(en, td, icon_path, oscad, orient="portrait",
     # bundle all parts into one multicolour .3mf (separate coloured objects)
     part_rgb = {"plaque": PLAQUE_RGB, "english": TEXT_RGB,
                 "translit": TEXT_RGB, "syllabics": SYLL_RGB, "number": SYLL_RGB}
+    # extra syllabic-row parts (syllabics_2, …) share the red syllabics filament
+    for k in comps:
+        if isinstance(k, str) and k.startswith("syllabics_") and k != "syllabics_rows":
+            part_rgb[k] = SYLL_RGB
     for key, poly2d, ztop, rgb, fil, _is in icon_parts:
         part_rgb[key] = rgb
     threemf = _bundle_3mf(name, sdir, part_rgb)

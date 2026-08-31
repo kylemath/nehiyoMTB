@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Mark Messier Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Mark Messier
+</name>
+<link href="https://www.trailforks.com/trails/mark-messier/">
+</link>
+<trkseg>
+<trkpt lat="53.55534" lon="-113.43611">
+<ele>623.7</ele>
+<time>2026-06-15T13:07:46-07:00</time>
+</trkpt>
+<trkpt lat="53.55538" lon="-113.43619">
+<ele>621</ele>
+<time>2026-06-15T13:07:47-07:00</time>
+</trkpt>
+<trkpt lat="53.55544" lon="-113.43617">
+<ele>621</ele>
+<time>2026-06-15T13:07:48-07:00</time>
+</trkpt>
+<trkpt lat="53.55548" lon="-113.43611">
+<ele>623.7</ele>
+<time>2026-06-15T13:07:49-07:00</time>
+</trkpt>
+<trkpt lat="53.55553" lon="-113.43613">
+<ele>621</ele>
+<time>2026-06-15T13:07:50-07:00</time>
+</trkpt>
+<trkpt lat="53.55552" lon="-113.43619">
+<ele>621</ele>
+<time>2026-06-15T13:07:51-07:00</time>
+</trkpt>
+<trkpt lat="53.55552" lon="-113.4363">
+<ele>621</ele>
+<time>2026-06-15T13:07:52-07:00</time>
+</trkpt>
+<trkpt lat="53.55549" lon="-113.43639">
+<ele>619.6</ele>
+<time>2026-06-15T13:07:53-07:00</time>
+</trkpt>
+<trkpt lat="53.55545" lon="-113.43649">
+<ele>619.6</ele>
+<time>2026-06-15T13:07:54-07:00</time>
+</trkpt>
+<trkpt lat="53.55538" lon="-113.4365">
+<ele>619.6</ele>
+<time>2026-06-15T13:07:55-07:00</time>
+</trkpt>
+<trkpt lat="53.5553" lon="-113.43663">
+<ele>619.6</ele>
+<time>2026-06-15T13:07:56-07:00</time>
+</trkpt>
+<trkpt lat="53.55522" lon="-113.43675">
+<ele>619.9</ele>
+<time>2026-06-15T13:07:57-07:00</time>
+</trkpt>
+<trkpt lat="53.55516" lon="-113.43676">
+<ele>619.9</ele>
+<time>2026-06-15T13:07:58-07:00</time>
+</trkpt>
+<trkpt lat="53.55508" lon="-113.43677">
+<ele>619.9</ele>
+<time>2026-06-15T13:07:59-07:00</time>
+</trkpt>
+<trkpt lat="53.55496" lon="-113.43672">
+<ele>622.6</ele>
+<time>2026-06-15T13:08:00-07:00</time>
+</trkpt>
+<trkpt lat="53.55492" lon="-113.43679">
+<ele>622.6</ele>
+<time>2026-06-15T13:08:01-07:00</time>
+</trkpt>
+<trkpt lat="53.55496" lon="-113.43708">
+<ele>621.6</ele>
+<time>2026-06-15T13:08:02-07:00</time>
+</trkpt>
+<trkpt lat="53.55498" lon="-113.43719">
+<ele>621.6</ele>
+<time>2026-06-15T13:08:03-07:00</time>
+</trkpt>
+<trkpt lat="53.55497" lon="-113.43732">
+<ele>621.2</ele>
+<time>2026-06-15T13:08:04-07:00</time>
+</trkpt>
+<trkpt lat="53.55493" lon="-113.43735">
+<ele>621.2</ele>
+<time>2026-06-15T13:08:05-07:00</time>
+</trkpt>
+<trkpt lat="53.55488" lon="-113.43736">
+<ele>621.2</ele>
+<time>2026-06-15T13:08:06-07:00</time>
+</trkpt>
+<trkpt lat="53.5548" lon="-113.4374">
+<ele>621.2</ele>
+<time>2026-06-15T13:08:07-07:00</time>
+</trkpt>
+<trkpt lat="53.55477" lon="-113.43749">
+<ele>621.2</ele>
+<time>2026-06-15T13:08:08-07:00</time>
+</trkpt>
+<trkpt lat="53.55474" lon="-113.43758">
+<ele>621.1</ele>
+<time>2026-06-15T13:08:09-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

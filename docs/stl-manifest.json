@@ -1,9 +1,15 @@
 {
+  "andre_s_trail": [
+    "andre_s_trail.stl"
+  ],
   "backbreaker": [
     "Assembly.stl"
   ],
   "bedSprings": [
     "bed_springs_plaque 2.stl"
+  ],
+  "birdhouse_trail": [
+    "birdhouse_trail.stl"
   ],
   "bobsled": [
     "bobsled_plaque_v4.stl"
@@ -13,6 +19,9 @@
   ],
   "coalminer_s_daughter": [
     "coalminer_s_daughter.stl"
+  ],
+  "coffee": [
+    "coffee.stl"
   ],
   "deliverance": [
     "deliverance_plaque_v3_solid.stl"
@@ -27,6 +36,9 @@
   "flat_pete": [
     "flat_pete.stl"
   ],
+  "flatter_pete": [
+    "flatter_pete.stl"
+  ],
   "gnome_trail": [
     "gnome_trail.stl"
   ],
@@ -35,6 +47,12 @@
   ],
   "gold_digger": [
     "gold_digger.stl"
+  ],
+  "happy_ending": [
+    "happy_ending.stl"
+  ],
+  "hustler": [
+    "hustler.stl"
   ],
   "kahkakiw": [
     "kahkakiw_plaque_admesh_fixed.stl"
@@ -51,6 +69,9 @@
   "mamahtaw_askwew": [
     "mamahtâw_iskwew_plaque_v2.stl"
   ],
+  "mark_messier": [
+    "mark_messier.stl"
+  ],
   "maskihkiwiyiniw": [
     "maskihkiwiyiniw_new_v6.stl"
   ],
@@ -59,6 +80,9 @@
   ],
   "moonraker": [
     "moonraker.stl"
+  ],
+  "mustang": [
+    "mustang.stl"
   ],
   "nicocwasaskanos": [
     "nicocwâsaskanôs_plaque.stl"
@@ -77,6 +101,9 @@
     "ocayisinâkês_plaque_v2.stl",
     "ocâyisanakes.stl"
   ],
+  "old_timer_s": [
+    "old_timer_s.stl"
+  ],
   "oyoyow": [
     "oyoyo_plaque_moveholes_v4_multicolour_solid_solid_redown.stl"
   ],
@@ -86,6 +113,9 @@
   "purgatory": [
     "purgatory_plaque_v3.stl"
   ],
+  "risky_business": [
+    "risky_business.stl"
+  ],
   "root_canal": [
     "root_canal.stl"
   ],
@@ -94,6 +124,9 @@
   ],
   "scalpel": [
     "scalpel.stl"
+  ],
+  "selkirk_knights": [
+    "selkirk_knights.stl"
   ],
   "sideline": [
     "sideline.stl"
@@ -106,6 +139,9 @@
   ],
   "the_holy_trail": [
     "the_holy_trail.stl"
+  ],
+  "the_trap": [
+    "the_trap.stl"
   ],
   "too_much": [
     "too_much.stl"

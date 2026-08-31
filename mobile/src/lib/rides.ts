@@ -47,8 +47,21 @@ export async function saveRide(ride: LocalRide) {
 
 export class RideRecorder {
   private subscription: Location.LocationSubscription | null = null;
+  private listeners = new Set<(ride: LocalRide) => void>();
   ride: LocalRide | null = null;
   onUpdate: ((ride: LocalRide) => void) | null = null;
+
+  addListener(fn: (ride: LocalRide) => void): () => void {
+    this.listeners.add(fn);
+    return () => {
+      this.listeners.delete(fn);
+    };
+  }
+
+  private notify(ride: LocalRide) {
+    this.onUpdate?.(ride);
+    for (const fn of this.listeners) fn(ride);
+  }
 
   async start(): Promise<void> {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -82,7 +95,7 @@ export class RideRecorder {
           );
         }
         this.ride.points.push(pt);
-        this.onUpdate?.(this.ride);
+        this.notify(this.ride);
       },
     );
   }
@@ -99,6 +112,9 @@ export class RideRecorder {
     return finished;
   }
 }
+
+/** App-wide recorder so the Ride tab and live navigation observe one recording. */
+export const sharedRecorder = new RideRecorder();
 
 export function rideToGpx(ride: LocalRide, name = 'Ride'): string {
   const pts = ride.points

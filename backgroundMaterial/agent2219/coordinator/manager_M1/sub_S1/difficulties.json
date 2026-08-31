@@ -1,0 +1,21 @@
+{
+  "kahkakiw": {"difficulty": "blue", "source": "trailforks.com/trails/raven-146421/ FAQ via search snippet: 'Raven is rated as Blue difficulty'", "confidence": "high"},
+  "backbreaker": {"difficulty": "blue", "source": "trailforks.com/trails/back-breaker/ FAQ via search snippet: 'Back Breaker is rated as Blue difficulty'", "confidence": "high"},
+  "mistapiskihkoman": {"difficulty": "black", "source": "trailforks.com/trails/machete/ FAQ via search snippet: 'Machete is rated as Black Diamond difficulty'", "confidence": "high"},
+  "nicocwasaskanos": {"difficulty": "blue", "source": "trailforks.com/trails/six-shooter/ FAQ via search snippet: 'Six Shooter is rated as Blue difficulty'", "confidence": "high"},
+  "nipamayatan-pekiseyahk": {"difficulty": "blue", "source": "direct fetch of trailforks.com/trails/purple-haze-15797/ (AKA nipamayatan pekiseyahk): 'Purple Haze is rated as Blue difficulty'", "confidence": "high"},
+  "lovers-lane": {"difficulty": "blue", "source": "trailforks.com/trails/lovers-lane-15796/ FAQ via search snippet: 'Lovers Lane is rated as Blue difficulty' (user votes lean Green, official rating Blue)", "confidence": "high"},
+  "mamahtaw-iskwew": {"difficulty": "blue", "source": "trailforks.com/trails/wonder-woman/ FAQ via search snippet: 'Wonder Woman is rated as Blue difficulty'", "confidence": "high"},
+  "sapwapahcikan-paskisikan": {"difficulty": "blue", "source": "trailforks.com/trails/ray-gun-201396/ FAQ via search snippet: 'Ray Gun is rated as Blue difficulty'", "confidence": "high"},
+  "bed-springs": {"difficulty": "black", "source": "direct fetch of trailforks.com/trails/bed-springs/: 'Bed Springs is rated as Black Diamond difficulty' (voted Black Diamond, 2 votes); corroborated by crankys.ca mirror", "confidence": "high"},
+  "soniyawahkesis": {"difficulty": null, "source": "no Trailforks page exists; name only appears in trail reports on the decommissioned 'EM Descent' trail and a Pacer walking-app route with no MTB rating", "confidence": "low"},
+  "maskihkiwiyiniw": {"difficulty": "black", "source": "trailforks.com/trails/maskihkiwiyiniw-medicine-man/ FAQ via search snippet: 'maskihkiwiyiniw - Medicine Man is rated as Black Diamond difficulty'", "confidence": "high"},
+  "bobsled": {"difficulty": "blue", "source": "trailforks.com/trails/bobsled-12400/ FAQ via search snippet: 'Bobsled is rated as Blue difficulty'", "confidence": "high"},
+  "purgatory": {"difficulty": "dblblack", "source": "Trailforks page purgatory-81341 is login-gated (hidden trail); toronto.com travel feature on Edmonton river valley MTB explicitly calls Purgatory 'a double black diamond trail'", "confidence": "medium"},
+  "deliverance": {"difficulty": "black", "source": "trailforks.com/trails/deliverance-13244/ FAQ via search snippet: 'Deliverance is rated as Black Diamond difficulty'; corroborated by crankys.ca mirror", "confidence": "high"},
+  "farmers-daughter": {"difficulty": "black", "source": "direct fetch of trailforks.com/trails/the-farmer-s-daughter-60234/: 'The Farmer's Daughter is rated as Black Diamond difficulty'", "confidence": "high"},
+  "kakwa": {"difficulty": "black", "source": "trailforks.com/trails/kakwa-porcupine-322561/ FAQ via search snippet: 'kakwa - Porcupine is rated as Black Diamond difficulty'", "confidence": "high"},
+  "kiwapamitin": {"difficulty": "blue", "source": "direct fetch of trailforks.com/trails/i-see-you/: 'I See You is rated as Blue difficulty'", "confidence": "high"},
+  "oyoyow": {"difficulty": "black", "source": "direct fetch of trailforks.com/trails/oyoyow-howl/: 'oyoyow - Howl is rated as Black Diamond difficulty'", "confidence": "high"},
+  "nosemanicos": {"difficulty": "black", "source": "trailforks.com/trails/nosemanicos-ladybug-703615/ FAQ via search snippet: 'nosemanicos - Ladybug is rated as Black Diamond difficulty'", "confidence": "high"}
+}

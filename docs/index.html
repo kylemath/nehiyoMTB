@@ -13,6 +13,7 @@
         }
     </script>
     <script src="https://scrtwpns.com/mixbox.js"></script>
+    <script src="bg-jobs.js"></script>
     <style>
         * {
             margin: 0;
@@ -2245,6 +2246,16 @@
                                 <div class="content-field wide">
                                     <label for="content-trail-widget">Trailforks widget URL (optional override)</label>
                                     <input type="url" id="content-trail-widget" placeholder="https://www.trailforks.com/widgets/trail/?trailid=...">
+                                </div>
+                                <div class="content-field">
+                                    <label for="content-trail-difficulty">Difficulty</label>
+                                    <select id="content-trail-difficulty">
+                                        <option value="">Unknown</option>
+                                        <option value="green">Green — easy</option>
+                                        <option value="blue">Blue — intermediate</option>
+                                        <option value="black">Black diamond — advanced</option>
+                                        <option value="dblblack">Double black — expert</option>
+                                    </select>
                                 </div>
                             </div>
                             <div id="content-strava-panel" class="trail-source-panel is-hidden">
@@ -4902,8 +4913,12 @@
             if (pagePath) {
                 pageEmpty.classList.add('is-hidden');
                 pageFrame.classList.remove('is-hidden');
-                if (pageFrame.getAttribute('src') !== pagePath) {
-                    pageFrame.src = pagePath;
+                // Cache-bust on every sign change so the preview always shows the
+                // freshly-rendered page (e.g. after an AI flesh-out re-render);
+                // without this the browser serves a stale cached iframe.
+                const currentBase = (pageFrame.getAttribute('src') || '').split('?')[0];
+                if (currentBase !== pagePath) {
+                    pageFrame.src = pagePath + '?t=' + Date.now();
                 }
             } else {
                 pageEmpty.textContent = 'No full detail page is available for this sign yet.';
@@ -5195,6 +5210,7 @@
             'content-trail-id',
             'content-trail-url',
             'content-trail-widget',
+            'content-trail-difficulty',
             'content-strava-segment-id',
             'content-strava-segment-url',
             'content-track-source-path',
@@ -5717,6 +5733,7 @@
             document.getElementById('content-trail-id').value = content.trailforks.trailId || '';
             document.getElementById('content-trail-url').value = content.trailforks.trailUrl || '';
             document.getElementById('content-trail-widget').value = content.trailforks.widgetUrl || '';
+            document.getElementById('content-trail-difficulty').value = content.trailforks.difficulty || '';
             const stravaSegmentId = getStravaSegmentIdFromContent(content.trailforks);
             document.getElementById('content-strava-segment-id').value = content.trailforks.stravaSegmentId || stravaSegmentId;
             document.getElementById('content-strava-segment-url').value = content.trailforks.stravaSegmentUrl
@@ -5803,6 +5820,12 @@
                     widgetUrl: document.getElementById('content-trail-widget').value.trim(),
                     displayName: trailUrl.split('/').filter(Boolean).pop() || ''
                 });
+            const trailDifficulty = document.getElementById('content-trail-difficulty').value;
+            if (trailDifficulty) {
+                trailforks.difficulty = trailDifficulty;
+            } else {
+                delete trailforks.difficulty;
+            }
 
             return {
                 pageStatus: document.getElementById('content-status-select').value,
@@ -5832,6 +5855,11 @@
         async function saveSignContent({ autoRender = true } = {}) {
             if (!editorApiAvailable || !selectedModel) {
                 setContentLog('Local editor server is not available.');
+                return;
+            }
+
+            if (fleshOutInFlight[selectedModel.id]) {
+                setContentLog('Hold on — the AI flesh-out for this sign is still running in the background. Wait for it to finish (the form refreshes automatically) before saving, so your save doesn\u2019t overwrite the new content.');
                 return;
             }
 
@@ -5935,41 +5963,77 @@
             }
         }
 
-        async function fleshOutSign() {
+        // Signs with an in-flight AI flesh-out job. While a sign is in here its
+        // form holds pre-flesh content, so saving would clobber the agent's
+        // work — saveSignContent() refuses to save these until the job finishes.
+        const fleshOutInFlight = Object.create(null);
+
+        // Merge a freshly-fetched catalogue model INTO the in-memory arrays in
+        // place, so every reference (catalogueModels, filteredModels, the card
+        // grid, and selectedModel) sees the new content. Without this, the form
+        // gets repopulated with stale pre-flesh content on the next re-select
+        // and a subsequent Save writes that stale content back. Returns the
+        // canonical in-memory object for `modelId`.
+        function mergeFreshModel(m) {
+            const existing = (catalogueModels || []).find(x => x.id === m.id);
+            if (!existing) return m;
+            Object.keys(existing).forEach(k => { if (!(k in m)) delete existing[k]; });
+            Object.assign(existing, m);
+            if (selectedModel && selectedModel.id === m.id) selectedModel = existing;
+            return existing;
+        }
+
+        function fleshOutSign() {
             if (!editorApiAvailable || !selectedModel) {
                 setContentLog('Local editor server is not available.');
                 return;
             }
             const modelId = selectedModel.id;
-            setContentInputsDisabled(true);
-            setContentLog('Asking the Cursor agent to author the page content… (this can take a minute or two)');
-            try {
-                const response = await fetch('/api/flesh-out-sign', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ modelId })
-                });
-                const data = await response.json();
-                if (!response.ok || !data.ok) {
-                    throw new Error(data.error || 'Flesh-out failed');
+            const modelLabel = selectedModel.englishName || selectedModel.name || modelId;
+            // Background job: don't lock the editor — the author can keep working
+            // on OTHER signs while the agent authors this one. Progress shows in
+            // the banner at the top of the page. Saving THIS sign is blocked
+            // until it finishes so the agent's content isn't overwritten.
+            fleshOutInFlight[modelId] = true;
+            syncContentEditorAvailability();
+            setContentLog('Queued — the Cursor agent is authoring this page in the background (a minute or two). You can work on OTHER signs meanwhile; don\u2019t edit/save THIS sign until it finishes — the form will refresh automatically.');
+            BGJobs.start('flesh-out-sign', { modelId }, {
+                label: 'Flesh out · ' + modelLabel,
+                onDone: async () => {
+                    delete fleshOutInFlight[modelId];
+                    // Pull the freshly-authored content back and merge it into the
+                    // in-memory catalogue so re-selecting the sign (or saving)
+                    // always sees the new content — not the stale pre-flesh copy.
+                    let merged = null;
+                    try {
+                        const fresh = await fetch('catalogue.json', { cache: 'no-store' }).then(r => r.json());
+                        const m = (fresh.models || []).find(x => x.id === modelId);
+                        if (m) merged = mergeFreshModel(m);
+                    } catch (e) { /* non-fatal: in-memory refresh only */ }
+                    renderCatalogue();
+                    const stillSelected = selectedModel && selectedModel.id === modelId;
+                    if (!stillSelected) {
+                        setContentLog(`Authored & locked ✓ "${modelLabel}" (pageStatus: user-reviewed). Reselect it to review.`);
+                        syncContentEditorAvailability();
+                        return;
+                    }
+                    if (merged) loadContentIntoForm(merged);
+                    setContentLog('Authored & locked ✓ (pageStatus: user-reviewed) — the form now shows the new content, and a later "Move to production" will not overwrite it.');
+                    const frame = document.getElementById('detail-page-frame');
+                    if (frame && frame.src) {
+                        const src = frame.src.split('?')[0];
+                        frame.src = `${src}?t=${Date.now()}`;
+                    }
+                    syncContentEditorAvailability();
+                },
+                onError: (msg) => {
+                    delete fleshOutInFlight[modelId];
+                    syncContentEditorAvailability();
+                    if (selectedModel && selectedModel.id === modelId) {
+                        setContentLog(`Flesh out failed: ${msg}`);
+                    }
                 }
-                setContentLog('Drafted ✓ (pageStatus: agent-drafted). Review it, then set status to user-reviewed to lock it.');
-                // pull the freshly-authored pageContent back into the editor form
-                try {
-                    const fresh = await fetch('catalogue.json', { cache: 'no-store' }).then(r => r.json());
-                    const m = (fresh.models || []).find(x => x.id === modelId);
-                    if (m) { selectedModel = m; loadContentIntoForm(m); }
-                } catch (e) { /* non-fatal: form refresh only */ }
-                const frame = document.getElementById('detail-page-frame');
-                if (frame && frame.src) {
-                    const src = frame.src.split('?')[0];
-                    frame.src = `${src}?t=${Date.now()}`;
-                }
-            } catch (error) {
-                setContentLog(`Flesh out failed: ${error.message}`);
-            } finally {
-                setContentInputsDisabled(false);
-            }
+            }).catch(error => setContentLog(`Flesh out failed: ${error.message}`));
         }
 
         function openRenderedSignPage() {
@@ -6093,10 +6157,13 @@
                 const el = document.getElementById(id);
                 if (el) el.disabled = !enabled;
             });
+            // While THIS sign's AI flesh-out is running, block save/flesh so the
+            // pre-flesh form can't overwrite the agent's content mid-job.
+            const fleshing = !!(selectedModel && fleshOutInFlight[selectedModel.id]);
             document.getElementById('content-load').disabled = !enabled;
-            document.getElementById('content-save').disabled = !enabled;
+            document.getElementById('content-save').disabled = !enabled || fleshing;
             const fleshBtnT = document.getElementById('content-flesh');
-            if (fleshBtnT) fleshBtnT.disabled = !enabled || !selectedModel;
+            if (fleshBtnT) fleshBtnT.disabled = !enabled || !selectedModel || fleshing;
             document.getElementById('content-regenerate').disabled = !enabled;
             document.getElementById('content-open').disabled = !selectedModel || !getModelPagePath(selectedModel);
             document.getElementById('content-map-icon-render').disabled = !enabled || !getModelSTLPath(selectedModel);
@@ -6152,6 +6219,52 @@
                 return { points: [start, [end.lat, end.lng]], rough: true };
             }
             return null;
+        }
+
+        // Point halfway along a polyline measured by cumulative distance, so
+        // the marker lands in the visual middle of the trail rather than at a
+        // midpoint index (which skews toward densely-sampled sections).
+        function getTrackCenterCoords(points) {
+            if (!Array.isArray(points) || points.length === 0) return null;
+            if (points.length === 1) return points[0];
+            const segLen = [];
+            let total = 0;
+            for (let i = 1; i < points.length; i++) {
+                const dLat = points[i][0] - points[i - 1][0];
+                const dLng = points[i][1] - points[i - 1][1];
+                const d = Math.hypot(dLat, dLng);
+                segLen.push(d);
+                total += d;
+            }
+            if (total === 0) return points[0];
+            const half = total / 2;
+            let acc = 0;
+            for (let i = 0; i < segLen.length; i++) {
+                if (acc + segLen[i] >= half) {
+                    const t = segLen[i] === 0 ? 0 : (half - acc) / segLen[i];
+                    const lat = points[i][0] + (points[i + 1][0] - points[i][0]) * t;
+                    const lng = points[i][1] + (points[i + 1][1] - points[i][1]) * t;
+                    return [lat, lng];
+                }
+                acc += segLen[i];
+            }
+            return points[points.length - 1];
+        }
+
+        // Where the sign icon should sit on the map: the centre of the trail
+        // when a track is available, otherwise the trailhead coordinate.
+        function getMarkerAnchorCoords(model) {
+            const trackInfo = getSignTrackCoords(model);
+            if (trackInfo && Array.isArray(trackInfo.points) && trackInfo.points.length) {
+                const center = getTrackCenterCoords(trackInfo.points);
+                if (center) return center;
+            }
+            return getSignMapCoords(model);
+        }
+
+        function getSignAccentColor(model) {
+            const accent = model && model.pageContent && model.pageContent.accentColor;
+            return (typeof accent === 'string' && accent) ? accent : '#dc3545';
         }
 
         function getSignThumbUrl(model) {
@@ -6215,6 +6328,9 @@
         let maplibreLoadPromise = null;
         const map3DMarkers = {};
         const map3DLayerIds = [];
+        // Per-trail layer ids + base styling, so selection can accentuate the
+        // chosen trail's path and dim the rest.
+        const map3DTrackMeta = {};
 
         function loadMapLibre() {
             if (window.maplibregl) return Promise.resolve(window.maplibregl);
@@ -6347,6 +6463,7 @@
                 }
             });
             map3DLayerIds.length = 0;
+            Object.keys(map3DTrackMeta).forEach(k => delete map3DTrackMeta[k]);
         }
 
         function buildMarkerElement(model, options = {}) {
@@ -6387,18 +6504,44 @@
             let missing = 0;
             const bounds = new maplibregl.LngLatBounds();
 
+            // Group markers whose start points are (nearly) the same location so
+            // their icons can be fanned out instead of stacking on top of one
+            // another (e.g. Root Canal and Back Breaker share a trailhead).
+            const coordKey = (c) => `${c[0].toFixed(4)},${c[1].toFixed(4)}`;
+            const coordGroups = {};
             (catalogueModels || []).forEach(model => {
                 if (!editorApiAvailable && isModelPublicHidden(model)) return;
-                const coords = getSignMapCoords(model);
-                if (!coords) { missing++; return; }
+                const anchor = getMarkerAnchorCoords(model);
+                if (!anchor) return;
+                const key = coordKey(anchor);
+                (coordGroups[key] = coordGroups[key] || []).push(model.id);
+            });
+            const coordSeen = {};
+
+            (catalogueModels || []).forEach(model => {
+                if (!editorApiAvailable && isModelPublicHidden(model)) return;
+                const anchor = getMarkerAnchorCoords(model);
+                if (!anchor) { missing++; return; }
                 const { el, isRendering } = buildMarkerElement(model, {
                     onClick: () => setSelectedModel(model)
                 });
-                const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
-                    .setLngLat([coords[1], coords[0]])
+                // Fan out icons whose trail centres coincide via a pixel offset,
+                // while keeping the geographic anchor at the true trail centre.
+                const key = coordKey(anchor);
+                const group = coordGroups[key] || [];
+                let markerOffset = [0, 0];
+                if (group.length > 1) {
+                    const idx = coordSeen[key] || 0;
+                    coordSeen[key] = idx + 1;
+                    const radius = 24;
+                    const angle = (2 * Math.PI * idx) / group.length - Math.PI / 2;
+                    markerOffset = [Math.cos(angle) * radius, Math.sin(angle) * radius];
+                }
+                const marker = new maplibregl.Marker({ element: el, anchor: 'center', offset: markerOffset })
+                    .setLngLat([anchor[1], anchor[0]])
                     .addTo(map3D);
                 map3DMarkers[model.id] = marker;
-                bounds.extend([coords[1], coords[0]]);
+                bounds.extend([anchor[1], anchor[0]]);
                 placed++;
 
                 if (isRendering) {
@@ -6433,7 +6576,7 @@
                         }
                     });
                     const linePaint = {
-                        'line-color': '#dc3545',
+                        'line-color': getSignAccentColor(model),
                         'line-width': 4,
                         'line-opacity': rough ? 0.8 : 0.95
                     };
@@ -6483,6 +6626,11 @@
 
                     map3DLayerIds.push(`source:${lineSourceId}`, `layer:${lineLayerId}`);
                     map3DLayerIds.push(`source:${dotsSourceId}`, `layer:${startLayerId}`, `layer:${endLayerId}`);
+                    map3DTrackMeta[model.id] = {
+                        lineLayerId, startLayerId, endLayerId, rough,
+                        baseWidth: 4,
+                        baseOpacity: rough ? 0.8 : 0.95
+                    };
                     coordsLng.forEach(c => bounds.extend(c));
                 }
             });
@@ -6515,6 +6663,44 @@
                     duration: 0
                 });
             }
+
+            updateTrackHighlight();
+        }
+
+        // Accentuate the selected trail's path: thicken and fully reveal it,
+        // lift it (and its end dots) above the rest, and gently dim the other
+        // trails so the chosen one reads more saliently. With nothing selected
+        // every trail returns to its neutral baseline.
+        function updateTrackHighlight() {
+            if (!map3DInitialized || !map3D) return;
+            const selectedId = selectedModel ? selectedModel.id : null;
+            const hasSelection = Boolean(selectedId && map3DTrackMeta[selectedId]);
+            Object.entries(map3DTrackMeta).forEach(([id, meta]) => {
+                const isSelected = hasSelection && id === selectedId;
+                const width = isSelected ? meta.baseWidth + 3 : meta.baseWidth;
+                let opacity = meta.baseOpacity;
+                if (hasSelection) opacity = isSelected ? 1 : Math.min(meta.baseOpacity, 0.68);
+                const dotOpacity = hasSelection && !isSelected ? 0.65 : 1;
+                if (map3D.getLayer(meta.lineLayerId)) {
+                    map3D.setPaintProperty(meta.lineLayerId, 'line-width', width);
+                    map3D.setPaintProperty(meta.lineLayerId, 'line-opacity', opacity);
+                }
+                [meta.startLayerId, meta.endLayerId].forEach(layerId => {
+                    if (layerId && map3D.getLayer(layerId)) {
+                        map3D.setPaintProperty(layerId, 'circle-opacity', dotOpacity);
+                        map3D.setPaintProperty(layerId, 'circle-stroke-opacity', dotOpacity);
+                    }
+                });
+            });
+            // Raise the selected trail's layers above its neighbours.
+            if (hasSelection) {
+                const meta = map3DTrackMeta[selectedId];
+                [meta.lineLayerId, meta.startLayerId, meta.endLayerId].forEach(layerId => {
+                    if (layerId && map3D.getLayer(layerId)) {
+                        try { map3D.moveLayer(layerId); } catch (_) { /* ignore */ }
+                    }
+                });
+            }
         }
 
         function highlight3DMarkerForSelected() {
@@ -6530,6 +6716,7 @@
                 if (!el) return;
                 el.classList.toggle('active', Boolean(selectedModel && selectedModel.id === id));
             });
+            updateTrackHighlight();
         }
 
         function panTo3DMarkerForSelected() {

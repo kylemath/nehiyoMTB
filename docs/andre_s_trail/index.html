@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andre&#x27;s Trail • Interactive Poster</title>
+    <style>
+    :root{
+      --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#e27a37;--accent2:#b9642d;--line:#dee2e6;--chip:#e9ecef;--ok:#e27a37;--primary-bg:#fbebe1;--primary-text:#000000;--formula-bg:#fefaf7;--formula-border:#e27a37;--secondary-bg:#fdf4ef;--secondary-border:#f6d7c3
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+    a:hover{border-bottom-color:var(--accent)}
+    .container{max-width:1100px;margin:0 auto;padding:16px}
+    header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;padding:20px;border-bottom:3px solid var(--accent);margin-bottom:16px;background:linear-gradient(135deg, var(--primary-bg) 0%, #ffffff 100%);border-radius:12px 12px 0 0;text-align:center}
+    .title{display:flex;flex-direction:column;gap:8px;align-items:center;width:100%}
+    .tag{background:rgba(255,255,255,0.9);border:1px solid var(--accent);padding:6px 14px;border-radius:999px;color:var(--primary-text);font-size:13px;font-weight:600}
+    h1{font-size:32px;margin:0;color:var(--primary-text);font-weight:900;letter-spacing:-0.02em}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);height:100%}
+    .panel h2{font-size:18px;margin:0 0 14px 0;color:var(--primary-text);font-weight:800;padding-bottom:8px;border-bottom:3px solid var(--primary-bg)}
+    .panel h3{font-size:17px;margin:14px 0 10px 0;color:#000000;font-weight:800;padding-left:10px;border-left:4px solid var(--accent)}
+    .row{display:flex;flex-wrap:nowrap;align-items:center;gap:8px}
+    .sro{font-weight:700;font-size:20px;color:#000000;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);white-space:nowrap}
+    .syll{font-size:20px;color:#000000;background:var(--primary-bg);padding:6px 12px;border-radius:8px;font-weight:600;border:2px solid var(--secondary-border)}
+    .muted{color:var(--muted);font-size:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:var(--chip);border:1px solid var(--line);padding:7px 11px;border-radius:8px;font-weight:600;font-size:15px}
+    .copy{background:#ffffff;color:#000000;border:2px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:11px;font-weight:600;transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+    .copy:hover{background:var(--accent);color:white;border-color:var(--accent)}
+    .formula{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;background:var(--formula-bg);border:2px solid var(--formula-border);padding:12px 14px;border-radius:10px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.05);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .syll-part{padding:7px 11px;border-radius:8px;border:2px solid var(--line);background:#ffffff;cursor:pointer;font-weight:600;transition:all 0.15s;font-size:18px}
+    .syll-part:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .syll-part[data-active="true"]{outline:2px solid var(--accent);background:var(--primary-bg);border-color:var(--accent)}
+    .hint{font-size:13px;color:var(--muted);font-weight:500;font-style:italic}
+    .syllabics-emphasis{font-size:20px;font-weight:700;color:#000000;margin-top:8px;padding:8px 12px;background:var(--primary-bg);border-radius:8px;border:2px solid var(--secondary-border);display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+    .trail-iframe{width:100%;height:600px;border:2px solid var(--line);border-radius:12px;margin-top:12px}
+    .trail-mini-map-link{display:block;color:inherit;text-decoration:none;border-bottom:0}
+    .trail-mini-map-link:hover{border-bottom:0}
+    .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
+    .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
+    .trail-mini-map svg{display:block;width:100%;height:auto}
+    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
+    .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
+    .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
+    .trail-mini-map-attrib{font-size:10px;fill:#5f6368;paint-order:stroke;stroke:#ffffff;stroke-width:3px;stroke-linejoin:round}
+    .trail-mini-map-caption{padding:8px 10px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:left;background:rgba(255,255,255,0.82)}
+    .kvs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .kv{background:var(--secondary-bg);border:2px solid var(--secondary-border);border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+    .kv strong{color:#000000}
+    .table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+    .table th,.table td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px}
+    .table th{background:var(--secondary-bg);text-align:left;color:#000000;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.025em}
+    .table tr:hover{background:#f8fafc}
+    .table tr:last-child td{border-bottom:none}
+    .badge{padding:3px 10px;border-radius:999px;border:1px solid var(--accent);background:rgba(255,255,255,0.9);color:var(--primary-text);font-size:12px;font-weight:600}
+    footer{margin:24px 0 8px;color:var(--muted);text-align:center;font-size:13px}
+    @media (max-width: 960px){.grid{grid-template-columns:1fr}}
+    @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
+    .tooltip{position:relative}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
+    .buy-panel{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
+    .buy-panel h2{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}
+    .buy-price{font-size:24px;font-weight:800;color:#000}
+    .buy-mount{flex:1 1 200px;min-width:200px}
+    .buy-fineprint{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
+    .buy-panel--soon{border-style:dashed}
+    @media (max-width:600px){.buy-panel{flex-direction:column;align-items:stretch;text-align:center}}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="title">
+          <h1>Andre's Trail • Ândrê omeskanaw • ᐋᐣᑇ ᐅᒣᐢᑲᓇᐤ</h1>
+          <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
+          <div style="margin-top:12px">
+            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
+        <h2>Get one</h2>
+        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>The Name</h2>
+
+        <div class="primary-content">
+          <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">Ândrê omeskanaw</div>
+          <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
+              <span class="part tooltip" data-key="andre_s_trail_0" data-tip="" data-syll-id="andre_s_trail_0-syll">Ândrê</span>
+              <span class="part tooltip" data-key="andre_s_trail_1" data-tip="" data-syll-id="andre_s_trail_1-syll">omeskanaw</span>
+              <span style="margin:0 8px">→</span>
+              <strong style="font-size:20px">Ândrê omeskanaw</strong>
+          </div>
+          <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
+              <span class="syll-part tooltip" data-key="andre_s_trail_0" data-tip="Ândrê" id="andre_s_trail_0-syll">ᐋᐣᑇ</span>
+              <span class="syll-part tooltip" data-key="andre_s_trail_1" data-tip="omeskanaw" id="andre_s_trail_1-syll">ᐅᒣᐢᑲᓇᐤ</span>
+          </div>
+          <p style="text-align:center;margin:16px 0 0 0;color:#000000;font-size:17px;line-height:1.6;font-weight:600">&quot;Andre&#x27;s trail&quot;</p>
+        </div>
+
+        <h2 style="margin-top:16px">Trail Sign Design</h2>
+        <div style="text-align:center;margin-bottom:16px">
+            <img src="../assets/andre_s_trail/andre_s_trail_sign.png" alt="Andre&#x27;s Trail trail sign — 3D render" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
+            <p style="margin-top:8px;color:var(--muted);font-size:14px;font-style:italic">Front view of the 3D-printed multi-colour sign, rendered from the print geometry.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">The Name &amp; Its Meaning</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">The chosen Plains Cree rendering for “Andre's Trail” means “Andre's trail.”</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Andre phonetic + omeskanaw 'his trail'.</p>
+        </div>
+
+        <div class="story-box">
+          <h3 style="margin:0 0 12px 0;border:none;padding:0;font-size:18px">Design &amp; Trail</h3>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Sign icon: Hand-painted wooden trail name marker reading ANDRE.</p>
+          <p style="margin:0 0 12px 0;font-size:15px;line-height:1.6">Trail stats: Located in Forest Heights; about 822 m long; -20 m descent / 20 m ascent.</p>
+        </div>
+        </div>
+
+        <div class="panel">
+
+        <h2>Trail Information</h2>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <div style="text-align:center;margin-bottom:24px">
+            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/andre-s-trail/" target="_blank" rel="noopener noreferrer">
+            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
+              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
+                <defs>
+                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#f7f8fa" />
+                    <stop offset="100%" stop-color="#eef1f5" />
+                  </linearGradient>
+                </defs>
+                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12114/21179.png" x="-229.7" y="-118.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12115/21179.png" x="26.3" y="-118.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12116/21179.png" x="282.3" y="-118.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12117/21179.png" x="538.3" y="-118.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12114/21180.png" x="-229.7" y="137.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12115/21180.png" x="26.3" y="137.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12116/21180.png" x="282.3" y="137.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12117/21180.png" x="538.3" y="137.2" width="256" height="256" />
+                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
+                <polyline class="trail-mini-map-halo" points="73.2,175.9 84.9,175.9 94.2,178.2 101.7,175.9 104.9,175.1 106.3,177.5 101.2,182.2 97.9,191.6 111.0,191.6 123.6,181.4 125.9,184.5 129.6,185.3 135.2,187.7 141.3,190.8 149.2,196.3 153.9,193.9 157.6,193.9 178.1,193.2 179.5,190.8 181.4,193.9 184.2,193.2 186.9,190.0 187.9,185.3 192.5,181.4 198.1,179.0 201.4,178.2 207.0,180.6 210.2,175.9 213.5,171.2 217.2,167.3 223.8,167.3 229.8,168.8 234.0,167.3 240.5,165.7 249.4,164.1 257.3,158.6 264.8,156.3 272.2,155.5 287.1,153.1 293.7,151.6 299.3,152.4 303.5,153.9 313.2,153.9 320.7,147.7 329.1,142.2 339.3,139.8 362.6,138.2 372.4,139.0 377.1,141.4 382.7,142.9 393.4,139.0 399.0,137.5 404.1,137.5 414.8,135.1 433.5,129.6 439.1,124.9 443.7,121.8 448.9,121.0 457.7,121.8 466.6,119.4 473.1,116.3 488.5,109.2 496.4,106.1 504.3,105.3 507.6,103.7 509.4,101.4 516.0,99.8 522.5,97.4 526.7,95.1 534.1,90.4 543.0,88.0 555.1,81.8 560.2,77.8 563.5,72.3 566.8,63.7" />
+                <polyline class="trail-mini-map-track" points="73.2,175.9 84.9,175.9 94.2,178.2 101.7,175.9 104.9,175.1 106.3,177.5 101.2,182.2 97.9,191.6 111.0,191.6 123.6,181.4 125.9,184.5 129.6,185.3 135.2,187.7 141.3,190.8 149.2,196.3 153.9,193.9 157.6,193.9 178.1,193.2 179.5,190.8 181.4,193.9 184.2,193.2 186.9,190.0 187.9,185.3 192.5,181.4 198.1,179.0 201.4,178.2 207.0,180.6 210.2,175.9 213.5,171.2 217.2,167.3 223.8,167.3 229.8,168.8 234.0,167.3 240.5,165.7 249.4,164.1 257.3,158.6 264.8,156.3 272.2,155.5 287.1,153.1 293.7,151.6 299.3,152.4 303.5,153.9 313.2,153.9 320.7,147.7 329.1,142.2 339.3,139.8 362.6,138.2 372.4,139.0 377.1,141.4 382.7,142.9 393.4,139.0 399.0,137.5 404.1,137.5 414.8,135.1 433.5,129.6 439.1,124.9 443.7,121.8 448.9,121.0 457.7,121.8 466.6,119.4 473.1,116.3 488.5,109.2 496.4,106.1 504.3,105.3 507.6,103.7 509.4,101.4 516.0,99.8 522.5,97.4 526.7,95.1 534.1,90.4 543.0,88.0 555.1,81.8 560.2,77.8 563.5,72.3 566.8,63.7" />
+                <circle class="trail-mini-map-dot" cx="73.2" cy="175.9" r="6" fill="#22c55e" />
+                <circle class="trail-mini-map-dot" cx="566.8" cy="63.7" r="6" fill="#ef4444" />
+                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
+              </svg>
+              <div class="trail-mini-map-caption">Uploaded GPX over map context: 75 track points. Click to open the Trailforks trail page.</div>
+            </div></a>
+            
+            <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/andre-s-trail/" style="font-size: 0.7em;">andre-s-trail</a></div>
+        </div>
+
+        <h2>Building Other Forms</h2>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;the man Andre&#x27;s trail&quot;</div>
+          <div class="formula" style="justify-content:flex-start"><strong>nâpêw Ândrê omeskanaw</strong></div>
+          <div class="syllabics-emphasis"><span class="syll-part">ᓈᐯᐤ ᐋᐣᑇ ᐅᒣᐢᑲᓇᐤ</span></div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Adds nâpêw &#x27;man&#x27;.</p>
+          </div>
+
+          <div class="kv" style="margin-top:12px">
+            <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Andre&#x27;s path/route&quot;</div>
+          <div class="formula" style="justify-content:flex-start"><strong>Ândrê opimohtêwin</strong></div>
+          <div class="syllabics-emphasis"><span class="syll-part">ᐋᐣᑇ ᐅᐱᒧᐦᑌᐎᐣ</span></div>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">pimohtêwin &#x27;walking route&#x27;.</p>
+          </div>
+
+        <h2 style="margin-top:24px">Examples &amp; Sources</h2>
+        <h3 style="margin:0 0 12px 0">Quick reference</h3>
+        <table class="table">
+          <thead>
+            <tr><th>English</th><th>SRO</th><th>Syllabics</th></tr>
+          </thead>
+          <tbody>
+              <tr><td>Andre&#x27;s trail</td><td class="tooltip" data-tip="Andre phonetic + omeskanaw &#x27;his trail&#x27;.">Ândrê omeskanaw</td><td>ᐋᐣᑇ ᐅᒣᐢᑲᓇᐤ</td></tr>
+              <tr><td>the man Andre&#x27;s trail</td><td class="tooltip" data-tip="Adds nâpêw &#x27;man&#x27;.">nâpêw Ândrê omeskanaw</td><td>ᓈᐯᐤ ᐋᐣᑇ ᐅᒣᐢᑲᓇᐤ</td></tr>
+              <tr><td>Andre&#x27;s path/route</td><td class="tooltip" data-tip="pimohtêwin &#x27;walking route&#x27;.">Ândrê opimohtêwin</td><td>ᐋᐣᑇ ᐅᐱᒧᐦᑌᐎᐣ</td></tr>
+          </tbody>
+        </table>
+
+
+        <h3 style="margin:18px 0 12px 0">Sources</h3>
+        <p class="muted">SRO uses ê î ô â. Syllabics match the SRO shown.</p>
+        <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
+        <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
+        </div>
+      </section>
+
+      <footer>
+        Andre&#x27;s Trail • ᐋᐣᑇ ᐅᒣᐢᑲᓇᐤ • Ândrê omeskanaw • Interactive Poster
+      </footer>
+    </div>
+
+    <script>
+      const pairs = [
+        {sro: '[data-key="andre_s_trail_0"]', syll: '#andre_s_trail_0-syll'},
+        {sro: '[data-key="andre_s_trail_1"]', syll: '#andre_s_trail_1-syll'}
+      ];
+
+      document.querySelectorAll('.part').forEach(p=>{
+        p.addEventListener('mouseenter',()=>{
+          const key = p.getAttribute('data-key');
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.setAttribute('data-active', 'true');
+            }
+          }
+          p.setAttribute('data-active','true');
+        });
+        p.addEventListener('mouseleave',()=>{
+          const syllId = p.getAttribute('data-syll-id');
+          if (syllId) {
+            const syllElem = document.getElementById(syllId);
+            if (syllElem) {
+              syllElem.removeAttribute('data-active');
+            }
+          }
+          p.removeAttribute('data-active');
+        });
+      });
+
+      document.querySelectorAll('.syll-part[data-key]').forEach(s=>{
+        s.addEventListener('mouseenter',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.setAttribute('data-active', 'true');
+          });
+          s.setAttribute('data-active','true');
+        });
+        s.addEventListener('mouseleave',()=>{
+          const key = s.getAttribute('data-key');
+          document.querySelectorAll(`[data-key="${key}"].part`).forEach(p=>{
+            p.removeAttribute('data-active');
+          });
+          s.removeAttribute('data-active');
+        });
+      });
+
+      function copyText(text){
+        navigator.clipboard.writeText(text).then(()=>{
+          toast('Copied');
+        }).catch(()=>toast('Copy failed'));
+      }
+      document.querySelectorAll('.copy').forEach(btn=>{
+        const sel = btn.getAttribute('data-copy');
+        const direct = btn.getAttribute('data-copy-text');
+        btn.addEventListener('click',()=>{
+          if (direct) return copyText(direct);
+          const el = document.querySelector(sel);
+          if (el) copyText(el.textContent.trim());
+        });
+      });
+
+      function toast(msg){
+        const t = document.createElement('div');
+        t.textContent = msg;
+        t.style.position='fixed';t.style.bottom='14px';t.style.left='50%';
+        t.style.transform='translateX(-50%)';t.style.background='#111827';
+        t.style.color='#e5e7eb';t.style.padding='8px 12px';t.style.border='1px solid #374151';
+        t.style.borderRadius='8px';t.style.zIndex='9999';t.style.opacity='0';
+        t.style.transition='opacity .15s ease';
+        document.body.appendChild(t);
+        requestAnimationFrame(()=>t.style.opacity='1');
+        setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),200)},1200);
+      }
+    </script>
+
+  </body>
+</html>

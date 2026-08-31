@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { TrailIconBadge } from '@/components/trail-icon';
 import { Button, Card, Screen, Subtitle, Title, usePalette } from '@/components/ui';
 import { Brand } from '@/constants/brand';
 import { LocalCapture, listCaptures, localScore } from '@/lib/captures';
@@ -29,6 +30,7 @@ export default function HuntTab() {
     return (
       <Pressable onPress={() => router.push(`/trail/${trail.id}`)}>
         <Card style={styles.trailCard}>
+          <TrailIconBadge trail={trail} size={56} />
           <View style={{ flex: 1 }}>
             <Text style={{ color: p.text, fontWeight: '600', fontSize: 15 }}>
               {displayName(trail)}
@@ -52,6 +54,10 @@ export default function HuntTab() {
         data={mappedTrails}
         keyExtractor={(t) => t.id}
         renderItem={renderTrail}
+        // Mount and draw every row up front (the list is small): this is what
+        // warms the icon bitmap cache that the Map tab's markers rely on.
+        initialNumToRender={mappedTrails.length}
+        removeClippedSubviews={false}
         contentContainerStyle={{
           paddingTop: insets.top + 12,
           paddingHorizontal: 16,

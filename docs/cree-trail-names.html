@@ -60,6 +60,21 @@
   .opt .meta{font-size:13px;margin-top:6px}
   .opt .meta b{color:var(--accent)}
   .opt .inn{font-size:13px;margin-top:4px;color:#d9b48a}
+  /* speaker-suggested options (added via the LLM box) get a distinct blue rail */
+  .opt.custom{border-left-color:#6fb0e0;background:#13202b}
+  .opt .optbadge{font-size:11px;color:#6fb0e0;margin-bottom:4px}
+  .opt .optbadge a{color:var(--accent)}
+  .opt .verdict{font-size:13px;margin-top:4px;color:#9fc7e6}
+  /* "Suggest a translation" box inside the expanded detail row */
+  .suggest{margin-top:12px;background:#101a22;border:1px solid #2c4a5e;border-radius:8px;padding:12px 14px}
+  .suggest h4{margin:0 0 6px;font-size:13px;color:#6fb0e0}
+  .suggest .sghint{font-size:12px;color:var(--muted);line-height:1.45;margin-bottom:8px}
+  .suggest textarea{width:100%;min-height:54px;background:#0d100a;border:1px solid var(--line);color:var(--syl);border-radius:7px;padding:8px 10px;font:13px/1.5 ui-monospace,Menlo,monospace;resize:vertical}
+  .suggest .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+  .suggest button{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:6px 12px;border-radius:7px;cursor:pointer;font-size:13px}
+  .suggest button:hover{border-color:var(--accent)}
+  .suggest button.primary{background:#1b2a36;color:#6fb0e0;border-color:#2c4a5e}
+  .suggest .status{font-size:12px;color:var(--muted)}
   .chk{width:18px;height:18px;accent-color:var(--accent);cursor:pointer}
   .pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:#2a331d;color:var(--accent);border:1px solid var(--line)}
   footer{color:var(--muted);font-size:12px;padding:18px 22px;border-top:1px solid var(--line)}
@@ -218,7 +233,7 @@
 <body>
 <header>
   <h1>nêhiyaw Trail Names — ᓀᐦᐃᔭᐤ Translation Workbench</h1>
-  <div class="sub">Edmonton MTB trails, default-ordered by Trailforks <b>ride check-ins</b> (most-ridden first). This is a non-destructive merge of three source lists — <i>ride check-ins</i>, <i>pageviews</i>, and <i>Trailforks global ranking</i> — so each trail shows all three metrics, with a blank (—) where a trail appears on only some lists. Each name has up to three candidate Plains Cree (nêhiyawêwin) renderings — syllabics + transliteration — with reasoning, word components, and notes on innuendo / second meanings. <b>These are draft AI guesses for review</b>: tick the checkbox once a translation has been vetted by a speaker (ticked rows grey out and persist across reloads). Click any column header to re-sort; click <span class="pill">show ▾</span> to expand suggestions.</div>
+  <div class="sub">Edmonton MTB trails, default-ordered by Trailforks <b>ride check-ins</b> (most-ridden first). This is a non-destructive merge of three source lists — <i>ride check-ins</i>, <i>pageviews</i>, and <i>Trailforks global ranking</i> — so each trail shows all three metrics, with a blank (—) where a trail appears on only some lists. Each name has up to three candidate Plains Cree (nêhiyawêwin) renderings — syllabics + transliteration — with reasoning, word components, and notes on innuendo / second meanings. <b>These are draft AI guesses for review</b>: tick the checkbox once a translation has been vetted by a speaker (ticked rows grey out and persist across reloads). Use <b>hide vetted</b> to remove finished rows from the table. Click any column header to re-sort; click <span class="pill">show ▾</span> to expand suggestions.</div>
 </header>
 
 <div class="bar">
@@ -227,9 +242,11 @@
   <button id="collapseAll">Collapse all</button>
   <button id="clearChecks">Clear ticks</button>
   <button id="apiConfig">⚙ Image API</button>
+  <button id="textApiConfig">🧠 Cree LLM</button>
   <a href="style-guide.html" style="text-decoration:none"><button type="button">📐 Style guide</button></a>
   <a href="tools/icon-extruder/index.html" style="text-decoration:none"><button type="button">🧊 Icon extruder</button></a>
   <label class="fitsbox" title="Show only signs whose colours are all in the loaded filament set"><input type="checkbox" id="fitsOnly"> fits loaded filaments</label>
+  <label class="fitsbox" title="Remove ticked rows from the table (ticks are kept; turn off to show them again)"><input type="checkbox" id="hideChecked"> hide vetted</label>
   <span class="count" id="count"></span>
 </div>
 <div class="slotstrip" id="slotstrip"></div>
@@ -265,6 +282,7 @@
 </footer>
 
 <script src="graphics-data.js"></script>
+<script src="bg-jobs.js"></script>
 <script>
 /* ---- Trail data -------------------------------------------------------
    r=rank, en=english, loc=area, dist=display distance, distM=metres,
@@ -453,9 +471,9 @@ const DATA = [
  {s:"ᐃᑑᐦᑌ ᒣᐢᑲᓇᐤ ᑯᑕᐠ ᐊᒥᐢᑎᑲᐤ",t:"itohtê meskanaw kotak amaciwêwin",g:"go-on trail, other climb",why:"As GO Trail + kotak 'other' + amaciwê- 'climb up'.",inn:"None."},
  {s:"ᑰ ᒣᐢᑲᓇᐤ ᐊᒥᐢᑎᑲᐤ",t:"Kô meskanaw amaciwêwin",g:"GO (phonetic) climb",why:"If GO is an acronym.",inn:"None."}]},
 {en:"Hustler",loc:"Gold Bar/Capilano Park",dist:"2 km",distM:2000,desc:"-79 m",descM:79,asc:"84 m",ascM:84,rank:404,views:13075,checkins:14689,cree:[
- {s:"ᐅᑮᒧᑎᐢᐠ ᐊᑑᐢᑫᐤ",t:"okîmotisk-atoskêw",g:"one who works fast/sneaky",why:"Hustle = work hard/sharp; okîmoc 'secretly, slyly' + atoskêw 'works'.",inn:"Hustler magazine + street hustler; sly/secret sense kept via kîmoc."},
- {s:"ᑲᑯᔮᐎᐢ",t:"kakwâyaki-atoskêw",g:"one who hustles intensely",why:"kakwâyaki 'extremely, hard' + works.",inn:"Hard grind overtone."},
- {s:"ᐅᑮᒧᑎᓯᐤ",t:"okîmotisiw",g:"a sly/hustling one",why:"Agent noun from kîmoc 'sneakily'.",inn:"Trickster wink."}]},
+ {s:"ᑲᑲᔦᓯᒧᐧ",t:"kakayêsimow",g:"a tricky, clever outwitter",why:"kakayêsi- 'cunning, sly, full of tricks' as an actor noun: a slick rider who uses sharp maneuvers to get ahead of an opponent.",inn:"The hustler's edge — outsmarting a rival on the loop rather than brute force."},
+ {s:"ᑲᑴᔮᐦᐅᐧ",t:"kakwêyâhow",g:"an intense striver who pushes hard",why:"kakwêyâho- 'to hurry, rush, exert under pressure': the raw physical grit and grind of racing the loop.",inn:"Pure hustle as aggressive athletic effort."},
+ {s:"ᐃᐧᔭᓯᐦᑲᒫᑫᐧ",t:"wiyasihkâmâkêw",g:"a trickster/schemer",why:"wiyasihkê- 'to scheme, use deceptive tactics' to bend a situation to one's advantage.",inn:"Heavier illicit undertone, like the movie Risky Business."}]},
 {en:"Turtle berms",loc:"Keillor",dist:"125 m",distM:125,desc:"-1 m",descM:1,asc:"3 m",ascM:3,rank:11581,views:"",checkins:14662,cree:[
  {s:"ᒥᐢᑭᓈᐠ ᐊᓯᐢᑭᐗᐦᐃᑲᓇ",t:"miskinâk asiskiwahikana",g:"turtle banks/berms",why:"miskinâk 'turtle' + asiski- 'earth' banked-up features (berms).",inn:"Turtle Island echo; earthen mounds."},
  {s:"ᒥᐢᑭᓈᐠ ᐗᓵᐦᐃᑲᓇ",t:"miskinâk wâsahikana",g:"turtle mounds",why:"Mound/heap sense for berms.",inn:"None."},
@@ -1147,7 +1165,15 @@ const DATA = [
 {en:"Howdy neighbour",loc:"Mill Woods",dist:"533 m",distM:533,desc:"-9 m",descM:9,asc:"7 m",ascM:7,rank:108556,views:"",checkins:"",cree:[
  {s:"ᑖᓂᓯ ᑭᒋᐚᕽ",t:"tânisi kiciwâhk",g:"hello, neighbour",why:"tânisi 'hello / how are you' + kiciwâw 'neighbour' = 'howdy, neighbour'.",inn:"The neighbourly greeting."},
  {s:"ᑖᓂᓯ ᐅᑏᒼ",t:"tânisi otôtêm",g:"hello, friend",why:"tânisi 'hello' + otôtêm 'friend / relative' as a warm 'howdy neighbour'.",inn:"None."},
- {s:"ᐚᒋᔦ ᑭᒋᐚᕽ",t:"wâciyê kiciwâhk",g:"greetings, neighbour",why:"wâciyê 'greetings / hi' + neighbour.",inn:"None."}]}
+ {s:"ᐚᒋᔦ ᑭᒋᐚᕽ",t:"wâciyê kiciwâhk",g:"greetings, neighbour",why:"wâciyê 'greetings / hi' + neighbour.",inn:"None."}]},
+{en:"Fireball",loc:"Central Edmonton (North)",dist:"384 m",distM:384,desc:"-2 m",descM:2,asc:"",ascM:0,rank:37950,views:486,checkins:413,cree:[
+ {s:"ᐃᐢᑯᑌᐤ ᐗᐍᔭᔮᐤ",t:"iskotêw-wâwiyêyâw",g:"round ball of fire",why:"iskotêw 'fire' + wâwiyê- 'it is round / circular' = a fiery sphere. The trail's real name is 'Fireball' — Trailforks mislabels it 'Smoke Bomb' (AKA fireball).",inn:"Corrects the mislabel; both are pyrotechnics, but this one burns rather than smokes."},
+ {s:"ᐃᐢᑯᑌᐤ ᐹᐢᑌᐤ",t:"iskotêw-pâhkitêw",g:"the fire that bursts / explodes",why:"iskotêw 'fire' + pâhkitêw 'it bursts / explodes' — a fireball detonating.",inn:"Leans into the pyrotechnic blast it was confused with ('smoke bomb')."},
+ {s:"ᒥᐢᑎ ᐃᐢᑯᑌᐤ",t:"misti-iskotêw",g:"great big fire / fireball",why:"misti- 'great, big' + iskotêw 'fire' for a large rolling ball of flame.",inn:"Plain awe of a big fireball."}]},
+{en:"Coffee",loc:"Mill Woods",dist:"",distM:0,desc:"",descM:0,asc:"",ascM:0,rank:"",views:"",checkins:"",cree:[
+ {s:"ᒥᑭᐢ",t:"mîkis",g:"coffee",why:"mîkis is the established Plains Cree loanword for coffee (from French messieu / michaud).",inn:"The post-ride cup everyone is really riding toward."},
+ {s:"ᑳᐦᐲ",t:"kâhpî",g:"coffee (phonetic)",why:"kâhpî is the English 'coffee' spelled phonetically into SRO and syllabics.",inn:"Keeps the English trail name audible in Cree orthography."},
+ {s:"ᒥᑭᐢ ᒣᐢᑲᓇᐤ",t:"mîkis meskanaw",g:"coffee trail",why:"mîkis 'coffee' + meskanaw 'trail/path'.",inn:"Names the trail as the route to (or from) the coffee stop."}]}
 ];
 
 /* ---- Ordinal ranks + overall (avg of 3 metrics; missing → n+1) -------- */
@@ -1180,9 +1206,32 @@ DATA.forEach(d => {
 /* ---- Render ----------------------------------------------------------- */
 const tbody = document.getElementById('tbody');
 const CHECK_KEY = 'creeTrailChecks';
+const HIDE_CHECKED_KEY = 'creeTrailHideChecked';
 let checks = JSON.parse(localStorage.getItem(CHECK_KEY) || '{}');
+let hideChecked = localStorage.getItem(HIDE_CHECKED_KEY) === '1';
 const CREE_KEY = 'creeTrailChoice';   // en -> chosen cree option index
 let creeChoice = JSON.parse(localStorage.getItem(CREE_KEY) || '{}');
+
+/* Speaker/LLM-suggested renderings, kept per-browser (localStorage). Each is a
+   normal cree option ({s,t,g,why,inn}) plus custom:true and an LLM verdict.
+   They're appended after the built-in options so the hard-coded indices (and
+   thus existing creeChoice values) stay valid. */
+const SUGGEST_KEY = 'creeTrailSuggestions';   // en -> [ {s,t,g,why,inn,verdict,custom} ]
+function loadSuggestions(){ try{ return JSON.parse(localStorage.getItem(SUGGEST_KEY)||'{}'); }catch(e){ return {}; } }
+function saveSuggestions(s){ localStorage.setItem(SUGGEST_KEY, JSON.stringify(s)); }
+let SUGGESTIONS = loadSuggestions();
+/* (re)merge stored suggestions into DATA[].cree — idempotent: drops previously
+   merged customs first, so it can be called again after add/remove. */
+function applySuggestions(){
+  DATA.forEach(d=>{
+    if(Array.isArray(d.cree)) d.cree = d.cree.filter(c=>!c.custom);
+    const list = SUGGESTIONS[d.en];
+    if(Array.isArray(list) && list.length){
+      d.cree = (d.cree||[]).concat(list.map(c=>Object.assign({}, c, {custom:true})));
+    }
+  });
+}
+applySuggestions();
 let EDITOR_OK = false;                 // local catalogue editor server available?
 let sortKey = 'checkins', sortDir = -1; // default: most ride check-ins first
 
@@ -1212,6 +1261,7 @@ function filamentCss(name){ return FILAMENT_CSS[(name||'').toLowerCase()] || '#9
 let LOADED_SLOTS = ['teal','pink','yellow','purple','grey','white','black','red'];
 let LOADED_SET = new Set(LOADED_SLOTS);
 let fitsOnly = false;
+let hiddenVettedCount = 0;
 
 /* distinct filament names a built sign needs (lowercased), or [] if not built */
 function signColors(en){
@@ -1383,14 +1433,33 @@ function rowHTML(d, pos){
   const top = d.cree && d.cree.length ? d.cree[ci] : {s:'—',t:'(needs translation)'};
   const isChecked = !!checks[d.en];
   const checked = isChecked ? 'checked' : '';
-  const opts = (d.cree && d.cree.length ? d.cree : []).map(c=>`
-    <div class="opt">
-      <div class="syl">${c.s}</div>
-      <div class="translit">${c.t}</div>
-      <div class="gloss">&ldquo;${c.g}&rdquo;</div>
-      <div class="meta"><b>Reasoning / components:</b> ${c.why}</div>
-      <div class="inn"><b>Innuendo / 2nd meaning:</b> ${c.inn}</div>
-    </div>`).join('') || '<div class="opt">No Cree translation yet for this trail.</div>';
+  const opts = (d.cree && d.cree.length ? d.cree : []).map((c,i)=>{
+    // built-in options are trusted literals (kept raw); custom LLM/speaker
+    // suggestions are escaped since they're free text.
+    const S=c.custom?esc(c.s):c.s, T=c.custom?esc(c.t):c.t, G=c.custom?esc(c.g):c.g,
+          W=c.custom?esc(c.why):c.why, N=c.custom?esc(c.inn):c.inn;
+    const badge=c.custom?`<div class="optbadge">★ suggested · <a href="#" class="copyopt" data-en="${key}" data-i="${i}">copy JSON</a> · <a href="#" class="rmopt" data-en="${key}" data-i="${i}">remove</a></div>`:'';
+    const verdict=(c.custom&&c.verdict)?`<div class="verdict"><b>LLM check:</b> ${esc(c.verdict)}</div>`:'';
+    return `
+    <div class="opt${c.custom?' custom':''}">
+      ${badge}
+      <div class="syl">${S}</div>
+      <div class="translit">${T}</div>
+      <div class="gloss">&ldquo;${G}&rdquo;</div>
+      <div class="meta"><b>Reasoning / components:</b> ${W}</div>
+      <div class="inn"><b>Innuendo / 2nd meaning:</b> ${N}</div>
+      ${verdict}
+    </div>`;}).join('') || '<div class="opt">No Cree translation yet for this trail.</div>';
+  const suggestBox = `
+    <div class="suggest" data-sg-en="${key}">
+      <h4>Suggest a translation</h4>
+      <div class="sghint">Type the nêhiyawêwin you want (SRO, e.g. <i>amiskwacîwâskahikan</i>) or an English description of the meaning. An LLM checks appropriateness &amp; spelling, then adds it as a new option with matching syllabics + transliteration. It becomes selectable in the sign factory.</div>
+      <textarea class="sgtext" data-en="${key}" placeholder="e.g. amiskwacî(wâskahikan) — Beaver Hills House, the full Cree name for Edmonton"></textarea>
+      <div class="row">
+        <button class="primary sgrun" data-en="${key}">✨ Validate &amp; add option</button>
+        <span class="status" data-sg-status="${key}"></span>
+      </div>
+    </div>`;
   return `
   <tr class="main${isChecked?' done':''}" data-en="${key}">
     <td><input type="checkbox" class="chk" data-en="${key}" ${checked}></td>
@@ -1410,17 +1479,21 @@ function rowHTML(d, pos){
     <td class="num">${d.overall==null?'—':d.overall.toFixed(1)}</td>
     <td><span class="expand" data-en="${key}">show ▾</span></td>
   </tr>
-  <tr class="detail hidden" data-detail="${key}"><td colspan="16"><div class="inner">${opts}${designHTML(d)}</div></td></tr>`;
+  <tr class="detail hidden" data-detail="${key}"><td colspan="16"><div class="inner">${opts}${suggestBox}${designHTML(d)}</div></td></tr>`;
 }
 
 function render(list){
   tbody.innerHTML = list.map((d,i)=>rowHTML(d,i+1)).join('');
-  document.getElementById('count').textContent = list.length + ' trails';
+  const countEl = document.getElementById('count');
+  countEl.textContent = hiddenVettedCount
+    ? `${list.length} trails (${hiddenVettedCount} vetted hidden)`
+    : `${list.length} trails`;
   if(typeof observeThumbs==='function') observeThumbs();
   tbody.querySelectorAll('.chk').forEach(cb=>cb.addEventListener('change',e=>{
     const en = decodeURIComponent(e.target.dataset.en);
     if(e.target.checked) checks[en] = true; else delete checks[en];
     localStorage.setItem(CHECK_KEY, JSON.stringify(checks));
+    if(hideChecked){ refresh(); return; }
     const row = tbody.querySelector(`tr.main[data-en="${e.target.dataset.en}"]`);
     if(row) row.classList.toggle('done', e.target.checked);
   }));
@@ -1449,6 +1522,14 @@ function render(list){
     const ta=tbody.querySelector(`textarea.gprompt[data-en="${e.target.dataset.en}"]`);
     ta.value=buildPrompt(GFX[en]); setStatus(e.target.dataset.en,'Prompt reset.');
   }));
+  // --- speaker-suggested translation handlers ---
+  tbody.querySelectorAll('.sgrun').forEach(b=>b.addEventListener('click',e=>suggestCree(e.target.dataset.en)));
+  tbody.querySelectorAll('.rmopt').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); removeSuggestion(decodeURIComponent(e.target.dataset.en), parseInt(e.target.dataset.i,10));
+  }));
+  tbody.querySelectorAll('.copyopt').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); copyOptJSON(decodeURIComponent(e.target.dataset.en), parseInt(e.target.dataset.i,10), e.target);
+  }));
   // --- sign factory handlers ---
   tbody.querySelectorAll('.cree-opt').forEach(sel=>sel.addEventListener('change',e=>{
     const en=decodeURIComponent(e.target.dataset.en);
@@ -1469,24 +1550,24 @@ function chosenCree(en){
   const i=Math.min(creeChoice[en]||0, Math.max(0,opts.length-1));
   return opts[i] || {t:'', s:''};
 }
-async function regenerateSign(key){
+function regenerateSign(key){
   const en=decodeURIComponent(key);
   if(!EDITOR_OK){ facStatus(key,'editor server not running'); return; }
   const c=chosenCree(en);
   const orient=(tbody.querySelector(`.orient-opt[data-en="${key}"]`)||{}).value||'auto';
-  facStatus(key,'regenerating… (this can take ~20s)');
-  try{
-    const res=await fetch('/api/build-sign',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({en, translit:c.t, syllabics:c.s, orient})});
-    const j=await res.json();
-    if(!res.ok||!j.ok){ facStatus(key,'failed: '+((j&&j.error)||res.status)); return; }
-    if(j.entry){ DRAFTS[en]=j.entry; }
-    delete SNAP_CACHE[en];
-    facStatus(key,'done ✓ ('+(j.orient||orient)+')');
-    refresh();
-  }catch(err){ facStatus(key,'request failed: '+err.message); }
+  facStatus(key,'queued — regenerating in background…');
+  BGJobs.start('build-sign', {en, translit:c.t, syllabics:c.s, orient}, {
+    label:'Regenerate · '+en,
+    onDone:(j)=>{
+      if(j&&j.entry){ DRAFTS[en]=j.entry; }
+      delete SNAP_CACHE[en];
+      facStatus(key,'done ✓ ('+((j&&j.orient)||orient)+')');
+      refreshPreserving();
+    },
+    onError:(msg)=>facStatus(key,'failed: '+msg)
+  }).catch(err=>facStatus(key,'request failed: '+err.message));
 }
-async function promoteSign(key){
+function promoteSign(key){
   const en=decodeURIComponent(key);
   if(!EDITOR_OK){ facStatus(key,'editor server not running'); return; }
   const c=chosenCree(en);
@@ -1495,20 +1576,20 @@ async function promoteSign(key){
   const f=draftFor(en);
   const opts=(d.cree||[]).map(o=>({t:o.t||'',s:o.s||'',g:o.g||'',why:o.why||'',inn:o.inn||''}));
   const chosenIndex=Math.min(creeChoice[en]||0, Math.max(0,opts.length-1));
-  facStatus(key,'rendering combined STL + building sign page… (~45s)');
-  try{
-    const res=await fetch('/api/promote-sign',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({en, englishName:en, creeName:c.t, creeSyllabics:c.s, meaning:(c.g||''),
-        reasoning:(c.why||''), innuendo:(c.inn||''), chosenIndex, alternates:opts,
-        trail:{loc:d.loc||'', dist:d.dist||'', desc:d.desc||'', asc:d.asc||'', views:d.views, checkins:d.checkins},
-        design:{concept:g.concept||'', subject:g.subject||'', object:g.object||'', type:g.type||''},
-        previewPng:(f&&f.rec&&f.rec.png)||'', assemblyPng:(f&&f.rec&&f.rec.assembly_png)||''})});
-    const j=await res.json();
-    if(!res.ok||!j.ok){ facStatus(key,'failed: '+((j&&j.error)||res.status)); return; }
-    checks[en]=true; localStorage.setItem(CHECK_KEY, JSON.stringify(checks));   // tick review
-    facStatus(key,'in production ✓ → '+(j.docsStlPath||''));
-    refresh();
-  }catch(err){ facStatus(key,'request failed: '+err.message); }
+  facStatus(key,'queued — building in background…');
+  BGJobs.start('promote-sign', {en, englishName:en, creeName:c.t, creeSyllabics:c.s, meaning:(c.g||''),
+      reasoning:(c.why||''), innuendo:(c.inn||''), chosenIndex, alternates:opts,
+      trail:{loc:d.loc||'', dist:d.dist||'', desc:d.desc||'', asc:d.asc||'', views:d.views, checkins:d.checkins},
+      design:{concept:g.concept||'', subject:g.subject||'', object:g.object||'', type:g.type||''},
+      previewPng:(f&&f.rec&&f.rec.png)||'', assemblyPng:(f&&f.rec&&f.rec.assembly_png)||''}, {
+    label:'Move to production · '+en,
+    onDone:(j)=>{
+      checks[en]=true; localStorage.setItem(CHECK_KEY, JSON.stringify(checks));   // tick review
+      facStatus(key,'in production ✓ → '+((j&&j.docsStlPath)||''));
+      refreshPreserving();
+    },
+    onError:(msg)=>facStatus(key,'failed: '+msg)
+  }).catch(err=>facStatus(key,'request failed: '+err.message));
 }
 
 function expandRow(key){
@@ -1597,6 +1678,145 @@ function showImage(key,src,en){
     <a href="${tool}">open ${isHue?'HueForge':'Icon Extruder'} →</a></div></div>`;
 }
 
+/* ---- Cree text-LLM config (chat-completions; stored in localStorage) ---- */
+const TEXT_API_KEY='creeTextApi';
+function getTextCfg(){
+  return Object.assign({endpoint:'https://api.openai.com/v1/chat/completions', model:'gpt-4o', key:''},
+    JSON.parse(localStorage.getItem(TEXT_API_KEY)||'{}'));
+}
+function saveTextCfg(c){ localStorage.setItem(TEXT_API_KEY, JSON.stringify(c)); }
+function openTextApiModal(){
+  const c=getTextCfg();
+  const wrap=document.createElement('div'); wrap.className='modal';
+  wrap.innerHTML=`<div class="box">
+    <h3>Cree translation LLM</h3>
+    <div class="note">Checks a suggested Cree name for appropriateness &amp; spelling and produces matching syllabics. Stored only in this browser (localStorage). Defaults to the OpenAI chat-completions API; any OpenAI-compatible endpoint works (it reads <code>choices[0].message.content</code> and expects a JSON object back).</div>
+    <label>Endpoint URL</label><input id="t_ep" value="${esc(c.endpoint)}">
+    <label>Model</label><input id="t_model" value="${esc(c.model)}">
+    <label>API key (Bearer token)</label><input id="t_key" type="password" value="${esc(c.key)}" placeholder="sk-…">
+    <div class="actions">
+      <button id="t_cancel">Cancel</button>
+      <button id="t_save" class="primary">Save</button>
+    </div>
+  </div>`;
+  document.body.appendChild(wrap);
+  wrap.addEventListener('click',e=>{ if(e.target===wrap) wrap.remove(); });
+  wrap.querySelector('#t_cancel').onclick=()=>wrap.remove();
+  wrap.querySelector('#t_save').onclick=()=>{
+    saveTextCfg({endpoint:wrap.querySelector('#t_ep').value.trim(), model:wrap.querySelector('#t_model').value.trim(),
+                 key:wrap.querySelector('#t_key').value.trim()});
+    wrap.remove();
+  };
+}
+
+const CREE_SYS = "You are a careful Plains Cree (nêhiyawêwin, y-dialect / Western Cree) language consultant. You use Standard Roman Orthography (SRO) with circumflex long vowels (â ê î ô) and Western Cree (Western/Plains) syllabics. You never invent words you are unsure of — flag any uncertainty in the verdict. You always reply with a single JSON object and nothing else.";
+function buildCreePrompt(en, d, text){
+  const opts=(d.cree||[]).filter(c=>!c.custom)
+    .map((c,i)=>`  ${i+1}. ${c.t} [${c.s}] — ${c.g}`).join('\n') || '  (none yet)';
+  return `A mountain-bike trail is named "${en}"${d.loc?(' (area: '+d.loc+')'):''}.
+Existing candidate Plains Cree renderings, for context:
+${opts}
+
+A reviewer suggests this new Cree rendering. It may be SRO text to confirm/correct, or an English description of the meaning they want:
+"""${text}"""
+
+Tasks:
+1. Decide the best Plains Cree (y-dialect) rendering for the suggestion. If they gave SRO, correct its spelling to proper SRO (circumflex long vowels); if they gave a description/English, translate it.
+2. Produce the matching Western Cree syllabics, ensuring a correct SRO<->syllabics mapping (every SRO sound maps to the right syllable, including finals and long-vowel marks).
+3. Judge appropriateness for a public trail-sign name (meaning, register, and any unintended or innuendo readings).
+
+Reply with ONLY this JSON object (no prose, no markdown fences):
+{
+ "t": "SRO transliteration (corrected)",
+ "s": "Western Cree syllabics matching t exactly",
+ "g": "short English gloss",
+ "why": "reasoning + morpheme breakdown",
+ "inn": "innuendo / second meaning, or 'None.'",
+ "verdict": "one line: is the suggestion appropriate and correctly spelled? note any corrections you made"
+}`;
+}
+
+/* find the first balanced {...} JSON object in a blob of text */
+function extractJsonObject(text){
+  let t=String(text==null?'':text).trim();
+  if(!t) throw new Error('empty response');
+  t=t.replace(/^```[a-zA-Z]*\n?/,'').replace(/```$/,'').trim();
+  const start=t.indexOf('{'); if(start<0) throw new Error('no JSON object in response');
+  let depth=0,inStr=false,esc=false;
+  for(let i=start;i<t.length;i++){
+    const ch=t[i];
+    if(inStr){ if(esc) esc=false; else if(ch==='\\') esc=true; else if(ch==='"') inStr=false; }
+    else { if(ch==='"') inStr=true; else if(ch==='{') depth++; else if(ch==='}'){ depth--; if(depth===0) return JSON.parse(t.slice(start,i+1)); } }
+  }
+  throw new Error('unbalanced JSON object in response');
+}
+
+function sgStatus(key,msg){ const s=tbody.querySelector(`[data-sg-status="${key}"]`); if(s) s.textContent=msg||''; }
+
+async function suggestCree(key){
+  const en=decodeURIComponent(key);
+  const ta=tbody.querySelector(`textarea.sgtext[data-en="${key}"]`);
+  const text=((ta&&ta.value)||'').trim();
+  if(!text){ sgStatus(key,'Type a suggestion first.'); return; }
+  const cfg=getTextCfg();
+  if(!cfg.key){ sgStatus(key,'No LLM key set — click “🧠 Cree LLM”.'); return; }
+  const d=DATA.find(x=>x.en===en)||{};
+  sgStatus(key,'Asking the LLM…');
+  try{
+    const res=await fetch(cfg.endpoint,{method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+cfg.key},
+      body:JSON.stringify({model:cfg.model, temperature:0.2,
+        messages:[{role:'system',content:CREE_SYS},{role:'user',content:buildCreePrompt(en,d,text)}],
+        response_format:{type:'json_object'}})});
+    if(!res.ok){ sgStatus(key,'API error '+res.status+': '+(await res.text()).slice(0,180)); return; }
+    const json=await res.json();
+    const content=(((json.choices||[])[0]||{}).message||{}).content || json.content || '';
+    let obj; try{ obj=extractJsonObject(content); }
+    catch(e){ sgStatus(key,'Could not parse JSON: '+e.message+' · raw: '+String(content).slice(0,140)); return; }
+    const opt={
+      t:String(obj.t||obj.translit||'').trim(),
+      s:String(obj.s||obj.syllabics||'').trim(),
+      g:String(obj.g||obj.gloss||'').trim(),
+      why:String(obj.why||obj.reasoning||'').trim(),
+      inn:String(obj.inn||obj.innuendo||'None.').trim(),
+      verdict:String(obj.verdict||'').trim(),
+      input:text
+    };
+    if(!opt.t||!opt.s){ sgStatus(key,'LLM gave no syllabics + transliteration. Raw: '+String(content).slice(0,160)); return; }
+    const list=SUGGESTIONS[en]||[]; list.push(opt); SUGGESTIONS[en]=list; saveSuggestions(SUGGESTIONS);
+    applySuggestions();
+    const d2=DATA.find(x=>x.en===en);
+    if(d2){ creeChoice[en]=d2.cree.length-1; localStorage.setItem(CREE_KEY, JSON.stringify(creeChoice)); }   // select the new option
+    refreshPreserving();
+    sgStatus(key,'Added ✓'+(opt.verdict?(' — '+opt.verdict):''));
+  }catch(err){ sgStatus(key,'Request failed: '+err.message); }
+}
+
+function removeSuggestion(en, idx){
+  const d=DATA.find(x=>x.en===en); if(!d||!Array.isArray(d.cree)) return;
+  const opt=d.cree[idx]; if(!opt||!opt.custom) return;
+  const list=SUGGESTIONS[en]||[];
+  const pos=list.findIndex(c=>c.t===opt.t && c.s===opt.s && (c.input||'')===(opt.input||''));
+  if(pos>=0) list.splice(pos,1);
+  if(list.length) SUGGESTIONS[en]=list; else delete SUGGESTIONS[en];
+  saveSuggestions(SUGGESTIONS);
+  applySuggestions();
+  if((creeChoice[en]||0) >= d.cree.length){ creeChoice[en]=0; localStorage.setItem(CREE_KEY, JSON.stringify(creeChoice)); }
+  refreshPreserving();
+}
+
+/* copy a custom option as a DATA-style {s,t,g,why,inn} line, for pasting the
+   vetted rendering permanently into this file (or a sign page) by hand */
+function copyOptJSON(en, idx, el){
+  const d=DATA.find(x=>x.en===en); if(!d||!d.cree||!d.cree[idx]) return;
+  const o=d.cree[idx];
+  const line=' {s:'+JSON.stringify(o.s)+',t:'+JSON.stringify(o.t)+',g:'+JSON.stringify(o.g)
+    +',why:'+JSON.stringify(o.why)+',inn:'+JSON.stringify(o.inn)+'},';
+  navigator.clipboard.writeText(line).then(()=>{
+    if(el){ const t=el.textContent; el.textContent='copied'; setTimeout(()=>el.textContent=t,1200); }
+  });
+}
+
 function currentList(){
   const q = document.getElementById('search').value.toLowerCase().trim();
   let list = DATA.filter(d=>{
@@ -1604,6 +1824,10 @@ function currentList(){
     return (d.en+' '+d.loc+' '+(d.cree||[]).map(c=>c.t+' '+c.s+' '+c.g).join(' ')).toLowerCase().includes(q);
   });
   if(fitsOnly) list = list.filter(d=>signFits(d.en));   // only signs printable with the loaded set
+  if(hideChecked){
+    hiddenVettedCount = list.filter(d=>checks[d.en]).length;
+    list = list.filter(d=>!checks[d.en]);
+  } else hiddenVettedCount = 0;
   const numeric = (sortKey==='distM'||sortKey==='ascM'||sortKey==='descM'||sortKey==='checkins'||sortKey==='views'||sortKey==='rank'||sortKey==='overall');
   list.sort((a,b)=>{
     if(sortKey==='colors'){
@@ -1633,6 +1857,25 @@ function currentList(){
 
 function refresh(){ render(currentList()); updateArrows(); }
 
+/* Re-render the table but keep the author's place: preserve which detail rows
+   are expanded and the scroll position. Used by background-job completions so a
+   sign finishing in the background doesn't collapse the row you're working in. */
+function refreshPreserving(){
+  const expanded = Array.from(tbody.querySelectorAll('tr.detail:not(.hidden)'))
+    .map(tr=>tr.getAttribute('data-detail'));
+  const y = window.scrollY;
+  refresh();
+  expanded.forEach(key=>{
+    const det=tbody.querySelector(`tr.detail[data-detail="${key}"]`);
+    if(det){
+      det.classList.remove('hidden');
+      const row=tbody.querySelector(`tr.main[data-en="${key}"] .expand`);
+      if(row) row.textContent='hide ▴';
+    }
+  });
+  window.scrollTo(0, y);
+}
+
 function updateArrows(){
   document.querySelectorAll('thead th[data-sort]').forEach(th=>{
     const a=th.querySelector('.arr');
@@ -1660,7 +1903,14 @@ document.getElementById('clearChecks').addEventListener('click',()=>{
   if(confirm('Clear all review ticks?')){ checks={}; localStorage.removeItem(CHECK_KEY); refresh(); }
 });
 document.getElementById('apiConfig').addEventListener('click',openApiModal);
+document.getElementById('textApiConfig').addEventListener('click',openTextApiModal);
 document.getElementById('fitsOnly').addEventListener('change',e=>{ fitsOnly=e.target.checked; refresh(); });
+document.getElementById('hideChecked').checked = hideChecked;
+document.getElementById('hideChecked').addEventListener('change',e=>{
+  hideChecked = e.target.checked;
+  localStorage.setItem(HIDE_CHECKED_KEY, hideChecked ? '1' : '0');
+  refresh();
+});
 
 renderLoadedSlots();
 refresh();
@@ -1743,7 +1993,7 @@ function colorForKey(key){
   if(key==='plaque') return 0xe8e1cf;
   if(key==='english'||key==='translit') return 0x2b2b2b;
   if(key==='icon_outline') return 0x141414;
-  if(key==='syllabics') return 0xc0392b;
+  if(key==='syllabics' || (key && key.indexOf('syllabics')===0)) return 0xc0392b;
   if(key && key.indexOf('icon_')===0){ return FILL_HEX[key.slice(5)] ?? 0x9aa0a6; }
   return 0xc7cdd4;   // _single fallback
 }
@@ -1763,7 +2013,7 @@ function partColorName(key){
   if(ov) return ov;
   if(key==='plaque') return 'white';
   if(key==='english'||key==='translit'||key==='icon_outline') return 'black';
-  if(key==='syllabics'||key==='number') return 'red';
+  if(key==='number' || (key && key.indexOf('syllabics')===0)) return 'red';
   if(key && key.indexOf('icon_')===0) return key.slice(5);
   return 'silver';
 }
@@ -1876,19 +2126,21 @@ function buildDownloads(en, rec, parts){
 
 /* render the assembled STL + print .3mf for a draft via the editor server,
    then refresh the download row. */
-async function buildAssembled(en){
+function buildAssembled(en){
   if(!EDITOR_OK){ v3dStatus('editor server not running'); return; }
-  v3dStatus('building assembled STL + print .3mf… (this can take ~30s–3min)');
-  try{
-    const res=await fetch('/api/build-assembled',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({en})});
-    const j=await res.json();
-    if(!res.ok||!j.ok){ v3dStatus('build failed: '+((j&&j.error)||res.status)); return; }
-    if(j.entry){ DRAFTS[en]=j.entry; }
-    const f=draftFor(en);
-    v3dStatus('print-ready built ✓'+(j.objects?(' — '+j.objects.length+' colour objects'):''));
-    if(f&&f.rec) buildDownloads(en, f.rec, stlPartsFor(f.rec));
-  }catch(err){ v3dStatus('request failed: '+err.message); }
+  v3dStatus('queued — building assembled STL + print .3mf in background… (keep working)');
+  BGJobs.start('build-assembled', {en}, {
+    label:'Build print-ready · '+en,
+    onDone:(j)=>{
+      if(j&&j.entry){ DRAFTS[en]=j.entry; }
+      const f=draftFor(en);
+      const done='print-ready built ✓'+((j&&j.objects)?(' — '+j.objects.length+' colour objects'):'');
+      // only update the viewer if it's still showing this sign
+      if(v3d && v3d.en===en) v3dStatus(done);
+      if(f&&f.rec && v3d && v3d.en===en) buildDownloads(en, f.rec, stlPartsFor(f.rec));
+    },
+    onError:(msg)=>{ if(v3d && v3d.en===en) v3dStatus('build failed: '+msg); }
+  }).catch(err=>{ if(v3d && v3d.en===en) v3dStatus('request failed: '+err.message); });
 }
 
 function openViewer(en){
@@ -1978,6 +2230,7 @@ function partLabel(key){
   const names={plaque:'plaque',icon_outline:'icon outline',icon_color:'icon colour',
     english:'English text',translit:'transliteration',syllabics:'syllabics',_single:'whole sign'};
   if(names[key]) return names[key];
+  if(key && key.indexOf('syllabics_')===0) return 'syllabics row '+key.slice(10);
   if(key && key.indexOf('icon_')===0) return 'icon · '+key.slice(5);
   return key;
 }
@@ -2053,6 +2306,7 @@ function applyAdjustments(){
 function shortLabel(key){
   const m={english:'EN', translit:'TL', syllabics:'SYL', icon_outline:'ICON', plaque:'', number:'#'};
   if(m[key]!==undefined) return m[key];
+  if(key && key.indexOf('syllabics_')===0) return 'SYL'+key.slice(10);
   if(key && key.indexOf('icon_')===0) return key.slice(5,9);
   return (key||'').slice(0,3);
 }
@@ -2338,24 +2592,25 @@ function v3dCollectAdjustments(){
 }
 /* bake the adjustments into the saved assembled .stl + colour .3mf on the editor
    server, so they flow through to "Move to production" */
-async function v3dBuildAdjustedServer(){
+function v3dBuildAdjustedServer(){
   if(!v3d) return;
   if(!EDITOR_OK){ v3dStatus('editor server not running — use the ⬇ adjusted .stl download instead'); return; }
   const single=v3d.partMeshes.length===1 && v3d.partMeshes[0].part.key==='_single';
   if(single){ v3dStatus('server bake needs per-component signs; use ⬇ adjusted .stl for this one'); return; }
   const en=v3d.en;
   saveAdjustments();
-  v3dStatus('baking adjusted print-ready on server… (~30s–3min)');
-  try{
-    const res=await fetch('/api/build-adjusted',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({en, adjustments:v3dCollectAdjustments()})});
-    const j=await res.json();
-    if(!res.ok||!j.ok){ v3dStatus('server bake failed: '+((j&&j.error)||res.status)); return; }
-    if(j.entry){ DRAFTS[en]=j.entry; }
-    v3dStatus('adjusted print-ready baked ✓'+(j.objects?(' — '+j.objects.length+' colour objects'):''));
-    const f=draftFor(en);
-    if(f&&f.rec) buildDownloads(en, f.rec, stlPartsFor(f.rec));
-  }catch(err){ v3dStatus('request failed: '+err.message); }
+  v3dStatus('queued — baking adjusted print-ready in background… (keep working)');
+  BGJobs.start('build-adjusted', {en, adjustments:v3dCollectAdjustments()}, {
+    label:'Bake adjusted .stl · '+en,
+    onDone:(j)=>{
+      if(j&&j.entry){ DRAFTS[en]=j.entry; }
+      const f=draftFor(en);
+      const done='adjusted print-ready baked ✓'+((j&&j.objects)?(' — '+j.objects.length+' colour objects'):'');
+      if(v3d && v3d.en===en) v3dStatus(done);
+      if(f&&f.rec && v3d && v3d.en===en) buildDownloads(en, f.rec, stlPartsFor(f.rec));
+    },
+    onError:(msg)=>{ if(v3d && v3d.en===en) v3dStatus('server bake failed: '+msg); }
+  }).catch(err=>{ if(v3d && v3d.en===en) v3dStatus('request failed: '+err.message); });
 }
 
 /* panel wiring (bound once; all guarded on an open viewer) */

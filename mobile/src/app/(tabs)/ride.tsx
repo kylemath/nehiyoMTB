@@ -11,10 +11,10 @@ import { LocalCapture, listCaptures, pairTrailTimes } from '@/lib/captures';
 import { formatDuration, formatKm } from '@/lib/geo';
 import {
   LocalRide,
-  RideRecorder,
   listRides,
   rideToGpx,
   saveRide,
+  sharedRecorder,
   syncPhotosWithRide,
   uploadRide,
 } from '@/lib/rides';
@@ -24,7 +24,7 @@ export default function RideTab() {
   const p = usePalette();
   const insets = useSafeAreaInsets();
   const { session, backendConfigured } = useAuth();
-  const recorderRef = useRef(new RideRecorder());
+  const recorderRef = useRef(sharedRecorder);
   const [recording, setRecording] = useState(false);
   const [live, setLive] = useState<LocalRide | null>(null);
   const [rides, setRides] = useState<LocalRide[]>([]);
@@ -36,9 +36,21 @@ export default function RideTab() {
   const refresh = useCallback(() => {
     listRides().then(setRides);
     listCaptures().then(setCaptures);
+    const current = recorderRef.current.ride;
+    setRecording(current != null);
+    setLive(current ? { ...current } : null);
   }, []);
 
-  useFocusEffect(refresh);
+  useFocusEffect(
+    useCallback(() => {
+      refresh();
+      const unsubscribe = recorderRef.current.addListener((r) => {
+        setLive({ ...r });
+        setRecording(true);
+      });
+      return unsubscribe;
+    }, [refresh]),
+  );
 
   useEffect(() => {
     if (!recording) return;
@@ -51,7 +63,6 @@ export default function RideTab() {
 
   const start = async () => {
     try {
-      recorderRef.current.onUpdate = (r) => setLive({ ...r });
       await recorderRef.current.start();
       setRecording(true);
       setElapsed(0);

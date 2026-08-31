@@ -13,11 +13,14 @@ Pipeline:
      Cursor desktop login — no API key needed), or accept a ready JSON via
      --from-json (so chat-authored content applies the same way);
   4. validate via catalogue_editor_server._clean_page_content, merge onto the
-     model's existing pageContent, set pageStatus="agent-drafted", write
+     model's existing pageContent, stamp the chosen pageStatus, write
      catalogue.json, and re-render docs/<slug>/index.html.
 
-The result is always pageStatus="agent-drafted" — a draft for you to review and
-bump to "user-reviewed" once you're happy (see tools/SIGN_PAGE_AUTHORING.md).
+The pageStatus is set by the caller (never the LLM): the CLI defaults to
+"agent-drafted" (a draft for you to review, see tools/SIGN_PAGE_AUTHORING.md),
+while the editor's "Flesh out details (AI)" button locks the page as
+"user-reviewed" so a later "Move to production" won't regenerate over it. Pass
+--status to override on the CLI.
 
 Usage:
   # see the exact prompt without calling anything (safe, no writes)
@@ -279,8 +282,16 @@ def extract_json_object(text):
 # --------------------------------------------------------------------------- #
 # apply
 # --------------------------------------------------------------------------- #
-def apply_authored(model_id, authored):
-    """Merge authored fields onto the model's pageContent, validate, render."""
+def apply_authored(model_id, authored, final_status="agent-drafted"):
+    """Merge authored fields onto the model's pageContent, validate, render.
+
+    ``final_status`` is the pageStatus stamped on the result. It is forced by the
+    caller (never read from the LLM output) so the model can't self-promote, but
+    a trusted caller can lock the page as ``user-reviewed`` to protect the freshly
+    authored content from being clobbered by later "Move to production" runs
+    (promote_sign leaves user-reviewed/published pages untouched)."""
+    if final_status not in ce.ALLOWED_PAGE_STATUSES:
+        raise ValueError(f"final_status must be one of {sorted(ce.ALLOWED_PAGE_STATUSES)}")
     cat = ce.load_catalogue()
     model = ce.find_model(cat, model_id)
     pc = dict(model.get("pageContent") or {})
@@ -295,8 +306,8 @@ def apply_authored(model_id, authored):
     for key in ("linguistics", "culturalStory", "trailStory", "sources"):
         if authored.get(key) is not None:
             pc[key] = authored[key]
-    # never let the LLM flip the status to published/user-reviewed: it's a draft
-    pc["pageStatus"] = "agent-drafted"
+    # status is decided by the caller, never the LLM
+    pc["pageStatus"] = final_status
 
     model["pageContent"] = ce._clean_page_content(pc)
     ce.write_json(ce.CATALOGUE_PATH, cat)
@@ -319,6 +330,10 @@ def main():
     ap.add_argument("--cursor-agent", default="", help="path to the cursor-agent binary")
     ap.add_argument("--save-prompt", action="store_true",
                     help="also write the prompt to docs/sign-drafts/flesh-prompts/<id>.txt")
+    ap.add_argument("--status", default="agent-drafted",
+                    choices=sorted(ce.ALLOWED_PAGE_STATUSES),
+                    help="pageStatus to stamp on the result (default: agent-drafted; "
+                         "use user-reviewed to lock the page against later regeneration)")
     args = ap.parse_args()
 
     cat = ce.load_catalogue()
@@ -330,7 +345,7 @@ def main():
     # --- apply a ready JSON (chat-authored or agent output saved to disk) ---
     if args.from_json:
         authored = json.loads(Path(args.from_json).read_text(encoding="utf-8"))
-        summaries = apply_authored(args.model, authored)
+        summaries = apply_authored(args.model, authored, final_status=args.status)
         print(json.dumps({"ok": True, "applied": "from-json", "summaries": summaries},
                          ensure_ascii=False))
         return
@@ -357,7 +372,7 @@ def main():
 
     text = run_cursor_agent(prompt, agent_bin, args.model_name)
     authored = extract_json_object(text)
-    summaries = apply_authored(args.model, authored)
+    summaries = apply_authored(args.model, authored, final_status=args.status)
     print(json.dumps({"ok": True, "applied": "cursor-agent", "model": args.model_name,
                       "summaries": summaries}, ensure_ascii=False))
 

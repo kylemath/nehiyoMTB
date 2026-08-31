@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx version="1.1" creator="Trailforks.com" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+<metadata>
+<name>Mustang Trailforks Trail</name>
+<link href="https://www.trailforks.com/">
+<text>Trailforks</text>
+</link>
+</metadata>
+<trk>
+<name>
+Mustang
+</name>
+<link href="https://www.trailforks.com/trails/mustang/">
+</link>
+<trkseg>
+<trkpt lat="53.45202" lon="-113.60913">
+<ele>672</ele>
+<time>2026-06-17T09:40:43-07:00</time>
+</trkpt>
+<trkpt lat="53.45189" lon="-113.60908">
+<ele>671.8</ele>
+<time>2026-06-17T09:40:44-07:00</time>
+</trkpt>
+<trkpt lat="53.45178" lon="-113.60904">
+<ele>671.8</ele>
+<time>2026-06-17T09:40:45-07:00</time>
+</trkpt>
+<trkpt lat="53.45163" lon="-113.60907">
+<ele>671.1</ele>
+<time>2026-06-17T09:40:46-07:00</time>
+</trkpt>
+<trkpt lat="53.45166" lon="-113.60924">
+<ele>671.8</ele>
+<time>2026-06-17T09:40:47-07:00</time>
+</trkpt>
+<trkpt lat="53.45177" lon="-113.60938">
+<ele>671.5</ele>
+<time>2026-06-17T09:40:48-07:00</time>
+</trkpt>
+<trkpt lat="53.452" lon="-113.60954">
+<ele>670</ele>
+<time>2026-06-17T09:40:49-07:00</time>
+</trkpt>
+<trkpt lat="53.45235" lon="-113.60985">
+<ele>668.2</ele>
+<time>2026-06-17T09:40:50-07:00</time>
+</trkpt>
+<trkpt lat="53.45241" lon="-113.60991">
+<ele>668.2</ele>
+<time>2026-06-17T09:40:51-07:00</time>
+</trkpt>
+<trkpt lat="53.45248" lon="-113.61">
+<ele>668.2</ele>
+<time>2026-06-17T09:40:52-07:00</time>
+</trkpt>
+<trkpt lat="53.45261" lon="-113.61004">
+<ele>666.5</ele>
+<time>2026-06-17T09:40:53-07:00</time>
+</trkpt>
+<trkpt lat="53.45274" lon="-113.61011">
+<ele>666.5</ele>
+<time>2026-06-17T09:40:54-07:00</time>
+</trkpt>
+<trkpt lat="53.45286" lon="-113.6103">
+<ele>666</ele>
+<time>2026-06-17T09:40:55-07:00</time>
+</trkpt>
+<trkpt lat="53.45321" lon="-113.61056">
+<ele>664.5</ele>
+<time>2026-06-17T09:40:56-07:00</time>
+</trkpt>
+<trkpt lat="53.45324" lon="-113.6108">
+<ele>664.5</ele>
+<time>2026-06-17T09:40:57-07:00</time>
+</trkpt>
+<trkpt lat="53.45319" lon="-113.61098">
+<ele>663.8</ele>
+<time>2026-06-17T09:40:58-07:00</time>
+</trkpt>
+<trkpt lat="53.4532" lon="-113.61115">
+<ele>662.6</ele>
+<time>2026-06-17T09:40:59-07:00</time>
+</trkpt>
+<trkpt lat="53.45342" lon="-113.61148">
+<ele>661</ele>
+<time>2026-06-17T09:41:00-07:00</time>
+</trkpt>
+<trkpt lat="53.45359" lon="-113.61184">
+<ele>660.3</ele>
+<time>2026-06-17T09:41:01-07:00</time>
+</trkpt>
+<trkpt lat="53.4537" lon="-113.61198">
+<ele>659</ele>
+<time>2026-06-17T09:41:02-07:00</time>
+</trkpt>
+<trkpt lat="53.45393" lon="-113.61265">
+<ele>657.7</ele>
+<time>2026-06-17T09:41:03-07:00</time>
+</trkpt>
+<trkpt lat="53.45405" lon="-113.61286">
+<ele>657.6</ele>
+<time>2026-06-17T09:41:04-07:00</time>
+</trkpt>
+<trkpt lat="53.45433" lon="-113.61355">
+<ele>655.6</ele>
+<time>2026-06-17T09:41:05-07:00</time>
+</trkpt>
+<trkpt lat="53.4545" lon="-113.61419">
+<ele>652.4</ele>
+<time>2026-06-17T09:41:06-07:00</time>
+</trkpt>
+<trkpt lat="53.45482" lon="-113.61494">
+<ele>648</ele>
+<time>2026-06-17T09:41:07-07:00</time>
+</trkpt>
+<trkpt lat="53.45503" lon="-113.61529">
+<ele>642.7</ele>
+<time>2026-06-17T09:41:08-07:00</time>
+</trkpt>
+<trkpt lat="53.45513" lon="-113.61562">
+<ele>640.8</ele>
+<time>2026-06-17T09:41:09-07:00</time>
+</trkpt>
+<trkpt lat="53.45548" lon="-113.61597">
+<ele>637.4</ele>
+<time>2026-06-17T09:41:10-07:00</time>
+</trkpt>
+<trkpt lat="53.45554" lon="-113.61593">
+<ele>637.4</ele>
+<time>2026-06-17T09:41:11-07:00</time>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>

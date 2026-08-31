@@ -1,0 +1,21 @@
+{
+  "victoria-secret": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/victoria-s-secret-10632/", "confidence": "high"},
+  "slinky": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/slinky-mid/", "confidence": "high"},
+  "scalpel": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/scalpel/", "confidence": "high"},
+  "too_much": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/too-much/", "confidence": "high"},
+  "gnome_trail": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/gnome-trail/", "confidence": "high"},
+  "sideline": {"difficulty": "black", "source": "direct fetch of https://www.trailforks.com/trails/sideline/", "confidence": "high"},
+  "no_horses": {"difficulty": "green", "source": "direct fetch of https://www.trailforks.com/trails/no-horses-10636/", "confidence": "high"},
+  "caddytrack": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/caddytrack-17761/", "confidence": "high"},
+  "the_holy_trail": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/the-holy-trail-12414/", "confidence": "high"},
+  "flat_pete": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/flat-pete/", "confidence": "high"},
+  "walters_folly": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/walters-folly/", "confidence": "high"},
+  "moonraker": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/moonraker-40151/", "confidence": "high"},
+  "go_trail": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/go-trail/", "confidence": "high"},
+  "gold_digger": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/gold-digger-31547/", "confidence": "high"},
+  "peckers_hollow": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/peckers-hollow/", "confidence": "high"},
+  "coalminer_s_daughter": {"difficulty": null, "source": "no Trailforks URL provided; WebSearch (trailforks/MTB Project/general) found no Edmonton trail by this name; trailforks.com/trails/coalminer-s-daughter/ returns 'Trail not found in database'; appears to be a repo-local custom trail name", "confidence": "low"},
+  "root_canal": {"difficulty": "blue", "source": "direct fetch of https://www.trailforks.com/trails/root-canal-10628/", "confidence": "high"},
+  "selkirk_knights": {"difficulty": "black", "source": "direct fetch of https://www.trailforks.com/trails/selkirk-knights/", "confidence": "high"},
+  "flatter_pete": {"difficulty": "green", "source": "direct fetch of https://www.trailforks.com/trails/flatter-pete/", "confidence": "high"}
+}

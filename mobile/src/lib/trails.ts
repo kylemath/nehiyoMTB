@@ -1,4 +1,5 @@
 import rawData from '@/data/trails.json';
+import { trailIcons } from '@/data/trail-assets';
 import { LatLng } from '@/lib/geo';
 
 export type Trail = {
@@ -11,12 +12,24 @@ export type Trail = {
   description: string | null;
   status: string;
   accentColor: string;
+  /** Physical sign colourway (filament colours), e.g. ['white','black','red']. */
+  colors: string[];
+  hasIcon: boolean;
   trailforksUrl: string | null;
+  /** Trailforks rating: 'green' | 'blue' | 'black' | 'dblblack', or null. */
+  difficulty: string | null;
   start: { lat: number | null; lng: number | null } | null;
   end: { lat: number | null; lng: number | null } | null;
   lengthM: number | null;
   track: [number, number][];
 };
+
+/** STL-rendered sign icon (same art as the web app), or null if none yet.
+ * This is the one piece of sign artwork the app ships per trail — used for
+ * map markers, list rows, and trail pages. */
+export function trailIcon(id: string): number | null {
+  return trailIcons[id] ?? null;
+}
 
 export type SignKind = 'start' | 'end';
 

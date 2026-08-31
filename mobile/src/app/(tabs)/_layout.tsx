@@ -21,7 +21,10 @@ export default function TabsLayout() {
         tabBarInactiveTintColor: p.muted,
         tabBarStyle: { backgroundColor: p.bg, borderTopColor: p.border },
       }}>
-      <Tabs.Screen name="index" options={{ title: 'Map', tabBarIcon: icon('map-outline') }} />
+      {/* '/' is a hidden redirect to Hunt (see index.tsx) — the map lives at
+          /map so the app can land on Hunt and warm the sign-icon cache. */}
+      <Tabs.Screen name="index" options={{ href: null }} />
+      <Tabs.Screen name="map" options={{ title: 'Map', tabBarIcon: icon('map-outline') }} />
       <Tabs.Screen name="hunt" options={{ title: 'Hunt', tabBarIcon: icon('trophy-outline') }} />
       <Tabs.Screen name="ride" options={{ title: 'Ride', tabBarIcon: icon('bicycle-outline') }} />
       <Tabs.Screen name="ranks" options={{ title: 'Ranks', tabBarIcon: icon('podium-outline') }} />

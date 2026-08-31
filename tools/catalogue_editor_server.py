@@ -19,13 +19,18 @@ import json
 import mimetypes
 import os
 import posixpath
+import queue
 import re
 import shutil
 import subprocess
+import threading
+import time
+import uuid
 import xml.etree.ElementTree as ET
+from collections import deque
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 from urllib.parse import parse_qs, urlparse
 
 import sys
@@ -60,7 +65,7 @@ DOCS_ROOT = REPO_ROOT / "docs"
 # alone by this server.
 CATALOGUE_PATH = DOCS_ROOT / "catalogue.json"
 MANIFEST_PATH = DOCS_ROOT / "stl-manifest.json"
-EDITOR_API_VERSION = 8
+EDITOR_API_VERSION = 9
 EDITOR_API_FEATURES = [
     "savePrintSetup",
     "repairStl",
@@ -76,7 +81,163 @@ EDITOR_API_FEATURES = [
     "buildAdjusted",
     "fleshOutSign",
     "saveAdjustments",
+    "backgroundJobs",
 ]
+
+
+# --------------------------------------------------------------------------- #
+# Background job manager
+# --------------------------------------------------------------------------- #
+# The heavy production steps (rendering a combined STL, baking adjustments,
+# promoting a sign into the catalogue, and the agent flesh-out) can each take
+# tens of seconds to several minutes. Running them inline blocks the browser
+# request the whole time, so the author has to sit and wait. Instead these are
+# submitted as background jobs: the POST returns a jobId immediately and a
+# single worker thread runs them one at a time (serialised so concurrent jobs
+# can't corrupt the shared catalogue.json / sign-drafts manifest). The browser
+# polls /api/job/list to show a status banner and continues to be usable.
+
+# kind -> resolved at dispatch time (the worker functions are defined further
+# down this module, so we look them up lazily by name when a job runs).
+JOB_KINDS = {
+    "build-sign",
+    "build-assembled",
+    "build-adjusted",
+    "promote-sign",
+    "flesh-out-sign",
+}
+
+_JOB_LOCK = threading.Lock()
+_JOBS: dict[str, dict] = {}
+_JOB_ORDER: deque[str] = deque()
+_JOB_QUEUE: "queue.Queue[str]" = queue.Queue()
+_JOB_WORKER_STARTED = False
+# How many finished (done/error) jobs to keep around for the status banner /
+# late-arriving pollers before pruning. Active jobs are never pruned.
+_MAX_FINISHED_JOBS = 40
+
+
+def _job_dispatch(kind: str) -> Callable[[dict], dict] | None:
+    """Resolve a job kind to its handler. Done lazily so this lives above the
+    handler definitions without import-order gymnastics."""
+    return {
+        "build-sign": build_sign,
+        "build-assembled": build_assembled,
+        "build-adjusted": build_adjusted,
+        "promote-sign": promote_sign,
+        "flesh-out-sign": flesh_out_sign,
+    }.get(kind)
+
+
+def _job_public(rec: dict, *, include_result: bool = False) -> dict:
+    """Client-facing snapshot of a job (omits the input payload, and the
+    potentially large result unless explicitly requested)."""
+    out = {
+        "id": rec["id"],
+        "kind": rec["kind"],
+        "label": rec["label"],
+        "status": rec["status"],
+        "error": rec["error"],
+        "createdAt": rec["createdAt"],
+        "startedAt": rec["startedAt"],
+        "finishedAt": rec["finishedAt"],
+    }
+    if include_result:
+        out["result"] = rec["result"]
+    return out
+
+
+def _prune_finished_locked() -> None:
+    """Drop the oldest finished jobs beyond the retention cap. Caller holds the
+    lock. Active (queued/running) jobs are always kept."""
+    finished = [jid for jid in _JOB_ORDER
+                if _JOBS.get(jid, {}).get("status") in ("done", "error")]
+    excess = len(finished) - _MAX_FINISHED_JOBS
+    for jid in finished[:max(0, excess)]:
+        _JOBS.pop(jid, None)
+        try:
+            _JOB_ORDER.remove(jid)
+        except ValueError:
+            pass
+
+
+def submit_job(kind: str, label: str, payload: dict) -> dict:
+    """Enqueue a background job and return its public snapshot immediately."""
+    if kind not in JOB_KINDS:
+        raise ValueError(f"unknown job kind: {kind}")
+    job_id = uuid.uuid4().hex[:12]
+    rec = {
+        "id": job_id,
+        "kind": kind,
+        "label": label or kind,
+        "payload": payload or {},
+        "status": "queued",
+        "result": None,
+        "error": None,
+        "createdAt": time.time(),
+        "startedAt": None,
+        "finishedAt": None,
+    }
+    with _JOB_LOCK:
+        _JOBS[job_id] = rec
+        _JOB_ORDER.append(job_id)
+        _prune_finished_locked()
+    _JOB_QUEUE.put(job_id)
+    _ensure_job_worker()
+    with _JOB_LOCK:
+        return _job_public(rec)
+
+
+def list_jobs() -> list[dict]:
+    with _JOB_LOCK:
+        return [_job_public(_JOBS[jid]) for jid in _JOB_ORDER if jid in _JOBS]
+
+
+def get_job(job_id: str) -> dict | None:
+    with _JOB_LOCK:
+        rec = _JOBS.get(job_id)
+        return _job_public(rec, include_result=True) if rec else None
+
+
+def _job_worker_loop() -> None:
+    while True:
+        job_id = _JOB_QUEUE.get()
+        try:
+            with _JOB_LOCK:
+                rec = _JOBS.get(job_id)
+            if not rec:
+                continue
+            with _JOB_LOCK:
+                rec["status"] = "running"
+                rec["startedAt"] = time.time()
+            handler = _job_dispatch(rec["kind"])
+            try:
+                if handler is None:
+                    raise ValueError(f"no handler for job kind: {rec['kind']}")
+                result = handler(rec["payload"])
+                with _JOB_LOCK:
+                    rec["result"] = result
+                    rec["status"] = "done"
+                    rec["finishedAt"] = time.time()
+            except Exception as exc:  # pragma: no cover - surfaced to the UI
+                with _JOB_LOCK:
+                    rec["error"] = str(exc)
+                    rec["status"] = "error"
+                    rec["finishedAt"] = time.time()
+                print(f"[catalogue_editor] job {rec['kind']} ({job_id}) failed: {exc}",
+                      file=sys.stderr)
+        finally:
+            _JOB_QUEUE.task_done()
+
+
+def _ensure_job_worker() -> None:
+    global _JOB_WORKER_STARTED
+    with _JOB_LOCK:
+        if _JOB_WORKER_STARTED:
+            return
+        _JOB_WORKER_STARTED = True
+    thread = threading.Thread(target=_job_worker_loop, name="job-worker", daemon=True)
+    thread.start()
 
 
 def load_catalogue() -> dict:
@@ -563,7 +724,7 @@ def _adjusted_part_color(key: str, colors: dict | None = None) -> tuple[str, tup
         return "white", _PLAQUE_RGB
     if key in ("english", "translit", "icon_outline"):
         return "black", _TEXT_RGB
-    if key in ("syllabics", "number"):
+    if key == "number" or key.startswith("syllabics"):
         return "red", _SYLL_RGB
     if key.startswith("icon_"):
         fil = key[5:]
@@ -2442,9 +2603,14 @@ def flesh_out_sign(payload: dict) -> dict:
     model_name = str(payload.get("modelName") or "")  # empty -> account default
     text = fos.run_cursor_agent(prompt, agent_bin, model_name)
     authored = fos.extract_json_object(text)
-    summaries = fos.apply_authored(model_id, authored)
+    # Lock the freshly-authored page as user-reviewed by default so a later
+    # "Move to production" won't regenerate over it (promote_sign skips
+    # user-reviewed/published pages). Caller can override via payload.pageStatus.
+    final_status = str(payload.get("pageStatus") or "user-reviewed").strip()
+    summaries = fos.apply_authored(model_id, authored, final_status=final_status)
     summary = next((s for s in summaries if s.get("id") == model_id), None)
-    return {"ok": True, "model": model_name, "summaries": summaries, "rendered": summary}
+    return {"ok": True, "model": model_name, "pageStatus": final_status,
+            "summaries": summaries, "rendered": summary}
 
 
 class CatalogueEditorHandler(SimpleHTTPRequestHandler):
@@ -2495,6 +2661,20 @@ class CatalogueEditorHandler(SimpleHTTPRequestHandler):
                 model_id = query.get("modelId", [""])[0]
                 self.send_json(200, {"ok": True, "assets": list_sign_assets(model_id)})
                 return
+
+            if parsed.path == "/api/job/list":
+                self.send_json(200, {"ok": True, "jobs": list_jobs()})
+                return
+
+            if parsed.path == "/api/job/status":
+                query = parse_qs(parsed.query)
+                job_id = query.get("id", [""])[0]
+                job = get_job(job_id)
+                if job is None:
+                    self.send_error_json(404, "unknown job id")
+                    return
+                self.send_json(200, {"ok": True, "job": job})
+                return
         except Exception as exc:  # pragma: no cover - local tool ergonomics
             self.send_error_json(400, str(exc))
             return
@@ -2518,6 +2698,7 @@ class CatalogueEditorHandler(SimpleHTTPRequestHandler):
             "/api/save-adjustments",
             "/api/promote-sign",
             "/api/flesh-out-sign",
+            "/api/job/start",
         }
         if parsed.path not in known_endpoints:
             self.send_error_json(404, "Unknown API endpoint")
@@ -2526,6 +2707,12 @@ class CatalogueEditorHandler(SimpleHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length", "0"))
             payload = json.loads(self.rfile.read(length).decode("utf-8"))
+            if parsed.path == "/api/job/start":
+                kind = str(payload.get("kind", "")).strip()
+                label = str(payload.get("label", "") or kind)
+                job = submit_job(kind, label, payload.get("payload") or {})
+                self.send_json(200, {"ok": True, "jobId": job["id"], "job": job})
+                return
             if parsed.path == "/api/save-print-setup":
                 self.send_json(200, save_print_setup(payload))
                 return
