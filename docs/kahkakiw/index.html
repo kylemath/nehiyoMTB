@@ -89,9 +89,11 @@
         </div>
       </header>
 
-      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
+      <section class="buy-panel" aria-label="Order this sign">
         <h2>Get one</h2>
-        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+        <div class="buy-price">$35 CAD</div>
+        <div class="buy-mount" id="buy-mount"></div>
+        <p class="buy-fineprint">Secure checkout by Shopify. Ships from Edmonton. Tax + shipping calculated at checkout.</p>
       </section>
 
       <section class="grid">
@@ -272,5 +274,13 @@
       }
     </script>
 
+    <script src="../shop.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (!window.NehiyoShop) return;
+        window.NehiyoShop.mountProduct(document.getElementById("buy-mount"), "10442604216615", { buttonText: "Add to cart" });
+        window.NehiyoShop.mountCart();
+      });
+    </script>
   </body>
 </html>

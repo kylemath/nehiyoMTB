@@ -22,14 +22,14 @@
   // ─── EDIT THESE TWO LINES WHEN YOU SET UP SHOPIFY ────────────────────────
   // 1. Your store domain. Find it under Shopify admin → Settings → Domains.
   //    It is the "myshopify.com" one, even if you also have nehiyomtb.ca.
-  const SHOPIFY_DOMAIN = "YOUR-STORE.myshopify.com";
+  const SHOPIFY_DOMAIN = "w9hrxh-3z.myshopify.com";
 
   // 2. Your Storefront API access token. Create it under Shopify admin →
   //    Settings → Apps and sales channels → Develop apps → Create an app →
   //    Configure Storefront API scopes (tick unauthenticated_read_product_listings
   //    and unauthenticated_write_checkouts) → Install app → copy the
   //    "Storefront API access token".
-  const STOREFRONT_ACCESS_TOKEN = "YOUR_STOREFRONT_API_TOKEN";
+  const STOREFRONT_ACCESS_TOKEN = "56a2c05f45f8eba327327a378e317384";
   // ──────────────────────────────────────────────────────────────────────────
 
   const SDK_URL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
@@ -178,6 +178,7 @@
       .then(({ ui }) => {
         const productOptions = JSON.parse(JSON.stringify(PRODUCT_OPTIONS_BASE));
         if (opts.buttonText) productOptions.text = { button: opts.buttonText };
+        if (opts.showPrice === false) productOptions.contents.price = false;
         ui.createComponent("product", {
           id: String(productId),
           node: target,
