@@ -535,7 +535,10 @@ def render_trailforks_block(content: dict) -> str:
     widget_url = trail.get("widgetUrl")
     trail_url = trail.get("trailUrl")
     map_embed_mode = str(trail.get("mapEmbedMode") or "").strip().lower()
-    use_local_map = map_embed_mode == "local" or (not widget_url and bool(trail.get("track")))
+    # Trailforks' embed widget now needs an API key and shows only a warning
+    # with the line drawn over it, so prefer our own GPX preview whenever we
+    # have a track. Set mapEmbedMode to "widget" to force the iframe back.
+    use_local_map = map_embed_mode == "local" or (map_embed_mode != "widget" and bool(trail.get("track")))
 
     mini_map_html = ""
     if use_local_map:
