@@ -73,6 +73,14 @@ A connected pipeline turns each trail name into a printable bilingual sign:
    Workbench's **Draft sign** column shows each preview (click to enlarge); existing
    signs show `built ✓` and co-named trails reuse the canonical draft.
 
+## Trail app
+
+`mobile/` is the NehiyoMTB trail app (map, bike route builder, sign hunt, ride
+logging), built with Expo for iOS, Android and the web. It reads the same
+`docs/catalogue.json` live from the website, so new signs show up in the app as
+soon as they are pushed. The web version is served at
+[nehiyomtb.ca/app](https://nehiyomtb.ca/app/); see [`mobile/README.md`](mobile/README.md).
+
 ## Online Store
 
 The catalogue at `docs/` doubles as the storefront for [nehiyomtb.ca](https://nehiyomtb.ca). Purchases are powered by the Shopify Buy Button SDK — Shopify handles checkout, payments, taxes, and shipping while every visible page stays here on GitHub Pages.

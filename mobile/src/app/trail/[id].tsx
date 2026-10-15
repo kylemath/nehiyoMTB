@@ -3,14 +3,15 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import MapView, { Marker, Polyline } from '@/components/map';
-import { openDirections } from '@/app/(tabs)/map';
 import { DifficultyBadge } from '@/components/route-itinerary';
 import { TrailIconBadge } from '@/components/trail-icon';
 import { Body, Button, Card, Row, Screen, Subtitle, Title, usePalette } from '@/components/ui';
 import { Brand } from '@/constants/brand';
 import { LocalCapture, listCaptures, pairTrailTimes } from '@/lib/captures';
+import { openDirections } from '@/lib/directions';
 import { formatDuration, formatKm, regionForPoints } from '@/lib/geo';
-import { trackToLatLng, trailById } from '@/lib/trails';
+import { buySign } from '@/lib/shop';
+import { trackToLatLng, trailById, useTrailsVersion } from '@/lib/trails';
 
 /** Filament colour names from the catalogue → display colours. */
 const FILAMENT_COLORS: Record<string, string> = {
@@ -38,6 +39,7 @@ export default function TrailDetail() {
   const p = usePalette();
   const { id } = useLocalSearchParams<{ id: string }>();
   const navigation = useNavigation();
+  useTrailsVersion();
   const trail = trailById(id);
   const [captures, setCaptures] = useState<LocalCapture[]>([]);
 
@@ -183,15 +185,20 @@ export default function TrailDetail() {
               label="Open in external maps"
               variant="ghost"
               onPress={() =>
-                openDirections(
-                  { latitude: trail.start!.lat!, longitude: trail.start!.lng! },
-                  trail.title,
-                )
+                openDirections({ latitude: trail.start!.lat!, longitude: trail.start!.lng! })
               }
             />
           </>
         )}
         <Button label="Capture a sign here" variant="secondary" onPress={() => router.push('/capture')} />
+        {/* Kept quiet and price-free, like the "Get one" link on the site's sign pages. */}
+        {trail.shop && (
+          <Pressable onPress={() => buySign(trail)} hitSlop={8} style={styles.getOne}>
+            <Text style={{ color: p.muted, fontSize: 13, textDecorationLine: 'underline' }}>
+              Get one
+            </Text>
+          </Pressable>
+        )}
       </ScrollView>
     </Screen>
   );
@@ -210,6 +217,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 const styles = StyleSheet.create({
   map: { height: 220, borderRadius: 16 },
   mapHint: { fontSize: 12, textAlign: 'center', marginTop: 6 },
+  getOne: { alignSelf: 'center', paddingVertical: 8 },
   colorChip: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -1,8 +1,10 @@
 /**
- * Brand tokens. The app is name-agnostic: change APP_NAME (and app.json
- * name/slug/scheme) when the real brand lands and everything follows.
+ * Brand tokens. APP_NAME is the display name everywhere in the app; app.json
+ * `name` must match. The slug, URL scheme and bundle ids still carry the old
+ * edmontontrailmaps placeholder because changing them re-keys OAuth redirects
+ * and store listings.
  */
-export const APP_NAME = 'EdmontonTrailMaps'; // placeholder brand
+export const APP_NAME = 'NehiyoMTB';
 export const APP_TAGLINE = 'Ride. Find. Collect.';
 
 export const Brand = {

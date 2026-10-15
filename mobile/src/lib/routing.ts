@@ -38,7 +38,8 @@ function connectorDistance(a: LatLng, b: LatLng): number {
 
 function orientations(trail: Trail): Segment[] {
   const fwd = trackToLatLng(trail.track);
-  const lengthM = trail.lengthM ?? 0;
+  // A trail with no recorded length must not look "free" to the planner.
+  const lengthM = trail.lengthM ?? pathLengthM(fwd);
   return [
     { trail, points: fwd, lengthM },
     { trail, points: [...fwd].reverse(), lengthM },
@@ -243,11 +244,13 @@ export function routeChevrons(route: BikeRoute, spacingM = 150, maxCount = 40): 
 }
 
 /** Index of the route leg nearest to `pos` — drives "you are here" progress
- * in the live navigation itinerary. */
-export function nearestLegIndex(route: BikeRoute, pos: LatLng): number {
-  let bestIdx = 0;
+ * in the live navigation itinerary. Only looks from `fromLeg` up to two legs
+ * ahead, so progress never jumps backwards where a route doubles back. */
+export function nearestLegIndex(route: BikeRoute, pos: LatLng, fromLeg = 0): number {
+  let bestIdx = fromLeg;
   let bestDist = Infinity;
   route.legs.forEach((leg, i) => {
+    if (i < fromLeg || i > fromLeg + 2) return;
     for (let j = 1; j < leg.points.length; j++) {
       const d = pointSegmentDistM(pos, leg.points[j - 1], leg.points[j]);
       if (d < bestDist) {

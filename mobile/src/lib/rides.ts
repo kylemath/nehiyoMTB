@@ -1,5 +1,13 @@
 /**
- * Ride logging: foreground GPS tracking, GPX export, photo-time sync.
+ * Ride logging: GPS tracking that keeps running with the screen locked,
+ * GPX export, photo-time sync.
+ *
+ * On iOS/Android the recorder uses a background location task (an Android
+ * foreground-service notification / the iOS blue location pill), so the
+ * track keeps filling while the phone is in a pocket. The in-progress ride is
+ * saved as points arrive, so if the OS kills the app the ride survives and
+ * recording resumes (or is finalised) on the next launch. In a browser,
+ * background GPS is impossible; the recorder keeps the screen awake instead.
  *
  * Rides are saved locally; uploading the GPX (with the user's chosen share
  * level) is opt-in per ride. 'contribute' rides go only to the trail-mapping
@@ -8,6 +16,8 @@
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
+import * as TaskManager from 'expo-task-manager';
+import { Platform } from 'react-native';
 
 import { ShareLevel } from '@/constants/brand';
 import { LatLng, haversineM } from '@/lib/geo';
@@ -15,6 +25,11 @@ import { LocalCapture } from '@/lib/captures';
 import { supabase } from '@/lib/supabase';
 
 const STORE_KEY = 'etm.rides.v1';
+/** The ride being recorded right now, saved as points arrive. */
+const ACTIVE_KEY = 'etm.activeRide.v1';
+const RIDE_TASK = 'nehiyomtb-ride-location';
+/** Write the active ride at most this often (plus on stop). */
+const PERSIST_EVERY_MS = 5000;
 
 export type TrackPoint = { lat: number; lng: number; ele: number | null; t: string };
 
@@ -45,9 +60,27 @@ export async function saveRide(ride: LocalRide) {
   await persist(rides);
 }
 
+const isNative = Platform.OS === 'ios' || Platform.OS === 'android';
+
+/** Screen wake lock for the browser build (no background GPS on the web). */
+type WakeLockSentinel = { release: () => Promise<void> };
+async function requestWakeLock(): Promise<WakeLockSentinel | null> {
+  const nav = (globalThis as { navigator?: { wakeLock?: { request: (t: 'screen') => Promise<WakeLockSentinel> } } })
+    .navigator;
+  try {
+    return (await nav?.wakeLock?.request('screen')) ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export class RideRecorder {
   private subscription: Location.LocationSubscription | null = null;
+  private wakeLock: WakeLockSentinel | null = null;
   private listeners = new Set<(ride: LocalRide) => void>();
+  private lastPersist = 0;
+  /** True when points arrive from the background task rather than a watch. */
+  private background = false;
   ride: LocalRide | null = null;
   onUpdate: ((ride: LocalRide) => void) | null = null;
 
@@ -63,6 +96,46 @@ export class RideRecorder {
     for (const fn of this.listeners) fn(ride);
   }
 
+  private async persistActive(force = false) {
+    if (!this.ride) return;
+    const now = Date.now();
+    if (!force && now - this.lastPersist < PERSIST_EVERY_MS) return;
+    this.lastPersist = now;
+    await AsyncStorage.setItem(ACTIVE_KEY, JSON.stringify(this.ride));
+  }
+
+  /** Append fixes (from the watch or the background task) to the ride. */
+  async ingest(locations: Location.LocationObject[]) {
+    if (!this.ride) {
+      // Woken by the OS after the app was killed: pick the ride back up.
+      const raw = await AsyncStorage.getItem(ACTIVE_KEY);
+      if (!raw) return;
+      this.ride = JSON.parse(raw) as LocalRide;
+      this.background = true;
+    }
+    const ride = this.ride;
+    for (const loc of locations) {
+      const pt: TrackPoint = {
+        lat: loc.coords.latitude,
+        lng: loc.coords.longitude,
+        ele: loc.coords.altitude ?? null,
+        t: new Date(loc.timestamp).toISOString(),
+      };
+      const prev = ride.points[ride.points.length - 1];
+      if (prev) {
+        // Background batches can repeat or reorder fixes; keep time order.
+        if (pt.t <= prev.t) continue;
+        ride.distanceM += haversineM(
+          { latitude: prev.lat, longitude: prev.lng },
+          { latitude: pt.lat, longitude: pt.lng },
+        );
+      }
+      ride.points.push(pt);
+    }
+    this.notify(ride);
+    await this.persistActive();
+  }
+
   async start(): Promise<void> {
     const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') throw new Error('Location permission is required to record a ride.');
@@ -76,45 +149,102 @@ export class RideRecorder {
       shareLevel: 'private',
       uploaded: false,
     };
+    await this.persistActive(true);
 
-    this.subscription = await Location.watchPositionAsync(
-      { accuracy: Location.Accuracy.BestForNavigation, timeInterval: 2000, distanceInterval: 3 },
-      (loc) => {
-        if (!this.ride) return;
-        const pt: TrackPoint = {
-          lat: loc.coords.latitude,
-          lng: loc.coords.longitude,
-          ele: loc.coords.altitude ?? null,
-          t: new Date(loc.timestamp).toISOString(),
-        };
-        const prev = this.ride.points[this.ride.points.length - 1];
-        if (prev) {
-          this.ride.distanceM += haversineM(
-            { latitude: prev.lat, longitude: prev.lng },
-            { latitude: pt.lat, longitude: pt.lng },
-          );
-        }
-        this.ride.points.push(pt);
-        this.notify(this.ride);
-      },
-    );
+    // "Allow all the time" lets the track keep filling with the screen off.
+    // If the rider declines, fall back to recording while the app is open.
+    let background = false;
+    if (isNative) {
+      try {
+        background = (await Location.requestBackgroundPermissionsAsync()).status === 'granted';
+      } catch {
+        background = false;
+      }
+    }
+    this.background = background;
+
+    if (background) {
+      await Location.startLocationUpdatesAsync(RIDE_TASK, {
+        accuracy: Location.Accuracy.BestForNavigation,
+        timeInterval: 2000,
+        distanceInterval: 3,
+        activityType: Location.ActivityType.Fitness,
+        pausesUpdatesAutomatically: false,
+        showsBackgroundLocationIndicator: true,
+        foregroundService: {
+          notificationTitle: 'Recording your ride',
+          notificationBody: 'NehiyoMTB is logging your GPS track.',
+          notificationColor: '#1E5E46',
+          killServiceOnDestroy: false,
+        },
+      });
+    } else {
+      this.subscription = await Location.watchPositionAsync(
+        { accuracy: Location.Accuracy.BestForNavigation, timeInterval: 2000, distanceInterval: 3 },
+        (loc) => {
+          this.ingest([loc]);
+        },
+      );
+      if (!isNative) this.wakeLock = await requestWakeLock();
+    }
   }
 
   async stop(): Promise<LocalRide | null> {
     this.subscription?.remove();
     this.subscription = null;
+    await this.wakeLock?.release().catch(() => {});
+    this.wakeLock = null;
+    if (isNative && (await Location.hasStartedLocationUpdatesAsync(RIDE_TASK).catch(() => false))) {
+      await Location.stopLocationUpdatesAsync(RIDE_TASK);
+    }
+    this.background = false;
     if (this.ride) {
       this.ride.endedAt = new Date().toISOString();
       await saveRide(this.ride);
     }
+    await AsyncStorage.removeItem(ACTIVE_KEY);
     const finished = this.ride;
     this.ride = null;
     return finished;
+  }
+
+  /**
+   * Call once at app launch. If a ride was in progress when the app was
+   * closed or killed: keep recording when the background task is still
+   * running, otherwise save what was recorded so it is never lost.
+   */
+  async restore(): Promise<void> {
+    if (this.ride) return;
+    const raw = await AsyncStorage.getItem(ACTIVE_KEY);
+    if (!raw) return;
+    const active = JSON.parse(raw) as LocalRide;
+    const running =
+      isNative && (await Location.hasStartedLocationUpdatesAsync(RIDE_TASK).catch(() => false));
+    if (running) {
+      this.ride = active;
+      this.background = true;
+      this.notify(active);
+      return;
+    }
+    if (active.points.length > 1) {
+      active.endedAt = active.points[active.points.length - 1].t;
+      await saveRide(active);
+    }
+    await AsyncStorage.removeItem(ACTIVE_KEY);
   }
 }
 
 /** App-wide recorder so the Ride tab and live navigation observe one recording. */
 export const sharedRecorder = new RideRecorder();
+
+// Background fixes are delivered here, even when the app was relaunched by
+// the OS without any screen open. Must be defined at module load.
+if (isNative) {
+  TaskManager.defineTask<{ locations: Location.LocationObject[] }>(RIDE_TASK, async ({ data, error }) => {
+    if (error || !data?.locations?.length) return;
+    await sharedRecorder.ingest(data.locations);
+  });
+}
 
 export function rideToGpx(ride: LocalRide, name = 'Ride'): string {
   const pts = ride.points
@@ -126,7 +256,7 @@ export function rideToGpx(ride: LocalRide, name = 'Ride'): string {
     )
     .join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
-<gpx version="1.1" creator="EdmontonTrailMaps" xmlns="http://www.topografix.com/GPX/1/1">
+<gpx version="1.1" creator="NehiyoMTB" xmlns="http://www.topografix.com/GPX/1/1">
   <trk>
     <name>${name}</name>
     <trkseg>
