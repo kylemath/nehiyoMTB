@@ -1,17 +1,29 @@
 /*
  * docs/shop.js — single shared Shopify storefront integration for nehiyoMTB.
  *
- * This file is loaded by both `docs/index.html` (the catalogue) and every
- * per-sign page rendered by `tools/sign_page_renderer.py`. It does three jobs:
+ * Loaded by every per-sign page rendered by `tools/sign_page_renderer.py`
+ * (and by `docs/index.html`, which only shows the cart). It does three jobs:
  *
  *  1. Holds the one-place Shopify store config (domain + Storefront API token).
  *  2. Lazy-loads the Shopify Buy Button SDK on first use.
  *  3. Exposes a tiny `window.NehiyoShop` API that pages call to:
- *       - mount an "Add to cart" button against a Shopify productId
- *       - mount the floating cart drawer
+ *       - mount a small "Get one" button against a Shopify productId
+ *       - mount the floating cart (one per window, never two)
+ *
+ *  Design notes (why it looks like this):
+ *   - Every Shopify component renders inside its own iframe (`iframe: true`).
+ *     That isolates the cart from the page's CSS, which is what made the
+ *     drawer unreadable on the dark catalogue.
+ *   - The product component creates the shared cart itself, with our cart +
+ *     toggle styles passed in. We never call `createComponent("cart")` on top
+ *     of that, because the SDK would build a second, independent cart.
+ *   - Checkout opens in the same tab (`popup: false`) instead of a small
+ *     popup window that browsers often block or bury.
+ *   - Pages embedded in another page (the catalogue preview iframe) should not
+ *     mount Shopify at all; they link out to the standalone sign page instead.
  *
  *  No Shopify credentials? Leave the placeholders below as-is. The script will
- *  detect missing config, log a single console warning, and silently no-op so
+ *  detect missing config, log a single console note, and silently no-op so
  *  the rest of the page keeps working.
  *
  *  When you are ready to wire up Shopify, see `docs/SHOPIFY_SETUP.md` for the
@@ -33,12 +45,23 @@
   // ──────────────────────────────────────────────────────────────────────────
 
   const SDK_URL = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js";
+  const DEFAULT_ACCENT = "#dc3545";
+  const FONT_STACK =
+    "system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
   const isConfigured = () =>
     SHOPIFY_DOMAIN &&
     STOREFRONT_ACCESS_TOKEN &&
     !SHOPIFY_DOMAIN.startsWith("YOUR") &&
     !STOREFRONT_ACCESS_TOKEN.startsWith("YOUR");
+
+  const isEmbedded = () => {
+    try {
+      return window.self !== window.top;
+    } catch (e) {
+      return true;
+    }
+  };
 
   if (!isConfigured()) {
     console.info(
@@ -84,81 +107,149 @@
     return clientPromise;
   }
 
-  // Shared cart-button styling. Lives once on the page so re-mounting product
-  // buttons reuses the same drawer (single cart across the whole catalogue).
-  const CART_OPTIONS = {
-    iframe: false,
-    text: { total: "Subtotal", button: "Checkout" },
-    styles: {
-      button: {
-        "background-color": "#dc3545",
-        ":hover": { "background-color": "#b02a37" },
-        ":focus": { "background-color": "#b02a37" },
-        "border-radius": "8px",
-      },
-      footer: { "background-color": "#ffffff" },
-    },
-  };
+  // Darken a #rrggbb colour for hover states.
+  function shade(hex, amount) {
+    const m = /^#?([0-9a-f]{6})$/i.exec(hex || "");
+    if (!m) return hex;
+    const n = parseInt(m[1], 16);
+    const f = 1 - amount;
+    const r = Math.round(((n >> 16) & 255) * f);
+    const g = Math.round(((n >> 8) & 255) * f);
+    const b = Math.round((n & 255) * f);
+    return "#" + ((1 << 24) | (r << 16) | (g << 8) | b).toString(16).slice(1);
+  }
 
-  const TOGGLE_OPTIONS = {
-    iframe: false,
-    sticky: true,
-    styles: {
+  // The cart drawer and its floating toggle. Solid accent buttons, dark text
+  // on white so it reads clearly over any page.
+  function cartOptions(accent) {
+    const hover = shade(accent, 0.15);
+    return {
+      cart: {
+        iframe: true,
+        popup: false,
+        startOpen: false,
+        text: {
+          title: "Your cart",
+          total: "Subtotal",
+          button: "Checkout",
+          empty: "Your cart is empty.",
+          notice: "Shipping and taxes are calculated at checkout.",
+        },
+        styles: {
+          cart: { "font-family": FONT_STACK, "background-color": "#ffffff", color: "#111111" },
+          title: { color: "#111111" },
+          header: { color: "#111111" },
+          lineItems: { color: "#111111" },
+          subtotalText: { color: "#111111" },
+          subtotal: { color: "#111111" },
+          notice: { color: "#555555" },
+          currency: { color: "#111111" },
+          close: { color: "#555555", ":hover": { color: "#111111" } },
+          empty: { color: "#555555" },
+          footer: { "background-color": "#ffffff" },
+          button: {
+            "font-family": FONT_STACK,
+            "background-color": accent,
+            ":hover": { "background-color": hover },
+            ":focus": { "background-color": hover },
+            "border-radius": "8px",
+          },
+        },
+      },
+      lineItem: {
+        styles: {
+          variantTitle: { color: "#444444" },
+          itemTitle: { color: "#111111" },
+          price: { color: "#111111" },
+          quantity: { color: "#111111" },
+          quantityIncrement: { color: "#111111", "border-color": "#cccccc" },
+          quantityDecrement: { color: "#111111", "border-color": "#cccccc" },
+          quantityInput: { color: "#111111", "border-color": "#cccccc" },
+        },
+      },
       toggle: {
-        "background-color": "#dc3545",
-        ":hover": { "background-color": "#b02a37" },
-        ":focus": { "background-color": "#b02a37" },
+        iframe: true,
+        sticky: true,
+        styles: {
+          toggle: {
+            "font-family": FONT_STACK,
+            "background-color": accent,
+            ":hover": { "background-color": hover },
+            ":focus": { "background-color": hover },
+          },
+          count: { color: "#ffffff", ":hover": { color: "#ffffff" } },
+          iconPath: { fill: "#ffffff" },
+        },
       },
-      count: { color: "#ffffff" },
-      iconPath: { fill: "#ffffff" },
-    },
-  };
+    };
+  }
 
-  const PRODUCT_OPTIONS_BASE = {
-    iframe: false,
-    contents: {
-      img: false,
-      title: false,
-      price: true,
-      description: false,
-      options: true,
-      quantity: false,
-      buttonWithQuantity: false,
-      button: true,
-    },
-    text: { button: "Add to cart" },
-    styles: {
-      product: {
-        "text-align": "center",
-        "@media (min-width: 601px)": { "max-width": "100%" },
+  // A small outlined button in the sign's accent colour. No price, no title,
+  // no image: the sign page itself is the product page.
+  function productOptions(accent, buttonText) {
+    return {
+      iframe: true,
+      buttonDestination: "cart",
+      layout: "vertical",
+      width: "130px",
+      contents: {
+        img: false,
+        imgWithCarousel: false,
+        title: false,
+        variantTitle: false,
+        price: false,
+        unitPrice: false,
+        description: false,
+        options: true,
+        quantity: false,
+        buttonWithQuantity: false,
+        button: true,
       },
-      button: {
-        "background-color": "#dc3545",
-        ":hover": { "background-color": "#b02a37" },
-        ":focus": { "background-color": "#b02a37" },
-        "border-radius": "8px",
-        "padding-top": "12px",
-        "padding-bottom": "12px",
-        "font-size": "16px",
-        "font-weight": "700",
+      text: { button: buttonText || "Get one" },
+      styles: {
+        product: {
+          "text-align": "left",
+          "@media (min-width: 601px)": { "max-width": "100%", "margin-left": "0", "margin-bottom": "0" },
+        },
+        options: { "font-family": FONT_STACK, color: "#333333" },
+        button: {
+          "font-family": FONT_STACK,
+          "background-color": "transparent",
+          color: accent,
+          border: `1.5px solid ${accent}`,
+          "border-radius": "999px",
+          "padding-top": "7px",
+          "padding-bottom": "7px",
+          "padding-left": "18px",
+          "padding-right": "18px",
+          "font-size": "14px",
+          "font-weight": "600",
+          ":hover": { "background-color": accent, color: "#ffffff" },
+          ":focus": { "background-color": accent, color: "#ffffff" },
+        },
       },
-      price: { "font-size": "20px", "font-weight": "700", color: "#000" },
-      compareAt: { "font-size": "14px" },
-    },
-  };
+    };
+  }
 
-  let cartMounted = false;
-  function mountCart() {
-    if (!isConfigured() || cartMounted) return Promise.resolve();
-    cartMounted = true;
-    return getClient()
-      .then(({ ui }) => {
-        ui.createComponent("cart", { options: { cart: CART_OPTIONS, toggle: TOGGLE_OPTIONS } });
-      })
+  function allOptions(accent, buttonText) {
+    return Object.assign({ product: productOptions(accent, buttonText) }, cartOptions(accent));
+  }
+
+  // One cart per window. Whichever call gets here first (a product mount or a
+  // bare mountCart) creates it; later calls reuse it.
+  let cartPromise = null;
+
+  function mountCart(opts = {}) {
+    if (!isConfigured() || isEmbedded()) return Promise.resolve();
+    if (cartPromise) return cartPromise;
+    const accent = opts.accent || DEFAULT_ACCENT;
+    cartPromise = getClient()
+      .then(({ ui }) => ui.createCart({ options: cartOptions(accent) }))
       .catch((err) => {
-        cartMounted = false;
+        cartPromise = null;
         console.warn("[NehiyoShop] cart mount failed:", err);
       });
+    return cartPromise;
   }
 
   function mountProduct(target, productId, opts = {}) {
@@ -166,37 +257,39 @@
     if (!isConfigured()) {
       target.classList.add("shop-disabled");
       target.innerHTML =
-        '<div class="shop-disabled-note">Online checkout coming soon. ' +
-        "Email <a href=\"mailto:hello@nehiyomtb.ca\">hello@nehiyomtb.ca</a> to order.</div>";
+        '<span class="shop-disabled-note">Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to ask about one.</span>';
       return Promise.resolve();
     }
     if (!productId) {
       target.classList.add("shop-empty");
       return Promise.resolve();
     }
+    const accent = opts.accent || DEFAULT_ACCENT;
     return getClient()
       .then(({ ui }) => {
-        const productOptions = JSON.parse(JSON.stringify(PRODUCT_OPTIONS_BASE));
-        if (opts.buttonText) productOptions.text = { button: opts.buttonText };
-        if (opts.showPrice === false) productOptions.contents.price = false;
-        ui.createComponent("product", {
+        // If a cart already exists the SDK reuses it; otherwise the product
+        // component creates it with the cart/toggle options passed here.
+        const options = allOptions(accent, opts.buttonText);
+        const created = ui.createComponent("product", {
           id: String(productId),
           node: target,
-          moneyFormat: "%24%7B%7Bamount%7D%7D%20CAD",
-          options: { product: productOptions },
+          options,
         });
-        // Make sure the floating cart is mounted on any page with a product.
-        mountCart();
+        if (!cartPromise) {
+          cartPromise = created.then(() => ui.components.cart[0]);
+        }
+        return created;
       })
       .catch((err) => {
         target.classList.add("shop-error");
-        target.textContent = "Could not load the buy button.";
+        target.textContent = "Could not load the order button.";
         console.warn("[NehiyoShop] product mount failed:", err);
       });
   }
 
   window.NehiyoShop = {
     isConfigured,
+    isEmbedded,
     mountCart,
     mountProduct,
   };

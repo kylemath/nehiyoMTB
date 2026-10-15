@@ -149,13 +149,13 @@ def build_css(accent: str) -> str:
     .tooltip:hover::after{{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}}
     .primary-content{{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}}
     .story-box{{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}}
-    .buy-panel{{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}}
-    .buy-panel h2{{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}}
-    .buy-price{{font-size:24px;font-weight:800;color:#000}}
-    .buy-mount{{flex:1 1 200px;min-width:200px}}
-    .buy-fineprint{{width:100%;font-size:12px;color:var(--muted);margin-top:4px}}
-    .buy-panel--soon{{border-style:dashed}}
-    @media (max-width:600px){{.buy-panel{{flex-direction:column;align-items:stretch;text-align:center}}}}"""
+    .get-one{{margin:28px 0 4px;padding:16px 4px 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}}
+    .get-one-text{{margin:0;flex:1 1 280px;color:var(--muted);font-size:14px;line-height:1.5}}
+    .get-one-text a{{color:var(--accent)}}
+    .get-one-mount{{flex:0 0 auto;min-height:38px;display:flex;align-items:center}}
+    .get-one-mount:empty{{display:none}}
+    .get-one-link{{display:inline-block;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}}
+    .get-one-link:hover,.get-one-link:focus{{background:var(--accent);color:#ffffff}}"""
 
 
 def collect_morpheme_keys(content: dict) -> set[str]:
@@ -672,68 +672,61 @@ def render_sources(content: dict) -> str:
         <p class="muted">References: {refs_html}</p>"""
 
 
-def _format_price_cad(price: Any) -> str:
-    """Format a numeric CAD price as ``$XX CAD`` (drops the decimal when whole)."""
-    if price is None:
-        return ""
-    try:
-        amount = float(price)
-    except (TypeError, ValueError):
-        return ""
-    if math.isnan(amount) or math.isinf(amount):
-        return ""
-    if abs(amount - round(amount)) < 1e-6:
-        return f"${int(round(amount))} CAD"
-    return f"${amount:,.2f} CAD"
+def _has_live_product(model: dict) -> bool:
+    shopify = model.get("shopify") or {}
+    return bool(str(shopify.get("productId") or "").strip()) and bool(shopify.get("available"))
 
 
 def render_buy_panel(model: dict) -> str:
-    """Render the Shopify "buy this sign" panel for a sign model.
+    """Render the quiet "get one" note at the bottom of a sign page.
 
-    The panel always renders (so layout stays consistent across signs). When
-    ``shopify.productId`` exists and ``shopify.available`` is true, a live
-    buy mount + advisory price is rendered for ``docs/shop.js`` to hydrate.
-    Otherwise a "coming soon" stub with an email fallback is rendered.
+    The sign pages are learning pages first, so ordering is a single line
+    above the footer with no price. When ``shopify.productId`` exists and
+    ``shopify.available`` is true, ``docs/shop.js`` hydrates a small
+    "Get one" button into ``#buy-mount``. Otherwise an email fallback shows.
     """
-    shopify = model.get("shopify") or {}
-    product_id = str(shopify.get("productId") or "").strip()
-    available = bool(shopify.get("available"))
-
-    if product_id and available:
-        price_text = _format_price_cad(shopify.get("priceCAD")) or "Price loading…"
-        return f"""
-      <section class="buy-panel" aria-label="Order this sign">
-        <h2>Get one</h2>
-        <div class="buy-price">{escape(price_text)}</div>
-        <div class="buy-mount" id="buy-mount"></div>
-        <p class="buy-fineprint">Secure checkout by Shopify. Ships from Edmonton. Tax + shipping calculated at checkout.</p>
+    if _has_live_product(model):
+        return """
+      <section class="get-one" id="get-one" aria-label="Get this sign">
+        <p class="get-one-text">Each sign is 3D printed in Edmonton. Want one for your own trail, cabin or wall?</p>
+        <div class="get-one-mount" id="buy-mount"></div>
       </section>"""
 
     return """
-      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
-        <h2>Get one</h2>
-        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+      <section class="get-one" id="get-one" aria-label="Get this sign">
+        <p class="get-one-text">Each sign is 3D printed in Edmonton. Want one for your own trail, cabin or wall? Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a>.</p>
       </section>"""
 
 
-def render_buy_script(model: dict) -> str:
+def render_buy_script(model: dict, accent: str) -> str:
     """Render the ``<script>`` block that mounts the Shopify button + cart.
 
     Returns an empty string when the sign is not yet purchasable so we don't
-    pull in ``shop.js`` on coming-soon pages.
+    pull in ``shop.js`` on email-only pages. When the page is shown inside the
+    catalogue's preview iframe, it links out to the standalone page instead of
+    mounting Shopify, so the catalogue never ends up with a second cart.
     """
-    shopify = model.get("shopify") or {}
-    product_id = str(shopify.get("productId") or "").strip()
-    if not product_id or not shopify.get("available"):
+    if not _has_live_product(model):
         return ""
-    safe_product_id = escape(product_id)
+    product_id = str((model.get("shopify") or {}).get("productId") or "").strip()
+    safe_product_id = json.dumps(product_id)
+    safe_accent = json.dumps(accent)
     return f"""
     <script src="../shop.js" defer></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {{
-        if (!window.NehiyoShop) return;
-        window.NehiyoShop.mountProduct(document.getElementById("buy-mount"), "{safe_product_id}", {{ buttonText: "Add to cart" }});
-        window.NehiyoShop.mountCart();
+        var mount = document.getElementById("buy-mount");
+        if (!mount || !window.NehiyoShop) return;
+        if (window.NehiyoShop.isEmbedded()) {{
+          var link = document.createElement("a");
+          link.className = "get-one-link";
+          link.href = window.location.pathname + "#get-one";
+          link.target = "_top";
+          link.textContent = "Get one";
+          mount.appendChild(link);
+          return;
+        }}
+        window.NehiyoShop.mountProduct(mount, {safe_product_id}, {{ buttonText: "Get one", accent: {safe_accent} }});
       }});
     </script>"""
 
@@ -769,7 +762,6 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
           </div>
         </div>
       </header>
-{buy_panel}
 
       <section class=\"grid\">
         <div class=\"panel\">
@@ -788,6 +780,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 {sources}
         </div>
       </section>
+{buy_panel}
 
       <footer>
         {footer_text}
@@ -916,7 +909,7 @@ def render_page(model: dict) -> str | None:
         ),
         pairs_script=build_pairs_script(content),
         buy_panel=render_buy_panel(model),
-        buy_script=render_buy_script(model),
+        buy_script=render_buy_script(model, accent),
     )
 
 

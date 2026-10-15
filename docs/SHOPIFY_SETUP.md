@@ -161,8 +161,8 @@ each sign you've created in Shopify, edit its entry to fill in:
 - `productId` — the long number from the Shopify admin URL (step 2).
 - `variantId` — leave `""` unless you have multiple variants and want to
   target a specific one.
-- `priceCAD` — fallback price shown before the SDK script loads. Keep it in
-  sync with Shopify, but the live button always shows the Shopify price.
+- `priceCAD` — reference only; the site does not display prices. Shopify shows
+  the price in the cart and at checkout.
 - `available` — set to `true` once you're ready for it to be buyable. Setting
   it back to `false` hides the button without deleting any other data.
 
@@ -281,8 +281,8 @@ admin → Orders → Refund).
 - **Take a sign off the store temporarily**: set `shopify.available` to
   `false` and push. The catalogue still shows the sign — only the buy button
   disappears.
-- **Change a price**: change it in Shopify admin. Optionally update
-  `priceCAD` in the catalogue so the pre-load fallback chip matches.
+- **Change a price**: change it in Shopify admin. The site shows no prices,
+  so nothing else needs updating.
 - **Refund / cancel an order**: Shopify admin → Orders. Email goes out
   automatically.
 - **Shipping label**: Shopify admin → Orders → "Buy shipping label" (Canada
