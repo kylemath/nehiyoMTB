@@ -9,7 +9,10 @@
 //
 // Secrets (supabase secrets set ...):
 //   SHOPIFY_DOMAIN            e.g. w9hrxh-3z.myshopify.com
-//   SHOPIFY_ADMIN_TOKEN       Admin API token with write_discounts
+//   SHOPIFY_CLIENT_ID         } the KOM app's credentials (Dev Dashboard app with
+//   SHOPIFY_CLIENT_SECRET     } write_discounts, installed on the store); exchanged
+//                               for a short-lived Admin API token below
+//   SHOPIFY_ADMIN_TOKEN       or instead: a legacy custom-app token (shpat_...)
 //   SHOPIFY_KOM_PRODUCT_ID    numeric id of the "KOM edition trail sign" product
 //   SHOPIFY_KOM_VARIANT_ID    numeric id of its variant (for the checkout link)
 // SUPABASE_URL / SUPABASE_ANON_KEY / SUPABASE_SERVICE_ROLE_KEY are provided.
@@ -41,6 +44,32 @@ function checkoutUrl(code: string, trailTitle: string) {
   return `https://${env('SHOPIFY_DOMAIN')}/cart/${env('SHOPIFY_KOM_VARIANT_ID')}:1?${params}`;
 }
 
+let cachedToken: { value: string; expiresAt: number } | null = null;
+
+/** Admin API token: a legacy shpat_ token if set, otherwise one obtained with
+ * the client credentials grant (valid ~24 h, cached while the function is warm). */
+async function adminToken(): Promise<string> {
+  const legacy = Deno.env.get('SHOPIFY_ADMIN_TOKEN');
+  if (legacy) return legacy;
+  if (cachedToken && cachedToken.expiresAt > Date.now() + 60_000) return cachedToken.value;
+  const res = await fetch(`https://${env('SHOPIFY_DOMAIN')}/admin/oauth/access_token`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: env('SHOPIFY_CLIENT_ID'),
+      client_secret: env('SHOPIFY_CLIENT_SECRET'),
+    }),
+  });
+  if (!res.ok) throw new Error(`Shopify token exchange failed: HTTP ${res.status}`);
+  const body = await res.json();
+  cachedToken = {
+    value: body.access_token,
+    expiresAt: Date.now() + (body.expires_in ?? 3600) * 1000,
+  };
+  return cachedToken.value;
+}
+
 async function createShopifyCode(code: string, title: string): Promise<string> {
   const res = await fetch(
     `https://${env('SHOPIFY_DOMAIN')}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`,
@@ -48,7 +77,7 @@ async function createShopifyCode(code: string, title: string): Promise<string> {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Shopify-Access-Token': env('SHOPIFY_ADMIN_TOKEN'),
+        'X-Shopify-Access-Token': await adminToken(),
       },
       body: JSON.stringify({
         query: `mutation($discount: DiscountCodeBasicInput!) {
