@@ -155,7 +155,44 @@ export function TrailMarker({
   );
 }
 
+/** Decodes every sign icon once, invisibly, so map markers can draw them
+ * (Android never starts image loads inside detached marker views; they only
+ * draw bitmaps already in cache). Calls onReady when all have loaded, which
+ * the map passes on to TrailMarker's `refresh` so markers re-snapshot. */
+export function IconPreloader({ trails, onReady }: { trails: Trail[]; onReady: () => void }) {
+  const sources = trails
+    .map((t) => ({ id: t.id, src: trailIcon(t.id) }))
+    .filter((x): x is { id: string; src: NonNullable<ReturnType<typeof trailIcon>> } => x.src != null);
+  const remaining = React.useRef(new Set(sources.map((x) => x.id)));
+  const done = (id: string) => {
+    remaining.current.delete(id);
+    if (remaining.current.size === 0) onReady();
+  };
+  return (
+    <View pointerEvents="none" style={styles.preloader}>
+      {sources.map((x) => (
+        <Image
+          key={x.id}
+          source={x.src}
+          style={styles.preloadImage}
+          onLoadEnd={() => done(x.id)}
+        />
+      ))}
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
+  preloader: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: 2,
+    opacity: 0.01,
+  },
+  preloadImage: { width: 2, height: 2 },
   box: {
     backgroundColor: '#FFFFFF',
     alignItems: 'center',

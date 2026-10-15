@@ -5,7 +5,6 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Alert,
   Dimensions,
-  Linking,
   Platform,
   Pressable,
   ScrollView,
@@ -17,7 +16,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MapView, { MapPressEvent, Marker, Polyline } from '@/components/map';
 import { RouteItinerary } from '@/components/route-itinerary';
-import { TrailIconBadge, TrailMarker, badgeBox } from '@/components/trail-icon';
+import { IconPreloader, TrailIconBadge, TrailMarker, badgeBox } from '@/components/trail-icon';
 import { Button, Chip, Row, usePalette } from '@/components/ui';
 import { Brand } from '@/constants/brand';
 import { refineRouteConnectors } from '@/lib/connector-routing';
@@ -59,6 +58,12 @@ const MAP_TYPE_META: Record<string, { label: string; icon: keyof typeof Ionicons
   hybrid: { label: 'Satellite', icon: 'earth-outline' },
   terrain: { label: 'Terrain', icon: 'trail-sign-outline' },
 };
+
+/** Coarse zoom level: markers are only re-laid-out when this changes, not
+ * on every pan (the de-overlap layout doesn't depend on the map centre). */
+function zoomBucket(latitudeDelta: number): number {
+  return Math.round(Math.log2(latitudeDelta) * 4);
+}
 
 /** Marker height grows as you zoom in. Quantized into buckets so marker
  * views only re-render when the bucket actually changes. */
@@ -103,23 +108,6 @@ function trailEndpoints(trail: Trail): LatLng[] {
     if (pts.length === 0 || haversineM(pts[0], end) > 30) pts.push(end);
   }
   return pts;
-}
-
-/** Hand off to the phone's maps app — kept as a secondary escape hatch now
- * that in-app routing covers "directions to trail start". */
-export function openDirections(to: LatLng, label: string) {
-  const lat = to.latitude;
-  const lng = to.longitude;
-  const url = Platform.select({
-    ios: `maps:?daddr=${lat},${lng}&dirflg=b`,
-    android: `google.navigation:q=${lat},${lng}&mode=b`,
-    default: `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=bicycling`,
-  });
-  Linking.openURL(url).catch(() =>
-    Linking.openURL(
-      `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=bicycling`,
-    ),
-  );
 }
 
 /** A route start or destination: where it is and how the user chose it. */
@@ -183,6 +171,14 @@ export default function MapTab() {
   const trailsVersion = useTrailsVersion();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const trailMarkers = useMemo(() => buildTrailMarkers(), [trailsVersion]);
+  // Track coordinates converted once per trail set, not on every render.
+  const trailCoords = useMemo(
+    () => new Map(mappedTrails.map((t) => [t.id, trackToLatLng(t.track)])),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [trailsVersion],
+  );
+  /** Flips once every sign icon has decoded (see IconPreloader). */
+  const [iconsReady, setIconsReady] = useState(false);
   const [myLocation, setMyLocation] = useState<LatLng | null>(null);
   const [home, setHomeState] = useState<HomeLocation | null>(null);
   const [selected, setSelected] = useState<Trail | null>(null);
@@ -210,7 +206,7 @@ export default function MapTab() {
   // ride, whether it was started here (navigation) or on the Ride tab. Drives
   // the REC pill, the live position marker, and the ridden-path polyline.
   const [recording, setRecording] = useState(false);
-  const [elapsedS, setElapsedS] = useState(0);
+  const [recordStartedAt, setRecordStartedAt] = useState<string | null>(null);
 
   const initialRegion = useMemo(() => {
     const region = regionForPoints(mappedTrails.flatMap((t) => trackToLatLng(t.track)));
@@ -232,9 +228,19 @@ export default function MapTab() {
     };
   }, []);
 
-  const [region, setRegion] = useState<Region>(initialRegion);
-  const showSigns = region.latitudeDelta <= SIGNS_VISIBLE_MAX_DELTA;
-  const markerSize = markerSizeFor(region.latitudeDelta);
+  // The live camera region lives in a ref (read by zoom buttons and
+  // navigation); React state only changes when the zoom bucket does, so
+  // panning the map doesn't re-render this screen.
+  const regionRef = useRef<Region>(initialRegion);
+  const [zoomRegion, setZoomRegion] = useState<Region>(initialRegion);
+  const onRegionChangeComplete = (r: Region) => {
+    regionRef.current = r;
+    setZoomRegion((prev) =>
+      zoomBucket(prev.latitudeDelta) === zoomBucket(r.latitudeDelta) ? prev : r,
+    );
+  };
+  const showSigns = zoomRegion.latitudeDelta <= SIGNS_VISIBLE_MAX_DELTA;
+  const markerSize = markerSizeFor(zoomRegion.latitudeDelta);
 
   // Nudge overlapping sign badges apart for the current zoom.
   const displaced = useMemo(() => {
@@ -245,8 +251,8 @@ export default function MapTab() {
       base: m.base,
       ...badgeBox(m.trail, markerSize),
     }));
-    return spreadMarkers(items, region, screen);
-  }, [region, markerSize, showSigns, trailMarkers]);
+    return spreadMarkers(items, zoomRegion, screen);
+  }, [zoomRegion, markerSize, showSigns, trailMarkers]);
 
   // Route drawn ~5 m beside the underlying trail lines so both stay visible,
   // with chevrons along it showing the riding direction.
@@ -298,19 +304,24 @@ export default function MapTab() {
   // Ride tab too, and notices when a ride is finished elsewhere.
   useFocusEffect(
     useCallback(() => {
-      const sync = (ride = sharedRecorder.ride) => {
+      const sync = (ride: typeof sharedRecorder.ride = sharedRecorder.ride) => {
         setRecording(!!ride);
+        setRecordStartedAt(ride?.startedAt ?? null);
         if (!ride) return;
         setNavTrack(ride.points.map((pt) => ({ latitude: pt.lat, longitude: pt.lng })));
         setNavDistanceM(ride.distanceM);
-        setElapsedS(Math.max(0, Math.floor((Date.now() - new Date(ride.startedAt).getTime()) / 1000)));
       };
       sync();
+      // Track/distance update per GPS fix; the elapsed clock ticks inside
+      // RecPill so the map isn't re-rendered every second. A slow poll
+      // notices a ride finished on another tab.
       const unsub = sharedRecorder.addListener((ride) => sync(ride));
-      const timer = setInterval(() => sync(), 1000);
+      const poll = setInterval(() => {
+        if (!sharedRecorder.ride) sync(null);
+      }, 3000);
       return () => {
         unsub();
-        clearInterval(timer);
+        clearInterval(poll);
       };
     }, []),
   );
@@ -336,7 +347,7 @@ export default function MapTab() {
   const selectTrail = (trail: Trail) => {
     setSelected(trail);
     if (trail.track.length > 1) {
-      mapRef.current?.fitToCoordinates(trackToLatLng(trail.track), {
+      mapRef.current?.fitToCoordinates(trailCoords.get(trail.id) ?? trackToLatLng(trail.track), {
         edgePadding: { top: 110, right: 56, bottom: 300, left: 56 },
         animated: true,
       });
@@ -350,7 +361,7 @@ export default function MapTab() {
       return;
     }
     const dest = trailDestEndpoint(trail);
-    if (dest) setDraft((d) => ({ ...d, to: dest, result: null }));
+    if (dest) updateDraft({ to: dest });
   };
 
   const onMapPress = (e: MapPressEvent) => {
@@ -364,13 +375,13 @@ export default function MapTab() {
     }
     const pin: Endpoint = { kind: 'pin', coord: e.nativeEvent.coordinate, label: 'Map pin' };
     if (pinTarget === 'from') {
-      setDraft((d) => ({ ...d, from: pin, result: null }));
+      updateDraft({ from: pin });
       setPinTarget('to');
     } else if (!draft.from && !myLocation) {
       // No usable start yet: first tap places the start, like before.
-      setDraft((d) => ({ ...d, from: pin, result: null }));
+      updateDraft({ from: pin });
     } else {
-      setDraft((d) => ({ ...d, to: pin, result: null }));
+      updateDraft({ to: pin });
     }
   };
 
@@ -380,6 +391,7 @@ export default function MapTab() {
     const MIN_DELTA = 0.0006;
     const MAX_DELTA = 2;
     const clamp = (v: number) => Math.min(MAX_DELTA, Math.max(MIN_DELTA, v));
+    const region = regionRef.current;
     mapRef.current?.animateToRegion(
       {
         latitude: region.latitude,
@@ -438,20 +450,33 @@ export default function MapTab() {
       });
   };
 
-  const buildRoute = () => {
+  /** Change the route's start, destination or detour budget. The route
+   * rebuilds immediately whenever both ends are known (planning is
+   * synchronous and cheap; connectors are refined in the background). */
+  const updateDraft = (patch: Partial<Pick<RouteDraft, 'from' | 'to' | 'detourKm'>>) => {
+    const next = { ...draft, ...patch, result: null };
+    const from =
+      next.from ??
+      (myLocation ? ({ kind: 'gps', coord: myLocation, label: 'My location' } as Endpoint) : null);
+    if (!from || !next.to) {
+      refineToken.current += 1;
+      setRefining(false);
+      setDraft(next);
+      return;
+    }
+    const { result, destCoord } = buildBestRoute(from.coord, next.to, next.detourKm);
+    setDraft({ ...next, from, to: { ...next.to, coord: destCoord }, result });
+    fitToRoute(result);
+    refineConnectors(result);
+  };
+
+  const swapEnds = () => {
+    if (!draft.to) return;
     const from =
       draft.from ??
       (myLocation ? ({ kind: 'gps', coord: myLocation, label: 'My location' } as Endpoint) : null);
-    if (!from || !draft.to) return;
-    const { result, destCoord } = buildBestRoute(from.coord, draft.to, draft.detourKm);
-    setDraft((d) => ({
-      ...d,
-      from,
-      to: d.to ? { ...d.to, coord: destCoord } : d.to,
-      result,
-    }));
-    fitToRoute(result);
-    refineConnectors(result);
+    if (!from) return;
+    updateDraft({ from: draft.to, to: from });
   };
 
   /** In-app replacement for "directions to trail start": route from the
@@ -473,7 +498,7 @@ export default function MapTab() {
         fitToRoute(result);
         refineConnectors(result);
       } else {
-        setDraft((d) => ({ ...d, to: dest, result: null }));
+        updateDraft({ to: dest });
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -527,9 +552,15 @@ export default function MapTab() {
       const last = ride.points[ride.points.length - 1];
       if (last) {
         const pos = { latitude: last.lat, longitude: last.lng };
-        setActiveLeg(nearestLegIndex(route, pos));
+        setActiveLeg((prev) => nearestLegIndex(route, pos, prev ?? 0));
+        // Follow the rider but keep whatever zoom they chose.
+        const { latitudeDelta, longitudeDelta } = regionRef.current;
         mapRef.current?.animateToRegion(
-          { ...pos, latitudeDelta: 0.006, longitudeDelta: 0.006 },
+          {
+            ...pos,
+            latitudeDelta: Math.min(latitudeDelta, 0.02),
+            longitudeDelta: Math.min(longitudeDelta, 0.02),
+          },
           750,
         );
       }
@@ -594,24 +625,14 @@ export default function MapTab() {
             Alert.alert('No location', 'Location permission is needed to start from here.');
             return;
           }
-          setDraft((d) => ({
-            ...d,
-            from: { kind: 'gps', coord: loc, label: 'My location' },
-            result: null,
-          }));
+          updateDraft({ from: { kind: 'gps', coord: loc, label: 'My location' } });
         }}
       />
       {home && (
         <Chip
           label="Home"
           active={draft.from?.kind === 'home'}
-          onPress={() =>
-            setDraft((d) => ({
-              ...d,
-              from: { kind: 'home', coord: home, label: 'Home' },
-              result: null,
-            }))
-          }
+          onPress={() => updateDraft({ from: { kind: 'home', coord: home, label: 'Home' } })}
         />
       )}
       <Chip
@@ -630,13 +651,7 @@ export default function MapTab() {
         <Chip
           label="Home"
           active={draft.to?.kind === 'home'}
-          onPress={() =>
-            setDraft((d) => ({
-              ...d,
-              to: { kind: 'home', coord: home, label: 'Home' },
-              result: null,
-            }))
-          }
+          onPress={() => updateDraft({ to: { kind: 'home', coord: home, label: 'Home' } })}
         />
       )}
       <Chip
@@ -664,7 +679,7 @@ export default function MapTab() {
         showsMyLocationButton
         moveOnMarkerPress={false}
         onPress={onMapPress}
-        onRegionChangeComplete={setRegion}>
+        onRegionChangeComplete={onRegionChangeComplete}>
         {mappedTrails.map((trail) => {
           const isSelected = selected?.id === trail.id;
           const onRoute = routeTrailIds.has(trail.id);
@@ -673,7 +688,7 @@ export default function MapTab() {
           return (
             <Polyline
               key={trail.id}
-              coordinates={trackToLatLng(trail.track)}
+              coordinates={trailCoords.get(trail.id) ?? []}
               strokeColor={
                 dimmed
                   ? '#9AA09C44'
@@ -700,6 +715,7 @@ export default function MapTab() {
                   : selected !== null && selected.id !== m.trail.id
               }
               size={markerSize}
+              refresh={iconsReady}
               onPress={() => onTrailPress(m.trail)}
             />
           ))}
@@ -766,17 +782,15 @@ export default function MapTab() {
         )}
       </MapView>
 
+      <IconPreloader
+        key={trailsVersion}
+        trails={mappedTrails}
+        onReady={() => setIconsReady((v) => !v)}
+      />
+
       {/* GPS recording status: red dot + elapsed time + distance so far */}
-      {recording && (
-        <View
-          style={[
-            styles.recPill,
-            { top: insets.top + 12, backgroundColor: p.surface, borderColor: p.border },
-          ]}>
-          <View style={styles.recDot} />
-          <Text style={[styles.recText, { color: p.text }]}>{formatElapsed(elapsedS)}</Text>
-          <Text style={[styles.recText, { color: p.muted }]}>{formatKm(navDistanceM)}</Text>
-        </View>
+      {recording && recordStartedAt && (
+        <RecPill top={insets.top + 12} startedAt={recordStartedAt} distanceM={navDistanceM} />
       )}
 
       {/* Route-mode toggle */}
@@ -924,8 +938,8 @@ export default function MapTab() {
           <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
             <Text style={{ color: p.muted, fontSize: 12 }}>
               {draft.to
-                ? `To ${draft.to.label} — tap the map or a trail to change it.`
-                : 'Tap the map or a trail sign to set your destination.'}
+                ? `To ${draft.to.label}. Tap the map or a trail to change it.`
+                : 'Tap the map or a trail sign to set your destination. The route builds itself.'}
             </Text>
             {fromChips}
             {toChips}
@@ -934,9 +948,9 @@ export default function MapTab() {
               {DETOUR_OPTIONS_KM.map((km) => (
                 <Chip
                   key={km}
-                  label={`${km} km`}
+                  label={`+${km} km`}
                   active={draft.detourKm === km}
-                  onPress={() => setDraft((d) => ({ ...d, detourKm: km, result: null }))}
+                  onPress={() => updateDraft({ detourKm: km })}
                 />
               ))}
             </Row>
@@ -965,28 +979,21 @@ export default function MapTab() {
             )}
           </ScrollView>
           <View style={{ gap: 6, marginTop: 6 }}>
-            {draft.result ? (
-              <>
-                <Button label="Start navigation" onPress={startNavigation} />
-                <Button label="Rebuild" variant="secondary" onPress={buildRoute} />
-              </>
-            ) : (
+            {draft.result && <Button label="Start navigation" onPress={startNavigation} />}
+            <Row>
+              {draft.to && (draft.from || myLocation) && (
+                <Button label="Swap" variant="secondary" onPress={swapEnds} style={{ flex: 1 }} />
+              )}
               <Button
-                label="Build route"
-                disabled={!draft.to || (!draft.from && !myLocation)}
-                onPress={buildRoute}
+                label="Clear"
+                variant="secondary"
+                style={{ flex: 1 }}
+                onPress={() => {
+                  setPinTarget('to');
+                  updateDraft({ from: null, to: null });
+                }}
               />
-            )}
-            <Button
-              label="Clear"
-              variant="secondary"
-              onPress={() => {
-                refineToken.current += 1;
-                setRefining(false);
-                setPinTarget('to');
-                setDraft({ from: null, to: null, detourKm: draft.detourKm, result: null });
-              }}
-            />
+            </Row>
           </View>
         </View>
       )}
@@ -1196,3 +1203,22 @@ const styles = StyleSheet.create({
   },
   sheetTitle: { fontSize: 17, fontWeight: '700' },
 });
+
+/** GPS recording status: red dot, elapsed time (ticks on its own so the map
+ * screen doesn't re-render every second), and distance so far. */
+function RecPill({ top, startedAt, distanceM }: { top: number; startedAt: string; distanceM: number }) {
+  const p = usePalette();
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+  const elapsedS = Math.max(0, Math.floor((now - new Date(startedAt).getTime()) / 1000));
+  return (
+    <View style={[styles.recPill, { top, backgroundColor: p.surface, borderColor: p.border }]}>
+      <View style={styles.recDot} />
+      <Text style={[styles.recText, { color: p.text }]}>{formatElapsed(elapsedS)}</Text>
+      <Text style={[styles.recText, { color: p.muted }]}>{formatKm(distanceM)}</Text>
+    </View>
+  );
+}
