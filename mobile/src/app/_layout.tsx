@@ -5,6 +5,8 @@ import { ActivityIndicator, View, useColorScheme } from 'react-native';
 import { Brand } from '@/constants/brand';
 import { AuthProvider, useAuth } from '@/lib/auth';
 import { syncCatalogue } from '@/lib/catalogue';
+// Importing rides registers the background GPS task at launch.
+import { sharedRecorder } from '@/lib/rides';
 
 function RootNavigator() {
   const { session, guest, loading } = useAuth();
@@ -43,6 +45,7 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   useEffect(() => {
     syncCatalogue();
+    sharedRecorder.restore();
   }, []);
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

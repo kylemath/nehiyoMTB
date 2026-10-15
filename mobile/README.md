@@ -27,7 +27,8 @@ The web build is published with the website at **nehiyomtb.ca/app**.
 - **Trail timing from photos** — a start-sign photo plus an end-sign photo on
   the same ride yields your trail time (photo timestamps are the clock, so no
   live upload is needed; photo-taking overhead is the same for everyone).
-- **Ride logging** — record the GPS track of a ride, export it as GPX, and sync
+- **Ride logging** — record the GPS track of a ride (keeps recording with the
+  screen locked on iOS/Android; see below), export it as GPX, and sync
   photo timestamps against the track to detect photo stops and estimate
   riding-only speed.
 - **Leaderboards** — overall, this-week, and weekend boards (points and names
@@ -110,6 +111,29 @@ src/constants/      brand tokens & data-use copy (single rename point)
 src/lib/            supabase client, auth, geo, routing, captures, rides
 src/data/           generated trail dataset
 ```
+
+## Background ride recording and installing on a phone
+
+Ride recording uses a background location task (`src/lib/rides.ts`), so the
+track keeps filling with the phone locked: Android shows a "Recording your
+ride" notification, iOS shows the blue location pill. Riders are asked to
+allow location **all the time**; if they decline, recording still works while
+the app is open. The in-progress ride is saved every few seconds, so a crash
+or the OS killing the app never loses the ride.
+
+Background location does **not** work in Expo Go or in the browser build
+(browsers stop GPS when the screen locks; the web build keeps the screen awake
+while recording instead). To test it, install a real build:
+
+```bash
+cd mobile
+npx eas build -p android --profile preview   # installable .apk (needs a free Expo account)
+# or, with Android Studio installed and a phone plugged in:
+npx expo run:android
+```
+
+For iPhone, `npx expo run:ios` (Xcode) or an EAS build with an Apple
+developer account.
 
 ## Native notes
 

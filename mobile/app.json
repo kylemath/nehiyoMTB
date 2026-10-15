@@ -18,7 +18,11 @@
     },
     "android": {
       "package": "com.edmontontrailmaps.app",
-      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION", "CAMERA"],
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "CAMERA"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#1E5E46",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -47,7 +51,11 @@
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "Your location is used to show you on the trail map, verify sign captures, and record rides you choose to log."
+          "locationWhenInUsePermission": "Your location is used to show you on the trail map, verify sign captures, and record rides you choose to log.",
+          "locationAlwaysAndWhenInUsePermission": "Allow \"Always\" so a ride keeps recording while your phone is locked in your pocket. Location is only tracked while you are recording a ride.",
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true,
+          "isIosBackgroundLocationEnabled": true
         }
       ],
       [
