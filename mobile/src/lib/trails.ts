@@ -27,6 +27,9 @@ export type Trail = {
   /** Remote sign icon on the website, used when no icon is bundled yet
    * (signs added to the catalogue after this build). */
   iconUrl?: string | null;
+  /** Shopify listing for the physical sign (from the catalogue's `shopify`
+   * block), or null when it isn't for sale yet. */
+  shop?: { variantId: string; priceCAD: number | null } | null;
 };
 
 /** STL-rendered sign icon (same art as the web app), or null if none yet.

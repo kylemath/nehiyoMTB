@@ -4,12 +4,14 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import MapView, { Marker, Polyline } from '@/components/map';
 import { openDirections } from '@/app/(tabs)/map';
+import { KomCard } from '@/components/kom-card';
 import { DifficultyBadge } from '@/components/route-itinerary';
 import { TrailIconBadge } from '@/components/trail-icon';
 import { Body, Button, Card, Row, Screen, Subtitle, Title, usePalette } from '@/components/ui';
 import { Brand } from '@/constants/brand';
 import { LocalCapture, listCaptures, pairTrailTimes } from '@/lib/captures';
 import { formatDuration, formatKm, regionForPoints } from '@/lib/geo';
+import { buySign, formatPrice } from '@/lib/shop';
 import { trackToLatLng, trailById, useTrailsVersion } from '@/lib/trails';
 
 /** Filament colour names from the catalogue → display colours. */
@@ -94,6 +96,14 @@ export default function TrailDetail() {
                 ))}
               </Row>
             )}
+            {trail.shop && (
+              <Button
+                label={`Buy this sign${formatPrice(trail) ? ` · ${formatPrice(trail)}` : ''}`}
+                variant="secondary"
+                onPress={() => buySign(trail)}
+                style={{ alignSelf: 'stretch' }}
+              />
+            )}
           </Card>
         )}
 
@@ -168,6 +178,8 @@ export default function TrailDetail() {
             ))}
           </Card>
         )}
+
+        <KomCard trail={trail} />
 
         {trail.start?.lat != null && (
           <>

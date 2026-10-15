@@ -115,6 +115,13 @@ def export_icon(src, dest, size):
     return round(nw / nh, 3)
 
 
+def shop_block(block):
+    """The sign's Shopify listing for the app's "Buy this sign" button."""
+    if not block or not block.get("variantId") or block.get("available") is False:
+        return None
+    return {"variantId": str(block["variantId"]), "priceCAD": block.get("priceCAD")}
+
+
 def main():
     with open(CATALOGUE) as f:
         catalogue = json.load(f)
@@ -164,6 +171,7 @@ def main():
             "end": {"lat": end.get("lat"), "lng": end.get("lng")} if end else None,
             "lengthM": round(track_length_m(track), 1) if len(track) > 1 else None,
             "track": decimate(track, MAX_TRACK_POINTS),
+            "shop": shop_block(model.get("shopify")),
         })
 
     mapped = [t for t in trails if t["start"] and t["start"]["lat"] is not None]

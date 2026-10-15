@@ -40,6 +40,7 @@ type CatalogueModel = {
   description?: string | null;
   status?: string;
   colors?: string[];
+  shopify?: { variantId?: string | null; priceCAD?: number | null; available?: boolean };
   pageContent?: {
     accentColor?: string;
     trailforks?: {
@@ -77,6 +78,11 @@ function docsUrl(src: string | undefined): string | null {
   return encodeURI(siteUrl() + path);
 }
 
+function shopFrom(block: CatalogueModel['shopify']): Trail['shop'] {
+  if (!block?.variantId || block.available === false) return null;
+  return { variantId: String(block.variantId), priceCAD: block.priceCAD ?? null };
+}
+
 /** Mirrors the trail shape written by tools/export_trails_for_app.py. */
 export function trailsFromCatalogue(catalogue: { models?: CatalogueModel[] }): Trail[] {
   return (catalogue.models ?? []).map((model) => {
@@ -108,6 +114,7 @@ export function trailsFromCatalogue(catalogue: { models?: CatalogueModel[] }): T
       lengthM: track.length > 1 ? Math.round(trackLengthM(track) * 10) / 10 : null,
       track: decimate(track, MAX_TRACK_POINTS),
       iconUrl,
+      shop: shopFrom(model.shopify),
     };
   });
 }
