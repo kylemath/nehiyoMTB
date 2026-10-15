@@ -63,7 +63,8 @@
         {
           "cameraPermission": "The sign hunt uses your camera to photograph trail signs. Photos stay on your phone unless you choose to upload them."
         }
-      ]
+      ],
+      "@maplibre/maplibre-react-native"
     ],
     "experiments": {
       "baseUrl": "/app",
