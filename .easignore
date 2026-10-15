@@ -2,7 +2,7 @@
 # git repo, and the sign sources, docs/ and photos add ~1.5 GB, so upload only
 # mobile/. This file replaces .gitignore for EAS, so mobile's ignores repeat here.
 /*
-!/mobile/
+!/mobile
 
 mobile/node_modules/
 mobile/.expo/
