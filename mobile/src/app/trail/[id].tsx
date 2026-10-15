@@ -10,7 +10,7 @@ import { Body, Button, Card, Row, Screen, Subtitle, Title, usePalette } from '@/
 import { Brand } from '@/constants/brand';
 import { LocalCapture, listCaptures, pairTrailTimes } from '@/lib/captures';
 import { formatDuration, formatKm, regionForPoints } from '@/lib/geo';
-import { trackToLatLng, trailById } from '@/lib/trails';
+import { trackToLatLng, trailById, useTrailsVersion } from '@/lib/trails';
 
 /** Filament colour names from the catalogue → display colours. */
 const FILAMENT_COLORS: Record<string, string> = {
@@ -38,6 +38,7 @@ export default function TrailDetail() {
   const p = usePalette();
   const { id } = useLocalSearchParams<{ id: string }>();
   const navigation = useNavigation();
+  useTrailsVersion();
   const trail = trailById(id);
   const [captures, setCaptures] = useState<LocalCapture[]>([]);
 

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "EdmontonTrailMaps",
+    "name": "NehiyoMTB",
     "slug": "edmonton-trail-maps",
     "version": "0.1.0",
     "orientation": "portrait",
@@ -58,6 +58,7 @@
       ]
     ],
     "experiments": {
+      "baseUrl": "/app",
       "typedRoutes": true,
       "reactCompiler": true
     }

@@ -1,3 +1,5 @@
+import { useSyncExternalStore } from 'react';
+
 import rawData from '@/data/trails.json';
 import { trailIcons } from '@/data/trail-assets';
 import { LatLng } from '@/lib/geo';
@@ -22,13 +24,19 @@ export type Trail = {
   end: { lat: number | null; lng: number | null } | null;
   lengthM: number | null;
   track: [number, number][];
+  /** Remote sign icon on the website, used when no icon is bundled yet
+   * (signs added to the catalogue after this build). */
+  iconUrl?: string | null;
 };
 
 /** STL-rendered sign icon (same art as the web app), or null if none yet.
  * This is the one piece of sign artwork the app ships per trail — used for
  * map markers, list rows, and trail pages. */
-export function trailIcon(id: string): number | null {
-  return trailIcons[id] ?? null;
+export function trailIcon(id: string): number | { uri: string } | null {
+  const bundled = trailIcons[id];
+  if (bundled != null) return bundled;
+  const url = trailById(id)?.iconUrl;
+  return url ? { uri: url } : null;
 }
 
 export type SignKind = 'start' | 'end';
@@ -41,11 +49,41 @@ export type TrailSign = {
   basePoints: number;
 };
 
-export const trails: Trail[] = (rawData as { trails: Trail[] }).trails;
+// The trail set is live: it starts from the bundled snapshot and is replaced
+// in place by applyTrails() once the website catalogue loads (see
+// lib/catalogue.ts). The arrays keep their identity so module-level imports
+// stay valid; components that render trail lists call useTrailsVersion() so
+// they re-render when the set changes.
+export const trails: Trail[] = [];
+export const mappedTrails: Trail[] = [];
+export const allSigns: TrailSign[] = [];
 
-export const mappedTrails = trails.filter(
-  (t) => t.track.length > 1 && t.start?.lat != null,
-);
+let version = 0;
+const listeners = new Set<() => void>();
+
+export function applyTrails(next: Trail[]) {
+  trails.splice(0, trails.length, ...next);
+  mappedTrails.splice(
+    0,
+    mappedTrails.length,
+    ...next.filter((t) => t.track.length > 1 && t.start?.lat != null),
+  );
+  allSigns.splice(0, allSigns.length, ...mappedTrails.flatMap(signsFor));
+  version += 1;
+  listeners.forEach((l) => l());
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
+/** Bumps whenever the live catalogue replaces the trail set. */
+export function useTrailsVersion(): number {
+  return useSyncExternalStore(subscribe, () => version, () => version);
+}
 
 export function trailById(id: string): Trail | undefined {
   return trails.find((t) => t.id === id);
@@ -61,7 +99,7 @@ export function displayName(t: Trail): string {
     : t.title;
 }
 
-export const allSigns: TrailSign[] = mappedTrails.flatMap((t) => {
+function signsFor(t: Trail): TrailSign[] {
   const signs: TrailSign[] = [];
   if (t.start?.lat != null && t.start.lng != null) {
     signs.push({
@@ -82,8 +120,10 @@ export const allSigns: TrailSign[] = mappedTrails.flatMap((t) => {
     });
   }
   return signs;
-});
+}
 
 export function signById(id: string): TrailSign | undefined {
   return allSigns.find((s) => s.id === id);
 }
+
+applyTrails((rawData as { trails: Trail[] }).trails);

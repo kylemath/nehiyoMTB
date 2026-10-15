@@ -1,8 +1,10 @@
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
+import { useEffect } from 'react';
 import { ActivityIndicator, View, useColorScheme } from 'react-native';
 
 import { Brand } from '@/constants/brand';
 import { AuthProvider, useAuth } from '@/lib/auth';
+import { syncCatalogue } from '@/lib/catalogue';
 
 function RootNavigator() {
   const { session, guest, loading } = useAuth();
@@ -39,6 +41,9 @@ function RootNavigator() {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  useEffect(() => {
+    syncCatalogue();
+  }, []);
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <AuthProvider>

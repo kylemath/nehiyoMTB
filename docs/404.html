@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NehiyoMTB</title>
+  <script>
+    // GitHub Pages serves this page for any missing path. The trail app at
+    // /app/ is a single-page app, so deep links like /app/map or
+    // /app/trail/kahkakiw boot the app shell in place (the URL is kept and
+    // the app's router picks the screen).
+    if (location.pathname === '/app' || location.pathname.indexOf('/app/') === 0) {
+      fetch('/app/index.html', { cache: 'no-cache' })
+        .then(function (r) { return r.text(); })
+        .then(function (html) { document.open(); document.write(html); document.close(); });
+    }
+  </script>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center;
+      font-family: system-ui, -apple-system, sans-serif; background: #fafaf7; color: #101512; }
+    a { color: #1e5e46; }
+    @media (prefers-color-scheme: dark) { body { background: #161b18; color: #fafaf7; } a { color: #2e8b68; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Trail not found</h1>
+    <p>That page isn't here. <a href="/">Back to the trail signs</a> or <a href="/app/">open the trail map</a>.</p>
+  </main>
+</body>
+</html>

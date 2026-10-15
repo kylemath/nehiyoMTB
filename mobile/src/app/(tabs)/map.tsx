@@ -32,7 +32,14 @@ import {
   offsetPath,
   routeChevrons,
 } from '@/lib/routing';
-import { Trail, displayName, mappedTrails, trackToLatLng, trailById } from '@/lib/trails';
+import {
+  Trail,
+  displayName,
+  mappedTrails,
+  trackToLatLng,
+  trailById,
+  useTrailsVersion,
+} from '@/lib/trails';
 
 const DETOUR_OPTIONS_KM = [1, 2, 5, 10];
 
@@ -75,13 +82,15 @@ function formatElapsed(totalS: number): string {
 type TrailMarkerItem = { key: string; trail: Trail; base: LatLng };
 
 /** One icon per trail, anchored at the central point of its track. */
-const trailMarkers: TrailMarkerItem[] = mappedTrails.map((trail) => {
-  const mid = trail.track[Math.floor(trail.track.length / 2)];
-  const base = mid
-    ? { latitude: mid[0], longitude: mid[1] }
-    : { latitude: trail.start!.lat!, longitude: trail.start!.lng! };
-  return { key: trail.id, trail, base };
-});
+function buildTrailMarkers(): TrailMarkerItem[] {
+  return mappedTrails.map((trail) => {
+    const mid = trail.track[Math.floor(trail.track.length / 2)];
+    const base = mid
+      ? { latitude: mid[0], longitude: mid[1] }
+      : { latitude: trail.start!.lat!, longitude: trail.start!.lng! };
+    return { key: trail.id, trail, base };
+  });
+}
 
 /** Start/end coordinates of a trail, deduped for loops. */
 function trailEndpoints(trail: Trail): LatLng[] {
@@ -170,6 +179,10 @@ export default function MapTab() {
   const p = usePalette();
   const insets = useSafeAreaInsets();
   const mapRef = useRef<MapView>(null);
+  // Re-render when the live catalogue replaces the trail set.
+  const trailsVersion = useTrailsVersion();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const trailMarkers = useMemo(() => buildTrailMarkers(), [trailsVersion]);
   const [myLocation, setMyLocation] = useState<LatLng | null>(null);
   const [home, setHomeState] = useState<HomeLocation | null>(null);
   const [selected, setSelected] = useState<Trail | null>(null);
@@ -233,7 +246,7 @@ export default function MapTab() {
       ...badgeBox(m.trail, markerSize),
     }));
     return spreadMarkers(items, region, screen);
-  }, [region, markerSize, showSigns]);
+  }, [region, markerSize, showSigns, trailMarkers]);
 
   // Route drawn ~5 m beside the underlying trail lines so both stay visible,
   // with chevrons along it showing the riding direction.

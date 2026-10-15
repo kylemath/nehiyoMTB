@@ -40,8 +40,10 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
+    "@types/react-dom": "~19.2.0",
     "eslint": "^9.0.0",
     "eslint-config-expo": "~56.0.4",
+    "maplibre-gl": "^4.7.1",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -50,7 +52,8 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "export:site": "expo export --platform web --output-dir ../docs/app"
   },
   "private": true
 }

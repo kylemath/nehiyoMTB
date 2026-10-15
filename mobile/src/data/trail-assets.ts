@@ -40,6 +40,15 @@ export const trailIcons: Record<string, number> = {
   'root_canal': require('@/assets/trail-icons/root_canal.png'),
   'selkirk_knights': require('@/assets/trail-icons/selkirk_knights.png'),
   'flatter_pete': require('@/assets/trail-icons/flatter_pete.png'),
+  'happy_ending': require('@/assets/trail-icons/happy_ending.png'),
+  'old_timer_s': require('@/assets/trail-icons/old_timer_s.png'),
+  'mark_messier': require('@/assets/trail-icons/mark_messier.png'),
+  'hustler': require('@/assets/trail-icons/hustler.png'),
+  'andre_s_trail': require('@/assets/trail-icons/andre_s_trail.png'),
+  'birdhouse_trail': require('@/assets/trail-icons/birdhouse_trail.png'),
+  'risky_business': require('@/assets/trail-icons/risky_business.png'),
+  'mustang': require('@/assets/trail-icons/mustang.png'),
+  'the_trap': require('@/assets/trail-icons/the_trap.png'),
 };
 
 /** width / height of each trimmed sign icon. */
@@ -80,6 +89,15 @@ export const trailIconAspect: Record<string, number> = {
   'peckers_hollow': 0.542,
   'coalminer_s_daughter': 0.583,
   'root_canal': 0.771,
-  'selkirk_knights': 0.792,
+  'selkirk_knights': 0.656,
   'flatter_pete': 1.811,
+  'happy_ending': 0.562,
+  'old_timer_s': 0.552,
+  'mark_messier': 0.531,
+  'hustler': 0.531,
+  'andre_s_trail': 0.531,
+  'birdhouse_trail': 0.635,
+  'risky_business': 0.531,
+  'mustang': 0.573,
+  'the_trap': 0.531,
 };

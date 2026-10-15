@@ -8,10 +8,11 @@ import { TrailIconBadge } from '@/components/trail-icon';
 import { Button, Card, Screen, Subtitle, Title, usePalette } from '@/components/ui';
 import { Brand } from '@/constants/brand';
 import { LocalCapture, listCaptures, localScore } from '@/lib/captures';
-import { Trail, displayName, mappedTrails } from '@/lib/trails';
+import { Trail, displayName, mappedTrails, useTrailsVersion } from '@/lib/trails';
 
 export default function HuntTab() {
   const p = usePalette();
+  const trailsVersion = useTrailsVersion();
   const insets = useSafeAreaInsets();
   const [captures, setCaptures] = useState<LocalCapture[]>([]);
 
@@ -52,6 +53,7 @@ export default function HuntTab() {
     <Screen>
       <FlatList
         data={mappedTrails}
+        extraData={trailsVersion}
         keyExtractor={(t) => t.id}
         renderItem={renderTrail}
         // Mount and draw every row up front (the list is small): this is what

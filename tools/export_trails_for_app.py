@@ -8,7 +8,9 @@ Reads docs/catalogue.json (the source of truth for the sign set) and writes:
   - supabase/seed.sql                  trails + signs reference rows
 
 Run from the repo root:  python3 tools/export_trails_for_app.py
-Whenever the docs catalogue changes, re-run this and the app picks it up.
+The app fetches the live catalogue from the website at launch, so this only
+refreshes the bundled first-launch/offline snapshot and the database seed;
+re-run it before a store build.
 """
 
 import glob
