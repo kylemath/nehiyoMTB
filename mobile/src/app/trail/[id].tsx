@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import MapView, { Marker, Polyline } from '@/components/map';
-import { KomCard } from '@/components/kom-card';
 import { DifficultyBadge } from '@/components/route-itinerary';
 import { TrailIconBadge } from '@/components/trail-icon';
 import { Body, Button, Card, Row, Screen, Subtitle, Title, usePalette } from '@/components/ui';
@@ -170,8 +169,6 @@ export default function TrailDetail() {
             ))}
           </Card>
         )}
-
-        <KomCard trail={trail} />
 
         {trail.start?.lat != null && (
           <>
