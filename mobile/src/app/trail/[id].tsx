@@ -11,7 +11,7 @@ import { Brand } from '@/constants/brand';
 import { LocalCapture, listCaptures, pairTrailTimes } from '@/lib/captures';
 import { openDirections } from '@/lib/directions';
 import { formatDuration, formatKm, regionForPoints } from '@/lib/geo';
-import { buySign, formatPrice } from '@/lib/shop';
+import { buySign } from '@/lib/shop';
 import { trackToLatLng, trailById, useTrailsVersion } from '@/lib/trails';
 
 /** Filament colour names from the catalogue → display colours. */
@@ -95,14 +95,6 @@ export default function TrailDetail() {
                   </View>
                 ))}
               </Row>
-            )}
-            {trail.shop && (
-              <Button
-                label={`Buy this sign${formatPrice(trail) ? ` · ${formatPrice(trail)}` : ''}`}
-                variant="secondary"
-                onPress={() => buySign(trail)}
-                style={{ alignSelf: 'stretch' }}
-              />
             )}
           </Card>
         )}
@@ -202,6 +194,14 @@ export default function TrailDetail() {
           </>
         )}
         <Button label="Capture a sign here" variant="secondary" onPress={() => router.push('/capture')} />
+        {/* Kept quiet and price-free, like the "Get one" link on the site's sign pages. */}
+        {trail.shop && (
+          <Pressable onPress={() => buySign(trail)} hitSlop={8} style={styles.getOne}>
+            <Text style={{ color: p.muted, fontSize: 13, textDecorationLine: 'underline' }}>
+              Get one
+            </Text>
+          </Pressable>
+        )}
       </ScrollView>
     </Screen>
   );
@@ -220,6 +220,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 const styles = StyleSheet.create({
   map: { height: 220, borderRadius: 16 },
   mapHint: { fontSize: 12, textAlign: 'center', marginTop: 6 },
+  getOne: { alignSelf: 'center', paddingVertical: 8 },
   colorChip: {
     flexDirection: 'row',
     alignItems: 'center',

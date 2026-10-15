@@ -23,11 +23,6 @@ export function checkoutUrl(
   return `https://${SHOP_DOMAIN}/cart/${variantId}:1${query ? `?${query}` : ''}`;
 }
 
-export function formatPrice(trail: Trail): string | null {
-  const price = trail.shop?.priceCAD;
-  return price != null ? `$${price}` : null;
-}
-
 export async function buySign(trail: Trail): Promise<void> {
   if (!trail.shop) return;
   await WebBrowser.openBrowserAsync(
