@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nehiyoMTB: Indigenous Trail Signage Catalogue</title>
+    <title>nehiyoMTB: Plains Cree Trail Signs of Edmonton</title>
+    <meta name="description" content="Plains Cree (nēhiyawēwin) names for Edmonton's mountain-bike trails: the word behind each sign, its 3D-printed design, and where to find it.">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Canadian+Aboriginal:wght@400;600;700&display=swap">
     <script type="importmap">
         {
             "imports": {
@@ -32,7 +37,8 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', 'Noto Sans Canadian Aboriginal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
             line-height: 1.7;
             color: var(--text);
             background: var(--bg);
@@ -107,6 +113,30 @@
 
         .catalogue-list {
             min-width: 0;
+        }
+
+        .catalogue-brand {
+            padding: 0.35rem 0.25rem 0.9rem;
+            margin-bottom: 0.7rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .catalogue-brand-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: var(--text);
+        }
+
+        .catalogue-brand-name span {
+            color: var(--accent);
+        }
+
+        .catalogue-brand-blurb {
+            margin-top: 0.3rem;
+            font-size: 0.78rem;
+            line-height: 1.45;
+            color: var(--text-muted);
         }
 
         .column-resizer {
@@ -1955,6 +1985,10 @@
                     id="mobile-menu-close"
                     aria-label="Close trail signs menu"
                 >&times;</button>
+                <div class="catalogue-brand">
+                    <div class="catalogue-brand-name">nehiyo<span>MTB</span></div>
+                    <p class="catalogue-brand-blurb">Plains Cree names for Edmonton's mountain-bike trails. Pick a sign to learn its word, see its 3D-printed design and find it on the map.</p>
+                </div>
                 <div class="catalogue-grid" id="catalogue-grid">
                     <div class="loading">Loading catalogue...</div>
                 </div>

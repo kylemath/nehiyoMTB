@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Purgatory • Interactive Poster</title>
+    <script>if (window.self !== window.top) document.documentElement.classList.add("is-embedded");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Canadian+Aboriginal:wght@400;600;700&display=swap" />
     <style>
     :root{
       --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#dc3545;--accent2:#b42b39;--line:#dee2e6;--chip:#e9ecef;--ok:#dc3545;--primary-bg:#fae1e3;--primary-text:#000000;--formula-bg:#fef7f8;--formula-border:#dc3545;--secondary-bg:#fceff0;--secondary-border:#f4c2c7
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    body{margin:0;font-family:Inter, "Noto Sans Canadian Aboriginal", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
     a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
     a:hover{border-bottom-color:var(--accent)}
     .container{max-width:1100px;margin:0 auto;padding:16px}
@@ -65,7 +69,7 @@
     @media (max-width: 960px){.grid{grid-template-columns:1fr}}
     @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
     .tooltip{position:relative}
-    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:normal;width:max-content;max-width:min(320px, 80vw);text-align:left;line-height:1.4;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
     .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
     .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
     .get-one{margin:28px 0 4px;padding:16px 4px 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}
@@ -75,6 +79,33 @@
     .get-one-mount:empty{display:none}
     .get-one-link{display:inline-block;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}
     .get-one-link:hover,.get-one-link:focus{background:var(--accent);color:#ffffff}
+    body{-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    header{border-radius:16px;border-bottom-width:2px}
+    h1{font-size:clamp(24px, 4.2vw + 8px, 36px);line-height:1.15;text-wrap:balance}
+    .panel{border-radius:14px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)}
+    .panel h2{border-bottom-width:2px}
+    .primary-content,.story-box{border-radius:14px}
+    .kv{border-radius:12px}
+    .story-box p{max-width:68ch}
+    .back-link{color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)}
+    .is-embedded .back-link{display:none}
+    .shop-disabled-note{color:var(--muted);font-size:14px}
+    a:focus-visible,button:focus-visible,.part:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+    img{max-width:100%;height:auto}
+    @media (max-width: 640px){
+      .container{padding:12px}
+      header{padding:18px 14px}
+      .panel{padding:16px}
+      .grid{gap:12px}
+      .tag{font-size:12px;padding:5px 12px}
+      .row{flex-wrap:wrap}
+      .row .muted{order:1;flex:1 1 100%;font-size:14px;line-height:1.4}
+      .sro{white-space:normal}
+      .kvs{grid-template-columns:1fr}
+      .table th,.table td{padding:10px 10px;font-size:14px}
+      .trail-iframe{height:420px}
+    }
+    @media (prefers-reduced-motion: reduce){*{transition:none !important}}
     </style>
   </head>
   <body>
@@ -84,7 +115,7 @@
           <h1>Purgatory • kâsenamâkêw iskotêw • ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ</h1>
           <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
           <div style="margin-top:12px">
-            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+            <a class="back-link" href="../index.html" target="_top">← Back to Catalogue</a>
           </div>
         </div>
       </header>
@@ -96,11 +127,11 @@
         <div class="primary-content">
           <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">kâsenamâkêw iskotêw</div>
           <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
-              <span class="part tooltip" data-key="kaaseni-initial" data-tip="VTI initial: &lt;strong&gt;refuse, reject, hold back&lt;/strong&gt;. The kâ‑ here is the long‑â initial that anchors many Plains Cree verbs of &#x27;shutting off / blocking&#x27;; itwêwina lists the related VTI &lt;strong&gt;kâsenam&lt;/strong&gt; &#x27;s/he refuses, rejects it&#x27;." data-syll-id="kaaseni-initial-syll">kâseni‑</span>
-              <span class="part tooltip" data-key="am-vti" data-tip="VTI thematic: signals an inanimate object is being acted on (the &#x27;it&#x27; being refused). Hidden inside the surface form &lt;strong&gt;kâsenamâkêw&lt;/strong&gt;." data-syll-id="am-vti-syll">‑am‑</span>
-              <span class="part tooltip" data-key="aw-benef" data-tip="VTA benefactive / indefinite‑object suffix: &lt;strong&gt;&#x27;for / to people&#x27;&lt;/strong&gt;. Same applicative tail that turns &#x27;wipe it&#x27; into &#x27;wipe (it) for s.o.&#x27;, here turning &#x27;refuse it&#x27; into &#x27;refuse (it) to people&#x27;." data-syll-id="aw-benef-syll">‑âk(ê)‑</span>
-              <span class="part tooltip" data-key="ew-3to3p" data-tip="VTA 3→3′ indicative suffix: &lt;strong&gt;&#x27;s/he does it to him/her (an animate other)&#x27;&lt;/strong&gt;. Standard verb tail you also see on &lt;em&gt;kaskâwikanênêw&lt;/em&gt; &#x27;Back Breaker&#x27;." data-syll-id="ew-3to3p-syll">‑êw</span>
-              <span class="part tooltip" data-key="iskotew-fire" data-tip="NI noun: &lt;strong&gt;fire&lt;/strong&gt;. From Proto‑Algonquian *eškwete·wi; the same root sits inside &lt;em&gt;iskotêwâpoy&lt;/em&gt; &#x27;firewater / liquor&#x27; and &lt;em&gt;iskotêwân&lt;/em&gt; &#x27;matchstick&#x27;." data-syll-id="iskotew-fire-syll">iskotêw</span>
+              <span class="part tooltip" data-key="kaaseni-initial" data-tip="VTI initial: refuse, reject, hold back. The kâ‑ here is the long‑â initial that anchors many Plains Cree verbs of &#x27;shutting off / blocking&#x27;; itwêwina lists the related VTI kâsenam &#x27;s/he refuses, rejects it&#x27;." data-syll-id="kaaseni-initial-syll">kâseni‑</span>
+              <span class="part tooltip" data-key="am-vti" data-tip="VTI thematic: signals an inanimate object is being acted on (the &#x27;it&#x27; being refused). Hidden inside the surface form kâsenamâkêw." data-syll-id="am-vti-syll">‑am‑</span>
+              <span class="part tooltip" data-key="aw-benef" data-tip="VTA benefactive / indefinite‑object suffix: &#x27;for / to people&#x27;. Same applicative tail that turns &#x27;wipe it&#x27; into &#x27;wipe (it) for s.o.&#x27;, here turning &#x27;refuse it&#x27; into &#x27;refuse (it) to people&#x27;." data-syll-id="aw-benef-syll">‑âk(ê)‑</span>
+              <span class="part tooltip" data-key="ew-3to3p" data-tip="VTA 3→3′ indicative suffix: &#x27;s/he does it to him/her (an animate other)&#x27;. Standard verb tail you also see on kaskâwikanênêw &#x27;Back Breaker&#x27;." data-syll-id="ew-3to3p-syll">‑êw</span>
+              <span class="part tooltip" data-key="iskotew-fire" data-tip="NI noun: fire. From Proto‑Algonquian *eškwete·wi; the same root sits inside iskotêwâpoy &#x27;firewater / liquor&#x27; and iskotêwân &#x27;matchstick&#x27;." data-syll-id="iskotew-fire-syll">iskotêw</span>
               <span style="margin:0 8px">→</span>
               <strong style="font-size:20px">kâsenamâkêw iskotêw</strong>
           </div>
@@ -179,7 +210,7 @@
               <span class="syll-part tooltip" data-key="kaaseni-rel1" data-tip="kâseni‑" id="kaaseni-rel1-syll">ᑳᓭᓂ</span>
               <span class="syll-part tooltip" data-key="am-vti-rel1" data-tip="‑am" id="am-vti-rel1-syll">ᐊᒼ</span>
           </div>
-            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">itwêwina headword (Wolvengrey/CW). The plaque&#x27;s &lt;em&gt;kâsenamâkêw&lt;/em&gt; is the people‑object (VTA) sibling of this VTI &#x27;refuse it&#x27;.</p>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">itwêwina headword (Wolvengrey/CW). The plaque&#x27;s <em>kâsenamâkêw</em> is the people‑object (VTA) sibling of this VTI &#x27;refuse it&#x27;.</p>
           </div>
 
           <div class="kv" style="margin-top:12px">
@@ -190,13 +221,13 @@
           <div class="syllabics-emphasis">
               <span class="syll-part tooltip" data-key="iskotew-rel2" data-tip="iskotêw" id="iskotew-rel2-syll">ᐃᐢᑯᑌᐤ</span>
           </div>
-            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Standalone form. Same noun used in &lt;em&gt;iskotêwâpoy&lt;/em&gt; &#x27;liquor&#x27; (lit. &#x27;fire‑water&#x27;) and &lt;em&gt;iskotêwân&lt;/em&gt; &#x27;a matchstick&#x27;.</p>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Standalone form. Same noun used in <em>iskotêwâpoy</em> &#x27;liquor&#x27; (lit. &#x27;fire‑water&#x27;) and <em>iskotêwân</em> &#x27;a matchstick&#x27;.</p>
           </div>
 
           <div class="kv" style="margin-top:12px">
             <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;S/he wipes / cleans it (acoustic near‑neighbour — different stem)&quot;</div>
           <div class="formula">
-              <span class="part tooltip" data-key="kaasii-rel3" data-tip="VTI initial: &lt;strong&gt;wipe clean, wash, erase&lt;/strong&gt; (long‑î, different stem)." data-syll-id="kaasii-rel3-syll">kâsî‑</span>
+              <span class="part tooltip" data-key="kaasii-rel3" data-tip="VTI initial: wipe clean, wash, erase (long‑î, different stem)." data-syll-id="kaasii-rel3-syll">kâsî‑</span>
               <span class="part tooltip" data-key="h-rel3" data-tip="Connective consonant before the VTI tail." data-syll-id="h-rel3-syll">‑h‑</span>
               <span class="part tooltip" data-key="am-rel3" data-tip="VTI 3→inan. indicative suffix." data-syll-id="am-rel3-syll">‑am</span>
               <span style="margin:0 8px">→</span>
@@ -207,7 +238,7 @@
               <span class="syll-part tooltip" data-key="h-rel3" data-tip="‑h‑" id="h-rel3-syll">ᐦ</span>
               <span class="syll-part tooltip" data-key="am-rel3" data-tip="‑am" id="am-rel3-syll">ᐊᒼ</span>
           </div>
-            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">&lt;em&gt;kâsî‑&lt;/em&gt; &#x27;wipe / cleanse&#x27; is a structural near‑neighbour of &lt;em&gt;kâseni‑&lt;/em&gt; &#x27;refuse&#x27;, and the two are easy to confuse by ear. The Purgatory plaque sits at exactly that semantic pun: &#x27;fire that refuses&#x27; vs. &#x27;cleansing‑fire&#x27; both read.</p>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic"><em>kâsî‑</em> &#x27;wipe / cleanse&#x27; is a structural near‑neighbour of <em>kâseni‑</em> &#x27;refuse&#x27;, and the two are easy to confuse by ear. The Purgatory plaque sits at exactly that semantic pun: &#x27;fire that refuses&#x27; vs. &#x27;cleansing‑fire&#x27; both read.</p>
           </div>
 
         <h2 style="margin-top:24px">Examples &amp; Sources</h2>
@@ -220,8 +251,8 @@
               <tr><td>Purgatory — &#x27;the fire that refuses (people)&#x27;</td><td class="tooltip" data-tip="Headline as carved on the plaque.">kâsenamâkêw iskotêw</td><td>ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ</td></tr>
               <tr><td>S/he refuses, s/he rejects it (VTI base)</td><td class="tooltip" data-tip="Underlying verb stem. itwêwina (CW).">kâsenam</td><td>ᑳᓭᓇᒼ</td></tr>
               <tr><td>Fire (NI)</td><td class="tooltip" data-tip="Second word of the plaque; from Proto‑Algonquian *eškwete·wi.">iskotêw</td><td>ᐃᐢᑯᑌᐤ</td></tr>
-              <tr><td>S/he refuses people, s/he rejects people (VTA)</td><td class="tooltip" data-tip="Same verb tail as &lt;em&gt;kaskâwikanênêw&lt;/em&gt; &#x27;Back Breaker&#x27; (‑âkêw / ‑êw VTA 3→3′).">kâsenamâkêw</td><td>ᑳᓭᓇᒫᑫᐤ</td></tr>
-              <tr><td>Hellfire / a fire that burns severely</td><td class="tooltip" data-tip="Literally &#x27;forever fire&#x27; — the missionary‑era calque for &#x27;hell&#x27; in Plains Cree liturgy. Contrasts with the trail&#x27;s &lt;em&gt;kâsenamâkêw iskotêw&lt;/em&gt;, which is the in‑between &#x27;refusing&#x27; fire, not the eternal one.">kâkikê iskotêw</td><td>ᑳᑭᑫ ᐃᐢᑯᑌᐤ</td></tr>
+              <tr><td>S/he refuses people, s/he rejects people (VTA)</td><td class="tooltip" data-tip="Same verb tail as kaskâwikanênêw &#x27;Back Breaker&#x27; (‑âkêw / ‑êw VTA 3→3′).">kâsenamâkêw</td><td>ᑳᓭᓇᒫᑫᐤ</td></tr>
+              <tr><td>Hellfire / a fire that burns severely</td><td class="tooltip" data-tip="Literally &#x27;forever fire&#x27; — the missionary‑era calque for &#x27;hell&#x27; in Plains Cree liturgy. Contrasts with the trail&#x27;s kâsenamâkêw iskotêw, which is the in‑between &#x27;refusing&#x27; fire, not the eternal one.">kâkikê iskotêw</td><td>ᑳᑭᑫ ᐃᐢᑯᑌᐤ</td></tr>
           </tbody>
         </table>
 

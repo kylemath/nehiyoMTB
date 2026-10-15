@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ewok • Interactive Poster</title>
+    <script>if (window.self !== window.top) document.documentElement.classList.add("is-embedded");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Canadian+Aboriginal:wght@400;600;700&display=swap" />
     <style>
     :root{
       --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#7c4a1a;--accent2:#663d15;--line:#dee2e6;--chip:#e9ecef;--ok:#7c4a1a;--primary-bg:#ebe4dd;--primary-text:#000000;--formula-bg:#faf8f6;--formula-border:#7c4a1a;--secondary-bg:#f5f1ed;--secondary-border:#d8c9ba
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    body{margin:0;font-family:Inter, "Noto Sans Canadian Aboriginal", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
     a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
     a:hover{border-bottom-color:var(--accent)}
     .container{max-width:1100px;margin:0 auto;padding:16px}
@@ -65,7 +69,7 @@
     @media (max-width: 960px){.grid{grid-template-columns:1fr}}
     @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
     .tooltip{position:relative}
-    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:normal;width:max-content;max-width:min(320px, 80vw);text-align:left;line-height:1.4;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
     .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
     .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
     .get-one{margin:28px 0 4px;padding:16px 4px 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}
@@ -75,6 +79,33 @@
     .get-one-mount:empty{display:none}
     .get-one-link{display:inline-block;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}
     .get-one-link:hover,.get-one-link:focus{background:var(--accent);color:#ffffff}
+    body{-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    header{border-radius:16px;border-bottom-width:2px}
+    h1{font-size:clamp(24px, 4.2vw + 8px, 36px);line-height:1.15;text-wrap:balance}
+    .panel{border-radius:14px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)}
+    .panel h2{border-bottom-width:2px}
+    .primary-content,.story-box{border-radius:14px}
+    .kv{border-radius:12px}
+    .story-box p{max-width:68ch}
+    .back-link{color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)}
+    .is-embedded .back-link{display:none}
+    .shop-disabled-note{color:var(--muted);font-size:14px}
+    a:focus-visible,button:focus-visible,.part:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+    img{max-width:100%;height:auto}
+    @media (max-width: 640px){
+      .container{padding:12px}
+      header{padding:18px 14px}
+      .panel{padding:16px}
+      .grid{gap:12px}
+      .tag{font-size:12px;padding:5px 12px}
+      .row{flex-wrap:wrap}
+      .row .muted{order:1;flex:1 1 100%;font-size:14px;line-height:1.4}
+      .sro{white-space:normal}
+      .kvs{grid-template-columns:1fr}
+      .table th,.table td{padding:10px 10px;font-size:14px}
+      .trail-iframe{height:420px}
+    }
+    @media (prefers-reduced-motion: reduce){*{transition:none !important}}
     </style>
   </head>
   <body>
@@ -84,7 +115,7 @@
           <h1>Ewok</h1>
           <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
           <div style="margin-top:12px">
-            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+            <a class="back-link" href="../index.html" target="_top">← Back to Catalogue</a>
           </div>
         </div>
       </header>
@@ -96,7 +127,7 @@
         <div class="primary-content">
           <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">ewok</div>
           <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
-              <span class="part tooltip" data-key="ewok-borrow" data-tip="&lt;strong&gt;English‑only borrowing.&lt;/strong&gt; Coined by George Lucas for the 1983 film &lt;em&gt;Return of the Jedi&lt;/em&gt;; the small hooded forest‑dwelling species of Endor. Used on this trail as a builder&#x27;s nickname for a tight, low, twisty forest section — the kind of trail where you ride hunched over like an Ewok through the trees. No Plains Cree translation has been carved onto the plaque, and no &lt;em&gt;nêhiyawêwin&lt;/em&gt; calque is proposed here: the sign exists in English only, mirroring how &lt;em&gt;slinky&lt;/em&gt; is treated elsewhere in this catalogue." data-syll-id="ewok-borrow-syll">Ewok</span>
+              <span class="part tooltip" data-key="ewok-borrow" data-tip="English‑only borrowing. Coined by George Lucas for the 1983 film Return of the Jedi; the small hooded forest‑dwelling species of Endor. Used on this trail as a builder&#x27;s nickname for a tight, low, twisty forest section — the kind of trail where you ride hunched over like an Ewok through the trees. No Plains Cree translation has been carved onto the plaque, and no nêhiyawêwin calque is proposed here: the sign exists in English only, mirroring how slinky is treated elsewhere in this catalogue." data-syll-id="ewok-borrow-syll">Ewok</span>
           </div>
           <div class="syllabics-emphasis" style="justify-content:center;font-size:22px">
               <span class="syll-part tooltip" data-key="ewok-borrow" data-tip="Ewok" id="ewok-borrow-syll">—</span>
@@ -143,12 +174,12 @@
           <div class="kv" style="margin-top:12px">
             <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;A small forest‑being / &#x27;little person&#x27; (general Cree concept, not the trail name)&quot;</div>
           <div class="formula">
-              <span class="part tooltip" data-key="memekwesiwak-noun" data-tip="Plains Cree NA noun (plural): &lt;strong&gt;memekwêsiwak&lt;/strong&gt; — &#x27;little people / small forest beings&#x27; in Plains Cree oral tradition (after Wolvengrey&#x27;s &lt;em&gt;memekwêsiw&lt;/em&gt;). Singular: &lt;em&gt;memekwêsiw&lt;/em&gt;. Included here only to point at the nearest &lt;em&gt;cultural&lt;/em&gt; analogue to the Ewok concept; the plaque itself carries no Cree." data-syll-id="memekwesiwak-noun-syll">memekwêsiwak</span>
+              <span class="part tooltip" data-key="memekwesiwak-noun" data-tip="Plains Cree NA noun (plural): memekwêsiwak — &#x27;little people / small forest beings&#x27; in Plains Cree oral tradition (after Wolvengrey&#x27;s memekwêsiw). Singular: memekwêsiw. Included here only to point at the nearest cultural analogue to the Ewok concept; the plaque itself carries no Cree." data-syll-id="memekwesiwak-noun-syll">memekwêsiwak</span>
           </div>
           <div class="syllabics-emphasis">
               <span class="syll-part tooltip" data-key="memekwesiwak-noun" data-tip="memekwêsiwak" id="memekwesiwak-noun-syll">ᒣᒣᒁᓯᐘᐠ</span>
           </div>
-            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Cultural reference, NOT a translation of &#x27;Ewok&#x27;. The carved plaque is English‑only — if the community ever wanted a Cree name, &lt;em&gt;memekwêsiw&lt;/em&gt; &#x27;little forest being&#x27; would be one starting point, but this would need elder review before any plaque carving.</p>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Cultural reference, NOT a translation of &#x27;Ewok&#x27;. The carved plaque is English‑only — if the community ever wanted a Cree name, <em>memekwêsiw</em> &#x27;little forest being&#x27; would be one starting point, but this would need elder review before any plaque carving.</p>
           </div>
 
         <h2 style="margin-top:24px">Examples &amp; Sources</h2>
@@ -160,7 +191,7 @@
           <tbody>
               <tr><td>Ewok</td><td class="tooltip" data-tip="English borrowing only; no Cree on the plaque.">Ewok</td><td>—</td></tr>
               <tr><td>Small forest being (Plains Cree, cultural analogue)</td><td class="tooltip" data-tip="Wolvengrey / Plains Cree oral tradition. NOT a translation of &#x27;Ewok&#x27; — listed here only to show the nearest cultural concept.">memekwêsiw</td><td>ᒣᒣᒁᓯᐤ</td></tr>
-              <tr><td>I have nothing in Cree to say here, this trail&#x27;s name is English</td><td class="tooltip" data-tip="Mirrors the &lt;em&gt;slinky&lt;/em&gt; page pattern: pageStatus = agent-drafted, no Cree on the plaque, no Cree invented for the page.">—</td><td>—</td></tr>
+              <tr><td>I have nothing in Cree to say here, this trail&#x27;s name is English</td><td class="tooltip" data-tip="Mirrors the slinky page pattern: pageStatus = agent-drafted, no Cree on the plaque, no Cree invented for the page.">—</td><td>—</td></tr>
           </tbody>
         </table>
 

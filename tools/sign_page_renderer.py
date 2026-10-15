@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 from html import escape
 from pathlib import Path
 from typing import Any, Iterable
@@ -90,7 +91,7 @@ def build_css(accent: str) -> str:
       --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:{accent};--accent2:{accent2};--line:#dee2e6;--chip:#e9ecef;--ok:{accent};--primary-bg:{primary_bg};--primary-text:#000000;--formula-bg:{formula_bg};--formula-border:{accent};--secondary-bg:{secondary_bg};--secondary-border:{soften_hex(accent, 0.7)}
     }}
     *{{box-sizing:border-box}}
-    body{{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}}
+    body{{margin:0;font-family:Inter, "Noto Sans Canadian Aboriginal", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}}
     a{{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}}
     a:hover{{border-bottom-color:var(--accent)}}
     .container{{max-width:1100px;margin:0 auto;padding:16px}}
@@ -146,7 +147,7 @@ def build_css(accent: str) -> str:
     @media (max-width: 960px){{.grid{{grid-template-columns:1fr}}}}
     @media (max-width: 640px){{.grid-2{{grid-template-columns:1fr}}}}
     .tooltip{{position:relative}}
-    .tooltip:hover::after{{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}}
+    .tooltip:hover::after{{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:normal;width:max-content;max-width:min(320px, 80vw);text-align:left;line-height:1.4;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}}
     .primary-content{{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}}
     .story-box{{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}}
     .get-one{{margin:28px 0 4px;padding:16px 4px 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}}
@@ -155,7 +156,34 @@ def build_css(accent: str) -> str:
     .get-one-mount{{flex:0 0 auto;min-height:38px;display:flex;align-items:center}}
     .get-one-mount:empty{{display:none}}
     .get-one-link{{display:inline-block;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}}
-    .get-one-link:hover,.get-one-link:focus{{background:var(--accent);color:#ffffff}}"""
+    .get-one-link:hover,.get-one-link:focus{{background:var(--accent);color:#ffffff}}
+    body{{-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}}
+    header{{border-radius:16px;border-bottom-width:2px}}
+    h1{{font-size:clamp(24px, 4.2vw + 8px, 36px);line-height:1.15;text-wrap:balance}}
+    .panel{{border-radius:14px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)}}
+    .panel h2{{border-bottom-width:2px}}
+    .primary-content,.story-box{{border-radius:14px}}
+    .kv{{border-radius:12px}}
+    .story-box p{{max-width:68ch}}
+    .back-link{{color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)}}
+    .is-embedded .back-link{{display:none}}
+    .shop-disabled-note{{color:var(--muted);font-size:14px}}
+    a:focus-visible,button:focus-visible,.part:focus-visible{{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}}
+    img{{max-width:100%;height:auto}}
+    @media (max-width: 640px){{
+      .container{{padding:12px}}
+      header{{padding:18px 14px}}
+      .panel{{padding:16px}}
+      .grid{{gap:12px}}
+      .tag{{font-size:12px;padding:5px 12px}}
+      .row{{flex-wrap:wrap}}
+      .row .muted{{order:1;flex:1 1 100%;font-size:14px;line-height:1.4}}
+      .sro{{white-space:normal}}
+      .kvs{{grid-template-columns:1fr}}
+      .table th,.table td{{padding:10px 10px;font-size:14px}}
+      .trail-iframe{{height:420px}}
+    }}
+    @media (prefers-reduced-motion: reduce){{*{{transition:none !important}}}}"""
 
 
 def collect_morpheme_keys(content: dict) -> set[str]:
@@ -186,7 +214,7 @@ def render_morpheme_row(
         key = escape(str(morpheme.get("key") or f"{section_id}-m{index}"))
         sro = escape(str(morpheme.get("sro") or ""))
         syll = escape(str(morpheme.get("syllabics") or ""))
-        gloss = escape(str(morpheme.get("gloss") or ""))
+        gloss = escape(_strip_tags(str(morpheme.get("gloss") or "")))
         syll_id = f"{key}-syll"
         sro_parts.append(
             f'<span class="part tooltip" data-key="{key}" data-tip="{gloss}" data-syll-id="{syll_id}">{sro}</span>'
@@ -258,6 +286,22 @@ def render_photo_block(content: dict) -> str:
             <img src="{escape(src)}" alt="{alt}" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
             {caption_html}
         </div>"""
+
+
+_INLINE_TAGS = ("strong", "em", "b", "i")
+
+
+def _strip_tags(text: str) -> str:
+    """Drop simple HTML tags for plain-text contexts such as tooltips."""
+    return re.sub(r"</?[a-zA-Z][^>]*>", "", text)
+
+
+def _inline_html(text: str) -> str:
+    """Escape text but keep simple inline emphasis tags authors use in notes."""
+    out = escape(text)
+    for tag in _INLINE_TAGS:
+        out = out.replace(f"&lt;{tag}&gt;", f"<{tag}>").replace(f"&lt;/{tag}&gt;", f"</{tag}>")
+    return out
 
 
 def render_story_block(story: dict | None) -> str:
@@ -555,7 +599,7 @@ def render_related_form(form: dict, suffix: str) -> str:
           <div class="syllabics-emphasis"><span class="syll-part">{syll}</span></div>"""
 
     note_html = (
-        f'<p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">{escape(note)}</p>'
+        f'<p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">{_inline_html(note)}</p>'
         if note
         else ""
     )
@@ -614,7 +658,7 @@ def render_quick_reference(content: dict) -> str:
         syll = escape(row.get("syllabics") or "")
         note = (row.get("note") or "").strip()
         sro_cell = (
-            f'<td class="tooltip" data-tip="{escape(note)}">{sro}</td>' if note else f"<td>{sro}</td>"
+            f'<td class="tooltip" data-tip="{escape(_strip_tags(note))}">{sro}</td>' if note else f"<td>{sro}</td>"
         )
         body_rows.append(f"<tr><td>{english}</td>{sro_cell}<td>{syll}</td></tr>")
 
@@ -747,6 +791,10 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <meta charset=\"UTF-8\" />
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
     <title>{title_text} • Interactive Poster</title>
+    <script>if (window.self !== window.top) document.documentElement.classList.add("is-embedded");</script>
+    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />
+    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin />
+    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Canadian+Aboriginal:wght@400;600;700&display=swap\" />
     <style>
 {css}
     </style>
@@ -758,7 +806,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
           <h1>{header_title}</h1>
           <span class=\"tag\">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
           <div style=\"margin-top:12px\">
-            <a href=\"../index.html\" target=\"_top\" style=\"color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)\">← Back to Catalogue</a>
+            <a class=\"back-link\" href=\"../index.html\" target=\"_top\">← Back to Catalogue</a>
           </div>
         </div>
       </header>

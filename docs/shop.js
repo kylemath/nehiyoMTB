@@ -281,8 +281,10 @@
         return created;
       })
       .catch((err) => {
+        // Fall back to email rather than showing an error on a learning page.
         target.classList.add("shop-error");
-        target.textContent = "Could not load the order button.";
+        target.innerHTML =
+          '<span class="shop-disabled-note">Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to ask about one.</span>';
         console.warn("[NehiyoShop] product mount failed:", err);
       });
   }
