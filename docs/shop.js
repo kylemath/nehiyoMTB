@@ -9,6 +9,7 @@
  *  3. Exposes a tiny `window.NehiyoShop` API that pages call to:
  *       - mount a small "Get one" button against a Shopify productId
  *       - mount the floating cart (one per window, never two)
+ *       - add a product to the cart directly (catalogue preview "Get one")
  *
  *  Design notes (why it looks like this):
  *   - Every Shopify component renders inside its own iframe (`iframe: true`).
@@ -19,8 +20,9 @@
  *     of that, because the SDK would build a second, independent cart.
  *   - Checkout opens in the same tab (`popup: false`) instead of a small
  *     popup window that browsers often block or bury.
- *   - Pages embedded in another page (the catalogue preview iframe) should not
- *     mount Shopify at all; they link out to the standalone sign page instead.
+ *   - Pages embedded in another page (the catalogue preview iframe) never
+ *     mount Shopify themselves; their "Get one" calls the parent window's
+ *     `NehiyoShop.addToCart` so the item lands in the catalogue's one cart.
  *
  *  No Shopify credentials? Leave the placeholders below as-is. The script will
  *  detect missing config, log a single console note, and silently no-op so
@@ -289,10 +291,32 @@
       });
   }
 
+  // Add one of a product straight to this window's cart and open it. Used by
+  // the catalogue when a sign page in its preview pane asks for "Get one", so
+  // the visitor stays where they are instead of being sent to another page.
+  function addToCart(productId, opts = {}) {
+    if (!isConfigured() || !productId) {
+      return Promise.reject(new Error("[NehiyoShop] store not configured or no product"));
+    }
+    return Promise.resolve(mountCart(opts))
+      .then(() => getClient())
+      .then(({ client, ui }) => {
+        const cart = ui.components.cart[0];
+        if (!cart) throw new Error("[NehiyoShop] cart did not mount");
+        return client.product.fetch(`gid://shopify/Product/${productId}`).then((product) => {
+          const variants = (product && product.variants) || [];
+          const variant = variants.find((v) => v.available) || variants[0];
+          if (!variant) throw new Error("[NehiyoShop] product has no variants");
+          return cart.addVariantToCart(variant, 1, true);
+        });
+      });
+  }
+
   window.NehiyoShop = {
     isConfigured,
     isEmbedded,
     mountCart,
     mountProduct,
+    addToCart,
   };
 })();

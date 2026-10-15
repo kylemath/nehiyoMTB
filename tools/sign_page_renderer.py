@@ -155,8 +155,9 @@ def build_css(accent: str) -> str:
     .get-one-text a{{color:var(--accent)}}
     .get-one-mount{{flex:0 0 auto;min-height:38px;display:flex;align-items:center}}
     .get-one-mount:empty{{display:none}}
-    .get-one-link{{display:inline-block;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}}
+    .get-one-link{{display:inline-block;font:inherit;background:transparent;cursor:pointer;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}}
     .get-one-link:hover,.get-one-link:focus{{background:var(--accent);color:#ffffff}}
+    .get-one-link:disabled{{opacity:0.6;cursor:progress}}
     body{{-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}}
     header{{border-radius:16px;border-bottom-width:2px}}
     h1{{font-size:clamp(24px, 4.2vw + 8px, 36px);line-height:1.15;text-wrap:balance}}
@@ -747,8 +748,8 @@ def render_buy_script(model: dict, accent: str) -> str:
 
     Returns an empty string when the sign is not yet purchasable so we don't
     pull in ``shop.js`` on email-only pages. When the page is shown inside the
-    catalogue's preview iframe, it links out to the standalone page instead of
-    mounting Shopify, so the catalogue never ends up with a second cart.
+    catalogue's preview iframe, it adds to the catalogue's cart through the
+    parent window instead of mounting Shopify, so there is only ever one cart.
     """
     if not _has_live_product(model):
         return ""
@@ -762,12 +763,25 @@ def render_buy_script(model: dict, accent: str) -> str:
         var mount = document.getElementById("buy-mount");
         if (!mount || !window.NehiyoShop) return;
         if (window.NehiyoShop.isEmbedded()) {{
-          var link = document.createElement("a");
-          link.className = "get-one-link";
-          link.href = window.location.pathname + "#get-one";
-          link.target = "_top";
-          link.textContent = "Get one";
-          mount.appendChild(link);
+          // Inside the catalogue preview: add to the catalogue's cart so the
+          // visitor stays put. Fall back to the standalone page if that fails.
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "get-one-link";
+          btn.textContent = "Get one";
+          var openPage = function () {{
+            window.top.location.href = window.location.pathname + "#get-one";
+          }};
+          btn.addEventListener("click", function () {{
+            var parentShop = null;
+            try {{ parentShop = window.parent.NehiyoShop; }} catch (e) {{}}
+            if (!parentShop || !parentShop.addToCart) return openPage();
+            btn.disabled = true;
+            parentShop.addToCart({safe_product_id})
+              .catch(function (err) {{ console.warn(err); openPage(); }})
+              .then(function () {{ btn.disabled = false; }});
+          }});
+          mount.appendChild(btn);
           return;
         }}
         window.NehiyoShop.mountProduct(mount, {safe_product_id}, {{ buttonText: "Get one", accent: {safe_accent} }});
