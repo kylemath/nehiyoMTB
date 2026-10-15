@@ -1,0 +1,22 @@
+# What EAS uploads when it builds the app in mobile/. EAS archives the whole
+# git repo, and the sign sources, docs/ and photos add ~1.5 GB, so upload only
+# mobile/. This file replaces .gitignore for EAS, so mobile's ignores repeat here.
+/*
+!/mobile/
+
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+mobile/web-build/
+mobile/ios/
+mobile/android/
+mobile/supabase/
+mobile/.env
+mobile/.env*.local
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
+.DS_Store

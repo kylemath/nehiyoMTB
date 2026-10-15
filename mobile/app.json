@@ -69,6 +69,13 @@
       "baseUrl": "/app",
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "da3800e1-8a6f-4485-8d8d-38ab9d0af71a"
+      }
+    },
+    "owner": "kylemath"
   }
 }
