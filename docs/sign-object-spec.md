@@ -505,9 +505,10 @@ The local catalogue editor exposes `checks.meshRepaired` as a checkbox in the Si
 
 ## Shopify Binding
 
-Each sign can advertise itself as a Shopify product. The catalogue and per-sign
-pages both read the `shopify` block to decide whether to render an "Add to cart"
-button and a price chip. The actual cart UI and checkout are powered by the
+Each sign can advertise itself as a Shopify product. The per-sign page reads
+the `shopify` block to decide whether to show a small "Get one" button at the
+bottom of the page (no price is shown on the site; Shopify shows it in the cart
+and at checkout). The catalogue only hosts the floating cart. The actual cart UI and checkout are powered by the
 [Shopify Buy Button SDK](https://shopify.dev/docs/api/buy-button-sdk) loaded
 once from `docs/shop.js`; no Shopify storefront theme is involved.
 
@@ -532,10 +533,8 @@ Field rules:
 - `variantId`: optional specific variant id. Leave empty when the product has a
   single variant or you want the SDK to pick the first one. Required only when
   you have multiple sizes/colors per sign and want to target one.
-- `priceCAD`: advisory CAD price shown as the chip on the catalogue card and as
-  the headline price on the per-sign page. The SDK overwrites this on the actual
-  button with the live Shopify price when the script loads, so this field is a
-  fallback for pre-load and for users with JavaScript disabled.
+- `priceCAD`: reference only. The site no longer displays prices; Shopify is
+  the source of truth and shows the price in the cart and at checkout.
 - `available`: explicit kill switch. When `false`, the button is hidden even if
   a `productId` is present. Use to pull a sign off the store without deleting
   data.

@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 from html import escape
 from pathlib import Path
 from typing import Any, Iterable
@@ -90,7 +91,7 @@ def build_css(accent: str) -> str:
       --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:{accent};--accent2:{accent2};--line:#dee2e6;--chip:#e9ecef;--ok:{accent};--primary-bg:{primary_bg};--primary-text:#000000;--formula-bg:{formula_bg};--formula-border:{accent};--secondary-bg:{secondary_bg};--secondary-border:{soften_hex(accent, 0.7)}
     }}
     *{{box-sizing:border-box}}
-    body{{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}}
+    body{{margin:0;font-family:Inter, "Noto Sans Canadian Aboriginal", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}}
     a{{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}}
     a:hover{{border-bottom-color:var(--accent)}}
     .container{{max-width:1100px;margin:0 auto;padding:16px}}
@@ -146,16 +147,44 @@ def build_css(accent: str) -> str:
     @media (max-width: 960px){{.grid{{grid-template-columns:1fr}}}}
     @media (max-width: 640px){{.grid-2{{grid-template-columns:1fr}}}}
     .tooltip{{position:relative}}
-    .tooltip:hover::after{{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}}
+    .tooltip:hover::after{{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:normal;width:max-content;max-width:min(320px, 80vw);text-align:left;line-height:1.4;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}}
     .primary-content{{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}}
     .story-box{{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}}
-    .buy-panel{{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}}
-    .buy-panel h2{{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}}
-    .buy-price{{font-size:24px;font-weight:800;color:#000}}
-    .buy-mount{{flex:1 1 200px;min-width:200px}}
-    .buy-fineprint{{width:100%;font-size:12px;color:var(--muted);margin-top:4px}}
-    .buy-panel--soon{{border-style:dashed}}
-    @media (max-width:600px){{.buy-panel{{flex-direction:column;align-items:stretch;text-align:center}}}}"""
+    .get-one{{margin:28px 0 4px;padding:16px 4px 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}}
+    .get-one-text{{margin:0;flex:1 1 280px;color:var(--muted);font-size:14px;line-height:1.5}}
+    .get-one-text a{{color:var(--accent)}}
+    .get-one-mount{{flex:0 0 auto;min-height:38px;display:flex;align-items:center}}
+    .get-one-mount:empty{{display:none}}
+    .get-one-link{{display:inline-block;font:inherit;background:transparent;cursor:pointer;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}}
+    .get-one-link:hover,.get-one-link:focus{{background:var(--accent);color:#ffffff}}
+    .get-one-link:disabled{{opacity:0.6;cursor:progress}}
+    body{{-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}}
+    header{{border-radius:16px;border-bottom-width:2px}}
+    h1{{font-size:clamp(24px, 4.2vw + 8px, 36px);line-height:1.15;text-wrap:balance}}
+    .panel{{border-radius:14px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)}}
+    .panel h2{{border-bottom-width:2px}}
+    .primary-content,.story-box{{border-radius:14px}}
+    .kv{{border-radius:12px}}
+    .story-box p{{max-width:68ch}}
+    .back-link{{color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)}}
+    .is-embedded .back-link{{display:none}}
+    .shop-disabled-note{{color:var(--muted);font-size:14px}}
+    a:focus-visible,button:focus-visible,.part:focus-visible{{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}}
+    img{{max-width:100%;height:auto}}
+    @media (max-width: 640px){{
+      .container{{padding:12px}}
+      header{{padding:18px 14px}}
+      .panel{{padding:16px}}
+      .grid{{gap:12px}}
+      .tag{{font-size:12px;padding:5px 12px}}
+      .row{{flex-wrap:wrap}}
+      .row .muted{{order:1;flex:1 1 100%;font-size:14px;line-height:1.4}}
+      .sro{{white-space:normal}}
+      .kvs{{grid-template-columns:1fr}}
+      .table th,.table td{{padding:10px 10px;font-size:14px}}
+      .trail-iframe{{height:420px}}
+    }}
+    @media (prefers-reduced-motion: reduce){{*{{transition:none !important}}}}"""
 
 
 def collect_morpheme_keys(content: dict) -> set[str]:
@@ -186,7 +215,7 @@ def render_morpheme_row(
         key = escape(str(morpheme.get("key") or f"{section_id}-m{index}"))
         sro = escape(str(morpheme.get("sro") or ""))
         syll = escape(str(morpheme.get("syllabics") or ""))
-        gloss = escape(str(morpheme.get("gloss") or ""))
+        gloss = escape(_strip_tags(str(morpheme.get("gloss") or "")))
         syll_id = f"{key}-syll"
         sro_parts.append(
             f'<span class="part tooltip" data-key="{key}" data-tip="{gloss}" data-syll-id="{syll_id}">{sro}</span>'
@@ -258,6 +287,22 @@ def render_photo_block(content: dict) -> str:
             <img src="{escape(src)}" alt="{alt}" style="max-width:100%;height:auto;border-radius:8px;border:2px solid var(--line);box-shadow:0 2px 4px rgba(0,0,0,0.1)">
             {caption_html}
         </div>"""
+
+
+_INLINE_TAGS = ("strong", "em", "b", "i")
+
+
+def _strip_tags(text: str) -> str:
+    """Drop simple HTML tags for plain-text contexts such as tooltips."""
+    return re.sub(r"</?[a-zA-Z][^>]*>", "", text)
+
+
+def _inline_html(text: str) -> str:
+    """Escape text but keep simple inline emphasis tags authors use in notes."""
+    out = escape(text)
+    for tag in _INLINE_TAGS:
+        out = out.replace(f"&lt;{tag}&gt;", f"<{tag}>").replace(f"&lt;/{tag}&gt;", f"</{tag}>")
+    return out
 
 
 def render_story_block(story: dict | None) -> str:
@@ -555,7 +600,7 @@ def render_related_form(form: dict, suffix: str) -> str:
           <div class="syllabics-emphasis"><span class="syll-part">{syll}</span></div>"""
 
     note_html = (
-        f'<p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">{escape(note)}</p>'
+        f'<p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">{_inline_html(note)}</p>'
         if note
         else ""
     )
@@ -614,7 +659,7 @@ def render_quick_reference(content: dict) -> str:
         syll = escape(row.get("syllabics") or "")
         note = (row.get("note") or "").strip()
         sro_cell = (
-            f'<td class="tooltip" data-tip="{escape(note)}">{sro}</td>' if note else f"<td>{sro}</td>"
+            f'<td class="tooltip" data-tip="{escape(_strip_tags(note))}">{sro}</td>' if note else f"<td>{sro}</td>"
         )
         body_rows.append(f"<tr><td>{english}</td>{sro_cell}<td>{syll}</td></tr>")
 
@@ -672,68 +717,74 @@ def render_sources(content: dict) -> str:
         <p class="muted">References: {refs_html}</p>"""
 
 
-def _format_price_cad(price: Any) -> str:
-    """Format a numeric CAD price as ``$XX CAD`` (drops the decimal when whole)."""
-    if price is None:
-        return ""
-    try:
-        amount = float(price)
-    except (TypeError, ValueError):
-        return ""
-    if math.isnan(amount) or math.isinf(amount):
-        return ""
-    if abs(amount - round(amount)) < 1e-6:
-        return f"${int(round(amount))} CAD"
-    return f"${amount:,.2f} CAD"
+def _has_live_product(model: dict) -> bool:
+    shopify = model.get("shopify") or {}
+    return bool(str(shopify.get("productId") or "").strip()) and bool(shopify.get("available"))
 
 
 def render_buy_panel(model: dict) -> str:
-    """Render the Shopify "buy this sign" panel for a sign model.
+    """Render the quiet "get one" note at the bottom of a sign page.
 
-    The panel always renders (so layout stays consistent across signs). When
-    ``shopify.productId`` exists and ``shopify.available`` is true, a live
-    buy mount + advisory price is rendered for ``docs/shop.js`` to hydrate.
-    Otherwise a "coming soon" stub with an email fallback is rendered.
+    The sign pages are learning pages first, so ordering is a single line
+    above the footer with no price. When ``shopify.productId`` exists and
+    ``shopify.available`` is true, ``docs/shop.js`` hydrates a small
+    "Get one" button into ``#buy-mount``. Otherwise an email fallback shows.
     """
-    shopify = model.get("shopify") or {}
-    product_id = str(shopify.get("productId") or "").strip()
-    available = bool(shopify.get("available"))
-
-    if product_id and available:
-        price_text = _format_price_cad(shopify.get("priceCAD")) or "Price loading…"
-        return f"""
-      <section class="buy-panel" aria-label="Order this sign">
-        <h2>Get one</h2>
-        <div class="buy-price">{escape(price_text)}</div>
-        <div class="buy-mount" id="buy-mount"></div>
-        <p class="buy-fineprint">Secure checkout by Shopify. Ships from Edmonton. Tax + shipping calculated at checkout.</p>
+    if _has_live_product(model):
+        return """
+      <section class="get-one" id="get-one" aria-label="Get this sign">
+        <p class="get-one-text">Each sign is 3D printed in Edmonton. Want one for your own trail, cabin or wall?</p>
+        <div class="get-one-mount" id="buy-mount"></div>
       </section>"""
 
     return """
-      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
-        <h2>Get one</h2>
-        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
+      <section class="get-one" id="get-one" aria-label="Get this sign">
+        <p class="get-one-text">Each sign is 3D printed in Edmonton. Want one for your own trail, cabin or wall? Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a>.</p>
       </section>"""
 
 
-def render_buy_script(model: dict) -> str:
+def render_buy_script(model: dict, accent: str) -> str:
     """Render the ``<script>`` block that mounts the Shopify button + cart.
 
     Returns an empty string when the sign is not yet purchasable so we don't
-    pull in ``shop.js`` on coming-soon pages.
+    pull in ``shop.js`` on email-only pages. When the page is shown inside the
+    catalogue's preview iframe, it adds to the catalogue's cart through the
+    parent window instead of mounting Shopify, so there is only ever one cart.
     """
-    shopify = model.get("shopify") or {}
-    product_id = str(shopify.get("productId") or "").strip()
-    if not product_id or not shopify.get("available"):
+    if not _has_live_product(model):
         return ""
-    safe_product_id = escape(product_id)
+    product_id = str((model.get("shopify") or {}).get("productId") or "").strip()
+    safe_product_id = json.dumps(product_id)
+    safe_accent = json.dumps(accent)
     return f"""
     <script src="../shop.js" defer></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {{
-        if (!window.NehiyoShop) return;
-        window.NehiyoShop.mountProduct(document.getElementById("buy-mount"), "{safe_product_id}", {{ buttonText: "Add to cart" }});
-        window.NehiyoShop.mountCart();
+        var mount = document.getElementById("buy-mount");
+        if (!mount || !window.NehiyoShop) return;
+        if (window.NehiyoShop.isEmbedded()) {{
+          // Inside the catalogue preview: add to the catalogue's cart so the
+          // visitor stays put. Fall back to the standalone page if that fails.
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "get-one-link";
+          btn.textContent = "Get one";
+          var openPage = function () {{
+            window.top.location.href = window.location.pathname + "#get-one";
+          }};
+          btn.addEventListener("click", function () {{
+            var parentShop = null;
+            try {{ parentShop = window.parent.NehiyoShop; }} catch (e) {{}}
+            if (!parentShop || !parentShop.addToCart) return openPage();
+            btn.disabled = true;
+            parentShop.addToCart({safe_product_id})
+              .catch(function (err) {{ console.warn(err); openPage(); }})
+              .then(function () {{ btn.disabled = false; }});
+          }});
+          mount.appendChild(btn);
+          return;
+        }}
+        window.NehiyoShop.mountProduct(mount, {safe_product_id}, {{ buttonText: "Get one", accent: {safe_accent} }});
       }});
     </script>"""
 
@@ -754,6 +805,10 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <meta charset=\"UTF-8\" />
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
     <title>{title_text} • Interactive Poster</title>
+    <script>if (window.self !== window.top) document.documentElement.classList.add("is-embedded");</script>
+    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />
+    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin />
+    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Canadian+Aboriginal:wght@400;600;700&display=swap\" />
     <style>
 {css}
     </style>
@@ -765,11 +820,10 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
           <h1>{header_title}</h1>
           <span class=\"tag\">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
           <div style=\"margin-top:12px\">
-            <a href=\"../index.html\" target=\"_top\" style=\"color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)\">← Back to Catalogue</a>
+            <a class=\"back-link\" href=\"../index.html\" target=\"_top\">← Back to Catalogue</a>
           </div>
         </div>
       </header>
-{buy_panel}
 
       <section class=\"grid\">
         <div class=\"panel\">
@@ -788,6 +842,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 {sources}
         </div>
       </section>
+{buy_panel}
 
       <footer>
         {footer_text}
@@ -916,7 +971,7 @@ def render_page(model: dict) -> str | None:
         ),
         pairs_script=build_pairs_script(content),
         buy_panel=render_buy_panel(model),
-        buy_script=render_buy_script(model),
+        buy_script=render_buy_script(model, accent),
     )
 
 

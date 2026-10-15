@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nehiyoMTB: Indigenous Trail Signage Catalogue</title>
+    <title>nehiyoMTB: Plains Cree Trail Signs of Edmonton</title>
+    <meta name="description" content="Plains Cree (nēhiyawēwin) names for Edmonton's mountain-bike trails: the word behind each sign, its 3D-printed design, and where to find it.">
+    <meta name="theme-color" content="#0a0a0a">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Canadian+Aboriginal:wght@400;600;700&display=swap">
     <script type="importmap">
         {
             "imports": {
@@ -32,7 +37,8 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', 'Noto Sans Canadian Aboriginal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
             line-height: 1.7;
             color: var(--text);
             background: var(--bg);
@@ -107,6 +113,30 @@
 
         .catalogue-list {
             min-width: 0;
+        }
+
+        .catalogue-brand {
+            padding: 0.35rem 0.25rem 0.9rem;
+            margin-bottom: 0.7rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .catalogue-brand-name {
+            font-size: 1.05rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: var(--text);
+        }
+
+        .catalogue-brand-name span {
+            color: var(--accent);
+        }
+
+        .catalogue-brand-blurb {
+            margin-top: 0.3rem;
+            font-size: 0.78rem;
+            line-height: 1.45;
+            color: var(--text-muted);
         }
 
         .column-resizer {
@@ -531,13 +561,6 @@
             border-radius: 8px;
             padding: 0.5rem 0.75rem;
             font-size: 0.85rem;
-        }
-
-        .stl-price-row {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: nowrap;
         }
 
         .detail-action {
@@ -1929,84 +1952,6 @@
                 gap: 1.5rem;
             }
         }
-
-        /* ───────────────────────────────────────────────────────────────
-           Shopify storefront integration (see docs/shop.js).
-           All rules below are scoped to the buy-button UI and the price
-           chip rendered on catalogue cards. They are inert when shop.js
-           is missing or Shopify is not configured.
-           ─────────────────────────────────────────────────────────────── */
-        .sign-price-cell {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            min-width: 0;
-        }
-
-        .sign-price {
-            display: inline-block;
-            padding: 0.35rem 0.7rem;
-            border-radius: 8px;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            line-height: 1.2;
-        }
-
-        .deal-note {
-            display: inline-block;
-            padding: 0.35rem 0.7rem;
-            border-radius: 8px;
-            border: 1px solid #4ade80;
-            color: #bbf7d0;
-            background: rgba(74, 222, 128, 0.12);
-            font-size: 0.85rem;
-            font-weight: 700;
-            white-space: nowrap;
-            line-height: 1.2;
-        }
-
-        .detail-shop {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .detail-shop:empty {
-            display: none;
-        }
-
-        .shop-disabled-note {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        /* Safety override: the Shopify Buy SDK injects its sticky cart toggle
-           with `position: fixed` itself when `sticky: true`, but force the
-           placement so it can't collide with the page header or mobile bar. */
-        .shopify-buy-frame--toggle,
-        .shopify-buy__cart-toggle,
-        [class*="shopify-buy"][class*="toggle"] {
-            position: fixed !important;
-            right: 1rem !important;
-            top: 1rem !important;
-            z-index: 1000 !important;
-        }
-
-        @media (max-width: 900px) {
-            /* Below the mobile breakpoint there is a fixed top toolbar
-               (.mobile-toolbar, ~3.5rem tall). Push the cart toggle below it
-               so it doesn't overlap the navigation. */
-            .shopify-buy-frame--toggle,
-            .shopify-buy__cart-toggle,
-            [class*="shopify-buy"][class*="toggle"] {
-                top: 4rem !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -2040,6 +1985,10 @@
                     id="mobile-menu-close"
                     aria-label="Close trail signs menu"
                 >&times;</button>
+                <div class="catalogue-brand">
+                    <div class="catalogue-brand-name">nehiyo<span>MTB</span></div>
+                    <p class="catalogue-brand-blurb">Plains Cree names for Edmonton's mountain-bike trails. Pick a sign to learn its word, see its 3D-printed design and find it on the map.</p>
+                </div>
                 <div class="catalogue-grid" id="catalogue-grid">
                     <div class="loading">Loading catalogue...</div>
                 </div>
@@ -2067,17 +2016,8 @@
                             <label for="stl-file-select">STL</label>
                             <select class="stl-select" id="stl-file-select"></select>
                         </div>
-                        <span class="stl-price-row">
-                            <a class="detail-action is-disabled" id="download-stl-link" aria-disabled="true">Download STL</a>
-                            <span class="sign-price is-hidden" id="detail-price"></span>
-                        </span>
-                        <span class="deal-note is-hidden" id="detail-deal">Buy 2, get 1 free</span>
+                        <a class="detail-action is-disabled" id="download-stl-link" aria-disabled="true">Download STL</a>
                         <a class="detail-action is-hidden" id="download-3mf-link" title="Print-ready multi-colour .3mf: one object per filament colour, split from the production STL so it slices with the same fidelity">Download 3MF</a>
-                        <!-- Shopify "Add to cart" button mounts here via
-                             window.NehiyoShop.mountProduct() from updateDetailPane().
-                             Stays empty (and hidden via `.detail-shop:empty`) when
-                             the selected sign has no Shopify product configured. -->
-                        <div class="detail-shop" id="detail-shop" data-product-id=""></div>
                     </div>
                 </div>
 
@@ -4846,25 +4786,6 @@
             const pageFrame = document.getElementById('detail-page-frame');
             const downloadLink = document.getElementById('download-stl-link');
             const detailColors = document.getElementById('detail-colors');
-            // Shopify buy-button host (see docs/shop.js). Always cleared on
-            // every detail update so a stale button from a previous sign
-            // doesn't bleed into the currently-selected one. Re-mounted
-            // below only when the selected sign is for sale.
-            const detailShopEl = document.getElementById('detail-shop');
-            const detailPriceEl = document.getElementById('detail-price');
-            const detailDealEl = document.getElementById('detail-deal');
-            if (detailShopEl) {
-                detailShopEl.innerHTML = '';
-                detailShopEl.removeAttribute('data-product-id');
-            }
-            if (detailPriceEl) {
-                detailPriceEl.textContent = '';
-                detailPriceEl.classList.add('is-hidden');
-            }
-            if (detailDealEl) {
-                detailDealEl.classList.add('is-hidden');
-            }
-
             if (!selectedModel) {
                 title.textContent = 'Select a sign';
                 detailColors.innerHTML = '';
@@ -4885,26 +4806,6 @@
                 renderLayerEditor();
                 disposeDetailViewer();
                 return;
-            }
-
-            // Mount the Shopify "Add to cart" button for this sign, if it is
-            // configured and marked available in catalogue.json. The helper
-            // is a no-op when shop.js is missing or Shopify is unconfigured.
-            const shop = selectedModel.shopify;
-            if (detailShopEl && shop && shop.productId && shop.available === true
-                && window.NehiyoShop && typeof window.NehiyoShop.mountProduct === 'function') {
-                detailShopEl.setAttribute('data-product-id', String(shop.productId));
-                window.NehiyoShop.mountProduct(detailShopEl, shop.productId, {
-                    buttonText: 'Add to cart',
-                    showPrice: false
-                });
-                if (detailPriceEl && shop.priceCAD != null) {
-                    detailPriceEl.textContent = `$${shop.priceCAD} CAD`;
-                    detailPriceEl.classList.remove('is-hidden');
-                }
-                if (detailDealEl) {
-                    detailDealEl.classList.remove('is-hidden');
-                }
             }
 
             const pagePath = getModelPagePath(selectedModel);
@@ -5093,10 +4994,6 @@
                 const creeTransliteration = model.creeName || '—';
                 const syllClass = model.creeSyllabics ? 'sign-syllabics' : 'sign-syllabics sign-placeholder';
                 const transliterationClass = model.creeName ? 'sign-cree' : 'sign-cree sign-placeholder';
-                // Shopify price chip: shown only when this sign has a
-                // configured & available Shopify product. The chip is purely
-                // informational on the card; the actual buy button lives in
-                // the detail pane.
                 return `
                     <div class="sign-card ${selectedModel?.id === model.id ? 'active' : ''}" draggable="true" data-model-id="${model.id}">
                         <div class="sign-info">
@@ -7625,10 +7522,9 @@
             attachPitchToggleHandlers();
             attachStyleToggleHandlers();
             loadCatalogue();
-            // Mount the Shopify floating cart drawer (see docs/shop.js).
-            // Guarded so the page works fine even if shop.js is missing or
-            // Shopify is not yet configured — the helper itself is a no-op
-            // in that case.
+            // Mount the Shopify floating cart (see docs/shop.js). It stays
+            // hidden until something is in the cart, and is a no-op when
+            // shop.js is missing or Shopify is not configured.
             if (window.NehiyoShop && typeof window.NehiyoShop.mountCart === 'function') {
                 window.NehiyoShop.mountCart();
             }

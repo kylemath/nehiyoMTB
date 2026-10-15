@@ -21,7 +21,7 @@ stay hidden.
 | 3 | Create an API token | Shopify admin | ~3 min |
 | 4 | Allow your website addresses | Shopify admin | ~1 min |
 | 5 | Paste 2 keys into the site | `docs/shop.js` | ~1 min |
-| 6 | Add prices to each sign | `docs/catalogue.json` | ~1 min each |
+| 6 | Link each sign to its product | `docs/catalogue.json` | ~1 min each |
 | 7 | Point your domain at the site | Squarespace | ~15 min + wait |
 | 8 | Turn on the domain in GitHub | GitHub repo settings | ~2 min |
 | 9 | Test a real purchase | [nehiyomtb.ca](https://nehiyomtb.ca) | ~5 min |
@@ -114,7 +114,7 @@ Save, then commit and push to `main`. The site updates in about 30 seconds.
 
 ---
 
-## 6️⃣ Add prices to each sign
+## 6️⃣ Link each sign to its product
 
 Open **`docs/catalogue.json`**. Find each sign and fill in its `shopify` block:
 
@@ -128,11 +128,12 @@ Open **`docs/catalogue.json`**. Find each sign and fill in its `shopify` block:
 ```
 
 - **productId** — the long number from step 2
-- **priceCAD** — the price shown on the card before the page fully loads
+- **priceCAD** — reference only; the site does not display prices
 - **available** — set to `true` to make it buyable (`false` hides the button)
 
-Push your changes. The price tags and "Add to cart" buttons now appear for every
-sign you marked `available: true`. 🎉
+Push your changes and re-run `python3 tools/sign_page_renderer.py`. A small
+"Get one" button now appears at the bottom of every sign page you marked
+`available: true`. 🎉
 
 ---
 
@@ -196,7 +197,7 @@ In **Squarespace → Settings → Domains → nehiyomtb.ca → DNS Settings**:
 | I want to… | Do this |
 |------------|---------|
 | Hide a sign from the store | Set its `"available": false` in `docs/catalogue.json` and push |
-| Change a price | Change it in Shopify admin (update `priceCAD` too so the chip matches) |
+| Change a price | Change it in Shopify admin (the site itself shows no prices) |
 | Add a new sign | Add the product in Shopify, then fill its `shopify` block and push |
 | Refund / cancel an order | Shopify admin → **Orders** |
 | Print a shipping label | Shopify admin → **Orders → Buy shipping label** |

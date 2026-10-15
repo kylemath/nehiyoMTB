@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bed Springs • Interactive Poster</title>
+    <script>if (window.self !== window.top) document.documentElement.classList.add("is-embedded");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Canadian+Aboriginal:wght@400;600;700&display=swap" />
     <style>
     :root{
       --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#1f7fb6;--accent2:#196895;--line:#dee2e6;--chip:#e9ecef;--ok:#1f7fb6;--primary-bg:#ddecf4;--primary-text:#000000;--formula-bg:#f6fafc;--formula-border:#1f7fb6;--secondary-bg:#edf5f9;--secondary-border:#bcd9e9
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    body{margin:0;font-family:Inter, "Noto Sans Canadian Aboriginal", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
     a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
     a:hover{border-bottom-color:var(--accent)}
     .container{max-width:1100px;margin:0 auto;padding:16px}
@@ -65,16 +69,44 @@
     @media (max-width: 960px){.grid{grid-template-columns:1fr}}
     @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
     .tooltip{position:relative}
-    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:normal;width:max-content;max-width:min(320px, 80vw);text-align:left;line-height:1.4;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
     .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
     .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
-    .buy-panel{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
-    .buy-panel h2{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}
-    .buy-price{font-size:24px;font-weight:800;color:#000}
-    .buy-mount{flex:1 1 200px;min-width:200px}
-    .buy-fineprint{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
-    .buy-panel--soon{border-style:dashed}
-    @media (max-width:600px){.buy-panel{flex-direction:column;align-items:stretch;text-align:center}}
+    .get-one{margin:28px 0 4px;padding:16px 4px 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}
+    .get-one-text{margin:0;flex:1 1 280px;color:var(--muted);font-size:14px;line-height:1.5}
+    .get-one-text a{color:var(--accent)}
+    .get-one-mount{flex:0 0 auto;min-height:38px;display:flex;align-items:center}
+    .get-one-mount:empty{display:none}
+    .get-one-link{display:inline-block;font:inherit;background:transparent;cursor:pointer;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}
+    .get-one-link:hover,.get-one-link:focus{background:var(--accent);color:#ffffff}
+    .get-one-link:disabled{opacity:0.6;cursor:progress}
+    body{-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    header{border-radius:16px;border-bottom-width:2px}
+    h1{font-size:clamp(24px, 4.2vw + 8px, 36px);line-height:1.15;text-wrap:balance}
+    .panel{border-radius:14px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)}
+    .panel h2{border-bottom-width:2px}
+    .primary-content,.story-box{border-radius:14px}
+    .kv{border-radius:12px}
+    .story-box p{max-width:68ch}
+    .back-link{color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)}
+    .is-embedded .back-link{display:none}
+    .shop-disabled-note{color:var(--muted);font-size:14px}
+    a:focus-visible,button:focus-visible,.part:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+    img{max-width:100%;height:auto}
+    @media (max-width: 640px){
+      .container{padding:12px}
+      header{padding:18px 14px}
+      .panel{padding:16px}
+      .grid{gap:12px}
+      .tag{font-size:12px;padding:5px 12px}
+      .row{flex-wrap:wrap}
+      .row .muted{order:1;flex:1 1 100%;font-size:14px;line-height:1.4}
+      .sro{white-space:normal}
+      .kvs{grid-template-columns:1fr}
+      .table th,.table td{padding:10px 10px;font-size:14px}
+      .trail-iframe{height:420px}
+    }
+    @media (prefers-reduced-motion: reduce){*{transition:none !important}}
     </style>
   </head>
   <body>
@@ -84,17 +116,10 @@
           <h1>Bed Springs • nipêwin ka kwâskwekotek kîkwayak • ᓂᐯᐃᐣ ᑲ ᑳᐢᑵᑯᑌᐠ ᑮᑿᔭᐠ</h1>
           <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
           <div style="margin-top:12px">
-            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+            <a class="back-link" href="../index.html" target="_top">← Back to Catalogue</a>
           </div>
         </div>
       </header>
-
-      <section class="buy-panel" aria-label="Order this sign">
-        <h2>Get one</h2>
-        <div class="buy-price">$35 CAD</div>
-        <div class="buy-mount" id="buy-mount"></div>
-        <p class="buy-fineprint">Secure checkout by Shopify. Ships from Edmonton. Tax + shipping calculated at checkout.</p>
-      </section>
 
       <section class="grid">
         <div class="panel">
@@ -103,10 +128,10 @@
         <div class="primary-content">
           <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">nipêwin   ka   kwâskwekotek   kîkwayak</div>
           <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
-              <span class="part tooltip" data-key="nipewin-bed" data-tip="NI noun: &#x27;bed, sleeping place&#x27; — from VAI &lt;strong&gt;nipâ‑&lt;/strong&gt; &#x27;to sleep&#x27; + the place/state nominalizer &lt;strong&gt;‑win&lt;/strong&gt; (&#x27;the place/act of sleeping&#x27;)" data-syll-id="nipewin-bed-syll">nipêwin</span>
-              <span class="part tooltip" data-key="ka-rel" data-tip="relative-clause prefix (shortened conjunct &lt;strong&gt;kâ‑&lt;/strong&gt; &#x27;the one that…&#x27;) — introduces the descriptive clause &#x27;that bounces&#x27;" data-syll-id="ka-rel-syll">ka‑</span>
-              <span class="part tooltip" data-key="kwaskwekotek-vii" data-tip="II verb (changed conjunct of &lt;strong&gt;kwâskwêkotêw&lt;/strong&gt;): &#x27;(the thing) that bounces, that springs, that recoils&#x27; — root &lt;strong&gt;kwâskw‑&lt;/strong&gt; &#x27;jump, bounce&#x27; is the same productive initial in &lt;strong&gt;kwâskohtin&lt;/strong&gt; &#x27;it bounces off (involuntarily)&#x27; and &lt;strong&gt;kwâskwepayiw&lt;/strong&gt; &#x27;it springs into motion&#x27;" data-syll-id="kwaskwekotek-vii-syll">kwâskwekotek</span>
-              <span class="part tooltip" data-key="kikwayak-things" data-tip="INDEF noun, plural: &#x27;things&#x27; (animate plural / pejorative-flavoured) — base &lt;strong&gt;kîkway&lt;/strong&gt; &#x27;something, what&#x27;, with plural marker &lt;strong&gt;‑ak&lt;/strong&gt;" data-syll-id="kikwayak-things-syll">kîkwayak</span>
+              <span class="part tooltip" data-key="nipewin-bed" data-tip="NI noun: &#x27;bed, sleeping place&#x27; — from VAI nipâ‑ &#x27;to sleep&#x27; + the place/state nominalizer ‑win (&#x27;the place/act of sleeping&#x27;)" data-syll-id="nipewin-bed-syll">nipêwin</span>
+              <span class="part tooltip" data-key="ka-rel" data-tip="relative-clause prefix (shortened conjunct kâ‑ &#x27;the one that…&#x27;) — introduces the descriptive clause &#x27;that bounces&#x27;" data-syll-id="ka-rel-syll">ka‑</span>
+              <span class="part tooltip" data-key="kwaskwekotek-vii" data-tip="II verb (changed conjunct of kwâskwêkotêw): &#x27;(the thing) that bounces, that springs, that recoils&#x27; — root kwâskw‑ &#x27;jump, bounce&#x27; is the same productive initial in kwâskohtin &#x27;it bounces off (involuntarily)&#x27; and kwâskwepayiw &#x27;it springs into motion&#x27;" data-syll-id="kwaskwekotek-vii-syll">kwâskwekotek</span>
+              <span class="part tooltip" data-key="kikwayak-things" data-tip="INDEF noun, plural: &#x27;things&#x27; (animate plural / pejorative-flavoured) — base kîkway &#x27;something, what&#x27;, with plural marker ‑ak" data-syll-id="kikwayak-things-syll">kîkwayak</span>
               <span style="margin:0 8px">→</span>
               <strong style="font-size:20px">nipêwin   ka   kwâskwekotek   kîkwayak</strong>
           </div>
@@ -173,7 +198,7 @@
               <span class="syll-part tooltip" data-key="kwaskw-init" data-tip="kwâskw‑" id="kwaskw-init-syll">ᑵ</span>
               <span class="syll-part tooltip" data-key="ekotew-fin" data-tip="‑êkotêw" id="ekotew-fin-syll">ᑯᑌᐤ</span>
           </div>
-            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">The &#x27;plain&#x27; independent form. Changed-conjunct &lt;strong&gt;kâ kwâskwêkotêk&lt;/strong&gt; &#x27;the one that bounces&#x27; is what the plaque uses, written as &lt;strong&gt;ka kwâskwekotek&lt;/strong&gt;.</p>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">The &#x27;plain&#x27; independent form. Changed-conjunct <strong>kâ kwâskwêkotêk</strong> &#x27;the one that bounces&#x27; is what the plaque uses, written as <strong>ka kwâskwekotek</strong>.</p>
           </div>
 
           <div class="kv" style="margin-top:12px">
@@ -188,7 +213,7 @@
               <span class="syll-part tooltip" data-key="kikway-base" data-tip="kîkway" id="kikway-base-syll">ᑮᑿᕀ</span>
               <span class="syll-part tooltip" data-key="ak-plur1" data-tip="‑ak" id="ak-plur1-syll">ᐊᐠ</span>
           </div>
-            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Plural &lt;strong&gt;kîkwayak&lt;/strong&gt; &#x27;things&#x27; carries an animate plural — a small grammatical wink, since bedsprings &#x27;jump&#x27; and so can be cast as animate.</p>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Plural <strong>kîkwayak</strong> &#x27;things&#x27; carries an animate plural — a small grammatical wink, since bedsprings &#x27;jump&#x27; and so can be cast as animate.</p>
           </div>
 
         <h2 style="margin-top:24px">Examples &amp; Sources</h2>
@@ -216,6 +241,11 @@
         <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
         <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
         </div>
+      </section>
+
+      <section class="get-one" id="get-one" aria-label="Get this sign">
+        <p class="get-one-text">Each sign is 3D printed in Edmonton. Want one for your own trail, cabin or wall?</p>
+        <div class="get-one-mount" id="buy-mount"></div>
       </section>
 
       <footer>
@@ -310,9 +340,31 @@
     <script src="../shop.js" defer></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        if (!window.NehiyoShop) return;
-        window.NehiyoShop.mountProduct(document.getElementById("buy-mount"), "10442608607527", { buttonText: "Add to cart" });
-        window.NehiyoShop.mountCart();
+        var mount = document.getElementById("buy-mount");
+        if (!mount || !window.NehiyoShop) return;
+        if (window.NehiyoShop.isEmbedded()) {
+          // Inside the catalogue preview: add to the catalogue's cart so the
+          // visitor stays put. Fall back to the standalone page if that fails.
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "get-one-link";
+          btn.textContent = "Get one";
+          var openPage = function () {
+            window.top.location.href = window.location.pathname + "#get-one";
+          };
+          btn.addEventListener("click", function () {
+            var parentShop = null;
+            try { parentShop = window.parent.NehiyoShop; } catch (e) {}
+            if (!parentShop || !parentShop.addToCart) return openPage();
+            btn.disabled = true;
+            parentShop.addToCart("10442608607527")
+              .catch(function (err) { console.warn(err); openPage(); })
+              .then(function () { btn.disabled = false; });
+          });
+          mount.appendChild(btn);
+          return;
+        }
+        window.NehiyoShop.mountProduct(mount, "10442608607527", { buttonText: "Get one", accent: "#1f7fb6" });
       });
     </script>
   </body>

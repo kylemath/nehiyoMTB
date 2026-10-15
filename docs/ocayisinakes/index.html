@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Monkey • Interactive Poster</title>
+    <script>if (window.self !== window.top) document.documentElement.classList.add("is-embedded");</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Canadian+Aboriginal:wght@400;600;700&display=swap" />
     <style>
     :root{
       --bg:#f8f9fa;--panel:#ffffff;--muted:#6c757d;--text:#000000;--accent:#dc3545;--accent2:#b42b39;--line:#dee2e6;--chip:#e9ecef;--ok:#dc3545;--primary-bg:#fae1e3;--primary-text:#000000;--formula-bg:#fef7f8;--formula-border:#dc3545;--secondary-bg:#fceff0;--secondary-border:#f4c2c7
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
+    body{margin:0;font-family:Inter, "Noto Sans Canadian Aboriginal", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text);line-height:1.6}
     a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
     a:hover{border-bottom-color:var(--accent)}
     .container{max-width:1100px;margin:0 auto;padding:16px}
@@ -65,16 +69,44 @@
     @media (max-width: 960px){.grid{grid-template-columns:1fr}}
     @media (max-width: 640px){.grid-2{grid-template-columns:1fr}}
     .tooltip{position:relative}
-    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:nowrap;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
+    .tooltip:hover::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 8px);white-space:normal;width:max-content;max-width:min(320px, 80vw);text-align:left;line-height:1.4;background:#111827;color:#e5e7eb;font-size:12px;padding:6px 8px;border-radius:6px;border:1px solid #374151;pointer-events:none;z-index:100}
     .primary-content{background:#ffffff;border:3px solid var(--accent);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
     .story-box{background:linear-gradient(135deg, var(--formula-bg) 0%, #ffffff 100%);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:16px}
-    .buy-panel{background:var(--panel);border:2px solid var(--accent);border-radius:12px;padding:18px;margin:16px 0;display:flex;flex-wrap:wrap;align-items:center;gap:14px;box-shadow:0 4px 10px rgba(0,0,0,0.04)}
-    .buy-panel h2{margin:0;font-size:20px;color:var(--accent);padding:0;border:none}
-    .buy-price{font-size:24px;font-weight:800;color:#000}
-    .buy-mount{flex:1 1 200px;min-width:200px}
-    .buy-fineprint{width:100%;font-size:12px;color:var(--muted);margin-top:4px}
-    .buy-panel--soon{border-style:dashed}
-    @media (max-width:600px){.buy-panel{flex-direction:column;align-items:stretch;text-align:center}}
+    .get-one{margin:28px 0 4px;padding:16px 4px 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px}
+    .get-one-text{margin:0;flex:1 1 280px;color:var(--muted);font-size:14px;line-height:1.5}
+    .get-one-text a{color:var(--accent)}
+    .get-one-mount{flex:0 0 auto;min-height:38px;display:flex;align-items:center}
+    .get-one-mount:empty{display:none}
+    .get-one-link{display:inline-block;font:inherit;background:transparent;cursor:pointer;padding:7px 18px;border:1.5px solid var(--accent);border-radius:999px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:background 0.15s,color 0.15s}
+    .get-one-link:hover,.get-one-link:focus{background:var(--accent);color:#ffffff}
+    .get-one-link:disabled{opacity:0.6;cursor:progress}
+    body{-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    header{border-radius:16px;border-bottom-width:2px}
+    h1{font-size:clamp(24px, 4.2vw + 8px, 36px);line-height:1.15;text-wrap:balance}
+    .panel{border-radius:14px;padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)}
+    .panel h2{border-bottom-width:2px}
+    .primary-content,.story-box{border-radius:14px}
+    .kv{border-radius:12px}
+    .story-box p{max-width:68ch}
+    .back-link{color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)}
+    .is-embedded .back-link{display:none}
+    .shop-disabled-note{color:var(--muted);font-size:14px}
+    a:focus-visible,button:focus-visible,.part:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+    img{max-width:100%;height:auto}
+    @media (max-width: 640px){
+      .container{padding:12px}
+      header{padding:18px 14px}
+      .panel{padding:16px}
+      .grid{gap:12px}
+      .tag{font-size:12px;padding:5px 12px}
+      .row{flex-wrap:wrap}
+      .row .muted{order:1;flex:1 1 100%;font-size:14px;line-height:1.4}
+      .sro{white-space:normal}
+      .kvs{grid-template-columns:1fr}
+      .table th,.table td{padding:10px 10px;font-size:14px}
+      .trail-iframe{height:420px}
+    }
+    @media (prefers-reduced-motion: reduce){*{transition:none !important}}
     </style>
   </head>
   <body>
@@ -84,15 +116,10 @@
           <h1>Monkey • ocayisinâkês • ᐅᒐᔨᓯᓈᑫᐢ</h1>
           <span class="tag">Interactive Poster • Plains Cree (nēhiyawēwin)</span>
           <div style="margin-top:12px">
-            <a href="../index.html" target="_top" style="color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">← Back to Catalogue</a>
+            <a class="back-link" href="../index.html" target="_top">← Back to Catalogue</a>
           </div>
         </div>
       </header>
-
-      <section class="buy-panel buy-panel--soon" aria-label="Order this sign">
-        <h2>Get one</h2>
-        <div class="buy-fineprint">Online checkout coming soon. Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a> to order this sign.</div>
-      </section>
 
       <section class="grid">
         <div class="panel">
@@ -101,10 +128,10 @@
         <div class="primary-content">
           <div style="font-size:36px;font-weight:900;color:var(--accent);margin-bottom:20px;text-align:center;letter-spacing:-0.02em">ocayisinâkês</div>
           <div class="formula" style="justify-content:center;font-size:18px;margin-bottom:16px">
-              <span class="part tooltip" data-key="o-deriv" data-tip="&lt;strong&gt;Initial / derivational prefix.&lt;/strong&gt; Distinguishes the Plains Cree form &lt;em&gt;ocayisinâkês&lt;/em&gt; from the otherwise‑identical Northern Cree form &lt;em&gt;ayisinâkes&lt;/em&gt; (per itwêwina/CW). Plays the role of an animate‑actor / &#x27;one who&#x27; element." data-syll-id="o-deriv-syll">o‑</span>
-              <span class="part tooltip" data-key="cay-stem" data-tip="Stem element: &lt;strong&gt;part of the &#x27;monkey&#x27; lexicalization&lt;/strong&gt;. Likely related to the &lt;em&gt;ayisi‑&lt;/em&gt; family of &#x27;looking like / appearing as&#x27; morphemes that also surface in &lt;em&gt;ayisiyiniw&lt;/em&gt; &#x27;human being / person&#x27;." data-syll-id="cay-stem-syll">cay‑</span>
-              <span class="part tooltip" data-key="isinaakos-final" data-tip="VAI final: &lt;strong&gt;&#x27;look, appear, have the shape of&#x27;&lt;/strong&gt;. Same productive final that gives &lt;em&gt;nipiy‑isinâkosiw&lt;/em&gt; &#x27;s/he looks watery / liquid‑like&#x27;, &lt;em&gt;maskoso‑isinâkosiw&lt;/em&gt; &#x27;s/he looks bear‑like&#x27;, etc." data-syll-id="isinaakos-final-syll">‑isinâkos‑</span>
-              <span class="part tooltip" data-key="es-dim" data-tip="&lt;strong&gt;Diminutive / small‑animate suffix.&lt;/strong&gt; The reason &lt;em&gt;monkey&lt;/em&gt; ends in ‑ês and not the plain 3sg ‑w: it is conceived as &#x27;the little one that looks like (a person)&#x27; — a small primate, monkey‑sized. itwêwina lists the diminutive‑of‑diminutive &lt;em&gt;ocôcayisinâkês&lt;/em&gt; &#x27;the cute little monkey&#x27; on the same paradigm." data-syll-id="es-dim-syll">‑ês</span>
+              <span class="part tooltip" data-key="o-deriv" data-tip="Initial / derivational prefix. Distinguishes the Plains Cree form ocayisinâkês from the otherwise‑identical Northern Cree form ayisinâkes (per itwêwina/CW). Plays the role of an animate‑actor / &#x27;one who&#x27; element." data-syll-id="o-deriv-syll">o‑</span>
+              <span class="part tooltip" data-key="cay-stem" data-tip="Stem element: part of the &#x27;monkey&#x27; lexicalization. Likely related to the ayisi‑ family of &#x27;looking like / appearing as&#x27; morphemes that also surface in ayisiyiniw &#x27;human being / person&#x27;." data-syll-id="cay-stem-syll">cay‑</span>
+              <span class="part tooltip" data-key="isinaakos-final" data-tip="VAI final: &#x27;look, appear, have the shape of&#x27;. Same productive final that gives nipiy‑isinâkosiw &#x27;s/he looks watery / liquid‑like&#x27;, maskoso‑isinâkosiw &#x27;s/he looks bear‑like&#x27;, etc." data-syll-id="isinaakos-final-syll">‑isinâkos‑</span>
+              <span class="part tooltip" data-key="es-dim" data-tip="Diminutive / small‑animate suffix. The reason monkey ends in ‑ês and not the plain 3sg ‑w: it is conceived as &#x27;the little one that looks like (a person)&#x27; — a small primate, monkey‑sized. itwêwina lists the diminutive‑of‑diminutive ocôcayisinâkês &#x27;the cute little monkey&#x27; on the same paradigm." data-syll-id="es-dim-syll">‑ês</span>
               <span style="margin:0 8px">→</span>
               <strong style="font-size:20px">ocayisinâkês</strong>
           </div>
@@ -146,7 +173,7 @@
             <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Monkeys (plural)&quot;</div>
           <div class="formula">
               <span class="part tooltip" data-key="ocayisinaakees-stem-pl" data-tip="The full noun stem &#x27;monkey&#x27;." data-syll-id="ocayisinaakees-stem-pl-syll">ocayisinâkês</span>
-              <span class="part tooltip" data-key="ak-pl-anim" data-tip="Animate plural suffix: &#x27;‑s&#x27;. The same ‑ak that pluralizes &lt;em&gt;kahkakiwak&lt;/em&gt; &#x27;ravens&#x27; and &lt;em&gt;atimwak&lt;/em&gt; &#x27;dogs&#x27;." data-syll-id="ak-pl-anim-syll">‑ak</span>
+              <span class="part tooltip" data-key="ak-pl-anim" data-tip="Animate plural suffix: &#x27;‑s&#x27;. The same ‑ak that pluralizes kahkakiwak &#x27;ravens&#x27; and atimwak &#x27;dogs&#x27;." data-syll-id="ak-pl-anim-syll">‑ak</span>
               <span style="margin:0 8px">→</span>
               <strong style="font-size:20px">ocayisinâkêsak</strong>
           </div>
@@ -161,7 +188,7 @@
             <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Monkey (obviative — &#x27;the other monkey&#x27;, when one is already in the discourse)&quot;</div>
           <div class="formula">
               <span class="part tooltip" data-key="ocayisinaakees-stem-obv" data-tip="The full noun stem &#x27;monkey&#x27;." data-syll-id="ocayisinaakees-stem-obv-syll">ocayisinâkês</span>
-              <span class="part tooltip" data-key="a-obv-monkey" data-tip="Obviative suffix on the animate noun. Same ‑a that puts &lt;em&gt;otânisa&lt;/em&gt; &#x27;his/her daughter&#x27; in obviative on the &lt;em&gt;Farmer&#x27;s Daughter&lt;/em&gt; plaque." data-syll-id="a-obv-monkey-syll">‑a</span>
+              <span class="part tooltip" data-key="a-obv-monkey" data-tip="Obviative suffix on the animate noun. Same ‑a that puts otânisa &#x27;his/her daughter&#x27; in obviative on the Farmer&#x27;s Daughter plaque." data-syll-id="a-obv-monkey-syll">‑a</span>
               <span style="margin:0 8px">→</span>
               <strong style="font-size:20px">ocayisinâkêsa</strong>
           </div>
@@ -175,12 +202,12 @@
           <div class="kv" style="margin-top:12px">
             <div style="font-size:17px;font-weight:800;color:#000000;margin-bottom:8px">English: &quot;Monkey (Northern Cree variant)&quot;</div>
           <div class="formula">
-              <span class="part tooltip" data-key="ayisinaakees-northern" data-tip="Northern Cree form: drops the &lt;em&gt;o‑&lt;/em&gt; derivational prefix that Plains Cree carries. From Wolvengrey/AECD." data-syll-id="ayisinaakees-northern-syll">ayisinâkes</span>
+              <span class="part tooltip" data-key="ayisinaakees-northern" data-tip="Northern Cree form: drops the o‑ derivational prefix that Plains Cree carries. From Wolvengrey/AECD." data-syll-id="ayisinaakees-northern-syll">ayisinâkes</span>
           </div>
           <div class="syllabics-emphasis">
               <span class="syll-part tooltip" data-key="ayisinaakees-northern" data-tip="ayisinâkes" id="ayisinaakees-northern-syll">ᐊᔨᓯᓈᑫᐢ</span>
           </div>
-            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Same word, dialectal split. Plains Cree (the wall&#x27;s dialect) carries the &lt;em&gt;o‑&lt;/em&gt;; Northern Cree does not. Useful for any rider who learned the word from a Northern speaker and notices the dialect difference.</p>
+            <p style="margin-top:8px;color:var(--accent);font-size:15px;font-weight:600;font-style:italic">Same word, dialectal split. Plains Cree (the wall&#x27;s dialect) carries the <em>o‑</em>; Northern Cree does not. Useful for any rider who learned the word from a Northern speaker and notices the dialect difference.</p>
           </div>
 
         <h2 style="margin-top:24px">Examples &amp; Sources</h2>
@@ -193,8 +220,8 @@
               <tr><td>Monkey (Plains Cree)</td><td class="tooltip" data-tip="Plaque headword. itwêwina/CW. NA animate.">ocayisinâkês</td><td>ᐅᒐᔨᓯᓈᑫᐢ</td></tr>
               <tr><td>Monkeys (plural)</td><td class="tooltip" data-tip="Standard NA plural with ‑ak.">ocayisinâkêsak</td><td>ᐅᒐᔨᓯᓈᑫᓴᐠ</td></tr>
               <tr><td>Monkey (obviative — &#x27;the other one&#x27;)</td><td class="tooltip" data-tip="Used when a third party is in the clause.">ocayisinâkêsa</td><td>ᐅᒐᔨᓯᓈᑫᓴ</td></tr>
-              <tr><td>My (pet / cute little) monkey</td><td class="tooltip" data-tip="1sg.poss diminutive form from the itwêwina paradigm. The doubled &lt;em&gt;co‑&lt;/em&gt; reduplication is the affectionate / diminutive‑of‑diminutive shape.">nicôcayisinâkêsim</td><td>ᓂᒍᒐᔨᓯᓈᑫᓯᒼ</td></tr>
-              <tr><td>Person, human being (the morphological cousin)</td><td class="tooltip" data-tip="Same &lt;em&gt;ayisi‑&lt;/em&gt; &#x27;look like / appear as&#x27; family. Side‑by‑side: &lt;em&gt;ayisiyiniw&lt;/em&gt; &#x27;one who looks like (a being)&#x27; vs &lt;em&gt;ocayisinâkês&lt;/em&gt; &#x27;a little one that looks (person‑like)&#x27;.">ayisiyiniw</td><td>ᐊᔨᓯᔨᓂᐤ</td></tr>
+              <tr><td>My (pet / cute little) monkey</td><td class="tooltip" data-tip="1sg.poss diminutive form from the itwêwina paradigm. The doubled co‑ reduplication is the affectionate / diminutive‑of‑diminutive shape.">nicôcayisinâkêsim</td><td>ᓂᒍᒐᔨᓯᓈᑫᓯᒼ</td></tr>
+              <tr><td>Person, human being (the morphological cousin)</td><td class="tooltip" data-tip="Same ayisi‑ &#x27;look like / appear as&#x27; family. Side‑by‑side: ayisiyiniw &#x27;one who looks like (a being)&#x27; vs ocayisinâkês &#x27;a little one that looks (person‑like)&#x27;.">ayisiyiniw</td><td>ᐊᔨᓯᔨᓂᐤ</td></tr>
           </tbody>
         </table>
 
@@ -207,6 +234,10 @@
         <p class="muted">Dialectal preferences may affect minor spelling choices; check local norms for signage.</p>
         <p class="muted">References: <a href="https://itwewina.altlab.app/" target="_blank" rel="noreferrer">itwêwina</a>, <a href="https://www.creedictionary.com/" target="_blank" rel="noreferrer">Online Cree Dictionary</a>, <a href="https://dictionary.plainscree.atlas-ling.ca/" target="_blank" rel="noreferrer">Plains Cree Dictionary</a></p>
         </div>
+      </section>
+
+      <section class="get-one" id="get-one" aria-label="Get this sign">
+        <p class="get-one-text">Each sign is 3D printed in Edmonton. Want one for your own trail, cabin or wall? Email <a href="mailto:hello@nehiyomtb.ca">hello@nehiyomtb.ca</a>.</p>
       </section>
 
       <footer>
