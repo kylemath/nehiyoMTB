@@ -26,6 +26,7 @@ import math
 import re
 from html import escape
 from pathlib import Path
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from typing import Any, Iterable
 
 
@@ -489,6 +490,16 @@ def render_track_mini_map(
     return mini_map
 
 
+def _widget_without_map(widget_url: str) -> str:
+    parts = urlsplit(widget_url)
+    query = [
+        (key, "0" if key == "map" else value)
+        for key, value in parse_qsl(parts.query, keep_blank_values=True)
+        if key not in {"basemap", "basicmap", "trail_opacity"}
+    ]
+    return urlunsplit(parts._replace(query=urlencode(query, safe="%")))
+
+
 def render_trailforks_block(content: dict) -> str:
     trail = content.get("trailforks") or {}
     trail_source = _trail_map_source(trail)
@@ -559,6 +570,13 @@ def render_trailforks_block(content: dict) -> str:
     widget_html = ""
     if widget_url and not mini_map_html:
         widget_html = f'<iframe width="100%" height="350" frameborder="0" src="{escape(widget_url)}"></iframe>'
+    elif widget_url:
+        # Keep the Trailforks card (title, stats, elevation, photos) under our
+        # map, with its own map turned off since that part now needs API access.
+        widget_html = (
+            f'<iframe width="100%" height="350" frameborder="0" '
+            f'src="{escape(_widget_without_map(widget_url))}"></iframe>'
+        )
 
     link_html = ""
     if trail_url:
