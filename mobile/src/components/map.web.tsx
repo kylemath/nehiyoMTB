@@ -332,6 +332,160 @@ type PolylineProps = {
   zIndex?: number;
 };
 
+type LineEntry = {
+  coordinates: LatLng[];
+  color: string;
+  opacity: number;
+  width: number;
+  /** Dash pattern in line widths, as MapLibre wants it; '' for solid. */
+  dash: string;
+  tappable: boolean;
+  zIndex: number;
+  seq: number;
+  onPress?: () => void;
+};
+
+const LINES_SOURCE = 'polylines';
+const LINES_HIT = 'polylines-hit';
+const lineLayerId = (dash: string) => (dash ? `polylines-dash-${dash}` : 'polylines');
+
+/**
+ * Every Polyline on a map is drawn from ONE GeoJSON source, with one line
+ * layer per dash pattern and a single invisible hit layer. A source + layers
+ * per polyline (one per trail, ~50) made each frame of a pan redraw ~100
+ * layers, which froze and then crashed the tab on phones.
+ */
+class LineBatch {
+  private entries = new Map<string, LineEntry>();
+  private layers = new Set<string>();
+  private frame: number | null = null;
+  private seq = 0;
+
+  constructor(private ctx: MapState) {
+    const { map } = ctx;
+    map.addSource(LINES_SOURCE, {
+      type: 'geojson',
+      data: { type: 'FeatureCollection', features: [] },
+    });
+    // Invisible wide stroke so thin trail lines are easy to hit.
+    map.addLayer({
+      id: LINES_HIT,
+      type: 'line',
+      source: LINES_SOURCE,
+      filter: ['==', ['get', 'tappable'], true],
+      layout: { 'line-sort-key': ['get', 'sort'] },
+      paint: { 'line-width': 16, 'line-opacity': 0 },
+    });
+    ctx.tappableLayers.add(LINES_HIT);
+    map.on('click', LINES_HIT, (e) => {
+      // Topmost feature first.
+      const id = e.features?.[0]?.properties?.id as string | undefined;
+      const entry = id ? this.entries.get(id) : undefined;
+      if (!entry?.onPress) return;
+      ctx.consumedAt = Date.now();
+      entry.onPress();
+    });
+    map.on('mouseenter', LINES_HIT, () => (map.getCanvas().style.cursor = 'pointer'));
+    map.on('mouseleave', LINES_HIT, () => (map.getCanvas().style.cursor = ''));
+  }
+
+  set(id: string, entry: Omit<LineEntry, 'seq'>) {
+    const seq = this.entries.get(id)?.seq ?? this.seq++;
+    this.entries.set(id, { ...entry, seq });
+    this.schedule();
+  }
+
+  /** Keeps the press handler current without rebuilding the data. */
+  setPress(id: string, onPress?: () => void) {
+    const entry = this.entries.get(id);
+    if (entry) entry.onPress = onPress;
+  }
+
+  delete(id: string) {
+    if (this.entries.delete(id)) this.schedule();
+  }
+
+  private schedule() {
+    if (this.frame != null) return;
+    this.frame = requestAnimationFrame(() => {
+      this.frame = null;
+      this.flush();
+    });
+  }
+
+  private flush() {
+    const { map } = this.ctx;
+    if (!map.getStyle()) return; // map already removed
+    const features: GeoJSON.Feature<GeoJSON.LineString>[] = [];
+    const dashes = new Set<string>();
+    for (const [id, e] of this.entries) {
+      if (e.coordinates.length < 2) continue;
+      dashes.add(e.dash);
+      features.push({
+        type: 'Feature',
+        properties: {
+          id,
+          color: e.color,
+          opacity: e.opacity,
+          width: e.width,
+          dash: e.dash,
+          tappable: e.tappable,
+          // Later and higher-zIndex lines draw on top, as in react-native-maps.
+          sort: e.zIndex * 100000 + e.seq,
+        },
+        geometry: {
+          type: 'LineString',
+          coordinates: e.coordinates.map((c) => [c.longitude, c.latitude]),
+        },
+      });
+    }
+    // Dash patterns can't be data-driven, so each pattern gets its own layer.
+    for (const dash of dashes) {
+      const layerId = lineLayerId(dash);
+      if (this.layers.has(layerId)) continue;
+      map.addLayer(
+        {
+          id: layerId,
+          type: 'line',
+          source: LINES_SOURCE,
+          filter: ['==', ['get', 'dash'], dash],
+          layout: {
+            'line-cap': dash ? 'butt' : 'round',
+            'line-join': 'round',
+            'line-sort-key': ['get', 'sort'],
+          },
+          paint: {
+            'line-color': ['get', 'color'],
+            'line-opacity': ['get', 'opacity'],
+            'line-width': ['get', 'width'],
+            ...(dash ? { 'line-dasharray': dash.split('_').map(Number) } : {}),
+          },
+        },
+        LINES_HIT,
+      );
+      this.layers.add(layerId);
+    }
+    (map.getSource(LINES_SOURCE) as maplibreglType.GeoJSONSource | undefined)?.setData({
+      type: 'FeatureCollection',
+      features,
+    });
+  }
+
+  dispose() {
+    if (this.frame != null) cancelAnimationFrame(this.frame);
+  }
+}
+
+const batches = new WeakMap<MapState, LineBatch>();
+function lineBatch(ctx: MapState): LineBatch {
+  let batch = batches.get(ctx);
+  if (!batch) {
+    batch = new LineBatch(ctx);
+    batches.set(ctx, batch);
+  }
+  return batch;
+}
+
 export function Polyline({
   coordinates,
   strokeColor,
@@ -339,87 +493,38 @@ export function Polyline({
   lineDashPattern,
   tappable,
   onPress,
+  zIndex = 0,
 }: PolylineProps) {
   const ctx = useContext(MapContext);
-  const id = `line-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
-  const hitId = `${id}-hit`;
-  const pressRef = useRef(onPress);
-  useEffect(() => {
-    pressRef.current = onPress;
-  });
+  const id = useId();
+  const { color, opacity } = splitColor(strokeColor);
+  // react-native-maps dashes are in pixels; MapLibre's are in line widths.
+  const dash = lineDashPattern
+    ? lineDashPattern.map((n) => +(n / Math.max(strokeWidth, 1)).toFixed(2)).join('_')
+    : '';
 
-  const data = useMemo<GeoJSON.Feature<GeoJSON.LineString>>(
-    () => ({
-      type: 'Feature',
-      properties: {},
-      geometry: {
-        type: 'LineString',
-        coordinates: coordinates.map((c) => [c.longitude, c.latitude]),
-      },
-    }),
-    [coordinates],
-  );
-
-  // Add the source + layers once; later effects only update them.
   useEffect(() => {
     if (!ctx) return;
-    const { map } = ctx;
-    map.addSource(id, { type: 'geojson', data });
-    map.addLayer({
-      id,
-      type: 'line',
-      source: id,
-      layout: { 'line-cap': 'round', 'line-join': 'round' },
+    lineBatch(ctx).set(id, {
+      coordinates,
+      color,
+      opacity,
+      width: strokeWidth,
+      dash,
+      tappable: Boolean(tappable),
+      zIndex,
     });
-    if (tappable) {
-      // Invisible wide stroke so thin trail lines are easy to hit.
-      map.addLayer({
-        id: hitId,
-        type: 'line',
-        source: id,
-        paint: { 'line-width': 16, 'line-opacity': 0 },
-      });
-      ctx.tappableLayers.add(hitId);
-      const click = () => {
-        ctx.consumedAt = Date.now();
-        pressRef.current?.();
-      };
-      const enter = () => (map.getCanvas().style.cursor = 'pointer');
-      const leave = () => (map.getCanvas().style.cursor = '');
-      map.on('click', hitId, click);
-      map.on('mouseenter', hitId, enter);
-      map.on('mouseleave', hitId, leave);
-    }
-    return () => {
-      ctx.tappableLayers.delete(hitId);
-      if (!map.getStyle()) return; // map already removed
-      if (map.getLayer(hitId)) map.removeLayer(hitId);
-      if (map.getLayer(id)) map.removeLayer(id);
-      if (map.getSource(id)) map.removeSource(id);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // onPress is synced separately so a new closure doesn't rebuild the data.
+  }, [ctx, id, coordinates, color, opacity, strokeWidth, dash, tappable, zIndex]);
+
+  useEffect(() => {
+    if (ctx) lineBatch(ctx).setPress(id, onPress);
+  });
+
+  useEffect(() => {
+    if (!ctx) return;
+    return () => lineBatch(ctx).delete(id);
   }, [ctx, id]);
-
-  useEffect(() => {
-    const source = ctx?.map.getSource(id) as maplibreglType.GeoJSONSource | undefined;
-    source?.setData(data);
-  }, [ctx, id, data]);
-
-  const dash = lineDashPattern?.join(',');
-  useEffect(() => {
-    const map = ctx?.map;
-    if (!map?.getLayer(id)) return;
-    const { color, opacity } = splitColor(strokeColor);
-    map.setPaintProperty(id, 'line-color', color);
-    map.setPaintProperty(id, 'line-opacity', opacity);
-    map.setPaintProperty(id, 'line-width', strokeWidth);
-    // react-native-maps dashes are in pixels; MapLibre's are in line widths.
-    map.setPaintProperty(
-      id,
-      'line-dasharray',
-      dash ? dash.split(',').map((n) => Number(n) / Math.max(strokeWidth, 1)) : undefined,
-    );
-  }, [ctx, id, strokeColor, strokeWidth, dash]);
 
   return null;
 }
