@@ -50,7 +50,7 @@
     .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
     .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
     .trail-mini-map svg{display:block;width:100%;height:auto}
-    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-tile{image-rendering:auto;filter:saturate(0.55)}
     .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
     .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
     .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
@@ -166,36 +166,10 @@
         <div class="panel">
 
         <h2>Trail Information</h2>
-        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
         <div style="text-align:center;margin-bottom:24px">
-            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/the-farmer-s-daughter-60234/" target="_blank" rel="noopener noreferrer">
-            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
-              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
-                <defs>
-                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#f7f8fa" />
-                    <stop offset="100%" stop-color="#eef1f5" />
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3022/5298.png" x="-161.7" y="-228.1" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3023/5298.png" x="94.3" y="-228.1" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3024/5298.png" x="350.3" y="-228.1" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3025/5298.png" x="606.3" y="-228.1" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3022/5299.png" x="-161.7" y="27.9" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3023/5299.png" x="94.3" y="27.9" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3024/5299.png" x="350.3" y="27.9" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/14/3025/5299.png" x="606.3" y="27.9" width="256" height="256" />
-                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
-                <polyline class="trail-mini-map-halo" points="322.0,42.2 320.7,42.2 318.5,43.3 316.5,43.5 314.1,45.7 312.4,52.7 313.0,54.3 315.3,54.3 314.6,55.7 313.5,56.1 313.0,56.9 313.0,57.8 312.7,59.2 313.2,62.1 313.7,62.9 314.5,62.9 314.8,61.6 315.3,61.6 315.6,62.9 314.1,64.5 313.9,65.3 315.3,68.2 318.7,68.8 320.5,70.8 320.3,73.5 320.0,76.2 320.2,79.6 320.6,80.7 320.6,82.1 321.5,83.3 321.3,84.3 320.7,84.7 320.5,85.4 320.9,85.8 322.6,86.0 323.5,86.6 324.0,87.4 324.0,88.4 323.0,90.7 321.3,93.3 321.7,95.4 321.4,97.6 320.5,99.2 319.5,99.7 319.5,101.5 319.2,102.5 319.4,103.9 320.2,105.0 320.1,106.8 320.3,107.6 320.0,109.3 320.1,110.5 321.0,112.9 322.4,113.3 322.8,113.8 322.7,114.6 322.9,115.2 325.7,118.5 323.3,120.1 321.0,119.7 319.3,119.3 316.2,119.1 315.2,118.9 311.8,119.3 311.4,119.9 311.5,121.3 312.0,121.9 312.3,123.2 312.3,124.0 311.4,125.2 311.4,126.0 312.2,128.3 312.1,130.7 312.9,132.6 312.8,133.2 311.8,134.4 312.5,136.8 312.4,138.1 312.7,139.7 312.0,143.2 311.1,144.4 310.7,145.8 310.0,146.4 309.0,147.7 308.9,150.3 309.4,152.0 309.3,152.6 308.7,153.2 307.8,151.8 306.8,151.8 306.6,152.4 306.1,154.2 306.4,155.8 305.3,157.3 305.6,157.7 306.8,157.7 307.2,158.1 306.6,159.3 305.6,160.1 304.4,163.2 305.6,166.3 306.7,167.7 306.7,169.9 306.0,171.8 306.4,172.6 306.3,173.8 305.8,174.8 306.8,177.7 306.3,178.9 305.7,181.4 304.0,183.2 303.9,184.2 306.0,184.5 307.7,187.3 307.7,187.9 307.0,189.4 306.1,189.6 304.6,189.2 303.9,189.6 303.2,191.0 304.7,192.6 310.0,194.5 313.4,197.1 314.1,197.9 314.9,199.8 316.9,201.2 317.7,203.7 318.1,206.7 318.1,210.8 319.0,211.4 319.4,212.4 321.7,214.3 322.9,214.9 323.8,216.5 325.1,217.8 325.9,216.7 326.9,214.1 328.2,213.9 330.1,214.3 330.5,213.9 329.2,211.2 329.2,210.6 329.8,210.4 331.3,211.0 333.7,213.9 336.8,216.5" />
-                <polyline class="trail-mini-map-track" points="322.0,42.2 320.7,42.2 318.5,43.3 316.5,43.5 314.1,45.7 312.4,52.7 313.0,54.3 315.3,54.3 314.6,55.7 313.5,56.1 313.0,56.9 313.0,57.8 312.7,59.2 313.2,62.1 313.7,62.9 314.5,62.9 314.8,61.6 315.3,61.6 315.6,62.9 314.1,64.5 313.9,65.3 315.3,68.2 318.7,68.8 320.5,70.8 320.3,73.5 320.0,76.2 320.2,79.6 320.6,80.7 320.6,82.1 321.5,83.3 321.3,84.3 320.7,84.7 320.5,85.4 320.9,85.8 322.6,86.0 323.5,86.6 324.0,87.4 324.0,88.4 323.0,90.7 321.3,93.3 321.7,95.4 321.4,97.6 320.5,99.2 319.5,99.7 319.5,101.5 319.2,102.5 319.4,103.9 320.2,105.0 320.1,106.8 320.3,107.6 320.0,109.3 320.1,110.5 321.0,112.9 322.4,113.3 322.8,113.8 322.7,114.6 322.9,115.2 325.7,118.5 323.3,120.1 321.0,119.7 319.3,119.3 316.2,119.1 315.2,118.9 311.8,119.3 311.4,119.9 311.5,121.3 312.0,121.9 312.3,123.2 312.3,124.0 311.4,125.2 311.4,126.0 312.2,128.3 312.1,130.7 312.9,132.6 312.8,133.2 311.8,134.4 312.5,136.8 312.4,138.1 312.7,139.7 312.0,143.2 311.1,144.4 310.7,145.8 310.0,146.4 309.0,147.7 308.9,150.3 309.4,152.0 309.3,152.6 308.7,153.2 307.8,151.8 306.8,151.8 306.6,152.4 306.1,154.2 306.4,155.8 305.3,157.3 305.6,157.7 306.8,157.7 307.2,158.1 306.6,159.3 305.6,160.1 304.4,163.2 305.6,166.3 306.7,167.7 306.7,169.9 306.0,171.8 306.4,172.6 306.3,173.8 305.8,174.8 306.8,177.7 306.3,178.9 305.7,181.4 304.0,183.2 303.9,184.2 306.0,184.5 307.7,187.3 307.7,187.9 307.0,189.4 306.1,189.6 304.6,189.2 303.9,189.6 303.2,191.0 304.7,192.6 310.0,194.5 313.4,197.1 314.1,197.9 314.9,199.8 316.9,201.2 317.7,203.7 318.1,206.7 318.1,210.8 319.0,211.4 319.4,212.4 321.7,214.3 322.9,214.9 323.8,216.5 325.1,217.8 325.9,216.7 326.9,214.1 328.2,213.9 330.1,214.3 330.5,213.9 329.2,211.2 329.2,210.6 329.8,210.4 331.3,211.0 333.7,213.9 336.8,216.5" />
-                <circle class="trail-mini-map-dot" cx="322.0" cy="42.2" r="6" fill="#22c55e" />
-                <circle class="trail-mini-map-dot" cx="336.8" cy="216.5" r="6" fill="#ef4444" />
-                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
-              </svg>
-              <div class="trail-mini-map-caption">Uploaded GPX over map context: 146 track points. Click to open the Trailforks trail page.</div>
-            </div></a>
-            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=60234&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=0&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;v=2"></iframe>
+            
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=60234&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
             <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/the-farmer-s-daughter-60234/" style="font-size: 0.7em;">the-farmer-s-daughter-60234</a></div>
         </div>
 

@@ -50,7 +50,7 @@
     .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
     .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
     .trail-mini-map svg{display:block;width:100%;height:auto}
-    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-tile{image-rendering:auto;filter:saturate(0.55)}
     .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
     .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
     .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
@@ -158,34 +158,10 @@
         <div class="panel">
 
         <h2>Trail Information</h2>
-        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
         <div style="text-align:center;margin-bottom:24px">
-            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/nosemanicos-ladybug-703615/" target="_blank" rel="noopener noreferrer">
-            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
-              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
-                <defs>
-                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#f7f8fa" />
-                    <stop offset="100%" stop-color="#eef1f5" />
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/17/24193/42367.png" x="-91.1" y="-171.1" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/17/24194/42367.png" x="164.9" y="-171.1" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/17/24195/42367.png" x="420.9" y="-171.1" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/17/24193/42368.png" x="-91.1" y="84.9" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/17/24194/42368.png" x="164.9" y="84.9" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/17/24195/42368.png" x="420.9" y="84.9" width="256" height="256" />
-                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
-                <polyline class="trail-mini-map-halo" points="191.4,56.3 203.5,76.7 210.0,92.4 216.5,103.3 221.2,109.6 233.3,109.6 241.7,114.3 227.7,133.1 229.6,137.8 239.8,156.7 247.3,166.1 247.3,169.2 241.7,169.2 225.9,153.5 221.2,141.0 213.7,139.4 208.2,131.6 206.3,125.3 200.7,115.9 197.9,122.2 197.0,120.6 196.0,120.6 191.4,111.2 191.4,106.5 184.9,98.6 182.1,108.0 185.8,117.5 192.3,119.0 197.0,130.0 204.4,136.3 207.2,144.1 224.0,156.7 227.7,167.6 228.7,188.0 238.9,195.9 255.7,202.1 270.6,203.7 297.6,202.1 303.2,200.6 321.9,188.0 339.6,199.0 343.3,195.9 344.2,188.0 354.5,183.3 360.1,183.3 368.5,177.1 383.4,183.3 387.1,181.8 408.5,184.9 415.1,183.3 432.8,194.3 445.8,194.3 457.9,181.8" />
-                <polyline class="trail-mini-map-track" points="191.4,56.3 203.5,76.7 210.0,92.4 216.5,103.3 221.2,109.6 233.3,109.6 241.7,114.3 227.7,133.1 229.6,137.8 239.8,156.7 247.3,166.1 247.3,169.2 241.7,169.2 225.9,153.5 221.2,141.0 213.7,139.4 208.2,131.6 206.3,125.3 200.7,115.9 197.9,122.2 197.0,120.6 196.0,120.6 191.4,111.2 191.4,106.5 184.9,98.6 182.1,108.0 185.8,117.5 192.3,119.0 197.0,130.0 204.4,136.3 207.2,144.1 224.0,156.7 227.7,167.6 228.7,188.0 238.9,195.9 255.7,202.1 270.6,203.7 297.6,202.1 303.2,200.6 321.9,188.0 339.6,199.0 343.3,195.9 344.2,188.0 354.5,183.3 360.1,183.3 368.5,177.1 383.4,183.3 387.1,181.8 408.5,184.9 415.1,183.3 432.8,194.3 445.8,194.3 457.9,181.8" />
-                <circle class="trail-mini-map-dot" cx="191.4" cy="56.3" r="6" fill="#22c55e" />
-                <circle class="trail-mini-map-dot" cx="457.9" cy="181.8" r="6" fill="#ef4444" />
-                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
-              </svg>
-              <div class="trail-mini-map-caption">Uploaded GPX over map context: 53 track points. Click to open the Trailforks trail page.</div>
-            </div></a>
-            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=703615&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=0&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;v=2"></iframe>
+            
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=703615&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
             <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/nosemanicos-ladybug-703615/" style="font-size: 0.7em;">nosemanicos-ladybug-703615</a></div>
         </div>
 

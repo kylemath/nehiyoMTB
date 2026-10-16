@@ -50,7 +50,7 @@
     .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
     .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
     .trail-mini-map svg{display:block;width:100%;height:auto}
-    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-tile{image-rendering:auto;filter:saturate(0.55)}
     .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
     .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
     .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
@@ -158,36 +158,10 @@
         <div class="panel">
 
         <h2>Trail Information</h2>
-        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
         <div style="text-align:center;margin-bottom:24px">
-            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/bobsled-12400/" target="_blank" rel="noopener noreferrer">
-            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
-              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
-                <defs>
-                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#f7f8fa" />
-                    <stop offset="100%" stop-color="#eef1f5" />
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12093/21183.png" x="-237.7" y="-224.2" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12094/21183.png" x="18.3" y="-224.2" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12095/21183.png" x="274.3" y="-224.2" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12096/21183.png" x="530.3" y="-224.2" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12093/21184.png" x="-237.7" y="31.8" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12094/21184.png" x="18.3" y="31.8" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12095/21184.png" x="274.3" y="31.8" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12096/21184.png" x="530.3" y="31.8" width="256" height="256" />
-                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
-                <polyline class="trail-mini-map-halo" points="261.3,79.4 263.1,79.4 270.6,76.3 286.4,78.6 289.2,80.2 317.7,102.9 320.5,103.7 324.7,109.2 326.5,112.4 337.7,118.6 341.0,120.2 345.2,124.9 347.5,126.5 355.4,128.8 358.7,130.4 363.8,135.9 366.1,139.0 375.9,159.4 377.8,163.3 378.7,166.5 378.3,183.7" />
-                <polyline class="trail-mini-map-track" points="261.3,79.4 263.1,79.4 270.6,76.3 286.4,78.6 289.2,80.2 317.7,102.9 320.5,103.7 324.7,109.2 326.5,112.4 337.7,118.6 341.0,120.2 345.2,124.9 347.5,126.5 355.4,128.8 358.7,130.4 363.8,135.9 366.1,139.0 375.9,159.4 377.8,163.3 378.7,166.5 378.3,183.7" />
-                <circle class="trail-mini-map-dot" cx="261.3" cy="79.4" r="6" fill="#22c55e" />
-                <circle class="trail-mini-map-dot" cx="378.3" cy="183.7" r="6" fill="#ef4444" />
-                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
-              </svg>
-              <div class="trail-mini-map-caption">Uploaded GPX over map context: 21 track points. Click to open the Trailforks trail page.</div>
-            </div></a>
-            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=12400&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=0&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;v=2"></iframe>
+            
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=12400&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
             <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/bobsled-12400/" style="font-size: 0.7em;">bobsled-12400</a></div>
         </div>
 

@@ -2,7 +2,7 @@
 // react-native-maps API the screens use (MapView, Marker, Polyline, Callout),
 // so the same screens run in the browser build served at <site>/app.
 // Native builds resolve map.tsx (react-native-maps) instead. Basemaps match
-// the website's own trail map (CARTO Voyager streets, Esri imagery).
+// the website's own trail map (OpenStreetMap streets, Esri imagery).
 //
 // MapLibre is loaded at runtime from the same CDN build the website uses
 // (cached by the browser across the site and the app) instead of being
@@ -87,11 +87,7 @@ function loadMapLibre(): Promise<MapLibre> {
   return maplibreLoad;
 }
 
-const STREET_TILES = [
-  'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-  'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-  'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-];
+const STREET_TILES = ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'];
 const SATELLITE_TILES = [
   'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
 ];
@@ -105,7 +101,7 @@ const BASE_STYLE: maplibreglType.StyleSpecification = {
       tileSize: 256,
       maxzoom: 19,
       attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     },
     satellite: {
       type: 'raster',

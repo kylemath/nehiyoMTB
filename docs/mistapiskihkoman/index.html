@@ -50,7 +50,7 @@
     .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
     .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
     .trail-mini-map svg{display:block;width:100%;height:auto}
-    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-tile{image-rendering:auto;filter:saturate(0.55)}
     .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
     .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
     .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
@@ -160,34 +160,10 @@
         <div class="panel">
 
         <h2>Trail Information</h2>
-        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
         <div style="text-align:center;margin-bottom:24px">
-            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/machete/" target="_blank" rel="noopener noreferrer">
-            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
-              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
-                <defs>
-                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#f7f8fa" />
-                    <stop offset="100%" stop-color="#eef1f5" />
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6048/10594.png" x="-30.7" y="-163.5" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6049/10594.png" x="225.3" y="-163.5" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6050/10594.png" x="481.3" y="-163.5" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6048/10595.png" x="-30.7" y="92.5" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6049/10595.png" x="225.3" y="92.5" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6050/10595.png" x="481.3" y="92.5" width="256" height="256" />
-                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
-                <polyline class="trail-mini-map-halo" points="313.8,56.3 313.8,59.8 314.3,63.0 314.3,66.1 313.8,68.1 313.1,69.6 312.7,71.6 312.2,73.6 312.4,76.3 314.8,78.3 316.6,80.6 318.0,82.6 318.5,84.1 317.3,84.1 315.2,82.6 313.4,81.8 311.7,81.4 310.8,82.2 311.0,83.0 312.0,84.5 313.6,85.7 315.5,86.9 318.0,99.8 320.8,101.8 320.8,103.4 325.2,104.9 327.1,107.3 326.9,109.6 325.5,111.6 327.3,114.3 327.6,118.6 329.2,121.4 329.0,125.3 326.4,124.9 324.1,126.9 321.7,131.2 321.0,135.5 323.6,143.7 322.9,145.7 321.5,146.5 320.1,149.2 320.6,150.8 322.0,151.2 326.2,149.6 328.3,153.1 328.7,155.5 325.9,156.3 326.4,157.4 325.2,164.1 325.0,169.2 326.6,177.0 326.6,181.3 326.2,184.5 325.7,187.2 325.0,193.9 322.0,199.4 322.2,201.7 320.3,203.7" />
-                <polyline class="trail-mini-map-track" points="313.8,56.3 313.8,59.8 314.3,63.0 314.3,66.1 313.8,68.1 313.1,69.6 312.7,71.6 312.2,73.6 312.4,76.3 314.8,78.3 316.6,80.6 318.0,82.6 318.5,84.1 317.3,84.1 315.2,82.6 313.4,81.8 311.7,81.4 310.8,82.2 311.0,83.0 312.0,84.5 313.6,85.7 315.5,86.9 318.0,99.8 320.8,101.8 320.8,103.4 325.2,104.9 327.1,107.3 326.9,109.6 325.5,111.6 327.3,114.3 327.6,118.6 329.2,121.4 329.0,125.3 326.4,124.9 324.1,126.9 321.7,131.2 321.0,135.5 323.6,143.7 322.9,145.7 321.5,146.5 320.1,149.2 320.6,150.8 322.0,151.2 326.2,149.6 328.3,153.1 328.7,155.5 325.9,156.3 326.4,157.4 325.2,164.1 325.0,169.2 326.6,177.0 326.6,181.3 326.2,184.5 325.7,187.2 325.0,193.9 322.0,199.4 322.2,201.7 320.3,203.7" />
-                <circle class="trail-mini-map-dot" cx="313.8" cy="56.3" r="6" fill="#22c55e" />
-                <circle class="trail-mini-map-dot" cx="320.3" cy="203.7" r="6" fill="#ef4444" />
-                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
-              </svg>
-              <div class="trail-mini-map-caption">Uploaded GPX over map context: 58 track points. Click to open the Trailforks trail page.</div>
-            </div></a>
-            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=30260&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=0&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;v=2"></iframe>
+            
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=30260&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
             <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/machete/" style="font-size: 0.7em;">machete</a></div>
         </div>
 

@@ -50,7 +50,7 @@
     .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
     .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
     .trail-mini-map svg{display:block;width:100%;height:auto}
-    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-tile{image-rendering:auto;filter:saturate(0.55)}
     .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
     .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
     .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
@@ -162,36 +162,10 @@
         <div class="panel">
 
         <h2>Trail Information</h2>
-        <p style="margin:0 0 12px 0">Explore the trail on Trailforks, with a local preview from the uploaded GPX.</p>
+        <p style="margin:0 0 12px 0">Explore the trail on Trailforks for maps, conditions, and details.</p>
         <div style="text-align:center;margin-bottom:24px">
-            <a class="trail-mini-map-link" href="https://www.trailforks.com/trails/lovers-lane-15796/" target="_blank" rel="noopener noreferrer">
-            <div class="trail-mini-map" aria-label="Uploaded GPX trail preview on a basemap">
-              <svg viewBox="0 0 640 260" role="img" aria-label="Trail preview from uploaded GPX">
-                <defs>
-                  <linearGradient id="trailPreviewBg" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#f7f8fa" />
-                    <stop offset="100%" stop-color="#eef1f5" />
-                  </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6047/10590.png" x="-197.2" y="-182.7" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6048/10590.png" x="58.8" y="-182.7" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6049/10590.png" x="314.8" y="-182.7" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6050/10590.png" x="570.8" y="-182.7" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6047/10591.png" x="-197.2" y="73.3" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6048/10591.png" x="58.8" y="73.3" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6049/10591.png" x="314.8" y="73.3" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/15/6050/10591.png" x="570.8" y="73.3" width="256" height="256" />
-                <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
-                <polyline class="trail-mini-map-halo" points="369.2,219.9 371.6,218.0 374.5,218.6 376.6,217.3 376.1,214.9 374.0,212.5 372.6,208.9 372.7,206.4 371.6,202.1 369.1,198.6 367.3,195.3 360.6,187.8 357.9,184.9 354.1,181.7 353.0,179.2 355.9,178.6 358.0,180.1 359.9,180.3 360.8,179.5 357.6,176.9 357.1,176.1 358.7,175.8 361.1,177.0 365.5,181.4 369.0,187.1 377.1,195.1 379.6,198.7 380.0,203.4 379.0,207.6 379.4,209.3 381.4,210.2 382.5,208.8 382.7,207.4 384.0,204.7 383.9,199.1 381.0,191.7 377.0,185.8 370.5,179.0 362.7,173.8 351.8,169.1 343.4,160.9 339.4,159.7 333.9,157.0 335.3,151.9 332.2,146.4 330.8,139.3 329.0,133.8 325.7,127.9 318.9,120.5 311.7,117.4 306.4,112.3 289.6,108.7 287.7,107.2 288.2,104.4 288.4,98.1 287.9,96.6 282.6,87.2 277.9,70.7 263.5,48.3 259.1,44.4 258.1,44.4 256.0,41.3 256.3,40.1" />
-                <polyline class="trail-mini-map-track" points="369.2,219.9 371.6,218.0 374.5,218.6 376.6,217.3 376.1,214.9 374.0,212.5 372.6,208.9 372.7,206.4 371.6,202.1 369.1,198.6 367.3,195.3 360.6,187.8 357.9,184.9 354.1,181.7 353.0,179.2 355.9,178.6 358.0,180.1 359.9,180.3 360.8,179.5 357.6,176.9 357.1,176.1 358.7,175.8 361.1,177.0 365.5,181.4 369.0,187.1 377.1,195.1 379.6,198.7 380.0,203.4 379.0,207.6 379.4,209.3 381.4,210.2 382.5,208.8 382.7,207.4 384.0,204.7 383.9,199.1 381.0,191.7 377.0,185.8 370.5,179.0 362.7,173.8 351.8,169.1 343.4,160.9 339.4,159.7 333.9,157.0 335.3,151.9 332.2,146.4 330.8,139.3 329.0,133.8 325.7,127.9 318.9,120.5 311.7,117.4 306.4,112.3 289.6,108.7 287.7,107.2 288.2,104.4 288.4,98.1 287.9,96.6 282.6,87.2 277.9,70.7 263.5,48.3 259.1,44.4 258.1,44.4 256.0,41.3 256.3,40.1" />
-                <circle class="trail-mini-map-dot" cx="369.2" cy="219.9" r="6" fill="#22c55e" />
-                <circle class="trail-mini-map-dot" cx="256.3" cy="40.1" r="6" fill="#ef4444" />
-                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
-              </svg>
-              <div class="trail-mini-map-caption">Uploaded GPX over map context: 63 track points. Click to open the Trailforks trail page.</div>
-            </div></a>
-            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=15796&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=0&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;v=2"></iframe>
+            
+            <iframe width="100%" height="350" frameborder="0" src="https://www.trailforks.com/widgets/trail/?trailid=15796&amp;w=50%&amp;h=350px&amp;activitytype=6&amp;map=1&amp;basemap=trailforks-streets&amp;elevation=1&amp;photos=1&amp;title=1&amp;info=1&amp;trail_opacity=50&amp;v=2&amp;basicmap=1"></iframe>
             <div style="margin-top:8px"><a href="https://www.trailforks.com/trails/lovers-lane-15796/" style="font-size: 0.7em;">lovers-lane-15796</a></div>
         </div>
 

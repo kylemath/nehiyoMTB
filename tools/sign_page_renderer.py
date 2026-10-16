@@ -26,7 +26,6 @@ import math
 import re
 from html import escape
 from pathlib import Path
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from typing import Any, Iterable
 
 
@@ -129,7 +128,7 @@ def build_css(accent: str) -> str:
     .trail-mini-map{{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}}
     .trail-mini-map-link:hover .trail-mini-map{{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}}
     .trail-mini-map svg{{display:block;width:100%;height:auto}}
-    .trail-mini-map-tile{{image-rendering:auto}}
+    .trail-mini-map-tile{{image-rendering:auto;filter:saturate(0.55)}}
     .trail-mini-map-halo{{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}}
     .trail-mini-map-track{{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}}
     .trail-mini-map-dot{{stroke:#ffffff;stroke-width:3}}
@@ -435,7 +434,7 @@ def _build_map_preview(
             wrapped_x = tile_x % tile_count
             x = tile_x * tile_size - top_left_x
             y = tile_y * tile_size - top_left_y
-            href = f"https://a.basemaps.cartocdn.com/light_all/{chosen_zoom}/{wrapped_x}/{tile_y}.png"
+            href = f"https://tile.openstreetmap.org/{chosen_zoom}/{wrapped_x}/{tile_y}.png"
             tile_html.append(
                 f'<image class="trail-mini-map-tile" href="{href}" x="{x:.1f}" y="{y:.1f}" width="{tile_size}" height="{tile_size}" />'
             )
@@ -478,7 +477,7 @@ def render_track_mini_map(
                 <polyline class="trail-mini-map-track" points="{preview["points"]}" />
                 <circle class="trail-mini-map-dot" cx="{preview["startX"]}" cy="{preview["startY"]}" r="6" fill="#22c55e" />
                 <circle class="trail-mini-map-dot" cx="{preview["endX"]}" cy="{preview["endY"]}" r="6" fill="#ef4444" />
-                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
+                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap</text>
               </svg>
               <div class="trail-mini-map-caption">Uploaded GPX over map context: {point_count} track points. Click to open the {escape(link_label)}.</div>
             </div>"""
@@ -488,16 +487,6 @@ def render_track_mini_map(
             f'target="_blank" rel="noopener noreferrer">{mini_map}</a>'
         )
     return mini_map
-
-
-def _widget_without_map(widget_url: str) -> str:
-    parts = urlsplit(widget_url)
-    query = [
-        (key, "0" if key == "map" else value)
-        for key, value in parse_qsl(parts.query, keep_blank_values=True)
-        if key not in {"basemap", "basicmap", "trail_opacity"}
-    ]
-    return urlunsplit(parts._replace(query=urlencode(query, safe="%")))
 
 
 def render_trailforks_block(content: dict) -> str:
@@ -546,10 +535,7 @@ def render_trailforks_block(content: dict) -> str:
     widget_url = trail.get("widgetUrl")
     trail_url = trail.get("trailUrl")
     map_embed_mode = str(trail.get("mapEmbedMode") or "").strip().lower()
-    # Trailforks' embed widget now needs an API key and shows only a warning
-    # with the line drawn over it, so prefer our own GPX preview whenever we
-    # have a track. Set mapEmbedMode to "widget" to force the iframe back.
-    use_local_map = map_embed_mode == "local" or (map_embed_mode != "widget" and bool(trail.get("track")))
+    use_local_map = map_embed_mode == "local" or (not widget_url and bool(trail.get("track")))
 
     mini_map_html = ""
     if use_local_map:
@@ -570,13 +556,6 @@ def render_trailforks_block(content: dict) -> str:
     widget_html = ""
     if widget_url and not mini_map_html:
         widget_html = f'<iframe width="100%" height="350" frameborder="0" src="{escape(widget_url)}"></iframe>'
-    elif widget_url:
-        # Keep the Trailforks card (title, stats, elevation, photos) under our
-        # map, with its own map turned off since that part now needs API access.
-        widget_html = (
-            f'<iframe width="100%" height="350" frameborder="0" '
-            f'src="{escape(_widget_without_map(widget_url))}"></iframe>'
-        )
 
     link_html = ""
     if trail_url:
