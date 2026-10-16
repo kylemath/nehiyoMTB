@@ -50,7 +50,7 @@
     .trail-mini-map{margin:12px 0;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:linear-gradient(135deg, var(--secondary-bg), #ffffff);box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:transform 0.15s, box-shadow 0.15s}
     .trail-mini-map-link:hover .trail-mini-map{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.16)}
     .trail-mini-map svg{display:block;width:100%;height:auto}
-    .trail-mini-map-tile{image-rendering:auto}
+    .trail-mini-map-tile{image-rendering:auto;filter:saturate(0.55)}
     .trail-mini-map-halo{fill:none;stroke:#ffffff;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:0.95}
     .trail-mini-map-track{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 1px rgba(0,0,0,0.28))}
     .trail-mini-map-dot{stroke:#ffffff;stroke-width:3}
@@ -174,20 +174,20 @@
                   </linearGradient>
                 </defs>
                 <rect x="0" y="0" width="640" height="260" fill="url(#trailPreviewBg)" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12114/21179.png" x="-229.7" y="-118.8" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12115/21179.png" x="26.3" y="-118.8" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12116/21179.png" x="282.3" y="-118.8" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12117/21179.png" x="538.3" y="-118.8" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12114/21180.png" x="-229.7" y="137.2" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12115/21180.png" x="26.3" y="137.2" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12116/21180.png" x="282.3" y="137.2" width="256" height="256" />
-                <image class="trail-mini-map-tile" href="https://a.basemaps.cartocdn.com/light_all/16/12117/21180.png" x="538.3" y="137.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://tile.openstreetmap.org/16/12114/21179.png" x="-229.7" y="-118.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://tile.openstreetmap.org/16/12115/21179.png" x="26.3" y="-118.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://tile.openstreetmap.org/16/12116/21179.png" x="282.3" y="-118.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://tile.openstreetmap.org/16/12117/21179.png" x="538.3" y="-118.8" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://tile.openstreetmap.org/16/12114/21180.png" x="-229.7" y="137.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://tile.openstreetmap.org/16/12115/21180.png" x="26.3" y="137.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://tile.openstreetmap.org/16/12116/21180.png" x="282.3" y="137.2" width="256" height="256" />
+                <image class="trail-mini-map-tile" href="https://tile.openstreetmap.org/16/12117/21180.png" x="538.3" y="137.2" width="256" height="256" />
                 <rect x="0" y="0" width="640" height="260" fill="rgba(255,255,255,0.08)" />
                 <polyline class="trail-mini-map-halo" points="73.2,175.9 84.9,175.9 94.2,178.2 101.7,175.9 104.9,175.1 106.3,177.5 101.2,182.2 97.9,191.6 111.0,191.6 123.6,181.4 125.9,184.5 129.6,185.3 135.2,187.7 141.3,190.8 149.2,196.3 153.9,193.9 157.6,193.9 178.1,193.2 179.5,190.8 181.4,193.9 184.2,193.2 186.9,190.0 187.9,185.3 192.5,181.4 198.1,179.0 201.4,178.2 207.0,180.6 210.2,175.9 213.5,171.2 217.2,167.3 223.8,167.3 229.8,168.8 234.0,167.3 240.5,165.7 249.4,164.1 257.3,158.6 264.8,156.3 272.2,155.5 287.1,153.1 293.7,151.6 299.3,152.4 303.5,153.9 313.2,153.9 320.7,147.7 329.1,142.2 339.3,139.8 362.6,138.2 372.4,139.0 377.1,141.4 382.7,142.9 393.4,139.0 399.0,137.5 404.1,137.5 414.8,135.1 433.5,129.6 439.1,124.9 443.7,121.8 448.9,121.0 457.7,121.8 466.6,119.4 473.1,116.3 488.5,109.2 496.4,106.1 504.3,105.3 507.6,103.7 509.4,101.4 516.0,99.8 522.5,97.4 526.7,95.1 534.1,90.4 543.0,88.0 555.1,81.8 560.2,77.8 563.5,72.3 566.8,63.7" />
                 <polyline class="trail-mini-map-track" points="73.2,175.9 84.9,175.9 94.2,178.2 101.7,175.9 104.9,175.1 106.3,177.5 101.2,182.2 97.9,191.6 111.0,191.6 123.6,181.4 125.9,184.5 129.6,185.3 135.2,187.7 141.3,190.8 149.2,196.3 153.9,193.9 157.6,193.9 178.1,193.2 179.5,190.8 181.4,193.9 184.2,193.2 186.9,190.0 187.9,185.3 192.5,181.4 198.1,179.0 201.4,178.2 207.0,180.6 210.2,175.9 213.5,171.2 217.2,167.3 223.8,167.3 229.8,168.8 234.0,167.3 240.5,165.7 249.4,164.1 257.3,158.6 264.8,156.3 272.2,155.5 287.1,153.1 293.7,151.6 299.3,152.4 303.5,153.9 313.2,153.9 320.7,147.7 329.1,142.2 339.3,139.8 362.6,138.2 372.4,139.0 377.1,141.4 382.7,142.9 393.4,139.0 399.0,137.5 404.1,137.5 414.8,135.1 433.5,129.6 439.1,124.9 443.7,121.8 448.9,121.0 457.7,121.8 466.6,119.4 473.1,116.3 488.5,109.2 496.4,106.1 504.3,105.3 507.6,103.7 509.4,101.4 516.0,99.8 522.5,97.4 526.7,95.1 534.1,90.4 543.0,88.0 555.1,81.8 560.2,77.8 563.5,72.3 566.8,63.7" />
                 <circle class="trail-mini-map-dot" cx="73.2" cy="175.9" r="6" fill="#22c55e" />
                 <circle class="trail-mini-map-dot" cx="566.8" cy="63.7" r="6" fill="#ef4444" />
-                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap © CARTO</text>
+                <text class="trail-mini-map-attrib" x="632" y="250" text-anchor="end">© OpenStreetMap</text>
               </svg>
               <div class="trail-mini-map-caption">Uploaded GPX over map context: 75 track points. Click to open the Trailforks trail page.</div>
             </div></a>
