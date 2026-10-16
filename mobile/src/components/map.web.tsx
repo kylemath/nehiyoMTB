@@ -623,10 +623,65 @@ export function Marker({
   );
 }
 
+export type Dot = {
+  key: string;
+  coordinate: LatLng;
+  color: string;
+  /** Diameter in px, including the white ring. */
+  size: number;
+  ring?: number;
+};
+
+/** Plain round dots; native draws these as one circle layer. */
+export function Dots({ dots }: { dots: Dot[] }) {
+  return dots.map((d) => (
+    <Marker key={d.key} coordinate={d.coordinate} anchor={{ x: 0.5, y: 0.5 }} zIndex={10}>
+      <View
+        style={{
+          width: d.size,
+          height: d.size,
+          borderRadius: d.size / 2,
+          backgroundColor: d.color,
+          borderWidth: d.ring ?? 0,
+          borderColor: '#FFFFFF',
+        }}
+      />
+    </Marker>
+  ));
+}
+
+export type Arrow = { coordinate: LatLng; bearing: number };
+
+/** Direction-of-travel arrowheads along a route. */
+export function Arrows({ arrows }: { arrows: Arrow[] }) {
+  return arrows.map((a, i) => (
+    <Marker
+      key={`arrow-${i}`}
+      coordinate={a.coordinate}
+      anchor={{ x: 0.5, y: 0.5 }}
+      rotation={a.bearing}
+      flat
+      zIndex={6}>
+      <View style={styles.arrow} />
+    </Marker>
+  ));
+}
+
 /** Callouts are not used on web: the screens show their own trail sheet. */
 export const Callout = (_props: Record<string, unknown>) => null;
 
 const styles = StyleSheet.create({
+  // Solid arrowhead pointing north at rotation 0.
+  arrow: {
+    width: 0,
+    height: 0,
+    borderLeftWidth: 5,
+    borderRightWidth: 5,
+    borderBottomWidth: 10,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderBottomColor: '#FFFFFF',
+  },
   container: { overflow: 'hidden' },
   pin: {
     width: 16,

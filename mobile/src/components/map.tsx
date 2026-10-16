@@ -10,6 +10,7 @@ import {
   Camera,
   type CameraRef,
   GeoJSONSource,
+  Images,
   Layer,
   Map,
   type MapProps,
@@ -105,6 +106,7 @@ function baseStyle(imagery: boolean): StyleSpecification {
     layers: [{ id: 'base', type: 'raster', source: 'base' }],
   };
 }
+const MAP_IMAGES = { 'route-arrow': require('@/assets/images/route-arrow.png') };
 const STREETS = baseStyle(false);
 const IMAGERY = baseStyle(true);
 
@@ -237,6 +239,7 @@ const MapView = React.forwardRef<MapViewHandle, MapViewProps>(function MapViewNa
           });
         }}>
         <Camera ref={camera} initialViewState={{ bounds: initialBounds }} />
+        <Images images={MAP_IMAGES} />
         {showsUserLocation && <UserLocation />}
         <MapContext.Provider value={consume}>{children}</MapContext.Provider>
       </Map>
@@ -393,6 +396,87 @@ export function Marker({
       }>
       {rotation ? <View style={{ transform: [{ rotate: `${rotation}deg` }] }}>{body}</View> : body}
     </MLMarker>
+  );
+}
+
+export type Dot = {
+  key: string;
+  coordinate: LatLng;
+  color: string;
+  /** Diameter in px, including the white ring. */
+  size: number;
+  ring?: number;
+};
+
+/** Plain round dots (route ends, trail ends, live position) drawn as one
+ * circle layer. Marker views are avoided for these: MapLibre Android adds and
+ * removes each one as a separate native view, and a burst of them (as when a
+ * route appears) crashed the app. */
+export function Dots({ dots }: { dots: Dot[] }) {
+  const id = `dots-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
+  const data = useMemo<GeoJSON.FeatureCollection<GeoJSON.Point>>(
+    () => ({
+      type: 'FeatureCollection',
+      features: dots.map((d) => ({
+        type: 'Feature',
+        properties: {
+          color: d.color,
+          radius: (d.size - 2 * (d.ring ?? 0)) / 2,
+          ring: d.ring ?? 0,
+        },
+        geometry: { type: 'Point', coordinates: [d.coordinate.longitude, d.coordinate.latitude] },
+      })),
+    }),
+    [dots],
+  );
+  return (
+    <GeoJSONSource id={id} data={data}>
+      <Layer
+        id={id}
+        type="circle"
+        paint={{
+          'circle-color': ['get', 'color'],
+          'circle-radius': ['get', 'radius'],
+          'circle-stroke-width': ['get', 'ring'],
+          'circle-stroke-color': '#FFFFFF',
+          'circle-pitch-alignment': 'map',
+        }}
+      />
+    </GeoJSONSource>
+  );
+}
+
+export type Arrow = { coordinate: LatLng; bearing: number };
+
+/** Direction-of-travel arrowheads along a route, as one symbol layer. */
+export function Arrows({ arrows }: { arrows: Arrow[] }) {
+  const id = `arrows-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`;
+  const data = useMemo<GeoJSON.FeatureCollection<GeoJSON.Point>>(
+    () => ({
+      type: 'FeatureCollection',
+      features: arrows.map((a) => ({
+        type: 'Feature',
+        properties: { bearing: a.bearing },
+        geometry: { type: 'Point', coordinates: [a.coordinate.longitude, a.coordinate.latitude] },
+      })),
+    }),
+    [arrows],
+  );
+  return (
+    <GeoJSONSource id={id} data={data}>
+      <Layer
+        id={id}
+        type="symbol"
+        layout={{
+          'icon-image': 'route-arrow',
+          'icon-size': 0.45,
+          'icon-rotate': ['get', 'bearing'],
+          'icon-rotation-alignment': 'map',
+          'icon-allow-overlap': true,
+          'icon-ignore-placement': true,
+        }}
+      />
+    </GeoJSONSource>
   );
 }
 

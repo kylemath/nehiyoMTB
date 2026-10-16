@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import MapView, { MapPressEvent, Marker, Polyline } from '@/components/map';
+import MapView, { Arrows, Dot, Dots, MapPressEvent, Marker, Polyline } from '@/components/map';
 import { RouteItinerary } from '@/components/route-itinerary';
 import { IconPreloader, TrailIconBadge, TrailMarker, badgeBox } from '@/components/trail-icon';
 import { Button, Chip, Row, usePalette } from '@/components/ui';
@@ -662,6 +662,25 @@ export default function MapTab() {
     </Row>
   );
 
+  // Round markers drawn by the map itself rather than as marker views.
+  const dots: Dot[] = [];
+  if (selected) {
+    trailEndpoints(selected).forEach((pt, i) =>
+      dots.push({ key: `end-${i}`, coordinate: pt, color: Brand.moss, size: 18, ring: 3 }),
+    );
+  }
+  if (routeMode && draft.from && draft.from.kind !== 'gps') {
+    dots.push({ key: 'from', coordinate: draft.from.coord, color: Brand.moss, size: 16, ring: 3 });
+  }
+  if (routeMode && draft.to) {
+    dots.push({ key: 'to', coordinate: draft.to.coord, color: Brand.ember, size: 16, ring: 3 });
+  }
+  if (recording && navTrack.length > 0) {
+    const here = navTrack[navTrack.length - 1];
+    dots.push({ key: 'here-halo', coordinate: here, color: '#E0312D33', size: 22 });
+    dots.push({ key: 'here', coordinate: here, color: '#E0312D', size: 12, ring: 2 });
+  }
+
   return (
     <View style={{ flex: 1 }}>
       {/* Map pane: full screen normally; the route panel below claims the
@@ -719,29 +738,12 @@ export default function MapTab() {
               onPress={() => onTrailPress(m.trail)}
             />
           ))}
-        {/* Green dots on the selected trail's start and end signs */}
-        {selected &&
-          trailEndpoints(selected).map((pt, i) => (
-            <Marker
-              key={`${selected.id}-endpoint-${i}`}
-              coordinate={pt}
-              anchor={{ x: 0.5, y: 0.5 }}
-              zIndex={10}>
-              <View style={styles.endpointDot} />
-            </Marker>
-          ))}
         {routeMode && home && (
           <Marker coordinate={home} anchor={{ x: 0.5, y: 0.5 }} zIndex={9} title="Home">
             <View style={[styles.homeDot, { backgroundColor: p.surface }]}>
               <Ionicons name="home" size={13} color={Brand.pine} />
             </View>
           </Marker>
-        )}
-        {routeMode && draft.from && draft.from.kind !== 'gps' && (
-          <Marker coordinate={draft.from.coord} pinColor={Brand.moss} title="Start" />
-        )}
-        {routeMode && draft.to && (
-          <Marker coordinate={draft.to.coord} pinColor={Brand.ember} title="Destination" />
         )}
         {offsetLegs?.map((leg, i) => (
           <Polyline
@@ -752,34 +754,11 @@ export default function MapTab() {
             lineDashPattern={leg.type === 'connector' ? [8, 6] : undefined}
           />
         ))}
-        {chevrons.map((c, i) => (
-          <Marker
-            key={`chevron-${i}`}
-            coordinate={c.coordinate}
-            anchor={{ x: 0.5, y: 0.5 }}
-            rotation={c.bearing}
-            flat
-            tracksViewChanges={false}
-            zIndex={6}>
-            <View style={styles.chevron} />
-          </Marker>
-        ))}
+        <Arrows arrows={chevrons} />
         {recording && navTrack.length > 1 && (
           <Polyline coordinates={navTrack} strokeColor={Brand.ember} strokeWidth={5} zIndex={5} />
         )}
-        {/* Live GPS position while recording: red "recording" dot that rides
-            along the track as fixes arrive. */}
-        {recording && navTrack.length > 0 && (
-          <Marker
-            coordinate={navTrack[navTrack.length - 1]}
-            anchor={{ x: 0.5, y: 0.5 }}
-            tracksViewChanges={false}
-            zIndex={20}>
-            <View style={styles.recMarkerOuter}>
-              <View style={styles.recMarkerInner} />
-            </View>
-          </Marker>
-        )}
+        <Dots dots={dots} />
       </MapView>
 
       <IconPreloader
@@ -1057,23 +1036,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontVariant: ['tabular-nums'],
   },
-  // Current GPS position while recording.
-  recMarkerOuter: {
-    width: 22,
-    height: 22,
-    borderRadius: 11,
-    backgroundColor: '#E0312D33',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  recMarkerInner: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: '#E0312D',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-  },
   // Route builder shares the navCard look but needs more width for chips.
   builderCard: {
     width: 250,
@@ -1132,19 +1094,6 @@ const styles = StyleSheet.create({
     width: 28,
     height: StyleSheet.hairlineWidth,
   },
-  endpointDot: {
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    backgroundColor: Brand.moss,
-    borderWidth: 3,
-    borderColor: '#FFFFFF',
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-    shadowOffset: { width: 0, height: 1 },
-    elevation: 3,
-  },
   homeDot: {
     width: 26,
     height: 26,
@@ -1188,18 +1137,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: { width: 0, height: -4 },
     elevation: 10,
-  },
-  // Solid arrowhead pointing north at rotation 0; the Marker's flat rotation
-  // turns it to the route's travel bearing.
-  chevron: {
-    width: 0,
-    height: 0,
-    borderLeftWidth: 5,
-    borderRightWidth: 5,
-    borderBottomWidth: 10,
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomColor: '#FFFFFF',
   },
   sheetTitle: { fontSize: 17, fontWeight: '700' },
 });
