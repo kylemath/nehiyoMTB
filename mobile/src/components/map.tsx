@@ -4,7 +4,7 @@
 //
 // Why not react-native-maps: on Android it renders Google Maps, which crashes
 // the app outright when no Google Maps API key is configured. MapLibre needs
-// no key and draws the same basemaps as the website (CARTO Voyager streets,
+// no key and draws the same basemaps as the website (OpenStreetMap streets,
 // Esri imagery).
 import {
   Camera,
@@ -74,9 +74,7 @@ type MapViewProps = ViewProps & {
 };
 
 const STREET_TILES = [
-  'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png',
-  'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png',
-  'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}@2x.png',
+  'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 ];
 const SATELLITE_TILES = [
   'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -101,7 +99,7 @@ function baseStyle(imagery: boolean): StyleSpecification {
             tiles: STREET_TILES,
             tileSize: 256,
             maxzoom: 19,
-            attribution: '© OpenStreetMap contributors © CARTO',
+            attribution: '© OpenStreetMap contributors',
           },
         },
     layers: [{ id: 'base', type: 'raster', source: 'base' }],

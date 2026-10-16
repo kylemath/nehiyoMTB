@@ -2578,9 +2578,14 @@
                 // Mouse-driven tilt state. Mouse position in viewport coords drives
                 // mesh rotation: inside the viewer the sign tilts strongly toward the
                 // cursor; outside, the sign rests with a subtle gaze toward the mouse.
+                // A newly opened sign starts face-on and only begins following the
+                // mouse once the cursor moves over the viewer (tiltEngaged), so the
+                // click that opened it doesn't leave it turned toward that spot.
                 this.pointerX = window.innerWidth / 2;
                 this.pointerY = window.innerHeight / 2;
                 this.pointerActive = false;
+                this.tiltEngaged = false;
+                this._pointerAnchor = null;
                 this.targetRotX = 0;
                 this.targetRotY = 0;
                 this.currentRotX = 0;
@@ -2591,6 +2596,9 @@
                     this.pointerX = e.clientX;
                     this.pointerY = e.clientY;
                     this.pointerActive = true;
+                    if (!this.tiltEngaged) {
+                        this.maybeEngageTilt();
+                    }
                 };
                 this._onPointerLeaveWindow = () => {
                     this.pointerActive = false;
@@ -2653,6 +2661,32 @@
                 this.targetRotX = 0;
                 this.targetRotY = 0;
                 this._suppressTiltUntil = performance.now() + 450;
+            }
+
+            // Start following the mouse once the cursor is over the viewer. If the
+            // cursor was already sitting over it when the sign opened, it has to
+            // move a little first, so a stationary cursor doesn't count.
+            maybeEngageTilt() {
+                const rect = this.container.getBoundingClientRect();
+                if (rect.width <= 0 || rect.height <= 0) {
+                    return;
+                }
+                const inside = this.pointerX >= rect.left && this.pointerX <= rect.right &&
+                    this.pointerY >= rect.top && this.pointerY <= rect.bottom;
+                if (!this._pointerAnchor) {
+                    this._pointerAnchor = { x: this.pointerX, y: this.pointerY, inside };
+                    if (!inside) {
+                        return;
+                    }
+                }
+                if (!inside) {
+                    this._pointerAnchor.inside = false;
+                    return;
+                }
+                const moved = Math.hypot(this.pointerX - this._pointerAnchor.x, this.pointerY - this._pointerAnchor.y);
+                if (!this._pointerAnchor.inside || moved > 24) {
+                    this.tiltEngaged = true;
+                }
             }
 
             captureViewState() {
@@ -2909,7 +2943,7 @@
 
                 this.mesh = new THREE.Mesh(this.geometry, material);
                 this.scene.add(this.mesh);
-                this.camera.position.set(3, 2, 3);
+                this.camera.position.set(0, 0, 5);
                 this.camera.lookAt(0, 0, 0);
             }
 
@@ -3001,7 +3035,7 @@
                         this.scene.add(this.mesh);
                     }
 
-                    this.camera.position.set(3, 2, 3);
+                    this.camera.position.set(0, 0, 5);
                     this.camera.lookAt(0, 0, 0);
                 }
 
@@ -3119,7 +3153,7 @@
                 this.mesh = new THREE.Mesh(geometry, material);
                 this.scene.add(this.mesh);
 
-                this.camera.position.set(3, 2, 3);
+                this.camera.position.set(0, 0, 5);
                 this.camera.lookAt(0, 0, 0);
             }
 
@@ -3134,7 +3168,7 @@
                 const now = performance.now();
                 const suppressTilt = this._suppressTiltUntil && now < this._suppressTiltUntil;
 
-                if (this.mesh && !this.userInteracting && !suppressTilt && this.pointerActive) {
+                if (this.mesh && !this.userInteracting && !suppressTilt && this.pointerActive && this.tiltEngaged) {
                     const rect = this.container.getBoundingClientRect();
                     if (rect.width > 0 && rect.height > 0) {
                         const cx = rect.left + rect.width / 2;
@@ -6236,10 +6270,7 @@
         const TERRAIN_TILES_URL = 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png';
         const SATELLITE_TILES_URL = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
         const CARTOON_TILES_URLS = [
-            'https://a.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-            'https://b.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-            'https://c.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png',
-            'https://d.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
         ];
         const DEFAULT_3D_CENTER = [-113.5286, 53.5337];
         // The map opens in flat top-down orientation; users can opt into the
@@ -6303,7 +6334,7 @@
                             tiles: CARTOON_TILES_URLS,
                             tileSize: 256,
                             maxzoom: 19,
-                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                         },
                         'terrain-dem': {
                             type: 'raster-dem',
