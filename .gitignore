@@ -16,3 +16,6 @@ signs/*/*.3mf
 #     (git add -f) as instant-restore insurance; their subcomponents stay ignored.
 !docs/**/*.stl
 !blanks/*.stl
+
+# paper build output (regenerate with `make` in paper/)
+paper/build/
