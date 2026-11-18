@@ -7,12 +7,56 @@ Workbench, the sign-factory manifest, the Supabase migrations, the photographs
 and the Git history. When the project changes, rebuild the paper and it changes
 with it.
 
+## Target journal: *Names* (American Name Society)
+
+The paper is now aimed at *Names: A Journal of Onomastics*. Names charges no
+fees, publishes under CC BY 4.0, and asks for a Word file. The Names version
+is a shorter paper, under 5,000 words, focused on naming. It covers how the
+English trail names were made, how they were put into Plains Cree, and how
+the SRO and syllabic spellings agree. The fabrication and app material is cut
+to a minimum.
+
+```bash
+cd paper
+make            # same as `make names`  ->  paper/names/submission/
+```
+
+`names/build_names.py` reads the catalogue, the workbench, the photograph
+and the provisional coding in `names/data/name_coding.csv`. It computes every
+number and table and draws the figures in grayscale at the resolutions Names
+asks for. It then fills `names/manuscript.md`, and pandoc turns that into
+Word using:
+
+- the ANS-adapted Chicago author-date style (`names/ans-chicago-author-date.csl`);
+- `names/references.bib`;
+- a reference document built by `names/make_reference_docx.py`. This holds
+  the Names layout: Times New Roman 12 pt, justified, indented paragraphs,
+  three heading levels, hanging-indent references and a Syllabics character
+  style.
+
+The build writes two files:
+
+- `manuscript_anonymized.docx`, for blind review, with its metadata stripped;
+- `manuscript_final.docx`, for after acceptance.
+
+Both get a LibreOffice PDF preview. The build also writes the separate figure
+files, the supplementary CSVs and a word count. You need pandoc 3 and
+LibreOffice on top of the Python requirements.
+
+**Read `names/SUBMISSION_CHECKLIST.md` before you submit.** Names does not
+accept AI-written text, even after a person has edited it. So the prose in
+`names/manuscript.md` is a scaffold that the author must rewrite. Bold
+"[k to supply]" notes mark the facts only the author can give.
+
+The earlier, longer MDPI *Languages* version is still built with `make mdpi`.
+It is described below.
+
 ## Build
 
 ```bash
 cd paper
 pip install -r requirements.txt
-make            # figures + screenshots + PDF  ->  paper/nehiyomtb-paper.pdf
+make mdpi       # figures + screenshots + PDF  ->  paper/nehiyomtb-paper.pdf
 ```
 
 `make figures`, `make shots` and `make pdf` run the three stages on their own.

@@ -1,0 +1,711 @@
+source,english,sro,syllabics,syllabics_read_back,class,non_plains_glyph
+built,Raven,kahkakiw,ᑲᐦᑲᑭᐤ,kahkakiw,exact,0
+built,Back Breaker,kaskâwikanênêw,ᑲᐢᑳᐏᑲᓀᓀᐤ,kaskâwikanênêw,exact,0
+built,Machete,mistâpiskihkomân,ᒥᐢᑖᐱᐢᑭᐦᑯᒫᐣ,mistâpiskihkomân,exact,0
+built,Six Shooter,nikocwâsaskanôs,ᓂᑯᒑᐧᓴᐢᑲᓅᐢ,nikocwâsaskanôs,exact,0
+built,Purple Haze,nîpâmâyâtân pekiseyâhk,ᓂᐹᒫᔮᑖᐣ ᐯᑭᓭᔮᕽ,nipâmâyâtânpêkisêyâhk,length,0
+built,Lovers Lane,nicimos mêskanâs,ᓂᒋᒧᐢ ᒣᐢᑲᓈᐢ,nicimosmêskanâs,exact,0
+built,Wonder Woman,mamahtâw iskwew,ᒪᒪᐦᑖᐤ ᐃᐢᑲᐧᐤ,mamahtâwiskwaw,mismatch,0
+built,Ray Gun,sâpwâpahcikan pâskisikan,ᓵᐚᐸᐦᒋᑲᐣ ᐹᐢᑭᓯᑲᐣ,sâwâpahcikanpâskisikan,mismatch,0
+built,Silverfox,sôniyâwâhkêsis,ᓲᓂᔮᐚᐦᑫᓯᐢ,sôniyâwâhkêsis,exact,0
+built,Medicine Man,maskihkîwiyiniw,ᒪᐢᑭᐦᑮᐏᔨᓂᐤ,maskihkîwiyiniw,exact,0
+built,Bobsled,capanaskos,ᒐᐸᓇᐢᑯᐢ,capanaskos,exact,0
+built,Purgatory,kâsenamâkêw iskotêw,ᑳᓭᓇᒫᑫᐤ ᐃᐢᑯᑌᐤ,kâsênamâkêwiskotêw,exact,0
+built,Deliverance,paspîhiwêwin,ᐸᐢᐲᐦᐃᐍᐏᐣ,paspîhiwêwin,exact,0
+built,Farmer's Daughter,okistikêw otânisa,ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ,okistikêwotânisa,exact,0
+built,Porcupine,kâkwa,ᑳᑿ,kâkwa,exact,0
+built,I See You,kiwâpamitin,ᑭᐚᐸᒥᑎᐣ,kiwâpamitin,exact,0
+built,Howl,oyôyow,ᐅᔫᔪᐤ,oyôyow,exact,0
+built,Ladybug,nôsemanicôs,ᓅᓭᒪᓂᒎᐢ,nôsêmanicôs,exact,0
+built,Victoria's Secret,victoria okimôtânimiyiwa,victoria ᐅᑭᒨᑖᓂᒥᔨᐘ,victoriaokimôtânimiyiwa,exact,0
+built,Slinky,slinky,ᐢᓕᐣᑭ,slinki,mismatch,0
+draft,Scalpel,môhkomânis,ᒨᐦᑯᒫᓂᐢ,môhkomânis,exact,0
+draft,Too Much,osâm mistahi,ᐅᓵᒼ ᒥᐢᑕᐦᐃ,osâmmistahi,exact,0
+draft,Gnome Trail,mêmêkwêsiw meskanaw,ᒣᒣᑵᓯᐤ ᒣᐢᑲᓇᐤ,mêmêkwêsiwmêskanaw,exact,0
+draft,Sideline,opamê-meskanaw,ᐅᐸᒣ ᒣᐢᑲᓇᐤ,opamêmêskanaw,exact,0
+draft,No Horses,êkâ misatimwak,ᐁᑳ ᒥᓴᑎᒧᐠ,êkâmisatimok,mismatch,0
+draft,Caddytrack,pêyahikan meskanaw,ᐯᔭᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ,pêyahikanmêskanaw,exact,0
+draft,The Holy Trail,kâ-kihcitwâwik meskanaw,ᑳ ᑭᐦᒋᑣᐃᐠ ᒣᐢᑲᓇᐤ,kâkihcitwâikmêskanaw,mismatch,1
+draft,Flat Pete,Pît nâpakaskâw,ᐲᐟ ᓈᐸᑲᐢᑳᐤ,pîtnâpakaskâw,exact,0
+draft,Walters Folly,waltor okakêpâtisiwin,ᐗᓪᑐᕒ ᐅᑲᑫᐹᑎᓯᐎᐣ,waltorokakêpâtisiwin,exact,1
+draft,Moonraker,tipiskâw-pîsim kâ-manahât,ᑎᐱᐢᑳᐤ ᐲᓯᒼ ᑳ ᒪᓇᐦᐊᐟ,tipiskâwpîsimkâmanahat,length,0
+draft,GO Trail,itohtê meskanaw,ᐃᑑᐦᑌ ᒣᐢᑲᓇᐤ,itôhtêmêskanaw,length,0
+draft,Gold Digger,osâwâ-sôniyâw omonahikêw,ᐅᓵᐚ ᓲᓂᔮᐤ ᐅᒧᓇᐦᐃᑫᐤ,osâwâsôniyâwomonahikêw,exact,0
+draft,Peckers Hollow,pâpascês wâyatinâw,ᐹᐸᐢᒉᐢ ᐚᔭᑎᓈᐤ,pâpascêswâyatinâw,exact,0
+draft,Coalminer's Daughter,kaskitêw-asini-monahikêw otânisa,ᑲᐢᑭᑌᐤ ᐊᓯᓂ ᒧᓇᐦᐃᑫᐤ ᐅᑖᓂᓴ,kaskitêwasinimonahikêwotânisa,exact,0
+draft,Root Canal,ocêpihk sîpîsis,ᐅᒋᐱᐠ ᓰᐱᓯᐢ,ocipiksîpisis,mismatch,0
+draft,Selkirk Knights,Selkirk simâkanisak,ᓭᓪᑭᕒᐠ ᓯᒫᑲᓂᓴᐠ,sêlkirksimâkanisak,exact,0
+draft,Flatter Pete,awasi-nâpakaskâw Pît,ᐊᐍᓯ ᓈᐸᑲᐢᑳᐤ ᐲᐟ,awêsinâpakaskâwpît,mismatch,0
+draft,Happy Ending,miyawâtamowin iskwayâk,ᒥᔭᐗᔨᐦᑕᒧᐎᐣ ᐃᐢᑿᔮᐠ,miyawayihtamowiniskwayâk,mismatch,1
+draft,Old Timer's,kayâs-ayisiyiniwak,ᑲᔮᐢ ᐊᔨᓯᔨᓂᐘᐠ,kayâsayisiyiniwak,exact,0
+draft,Mark Messier,Mârk Mesiye,ᒫᕒᐠ ᒣᓯᔦ,mârkmêsiyê,exact,0
+draft,Hustler,kakayêsimow,ᑲᑲᔦᓯᒧᐧ,kakayêsimwo,mismatch,0
+draft,Andre's Trail,Ândrê omeskanaw,ᐋᐣᑇ ᐅᒣᐢᑲᓇᐤ,ânpwâomêskanaw,mismatch,0
+draft,Birdhouse Trail,piyêsîsiwikamik meskanaw,ᐱᔦᓰᓯᐎᑲᒥᐠ ᒣᐢᑲᓇᐤ,piyêsîsiwikamikmêskanaw,exact,1
+draft,Risky Business,kâ-ayâhastêk atoskêwin,ᑳ ᐊᔮᐦᐊᐢᑌᐠ ᐊᑑᐢᑫᐎᐣ,kâayâhastêkatôskêwin,length,1
+draft,Mustang,paskwâwi-misatim,ᐹᐢᒁ ᒥᓴᑎᒼ,pâskwâmisatim,mismatch,0
+draft,The Trap,wanihikan,ᑆᑭᑲᐣ,pwâkikan,mismatch,1
+draft,Coffee,mîkis,ᒥᑭᐢ,mikis,length,0
+workbench,Mark Messier,Mârk Mesiye,ᒫᕒᐠ ᒣᓯᔦ,mârkmêsiyê,exact,0
+workbench,Mark Messier,okimâw Mesiye,ᐅᑭᒪᐤ ᒣᓯᔦ,okimawmêsiyê,length,0
+workbench,Mark Messier,maskawisîw Mârk,ᒪᔅᑲᐎᓯᐤ ᒪᕒᐠ,maskawisiwmark,length,1
+workbench,Capilano Cresent,Kapilâno wâwiyêyâw,ᑲᐱᓛᓄ ᐗᐍᔭᔮᐤ,kapilânowawêyayâw,mismatch,1
+workbench,Capilano Cresent,pîwâpiskwâw meskanaw,ᐳᔭᐤ ᒣᐢᑲᓇᐤ,poyawmêskanaw,mismatch,0
+workbench,Capilano Cresent,tipiskâ-pîsimis,ᑎᐱᐢᑳ ᐲᓯᒥᐢ,tipiskâpîsimis,exact,0
+workbench,The Holy Trail,kâ-kihcitwâwik meskanaw,ᑳ ᑭᐦᒋᑣᐃᐠ ᒣᐢᑲᓇᐤ,kâkihcitwâikmêskanaw,mismatch,1
+workbench,The Holy Trail,manitow-meskanaw,ᒪᓂᑐ ᒣᐢᑲᓇᐤ,manitomêskanaw,mismatch,0
+workbench,The Holy Trail,meskanaw kâ-pîhonsoik,ᒣᐢᑲᓇᐤ ᑳ ᐯᐦᐅᐣᓱᐃᐠ,mêskanawkâpêhonsoik,mismatch,0
+workbench,Sideline,opamê-meskanaw,ᐅᐸᒣ ᒣᐢᑲᓇᐤ,opamêmêskanaw,exact,0
+workbench,Sideline,sîpâ-pimohtêwin,ᓰᐹ ᐱᒧᐦᑌᐎᐣ,sîpâpimohtêwin,exact,1
+workbench,Sideline,ayisâw meskanaw,ᐊᔭᔮᐤ ᒣᐢᑲᓇᐤ,ayayâwmêskanaw,mismatch,0
+workbench,Caddytrack,otâpânâsko-meskanaw,ᐅᑖᐹᓇᐢᑯ ᒣᐢᑲᓇᐤ,otâpânaskomêskanaw,length,0
+workbench,Caddytrack,otâpânâsk meskanaw,ᐅᑖᐹᓈᐢᐠ ᒣᐢᑲᓇᐤ,otâpânâskmêskanaw,exact,0
+workbench,Caddytrack,pêyahikan meskanaw,ᐯᔭᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ,pêyahikanmêskanaw,exact,0
+workbench,Hoot and Holler,têpwêwin mîna kitowin,ᑌᐺᐎᐣ ᒥᓇ ᑭᑐᐎᐣ,têpwêwinminakitowin,length,1
+workbench,Hoot and Holler,ohow mîna têpwêw,ᐅᐦᐅ ᒥᓇ ᑌᐺᐤ,ohominatêpwêw,mismatch,1
+workbench,Hoot and Holler,môcikiskwêwin,ᒨᒋᑭᐢᑵᐎᐣ,môcikiskwêwin,exact,1
+workbench,Moonraker,tipiskâw-pîsim kâ-manahât,ᑎᐱᐢᑳᐤ ᐲᓯᒼ ᑳ ᒪᓇᐦᐊᐟ,tipiskâwpîsimkâmanahat,length,0
+workbench,Moonraker,pîsim omanahikêw,ᐲᓯᒼ ᐅᒪᓇᐦᐃᑫᐤ,pîsimomanahikêw,exact,0
+workbench,Moonraker,itê-pîsim,ᐃᑌ ᐲᓯᒼ,itêpîsim,exact,0
+workbench,Risky Business,kâ-ayâhastêk atoskêwin,ᑳ ᐊᔮᐦᐊᐢᑌᐠ ᐊᑑᐢᑫᐎᐣ,kâayâhastêkatôskêwin,length,1
+workbench,Risky Business,nanêhiki-isihcikêwin,ᓇᓀᐦᐃᑭ ᐃᓯᒋᑫᐎᐣ,nanêhikiisicikêwin,mismatch,1
+workbench,Risky Business,pâstêw atoskêwin,ᐹᐢᑌᐤ ᐊᑑᐢᑫᐎᐣ,pâstêwatôskêwin,length,1
+workbench,Capilano Access,Kapilâno isi-pîhtokêwin,ᑲᐱᓛᓄ ᐃᓱ ᐱᐦᑐᑫᐎᐣ,kapilânoisopihtokêwin,mismatch,1
+workbench,Capilano Access,Kapilâno meskanas,ᑲᐱᓛᓄ ᒣᐢᑲᓇᐢ,kapilânomêskanas,exact,0
+workbench,Capilano Access,pîhtokêwi-meskanaw,ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ,pihtokêwimêskanaw,length,1
+workbench,Ray Gun,wâsêskotêw-paskisikan,ᐗᓭᔅᑯᑌᐤ ᐸᐢᑭᓯᑲᐣ,wasêskotêwpaskisikan,length,1
+workbench,Ray Gun,pîsimohkân-paskisikan,ᐱᓯᒧᐦᑲᐣ ᐸᐢᑭᓯᑲᐣ,pisimohkanpaskisikan,length,0
+workbench,Ray Gun,wêyâs-paskisikan,ᐍᔮᐢ ᐸᐢᑭᓯᑲᐣ,wêyâspaskisikan,exact,0
+workbench,Happy Ending,sîkinikêwin iskwayâk,ᓰᑭᓂᑫᐎᐣ ᐃᐢᑿᔮᐠ,sîkinikêwiniskwayâk,exact,1
+workbench,Happy Ending,miyawâtamowin iskwayâk,ᒥᔭᐗᔨᐦᑕᒧᐎᐣ ᐃᐢᑿᔮᐠ,miyawayihtamowiniskwayâk,mismatch,1
+workbench,Happy Ending,miywâsin iskwayâk,ᒥᔱᐢᑮᓯᐤ ᐃᐢᑿᔮᐠ,miywiskîsiwiskwayâk,mismatch,1
+workbench,Edmonton Queen,amiskwacî-okimâskwêw,ᐊᒥᐢᑿᒋ ᐅᑭᒫᐢᑵᐤ,amiskwaciokimâskwêw,length,0
+workbench,Edmonton Queen,okimâskwêw onâpikwân,ᐅᑭᒫᐢᑵᐤ ᐅᓈᐲᑲᐧᐣ,okimâskwêwonâpîkwan,length,0
+workbench,Edmonton Queen,amiskwacî okimâskwêw,ᐊᒥᐢᑿᒋ ᐅᑭᒫᐢᑵᐤ,amiskwaciokimâskwêw,length,0
+workbench,Birdhouse Trail,piyêsîsiwikamik meskanaw,ᐱᔦᓰᓯᐎᑲᒥᐠ ᒣᐢᑲᓇᐤ,piyêsîsiwikamikmêskanaw,exact,1
+workbench,Birdhouse Trail,piyêsîs owîki meskanaw,ᐱᔦᓰᐢ ᐅᐎᑭ ᒣᐢᑲᓇᐤ,piyêsîsowikimêskanaw,length,1
+workbench,Birdhouse Trail,piyêsîsiwikamikos,ᐱᔦᓰᓯᐎᑲᒥᑯᐢ,piyêsîsiwikamikos,exact,1
+workbench,E.M.P. Blast,pîwâpisk-pâhkitêw,ᐲᐍᔮᐱᐢᐠ ᐹᐢᑌᐤ,pîwêyâpiskpâstêw,mismatch,0
+workbench,E.M.P. Blast,wâsêskotêw pâhkitêw,ᐗᓭᔅᑯᑌᐤ ᐹᐢᑌᐤ,wasêskotêwpâstêw,mismatch,1
+workbench,E.M.P. Blast,pâhkitêw meskanaw,ᐹᐢᑌᐤ ᒣᐢᑲᓇᐤ,pâstêwmêskanaw,mismatch,0
+workbench,Old Timer's,kisêyiniw omeskanaw,ᑭᓭᔨᓂᐤ ᐅᒣᐢᑲᓇᐤ,kisêyiniwomêskanaw,exact,0
+workbench,Old Timer's,kayâs-ayisiyiniw meskanaw,ᐊᔭᔭᐳᔭᐤ ᒣᐢᑲᓇᐤ,ayayapoyawmêskanaw,mismatch,0
+workbench,Old Timer's,kisêyiniwak omeskanawâw,ᑭᓭᔨᓂᐗᐠ ᐅᒣᐢᑲᓇᐤ,kisêyiniwakomêskanaw,mismatch,1
+workbench,Walters Folly,waltor okakêpâtisiwin,ᐗᓪᑐᕒ ᐅᑲᑫᐹᑎᓯᐎᐣ,waltorokakêpâtisiwin,exact,1
+workbench,Walters Folly,âsokan kâ-âyimahk,ᐋᓱᑲᐣ ᑳ ᐋᔨᒪᕽ,âsokankââyimahk,exact,0
+workbench,Walters Folly,waltor otâsokan,ᐗᓪᑐᕒ ᐅᑖᓱᑲᐣ,waltorotâsokan,exact,1
+workbench,Dave's Trail,Têv omeskanaw,ᑌᐺ ᐅᒣᐢᑲᓇᐤ,têpwêomêskanaw,mismatch,1
+workbench,Dave's Trail,Têyiv omeskanaw,ᑌᐃᐍ ᐅᒣᐢᑲᓇᐤ,têiwêomêskanaw,mismatch,0
+workbench,Dave's Trail,nâpêw Têv omeskanaw,ᓈᐯᐤ ᑌᐺ ᐅᒣᐢᑲᓇᐤ,nâpêwtêpwêomêskanaw,mismatch,1
+workbench,Upper Corkscrew,ispimihk wâwaniyâw meskanaw,ᐃᐢᐸᒥᐠ ᐗᐗᓂᔭᐤ ᒣᐢᑲᓇᐤ,ispamikwawaniyawmêskanaw,mismatch,1
+workbench,Upper Corkscrew,ispimihk pimipîhkahikan,ᐃᐢᐸᒥᐠ ᐱᒥᐲᐦᑲᐦᐃᑲᐣ,ispamikpimipîhkahikan,mismatch,0
+workbench,Upper Corkscrew,wâwiyêyâw meskanaw ispimihk,ᐗᐍᔭᔮᐤ ᒣᐢᑲᓇᐤ ᐃᐢᐸᒥᐠ,wawêyayâwmêskanawispamik,mismatch,1
+workbench,Flat Pete,Pît nâpakaskâw,ᐲᐟ ᓈᐸᑲᐢᑳᐤ,pîtnâpakaskâw,exact,0
+workbench,Flat Pete,nâpakisîs Pît,ᓈᐸᑭᓰᐢ ᐲᐟ,nâpakisîspît,exact,0
+workbench,Flat Pete,Pît kâ-nâpakâw,ᐲᐟ ᑳ ᓈᐸᑳᐤ,pîtkânâpakâw,exact,0
+workbench,Too Much,osâm mistahi,ᐅᓵᒼ ᒥᐢᑕᐦᐃ,osâmmistahi,exact,0
+workbench,Too Much,ayiwâk,ᐊᔨᐗᐠ,ayiwak,length,1
+workbench,Too Much,osâm ê-mistakisik,ᐅᓵᒼ ᐁ ᒥᔅᑕᑭᐢᐠ,osâmêmistakisk,mismatch,1
+workbench,Fort Edmonton Park Double Track,amiskwacî nîso-meskanaw,ᐊᒥᐢᑿᒋ ᒥᓯᐍᔮᐤ ᒣᐢᑲᓇᐤ,amiskwacimisiwêyâwmêskanaw,mismatch,0
+workbench,Fort Edmonton Park Double Track,nîso-meskanaw,ᓃᓱ ᒣᐢᑲᓇᐤ,nîsomêskanaw,exact,0
+workbench,Fort Edmonton Park Double Track,oskana wâskahikan nîso-meskanaw,ᐅᐢᑭ ᐗᐢᑲᐦᐃᑲᐣ ᓃᓱ ᒣᐢᑲᓇᐤ,oskiwaskahikannîsomêskanaw,mismatch,1
+workbench,No Horses,namôya misatimwak,ᓇᒨᔭ ᒥᓴᑎᒧᐠ,namôyamisatimok,mismatch,0
+workbench,No Horses,êkâ misatimwak,ᐁᑳ ᒥᓴᑎᒧᐠ,êkâmisatimok,mismatch,0
+workbench,No Horses,namôya otêhtêwak misatimwak,ᓇᒨᔭ ᐅᑌᐦᑌᐗᐠ ᒥᓴᑎᒧᐠ,namôyaotêhtêwakmisatimok,mismatch,1
+workbench,Walterdale Park Access,waltordêl pîhtokêwi-meskanaw,ᐗᓪᑐᕒᑌᓪ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ,waltortêlpihtokêwimêskanaw,mismatch,1
+workbench,Walterdale Park Access,waltordêl isi-pîhtokêwin,ᐗᓪᑐᕒᑌᓪ ᐃᓱᑫᐎᐣ,waltortêlisokêwin,mismatch,1
+workbench,Walterdale Park Access,waltordêl meskanas,ᐗᓪᑐᕒᑌᓪ ᒣᐢᑲᓇᐢ,waltortêlmêskanas,mismatch,1
+workbench,Curvin Murvin,wâwani-meskanaw,ᐗᐗᓂ ᒣᐢᑲᓇᐤ,wawanimêskanaw,length,1
+workbench,Curvin Murvin,wâwiyêyâw meskanaw,ᐗᐍᔭᔮᐤ ᒣᐢᑲᓇᐤ,wawêyayâwmêskanaw,mismatch,1
+workbench,Curvin Murvin,Karvin Marvin,ᑲᕒᐱᐣ ᒪᕒᐱᐣ,karpinmarpin,mismatch,0
+workbench,Lower Back Breaker,nîhtâwi-pâspâwakanikêw,ᓂᐦᑖᐃᐧ ᐹᐢᐹᐧᐊᐗᑲᓂᑫᐤ,nihtâwipâspwâawakanikêw,mismatch,1
+workbench,Lower Back Breaker,nîhtâwi-pîkospiskanêw,ᓂᐦᑖᐃᐧ ᐲᑯᐢᐱᐢᑲᓀᐤ,nihtâwipîkospiskanêw,length,0
+workbench,Lower Back Breaker,ospiskani-pîkohikan nîhtâw,ᐅᐢᐱᐢᑲᓂᐲᑯᐦᐃᑲᐣ ᓂᐦᑖᐤ,ospiskanipîkohikannihtâw,length,0
+workbench,Emily Murphy Access,Emili Marpi pîhtokêwi-meskanaw,ᐁᒥᓕ ᒪᕒᐱ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ,êmilimarpipihtokêwimêskanaw,length,1
+workbench,Emily Murphy Access,Emili Marpi meskanas,ᐁᒥᓕ ᒪᕒᐱ ᒣᐢᑲᓇᐢ,êmilimarpimêskanas,exact,0
+workbench,Emily Murphy Access,Emili Marpi isi-pîhtokêwin,ᐁᒥᓕ ᒪᕒᐱ ᐃᓱ ᐱᐦᑐᑫᐎᐣ,êmilimarpiisopihtokêwin,mismatch,1
+workbench,Canada Cup Network - 1,Kanata minihkwâkan pêyak,ᑲᓇᑕ ᒥᓂᐦᑴᐗᐠᐦᐃᑲᐣ ᐯᔭᐠ,kanataminihkwêwakhikanpêyak,mismatch,1
+workbench,Canada Cup Network - 1,Kanata minihkwâkan meskanaw pêyak,ᑲᓇᑕ ᒥᓂᐦᑴᐗᑲᐣ ᒣᐢᑲᓇᐤ ᐯᔭᐠ,kanataminihkwêwakanmêskanawpêyak,mismatch,1
+workbench,Canada Cup Network - 1,Kanata atâmihowi-meskanaw pêyak,ᑲᓇᑕ ᐊᑖᒥᐦᐅᐎ ᒣᐢᑲᓇᐤ ᐯᔭᐠ,kanataatâmihowimêskanawpêyak,exact,1
+workbench,Terwillegar - 7,Têrwiligar têpakohp,ᑌᕒᐎᓕᑲᕒ ᑌᐺᑊᑕ,têrwilikartêpwêpta,mismatch,1
+workbench,Terwillegar - 7,Têrwiligar meskanaw têpakohp,ᑌᕒᐎᓕᑲᕒ ᒣᐢᑲᓇᐤ ᑌᐺᑊᑕ,têrwilikarmêskanawtêpwêpta,mismatch,1
+workbench,Terwillegar - 7,têpakohp meskanaw,ᑌᐺᑊᑕ ᒣᐢᑲᓇᐤ,têpwêptamêskanaw,mismatch,1
+workbench,Six Shooter,nikotwâsik-paskisikan,ᓂᑯᑤᐤ ᐸᐢᑭᓯᑲᐣ,nikotwâwpaskisikan,mismatch,0
+workbench,Six Shooter,nikotwâsik opaskisikêw,ᓂᑯᑤᐤ ᐅᐸᐢᑭᓯᑫᐤ,nikotwâwopaskisikêw,mismatch,0
+workbench,Six Shooter,paskisikanis nikotwâsosiw,ᐸᐢᑭᓯᑲᓂᐢ ᓂᑯᑤᓱᐤ,paskisikanisnikotwâsow,mismatch,0
+workbench,Won't Die,namôya ka-nipiw,ᓇᒨᔭ ᑭ ᓂᐱᐤ,namôyakinipiw,mismatch,0
+workbench,Won't Die,namôya wîhkâc nipiw,ᓇᒨᔭ ᐎᐦᑲᐨ ᓂᐱᐤ,namôyawihkacnipiw,length,1
+workbench,Won't Die,pimâtisiw kâkikê,ᐱᒫᑎᓯᐤ ᑳᑭᑫ,pimâtisiwkâkikê,exact,0
+workbench,Low Class,sîpihtêyimikosiw,ᓰᐱᐦᑌᔨᒥᑯᓯᐤ,sîpihtêyimikosiw,exact,0
+workbench,Low Class,tahkîc isihcikêwin,ᑕᐦᑮᐢ ᐃᓯᐦᒋᑫᐎᐣ,tahkîsisihcikêwin,mismatch,1
+workbench,Low Class,namôya kistêyimikosiw,ᓇᒨᔭ ᑭᐢᑌᔨᒥᑯᓯᐤ,namôyakistêyimikosiw,exact,0
+workbench,Logarythmic,mistiko-akihcikêwin,ᒥᐢᑎᑯ ᐊᑭᐦᒋᑫᐎᐣ,mistikoakihcikêwin,exact,1
+workbench,Logarythmic,mistik meskanaw,ᒥᐢᑎᐠ ᒣᐢᑲᓇᐤ,mistikmêskanaw,exact,0
+workbench,Logarythmic,akihtâsowin meskanaw,ᐊᑭᐦᑖᓱᐎᐣ ᒣᐢᑲᓇᐤ,akihtâsowinmêskanaw,exact,1
+workbench,Millcreek Double Track - Curling Club Exit,Milkrîk nîso-meskanaw sîswahikan,ᒥᓪᑯᕒᐃᐠ ᓃᓱ ᒣᐢᑲᓇᐤ ᓰᔅᐗᐦᐃᑲᐣ,milkoriknîsomêskanawsîswahikan,mismatch,1
+workbench,Millcreek Double Track - Curling Club Exit,Milkrîk nîso-meskanaw wayawî-pîhtwâwin,ᒥᓪᑯᕒᐃᐠ ᓃᓱ ᒣᐢᑲᓇᐤ ᐗᔭᐍᐱᐦᑐᐎᐣ,milkoriknîsomêskanawwayawêpihtowin,mismatch,1
+workbench,Millcreek Double Track - Curling Club Exit,nîso-meskanaw wayawîwin,ᓃᓱ ᒣᐢᑲᓇᐤ ᐗᔭᐍᐎᐣ,nîsomêskanawwayawêwin,mismatch,1
+workbench,Flatter Pete,awasi-nâpakaskâw Pît,ᐊᐍᓯ ᓈᐸᑲᐢᑳᐤ ᐲᐟ,awêsinâpakaskâwpît,mismatch,0
+workbench,Flatter Pete,nawac nâpakâw Pît,ᓇᐗᐨ ᓈᐸᑳᐤ ᐲᐟ,nawacnâpakâwpît,exact,1
+workbench,Flatter Pete,Pît kâ-awasi-nâpakât,ᐲᐟ ᑳ ᐊᐗᓯᓈᐸᑳᐟ,pîtkâawasinâpakât,exact,1
+workbench,Hyperloop,kayipî-wâsâkêwayiw,ᑭᔭᐲ ᐗᓵᑫᐗᔨᐤ,kiyapîwasâkêwayiw,mismatch,1
+workbench,Hyperloop,ayahcipayiw wâsâkêw,ᐊᔭᐦᒋᐱᔨᐤ ᐗᓵᑫᐤ,ayahcipiyiwwasâkêw,mismatch,1
+workbench,Hyperloop,haypêrlûp,ᐦᐊᔾᐯᕒᓘᑊ,haypêrlôp,mismatch,1
+workbench,Mustang - Alt,paskwâwi-misatim kotak,ᐹᐢᒁ ᒥᓴᑎᒼ ᑯᑕᐠ,pâskwâmisatimkotak,mismatch,0
+workbench,Mustang - Alt,paskwâwi-misatim âhciyaw,ᐹᐢᒁ ᒥᓴᑎᒼ ᐋᐦᒋᔭᐤ,pâskwâmisatimâhciyaw,mismatch,0
+workbench,Mustang - Alt,misatim kotak meskanaw,ᒥᓴᑎᒼ ᑯᑕᐠ ᒣᐢᑲᓇᐤ,misatimkotakmêskanaw,exact,0
+workbench,IMBA Trail,Imbâ meskanaw,ᐃᒼᐹ ᒣᐢᑲᓇᐤ,impâmêskanaw,mismatch,0
+workbench,IMBA Trail,otihtêwak omeskanawâw,ᐅᒋᑌᐦᑌᐗᐠ ᐅᒣᐢᑲᓇᐤ,ocitêhtêwakomêskanaw,mismatch,1
+workbench,IMBA Trail,tihtipâtikâw meskanaw,ᑎᐦᑎᐹᑎᑲᐤ ᒣᐢᑲᓇᐤ,tihtipâtikawmêskanaw,length,0
+workbench,Sprite,mêmêkwêsiw,ᒣᒣᑵᓯᐤ,mêmêkwêsiw,exact,0
+workbench,Sprite,acâhkos,ᐊᒋᐦᑲ ᐊᒑᐠ,acihkaacâk,mismatch,0
+workbench,Sprite,sprayt,ᐢᐱᕒᐊᐃᐟ,spirait,mismatch,0
+workbench,LRT Bridge,iskotêw-tâpânâsk âsiwahokan,ᐃᔅᑯᑌᐤ ᑌᐦᑕᐹᐢᑯ ᐋᓯᐗᐦᐅᑲᐣ,iskotêwtêhtapâskoâsiwahokan,mismatch,1
+workbench,LRT Bridge,âsokan meskanaw,ᐊᓱᑲᐣ ᒣᐢᑲᓇᐤ,asokanmêskanaw,length,0
+workbench,LRT Bridge,El-Âr-Tî âsokan,ᐃᓪ ᐋᕒ ᑏ ᐊᓱᑲᐣ,ilârtîasokan,mismatch,0
+workbench,Slinky - Mid,pimipîhkahikan tâwic,ᐱᒥᐲᐦᑲᐦᐃᑲᐣ ᑖᐎᐨ,pimipîhkahikantâwic,exact,1
+workbench,Slinky - Mid,wâwiyêpayiw tâwic,ᐗᐍᔭᐱᔭᐤ ᑖᐎᐨ,wawêyapiyawtâwic,mismatch,1
+workbench,Slinky - Mid,slinki tâwic,ᐢᓕᕄᑭ ᑖᐎᐨ,slilêkitâwic,mismatch,1
+workbench,Mustang Access,paskwâwi-misatim pîhtokêwi-meskanaw,ᐹᐢᒁ ᒥᓴᑎᒼ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ,pâskwâmisatimpihtokêwimêskanaw,mismatch,1
+workbench,Mustang Access,paskwâwi-misatim meskanas,ᐹᐢᒁ ᒥᓴᑎᒼ ᒣᐢᑲᓇᐢ,pâskwâmisatimmêskanas,mismatch,0
+workbench,Mustang Access,misatim isi-pîhtokêwin,ᒥᓴᑎᒼ ᐃᓱ ᐱᐦᑐᑫᐎᐣ,misatimisopihtokêwin,mismatch,1
+workbench,Slinky - South,pimipîhkahikan sâwanohk,ᐱᒥᐲᐦᑲᐦᐃᑲᐣ ᓵᐚᓄᐦᐠ,pimipîhkahikansâwânohk,length,0
+workbench,Slinky - South,wâwiyêpayiw sâwanohk,ᐗᐍᔭᐱᔭᐤ ᓵᐚᓄᐦᐠ,wawêyapiyawsâwânohk,mismatch,1
+workbench,Slinky - South,slinki sâwanohk,ᐢᓕᕄᑭ ᓵᐚᓄᐦᐠ,slilêkisâwânohk,mismatch,0
+workbench,GO Trail,itohtê meskanaw,ᐃᑑᐦᑌ ᒣᐢᑲᓇᐤ,itôhtêmêskanaw,length,0
+workbench,GO Trail,âhkamê-meskanaw,ᐋᐦᑲᒣ ᒣᐢᑲᓇᐤ,âhkamêmêskanaw,exact,0
+workbench,GO Trail,Kô meskanaw,ᑰ ᒣᐢᑲᓇᐤ,kômêskanaw,exact,0
+workbench,The Trap,wanihikan,ᑆᑭᑲᐣ,pwâkikan,mismatch,1
+workbench,The Trap,akwâpicikan,ᐊᑯᐱᐗᑖᐱᐢᑲᐦᐃᑲᐣ,akopiwatâpiskahikan,mismatch,1
+workbench,The Trap,wanihikan meskanaw,ᐗᓂᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ,wanihikanmêskanaw,exact,1
+workbench,GO Trail - alt climb,itohtê meskanaw amaciwêwin,ᐃᑑᐦᑌ ᒣᐢᑲᓇᐤ ᐊᒥᐢᑎᑲᐤ,itôhtêmêskanawamistikaw,mismatch,0
+workbench,GO Trail - alt climb,itohtê meskanaw kotak amaciwêwin,ᐃᑑᐦᑌ ᒣᐢᑲᓇᐤ ᑯᑕᐠ ᐊᒥᐢᑎᑲᐤ,itôhtêmêskanawkotakamistikaw,mismatch,0
+workbench,GO Trail - alt climb,Kô meskanaw amaciwêwin,ᑰ ᒣᐢᑲᓇᐤ ᐊᒥᐢᑎᑲᐤ,kômêskanawamistikaw,mismatch,0
+workbench,Hustler,kakayêsimow,ᑲᑲᔦᓯᒧᐧ,kakayêsimwo,mismatch,0
+workbench,Hustler,kakwêyâhow,ᑲᑴᔮᐦᐅᐧ,kakwêyâhwo,mismatch,1
+workbench,Hustler,wiyasihkâmâkêw,ᐃᐧᔭᓯᐦᑲᒫᑫᐧ,wiyasihkamâkwê,mismatch,0
+workbench,Turtle berms,miskinâk asiskiwahikana,ᒥᐢᑭᓈᐠ ᐊᓯᐢᑭᐗᐦᐃᑲᓇ,miskinâkasiskiwahikana,exact,1
+workbench,Turtle berms,miskinâk wâsahikana,ᒥᐢᑭᓈᐠ ᐗᓵᐦᐃᑲᓇ,miskinâkwasâhikana,length,1
+workbench,Turtle berms,miskinâk meskanaw,ᒥᐢᑭᓈᐠ ᒣᐢᑲᓇᐤ,miskinâkmêskanaw,exact,0
+workbench,Dancing with the Trees,nîmihitom mistikwak wîcêwakan,ᓃᒥᐦᐃᑐᒼ ᒥᐢᑎᑾᐠ ᐎᒉᐗᑲᐣ,nîmihitommistikwakwicêwakan,length,1
+workbench,Dancing with the Trees,nîmihitowin mistikwak,ᓃᒥᐦᐃᑐᐎᐣ ᒥᐢᑎᑾᐠ,nîmihitowinmistikwak,exact,1
+workbench,Dancing with the Trees,wîci-nîmihitom mistikwak,ᐎᒋᓃᒥᐦᐃᑐᒼ ᒥᐢᑎᑾᐠ,wicinîmihitommistikwak,length,1
+workbench,EM - Traverse,Em âhcipimohtêwin,ᐁᒼ ᐋᐦᒋᐱᒧᐦᑌᐎᐣ,êmâhcipimohtêwin,exact,1
+workbench,EM - Traverse,Em âsowahamêw meskanaw,ᐁᒼ ᐋᓱᐗᐦᐊᒣᐤ ᒣᐢᑲᓇᐤ,êmâsowahamêwmêskanaw,exact,1
+workbench,EM - Traverse,Em pimi-âhtêwin,ᐁᒼ ᐱᒥᔭᒧᐦᑌᐎᐣ,êmpimiyamohtêwin,mismatch,1
+workbench,Raven,kâhkâkiw,ᑳᐦᑳᑭᐤ,kâhkâkiw,exact,0
+workbench,Raven,mâhkâhkâkiw,ᒪᐦᑳᐦᑳᑭᐤ,mahkâhkâkiw,length,0
+workbench,Raven,kâhkâkiw meskanaw,ᑳᐦᑳᑭᐤ ᒣᐢᑲᓇᐤ,kâhkâkiwmêskanaw,exact,0
+workbench,Creekside Boogie II,sîpîsis cîkapihk nîmihitowin nîso,ᓰᐱᓯᔅ ᒋᑲᐱᐠ ᓃᒥᐦᐃᑐᐎᐣ ᓃᓱ,sîpisiscikapiknîmihitowinnîso,mismatch,1
+workbench,Creekside Boogie II,cîki-sîpîs nîmihitowin nîso,ᒋᑭᓰᐱᔅ ᓃᒥᐦᐃᑐᐎᐣ ᓃᓱ,cikisîpisnîmihitowinnîso,length,1
+workbench,Creekside Boogie II,sîpîsis nîmihitowin nîso,ᓰᐱᓯᔅ ᓃᒥᐦᐃᑐᐎᐣ ᓃᓱ,sîpisisnîmihitowinnîso,length,1
+workbench,Machete,mistikokahikan,ᒥᔅᑎᑯᑲᐦᐃᑲᐣ,mistikokahikan,exact,1
+workbench,Machete,kîskatahikan,ᑮᐢᑎᑲᐦᐃᑲᐣ,kîstikahikan,mismatch,0
+workbench,Machete,machête,ᒪᒉᑌ,macêtê,mismatch,0
+workbench,Oleskiw Meadow,Olêskîw maskosiskâw,ᐅᓚᐢᑮᐤ ᒪᐢᑯᓯᐢᑲᐤ,olaskîwmaskosiskaw,mismatch,0
+workbench,Oleskiw Meadow,Olêskîw paskwâw,ᐅᓚᐢᑮᐤ ᐹᐢᑳᐤ,olaskîwpâskâw,mismatch,0
+workbench,Oleskiw Meadow,Olêskîw maskosiskâw meskanaw,ᐅᓚᐢᑮᐤ ᒪᐢᑯᓯᐢᑲᐤ ᒣᐢᑲᓇᐤ,olaskîwmaskosiskawmêskanaw,mismatch,0
+workbench,Root and Roll,ocêpihk mîna tihtipâpayiw,ᐅᒋᐱᐠ ᒥᓇ ᑎᐦᑎᐹᐯᔨᐤ,ocipikminatihtipâpêyiw,mismatch,0
+workbench,Root and Roll,ocêpihk mîna tihtipoyiwin,ᐅᒋᐱᐠ ᒥᓇ ᑎᐦᑎᐳᔨᐎᐣ,ocipikminatihtipoyiwin,mismatch,1
+workbench,Root and Roll,ocêpihkâw tihtipâpayiw,ᐅᒋᐱᐦᑲᐤ ᑎᐦᑎᐹᐯᔨᐤ,ocipihkawtihtipâpêyiw,mismatch,0
+workbench,Lower Ewok,tahkohc? îwâk,ᑆᑎᒥᐠ ᐄᐘᐠ,pwâtimikîwak,mismatch,1
+workbench,Lower Ewok,nîhtâwi-Îwâk,ᓂᐦᑖᐃᐧ ᐄᐘᐠ,nihtâwiîwak,length,0
+workbench,Lower Ewok,sîpâ-Îwâk,ᓰᐲ ᐄᐘᐠ,sîpîîwak,mismatch,0
+workbench,Switchback Slicer,wâni-meskanaw kîskatahikêw,ᐗᓂᔭ ᒣᐢᑲᓇᐤ ᑮᐢᑎᑲᐦᐃᑫᐤ,waniyamêskanawkîstikahikêw,mismatch,1
+workbench,Switchback Slicer,wâwaniyâw kîskahikêw,ᐗᐗᓂᔭᔭᐤ ᑮᐢᑲᐦᐃᑫᐤ,wawaniyayawkîskahikêw,mismatch,1
+workbench,Switchback Slicer,kîskahikêw meskanaw,ᑮᐢᑲᐦᐃᑫᐤ ᒣᐢᑲᓇᐤ,kîskahikêwmêskanaw,exact,0
+workbench,Dirty Mattress,wîyipi-wîpêmêwi-nipêwin,ᐎᔨᐱ ᐎᐯᒣᐎ ᓂᐯᐎᐣ,wiyipiwipêmêwinipêwin,length,1
+workbench,Dirty Mattress,wîyipisi-nipêwinâhtik,ᐎᔨᐱᐢ ᓂᐯᐎᓈᐦᑎᐠ,wiyipisnipêwinâhtik,mismatch,1
+workbench,Dirty Mattress,mâyi-nipêwin,ᒫᔨ ᓂᐯᐎᐣ,mâyinipêwin,exact,1
+workbench,Gold Digger,osâwâ-sôniyâw omonahikêw,ᐅᓵᐚ ᓲᓂᔮᐤ ᐅᒧᓇᐦᐃᑫᐤ,osâwâsôniyâwomonahikêw,exact,0
+workbench,Gold Digger,sôniyâ-monahikêw,ᓲᓂᔮ ᒧᓇᐦᐃᑫᐤ,sôniyâmonahikêw,exact,0
+workbench,Gold Digger,omonahikêw osâwâpisk,ᐅᒧᓇᐦᐃᑫᐤ ᐅᓵᐚᐱᐢᐠ,omonahikêwosâwâpisk,exact,0
+workbench,Root Canal,ocêpihk meskanaw,ᐅᒋᐱᐠ ᒣᐢᑲᓇᐤ,ocipikmêskanaw,mismatch,0
+workbench,Root Canal,ocêpihk sîpîsis,ᐅᒋᐱᐠ ᓰᐱᓯᐢ,ocipiksîpisis,mismatch,0
+workbench,Root Canal,wîpit-ocêpihk,ᐎᐲᓱ ᐅᒋᐱᐠ,wipîsoocipik,mismatch,1
+workbench,West Coast Trail,pahkisimohtâhk sîpiya meskanaw,ᐹᐦᑭᓯᒧᑖᐦᐠ ᓰᐱᔭ ᒣᐢᑲᓇᐤ,pâhkisimotâhksîpiyamêskanaw,mismatch,0
+workbench,West Coast Trail,pahkisimohk sîsâk meskanaw,ᐹᐦᑭᓯᒧᐦᐠ ᓰᔅᑖᐠ ᒣᐢᑲᓇᐤ,pâhkisimohksîstâkmêskanaw,mismatch,1
+workbench,West Coast Trail,nipîstêw meskanaw pahkisimohk,ᓂᐱᐢᑌᐤ ᒣᐢᑲᓇᐤ ᐹᐦᑭᓯᒧᐦᐠ,nipistêwmêskanawpâhkisimohk,length,0
+workbench,Scona Hill Rip,Skôna ispatinâk kîskipayiw,ᔅᑯᓇ ᐃᐢᐹᑎᓈᐠ ᑮᐢᑭᐸᔨᐤ,skonaispâtinâkkîskipayiw,length,1
+workbench,Scona Hill Rip,Skôna ispatinâk kiyipîpayiw,ᔅᑯᓇ ᐃᐢᐹᑎᓈᐠ ᑭᔭᐲᐸᔨᐤ,skonaispâtinâkkiyapîpayiw,mismatch,1
+workbench,Scona Hill Rip,Skôna ispatinâw meskanaw,ᔅᑯᓇ ᐃᐢᐹᑎᓈᐤ ᒣᐢᑲᓇᐤ,skonaispâtinâwmêskanaw,length,1
+workbench,Victoria's Lower Secret,Viktôriya okâtâwin tawâyihk,ᐱᒃᑑᕒᐃᔭ ᐅᑳᑖᐎᐣ ᑖᐚᔨᐦᐠ,piktôriyaokâtâwintâwâyihk,mismatch,1
+workbench,Victoria's Lower Secret,Viktôriya okâtâwin nîhtâw,ᐱᒃᑑᕒᐃᔭ ᐅᑳᑖᐎᐣ ᓂᐦᑖᐤ,piktôriyaokâtâwinnihtâw,mismatch,1
+workbench,Victoria's Lower Secret,nîhtâwi kâ-kâtât Viktôriya,ᓂᐦᑖᐃᐧ ᑳ ᑳᑖᐟ ᐱᒃᑑᕒᐃᔭ,nihtâwikâkâtâtpiktôriya,mismatch,1
+workbench,Mustang,paskwâwi-misatim,ᐹᐢᒁ ᒥᓴᑎᒼ,pâskwâmisatim,mismatch,0
+workbench,Mustang,kistêniwi-misatim,ᑭᐢᑌᓂᑖᑯᓯᐤ ᒥᓴᑎᒼ,kistênitâkosiwmisatim,mismatch,0
+workbench,Mustang,misatim kâ-paskwêwit,ᒥᓴᑎᒼ ᑳ ᐹᐢᑵᐎᐟ,misatimkâpâskwêwit,length,1
+workbench,BDSM,pîtikwahikan mîna pasastêhikêwin,ᐹᑎᑿᐦᐃᑲᐣ ᒥᓇ ᐸᓴᐢᑌᐦᐃᑫᐎᐣ,pâtikwahikanminapasastêhikêwin,mismatch,1
+workbench,BDSM,pîtatêyimo-meskanaw,ᐹᐲᑎᔭ ᒣᐢᑲᓇᐤ,pâpîtiyamêskanaw,mismatch,0
+workbench,BDSM,pîtikwahikêwi-meskanaw,ᐹᑎᔭᐦᐃᑫᐎ ᒣᐢᑲᓇᐤ,pâtiyahikêwimêskanaw,mismatch,1
+workbench,Jasper Ave Traverse - Alt,Jaspêr meskanaw âsowahamêw kotak,ᒐᐢᐱᕒ ᒣᐢᑲᓇᐤ ᐋᓱᐗᐦᐊᒣᐤ ᑯᑕᐠ,caspirmêskanawâsowahamêwkotak,mismatch,1
+workbench,Jasper Ave Traverse - Alt,Jaspêr pimi-âhtêwin kotak,ᒐᐢᐱᕒ ᐱᒥᔭᒧᐦᑌᐎᐣ ᑯᑕᐠ,caspirpimiyamohtêwinkotak,mismatch,1
+workbench,Jasper Ave Traverse - Alt,Jaspêr âsowahikan kotak,ᒐᐢᐱᕒ ᐋᓱᐗᐦᐃᑲᐣ ᑯᑕᐠ,caspirâsowahikankotak,mismatch,1
+workbench,Slinky - North,pimipîhkahikan kîwêtinohk,ᐱᒥᐲᐦᑲᐦᐃᑲᐣ ᑮᐍᑎᓄᐦᐠ,pimipîhkahikankîwêtinohk,exact,0
+workbench,Slinky - North,wâwiyêpayiw kîwêtinohk,ᐗᐍᔭᐱᔭᐤ ᑮᐍᑎᓄᐦᐠ,wawêyapiyawkîwêtinohk,mismatch,1
+workbench,Slinky - North,slinki kîwêtinohk,ᐢᓕᕄᑭ ᑮᐍᑎᓄᐦᐠ,slilêkikîwêtinohk,mismatch,0
+workbench,Hawrelak Outer Trail,Hawrêlak wayawîyâk meskanaw,ᐦᐊᐧᕒᐁᓚᐠ ᐗᔭᐍᔮᐠ ᒣᐢᑲᓇᐤ,hwarêlakwayawêyâkmêskanaw,mismatch,1
+workbench,Hawrelak Outer Trail,Hawrêlak winawâw wâsâkêw,ᐦᐊᐧᕒᐁᓚᐠ ᐎᓇᐗᐤ ᐗᓵᑫᐤ,hwarêlakwinawawwasâkêw,mismatch,1
+workbench,Hawrelak Outer Trail,wayawîyâk meskanaw,ᐗᔭᐍᔮᐠ ᒣᐢᑲᓇᐤ,wayawêyâkmêskanaw,mismatch,1
+workbench,Lovers Lane,osâkihitowak omeskanawâw,ᐅᓵᑭᐦᐃᑐᐗᐠ ᐅᒣᐢᑲᓇᐤ,osâkihitowakomêskanaw,mismatch,1
+workbench,Lovers Lane,sâkihitowi-meskanaw,ᓵᑭᐦᐃᑐᐎ ᒣᐢᑲᓇᐤ,sâkihitowimêskanaw,exact,1
+workbench,Lovers Lane,ocîkawê meskanaw,ᐅᒋᑲ ᒣᐢᑲᓇᐤ,ocikamêskanaw,mismatch,0
+workbench,Wanyandi Access,Wanyandi pîhtokêwi-meskanaw,ᐗᓐᔭᐣᑎ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ,wanyantipihtokêwimêskanaw,mismatch,1
+workbench,Wanyandi Access,Wanyandi meskanas,ᐗᓐᔭᐣᑎ ᒣᐢᑲᓇᐢ,wanyantimêskanas,mismatch,1
+workbench,Wanyandi Access,Wanyandi isi-pîhtokêwin,ᐗᓐᔭᐣᑎ ᐃᓱ ᐱᐦᑐᑫᐎᐣ,wanyantiisopihtokêwin,mismatch,1
+workbench,Higher Edukation,ispimihk kiskinwahamâkêwin,ᐃᔅᐱᒥᐠ ᑭᔅᑭᓄᐦᐊᒫᑫᐎᐣ,ispimikkiskinohamâkêwin,mismatch,1
+workbench,Higher Edukation,awasiyâs kiskinwahamâkêwin,ᐊᐍᓯᔭᔥ ᑭᔅᑭᓄᐦᐊᒫᑫᐎᐣ,awêsiyashkiskinohamâkêwin,mismatch,1
+workbench,Higher Edukation,ispimi-kiskinwahamâkêwin,ᐃᔅᐱᒥᐦᑭᐢᑭᓄᐦᐊᒫᑫᐎᐣ,ispimihkiskinohamâkêwin,mismatch,1
+workbench,LOV,sâkihiwêwin,ᓵᑭᐦᐃᐌᐎᐣ,sâkihiwêwin,exact,1
+workbench,LOV,El-O-Vî,ᐃᓪ ᐅ ᐺ,ilopwê,mismatch,1
+workbench,LOV,sâkihitowin meskanaw,ᓵᑭᐦᐃᑐᐎᐣ ᒣᐢᑲᓇᐤ,sâkihitowinmêskanaw,exact,1
+workbench,MooseKnuckle,môswa tawâyihk,ᒨᔁ ᑖᐚᔨᐦᐠ,môswatâwâyihk,length,0
+workbench,MooseKnuckle,môswa ocihcîpîsis,ᒨᔁ ᐅᒋᐦᒋᐲᓯᐢ,môswaocihcipîsis,length,0
+workbench,MooseKnuckle,môso-oskan,ᒨᐢ ᐅᐢᑲᐣ,môsoskan,mismatch,0
+workbench,Victoria's Secret,Viktôriya okâtâwin sîpâyihk,ᐱᒃᑑᕒᐃᔭ ᐅᑳᑖᐎᐣ ᓰᐹᔨᐦᐠ,piktôriyaokâtâwinsîpâyihk,mismatch,1
+workbench,Victoria's Secret,Viktôriya okâtâwin,ᐱᒃᑑᕒᐃᔭ ᐅᑳᑖᐎᐣ,piktôriyaokâtâwin,mismatch,1
+workbench,Victoria's Secret,Viktôriya okâtêyitamowin,ᐱᒃᑑᕒᐃᔭ ᐅᑳᑌᔨᑕᒧᐎᐣ,piktôriyaokâtêyitamowin,mismatch,1
+workbench,Fox Drive - Alt,mahkêsîs meskanaw kotak,ᒪᐦᑫᓰᐢ ᒣᐢᑲᓇᐤ ᑯᑕᐠ,mahkêsîsmêskanawkotak,exact,0
+workbench,Fox Drive - Alt,mahkêsîs pimohtêwin kotak,ᒪᐦᑫᓰᐢ ᐱᒧᐦᑌᐎᐣ ᑯᑕᐠ,mahkêsîspimohtêwinkotak,exact,1
+workbench,Fox Drive - Alt,mahkêsîs meskanas,ᒪᐦᑫᓰᐢ ᒣᐢᑲᓇᐢ,mahkêsîsmêskanas,exact,0
+workbench,Skoot-n-Shoot,kâhkîw mîna paskisikê,ᑲᐦᑭᐤ ᒥᓇ ᐸᐢᑭᓯᑫ,kahkiwminapaskisikê,length,0
+workbench,Skoot-n-Shoot,wêwês mîna paskisikê,ᐺᐢ ᒥᓇ ᐸᐢᑭᓯᑫ,pwêsminapaskisikê,mismatch,1
+workbench,Skoot-n-Shoot,kâskipita mîna paskisikê,ᑲᐢᑭᐱᑕ ᒥᓇ ᐸᐢᑭᓯᑫ,kaskipitaminapaskisikê,length,0
+workbench,Master Yoda,okiskinwahamâkêw Yôta,ᐅᑭᔅᑭᓄᐦᐊᒫᑫᐤ ᔪᑕ,okiskinohamâkêwyota,mismatch,1
+workbench,Master Yoda,kisêyiniw Yôta,ᑭᓭᔨᓂᐤ ᔪᑕ,kisêyiniwyota,length,0
+workbench,Master Yoda,okakêyâw Yôta,ᐅᑲᑫᔮᐤ ᔪᑕ,okakêyâwyota,length,0
+workbench,McClung Connector,Makklan âsowahikan,ᒪᐠᐠᓚᐣ ᐋᓱᐗᐦᐃᑲᐣ,makklanâsowahikan,exact,1
+workbench,McClung Connector,Makklan meskanas,ᒪᐠᐠᓚᐣ ᒣᐢᑲᓇᐢ,makklanmêskanas,exact,0
+workbench,McClung Connector,âsowahikan meskanaw,ᐋᓱᐗᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ,âsowahikanmêskanaw,exact,1
+workbench,Moosestang,môso-misatim,ᒨᓱ ᒥᓴᑎᒼ,môsomisatim,exact,0
+workbench,Moosestang,môswa kâ-pîhtakosit,ᒨᔁ ᑳ ᐯᐦᑕᑯᓯᐟ,môswakâpêhtakosit,mismatch,0
+workbench,Moosestang,môsostân,ᒨᓱᐢᑖᐣ,môsostân,exact,0
+workbench,Gnome Trail,mêmêkwêsiw meskanaw,ᒣᒣᑵᓯᐤ ᒣᐢᑲᓇᐤ,mêmêkwêsiwmêskanaw,exact,0
+workbench,Gnome Trail,apiscî-ininiwak meskanaw,ᐊᐱᐢᒋ ᐃᓂᓂᐗᐠ ᒣᐢᑲᓇᐤ,apisciininiwakmêskanaw,length,1
+workbench,Gnome Trail,Nôm meskanaw,ᓄᒼ ᒣᐢᑲᓇᐤ,nommêskanaw,length,0
+workbench,Up and Down - McKinnon,ohpiw mîna nîhtâw McKinnon,ᐅᐦᐱᐤ ᒥᓇ ᓂᐦᑖᐤ ᒪᐠᑭᓅᐣ,ohpiwminanihtâwmakkinôn,mismatch,0
+workbench,Up and Down - McKinnon,ispimihk mîna tahcik McKinnon,ᐃᐢᐱᒥᐦᐠ ᒥᓇ ᑕᐦᒋᐠ ᒪᐠᑭᓅᐣ,ispimihkminatahcikmakkinôn,mismatch,0
+workbench,Up and Down - McKinnon,amaciwêw mîna nîhtâciwin,ᐊᒥᐢᑎᑲᐤ ᒥᓇ ᓂᐦᑖᒋᐎᐣ,amistikawminanihtâciwin,mismatch,1
+workbench,Happy Ending Hill,sîkinikêwin iskwayâk ispatinâw,ᓰᑭᓂᑫᐎᐣ ᐃᐢᑿᔮᐠ ᐃᐢᐹᑎᓈᐤ,sîkinikêwiniskwayâkispâtinâw,length,1
+workbench,Happy Ending Hill,miyawâtamowin iskwayâk ispatinâw,ᒥᔭᐗᔨᐦᑕᒧᐎᐣ ᐃᐢᑿᔮᐠ ᐃᐢᐹᑎᓈᐤ,miyawayihtamowiniskwayâkispâtinâw,mismatch,1
+workbench,Happy Ending Hill,miywâsin iskwayâk ispatinâw,ᒥᔼᓯᐣ ᐃᐢᑿᔮᐠ ᐃᐢᐹᑎᓈᐤ,miywâsiniskwayâkispâtinâw,length,0
+workbench,Emily Murphy Connector,Emili Marpi âsowahikan,ᐁᒥᓕ ᒪᕒᐱ ᐋᓱᐗᐦᐃᑲᐣ,êmilimarpiâsowahikan,exact,1
+workbench,Emily Murphy Connector,Emili Marpi meskanas,ᐁᒥᓕ ᒪᕒᐱ ᒣᐢᑲᓇᐢ,êmilimarpimêskanas,exact,0
+workbench,Emily Murphy Connector,âsowahikan meskanaw,ᐋᓱᐗᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ,âsowahikanmêskanaw,exact,1
+workbench,Snake Back,kinêpiko-spiskaniya,ᑭᓀᐱᑯ ᐢᐱᐢᑲᓂᔭ,kinêpikospiskaniya,exact,0
+workbench,Snake Back,kinêpik ospiskan,ᑭᓀᐱᐠ ᐅᐢᐱᐢᑲᐣ,kinêpikospiskan,exact,0
+workbench,Snake Back,kinêpikâw meskanaw,ᑭᓀᐱᑲᐤ ᒣᐢᑲᓇᐤ,kinêpikawmêskanaw,length,0
+workbench,Belgravia Access - South,Belgrêviya pîhtokêwi-meskanaw sâwanohk,ᐯᓪᑯᕒᐁᐲᔭ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ ᓵᐚᓄᐦᐠ,pêlkorêpîyapihtokêwimêskanawsâwânohk,mismatch,1
+workbench,Belgravia Access - South,Belgrêviya meskanas sâwanohk,ᐯᓪᑯᕒᐁᐲᔭ ᒣᐢᑲᓇᐢ ᓵᐚᓄᐦᐠ,pêlkorêpîyamêskanassâwânohk,mismatch,0
+workbench,Belgravia Access - South,pîhtokêwin sâwanohk,ᐱᐦᑐᑫᐎᐣ ᓵᐚᓄᐦᐠ,pihtokêwinsâwânohk,length,1
+workbench,Bridge me up Scottie,âsokanihkaw Skâtî,ᐋᓱᑲᓂᐦᑲᐤ ᔅᑳᑏ,âsokanihkawskâtî,exact,1
+workbench,Bridge me up Scottie,âsokanihkê Skâtî,ᐋᓱᑲᓂᐦᑫ ᔅᑳᑏ,âsokanihkêskâtî,exact,1
+workbench,Bridge me up Scottie,âsokan meskanaw,ᐋᓱᑲᐣ ᒣᐢᑲᓇᐤ,âsokanmêskanaw,exact,0
+workbench,Hulk Bogan,Halk Bogan,ᐦᐊᓪᐠ ᐳᑲᐣ,halkpokan,mismatch,0
+workbench,Hulk Bogan,maskawisîw Bogan,ᒪᔅᑲᐎᓯᐤ ᐳᑲᐣ,maskawisiwpokan,mismatch,1
+workbench,Hulk Bogan,ahkâs Bogan,ᐊᐦᑳᔅ ᐳᑲᐣ,ahkâspokan,mismatch,1
+workbench,Westpointe Ravine,ispimihk-pahkisimohk wâtikamâw,ᐃᔥᐱᒥᐠ ᐹᐦᑭᓯᒧᐦᐠ ᐚᑎᑲᒫᐤ,ishpimikpâhkisimohkwâtikamâw,mismatch,0
+workbench,Westpointe Ravine,Wêspoynt wâtikamâw,ᐗᐢᐳᐃᐣᐟ ᐚᑎᑲᒫᐤ,waspointwâtikamâw,mismatch,1
+workbench,Westpointe Ravine,pahkisimohk wâtikamâw meskanaw,ᐹᐦᑭᓯᒧᐦᐠ ᐚᑎᑲᒫᐤ ᒣᐢᑲᓇᐤ,pâhkisimohkwâtikamâwmêskanaw,length,0
+workbench,Machete-climb,mistikokahikan amaciwêwin,ᒥᔅᑎᑯᑲᐦᐃᑲᐣ ᐊᒥᐢᑎᑲᐤ,mistikokahikanamistikaw,mismatch,1
+workbench,Machete-climb,kîskatahikan amaciwêwin,ᑮᐢᑎᑲᐦᐃᑲᐣ ᐊᒥᐢᑎᑲᐤ,kîstikahikanamistikaw,mismatch,0
+workbench,Machete-climb,machête amaciwêwin meskanaw,ᒪᒉᑌ ᐊᒥᐢᑎᑲᐤ ᒣᐢᑲᓇᐤ,macêtêamistikawmêskanaw,mismatch,0
+workbench,Skyline Trail,kîsikâw-wiyaskiskâw meskanaw,ᑮᓯᑲᐤ ᐎᔭᐢᑭᐢᑲᐤ ᒣᐢᑲᓇᐤ,kîsikawwiyaskiskawmêskanaw,length,1
+workbench,Skyline Trail,ispimihk meskanaw,ᐃᐢᐱᒥᐦᐠ ᒣᐢᑲᓇᐤ,ispimihkmêskanaw,exact,0
+workbench,Skyline Trail,kîsik otêhtâw meskanaw,ᑮᓯᐠ ᐅᑌᐦᑖᐤ ᒣᐢᑲᓇᐤ,kîsikotêhtâwmêskanaw,exact,0
+workbench,Rowland Road Upper,Rôland meskanaw ispimihk,ᐧᕒᐅᓚᐣᐟ ᒣᐢᑲᓇᐤ ᐃᐢᐸᒥᐠ,rolantmêskanawispamik,mismatch,0
+workbench,Rowland Road Upper,ispimihk Rôland meskanaw,ᐃᐢᐸᒥᐠ ᐧᕒᐅᓚᐣᐟ ᒣᐢᑲᓇᐤ,ispamikrolantmêskanaw,mismatch,0
+workbench,Rowland Road Upper,Rôland ispimihk,ᐧᕒᐅᓚᐣᐟ ᐃᐢᐸᒥᐠ,rolantispamik,mismatch,0
+workbench,Mill Creek Access Alt,pîwâpisko-sîpîsis pîhtokêwi-meskanaw kotak,ᐲᐗᐲᐢᑯ ᓰᐱᓯᐢ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ ᑯᑕᐠ,pîwapîskosîpisispihtokêwimêskanawkotak,length,1
+workbench,Mill Creek Access Alt,Mil Krîk meskanas kotak,ᒥᓪ ᑯᕒᐃᐠ ᒣᐢᑲᓇᐢ ᑯᑕᐠ,milkorikmêskanaskotak,mismatch,0
+workbench,Mill Creek Access Alt,pîhtokêwin kotak,ᐱᐦᑐᑫᐎᐣ ᑯᑕᐠ,pihtokêwinkotak,length,1
+workbench,Hustler Uphill,okîmotisk amaciwêwin,ᐅᑮᒧᑎᐢᐠ ᐊᒥᐢᑎᑲᐤ,okîmotiskamistikaw,mismatch,0
+workbench,Hustler Uphill,kakwâyaki amaciwêwin,ᑲᑯᔮᐎᐢ ᐊᒥᐢᑎᑲᐤ,kakoyâwisamistikaw,mismatch,1
+workbench,Hustler Uphill,okîmotisiw amaciwêwin,ᐅᑮᒧᑎᓯᐤ ᐊᒥᐢᑎᑲᐤ,okîmotisiwamistikaw,mismatch,0
+workbench,Terwillegar - 26,Têrwiligar nîsitanaw-nikotwâsik,ᑌᕒᐎᓕᑲᕒ ᓂᔭᓈᓅᒥᑖᐦᐟ ᓂᑯᑤᔅ,têrwilikarniyanânômitâhtnikotwâs,mismatch,1
+workbench,Terwillegar - 26,Têrwiligar meskanaw 26,ᑌᕒᐎᓕᑲᕒ ᒣᐢᑲᓇᐤ 26,têrwilikarmêskanaw,mismatch,1
+workbench,Terwillegar - 26,meskanaw 26,ᒣᐢᑲᓇᐤ 26,mêskanaw,exact,0
+workbench,Buenavista Alt Track,Bwênavista meskanaw kotak,ᐺᓇᐱᐢᑕ ᒣᐢᑲᓇᐤ ᑯᑕᐠ,pwênapistamêskanawkotak,mismatch,1
+workbench,Buenavista Alt Track,miywâpihkêw meskanaw kotak,ᒥᔼᐱᐦᑫᐤ ᒣᐢᑲᓇᐤ ᑯᑕᐠ,miywâpihkêwmêskanawkotak,exact,0
+workbench,Buenavista Alt Track,Bwênavista meskanas kotak,ᐺᓇᐱᐢᑕ ᒣᐢᑲᓇᐢ ᑯᑕᐠ,pwênapistamêskanaskotak,mismatch,1
+workbench,Millcreek IIII,pîwâpisko-sîpîsis 4,ᐲᐗᐲᐢᑯ ᓰᐱᓯᐢ 4,pîwapîskosîpisis,length,1
+workbench,Millcreek IIII,Mil Krîk nêwo,ᒥᓪ ᑯᕒᐃᐠ ᓀᐭ,milkoriknê,mismatch,1
+workbench,Millcreek IIII,sîpîsis meskanaw 4,ᓰᐱᓯᐢ ᒣᐢᑲᓇᐤ 4,sîpisismêskanaw,length,0
+workbench,Tear Willy,tâhkopita Wili,ᑖᐦᑯᐱᑕ ᐎᓕ,tâhkopitawili,exact,1
+workbench,Tear Willy,Têr Wili,ᑌᕒ ᐎᓕ,têrwili,exact,1
+workbench,Tear Willy,tâhkopita Wili,ᑖᐦᑯᐱᑕ ᐎᓕ,tâhkopitawili,exact,1
+workbench,7-UP HitUP,têpakohp ispayiwin,ᑌᐺᑊᑕ ᐃᐢᐸᔨᐎᐣ,têpwêptaispayiwin,mismatch,1
+workbench,7-UP HitUP,têpakohp ohpipayiw,ᑌᐺᑊᑕ ᐅᐦᐳᔨᐤ,têpwêptaohpoyiw,mismatch,1
+workbench,7-UP HitUP,Sêvin-Up,ᓭᐱᐣ ᐅᑊ,sêpinop,mismatch,0
+workbench,Bakers Folly,opimihkasikêw okakêpâtisiwin,ᐅᐱᒥᐦᑲᐢᐊᑫᐤ ᐅᑲᑫᐹᑎᓯᐎᐣ,opimihkasakêwokakêpâtisiwin,mismatch,1
+workbench,Bakers Folly,opahkwêsikanaw okîpitwâwin,ᐅᐸᐦᑴᓯᑲᓇᐤ ᐅᑮᐱᑣᐎᐣ,opahkwêsikanawokîpitwâwin,exact,1
+workbench,Bakers Folly,opimihkasikêw opîkiskwâw,ᐅᐱᒥᐦᑲᐢᐊᑫᐤ ᐅᐱᑭᐢᑲᐤ,opimihkasakêwopikiskaw,mismatch,0
+workbench,Money $hot,sôniyâw-sîkinikêwin,ᓲᓂᔮᐤ ᓰᑭᓂᑫᐎᐣ,sôniyâwsîkinikêwin,exact,1
+workbench,Money $hot,sôniyâw-paskisikêwin,ᓲᓂᔮᐤ ᐸᐢᑭᓯᑫᐎᐣ,sôniyâwpaskisikêwin,exact,1
+workbench,Money $hot,sôniyâw ohci paskisikêw,ᓲᓂᔮᐤ ᐅᐦᒋ ᐸᐢᑭᓯᑫᐤ,sôniyâwohcipaskisikêw,exact,0
+workbench,Dawson Gravel Multi,Dâsan yâpaskasis mici-meskanaw,ᑖᓴᐣ ᔮᐸᔥᑲᓯᐢ ᒥᒋᒣᐢᑲᓇᐤ,tâsanyâpashkasismicimêskanaw,mismatch,0
+workbench,Dawson Gravel Multi,Dâsan asiniya meskanaw,ᑖᓴᐣ ᐊᓯᓂᔭ ᒣᐢᑲᓇᐤ,tâsanasiniyamêskanaw,mismatch,0
+workbench,Dawson Gravel Multi,yâpaskasis meskanaw,ᔮᐸᔥᑲᓯᐢ ᒣᐢᑲᓇᐤ,yâpashkasismêskanaw,mismatch,0
+workbench,Ass Over Tea Kettle,mitôy ohci titipâpayiw,ᒥᑑᔾ ᐅᐦᒋ ᑎᑎᐹᐯᔨᐤ,mitôyohcititipâpêyiw,mismatch,1
+workbench,Ass Over Tea Kettle,titipâpayiw,ᑎᑎᐹᐯᔨᐤ,titipâpêyiw,mismatch,0
+workbench,Ass Over Tea Kettle,wani-kwâskwêpayiw,ᐚᓂ ᑵᐢᑴᐸᔨᐤ,wânikwêskwêpayiw,mismatch,1
+workbench,780-Flow,780 pimiciwan,780 ᐱᒥᒋᐗᐣ,pimiciwan,exact,1
+workbench,780-Flow,pimiciwan meskanaw,ᐱᒥᒋᐗᐣ ᒣᐢᑲᓇᐤ,pimiciwanmêskanaw,exact,1
+workbench,780-Flow,780 yôskâtin meskanaw,780 ᔠᔮᐢᑎᐣ ᒣᐢᑲᓇᐤ,shwôyâstinmêskanaw,mismatch,1
+workbench,Selkirk Knights,Selkirk simâkanisak,ᓭᓪᑭᕒᐠ ᓯᒫᑲᓂᓴᐠ,sêlkirksimâkanisak,exact,0
+workbench,Selkirk Knights,Selkirk nôtinikêwak,ᓭᓪᑭᕒᐠ ᓅᑎᓂᑫᐗᐠ,sêlkirknôtinikêwak,exact,1
+workbench,Selkirk Knights,Selkirk omisatimiwak simâkanisak,ᓭᓪᑭᕒᐠ ᐅᒥᓴᑎᒥᐗᐠ ᓯᒫᑲᓂᓴᐠ,sêlkirkomisatimiwaksimâkanisak,exact,1
+workbench,Andre's Trail,Ândrê omeskanaw,ᐋᐣᑇ ᐅᒣᐢᑲᓇᐤ,ânpwâomêskanaw,mismatch,0
+workbench,Andre's Trail,nâpêw Ândrê omeskanaw,ᓈᐯᐤ ᐋᐣᑇ ᐅᒣᐢᑲᓇᐤ,nâpêwânpwâomêskanaw,mismatch,0
+workbench,Andre's Trail,Ândrê opimohtêwin,ᐋᐣᑇ ᐅᐱᒧᐦᑌᐎᐣ,ânpwâopimohtêwin,mismatch,1
+workbench,Silverberry Dirt Jumps,Silvêrbêri asiski-kwâskwêpayiwina,ᓯᓪᕓᕒᐯᕒᐃ ᐊᓯᐢᑭ ᑵᐢᑴᐸᔨᐎᓇ,silfêrpêriasiskikwêskwêpayiwina,mismatch,1
+workbench,Silverberry Dirt Jumps,asiski-kwâskwêpayiwina,ᐊᓯᐢᑭ ᑵᐢᑴᐸᔨᐎᓇ,asiskikwêskwêpayiwina,mismatch,1
+workbench,Silverberry Dirt Jumps,sôminânâhtik asiski-kwâskwêpayiwina,ᓱᒥᓂᓈᐦᑎᐠ ᐊᓯᐢᑭ ᑵᐢᑴᐸᔨᐎᓇ,somininâhtikasiskikwêskwêpayiwina,mismatch,1
+workbench,Bobsled,soskwaciwê-otâpânâsk,ᓱᔅᑿᒋᐍᐎᓄᑖᐹᓈᐢᐠ,soskwaciwêwinotâpânâsk,mismatch,1
+workbench,Bobsled,soskaciwêwin otâpânâsk,ᓱᔅᑲᒋᐍᐎᐣ ᐅᑖᐹᓈᐢᐠ,soskaciwêwinotâpânâsk,exact,1
+workbench,Bobsled,kôna-otâpânâsk,ᑰᓇ ᐅᑖᐹᓈᐢᐠ,kônaotâpânâsk,exact,0
+workbench,Bottle Rocket,môtôyâpisk-pîstîpicikan,ᒨᑐᔮᐱᐢᐠ ᐲᐢᑏᐱᒋᑲᐣ,môtoyâpiskpîstîpicikan,length,0
+workbench,Bottle Rocket,ohpipayiw-iskotêw,ᐅᐦᐱᐯᔨᐤ ᐃᐢᑯᑌᐤ,ohpipêyiwiskotêw,mismatch,0
+workbench,Bottle Rocket,pîstîw meskanaw,ᐲᐢᑏᐤ ᒣᐢᑲᓇᐤ,pîstîwmêskanaw,exact,0
+workbench,Upper Ewok,ispimihk Îwâk,ᐃᐢᐸᒥᐠ ᐄᐘᐠ,ispamikîwak,mismatch,0
+workbench,Upper Ewok,tahkohc Îwâk,ᑕᐦᑯᐦᐨ ᐄᐘᐠ,tahkohcîwak,length,0
+workbench,Upper Ewok,Îwâk ispimihk,ᐄᐘᐠ ᐃᐢᐱᒥᐦᐠ,îwakispimihk,length,0
+workbench,Bed Springs,wîpêmêwi-pîcipicikana,ᐎᐯᒣᐎ ᐲᒋᐱᒋᑲᓇ,wipêmêwipîcipicikana,length,1
+workbench,Bed Springs,nipêwinis-pîcipicikana,ᓂᐯᐎᓂᐢ ᐲᒋᐱᒋᑲᓇ,nipêwinispîcipicikana,exact,1
+workbench,Bed Springs,nipêwin opîcipicikana,ᓂᐯᐎᐣ ᐅᐲᒋᐱᒋᑲᓇ,nipêwinopîcipicikana,exact,1
+workbench,Back Breaker,ospiskani-pîkohikêw,ᐅᐢᐱᐢᑲᓂᐲᑯᐦᐃᑫᐤ,ospiskanipîkohikêw,exact,0
+workbench,Back Breaker,pâspâwakanikêw,ᐹᐢᐹᐧᐊᐗᑲᓂᑫᐤ,pâspwâawakanikêw,mismatch,1
+workbench,Back Breaker,pîkospiskanêw,ᐲᑯᐢᐱᐢᑲᓀᐤ,pîkospiskanêw,exact,0
+workbench,Fireman's Descent,iskotêwiyiniw onîhtâciwin,ᐃᐢᑯᑌᐤᐃᔨᓂᐤ ᐅᓂᐦᑖᒋᐎᐣ,iskotêwiyiniwonihtâciwin,length,1
+workbench,Fireman's Descent,onatêwiskotêw nîhtâciwin,ᐅᓇᑌᐎᐢᑯᑌᐤ ᓂᐦᑖᒋᐎᐣ,onatêwiskotêwnihtâciwin,length,1
+workbench,Fireman's Descent,nîhtâciwêwin meskanaw,ᓂᐦᑖᒋᐍᐎᐣ ᒣᐢᑲᓇᐤ,nihtâciwêwinmêskanaw,length,1
+workbench,Breathless,namôya kî-yêhyêw,ᓇᒨᔭ ᑮ ᔦᐦᔦᐤ,namôyakîyêhyêw,exact,0
+workbench,Breathless,kîstêyihtamowin-yêhyêwin,ᑭᐢᑌᔨᐦᑕᒧᐎᐣ ᔦᐦᔦᐎᐣ,kistêyihtamowinyêhyêwin,length,1
+workbench,Breathless,ayâskis-yêhyêw,ᐊᔮᐢᑭᐢ ᔦᐦᔦᐤ,ayâskisyêhyêw,exact,0
+workbench,Secret Trail,kâtâ-meskanaw,ᑳᑖ ᒣᐢᑲᓇᐤ,kâtâmêskanaw,exact,0
+workbench,Secret Trail,kâ-kâtamowahk meskanaw,ᑳ ᑳᑕᒧᐗᑭᐠ ᒣᐢᑲᓇᐤ,kâkâtamowakikmêskanaw,mismatch,1
+workbench,Secret Trail,kîmôc meskanaw,ᑭᒧᐨ ᒣᐢᑲᓇᐤ,kimocmêskanaw,length,0
+workbench,Deliverance,pâspinâwin,ᐹᐢᐱᓈᐎᐣ,pâspinâwin,exact,1
+workbench,Deliverance,pimâcihiwêwin,ᐱᒫᒋᐦᐃᐌᐎᐣ,pimâcihiwêwin,exact,1
+workbench,Deliverance,ohci-pâspiwin meskanaw,ᐅᐦᒋ ᐹᐢᐱᐎᐣ ᒣᐢᑲᓇᐤ,ohcipâspiwinmêskanaw,exact,1
+workbench,MacKenzie Ravine,Makênsi paskwâw,ᒪᑫᓐᓯ ᐸᐢᑣᐤ,makênsipastwâw,mismatch,1
+workbench,MacKenzie Ravine,Makênsi wâtikamâw,ᒪᑫᓐᓯ ᐚᑎᑲᒫᐤ,makênsiwâtikamâw,exact,1
+workbench,MacKenzie Ravine,Makênsi sîpîyâw meskanaw,ᒪᑫᓐᓯ ᓰᐱᔮᐤ ᒣᐢᑲᓇᐤ,makênsisîpiyâwmêskanaw,length,1
+workbench,Golf Course Trail,pâkitêhokani-meskanaw,ᐹᑭᑌᐦᐅᑲᓂ ᒣᐢᑲᓇᐤ,pâkitêhokanimêskanaw,exact,0
+workbench,Golf Course Trail,pâkitêhokan-askîw meskanaw,ᐹᑭᑌᐦᐅᑲᐣ ᐊᐢᑮᐤ ᒣᐢᑲᓇᐤ,pâkitêhokanaskîwmêskanaw,exact,0
+workbench,Golf Course Trail,Gôlf meskanaw,ᑳᓪᑊ ᒣᐢᑲᓇᐤ,kâlpmêskanaw,mismatch,0
+workbench,The Farmer's Daughter,okistikêw otânisa,ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓯ,okistikêwotânisi,mismatch,0
+workbench,The Farmer's Daughter,opamihâw otânisa,ᐅᐱᒧᐦᑌᐤ ᐅᑖᓂᓯ,opimohtêwotânisi,mismatch,0
+workbench,The Farmer's Daughter,okistikêw otânisa meskanaw,ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ ᒣᐢᑲᓇᐤ,okistikêwotânisamêskanaw,exact,0
+workbench,Coalminer's Daughter,kaskitêw-asini-monahikêw otânisa,ᑲᐢᑭᑌᐤ ᐊᓯᓂ ᒧᓇᐦᐃᑫᐤ ᐅᑖᓂᓴ,kaskitêwasinimonahikêwotânisa,exact,0
+workbench,Coalminer's Daughter,omonahikêw otânisa,ᐅᒧᓇᐦᐃᑫᐤ ᐅᑖᓂᓴ,omonahikêwotânisa,exact,0
+workbench,Coalminer's Daughter,omonahikêw otânisa meskanaw,ᐅᒧᓇᐦᐃᑫᐤ ᐅᑖᓂᓴ ᒣᐢᑲᓇᐤ,omonahikêwotânisamêskanaw,exact,0
+workbench,Farmers Daughter's Cousin,okistikêw otânisa owîcisâna,ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ ᐅᐑᒋᓵᓇ,okistikêwotânisaowîcisâna,exact,0
+workbench,Farmers Daughter's Cousin,okistikêw otânisa wîtimwa,ᐅᑭᐢᑎᑫᐤ ᐅᑖᓂᓴ ᐑᑎᒼᐘ,okistikêwotânisawîtimwa,exact,0
+workbench,Farmers Daughter's Cousin,otânisa owîcisâna meskanaw,ᐅᑖᓂᓴ ᐅᐑᒋᓵᓇ ᒣᐢᑲᓇᐤ,otânisaowîcisânamêskanaw,exact,0
+workbench,Purple Bench,ayôpâyâw têhtapiwin,ᐊᔪᐹᔭᐤ ᑌᐦᑕᐹᐎᐣ,ayopâyawtêhtapâwin,mismatch,1
+workbench,Purple Bench,sîpotêhtapiwin,ᔒᐳᑌᐦᑕᐱᐎᐣ,shîpotêhtapiwin,mismatch,1
+workbench,Purple Bench,ayôpâyâw apiwinâhtik,ᐊᔪᐹᔭᐤ ᐊᐱᐎᓈᐦᑎᐠ,ayopâyawapiwinâhtik,length,1
+workbench,Camel Humps,cêmil opîkwana,ᒉᒥᓪ ᐅᐲᑿᓇ,cêmilopîkwana,exact,0
+workbench,Camel Humps,opîkwana meskanaw,ᐅᐲᑿᓇ ᒣᐢᑲᓇᐤ,opîkwanamêskanaw,exact,0
+workbench,Camel Humps,cêmil ospiskana,ᒉᒥᓪ ᐅᐢᐱᐢᑲᓇ,cêmilospiskana,exact,0
+workbench,Belgravia Dirt Jumps - Drop In,Belgrêviya asiski-kwâskwêpayiwin pîhcipayi,ᐯᓪᑯᕒᐁᐲᔭ ᐊᓯᐢᑭ ᑵᐢᑴᐸᔨᐎᐣ ᐲᐦᑐᐺᐱᓇ,pêlkorêpîyaasiskikwêskwêpayiwinpîhtopwêpina,mismatch,1
+workbench,Belgravia Dirt Jumps - Drop In,asiski-kwâskwêpayiwina,ᐊᓯᐢᑭ ᑵᐢᑴᐸᔨᐎᓇ,asiskikwêskwêpayiwina,mismatch,1
+workbench,Belgravia Dirt Jumps - Drop In,asiski-pâspiyiwin,ᐊᓯᐢᑭ ᐹᐢᐱᔨᐎᐣ,asiskipâspiyiwin,exact,1
+workbench,Justice Training Loop,kwayaskitiwin kiskinohamâkêwi-wâsâkêw,ᑴᔭᔅᑭᑎᐎᐣ ᑭᐢᑭᓄᐦᐊᒪᑫᐎ ᐗᓵᑫᐤ,kwêyaskitiwinkiskinohamakêwiwasâkêw,mismatch,1
+workbench,Justice Training Loop,kwayaskitiwin wâsâkêw,ᑴᔭᔅᑭᑎᐎᐣ ᐗᓵᑫᐤ,kwêyaskitiwinwasâkêw,mismatch,1
+workbench,Justice Training Loop,kiskinohamâkêwi-wâsâkêw,ᑭᐢᑭᓄᐦᐊᒪᑫᐎ ᐗᓵᑫᐤ,kiskinohamakêwiwasâkêw,length,1
+workbench,Henday Hunge,Hênday ahkîwin,ᐦᐁᓐᑌ ᐊᐦᑮᐎᐣ,hêntêahkîwin,mismatch,1
+workbench,Henday Hunge,Hênday nôhtêhkatêwin,ᐦᐁᓐᑌ ᓅᐦᑌᐦᑲᑌᐎᐣ,hêntênôhtêhkatêwin,mismatch,1
+workbench,Henday Hunge,Hênday meskanaw,ᐦᐁᓐᑌ ᒣᐢᑲᓇᐤ,hêntêmêskanaw,mismatch,1
+workbench,A loop through the forest,sakâw ohci wâsâkêw,ᓴᑳᐤ ᐅᐦᒋ ᐗᓵᑫᐤ,sakâwohciwasâkêw,length,1
+workbench,A loop through the forest,mistikoskâw wâsâkêw,ᒥᐢᑎᑾᐢᑳᐤ ᐗᓵᑫᐤ,mistikwaskâwwasâkêw,mismatch,1
+workbench,A loop through the forest,sakâw wâsâkêw meskanaw,ᓴᑳᐤ ᐗᓵᑫᐤ ᒣᐢᑲᓇᐤ,sakâwwasâkêwmêskanaw,length,1
+workbench,UofA-6,okiskinohamâtowikamik 6,ᐅᑭᐢᑭᓄᐦᐊᒫᑐᐎᑲᒥᐠ 6,okiskinohamâtowikamik,exact,1
+workbench,UofA-6,Yu-Ê 6 meskanaw,ᔪᐗ 6 ᒣᐢᑲᓇᐤ,yowamêskanaw,mismatch,1
+workbench,UofA-6,kiskinohamâtowin 6,ᑭᐢᑭᓄᐦᐊᒫᑐᐎᐣ 6,kiskinohamâtowin,exact,1
+workbench,Klondike Valley Loop,Klândayk paskâw wâsâkêw,ᑲᓛᓐᑕᐃᐠ ᐹᐢᑳᐤ ᐗᓵᑫᐤ,kalântaikpâskâwwasâkêw,mismatch,1
+workbench,Klondike Valley Loop,Klândayk wâtikamâw wâsâkêw,ᑲᓛᓐᑕᐃᐠ ᐚᑎᑲᒫᐤ ᐗᓵᑫᐤ,kalântaikwâtikamâwwasâkêw,mismatch,1
+workbench,Klondike Valley Loop,Klândayk wâsâkêw meskanaw,ᑲᓛᓐᑕᐃᐠ ᐗᓵᑫᐤ ᒣᐢᑲᓇᐤ,kalântaikwasâkêwmêskanaw,mismatch,1
+workbench,Rattlesnake,sîsîkwan-kinêpik,ᓯᓯᑲᐤ ᑭᓀᐱᐠ,sisikawkinêpik,mismatch,0
+workbench,Rattlesnake,kinêpik kâ-sîsîkwêt,ᑭᓀᐱᐠ ᑳ ᓯᓯᑵᐟ,kinêpikkâsisikwêt,length,0
+workbench,Rattlesnake,sîsîkwan-kinêpiko meskanaw,ᓯᓯᑲᐤ ᑭᓀᐱᑯ ᒣᐢᑲᓇᐤ,sisikawkinêpikomêskanaw,mismatch,0
+workbench,Dawson Park,Dâsan mihcikanis,ᑖᓴᐣ ᒥᐦᒋᑲᓂᐢ,tâsanmihcikanis,mismatch,0
+workbench,Dawson Park,Dâsan oskitâw,ᑖᓴᐣ ᐅᐢᑭᑖᐤ,tâsanoskitâw,mismatch,0
+workbench,Dawson Park,Dâsan meskanaw,ᑖᓴᐣ ᒣᐢᑲᓇᐤ,tâsanmêskanaw,mismatch,0
+workbench,Bohemian Maid,Bohîmiyan oskinîkiskwêw,ᐳᐦᐃᒥᔭᐣ ᐅᔅᑭᓂᑭᐢᑵᐤ,pohimiyanoskinikiskwêw,mismatch,1
+workbench,Bohemian Maid,Bohîmiyan apâskwêw,ᐳᐦᐃᒥᔭᐣ ᐊᐹᐢᑵᐤ,pohimiyanapâskwêw,mismatch,0
+workbench,Bohemian Maid,Bohîmiyan iskwêsis,ᐳᐦᐃᒥᔭᐣ ᐃᐢᑵᓯᐢ,pohimiyaniskwêsis,mismatch,0
+workbench,Blue Man Group,sîpowâw-nâpêwak,ᓯᐳᐗᐤ ᓈᐯᐗᐠ,sipowawnâpêwak,length,1
+workbench,Blue Man Group,askihtakosiwak nâpêwak,ᐊᔅᑭᐦᑕᑯᓯᐗᐠ ᓈᐯᐗᐠ,askihtakosiwaknâpêwak,exact,1
+workbench,Blue Man Group,sîpowâw-nâpêw mâmawiwin,ᓯᐳᐗᐤ ᓈᐯᐤ ᒪᒪᐎᐎᐣ,sipowawnâpêwmamawiwin,length,1
+workbench,Riverside Traverse,sîpiy-cîki âsowahamêw,ᓰᐱᐃᔭ ᒋᑭ ᐋᓱᐗᐦᐊᒣᐤ,sîpiiyacikiâsowahamêw,mismatch,1
+workbench,Riverside Traverse,sîpiy-cîki pimi-âhtêwin,ᓰᐱᐃ ᒋᑭ ᐱᒥᔭᒧᐦᑌᐎᐣ,sîpiicikipimiyamohtêwin,mismatch,1
+workbench,Riverside Traverse,sîpisis-cîki meskanaw,ᓰᐱᓯᔅ ᒋᑭ ᒣᐢᑲᓇᐤ,sîpisiscikimêskanaw,length,1
+workbench,Spanish Switchblade,Aspayôl kîskatahikan,ᐊᔅᐸᔪᓪ ᑮᐢᑎᑲᐦᐃᑲᐣ,aspayolkîstikahikan,mismatch,1
+workbench,Spanish Switchblade,Aspayôl môhkomân,ᐊᔅᐸᔪᓪ ᒨᐦᑯᒫᐣ,aspayolmôhkomân,length,1
+workbench,Spanish Switchblade,wâwani-kîskatahikan,ᐗᐗᓂ ᑮᐢᑎᑲᐦᐃᑲᐣ,wawanikîstikahikan,mismatch,1
+workbench,Rundle Park Gravel,Randal yâpaskasis meskanaw,ᐧᕒᐊᓐᑕᓪ ᔮᐸᔥᑲᓯᐢ ᒣᐢᑲᓇᐤ,rantalyâpashkasismêskanaw,mismatch,1
+workbench,Rundle Park Gravel,Randal asiniya meskanaw,ᐧᕒᐊᓐᑕᓪ ᐊᓯᓂᔭ ᒣᐢᑲᓇᐤ,rantalasiniyamêskanaw,mismatch,1
+workbench,Rundle Park Gravel,yâpaskasis meskanaw,ᔮᐸᔥᑲᓯᐢ ᒣᐢᑲᓇᐤ,yâpashkasismêskanaw,mismatch,0
+workbench,Lower Corkscrew,nîhtâwi wâwaniyâw meskanaw,ᓂᐦᑖᐃᐧ ᐗᐗᓂᔭᐤ ᒣᐢᑲᓇᐤ,nihtâwiwawaniyawmêskanaw,length,1
+workbench,Lower Corkscrew,sîpâ pimipîhkahikan,ᓰᐹ ᐱᒥᐲᐦᑲᐦᐃᑲᐣ,sîpâpimipîhkahikan,exact,0
+workbench,Lower Corkscrew,wâwiyêyâw meskanaw nîhtâw,ᐗᐍᔭᔮᐤ ᒣᐢᑲᓇᐤ ᓂᐦᑖᐤ,wawêyayâwmêskanawnihtâw,mismatch,1
+workbench,Hawrelak Park Access,Hawrêlak pîhtokêwi-meskanaw,ᐦᐊᐧᕒᐁᓚᐠ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ,hwarêlakpihtokêwimêskanaw,mismatch,1
+workbench,Hawrelak Park Access,Hawrêlak meskanas,ᐦᐊᐧᕒᐁᓚᐠ ᒣᐢᑲᓇᐢ,hwarêlakmêskanas,mismatch,0
+workbench,Hawrelak Park Access,Hawrêlak isi-pîhtokêwin,ᐦᐊᐧᕒᐁᓚᐠ ᐃᓱ ᐱᐦᑐᑫᐎᐣ,hwarêlakisopihtokêwin,mismatch,1
+workbench,Riverside Dr Descent,sîpiy-cîki meskanaw nîhtâciwin,ᓰᐱᐃ ᒋᑭ ᒣᐢᑲᓇᐤ ᓂᐦᑖᒋᐎᐣ,sîpiicikimêskanawnihtâciwin,mismatch,1
+workbench,Riverside Dr Descent,nîhtâciwêwin sîpiy-cîki,ᓂᐦᑖᒋᐍᐎᐣ ᓰᐱᐃ ᒋᑭ,nihtâciwêwinsîpiiciki,mismatch,1
+workbench,Riverside Dr Descent,sîpiy-meskanaw nîhtâw,ᓰᐱᐃ ᒣᐢᑲᓇᐤ ᓂᐦᑖᐤ,sîpiimêskanawnihtâw,mismatch,0
+workbench,Kessel Run,Kêsal pimipahtâwin,ᑫᓴᓪ ᐱᒥᐸᐦᑖᐎᐣ,kêsalpimipahtâwin,exact,1
+workbench,Kessel Run,Kêsal pimipahtâ meskanaw,ᑫᓴᓪ ᐱᒥᐸᐦᑖ ᒣᐢᑲᓇᐤ,kêsalpimipahtâmêskanaw,exact,0
+workbench,Kessel Run,kayipî pimipahtâwin,ᑭᔭᐲ ᐱᒥᐸᐦᑖᐎᐣ,kiyapîpimipahtâwin,mismatch,1
+workbench,Prime Rib,miywâs-ospikay,ᒥᔼᐢ ᐅᔅᐱᑲᐩ,miywâsospikay,exact,1
+workbench,Prime Rib,ospikay-wiyâs,ᐅᔅᐱᑲᐩ ᐎᔮᐢ,ospikaywiyâs,exact,1
+workbench,Prime Rib,nîstam-ospikay,ᓂᐢᑕᒼ ᐅᔅᐱᑲᐩ,nistamospikay,length,1
+workbench,Wolf Willow Access,mahihkani-nîpisiy pîhtokêwi-meskanaw,ᒪᐦᐃᑲᓂᓈᐲᓯᐩ ᐱᐦᑐᑫᐎ ᒣᐢᑲᓇᐤ,mahikaninâpîsiypihtokêwimêskanaw,mismatch,1
+workbench,Wolf Willow Access,mahihkani-nîpisiy meskanas,ᒪᐦᐃᑲᓂᓈᐲᓯᐩ ᒣᐢᑲᓇᐢ,mahikaninâpîsiymêskanas,mismatch,0
+workbench,Wolf Willow Access,nîpisiy isi-pîhtokêwin,ᓈᐲᓯᐩ ᐃᓱ ᐱᐦᑐᑫᐎᐣ,nâpîsiyisopihtokêwin,mismatch,1
+workbench,Crazy Maria,kîskwêw Mariya,ᑮᐢᑴᐤ ᒪᕒᐃᔭ,kîskwêwmariya,exact,1
+workbench,Crazy Maria,wanishkisiw Mariya,ᐗᓂᔥᑭᓯᐤ ᒪᕒᐃᔭ,wanishkisiwmariya,exact,1
+workbench,Crazy Maria,Mariya kâ-kîskwât,ᒪᕒᐃᔭ ᑳ ᑮᐢᒁᐟ,mariyakâkîskwât,exact,0
+workbench,Battle Axe,nôtinikêwi-cîkahikan,ᓅᑎᓂᑫᐎ ᒋᑲᐦᐃᑲᐣ,nôtinikêwicikahikan,length,1
+workbench,Battle Axe,nôtinikêwi-watêhikan,ᓅᑎᓂᑫᐎ ᐗᑌᐦᐃᑲᐣ,nôtinikêwiwatêhikan,exact,1
+workbench,Battle Axe,cîkahikan meskanaw,ᒋᑲᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ,cikahikanmêskanaw,length,0
+workbench,Steep and Deep,pâstikâw mîna timiw,ᐹᔅᑎᑲᐤ ᒥᓇ ᑎᒥᐤ,pâstikawminatimiw,length,1
+workbench,Steep and Deep,amaciwâw mîna timiyâw,ᐊᒥᐢᑎᑲᐤ ᒥᓇ ᑎᒥᔮᐤ,amistikawminatimiyâw,mismatch,0
+workbench,Steep and Deep,pâstikâw meskanaw,ᐹᔅᑎᑲᐤ ᒣᐢᑲᓇᐤ,pâstikawmêskanaw,length,1
+workbench,McAloon R.I.P.,Makalûn kâ-nipit,ᒪᑲᓘᐣ ᑳ ᓂᐱᐟ,makalônkânipit,mismatch,0
+workbench,McAloon R.I.P.,Makalûn ayamihâwin,ᒪᑲᓘᐣ ᐊᔭᒥᐦᐋᐎᐣ,makalônayamihâwin,mismatch,1
+workbench,McAloon R.I.P.,Makalûn kâkikê âhkwatê,ᒪᑲᓘᐣ ᑳᑭᑫ ᐋᔓᑌ,makalônkâkikêâshotê,mismatch,1
+workbench,Wayne Gretzky,Wên Grêtski,ᐍᐣ ᐠᕒᐁᐟᐢᑭ,wênkrêtski,mismatch,0
+workbench,Wayne Gretzky,okimâw Grêtski,ᐅᑭᒪᐤ ᐠᕒᐁᐟᐢᑭ,okimawkrêtski,mismatch,0
+workbench,Wayne Gretzky,mamihcimikosiw Wên,ᒪᒥᐦᒋᒥᑯᓯᐤ ᐍᐣ,mamihcimikosiwwên,exact,0
+workbench,Edge of Tomorrow,wâpahki otêhtâw,ᐗᐹᑭ ᐅᑌᐦᑖᐤ,wapâkiotêhtâw,mismatch,1
+workbench,Edge of Tomorrow,wâpahki iskwayâk,ᐗᐹᑭ ᐃᔅᑴᔮᐠ,wapâkiiskwêyâk,mismatch,1
+workbench,Edge of Tomorrow,cîpîhci-wâpahki meskanaw,ᒋᐲᐦᒋ ᐗᐹᑭ ᒣᐢᑲᓇᐤ,cipîhciwapâkimêskanaw,mismatch,1
+workbench,Wonder Woman,mâmaskâci-iskwêw,ᒫᒪᐢᑳᒋ ᐃᐢᑵᐤ,mâmaskâciiskwêw,exact,0
+workbench,Wonder Woman,omamahtâwisiw iskwêw,ᐅᒪᒪᐦᑖᐎᓯᐤ ᐃᐢᑵᐤ,omamahtâwisiwiskwêw,exact,1
+workbench,Wonder Woman,mâmaskâci-iskwêw meskanaw,ᒫᒪᐢᑳᒋ ᐃᐢᑵᐤ ᒣᐢᑲᓇᐤ,mâmaskâciiskwêwmêskanaw,exact,0
+workbench,Mill Creek South,pîwâpisko-sîpîsis sâwanohk,ᐲᐗᐲᐢᑯ ᓰᐱᓯᐢ ᓵᐚᓄᐦᐠ,pîwapîskosîpisissâwânohk,length,1
+workbench,Mill Creek South,kîskinikan-sîpîsis sâwanohk,ᑮᔅᑭᓂᑲᐣ ᓰᐱᓯᐢ ᓵᐚᓄᐦᐠ,kîskinikansîpisissâwânohk,length,1
+workbench,Mill Creek South,Mil Krîk sâwanohk,ᒥᓪ ᑯᕒᐃᐠ ᓵᐚᓄᐦᐠ,milkoriksâwânohk,mismatch,0
+workbench,DownTheFunWay,nîhtâw môciki-meskanaw,ᓂᐦᑖᐤ ᒨᒋᑭ ᒣᐢᑲᓇᐤ,nihtâwmôcikimêskanaw,length,0
+workbench,DownTheFunWay,nîhtâciwin môcikisiwin,ᓂᐦᑖᒋᐎᐣ ᒨᒋᑭᓯᐎᐣ,nihtâciwinmôcikisiwin,length,1
+workbench,DownTheFunWay,môciki nîhtâw meskanaw,ᒨᒋᑭ ᓂᐦᑖᐤ ᒣᐢᑲᓇᐤ,môcikinihtâwmêskanaw,length,0
+workbench,Farm Frolic,kistikêwinihk môcikisiwin,ᑭᐢᑎᑫᐎᓂᐦᐠ ᒨᒋᑭᓯᐎᐣ,kistikêwinihkmôcikisiwin,exact,1
+workbench,Farm Frolic,kistikêwi-mêtawêwin,ᑭᐢᑎᑫᐎ ᒣᐲᓂᑫᐎᐣ,kistikêwimêpînikêwin,mismatch,1
+workbench,Farm Frolic,kistikêwin môciki meskanaw,ᑭᐢᑎᑫᐎᐣ ᒨᒋᑭ ᒣᐢᑲᓇᐤ,kistikêwinmôcikimêskanaw,exact,1
+workbench,Patricia Ravine Doubletrack,Patrishya wâtikamâw nîso-meskanaw,ᐸᕒᐃᔥᔭ ᐚᑎᑲᒫᐤ ᓃᓱ ᒣᐢᑲᓇᐤ,parishyawâtikamâwnîsomêskanaw,mismatch,0
+workbench,Patricia Ravine Doubletrack,Patrishya paskâw nîso-meskanaw,ᐸᕒᐃᔥᔭ ᐹᐢᑳᐤ ᓃᓱ ᒣᐢᑲᓇᐤ,parishyapâskâwnîsomêskanaw,mismatch,0
+workbench,Patricia Ravine Doubletrack,Patrishya nîso-meskanaw,ᐸᕒᐃᔥᔭ ᓃᓱ ᒣᐢᑲᓇᐤ,parishyanîsomêskanaw,mismatch,0
+workbench,Kinnaird Killer,Kinêrd onipahtâkêw,ᑭᓀᕒᐟ ᐅᓂᐸᐦᑖᑫᐤ,kinêrtonipahtâkêw,mismatch,0
+workbench,Kinnaird Killer,Kinêrd onipahiwêw,ᑭᓀᕒᐟ ᐅᓂᐸᐦᐃᐌᐤ,kinêrtonipahiwêw,mismatch,1
+workbench,Kinnaird Killer,Kinêrd meskanaw kâ-nipahiwêt,ᑭᓀᕒᐟ ᒣᐢᑲᓇᐤ ᑳ ᓂᐸᐦᐃᐌᐟ,kinêrtmêskanawkânipahiwêt,mismatch,1
+workbench,Scalpel,môhkomânis,ᒨᐦᑯᒫᓂᐢ,môhkomânis,exact,0
+workbench,Scalpel,kîskahikanis,ᑮᐢᑲᐦᐃᑲᓂᐢ,kîskahikanis,exact,0
+workbench,Scalpel,maskihkîwiyiniw omôhkomânis,ᒪᐢᑭᐦᑮᐤᐃᔨᓂᐤ ᐅᒨᐦᑯᒫᓂᐢ,maskihkîwiyiniwomôhkomânis,exact,0
+workbench,Soup Kitchen,mîcisôwikamik,ᒦᒋᓲᐎᑲᒥᐠ,mîcisôwikamik,exact,1
+workbench,Soup Kitchen,mîcimâpo-wîkamik,ᒥᒋᒫᐱ ᐎᑲᒥᐠ,micimâpiwikamik,mismatch,1
+workbench,Soup Kitchen,asotamâkêwikamik,ᐊᓱᑕᒫᑫᐎᑲᒥᐠ,asotamâkêwikamik,exact,1
+workbench,Drop In,pîhcipayi,ᐲᐦᑐᐺᐱᓇ,pîhtopwêpina,mismatch,1
+workbench,Drop In,pîhtokwê meskanaw,ᐲᐦᑐᑌ ᒣᐢᑲᓇᐤ,pîhtotêmêskanaw,mismatch,0
+workbench,Drop In,nîhtawi-pôni,ᓂᐦᑖᐎ ᐹᓇᐦᐃᑲᐣ,nihtâwipânahikan,mismatch,1
+workbench,Foxhole,mahkêsîso-wâti,ᒪᐦᑫᓰᓱ ᐧᐋᑎ,mahkêsîswoâti,mismatch,0
+workbench,Foxhole,mahkêsîs owâtim,ᒪᐦᑫᓰᐢ ᐅᐚᑎᒼ,mahkêsîsowâtim,exact,0
+workbench,Foxhole,wâti meskanaw,ᐚᑎ ᒣᐢᑲᓇᐤ,wâtimêskanaw,exact,0
+workbench,Mill Creek South II,pîwâpisko-sîpîsis sâwanohk,ᐲᐗᐲᐢᑯ ᓰᐱᓯᐢ ᓵᐚᓄᐦᐠ,pîwapîskosîpisissâwânohk,length,1
+workbench,Mill Creek South II,kîskinikan-sîpîsis sâwanohk,ᑮᔅᑭᓂᑲᐣ ᓰᐱᓯᐢ ᓵᐚᓄᐦᐠ,kîskinikansîpisissâwânohk,length,1
+workbench,Mill Creek South II,Mil Krîk sâwanohk nîso,ᒥᓪ ᑯᕒᐃᐠ ᓵᐚᓄᐦᐠ ᓃᓱ,milkoriksâwânohknîso,mismatch,0
+workbench,Canada Cup Network - 2,Kanata minihkwâkan nîso,ᑲᓇᑕ ᒥᓂᐦᑴᐗᑲᐣ ᓃᓱ,kanataminihkwêwakannîso,mismatch,1
+workbench,Canada Cup Network - 2,Kanata minihkwâkan meskanaw nîso,ᑲᓇᑕ ᒥᓂᐦᑴᐗᑲᐣ ᒣᐢᑲᓇᐤ ᓃᓱ,kanataminihkwêwakanmêskanawnîso,mismatch,1
+workbench,Canada Cup Network - 2,Kanata atâmihowi-meskanaw nîso,ᑲᓇᑕ ᐊᑖᒥᐦᐅᐎ ᒣᐢᑲᓇᐤ ᓃᓱ,kanataatâmihowimêskanawnîso,exact,1
+workbench,Upper Caddytrack,ispimihk otâpânâsko-meskanaw,ᐃᐢᐸᒥᐠ ᐅᑖᐹᓇᐢᑯ ᒣᐢᑲᓇᐤ,ispamikotâpânaskomêskanaw,mismatch,0
+workbench,Upper Caddytrack,ispimihk otâpânâsk meskanaw,ᐃᐢᐸᒥᐠ ᐅᑖᐹᓈᐢᐠ ᒣᐢᑲᓇᐤ,ispamikotâpânâskmêskanaw,mismatch,0
+workbench,Upper Caddytrack,ispimihk Kadi-trak meskanaw,ᑖᐱᐢᑰᐨ ᑳᑎᑮᐟ ᒣᐢᑲᓇᐤ,tâpiskôckâtikîtmêskanaw,mismatch,0
+workbench,Two Garths,nîso Garts,ᓃᓱ ᑲᕒᐟᔅ,nîsokarts,mismatch,1
+workbench,Two Garths,nîso nâpêwak Garth,ᓃᓱ ᓈᐯᐗᐠ ᑲᕒᐟ,nîsonâpêwakkart,mismatch,1
+workbench,Two Garths,nîso Garth omeskanawâw,ᓃᓱ ᑲᕒᐟ ᐅᒣᐢᑲᓇᐤ,nîsokartomêskanaw,mismatch,0
+workbench,Knights of Ren,Rên osimâkanisimak,ᕒᐁᐣ ᐅᓯᒫᑲᓂᓯᒪᐠ,rênosimâkanisimak,exact,0
+workbench,Knights of Ren,Rên onôtinikêwak,ᕒᐁᐣ ᐅᓅᑎᓂᑫᐗᐠ,rênonôtinikêwak,exact,1
+workbench,Knights of Ren,simâkanisak ohci Rên,ᓯᒫᑲᓂᓴᐠ ᐅᐦᒋ ᕒᐁᐣ,simâkanisakohcirên,exact,0
+workbench,Root Route,ocêpihk meskanaw,ᐅᒋᐱᐠ ᒣᐢᑲᓇᐤ,ocipikmêskanaw,mismatch,0
+workbench,Root Route,ocêpihk isi-pimohtêwin,ᐅᒋᐱᐠ ᐃᓱ ᐱᒧᐦᑌᐎᐣ,ocipikisopimohtêwin,mismatch,1
+workbench,Root Route,ocêpihkâw meskanaw,ᐅᒋᐱᐦᑲᐤ ᒣᐢᑲᓇᐤ,ocipihkawmêskanaw,mismatch,0
+workbench,North Millcreek Bridge,kîwêtinohk Milkrîk âsokan,ᑮᐍᑎᓄᐦᐠ ᒥᓪᑯᕒᐃᐠ ᐊᓱᑲᐣ,kîwêtinohkmilkorikasokan,mismatch,0
+workbench,North Millcreek Bridge,kîwêtinohk âsokan,ᑮᐍᑎᓄᐦᐠ ᐊᓱᑲᐣ,kîwêtinohkasokan,length,0
+workbench,North Millcreek Bridge,Milkrîk âsokan kîwêtinohk,ᒥᓪᑯᕒᐃᐠ ᐊᓱᑲᐣ ᑮᐍᑎᓄᐦᐠ,milkorikasokankîwêtinohk,mismatch,0
+workbench,Cowboy,mostosowiyiniw,ᒧᐢᑐᓱᐎᔨᓂᐤ,mostosowiyiniw,exact,1
+workbench,Cowboy,mostos okanawêyimêw,ᒧᐢᑐᔅ ᐅᑲᓇᐍᔨᒣᐤ,mostosokanawêyimêw,exact,1
+workbench,Cowboy,misatim opâmipayêw,ᒥᓴᑎᒼ ᐅᐹᒥᐱᔦᐤ,misatimopâmipiyêw,mismatch,0
+workbench,Earthshaker,askî-onanamipayihikêw,ᐊᐢᑭ ᐅᓇᓇᒥᐸᔨᐦᐃᑫᐤ,askionanamipayihikêw,length,0
+workbench,Earthshaker,nanamipayiw askiy,ᓇᓇᒥᐸᔨᐤ ᐊᐢᑭᔾ,nanamipayiwaskiy,exact,1
+workbench,Earthshaker,askî-nanamihikêw,ᐊᐢᑭ ᐅᓇᓇᒥᐦᐃᑫᐤ,askionanamihikêw,mismatch,0
+workbench,Dirty Cut,wîyipisi-kîskatahikan,ᐎᔨᐱᐢ ᑮᐢᑎᑲᐦᐃᑲᐣ,wiyipiskîstikahikan,mismatch,1
+workbench,Dirty Cut,mâyi-kîskahikan,ᒫᔨ ᑮᐢᑲᐦᐃᑲᐣ,mâyikîskahikan,exact,0
+workbench,Dirty Cut,wini-kîskahikan meskanaw,ᐎᓂ ᑮᐢᑲᐦᐃᑲᐣ ᒣᐢᑲᓇᐤ,winikîskahikanmêskanaw,exact,1
+workbench,There Be Dragons Connector,ôta ayâwak kinêpikwak âsowahikan,ᐅᑖ ᐊᔭᐗᐠ ᑭᓀᐱᑯᐠ ᐊᑑᔅᑫᐎᐣ,otâayawakkinêpikokatôskêwin,mismatch,1
+workbench,There Be Dragons Connector,ôta ayâwak miskinêpikwak,ᐅᑕ ᐊᔭᐗᐠ ᒥᔅᑭᓀᐱᑯᐠ,otaayawakmiskinêpikok,mismatch,1
+workbench,There Be Dragons Connector,kinêpik âsowahikan,ᑭᓀᐱᐠ ᐋᓱᐗᐦᐃᑲᐣ,kinêpikâsowahikan,exact,1
+workbench,Quick Snapper,ayahcipayiw otahkacikêw,ᐊᔭᐦᒋᐱᔨᐤ ᐅᑕᐦᑲᒋᑫᐤ,ayahcipiyiwotahkacikêw,mismatch,0
+workbench,Quick Snapper,kayipî otahkacikêw,ᑲᔭᐲ ᐅᑕᐦᑲᒋᑫᐤ,kayapîotahkacikêw,mismatch,0
+workbench,Quick Snapper,miskinâk otahkacikêw,ᒥᐢᑭᓈᐠ ᐅᑕᐦᑲᒋᑫᐤ,miskinâkotahkacikêw,exact,0
+workbench,Giddy Up,mâci-pimipahtâ,ᒫᒋᐱᒥᐸᐦᑖ,mâcipimipahtâ,exact,0
+workbench,Giddy Up,pâhpahtâ misatim,ᐹᐦᐹᐹᐦᑕ ᒥᓴᑎᒼ,pâhpâpâhtamisatim,mismatch,0
+workbench,Giddy Up,kiyipi itohtê,ᑭᔭᐱᐨ ᐃᑐᐦᑌ,kiyapicitohtê,mismatch,0
+workbench,Short 'n Sweet,cimâsin mîna wîhkasin,ᒋᒫᓯᐣ ᒥᓇ ᐧᐃᐦᑯᐢᐊᐧᐣ,cimâsinminwaihkoswan,mismatch,0
+workbench,Short 'n Sweet,cimâsin mîna miywâsin,ᒋᒫᓯᐣ ᒥᓇ ᒥᔼᓯᐣ,cimâsinminamiywâsin,length,0
+workbench,Short 'n Sweet,tahkohc mîna wîhkasin,ᑕᐦᑯᐢ ᒥᓇ ᐎᐦᑲᓯᐣ,tahkosminawihkasin,mismatch,1
+workbench,Old Timer's Shortcut,kisêyiniw ocimâsi-meskanaw,ᑭᓭᔨᓂᐤ ᐅᒋᒫᓯ ᒣᐢᑲᓇᐤ,kisêyiniwocimâsimêskanaw,exact,0
+workbench,Old Timer's Shortcut,kisêyiniw otâpiskôc-meskanaw,ᑭᓭᔨᓂᐤ ᐅᑖᐱᐢᑰᐨ ᒣᐢᑲᓇᐤ,kisêyiniwotâpiskôcmêskanaw,exact,0
+workbench,Old Timer's Shortcut,ocimâsi-meskanaw,ᐅᒋᒫᓯ ᒣᐢᑲᓇᐤ,ocimâsimêskanaw,exact,0
+workbench,Terwillegar - 19,Têrwiligar mitâtaht-ayênânêw,ᑌᕒᐎᓕᑲᕒ ᒥᑖᑐᔕᑊ ᐊᔮᓇᓄᓱᑊ,têrwilikarmitâtoshapayânanosop,mismatch,1
+workbench,Terwillegar - 19,Têrwiligar meskanaw 19,ᑌᕒᐎᓕᑲᕒ ᒣᐢᑲᓇᐤ 19,têrwilikarmêskanaw,mismatch,1
+workbench,Terwillegar - 19,meskanaw 19,ᒣᐢᑲᓇᐤ 19,mêskanaw,exact,0
+workbench,Cloverdale Detour Alt,Klôvordêl kotak âhcipimohtêwin,ᑲᓚᕒᑌᓪ ᑯᑕᐠ ᐋᐦᒋᐱᒧᐦᑌᐎᐣ,kalartêlkotakâhcipimohtêwin,mismatch,1
+workbench,Cloverdale Detour Alt,Klôvordêl âsowêyiwin,ᑲᓚᕒᑌᓪ ᐋᔁᐯᔨᐎᐣ,kalartêlâswapêyiwin,mismatch,1
+workbench,Cloverdale Detour Alt,kotak âhcipimohtêwin,ᑯᑕᐠ ᐋᐦᒋᐱᒧᐦᑌᐎᐣ,kotakâhcipimohtêwin,exact,1
+workbench,Vegan Hollow,êkâ-wiyâso-wâti,ᐁᑳ ᐎᔮᓱ ᐚᑎ,êkâwiyâsowâti,exact,1
+workbench,Vegan Hollow,namôya wiyâs mowâw wâti,ᓇᒨᔭ ᐎᔮᐢ ᒨᐗᐤ ᐚᑎ,namôyawiyâsmôwawwâti,length,1
+workbench,Vegan Hollow,maskosi-mowêw wâti,ᒪᐢᑯᓯ ᒧᐍᐤ ᐚᑎ,maskosimowêwwâti,exact,0
+workbench,Canada Cup Network - 3,Kanata minihkwâkan nisto,ᑲᓇᑕ ᒥᓂᐦᑴᐗᑲᐣ ᓂᔅᑐ,kanataminihkwêwakannisto,mismatch,1
+workbench,Canada Cup Network - 3,Kanata minihkwâkan meskanaw nisto,ᑲᓇᑕ ᒥᓂᐦᑴᐗᑲᐣ ᒣᐢᑲᓇᐤ ᓂᔅᑐ,kanataminihkwêwakanmêskanawnisto,mismatch,1
+workbench,Canada Cup Network - 3,Kanata atâmihowi-meskanaw nisto,ᑲᓇᑕ ᐊᑖᒥᐦᐅᐎ ᒣᐢᑲᓇᐤ ᓂᔅᑐ,kanataatâmihowimêskanawnisto,exact,1
+workbench,Terwillegar - 6,Têrwiligar nikotwâsik,ᑌᕒᐎᓕᑲᕒ ᓂᑯᑤᔅ,têrwilikarnikotwâs,mismatch,1
+workbench,Terwillegar - 6,Têrwiligar meskanaw nikotwâsik,ᑌᕒᐎᓕᑲᕒ ᒣᐢᑲᓇᐤ ᓂᑯᑤᔅ,têrwilikarmêskanawnikotwâs,mismatch,1
+workbench,Terwillegar - 6,nikotwâsik meskanaw,ᓂᑯᑤᔅ ᒣᐢᑲᓇᐤ,nikotwâsmêskanaw,mismatch,1
+workbench,Peckers Hollow,pâpascês wâyatinâw,ᐹᐸᐢᒉᐢ ᐚᔭᑎᓈᐤ,pâpascêswâyatinâw,exact,0
+workbench,Peckers Hollow,pâpascês omeskanaw wâyatinihk,ᐹᐸᐢᒉᐢ ᐅᒣᐢᑲᓇᐤ ᐚᔭᑎᓂᕽ,pâpascêsomêskanawwâyatinihk,exact,0
+workbench,Peckers Hollow,wâyatinâw meskanaw,ᐚᔭᑎᓈᐤ ᒣᐢᑲᓇᐤ,wâyatinâwmêskanaw,exact,0
+workbench,Tin Pan Alley,nikamowin meskanaw,ᓂᑲᒧᐎᐣ ᒣᐢᑲᓇᐤ,nikamowinmêskanaw,exact,1
+workbench,Tin Pan Alley,pîwâpisk kâ-matwêhikêt,ᐲᐚᐱᐢᐠ ᑳ ᒪᑘᐦᐃᑫᐟ,pîwâpiskkâmatwêhikêt,exact,0
+workbench,Tin Pan Alley,Tin Pân Ali,ᑎᐣ ᐹᐣ ᐊᓕ,tinpânali,exact,0
+workbench,Under the End,sîpâ iskwayâk,ᓰᐹ ᐃᐢᑿᔮᐠ,sîpâiskwayâk,exact,0
+workbench,Under the End,âsokanihk sîpâ,ᐋᓱᑲᓂᕽ ᓰᐹ,âsokanihksîpâ,exact,0
+workbench,Under the End,sîpâ-meskanaw iskwayâk,ᓰᐹ ᒣᐢᑲᓇᐤ ᐃᐢᑿᔮᐠ,sîpâmêskanawiskwayâk,exact,0
+workbench,Love Child,kîmôci-awâsis,ᑮᒨᒋ ᐊᐚᓯᐢ,kîmôciawâsis,exact,0
+workbench,Love Child,sâkihitowin-awâsis,ᓵᑭᐦᐃᑐᐎᐣ ᐊᐚᓯᐢ,sâkihitowinawâsis,exact,1
+workbench,Love Child,awâsis kâ-kîmôci-nihtâwikit,ᐊᐚᓯᐢ ᑳ ᑮᒨᒋ ᓂᐦᑖᐎᑭᐟ,awâsiskâkîmôcinihtâwikit,exact,1
+workbench,Organ Donor,mitêh kâ-mêkit,ᒥᑌᐦ ᑳ ᒣᑭᐟ,mitêhkâmêkit,exact,0
+workbench,Organ Donor,miyaw-mêkiwin,ᒥᔭᐤ ᒣᑭᐎᐣ,miyawmêkiwin,exact,1
+workbench,Organ Donor,omêkiw omiyaw,ᐅᒣᑭᐤ ᐅᒥᔭᐤ,omêkiwomiyaw,exact,0
+workbench,Pet Cemetary,atimwak okihkwahaskâniwâw,ᐊᑎᒷᐠ ᐅᑭᐦᑿᐦᐊᐢᑳᓂᐚᐤ,atimwakokihkwahaskâniwâw,exact,0
+workbench,Pet Cemetary,pisiskîsak onipowiniwâw,ᐱᓯᐢᑮᓴᐠ ᐅᓂᐳᐎᓂᐚᐤ,pisiskîsakonipowiniwâw,exact,1
+workbench,Pet Cemetary,cîpay-atimwak omeskanawâw,ᒌᐸᕀ ᐊᑎᒷᐠ ᐅᒣᐢᑲᓇᐚᐤ,cîpayatimwakomêskanawâw,exact,0
+workbench,Lansdown,Lânsdawn,ᓛᐣᐢᑌᐤᐣ,lânstêwn,mismatch,0
+workbench,Lansdown,mîkwan kâ-pahkihtihk,ᒦᑿᐣ ᑳ ᐸᐦᑭᐦᑎᐠ,mîkwankâpahkihtik,mismatch,0
+workbench,Lansdown,nîhci-askiy,ᓃᐦᒋ ᐊᐢᑭᕀ,nîhciaskiy,exact,0
+workbench,Outlaw,kâ-pîkonahk wiyasiwêwin,ᑳ ᐲᑯᓇᕽ ᐎᔭᓯᐍᐎᐣ,kâpîkonahkwiyasiwêwin,exact,1
+workbench,Outlaw,kimotisk,ᑭᒧᑎᐢᐠ,kimotisk,exact,0
+workbench,Outlaw,kâ-tapasît,ᑳ ᑕᐸᓰᐟ,kâtapasît,exact,0
+workbench,Sidewinder,opimê-kinêpik,ᐅᐱᒣ ᑭᓀᐱᐠ,opimêkinêpik,exact,0
+workbench,Sidewinder,wâwani-kinêpik,ᐗᐗᓂ ᑭᓀᐱᐠ,wawanikinêpik,length,1
+workbench,Sidewinder,opimê-pimohtêw,ᐅᐱᒣ ᐱᒧᐦᑌᐤ,opimêpimohtêw,exact,0
+workbench,Spirit Trail,ahcâhk-meskanaw,ᐊᐦᒑᕽ ᒣᐢᑲᓇᐤ,ahcâhkmêskanaw,exact,0
+workbench,Spirit Trail,cîpay-meskanaw,ᒌᐸᕀ ᒣᐢᑲᓇᐤ,cîpaymêskanaw,exact,0
+workbench,Spirit Trail,manitow-meskanaw,ᒪᓂᑐ ᒣᐢᑲᓇᐤ,manitomêskanaw,mismatch,0
+workbench,Svarog,Sawarok,ᓴᐘᕒᐅᐠ,sawarok,exact,0
+workbench,Svarog,iskotêwi-manitow,ᐃᐢᑯᑌᐎ ᒪᓂᑐᐤ,iskotêwimanitow,exact,1
+workbench,Svarog,pîwâpiskohkêwi-iskotêw,ᐲᐚᐱᐢᑯᐦᑫᐎ ᐃᐢᑯᑌᐤ,pîwâpiskohkêwiiskotêw,exact,1
+workbench,Serendipity,kâ-miyo-miskamihk pakwanaw,ᑳ ᒥᔪ ᒥᐢᑲᒥᕽ ᐸᑿᓇᐤ,kâmiyomiskamihkpakwanaw,exact,0
+workbench,Serendipity,miyo-papâmahcihowin,ᒥᔪ ᐸᐹᒪᐦᒋᐦᐅᐎᐣ,miyopapâmahcihowin,exact,1
+workbench,Serendipity,pakwanaw kâ-miskamân miywâsin,ᐸᑿᓇᐤ ᑳ ᒥᐢᑲᒫᐣ ᒥᔡᓯᐣ,pakwanawkâmiskamânmishwasin,mismatch,1
+workbench,Snow Sally,kôna-iskwêw,ᑰᓇ ᐃᐢᑵᐤ,kônaiskwêw,exact,0
+workbench,Snow Sally,kôna Sâli,ᑰᓇ ᓵᓕ,kônasâli,exact,0
+workbench,Snow Sally,kôna-wâpikwaniy,ᑰᓇ ᐚᐱᑿᓂᕀ,kônawâpikwaniy,exact,0
+workbench,Honky Tonks,minihkwêwikamik nikamowin,ᒥᓂᐦᑵᐎᑲᒥᐠ ᓂᑲᒧᐎᐣ,minihkwêwikamiknikamowin,exact,1
+workbench,Honky Tonks,nîmihitowikamik,ᓃᒥᐦᐃᑐᐎᑲᒥᐠ,nîmihitowikamik,exact,1
+workbench,Honky Tonks,madwêwêcikan kâ-matwêhamihk,ᒪᑘᐍᒋᑲᐣ ᑳ ᒪᑘᐦᐊᒥᕽ,matwêwêcikankâmatwêhamihk,mismatch,0
+workbench,Shooter McGavin,pâskisikêw Makâpin,ᐹᐢᑭᓯᑫᐤ ᒪᑲᐱᐣ,pâskisikêwmakapin,length,0
+workbench,Shooter McGavin,opâskisikêw kâ-mamihcimisot,ᐅᐹᐢᑭᓯᑫᐤ ᑳ ᒪᒥᐦᒋᒥᓱᐟ,opâskisikêwkâmamihcimisot,exact,0
+workbench,Shooter McGavin,ocihciy-pâskisikêw,ᐅᒋᒋᕀ ᐹᐢᑭᓯᑫᐤ,ociciypâskisikêw,mismatch,0
+workbench,Bruce Almighty,Brûs kihci-manitow,ᐳᕒᐢ ᑭᐦᒋ ᒪᓂᑐ,porskihcimanito,mismatch,0
+workbench,Bruce Almighty,misiwê kâ-kaskihtât,ᒥᓯᐍ ᑳ ᑲᐢᑭᐦᑖᐟ,misiwêkâkaskihtât,exact,0
+workbench,Bruce Almighty,maskawisîw Brûs,ᒪᐢᑲᐏᓯᐤ ᐳᕒᐢ,maskawisiwpors,mismatch,0
+workbench,Alderaan,Âldêrân,ᐋᓪᑌᕒᐋᐣ,âltêrân,mismatch,0
+workbench,Alderaan,pêyâhtak-askiy,ᐯᔮᐦᑕᐠ ᐊᐢᑮ,pêyâhtakaskî,mismatch,0
+workbench,Alderaan,askiy kâ-mêstihk,ᐊᐢᑮ ᑳ ᒣᐢᑎᕽ,askîkâmêstihk,mismatch,0
+workbench,Endor,Êndor,ᐁᐣᑐᕒ,êntor,mismatch,0
+workbench,Endor,sakâw-pîsim,ᓴᑳᐤ ᐲᓯᒼ,sakâwpîsim,exact,0
+workbench,Endor,sakâwi-askiy,ᓴᑳᐎ ᐊᐢᑮ,sakâwiaskî,mismatch,1
+workbench,Loki,wîsahkêcâhk,ᐎᓴᐦᑫᒑᕽ,wisahkêcâhk,length,1
+workbench,Loki,owâyêsîhkêw,ᐅᐚᔦᓰᐦᑫᐤ,owâyêsîhkêw,exact,0
+workbench,Loki,Lôki,ᓘᑭ,lôki,exact,0
+workbench,Coyote Corridor,mêscacâkanis meskanaw,ᒣᐢᑕᒑᑲᓂᐢ ᒣᐢᑲᓇᐤ,mêstacâkanismêskanaw,mismatch,0
+workbench,Coyote Corridor,mêscacâkanis omeskanaw,ᒣᐢᑕᒑᑲᓂᐢ ᐅᒣᐢᑲᓇᐤ,mêstacâkanisomêskanaw,mismatch,0
+workbench,Coyote Corridor,mêscacâkanis pimohtêwin,ᒣᐢᑕᒑᑲᓂᐢ ᐱᒧᐦᑌᐎᐣ,mêstacâkanispimohtêwin,mismatch,1
+workbench,Red Leader,mihko-nîkâniw,ᒥᐦᑯ ᓃᑳᓂᐤ,mihkonîkâniw,exact,0
+workbench,Red Leader,mihko-okimâw,ᒥᐦᑯ ᐅᑭᒪᐤ,mihkookimaw,length,0
+workbench,Red Leader,nîkânêyiw mihkwâw,ᓃᑳᓀᔨᐤ ᒥᐦᑲᐤ,nîkânêyiwmihkaw,mismatch,0
+workbench,Bo and the Gizzy,Pô mîna Kisi,ᐹ ᒥᓇ ᑭᓯ,pâminakisi,mismatch,0
+workbench,Bo and the Gizzy,nîso wîcêwâkanak,ᓂᔓ ᐎᒋᐍᐗᑲᓇᐠ,nishowiciwêwakanak,mismatch,1
+workbench,Bo and the Gizzy,nîso otôtêmak omeskanaw,ᓂᔓ ᐅᑏᒣᐠ ᐅᒣᐢᑲᓇᐤ,nishootîmêkomêskanaw,mismatch,1
+workbench,Papaschase,pâpâstêw,ᐹᐹᐢᑌᐤ,pâpâstêw,exact,0
+workbench,Papaschase,pâpâstêw-okimâw,ᐹᐹᐢᑌᐤ ᐅᑭᒪᐤ,pâpâstêwokimaw,length,0
+workbench,Papaschase,pâpâstêw otaskiy,ᐹᐹᐢᑌᐤ ᐅᑕᐢᑮ,pâpâstêwotaskî,mismatch,0
+workbench,Chew-barka,Chiw-bârka,ᒋᐤᐹᕒᑲ,ciwpârka,mismatch,0
+workbench,Chew-barka,misi-pisiskiw,ᒥᓯ ᐱᓯᐢᑭᐤ,misipisiskiw,exact,0
+workbench,Chew-barka,atim kâ-mikisimot,ᐊᑎᒼ ᑳ ᒥᑭᓯᒧᐟ,atimkâmikisimot,exact,0
+workbench,Berm Express 1,kisiskâ-asiskîwahikan pêyak,ᑭᓯᐢᑳ ᐊᓯᐢᑮᐗᐦᐃᑲᐣ ᐯᔭᐠ,kisiskâasiskîwahikanpêyak,exact,1
+workbench,Berm Express 1,kisiskâ-wâsahikan pêyak,ᑭᓯᐢᑳ ᐗᓵᐦᐃᑲᐣ ᐯᔭᐠ,kisiskâwasâhikanpêyak,length,1
+workbench,Berm Express 1,iyâhcipayîwin pêyak,ᐃᔮᐦᒋᐱᔮᐎᐣ ᐯᔭᐠ,iyâhcipiyâwinpêyak,mismatch,1
+workbench,Greenview Path,askihtako-meskanaw,ᐊᐢᑭᐦᑕᑯ ᒣᐢᑲᓇᐤ,askihtakomêskanaw,exact,0
+workbench,Greenview Path,wâpahtamowin askihtak,ᐗᐹᐦᑕᒧᐎᐣ ᐊᐢᑭᐦᑕᐠ,wapâhtamowinaskihtak,length,1
+workbench,Greenview Path,maskosiskâw meskanaw,ᒪᐢᑯᓯᐢᑲᐤ ᒣᐢᑲᓇᐤ,maskosiskawmêskanaw,length,0
+workbench,Papaschase Extension,pâpâstêw âniskoskêwin,ᐹᐹᐢᑌᐤ ᐋᓂᐢᑯᐢᑫᐎᐣ,pâpâstêwâniskoskêwin,exact,1
+workbench,Papaschase Extension,pâpâstêw meskanaw âniskohk,ᐹᐹᐢᑌᐤ ᒣᐢᑲᓇᐤ ᐋᓂᐢᑯᕽ,pâpâstêwmêskanawâniskohk,exact,0
+workbench,Papaschase Extension,ânisko-pâpâstêw,ᐋᓂᐢᑯ ᐹᐹᐢᑌᐤ,âniskopâpâstêw,exact,0
+workbench,Straggler,otâhk kâ-pimohtêt,ᐅᑖᐦᐠ ᑳ ᐱᒧᐦᑌᐟ,otâhkkâpimohtêt,exact,0
+workbench,Straggler,otâhkêw,ᐅᑖᐦᑫᐤ,otâhkêw,exact,0
+workbench,Straggler,kâ-nakatiht,ᑳ ᓇᑲᑎᐦᐟ,kânakatiht,exact,0
+workbench,Jackie Parkaloop,Jackie Parkar wâsâkâyâw,ᒉᑭ ᐹᕒᑲᕒ ᐗᓵᑲᔮᐤ,cêkipârkarwasâkayâw,mismatch,1
+workbench,Jackie Parkaloop,Jackie Parkar wâsâkêwin,ᒉᑭ ᐹᕒᑲᕒ ᐗᓵᑫᐎᐣ,cêkipârkarwasâkêwin,mismatch,1
+workbench,Jackie Parkaloop,Parkar wâsâkâyâw meskanaw,ᐹᕒᑲᕒ ᐗᓵᑲᔮᐤ ᒣᐢᑲᓇᐤ,pârkarwasâkayâwmêskanaw,length,1
+workbench,Jackie Parker Multiuse,Jackie Parkar misiwê-meskanaw,ᒉᑭ ᐹᕒᑲᕒ ᒥᓯᐍ ᒣᐢᑲᓇᐤ,cêkipârkarmisiwêmêskanaw,mismatch,0
+workbench,Jackie Parker Multiuse,Parkar mihcêt isi âpacihtâw,ᐹᕒᑲᕒ ᒥᐦᒉᑦ ᐃᓯ ᐋᐸᒋᐦᑖᐤ,pârkarmihcêtisiâpacihtâw,length,1
+workbench,Jackie Parker Multiuse,Parkar mihcêtohkêwi-meskanaw,ᐹᕒᑲᕒ ᒥᐦᒉᑐᐦᑫᐎ ᒣᐢᑲᓇᐤ,pârkarmihcêtohkêwimêskanaw,length,1
+workbench,Meadows Path,maskosiskâw meskanaw,ᒪᐢᑯᓯᐢᑲᐤ ᒣᐢᑲᓇᐤ,maskosiskawmêskanaw,length,0
+workbench,Meadows Path,paskwâw meskanaw,ᐹᐢᑳᐤ ᒣᐢᑲᓇᐤ,pâskâwmêskanaw,mismatch,0
+workbench,Meadows Path,maskosiya meskanaw,ᒪᐢᑯᓯᔭ ᒣᐢᑲᓇᐤ,maskosiyamêskanaw,exact,0
+workbench,No Where Man,namôya itê ohci-nâpêw,ᓇᒨᔭ ᐃᑌ ᐅᐦᒋ ᓈᐯᐤ,namôyaitêohcinâpêw,exact,0
+workbench,No Where Man,papâmohtêw nâpêw,ᐸᐹᒧᐦᑌᐤ ᓈᐯᐤ,papâmohtêwnâpêw,exact,0
+workbench,No Where Man,nâpêw namôya itê ayâw,ᓈᐯᐤ ᓇᒨᔭ ᐃᑌ ᐊᔮᐤ,nâpêwnamôyaitêayâw,exact,0
+workbench,Magpie,apistikakakês,ᐊᐱᐢᑎᑲᑲᑫᐢ,apistikakakês,exact,0
+workbench,Magpie,âpiscicânis,ᐋᐱᐢᒋᒑᓂᐢ,âpiscicânis,exact,0
+workbench,Magpie,apistikakakês meskanaw,ᐊᐱᐢᑎᑲᑲᑫᐢ ᒣᐢᑲᓇᐤ,apistikakakêsmêskanaw,exact,0
+workbench,Berm Express 2,kisiskâ-asiskîwahikan nîso,ᑭᓯᐢᑳ ᐊᓯᐢᑮᐗᐦᐃᑲᐣ ᓃᓱ,kisiskâasiskîwahikannîso,exact,1
+workbench,Berm Express 2,kisiskâ-wâsahikan nîso,ᑭᓯᐢᑳ ᐗᓵᐦᐃᑲᐣ ᓃᓱ,kisiskâwasâhikannîso,length,1
+workbench,Berm Express 2,iyâhcipayîwin nîso,ᐃᔮᐦᒋᐱᔮᐎᐣ ᓃᓱ,iyâhcipiyâwinnîso,mismatch,1
+workbench,Fulton Ravine Path,Pâltan sîpîsis meskanaw,ᐹᓪᑕᐣ ᓰᐲᓯᐢ ᒣᐢᑲᓇᐤ,pâltansîpîsismêskanaw,exact,0
+workbench,Fulton Ravine Path,Pâltan wâtihk meskanaw,ᐹᓪᑕᐣ ᐚᑎᕽ ᒣᐢᑲᓇᐤ,pâltanwâtihkmêskanaw,exact,0
+workbench,Fulton Ravine Path,sîpîsis-paskwâw meskanaw,ᓰᐲᓯᐢ ᐸᐢᑳᐤ ᒣᐢᑲᓇᐤ,sîpîsispaskâwmêskanaw,mismatch,0
+workbench,Party Line,mâmawi-sêwêpitâkan,ᒫᒪᐎ ᓭᐍᐱᑖᑲᐣ,mâmawisêwêpitâkan,exact,1
+workbench,Party Line,môcikihtâwin meskanaw,ᒨᒋᑭᐦᑖᐎᐣ ᒣᐢᑲᓇᐤ,môcikihtâwinmêskanaw,exact,1
+workbench,Party Line,môcikisikâw meskanaw,ᒨᒋᑭᓯᑳᐤ ᒣᐢᑲᓇᐤ,môcikisikâwmêskanaw,exact,0
+workbench,Tamarack Saplings Path,wâkinâkan oski-mistikwak meskanaw,ᐚᑭᓈᑲᐣ ᐅᐢᑭ ᒥᐢᑎᑾᐠ ᒣᐢᑲᓇᐤ,wâkinâkanoskimistikwakmêskanaw,exact,1
+workbench,Tamarack Saplings Path,oski-mistikwak meskanaw,ᐅᐢᑭ ᒥᐢᑎᑾᐠ ᒣᐢᑲᓇᐤ,oskimistikwakmêskanaw,exact,1
+workbench,Tamarack Saplings Path,wâkinâkanahtik meskanaw,ᐚᑭᓈᑲᓇᐦᑎᐠ ᒣᐢᑲᓇᐤ,wâkinâkanahtikmêskanaw,exact,0
+workbench,Tawa Dry Pond Path,tawâw pâstê-sâkahikanis meskanaw,ᑕᐚᐤ ᐹᐢᑌ ᓵᑲᐦᐃᑲᓂᐢ ᒣᐢᑲᓇᐤ,tawâwpâstêsâkahikanismêskanaw,exact,0
+workbench,Tawa Dry Pond Path,pâstê-sâkahikanis meskanaw,ᐹᐢᑌ ᓵᑲᐦᐃᑲᓂᐢ ᒣᐢᑲᓇᐤ,pâstêsâkahikanismêskanaw,exact,0
+workbench,Tawa Dry Pond Path,tawâw meskanaw,ᑕᐚᐤ ᒣᐢᑲᓇᐤ,tawâwmêskanaw,exact,0
+workbench,Death Star,nipowi-acâhk,ᓂᐱᐎ ᐊᒑᕽ,nipiwiacâhk,mismatch,1
+workbench,Death Star,acâhk kâ-nipâhiwêt,ᐊᒑᕽ ᑳ ᓂᐹᐦᐃᐍᐟ,acâhkkânipâhiwêt,exact,0
+workbench,Death Star,misi-acâhk pâhkitêw,ᒥᓯ ᐊᒑᕽ ᐹᐢᑌᐤ,misiacâhkpâstêw,mismatch,0
+workbench,23 Ave 1/8 mile,nîsitanaw-nisto meskanaw,ᓃᓯᑕᓇᐤ ᓂᐢᑐ ᒣᐢᑲᓇᐤ,nîsitanawnistomêskanaw,exact,0
+workbench,23 Ave 1/8 mile,kisiskâ-apahtâwinis,ᑭᓯᐢᑳ ᐊᐸᐦᑖᐎᓂᐢ,kisiskâapahtâwinis,exact,1
+workbench,23 Ave 1/8 mile,nîsitanaw-nisto kisiskâwin,ᓃᓯᑕᓇᐤ ᓂᐢᑐ ᑭᓯᐢᑳᐎᐣ,nîsitanawnistokisiskâwin,exact,1
+workbench,Hillview Path,wacîy-wâpahtamowin meskanaw,ᐗᒋᕀ ᐗᐹᐦᑕᒧᐎᐣ ᒣᐢᑲᓇᐤ,waciywapâhtamowinmêskanaw,length,1
+workbench,Hillview Path,ispatinâw wâpahtamowin,ᐃᐢᐸᑎᓈᐤ ᐗᐹᐦᑕᒧᐎᐣ,ispatinâwwapâhtamowin,length,1
+workbench,Hillview Path,wacîy meskanaw,ᐗᒋᕀ ᒣᐢᑲᓇᐤ,waciymêskanaw,length,1
+workbench,B.F.T.,Pî-Ef-Tî,ᐲ ᐁᑊ ᑏ,pîêptî,mismatch,0
+workbench,B.F.T.,mistahi-môcikin meskanaw,ᒥᐢᑕᐦᐃ ᒨᒋᑭᐣ ᒣᐢᑲᓇᐤ,mistahimôcikinmêskanaw,exact,0
+workbench,B.F.T.,misâ-meskanaw,ᒥᓭ ᒣᐢᑲᓇᐤ,misêmêskanaw,mismatch,0
+workbench,Howdy neighbour,tânisi kiciwâhk,ᑖᓂᓯ ᑭᒋᐚᕽ,tânisikiciwâhk,exact,0
+workbench,Howdy neighbour,tânisi otôtêm,ᑖᓂᓯ ᐅᑏᒼ,tânisiotîm,mismatch,0
+workbench,Howdy neighbour,wâciyê kiciwâhk,ᐚᒋᔦ ᑭᒋᐚᕽ,wâciyêkiciwâhk,exact,0
+workbench,Fireball,iskotêw-wâwiyêyâw,ᐃᐢᑯᑌᐤ ᐗᐍᔭᔮᐤ,iskotêwwawêyayâw,mismatch,1
+workbench,Fireball,iskotêw-pâhkitêw,ᐃᐢᑯᑌᐤ ᐹᐢᑌᐤ,iskotêwpâstêw,mismatch,0
+workbench,Fireball,misti-iskotêw,ᒥᐢᑎ ᐃᐢᑯᑌᐤ,mistiiskotêw,exact,0
+workbench,Coffee,mîkis,ᒥᑭᐢ,mikis,length,0
+workbench,Coffee,kâhpî,ᑳᐦᐲ,kâhpî,exact,0
+workbench,Coffee,mîkis meskanaw,ᒥᑭᐢ ᒣᐢᑲᓇᐤ,mikismêskanaw,length,0

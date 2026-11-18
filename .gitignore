@@ -19,3 +19,4 @@ signs/*/*.3mf
 
 # paper build output (regenerate with `make` in paper/)
 paper/build/
+__pycache__/

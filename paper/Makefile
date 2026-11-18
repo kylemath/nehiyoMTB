@@ -1,20 +1,36 @@
-# Build the NehiyoMTB paper end to end:  make
+# Build the paper end to end:  make
 #
+#   make names     (default) the Names submission: Word files for blind review
+#                  and after acceptance, PDF previews, figure files at the
+#                  required resolution, supplementary CSVs -> names/submission/
+#   make mdpi      the earlier MDPI Languages version (LaTeX -> nehiyomtb-paper.pdf)
 #   make figures   regenerate figures, tables and number macros from the repo
 #   make shots     re-take the website/app screenshots (needs Node + Playwright)
 #   make pdf       assemble build/tex and compile nehiyomtb-paper.pdf
 #   make clean     remove build/
 #
-# Requirements: python3 with paper/requirements.txt, a TeX Live with latexmk,
+# Requirements: python3 with paper/requirements.txt, pandoc (3.x) and LibreOffice
+# for the Names version, a TeX Live with latexmk for the MDPI version,
 # and the Noto Sans Canadian Aboriginal font (fonts-noto-core on Debian/Ubuntu).
 
 PY      ?= python3
 SCRIPTS := scripts
 BUILD   := build
 
-.PHONY: all figures shots pdf clean
+.PHONY: names mdpi all figures shots pdf clean
 
-all: figures shots pdf
+names:
+	$(PY) names/build_names.py
+	rm -rf names/submission && mkdir -p names/submission
+	cp $(BUILD)/names/manuscript_anonymized.docx $(BUILD)/names/manuscript_anonymized.pdf \
+	   $(BUILD)/names/manuscript_final.docx $(BUILD)/names/manuscript_final.pdf \
+	   $(BUILD)/names/wordcount.txt names/submission/
+	cp -r $(BUILD)/names/figures $(BUILD)/names/supplementary names/submission/
+	@echo "wrote paper/names/submission/"
+
+mdpi: figures shots pdf
+
+all: names mdpi
 
 figures:
 	cd $(SCRIPTS) && $(PY) make_tables.py
