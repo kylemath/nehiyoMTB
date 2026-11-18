@@ -1,0 +1,356 @@
+%  NehiyoMTB paper — MDPI "Languages" template (Article).
+%  Built by `make` in paper/: the Python scripts in paper/scripts/ write the
+%  figures, tables and number macros, scripts/build_tex.py turns every run of
+%  Cree syllabics into a vector image (pdfLaTeX has no syllabics font), and
+%  latexmk compiles build/tex/main.tex. Do not edit build/; edit paper/tex/.
+%
+%  Orange "[k to supply: ...]" notes mark facts only the author can give.
+%  Set \showtodosfalse below to hide them for a clean draft.
+\documentclass[languages,article,submit,oneauthor,pdftex]{Definitions/mdpi}
+
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[safe]{tipa}
+% ejective mark (comma above) in Nuu-chah-nulth spellings
+\newcommand{\ej}{\kern-0.04em\raisebox{0.55ex}{\scriptsize\textquoteright}\kern0.02em}
+
+% back-matter statements newer MDPI templates define; provided here so the
+% bundled class also compiles (the current template's own versions win)
+\providecommand{\institutionalreview}[1]{\vspace{6pt}\noindent{\fontsize{9}{9}\selectfont\textbf{Institutional Review Board Statement:} {#1}\par}}
+\providecommand{\informedconsent}[1]{\vspace{6pt}\noindent{\fontsize{9}{9}\selectfont\textbf{Informed Consent Statement:} {#1}\par}}
+\providecommand{\dataavailability}[1]{\vspace{6pt}\noindent{\fontsize{9}{9}\selectfont\textbf{Data Availability Statement:} {#1}\par}}
+
+\newif\ifshowtodos \showtodostrue
+\newcommand{\ktodo}[1]{\ifshowtodos{\color{orange!80!black}[\textbf{k to supply:} #1]}\fi}
+% Cree syllabics, pre-rendered by scripts/build_tex.py
+\newcommand{\syl}[1]{\raisebox{-0.29em}{\includegraphics[height=1.3em]{syl/#1}}}
+% a filament colour swatch for the sign table
+\newcommand{\swatch}[1]{{\definecolor{sw}{HTML}{#1}\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.3pt}\fcolorbox{gray}{sw}{\rule{0pt}{0.62em}\rule{0.62em}{0pt}}}\hspace{1pt}}
+% numbers quoted in the text, written by the figure and table scripts
+\input{generated/catalogue}
+\input{generated/orthography}
+\input{generated/map}
+\input{generated/generator}
+\input{generated/timeline}
+
+%=================================================================
+\firstpage{1}
+\makeatletter
+\setcounter{page}{\@firstpage}
+\makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2026}
+\copyrightyear{2026}
+\history{Received: date; Accepted: date; Published: date}
+
+%=================================================================
+\Title{Naming the Trail: Bilingual Plains Cree Signs, Generative Fabrication, and a Companion App on Edmonton's Mountain Bike Trails}
+
+
+\Author{Kyle E. Mathewson $^{1,}$*}
+\AuthorNames{Kyle E. Mathewson}
+
+\address{%
+$^{1}$ \quad Department of Psychology, University of Alberta, Edmonton, AB, Canada \ktodo{confirm affiliation and add ORCID}}
+
+\corres{Correspondence: \ktodo{corresponding e-mail}}
+
+%=================================================================
+\abstract{Mountain bike trails in Edmonton's river valley carry English nicknames that riders have used for years, often jokes or puns, and almost none of them say anything about the Plains Cree (n\={e}hiyaw\={e}win) language of the territory the trails cross. This paper describes NehiyoMTB, an ongoing project that puts bilingual signs on those trails: 3D-printed plaques that carry each trail's English name, a Plains Cree name in Standard Roman Orthography, and the same name in syllabics. I describe how the signs are designed and printed, how a set of open tools grew around them (a translation workbench, a parametric plaque generator, an automated sign factory, interpretive web pages and a companion phone app), and how review by fluent speakers and Elders is meant to sit between every automated step and anything that reaches a tree. The thesis is that trail signs are an unusually good place for an Indigenous language in a city, because riders stop at them, see them again on every ride, and tie the words to a place, but that cheap fabrication and machine-assisted drafting move the hard part of the work from making signs to knowing that the words are right. An audit of spelling consistency across \orthBuiltN{} finished signs, \orthDraftN{} draft pages and \orthWorkbenchN{} candidate names shows where that review is still needed. The whole paper, including every figure and number, is rebuilt from the project repository by one command.}
+
+\keyword{Plains Cree; n\={e}hiyaw\={e}win; syllabics; linguistic landscape; place names; mountain biking; wayfinding; 3D printing; language revitalization; mobile app}
+
+\begin{document}
+
+%=================================================================
+\section{Introduction}
+
+Anyone who rides the singletrack in Edmonton's river valley learns a second map of the city, one made of trail names that never appear on a street sign. Raven, Machete, Six Shooter, Purgatory, Deliverance, Lovers Lane and Back Breaker are names that riders pass along at trailheads and in phone apps, and most of them began as a builder's joke or a description of how a trail feels under the wheels. These names are local knowledge in the plainest sense, but they are also entirely English, and they sit on land that has had other names for far longer. Edmonton is amiskwacîw\^askahikan, Beaver Hills House, within Treaty~6 territory, and Plains Cree is the Indigenous language spoken by more people in the Prairie provinces than any other \citep{statcan2023}. Yet a rider can spend years in the valley without seeing a single word of it.
+
+NehiyoMTB started as a small attempt to change that on the trails I ride. The idea was simple: make a sign for each trail that keeps the English name riders already know, adds a Plains Cree name for it, and writes that Cree name twice, once in the Standard Roman Orthography (SRO) that most learners meet first and once in syllabics, the writing system that many Cree communities use and recognise as their own \citep{okimasis2008}. The signs are 3D printed, a few colours each, and screwed to trees at trail entrances (Figure~\ref{fig:wall}). Over five years the project grew from a handful of hand-painted prints into \catBuilt{} finished signs, \catDrafts{} further trails with draft signs and pages, a translation workbench covering \wbTrails{} trails, a set of tools that can generate a printable sign for any trail name, a website with an interpretive page for each sign, and a companion phone app that turns finding the signs into part of a ride.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/signs_wall.jpg}
+\caption{The finished NehiyoMTB signs, photographed together before mounting. Each plaque carries the Cree name in SRO at the top, the same name in syllabics across the graphic, and the English trail name at the bottom. The red coil at left is the Slinky sign, a printed spring.\label{fig:wall}}
+\end{figure}
+
+This paper describes that work and makes an argument about it. The argument is that a trail sign is an unusually good place to put an Indigenous language in a city. Riders stop at trailheads, they read the sign every time they ride that trail, and the word becomes attached to a place and a feeling, which is how a lot of vocabulary sticks. Signs like these are part of what sociolinguists call the linguistic landscape, and the visibility of a language in public space both reflects and shapes how people think about it \citep{landry1997,gorter2006}. The same argument has a second half that the project taught me the hard way. Once signs can be generated and printed cheaply, the bottleneck is no longer making them; it is knowing that the Cree on them is right, that the name is one a speaker would choose, and that the community whose language it is wants it there. Generative tools, including the large language models that helped draft some of the project's translations and interpretive text, make that problem sharper rather than easier \citep{bird2020,mager2023}. The design question running through every part of NehiyoMTB is therefore how to let the tooling scale while keeping authority over the language with fluent speakers and Elders.
+
+The rest of the paper follows the project from the ground up. Section~\ref{sec:background} places it in work on Plains Cree and its writing systems, on signs and place names, on Indigenous names on recreation trails, and on the ethics of language technology. Section~\ref{sec:methods} describes how names were chosen and reviewed, how the signs are designed and printed, the newer sign generator and its options, the interpretive pages and the companion app, and the pipeline that builds this paper. Section~\ref{sec:results} reports what exists now, where it is, and what an audit of the project's own spelling shows. Section~\ref{sec:discussion} returns to the thesis and to the limits of what a project like this should claim.
+
+%=================================================================
+\section{Background and Related Work}\label{sec:background}
+
+\subsection{Plains Cree in Edmonton and its two writing systems}
+
+Plains Cree, or n\={e}hiyaw\={e}win, is the westernmost variety of the Cree language continuum and is spoken across Alberta, Saskatchewan and Manitoba. In the 2021 Census about 237,000 Indigenous people in Canada reported that they could carry on a conversation in an Indigenous language, and Cree languages were the most widely spoken among First Nations people in the Prairie provinces, with more than 57,000 speakers there \citep{statcan2023}. Those numbers describe a language that is far from gone but that has lost speakers in every generation since residential schools, which is why the Truth and Reconciliation Commission's Calls to Action and the federal Indigenous Languages Act both frame language as something governments and institutions have a duty to support \citep{trc2015,ila2019}. The United Nations Declaration on the Rights of Indigenous Peoples goes further and affirms the right of Indigenous peoples to designate and retain their own names for communities, places and persons \citep{undrip2007}.
+
+Plains Cree is written two ways, and that fact shapes every sign in this project. The Standard Roman Orthography uses the Latin alphabet with a circumflex or macron to mark long vowels, so that \textit{kiw\^apamitin} `I see you' distinguishes \textit{\^a} from \textit{a} \citep{okimasis2008}. The syllabary uses one symbol for each consonant--vowel syllable, rotates the symbol to change the vowel, adds a dot to mark length, and uses small raised finals for syllable-final consonants, so the same word is ᑭᐚᐸᒥᑎᐣ. The two systems map onto each other almost one to one, but only if both are spelled carefully, and the details matter. The western convention used for Plains Cree puts the \textit{w}-dot after the syllable it modifies, while eastern Cree conventions put it before, and Unicode encodes both as separate characters \citep{wolvengrey2001}. A sign that mixes them, or drops a length mark in one script but not the other, teaches a learner something false.
+
+Good tools for Plains Cree exist, and the project leans on them. The online dictionary itw\^ewina, built by the Alberta Language Technology Lab at the University of Alberta on Wolvengrey's dictionary, can analyse inflected forms and show them in both scripts \citep{itwewina,wolvengrey2001}. That work rests on a decade of computational modelling of Cree morphology \citep{arppe2016,harrigan2017}, and it is the main reference I used for checking forms. A dictionary is not the same thing as a name, though. Trail names are often puns, and a good Cree name for a pun is a creative and cultural choice rather than a lookup.
+
+\subsection{Signs as language: linguistic landscape and toponymic inscription}
+
+The study of language on public signs took its modern shape with Landry and Bourhis, who argued that the languages visible on road signs, shop fronts and place names act as a marker of a group's vitality and as a signal to speakers about which language counts in a place \citep{landry1997}. Later work broadened the idea of the linguistic landscape to include every kind of public text and to treat it as an approach to multilingualism in its own right \citep{gorter2006,shohamy2009}. Two strands of that literature are especially close to NehiyoMTB. Daveluy and Ferguson describe road signs in Nunavik in which Inuktitut syllabics, Roman Inuktitut, French and English share a single plate, and show that the choice of script on a sign is itself a statement about identity and authority \citep{daveluy2009}. Pietik\"ainen and colleagues, working with S\'ami and other languages in the Arctic, treat signs as `frozen actions' that carry the histories and decisions that put them there \citep{pietikainen2011}. Both studies make the point that a bilingual sign is never neutral; someone chose which language goes on top, and which script.
+
+Place names are a sharper case of the same thing. Critical toponymy treats naming as a political act of inscription on the land, in which the names on maps and signs record who had the power to name \citep{roseredwood2010}. Tucker and Rose-Redwood's account of the renaming of the Salish Sea shows how a new name can be read both as recognition of Indigenous geography and as a symbolic gesture that leaves the underlying arrangement untouched \citep{tucker2015}. That tension is a fair warning for any project like this one. Tuck and Yang's argument that decolonization is not a metaphor applies directly: putting Cree words on trails is not the same as returning land or decision-making \citep{tuck2012}, and the project should not claim to be more than it is.
+
+\subsection{Indigenous names on trails}
+
+Recreation trails have become one of the places where Indigenous languages are returning to public signage in Canada, usually through partnerships between trail groups and Nations. In the Shuswap region of British Columbia, the Secw\'epemc Landmarks project led by Secw\'epemc leaders and Elders, with support from the Shuswap Trail Alliance, placed sculptures and interpretive panels carrying place names and oral histories at trail sites and involved local students in carving about a hundred trailhead posts \citep{secwepemc_landmarks}. On Vancouver Island, the mountain bike network on \v{C}\ej umaat\ej a (Mount Ozzard) near Ucluelet was built under a land use agreement between Yuu\l u\textglotstop i\l\textglotstop at\d{h} (Ucluelet First Nation) and the local mountain bike association, and its trail sign lists each trail in Nuu-chah-nulth with an English translation \citep{cumaata2023}. Nationally, the Trans Canada Trail now invites trail groups to add Indigenous languages to its wayfinding signs \citep{tct2023}. In Edmonton itself, the city's twelve wards were given Indigenous names in 2020 by a committee of Indigenous women guided by Knowledge Keepers and Elders, so names such as \textit{papastew}, \textit{pih\^esiwin}, \textit{sipiwiyiniwak} and \textit{tastawiyiniwak} now appear on civic maps \citep{edmontonwards2020}.
+
+These projects share a pattern that NehiyoMTB does not yet fully match. In each, the Nation or a body of Knowledge Keepers led or approved the naming, and the trail organisation supplied the infrastructure. NehiyoMTB began the other way around, as an individual rider's project with the signs and the tools coming first. That difference is the main reason this paper spends as much space on review and governance as it does on fabrication.
+
+\subsection{Digital tools, machine translation and language authority}
+
+Digital technology has been part of Indigenous language work for decades, from recordings and online dictionaries to apps and social media, and Galla's review describes both its promise for reaching learners where they are and the risk that technology substitutes for the slower work of intergenerational transmission \citep{galla2016,hinton2001}. Fishman's older argument that language shift is reversed in homes and communities, not on signs or screens, still frames what a project like this can claim \citep{fishman1991}. Signs and apps are at most a way to make a language more visible and to give learners small, repeated contact with words.
+
+Language technology for Indigenous languages also raises questions of who decides. Bird argues that much speech and language technology treats Indigenous languages as data to be processed rather than as the practices of communities who should set the agenda \citep{bird2020}. Mager and colleagues interviewed community members about machine translation for Indigenous languages and found strong concerns about accuracy, consent and control, along with a clear preference that speakers be involved throughout \citep{mager2023}. The CARE principles for Indigenous data governance, Collective benefit, Authority to control, Responsibility and Ethics, and the First Nations OCAP principles of ownership, control, access and possession put that expectation in formal terms \citep{carroll2020,fnigc_ocap}. Indigenous research methodologies make the same point from within, framing research as relational and accountable to community rather than extractive \citep{smith2012,wilson2008,kovach2009}. These sources set the standard that NehiyoMTB's machine-assisted drafting has to be measured against.
+
+\subsection{Fabrication, place and play}
+
+Two further bodies of work inform the design of the signs and the app. Digital fabrication has become a common tool in cultural heritage for making replicas, tactile objects and teaching materials \citep{scopigno2017}, and low-cost 3D printing makes it practical for an individual to produce durable, multi-colour objects in small runs. Place-based education argues that learning tied to a specific landscape, and to the histories of that landscape, is more meaningful than learning in the abstract \citep{gruenewald2003,battiste2013}, which is close to what a sign at a trailhead tries to do. On the app side, mountain bikers already live with gamified tracking; segment leaderboards on apps like Strava have been shown to motivate riders while also encouraging risk and comparison \citep{barratt2017}, and gamification more generally means borrowing game elements for non-game settings \citep{deterding2011}. The companion app borrows these ideas but points them at the signs rather than at speed alone, and it draws its maps from OpenStreetMap, the volunteer map of the world \citep{haklay2008}.
+
+%=================================================================
+\section{Materials and Methods}\label{sec:methods}
+
+\subsection{Setting and position}
+
+The signs are on singletrack in Edmonton's North Saskatchewan River valley and its tributary ravines, a network of informal and sanctioned trails that riders mostly find through Trailforks and word of mouth. The finished signs sit along about \mapBuiltKm{}~km of trail in the central valley, and the full set of signed and drafted trails spans roughly \mapExtentEW{}~km east to west and \mapExtentNS{}~km north to south (Section~\ref{sec:map}). The land is Treaty~6 territory and a traditional meeting place for many Indigenous peoples, including Cree, Saulteaux, Blackfoot, Nakota Sioux, Dene and M\'etis.
+
+I come to this project as a rider and maker rather than as a Cree speaker or a linguist, and that position shapes both what I could do alone and what had to come from others. \ktodo{a short positionality statement in your own words: your relationship to Cree language and community, why you started the project, and who you are accountable to.} The project has no external funding and has been built in evenings and on weekends.
+
+\subsection{How the project grew}
+
+The project's history is recorded in its Git repository, and Figure~\ref{fig:timeline} shows it as cumulative commits with the main milestones marked. The repository holds \gitCommits{} commits from October \gitFirstYear{} to \gitLastDate{}, which understates the physical work, since printing, painting, mounting and many conversations left no commits at all. The first signs were modelled by hand in SketchUp and printed in white PLA, then spray-primed and painted with acrylics. A later change to the slicer workflow, pausing the print at chosen layers to swap filament, made multi-colour signs possible straight off the printer and is how every current sign is made. From late 2025 the repository gained an OpenSCAD plaque generator and the first interpretive sign page, in 2026 a sign factory, a catalogue editor and the companion app, and in October 2026 the site and app were merged so that both read the same catalogue.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/timeline.pdf}
+\caption{The project's history read from its Git log (cumulative commits), with milestones labelled where their commits first appear. Physical work such as printing and mounting is not recorded in the log.\label{fig:timeline}}
+\end{figure}
+
+The tooling has also been built with help from AI coding assistants, and I record that here because it matters for how the paper's later claims should be read. Of the \gitCommits{} commits, \gitAssistantCommits{} were authored by an AI assistant working from my instructions and reviewed by me before merging. Other steps, described below, used language models to draft candidate translations and page text and an image model to draft sign icons. None of those outputs were treated as final.
+
+\subsection{Choosing and translating names}
+
+Every sign starts from a trail's existing English name, because that is the name riders use and the one a rider is looking for at the trailhead. I did not name any of these trails; the English names were given by the volunteers who built them and passed on by riders, and my part is only the Cree names and the signs. The trail list came from Trailforks' Edmonton listings, ranked by how often each trail is ridden, with its area, length and climbing. For each trail the Translation Workbench (\texttt{docs/cree-trail-names.html}) holds three candidate Cree names, each with syllabics, SRO, an English gloss, a short note on how the name was built from its parts, and a note on whether and how it carries the trail's joke. The workbench now covers \wbTrails{} trails in \wbAreas{} areas of the city, with \orthWorkbenchN{} candidates in all. \ktodo{say how the workbench candidates were produced; the repository suggests they were drafted with a language model and then curated, and the paper should say so plainly if that is right.}
+
+The candidates follow a few habits that came out of early signs. Where a name is a plain description or an animal, the Cree is usually a dictionary word: Raven is \textit{kahkakiw}, Porcupine is \textit{k\^akwa}, Howl is \textit{oy\^oyow}, the drawn-out cry of a wolf. Where the English is a pun, the candidates try to find a Cree name that carries some of the same play without simply translating an innuendo. Old Timer's, a trail whose English name nods to stiff old joints, became \textit{kay\^as-ayisiyiniwak} `the old-time people', which honours the people of earlier days as a community rather than poking at one old rider. Where the name is a proper noun, the workbench keeps it and spells it into syllabics, so Mark Messier's trail keeps the Oilers captain's name, with alternatives that add \textit{okim\^aw} `leader'. The I See You trail is the clearest case of a name with layers: its builder, an intensive-care physician, chose an English name that sounds like ``ICU'', and the Cree \textit{kiw\^apamitin} `I see you (one person)' keeps the sense of truly seeing a person, which the sign's interpretive page develops into a short lesson on how the verb is built from \textit{ki-} `you', \textit{w\^apam} `see' and \textit{-itin}.
+
+\subsection{Conversations with Elders, speakers and trail stakeholders}\label{sec:consult}
+
+The intended process puts people, not tools, at the point where a name is chosen. A candidate from the workbench is a starting point for a conversation with a fluent speaker or Elder, who can choose it, correct it, offer something better, or say that a trail should not carry a Cree name at all. The repository records that intention in several ways: the catalogue's schema has room for a named language consultant when one agrees to be credited, many draft pages carry a note that the Cree rendering is ``awaiting review by a fluent speaker'', and \catFlaggedReview{} sign records carry notes that flag a form for Elder or speaker review. The repository does not record the conversations themselves, and this section is where they belong.
+
+\ktodo{describe who you spoke with (only with their permission to be named, or described without names), when, and how: for example Elders, Cree language teachers, Knowledge Keepers, family or community members; whether protocol such as tobacco or an honorarium was offered; what they said about the idea of Cree names on trails; and which names they chose, corrected or declined. Specific examples of a name that changed after a conversation would be valuable here.}
+
+The trail side has its own stakeholders. The trails are built and maintained by volunteer builders and, in sanctioned areas, sit on City of Edmonton parkland. \ktodo{describe conversations with trail builders (for example the I See You builder), the Edmonton Mountain Bike Alliance or other trail groups, and the City, including whether permission was sought for mounting signs and how riders have responded.}
+
+\subsection{Designing and printing the signs}
+
+Each sign follows the same layout so that riders learn to read it at a glance. The SRO name runs across the top, a graphic fills the middle, the syllabics sit on top of the graphic in an accent colour, and the English name runs across the bottom (Figure~\ref{fig:wall}). Putting the syllabics on the image rather than in a separate band was a deliberate choice; on the Raven sign, the red syllabics ᑲᐦᑲᑭᐤ are carried on the raven's body, so the bird literally carries its Cree name. The plaques are roughly 9 by 16.5~cm, about 2 to 3~mm thick, with two holes for screws into a tree.
+
+The colours come from the printer rather than from paint. The plaque is sliced into layers, and the printer pauses at chosen heights so that the filament can be swapped, so a sign with a white base, black lettering and graphic, and red syllabics is three colour bands stacked in the print. The catalogue records those bands for each sign as an ordered list of colours with the height of each swap. For a few signs with photographic or gradient images, a different approach called IllumiStack (in the spirit of HueForge) prints a thin stack of layers whose partial transparency mixes colours, so that a continuous-tone image emerges from four or five filaments; the Farmer's Daughter and Purple Haze signs are made this way. Table~\ref{tab:signs} lists the finished signs with their filament colours and print method.
+
+\subsection{The sign generator and its options}
+
+Making the first signs by hand took many evenings each, which is why most of the newer work in the repository is a set of tools that turn a trail name into a printable sign. Figure~\ref{fig:pipeline} shows how they connect. The tools are meant to make drafts, not decisions; every arrow that leads to a tree passes through the review step described in Section~\ref{sec:consult}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/pipeline.pdf}
+\caption{How a trail name becomes a printed sign, a web page and an app entry. Blue boxes are tools in the repository, the orange box is the human review step, and green boxes are what riders see. The catalogue file is the single record that the website, the app and the print tools all read.\label{fig:pipeline}}
+\end{figure}
+
+The first option a maker chooses is the sign's style. The style guide (\texttt{docs/style-guide.html}) defines three. A screenprint sign uses a flat, two-to-four colour graphic with closed shapes and thick outlines, which slices cleanly into colour layers; this is the default and is meant to cover about four in five trails. A HueForge sign uses a continuous-tone image, printed as a tonal stack as described above, for the minority of trails whose names suggest a scene rather than an emblem. An object sign fuses a small printable 3D object into the plaque, such as an axe head or a birdhouse, for names where a physical object makes the joke. Each style carries an editable image-generation prompt in a common visual language, so that a graphic for any trail can be drafted with an image model and then traced, redrawn or replaced by hand.
+
+The second set of options turns a graphic into geometry. The Icon Extruder, a browser tool, posterises an image to a few tones, lets the maker click each closed region to assign a filament colour and a layer height, previews the result in 3D, and exports a manifold STL, either as one body or one body per colour for printers with an automatic material system. The plaque generator (\texttt{tools/plaque\_gen/plaque\_gen.py}) then builds the plaque in OpenSCAD: it starts from a blank plaque, fits the English name, the SRO and the syllabics into the available width with automatic font sizing and line breaking, raises the syllabics in front, fuses the icon on top, and writes a \texttt{.scad} and an \texttt{.stl}. Its options control the text, the font sizes, the icon width and the plaque blank, so a single command makes a sign.
+
+The sign factory (\texttt{tools/sign\_factory/build\_signs.py}) runs that whole chain for every trail that does not have a sign yet. In its current form it takes a generated icon for each trail, composes a full preview that matches the physical layout, builds a multi-body 3D model with one body per colour, and writes a 3MF file that a slicer can print with colour changes already set. An older procedural mode, still available, draws one of about forty simple vector motifs, such as a heart, a skull, a pine or a bridge, chosen by keywords in the trail's concept, so a draft can be made with no image model at all. The factory's outputs appear in the workbench's ``Draft sign'' column, so a speaker reviewing a name can see the sign it would go on.
+
+\subsection{Interpretive pages and machine-assisted drafting}
+
+A sign has room for a word, not an explanation, so each sign links to a web page that explains it (Figure~\ref{fig:signpage}). The page shows the name in both scripts, breaks it into its parts with hover glosses for each piece, shows related forms (the plural, the diminutive, other persons of a verb), tells a short cultural story about the word or the image and a trail story about the name, embeds the trail map, and lists sources. The I See You page, which was written first and by hand, became the model for the others.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\textwidth]{figures/site_sign_page.png}
+\caption{The interpretive page for the Raven sign (\textit{kahkakiw}), rendered from the repository's \texttt{docs/} folder. The left column shows the word in SRO and syllabics with its English meaning and a photograph of the mounted sign; the right column shows related forms built from the same stem. The trail map panel is blank here because third-party content is blocked when the figure is built.\label{fig:signpage}}
+\end{figure}
+
+Writing pages of this kind for every sign by hand did not scale, so most were drafted with machine help and then edited. The page text for each sign lives in one structured record in \texttt{docs/catalogue.json}, and a renderer turns that record into the page, so a page is never edited directly. A drafting script gathers a sign's context (its three workbench candidates, its graphic concept, its trail statistics and its neighbouring trails), asks a language model for the page fields only, validates the result against the schema, and writes it back with a status set by the script rather than the model. Every page carries one of four statuses: \textit{draft} and \textit{agent-drafted} mark text that has not been reviewed and may be regenerated, while \textit{user-reviewed} and \textit{published} mark text that a person has read and edited, which later regeneration will not overwrite. The models were also asked to leave notes rather than guess, and many did; the Raven page, for instance, carries a note that the diminutive \textit{kahkakiwisis} and its syllabics disagree by one syllable and should be checked against itw\^ewina or with an Elder. Those notes stay internal and are not shown on the public page.
+
+\subsection{The companion app}
+
+The companion app, NehiyoMTB on phones and at \texttt{nehiyomtb.ca/app} on the web, exists because a sign is only useful if riders find it. It is built once with Expo and React Native in TypeScript and runs on Android, iOS and the web, backed by a Supabase project (Postgres with authentication, storage and row-level security). The app has no trail data of its own. On every launch it shows the last catalogue it cached and then fetches the live catalogue from the website, so a sign added to the site appears in the app without a new release.
+
+The app has five parts, and each one was designed around the signs. The map shows every signed trail from its GPS track, the rider's location, and directions to a chosen trailhead. The route builder takes a start and an end and threads a ride through as many signed trails as it can within a detour budget the rider sets, using cheapest insertion: it starts from the direct line and repeatedly inserts whichever trail, in whichever direction, adds the least extra distance, until no trail fits the budget. The sign hunt asks riders to photograph the signs at a trail's start and end; a photo counts when its GPS position is within 75~m of the sign, and the photo timestamps double as a trail timer, so a start-sign photo and an end-sign photo on the same ride give a time without live tracking. The ride log records a GPS track that keeps recording with the screen locked in the native builds, and exports it as GPX. Leaderboards show points and names only, never photos or locations.
+
+Two design choices in the app follow from the governance concerns above. The first is a data-use promise made at every upload. Each photo and ride asks one question before anything leaves the phone, with three answers: keep it private, contribute it to the trail-mapping team only, or share it publicly with other signed-in riders; every capture is saved on the phone first, and a no-account guest mode keeps everything on the device. That design follows the spirit of the CARE principles in giving the person whose data it is the authority over it \citep{carroll2020}. The second is a King or Queen of the Mountain (KOM) board for each trail, on which the three fastest riders can claim the KOM edition of that trail's sign for free. To keep it honest, ranks come only from server-verified sign captures: a verified start-sign photo followed by a verified end-sign photo by the same rider within three hours, with runs that average over 15~m/s dropped as implausible. The reward is a sign, not a prize, which keeps the competition pointed back at the language.
+
+\subsection{A reproducible paper}
+
+This paper is built from the repository it describes. The \texttt{paper/} folder holds Python scripts that read the catalogue, the workbench, the sign-factory manifest, the Supabase migrations, the photographs and the Git history, and write every figure, every table, and every number quoted in the text as a \LaTeX{} macro; a further script renders the Cree syllabics in the text to vector images, because the journal's pdf\LaTeX{} toolchain has no syllabics font. One command, \texttt{make}, runs the scripts and compiles the paper, so the paper updates as the project does, in line with common advice for reproducible computational work \citep{sandve2013}. The screenshots are taken by a headless browser from the repository's own web folder with all third-party requests blocked, which is why maps in them have no basemap.
+
+%=================================================================
+\section{Results}\label{sec:results}
+
+\subsection{The finished signs}
+
+There are \catBuilt{} finished signs, all printed and photographed, and Table~\ref{tab:signs} lists them. They range from single dictionary words (\textit{kahkakiw} `raven', \textit{k\^akwa} `porcupine') to built compounds and short phrases. Back Breaker, \textit{kask\^awikan\^en\^ew}, is a verb meaning `s/he breaks someone's back by hand'; Machete is \textit{mist\^apiskihkom\^an} `great iron knife'; Purgatory, \textit{k\^asenam\^ak\^ew iskot\^ew}, is a compound the page glosses as `the fire that refuses (people)'. A few keep a borrowed English name and spell it into syllabics, as with Slinky and the first word of Victoria's Secret. About half the signs use three colours; the range across the set is \catMinColours{} to \catMaxColours{} filament colours, and \catTonal{} of the \catBuilt{} use the tonal print method rather than plain layer swaps.
+
+\begin{table}[H]
+\caption{The finished signs. Colours are the filament colours in print order, from the bottom layer up. ``Tonal'' marks signs printed as a translucent layer stack rather than plain layer swaps; the grey line is the review status of the sign's interpretive page. Generated from \texttt{docs/catalogue.json}.\label{tab:signs}}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\input{generated/signs_table}
+\end{table}
+
+Of the \catModels{} sign records in the catalogue, \catPublished{} pages are marked published, \catReviewed{} reviewed, \catAgentDrafted{} machine-drafted and \catDraftStatus{} still a draft. The I See You page carries the status draft even though its sign is finished, because its long hand-written lesson was restored from the project's history and its structured record has not been filled in yet.
+
+\subsection{Where the signs are}\label{sec:map}
+
+Figure~\ref{fig:map} places every signed and drafted trail. The finished signs cluster in the central river valley, where the ravines meet the river and where most of the trails I ride are, along about \mapBuiltKm{}~km of trail. The drafted trails reach east to Gold Bar and Capilano and south to Terwillegar, about \mapTotalKm{}~km of trail in all. The clustering is partly an accident of where I ride, and partly useful, since it means a single ride can pass most of the finished signs.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/map.pdf}
+\caption{Trails with finished signs (blue) and with draft sign pages only (orange), drawn from the GPS tracks stored in the catalogue; circles mark each trail's start. Panel B enlarges the central river valley and labels finished signs by sign number (Table~\ref{tab:signs}).\label{fig:map}}
+\end{figure}
+
+\subsection{What the generator produced}
+
+The sign factory has composed \genDrafts{} draft signs for trails without a physical sign, from \genIcons{} generated icons. Of these, \genScreenprint{} use the screenprint style, \genHueforge{} the tonal HueForge style and \genObject{} the object style, which leans further toward screenprint than the four-in-five, one-in-ten, one-in-ten split the style guide aims for, mostly because flat emblems were the easiest to draft well. The median draft uses \genMedianColours{} filament colours and the most complex uses \genMaxColours{}. Figure~\ref{fig:stages} follows one trail of each style through the factory, and Figure~\ref{fig:drafts} shows a sample of the composed previews.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.94\textwidth]{figures/generator_stages.pdf}
+\caption{Three trails followed through the sign factory, one per style: the generated icon (left), the composed sign preview with SRO, syllabics and English placed as on the physical signs (middle), and the assembled multi-body print model, one body per filament colour (right).\label{fig:stages}}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/drafts_grid.pdf}
+\caption{A sample of composed draft signs for trails in the catalogue that do not yet have a physical sign. Every Cree name on these drafts is a candidate awaiting review.\label{fig:drafts}}
+\end{figure}
+
+The drafts are good enough to show a speaker what a sign would look like, which was their purpose, and some are close to printable. They also make the review problem visible. A rider looking at a finished preview has no way to tell that its Cree has not been checked, which is exactly why the drafts stay in the workbench and on draft pages rather than on trees.
+
+\subsection{Spelling consistency as a measure of review}
+
+Because every name is written in two scripts, the project can check one kind of error automatically. I read each syllabic spelling back into SRO using the Unicode names of the syllabics characters and compared it with the SRO spelling recorded beside it, ignoring spaces and hyphens. A pair can agree exactly, differ only in vowel length (a circumflex present in one script and missing in the other), or differ in letters. Separately, I flagged any spelling that uses a character outside the western Plains Cree conventions, most often a \textit{w}-dot on the eastern side. This is a check of internal consistency only. A name can be spelled consistently in both scripts and still be wrong, and judging that is the job of speakers.
+
+Figure~\ref{fig:orth} shows the result, and it tracks the amount of human attention each group has had. Among the \orthBuiltN{} finished signs, \orthBuiltExact{} pairs agree exactly, \orthBuiltLength{} differs only in length, and \orthBuiltMismatch{} differ in letters, one of which is the loanword Slinky, whose syllabics spell the sound rather than the English letters. Among the \orthDraftN{} draft pages, \orthDraftExact{} agree, \orthDraftLength{} differ in length and \orthDraftMismatch{} differ in letters. Among the \orthWorkbenchN{} workbench candidates, which no one has reviewed one by one, only \orthWorkbenchExact{} agree exactly, \orthWorkbenchLength{} differ in length and \orthWorkbenchMismatch{} differ in letters, and \orthWorkbenchNonPlains{} use eastern or non-Plains characters. Table~\ref{tab:orth} lists the disagreements among the signs and draft pages.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/orthography.pdf}
+\caption{Agreement between the SRO and syllabic spellings of each name, read against each other. (\textbf{A}) Share of pairs that agree exactly, differ only in vowel length, or differ in letters, for finished signs, draft sign pages and unreviewed workbench candidates. (\textbf{B}) Share of syllabic spellings that use characters from eastern or other syllabaries, mostly the \textit{w}-dot placed on the eastern side.\label{fig:orth}}
+\end{figure}
+
+\begin{table}[H]
+\caption{Signs and draft pages whose two spellings disagree. ``Read back'' is the syllabic spelling converted to SRO by the audit script. Some differences are deliberate (the loanword Slinky); the rest are queued for review.\label{tab:orth}}
+\small
+\centering
+\input{generated/orthography_table}
+\end{table}
+
+Several of the disagreements are small but would mislead a learner. On the Ray Gun sign the SRO \textit{s\^apw\^apahcikan} has a \textit{p} that the syllabics drop. On Wonder Woman the syllabics spell \textit{iskwaw} with a \textit{w}-dot added to a \textit{ka} syllable rather than the \textit{kwe} syllable that \textit{iskwew} needs. On The Trap, the syllabics read as something close to \textit{pw\^akikan} while the SRO says \textit{wanihikan}, which suggests the two were drafted separately and never compared. None of these is a hard fix, but each needs a speaker to say which spelling is intended.
+
+\subsection{The app in use}
+
+Figure~\ref{fig:app} shows the app's web build, rendered from the repository. The sign-in screen states the data-use promise before a rider creates an account; the sign hunt lists every sign with start and end capture buttons; the ride screen starts a GPS log; and each trail's page shows the sign a rider should look for, its colours, and the rider's own start and end captures.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.24\textwidth]{figures/app_signin.png}\hfill
+\includegraphics[width=0.24\textwidth]{figures/app_hunt.png}\hfill
+\includegraphics[width=0.24\textwidth]{figures/app_ride.png}\hfill
+\includegraphics[width=0.24\textwidth]{figures/app_trail.png}
+\caption{The companion app's web build at phone size, rendered from \texttt{docs/app}: sign-in with the data-use promise; the sign hunt; the ride log; and the page for the Raven trail with the sign to look for.\label{fig:app}}
+\end{figure}
+
+The route builder is easiest to understand by running it. Figure~\ref{fig:routing} applies a line-for-line Python port of the app's route function to the finished signs, for a ride from the south end of the central valley to its north end, \routeDirect{}~km apart in a straight line. With half a kilometre of detour allowed the route passes \routeHalfTrails{} signed trails over \routeHalfTotal{}~km; with one kilometre, \routeOneTrails{} trails over \routeOneTotal{}~km; and with three kilometres, \routeThreeTrails{} trails over \routeThreeTotal{}~km. Connectors between trails are straight lines in this version, which overstates how direct the riding is but keeps the planner simple enough to replace later with a real cycling router.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/routing.pdf}
+\caption{The app's route builder (cheapest insertion) run on the finished signs for three detour budgets. Green lines are signed trails the route rides; dashed lines are straight connectors between them; grey lines are signed trails not used.\label{fig:routing}}
+\end{figure}
+
+The backend keeps what the hunt, rides and boards need and nothing else. Table~\ref{tab:schema} lists its tables; every one has row-level security switched on, which is what enforces the private, contribute and public levels at the database rather than in the app.
+
+\begin{table}[H]
+\caption{Tables in the app's Supabase backend, read from the SQL migrations in \texttt{supabase/migrations}.\label{tab:schema}}
+\small
+\centering
+\input{generated/schema_table}
+\end{table}
+
+%=================================================================
+\section{Discussion}\label{sec:discussion}
+
+\subsection{Learning a word at the trailhead}
+
+The case for trail signs as a place for Cree rests on repetition and place, and the signs are built to use both. A rider who rides Raven every week sees \textit{kahkakiw} and ᑲᐦᑲᑭᐤ every week, on the same tree, at the moment of slowing down to drop in. That kind of small, repeated, located contact is very different from a vocabulary list, and it fits what place-based education argues about learning that is tied to a landscape \citep{gruenewald2003}. The two scripts on every sign do a quieter kind of teaching as well; after enough signs, a rider starts to see that ᑲ is \textit{ka} and ᑭ is \textit{ki}, and the syllabary stops looking like decoration. The interpretive pages are there for the rider who wants more, and the app is there to send riders to trails they would not otherwise ride. \ktodo{any evidence you have of how riders respond: comments, messages, people asking about a word, app sign-ups or captures. Even informal observations help here, clearly labelled as informal.}
+
+\subsection{Humour, innuendo and translation}
+
+Mountain bike trail names are often jokes, and some are crude, and that creates a real translation question. A literal Cree rendering of a double entendre can put a language that many people hold as sacred in the service of a joke it was never part of. The workbench tries to handle this case by case: some names keep their play in a gentler form, as with Lovers Lane, \textit{nicimos m\^eskan\^as} `my sweetheart's little path'; some turn the joke toward respect, as with Old Timer's; and some names are better left without a Cree name at all. That last option matters. A trail whose English name cannot be carried into Cree with dignity should keep its English name and nothing more, and the people who should make that call are speakers and Elders, not the person who printed the sign. This is the clearest place where the project's tools cannot substitute for conversations.
+
+\subsection{Cheap to make, slow to know}
+
+The spelling audit gives a concrete picture of the project's central tension. As the tools got better, the cost of a new draft sign fell to almost nothing; the factory has drafted \genDrafts{} of them. The cost of a correct one did not fall at all, because correctness lives with speakers. The audit shows the gap directly: signs that went through many rounds of human attention are almost all consistent, draft pages are worse, and unreviewed candidates disagree with themselves in about half of all cases. That pattern is what the literature on language technology for Indigenous languages would predict \citep{bird2020,mager2023}, and it argues for a simple rule the repository already encodes: machine output is a draft, its status says so, and nothing goes on a tree until a person who knows the language has said yes. A useful next tool would be the audit itself, run by the catalogue editor on save, so that a page with a mismatched spelling cannot be marked published.
+
+\subsection{Data and who benefits}
+
+One feature of the project raises the question of who it benefits: the app's data. Ride tracks and photos are personal, and the default in NehiyoMTB is that they stay on the phone; the contribute level shares them only with trail mapping, and the public level is opt-in per item and reversible. That design follows CARE and OCAP in spirit for rider data \citep{carroll2020,fnigc_ocap}. Language content is a separate matter. The Cree names and pages are public by design, but the words and stories are not mine, and any community or speaker who contributes should have a say in how they are credited and used. \ktodo{state the licence for the sign files and pages, and any arrangement for crediting or compensating language contributors.}
+
+
+\subsection{Limitations and next steps}
+
+This is a descriptive account of a project, not an evaluation, and its claims should be read that way. I have not measured whether riders learn words from the signs, and the app's capture data could support a careful study of that only with ethics approval and riders' consent. The consultation record is thinner in the repository than in life, and Section~\ref{sec:consult} depends on details only I can supply. Signs on trees also age, fade and disappear, and \ktodo{a sentence on how many signs are mounted now, where, and how they have held up}. The most important next step is not a new tool but a more formal relationship with Cree speakers, Elders and language organisations in Edmonton, so that review is a standing practice with clear credit rather than a series of favours. On the technical side, the spelling audit belongs in the editor, the route builder needs a real cycling router, and the app's capture data could show, with consent, which signs riders actually find.
+
+%=================================================================
+\section{Conclusions}
+
+NehiyoMTB puts Plains Cree on Edmonton's mountain bike trails through bilingual 3D-printed signs, a website that explains each word, and an app that sends riders out to find them. The project shows that a single rider with a printer and open tools can make a coherent, durable set of bilingual signs and the software around them, and that trail signs are a natural place for an Indigenous language in a city because they are read again and again in the same place. It also shows that the same tools that make signs cheap make mistakes cheap, and that the work that cannot be automated, choosing names with speakers and Elders and checking every syllable, is the work that decides whether the project helps the language or not. The repository, the tools and this paper are open, so that other trail communities can borrow what works and improve on what does not.
+
+%=================================================================
+\vspace{6pt}
+
+\supplementary{The full spelling audit (\texttt{orthography\_audit.csv}), all figure scripts and the build pipeline are in the \texttt{paper/} folder of the project repository.}
+
+\funding{This research received no external funding.}
+
+\institutionalreview{\ktodo{Not applicable if no human-participant data are reported; if rider data or interviews are added, give the ethics approval here.}}
+
+\informedconsent{\ktodo{Not applicable, unless people consulted are named or quoted, in which case state that they consented.}}
+
+\dataavailability{The sign catalogue, design files, tools, app source and the scripts that build this paper are openly available at \url{https://github.com/kylemath/nehiyoMTB}. The website is at \url{https://nehiyomtb.ca}.}
+
+\acknowledgments{\ktodo{thank the Elders, speakers and trail builders who agreed to be named.} During the preparation of this work the author used generative AI tools: language models to draft candidate translations, interpretive page text and parts of the code and of this manuscript, and an image model to draft sign icons. The author reviewed and edited all outputs and takes full responsibility for the content of this publication.}
+
+\conflictsofinterest{\ktodo{state any conflicts of interest}}
+
+\abbreviations{
+The following abbreviations are used in this manuscript:\\
+\noindent
+\begin{tabular}{@{}ll}
+SRO & Standard Roman Orthography\\
+KOM & King/Queen of the Mountain\\
+GPX & GPS Exchange Format\\
+STL & Standard Tessellation Language (3D mesh format)\\
+3MF & 3D Manufacturing Format\\
+RLS & Row-level security
+\end{tabular}}
+
+%=================================================================
+\reftitle{References}
+\externalbibliography{yes}
+\bibliography{references}
+
+\end{document}
