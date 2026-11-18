@@ -72,6 +72,8 @@ Plains Cree, or nēhiyawēwin, is written in two systems that map onto each othe
 
 The corpus is the set of trail names in the project's open catalogue, which records for each sign its English name, its Cree name in both scripts, a literal gloss and an interpretive note on how the name was built.^2^ At the time of analysis the catalogue held {{nModels}} sign records, of which {{nNames}} are finished signs that have been printed and photographed and the rest are draft pages. Figure 1 shows where the named trails lie: the signed network spans roughly {{mapExtentEW}} km east to west and {{mapExtentNS}} km north to south, almost all of it within the North Saskatchewan River valley and its ravines. A separate working list, which I call the workbench, holds three candidate Cree names for each of {{wbTrails}} trails in {{wbAreas}} riding areas, {{wbCands}} candidates in all, and serves as the pool from which sign names are chosen. The English names were taken as they appear on Trailforks, the crowd-sourced trail database most riders in the city use, and they may differ in small ways from the names riders say aloud.
 
+To see whether the way names were translated changed as the project went on, I dated each finished sign by the first commit in the project's version-control history that contains its files. This gives the date on which a sign's files reached the repository, not the date on which the sign was made, and it groups the signs into {{nBatches}} batches rather than a strict sequence; the earliest batch, uploaded in the first commit in {{firstBatch}}, contains signs that were made before then. Within a batch I order the signs by their sign number. **[k to supply: confirm or correct the order in which the signs were made, and roughly when, from your own records or photographs.]**
+
 ::: {custom-style="Graphic Title"}
 **Figure 1.** Trails in Edmonton's river valley named in the project catalogue
 :::
@@ -132,19 +134,31 @@ This pattern is close to what Helset found for climbing routes, where most names
 
 ## How the names were translated
 
-Table 2 lists the finished names with their Cree forms, literal senses and the strategy I assigned. Translation proper was the most common operation, used for {{stratTranslationProper}} names ({{stratTranslationProperPct}}). Some of these are single dictionary words, as with *kahkakiw* 'raven' and *kâkwa* 'porcupine'; others translate a phrase word for word, as with *mamahtâw iskwew* 'wondrous woman' for *Wonder Woman*, or render an English noun phrase as a Cree verb, as with *kaskâwikanênêw* 's/he breaks his/her back' for *Back Breaker*. In several cases translation proper keeps the meaning of the words while losing the allusion: *paspîhiwêwin* 'the rescuing of people' translates *Deliverance* as an abstract noun and leaves the film behind, and *kiwâpamitin* 'I see you' keeps the phrase but cannot keep the pun on "ICU".
+Table 2 lists the finished names in the approximate order in which they were made, with their Cree forms, literal senses and the strategy I assigned. Translation proper was the most common operation, used for {{stratTranslationProper}} names ({{stratTranslationProperPct}}). Some of these are single dictionary words, as with *kahkakiw* 'raven' and *kâkwa* 'porcupine'; others translate a phrase word for word, as with *mamahtâw iskwew* 'wondrous woman' for *Wonder Woman*, or render an English noun phrase as a Cree verb, as with *kaskâwikanênêw* 's/he breaks his/her back' for *Back Breaker*. In several cases translation proper keeps the meaning of the words while losing the allusion: *paspîhiwêwin* 'the rescuing of people' translates *Deliverance* as an abstract noun and leaves the film behind, and *kiwâpamitin* 'I see you' keeps the phrase but cannot keep the pun on "ICU".
 
 {{tableNames}}
 
-Table: **Table 2.** The finished signs: English names, Cree names and translation strategy
+Table: **Table 2.** The finished signs in approximate order of making: English names, Cree names and translation strategy
 
 ::: {custom-style="Graphic Source"}
-Source: Project catalogue (English and Cree names, literal senses as glossed on each sign's page); strategy coded by the author. *Bed Springs* has no syllabic spelling on record.
+Source: Project catalogue (English and Cree names, literal senses as glossed on each sign's page); strategy coded by the author; dates are the month the sign's files first appear in the project's version history. *Bed Springs* has no syllabic spelling on record.
 :::
 
 Modification accounted for {{stratModification}} names ({{stratModificationPct}}), and it clusters among the object names, where Cree has no established single word for the thing. *Machete* became *mistâpiskihkomân* 'great iron knife', *Ray Gun* became *sâpwâpahcikan pâskisikan* 'through-shooting firearm', and *Bed Springs* became a short descriptive phrase meaning 'a bed, the things that bounce'. *Purgatory*, a theological term without a direct Cree equivalent, became *kâsenamâkêw iskotêw*, which the sign's page glosses as 'the fire that refuses (people)'. Substitution was used once, for *Purple Haze*, where the Cree *nîpâmâyâtân pekiseyâhk* 'our way is hazy, we ride through the haze' drops the color and the song and substitutes an image of riding. Transference was used once, for *Slinky*, a brand name kept as it is and spelled into syllabics, and one name, *Victoria's Secret*, mixes the two, keeping the personal name *Victoria* in roman letters and translating the rest as a verb meaning 'she keeps it secret from her'.
 
 The Cree names are also longer and more often built from parts than the English. Of the {{nNames}} names, {{nMultiWord}} are written as two or more words in SRO, and {{nDiminutive}} ({{nDiminutivePct}}) end in a diminutive suffix, among them {{diminutiveNames}}. The diminutive often does work that the English name does by other means, turning a lane into *mêskanâs* 'little path' or a sled into *capanaskos* 'little toboggan', and it gives several of the names a fond tone that the English lacks.
+
+## Change over time
+
+Table 3 groups the signs by the batch in which they reached the repository. The first batch of {{firstBatchN}} signs, uploaded in {{firstBatch}}, holds {{firstBatchFauna}} of the {{faunaN}} fauna names, and it already uses modification and substitution as well as translation proper. The clearest change is that transference and the mixed strategy appear only later, in {{lateLoanBatches}}, with *Slinky* and *Victoria's Secret*, when the project began to take on names drawn from brands. With so few signs in each batch, and with dates that record uploads rather than making, I read this as a pattern to check against the author's own record rather than as a trend.
+
+{{tableBatches}}
+
+Table: **Table 3.** Translation strategy by the batch in which signs reached the project repository
+
+::: {custom-style="Graphic Source"}
+Source: Project version history (date of the first commit containing each sign's files) and the author's coding. Table 2 lists the signs in each batch.
+:::
 
 ## The candidate pool
 
@@ -152,11 +166,11 @@ The workbench shows the same choices at larger scale and before review. Of the {
 
 ## Spelling consistency
 
-The check of the two spellings against each other tracks the amount of human attention each set of names has had (Table 3). Among the {{orthBuiltN}} finished signs with both spellings on record, {{orthBuiltExact}} ({{orthBuiltExactPct}}) agree exactly, {{orthBuiltLength}} differs only in vowel length and {{orthBuiltMismatch}} differ in letters, one of them the loan *Slinky*, whose syllabics spell the sound rather than the English letters. Among the {{orthDraftN}} draft pages, {{orthDraftExactPct}} agree exactly. Among the {{orthWorkbenchN}} workbench candidates, only {{orthWorkbenchExact}} ({{orthWorkbenchExactPct}}) agree exactly, {{orthWorkbenchMismatch}} ({{orthWorkbenchMismatchPct}}) differ in letters, and {{orthWorkbenchNonPlains}} ({{orthWorkbenchNonPlainsPct}}) use characters from eastern or other syllabaries.
+The check of the two spellings against each other tracks the amount of human attention each set of names has had (Table 4). Among the {{orthBuiltN}} finished signs with both spellings on record, {{orthBuiltExact}} ({{orthBuiltExactPct}}) agree exactly, {{orthBuiltLength}} differs only in vowel length and {{orthBuiltMismatch}} differ in letters, one of them the loan *Slinky*, whose syllabics spell the sound rather than the English letters. Among the {{orthDraftN}} draft pages, {{orthDraftExactPct}} agree exactly. Among the {{orthWorkbenchN}} workbench candidates, only {{orthWorkbenchExact}} ({{orthWorkbenchExactPct}}) agree exactly, {{orthWorkbenchMismatch}} ({{orthWorkbenchMismatchPct}}) differ in letters, and {{orthWorkbenchNonPlains}} ({{orthWorkbenchNonPlainsPct}}) use characters from eastern or other syllabaries.
 
 {{tableAudit}}
 
-Table: **Table 3.** Agreement between the SRO and syllabic spellings of each name
+Table: **Table 4.** Agreement between the SRO and syllabic spellings of each name
 
 ::: {custom-style="Graphic Source"}
 Source: Author's analysis of the project catalogue and workbench (supplementary file orthography_audit.csv).
@@ -206,10 +220,6 @@ The English names of Edmonton's mountain bike trails are a repertoire of jokes, 
 
 ::: {custom-style="Unindented"}
 ***Funding.*** This research received no external funding. **[k to confirm.]**
-:::
-
-::: {custom-style="Unindented"}
-***Financial interest.*** The signs described in this article can be ordered by other riders through the project's website. **[k to supply: how proceeds are used, and whether this was discussed with the people consulted.]**
 :::
 
 ::: {custom-style="Unindented"}

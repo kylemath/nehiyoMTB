@@ -43,10 +43,17 @@ scaffold, so it cannot be submitted as it stands.
       signs and what they said.
 - [ ] Ethics: confirm that no personal data are reported. Say whether you
       consulted a research ethics board or judged the work exempt.
-- [ ] Funding (none?) and financial interest (sign sales, and how proceeds are
-      used).
+- [ ] Funding: confirm "none". Names also asks authors to disclose any
+      financial interest. At your request the manuscript says nothing about the
+      signs being available to order, so decide whether that needs a line.
 - [ ] Final version only: affiliation, ORCID, a contributor note of 100 to 150
       words, and a correspondence line. These go in after acceptance.
+- [ ] Confirm the order in which the signs were made. Table 2 and Table 3
+      order them by the month each sign's folder first appears in git. That is
+      four batches: October 2021, November 2023, December 2023 and October 2025.
+      The first batch was uploaded in one commit, so it holds signs made before
+      then, in an order git can't show. Within each batch the signs are sorted
+      by sign number.
 - [ ] Have a fluent speaker check `supplementary/name_coding.csv`. Ask in
       particular whether the strategy column is right.
 - [ ] Fix or explain the spelling disagreements the audit found. Ray Gun is

@@ -68,6 +68,19 @@ def pipe_table(header, rows, widths):
 
 # ----------------------------------------------------------------- data
 
+def first_in_repo(m: dict) -> str:
+    """Date of the first commit that contains the sign's folder. This is when the
+    sign's files reached the repository, which can be later than when the sign
+    was made (the first commit, in October 2021, uploaded signs made before it)."""
+    folder = m.get("folder")
+    if not folder:
+        return ""
+    r = subprocess.run(["git", "-C", str(REPO), "log", "--all", "--format=%ad", "--date=short", "--", f"{folder}"],
+                       capture_output=True, text=True)
+    dates = r.stdout.split()
+    return dates[-1] if dates else ""
+
+
 def coded_names():
     coding = {int(r["sign_no"]): r for r in csv.DictReader(open(HERE / "data" / "name_coding.csv", encoding="utf-8"))}
     rows = []
@@ -78,7 +91,10 @@ def coded_names():
         g = gloss(m) or c["gloss_if_missing"].strip("'")
         rows.append({"n": m["signNumber"], "en": m["englishName"], "sro": m["creeName"],
                      "syl": m.get("creeSyllabics") or "", "gloss": g,
-                     "domain": c["source_domain"], "strategy": c["strategy"]})
+                     "domain": c["source_domain"], "strategy": c["strategy"],
+                     "first": first_in_repo(m)})
+    # order the signs by when they reached the repository, then by sign number
+    rows.sort(key=lambda r: (r["first"] or "9999", r["n"]))
     extra = set(coding) - {r["n"] for r in rows}
     if extra:
         raise SystemExit(f"name_coding.csv has rows for signs that are not finished: {sorted(extra)}")
@@ -109,10 +125,23 @@ def workbench_stats():
 def table_names(rows):
     body = []
     for r in rows:
-        body.append([md_escape(r["en"]), f"*{md_escape(r['sro'])}*", r["syl"] or "(none on record)",
+        body.append([r["first"][:7] or "?", md_escape(r["en"]), f"*{md_escape(r['sro'])}*",
+                     r["syl"] or "(none on record)",
                      f"'{md_escape(r['gloss'])}'" if r["gloss"] else "", r["strategy"]])
-    return pipe_table(["English name", "Cree name (SRO)", "Cree name (syllabics)",
-                       "Literal sense", "Strategy"], body, [16, 20, 20, 26, 22])
+    return pipe_table(["First commit", "English name", "Cree name (SRO)", "Cree name (syllabics)",
+                       "Literal sense", "Strategy"], body, [12, 15, 18, 18, 22, 17])
+
+
+def table_batches(rows):
+    """Translation strategy by the batch in which the signs reached the repository."""
+    batches = sorted({r["first"][:7] for r in rows})
+    used = [s for s in STRATEGIES if any(r["strategy"] == s for r in rows)]
+    body = []
+    for b in batches:
+        sub = [r for r in rows if r["first"][:7] == b]
+        body.append([b or "?", str(len(sub))] + [str(sum(1 for r in sub if r["strategy"] == s)) for s in used])
+    return pipe_table(["First commit", "Signs"] + [s.capitalize() for s in used],
+                      body, [14, 8] + [16] * len(used))
 
 
 def table_crosstab(rows):
@@ -360,15 +389,32 @@ def main():
     stats["tableNames"] = table_names(rows)
     stats["tableCrosstab"] = table_crosstab(rows)
     stats["tableAudit"] = table_audit(audit)
-    for k in ("tableNames", "tableCrosstab", "tableAudit"):
+    stats["tableBatches"] = table_batches(rows)
+    batches = Counter(r["first"][:7] for r in rows)
+    stats["nBatches"] = len(batches)
+    order = sorted(batches)
+    import calendar
+    def month(b):
+        y, mo = b.split("-")
+        return f"{calendar.month_name[int(mo)]} {y}"
+    stats["firstBatch"], stats["firstBatchN"] = month(order[0]), batches[order[0]]
+    stats["lastBatch"], stats["lastBatchN"] = month(order[-1]), batches[order[-1]]
+    def names_in(b, pred=lambda r: True):
+        return [r for r in rows if r["first"][:7] == b and pred(r)]
+    stats["firstBatchFauna"] = len(names_in(order[0], lambda r: r["domain"] == "Fauna"))
+    stats["faunaN"] = sum(1 for r in rows if r["domain"] == "Fauna")
+    late = [r for r in rows if r["strategy"] in ("transference", "mixed")]
+    stats["lateLoanBatches"] = " and ".join(month(b) for b in sorted({r["first"][:7] for r in late}))
+    for k in ("tableNames", "tableCrosstab", "tableAudit", "tableBatches"):
         (TABS / f"{k}.md").write_text(stats[k] + "\n", encoding="utf-8")
     (OUT / "stats.json").write_text(json.dumps({k: v for k, v in stats.items() if not k.startswith("table")},
                                                ensure_ascii=False, indent=1), encoding="utf-8")
     with open(OUT / "name_coding_full.csv", "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["sign_no", "english", "sro", "syllabics", "literal_sense", "source_domain", "strategy"])
-        for r in rows:
-            w.writerow([r["n"], r["en"], r["sro"], r["syl"], r["gloss"], r["domain"], r["strategy"]])
+        w.writerow(["order", "first_in_repository", "sign_no", "english", "sro", "syllabics", "literal_sense",
+                    "source_domain", "strategy"])
+        for i, r in enumerate(rows, 1):
+            w.writerow([i, r["first"], r["n"], r["en"], r["sro"], r["syl"], r["gloss"], r["domain"], r["strategy"]])
 
     sup = OUT / "supplementary"
     sup.mkdir(exist_ok=True)

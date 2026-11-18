@@ -1,4 +1,4 @@
 title words         15  (limit 50)
 abstract words     197  (limit 200)
-main text words   4461  (limit 5000; excludes notes, references, tables, graphics)
+main text words   4701  (limit 5000; excludes notes, references, tables, graphics)
 endnote words      161  (guideline about 400)
